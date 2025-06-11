@@ -1,0 +1,404 @@
+# NothingButTheTruth
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nothing ButTheTruth</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            height: 100vh;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(51, 51, 51, 0.8);
+            padding: 10px 20px;
+            color: white;
+            position: relative;
+            z-index: 1000;
+        }
+        .logo { font-size: 1.5em; font-weight: bold; }
+        .hamburger {
+            display: flex; flex-direction: column; justify-content: space-between;
+            width: 30px; height: 20px; cursor: pointer; z-index: 1000;
+        }
+        .hamburger span {
+            display: block; height: 3px; width: 100%; background-color: white;
+            border-radius: 2px; transition: all 0.3s ease;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .sidebar {
+            position: fixed; top: 0; left: -250px; width: 250px; height: 100%;
+            background-color: rgba(51, 51, 51, 0.8); display: flex; flex-direction: column;
+            justify-content: center; transition: left 0.3s ease; z-index: 999;
+        }
+        .sidebar.active { left: 0; }
+        .nav-links { list-style: none; padding: 0; text-align: center; }
+        .nav-links li { margin: 20px 0; }
+        .nav-links a {
+            text-decoration: none; color: white; font-size: 1.2em;
+            display: flex; align-items: center; gap: 10px; transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: #00ff55; }
+        .nav-links i { font-size: 1.2em; }
+        /* Scroll Fade Animation */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.5s cubic-bezier(.4,0,.2,1), transform 1.5s cubic-bezier(.4,0,.2,1);
+        }
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Top Section */
+        .top-section {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .top-section h1 { font-size: 3em; margin-bottom: 10px; }
+        .top-section p { font-size: 1.2em; max-width: 600px; line-height: 1.6; }
+        /* Bottom Section */
+        .bottom-section {
+            background-color: white;
+            color: #333;
+            min-height: 50vh;
+            padding: 40px 20px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px;
+            background-color: white;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .leftdiv, .StrDiv {
+            flex: 1;
+            max-width: 400px;
+            text-align: center;
+            padding: 20px;
+        }
+        .belowhead {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background-size: 200% 200%;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+            max-width: 400px;
+            margin: 20px auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 5s ease-in-out forwards, backgroundAnimation 6s infinite alternate;
+        }
+        @keyframes fadeInSlideUp {
+            0% { opacity: 0; transform: translateY(20px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes backgroundAnimation {
+            0% { background-position: 0% 50%;}
+            100% { background-position: 100% 50%;}
+        }
+        .purpose-box-alt {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin: 50px auto;
+            max-width: 900px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 15px;
+        }
+        .purpose-box-alt:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+        .purpose-box-alt h2 { font-size: 2.5em; margin-bottom: 20px; font-weight: bold; }
+        .purpose-box-alt p { font-size: 1.2em; line-height: 1.8; margin: 0 auto; max-width: 700px; }
+        .bt1 {
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 8px;
+            transition-duration: 0.4s;
+            background-color: rgb(58, 58, 58);
+            color: rgb(202, 202, 202);
+            border: 2px solid #c9c9c9;
+        }
+        .bt1:hover {
+            background-color: #333;
+            color: #eeff00ad;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 2em #1ea664;
+        }
+        /* Slides */
+        .modern-slides {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .slides {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            flex: 1 1 calc(33.33% - 20px);
+            max-width: 300px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 1s ease-in-out forwards;
+        }
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateY(20px);}
+            100% { opacity: 1; transform: translateY(0);}
+        }
+        .slides img {
+            width: 100%;
+            height: auto;
+            border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+        }
+        .slides-text { padding: 20px; }
+        .slides-text h3 { font-size: 1.5em; margin-bottom: 10px; color: #333; }
+        .slides-text p { font-size: 1em; color: #666; line-height: 1.6; }
+        .slides:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        @media screen and (max-width: 768px) {
+            .slides { flex: 1 1 calc(50% - 20px);}
+        }
+        @media screen and (max-width: 480px) {
+            .slides { flex: 1 1 100%;}
+        }
+        /* Studies Section */
+        .Studies {
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .flex-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+            background-color: #6f00ffdd;
+        }
+        .box {
+            flex: 1 1 300px;
+            max-width: 350px;
+            background-color: #3a3636;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            transition-duration: 0.4s;
+            border: 2px solid #c9c9c9;
+        }
+        .box:hover {
+            background-color: #333;
+            color: #eeff00ad;
+            cursor: pointer;
+            box-shadow: inset 0 0 2em 3em #1ea664;
+        }
+        /* Responsive: Stack boxes on small screens */
+        @media (max-width: 900px) {
+            .flex-wrap { flex-direction: column; align-items: center; }
+            .box { max-width: 95vw; width: 100%; margin: 10px 0; }
+        }
+        @media (max-width: 600px) {
+            .flex-wrap { flex-direction: column; align-items: center; gap: 8px; padding: 10px; }
+            .box {
+                flex: 1 1 auto;
+                max-width: 95%;
+                font-size: 0.95em;
+                padding: 10px 4px;
+                height: auto;
+                margin: 4px;
+                border-radius: 10px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow-wrap: break-word;
+            }
+        }
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            width: 100%;
+        }
+        .footer a {
+            color: #4FC6FF;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar scroll-fade">
+            <div class="logo">Nothing But The Truth</div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="sidebar"> 
+                <ul class="nav-links">
+                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                    <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
+                    <li><a href="#portfolio"><i class="fas fa-briefcase"></i> Portfolio</a></li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="top-section scroll-fade">
+        <h1>Website Still In Progress</h1>
+        <h3>To the reader:</h3>
+        <p> Our website is dedicated to providing you with the unchanged, untampered Gospel as it is written in the Holy Bible. </p>
+    </section>
+
+    <section class="modern-slides scroll-fade">
+        <div class="slides scroll-fade">
+            <img src="https://i.pinimg.com/736x/21/23/90/212390b2e32b32fecb4aafd55158fc05.jpg" alt="Slide 1">
+            <div class="slides-text">
+                <h3>The Bible</h3>
+                <p>Explore the teachings of the Bible and its timeless wisdom.</p>
+            </div>
+        </div>
+        <div class="slides scroll-fade">
+            <img src="https://i.pinimg.com/474x/e0/ce/f2/e0cef296d632cc0fe4aa2a7230524b25.jpg" alt="Slide 2">
+            <div class="slides-text">
+                <h3>Prayer</h3>
+                <p>Experience the power of prayer and its impact on life.</p>
+            </div>
+        </div>
+        <div class="slides scroll-fade">
+            <img src="https://i.pinimg.com/474x/3a/8d/4d/3a8d4daa6a1b6a9b6ad28e79c5898d84.jpg" alt="Slide 3">
+            <div class="slides-text">
+                <h3>Slide 3</h3>
+                <p>Discover the beauty of nature and how it reflects God's creation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bottom-section scroll-fade">
+        <div class="leftdiv scroll-fade"></div>
+        <div class="belowhead scroll-fade">
+            <h2>Welcome to Our Mission</h2>
+            <p>
+                We are committed to sharing the unchanged and untampered Gospel as it is written in the Holy Bible. Explore our resources and join us in spreading the truth.
+            </p>
+            <button class="cta-button">Learn More</button>
+        </div>
+        <div class="StrDiv scroll-fade"></div>
+    </section>
+
+    <section class="purpose-box-alt scroll-fade">
+        <div class="purpose-content">
+            <h2>About the Bible</h2>
+            <p>The Bible is a collection of sacred texts or scriptures that speak about God and the history of the World. It contains present events and the future of our world. The scriptures also explain Heaven as the Holy City of God, and explains The Trinity of The Holy God.</p>
+            <a href="http://www.unnamedweb.rf.gd/why_the_bible_is_God's_word.html">
+                <button class="bt1">How is the Bible God's Message to us</button>
+            </a>
+        </div>
+    </section>
+
+    <div class="Studies scroll-fade"><h2>Our Studies</h2></div>
+    <div class="flex-wrap scroll-fade">
+        <div class="box scroll-fade">Is the Bible Facts or Fiction?</div>
+        <div class="box scroll-fade">Is the Bible God's Word to Humanity?</div>
+        <div class="box scroll-fade">A tale of Cities</div>
+        <div class="box scroll-fade"> Still In Progress</div>
+        <div class="box scroll-fade"> Still In Progress</div>
+        <div class="box scroll-fade"> Still In Progress</div>
+    </div>
+
+    <footer class="footer scroll-fade">
+        <p>&copy; 2025 My Website. All rights reserved.</p>
+        <p>Follow us on:
+            <a href="https://facebook.com" target="_blank">Facebook</a> |
+            <a href="https://twitter.com" target="_blank">Twitter</a> |
+            <a href="https://instagram.com" target="_blank">Instagram</a>
+        </p>
+    </footer>
+
+    <script>
+        // Hamburger menu
+        document.addEventListener("DOMContentLoaded", function () {
+            const hamburger = document.querySelector(".hamburger");
+            const sidebar = document.querySelector(".sidebar");
+            hamburger.addEventListener("click", () => {
+                hamburger.classList.toggle("active");
+                sidebar.classList.toggle("active");
+            });
+        });
+
+        // Scroll Fade Animation
+        document.addEventListener("DOMContentLoaded", function () {
+            const faders = document.querySelectorAll('.scroll-fade');
+            const appearOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -40px 0px"
+            };
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
+</body>
+</html>
