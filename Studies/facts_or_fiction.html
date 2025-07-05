@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Is the Bible Facts or Fiction?</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e9e6f7 0%, #e3f0fa 100%);
+      color: #222;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .main-content {
+      max-width: 900px;
+      margin: 40px auto 40px auto;
+      padding: 2.5vw 6vw 3vw 6vw;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px 0 rgba(60,60,120,0.10);
+      min-height: 80vh;
+      position: relative;
+    }
+    .header-section {
+      text-align: center;
+      margin-bottom: 2.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: none;
+      background: linear-gradient(120deg, #2575fc 0%, #6a11cb 100%);
+      border-radius: 0 0 32px 32px;
+      color: #fff;
+      box-shadow: 0 8px 32px 0 rgba(37,117,252,0.15), 0 2px 12px 0 rgba(106,17,203,0.10);
+      position: relative;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+      overflow: hidden;
+    }
+    .header-section::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      left: -80px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, #ffd803 0%, #2575fc 70%, transparent 100%);
+      opacity: 0.18;
+      z-index: 0;
+    }
+    .header-section::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      right: -80px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, #6a11cb 0%, #fff 80%, transparent 100%);
+      opacity: 0.13;
+      z-index: 0;
+    }
+    .header-section h1 {
+      margin: 0;
+      font-size: 2.7rem;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      text-shadow: 0 4px 24px rgba(37,117,252,0.18), 0 1px 0 #fff;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      padding: 0.4em 1.2em;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 2px 16px 0 rgba(37,117,252,0.08);
+    }
+    .header-section .header-subtitle {
+      display: block;
+      margin-top: 1.2em;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #eaf4fd;
+      letter-spacing: 0.5px;
+      z-index: 1;
+      position: relative;
+      text-shadow: 0 2px 8px rgba(37,117,252,0.13);
+    }
+    h2 {
+      color: #2575fc;
+      margin-top: 2rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    h3 {
+      color: #6a11cb;
+      margin-top: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .quote {
+      margin: 1.2em 0;
+      padding: 1em 1.5em;
+      background: linear-gradient(90deg, #f3f0fa 0%, #eaf4fd 100%);
+      border-left: 5px solid #6a11cb;
+      border-radius: 8px;
+      color: #333;
+      font-style: italic;
+      font-size: 1.08em;
+      /* Intensified box-shadow */
+      box-shadow: 0 8px 32px 0 rgba(106,17,203,0.25), 0 24px 80px 0 rgba(37,117,252,0.25);
+      position: relative;
+    }
+    .quote-cite {
+      display: block;
+      margin-top: 0.5em;
+      color: #6a11cb;
+      font-size: 0.95em;
+      font-style: normal;
+    }
+    ul {
+      color: #222;
+      font-size: 1.05em;
+      line-height: 1.7;
+      margin-bottom: 1.2em;
+    }
+    .readmore-link {
+      color: #2575fc;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-left: 0.5em;
+      font-size: 0.98em;
+    }
+    .readmore-box {
+      display: none;
+      margin-top: 1em;
+      background: rgba(60, 30, 90, 0.68);
+      color: #fff;
+      border-radius: 14px;
+      border: 6px double #32006a;
+      padding: 1.3em 1.5em 1.3em 3.5em;
+      font-size: 1.07em;
+      font-style: normal;
+      font-weight: 400;
+      position: relative;
+      box-shadow: 0 20px 80px 0 rgb(0, 0, 0);
+      transition: box-shadow 0.3s, background 0.3s, border 0.3s;
+      overflow: hidden;
+      letter-spacing: 0.01em;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .readmore-box::before {
+      content: "💡";
+      position: absolute;
+      left: 0.7em;
+      top: 0.7em;
+      font-size: 1.5em;
+      filter: drop-shadow(0 1px 2px #0002);
+      pointer-events: none;
+    }
+    .readmore-box a {
+      color: #eebbc3;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    .readmore-box:hover {
+      box-shadow: 0 12px 36px 0 rgba(35,41,70,0.22);
+      background: #16161a;
+      border-color: #ffd803;
+    }
+    .manuscript-section {
+      box-shadow: 0 8px 32px 0 rgb(0, 0, 86);
+      border-radius: 16px;
+      background: #fafaff;
+      padding: 2em 1.5em;
+      margin: 2em 0;
+    }
+    .key-concepts-heading {
+      text-align: center;
+      font-size: 2.1em;
+      margin-bottom: 1.3em;
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+    }
+    .manuscript-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .manuscript-list li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5em;
+      position: relative;
+      padding-left: 2.2em;
+    }
+    .manuscript-bullet {
+      position: absolute;
+      left: 0;
+      top: 0.2em;
+      font-size: 1.3em;
+      color: #2575fc;
+    }
+    .manuscript-box {
+      background: none;
+      border: none;
+      border-radius: 10px;
+      color: #222;
+      font-size: 1.07em;
+      position: relative;
+      box-shadow: none;
+      width: 100%;
+    }
+    .manuscript-box strong {
+      font-size: 1.08em;
+      display: inline-block;
+      margin-bottom: 0.2em;
+    }
+    .manuscript-ref {
+      display: block;
+      background: #f2f2f2;
+      border-radius: 7px;
+      margin-top: 0.7em;
+      margin-bottom: 0.2em;
+      padding: 0.7em 1.1em;
+      font-size: 0.98em;
+      color: #222;
+      box-shadow: 0 2px 8px 0 rgba(37,117,252,0.07);
+    }
+    .manuscript-ref i {
+      margin-right: 0.5em;
+    }
+    .key-concept-divider {
+      border: none;
+      border-top: 2px solid #d1d1e0;
+      margin: 1.5em 0;
+    }
+    .bible-verse {
+      background: #eaf4fd;
+      border-left: 4px solid #2575fc;
+      border-radius: 7px;
+      padding: 0.7em 1.2em;
+      margin: 1em 0;
+      font-style: italic;
+      color: #222;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px 0 rgba(37,117,252,0.07);
+    }
+    .readmore-box .bible-verse,
+    .manuscript-ref .bible-verse {
+      display: block;
+      margin: 1em 0 0.5em 0;
+      padding: 0.6em 1em;
+      background: #eaf4fd;
+      border-left: 4px solid #2575fc;
+      border-radius: 7px;
+      font-style: italic;
+      color: #222;
+      font-size: 1em;
+      box-shadow: 0 2px 8px 0 rgba(37,117,252,0.07);
+    }
+    @media (max-width: 700px) {
+      body {
+        font-size: 0.98em;
+      }
+      .main-content {
+        padding: 7vw 3vw 5vw 3vw;
+        margin: 8vw 1vw;
+      }
+      .header-section h1 {
+        font-size: 1.4rem;
+      }
+      .header-section::after {
+        width: 40px;
+        height: 3px;
+      }
+      .manuscript-list li {
+        padding-left: 1.5em;
+      }
+      .manuscript-bullet {
+        font-size: 1.1em;
+        left: 0;
+      }
+      .bible-verse,
+      .quote,
+      .manuscript-box,
+      .readmore-box {
+        font-size: 0.97em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="header-section">
+      <h1>
+        <i class="fas fa-question-circle" style="color:#ffd803"></i> Is the Bible Facts or Fiction?
+      </h1>
+      <span class="header-subtitle">
+        Exploring the evidence for the Bible’s reliability, history, and power to change lives
+      </span>
+    </div>
+
+    <div style="background: #f3f0fa; border-left: 4px solid #6a11cb; border-radius: 7px; padding: 1em 1.5em; margin-bottom: 1.5em; color: #333;">
+      <strong><i class="fas fa-lightbulb" style="color:#ffd803"></i> Recommended:</strong> You may also want to read <a href="why_the_bible_is_God's_word.html" style="color:#2575fc; font-weight:bold; text-decoration:underline;">Why the Bible is God's Word to Us</a> for more insight into the authority and inspiration of Scripture.
+    </div>
+
+    <h2><i class="fas fa-info-circle" style="color:#2575fc"></i> Introduction</h2>
+    <p>
+      Many people wonder if the Bible is a reliable record of history or simply a collection of myths and legends. In this study, we will examine evidence from archaeology, manuscript history, fulfilled prophecy, and the Bible’s impact on lives to help answer the question: Is the Bible facts or fiction?
+    </p>
+    <div class="quote">
+      “The Bible is not only the revealer of God’s will, but the record of His dealings with men. It is the voice of God speaking to us, just as surely as though we could hear it with our ears.”
+      <span class="quote-cite">— Ellen G. White, <em>Education</em>, p. 125</span>
+    </div>
+
+    <p>
+      Here are some additional discoveries and facts that support the Bible’s historical reliability:
+    </p>
+    <ul>
+      <li>
+        <strong>The Moabite Stone (Mesha Stele):</strong> Discovered in 1868, this stone confirms the existence of King Omri of Israel and events described in 2 Kings 3.
+        <span class="readmore-link" onclick="toggleReadMore('rm1')">Read more</span>
+        <div class="readmore-box" id="rm1">
+          The Moabite Stone, also known as the Mesha Stele, is an inscribed stone set up around 840 BC by King Mesha of Moab. It describes Mesha’s victories over Israel and mentions King Omri, confirming the biblical account in 2 Kings 3. This artifact is one of the earliest references to the kingdom of Israel outside the Bible.<br><br>
+          <span class="manuscript-ref">
+            <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+            Reference: <a href="https://en.wikipedia.org/wiki/Mesha_Stele" target="_blank">Mesha Stele – Wikipedia</a><br>
+            <span style="font-size:0.95em;color:#bbb;">
+              Information sourced from Wikipedia contributors, "<a href="https://en.wikipedia.org/wiki/Mesha_Stele" target="_blank">Mesha Stele</a>," <em>Wikipedia, The Free Encyclopedia</em>, CC BY-SA 4.0.
+            </span>
+            <span class="bible-verse"><b>2 Kings 3:4-5</b> — "Now Mesha king of Moab was a sheep breeder, and he regularly paid the king of Israel one hundred thousand lambs and the wool of one hundred thousand rams..."</span>
+          </span>
+        </div>
+      </li>
+      <li>
+        <strong>The Cyrus Cylinder:</strong> This ancient Persian artifact records King Cyrus’s decree allowing exiled peoples, including the Jews, to return to their homelands, as described in Ezra 1.
+        <span class="readmore-link" onclick="toggleReadMore('rm2')">Read more</span>
+        <div class="readmore-box" id="rm2">
+          The Cyrus Cylinder, discovered in Babylon, contains a decree by Cyrus the Great after his conquest of Babylon in 539 BC. It describes his policy of allowing captive peoples to return to their lands and restore their temples. This aligns with the biblical account of Cyrus permitting the Jews to return to Jerusalem and rebuild the temple (Ezra 1:1-4).<br><br>
+          <span class="manuscript-ref">
+            <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+            Reference: <a href="https://en.wikipedia.org/wiki/Cyrus_Cylinder" target="_blank">Cyrus Cylinder – Wikipedia</a><br>
+            <span style="font-size:0.95em;color:#bbb;">
+              Information sourced from Wikipedia contributors, "<a href="https://en.wikipedia.org/wiki/Cyrus_Cylinder" target="_blank">Cyrus Cylinder</a>," <em>Wikipedia, The Free Encyclopedia</em>, CC BY-SA 4.0.
+            </span>
+            <span class="bible-verse"><b>Ezra 1:2-3</b> — "Thus says Cyrus king of Persia: All the kingdoms of the earth the Lord God of heaven has given me. And He has commanded me to build Him a house at Jerusalem..."</span>
+          </span>
+        </div>
+      </li>
+      <li>
+        <strong>The Pool of Siloam:</strong> Excavated in Jerusalem, this pool is mentioned in John 9 as the place where Jesus healed a blind man.
+        <span class="readmore-link" onclick="toggleReadMore('rm3')">Read more</span>
+        <div class="readmore-box" id="rm3">
+          The Pool of Siloam was discovered in 2004 during construction work in Jerusalem. Archaeologists identified it as the site described in John 9, where Jesus sent a blind man to wash and receive his sight. The pool’s discovery confirms the accuracy of John’s Gospel regarding first-century Jerusalem.<br><br>
+          <span class="manuscript-ref">
+            <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+            Reference: <a href="https://en.wikipedia.org/wiki/Pool_of_Siloam" target="_blank">Pool of Siloam – Wikipedia</a><br>
+            <span style="font-size:0.95em;color:#bbb;">
+              Information sourced from Wikipedia contributors, "<a href="https://en.wikipedia.org/wiki/Pool_of_Siloam" target="_blank">Pool of Siloam</a>," <em>Wikipedia, The Free Encyclopedia</em>, CC BY-SA 4.0.
+            </span>
+            <span class="bible-verse"><b>John 9:7</b> — "And He said to him, 'Go, wash in the pool of Siloam'... So he went and washed, and came back seeing."</span>
+          </span>
+        </div>
+      </li>
+      <li>
+        <strong>The Lachish Letters:</strong> These ancient Hebrew inscriptions describe the Babylonian invasion of Judah, confirming the events of Jeremiah 34 and 39.
+        <span class="readmore-link" onclick="toggleReadMore('rm4')">Read more</span>
+        <div class="readmore-box" id="rm4">
+          The Lachish Letters are a series of inscribed pottery fragments found at the site of Lachish. Written during the Babylonian siege of Judah (late 7th century BC), they mention events and people also found in the book of Jeremiah, providing a firsthand account of the invasion and confirming the biblical narrative.<br><br>
+          <span class="manuscript-ref">
+            <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+            Reference: <a href="https://en.wikipedia.org/wiki/Lachish_letters" target="_blank">Lachish Letters – Wikipedia</a><br>
+            <span style="font-size:0.95em;color:#bbb;">
+              Information sourced from Wikipedia contributors, "<a href="https://en.wikipedia.org/wiki/Lachish_letters" target="_blank">Lachish letters</a>," <em>Wikipedia, The Free Encyclopedia</em>, CC BY-SA 4.0.
+            </span>
+            <span class="bible-verse"><b>Jeremiah 34:7</b> — "When the king of Babylon’s army fought against Jerusalem and all the cities of Judah that were left, against Lachish and Azekah..."</span>
+          </span>
+        </div>
+      </li>
+      <li>
+        <strong>The House of Caiaphas:</strong> Archaeologists have uncovered an ossuary (bone box) inscribed with the name of Caiaphas, the high priest who presided over Jesus’ trial.
+        <span class="readmore-link" onclick="toggleReadMore('rm5')">Read more</span>
+        <div class="readmore-box" id="rm5">
+          In 1990, a burial cave was discovered in Jerusalem containing an ossuary inscribed with the name "Joseph son of Caiaphas." Scholars believe this to be the high priest Caiaphas mentioned in the Gospels, providing archaeological evidence for a key figure in the trial of Jesus.<br><br>
+          <span class="manuscript-ref">
+            <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+            Reference: <a href="https://en.wikipedia.org/wiki/Caiaphas#Ossuary" target="_blank">Caiaphas Ossuary – Wikipedia</a><br>
+            <span style="font-size:0.95em;color:#bbb;">
+              Information sourced from Wikipedia contributors, "<a href="https://en.wikipedia.org/wiki/Caiaphas#Ossuary" target="_blank">Caiaphas</a>," <em>Wikipedia, The Free Encyclopedia</em>, CC BY-SA 4.0.
+            </span>
+            <span class="bible-verse"><b>Matthew 26:57</b> — "And those who had laid hold of Jesus led Him away to Caiaphas the high priest, where the scribes and the elders were assembled."</span>
+          </span>
+        </div>
+      </li>
+    </ul>
+
+    <h2 id="manuscripts"><i class="fas fa-scroll" style="color:#2575fc"></i> Manuscript Evidence</h2>
+    <p>
+      <i class="fas fa-book-open" style="color:#2575fc"></i>
+      The Bible is supported by thousands of ancient manuscripts, making it the best-attested book of antiquity. The consistency among these manuscripts demonstrates the careful preservation of the biblical text.
+    </p>
+
+    <section class="manuscript-section">
+      <h3 class="key-concepts-heading"><i class="fas fa-scroll" style="color:#2575fc"></i> Key Manuscript Evidence</h3>
+      <ul class="manuscript-list">
+        <li>
+          <span class="manuscript-bullet"><i class="fas fa-circle"></i></span>
+          <div class="manuscript-box">
+            <strong>The Dead Sea Scrolls:</strong>
+            Discovered between 1947 and 1956 near Qumran, these ancient manuscripts include portions of every Old Testament book except Esther. They date from the third century BC to the first century AD and confirm the accuracy of the Hebrew Scriptures.
+            <span class="manuscript-ref">
+              <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+              Reference: <a href="https://en.wikipedia.org/wiki/Dead_Sea_Scrolls" target="_blank">Dead Sea Scrolls – Wikipedia</a>
+            </span>
+          </div>
+        </li>
+        <li>
+          <span class="manuscript-bullet"><i class="fas fa-circle"></i></span>
+          <div class="manuscript-box">
+            <strong>The Codex Sinaiticus:</strong>
+            One of the oldest and most complete manuscripts of the Greek Bible, dating to the 4th century AD. It contains the entire New Testament and much of the Old Testament.
+            <span class="manuscript-ref">
+              <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+              Reference: <a href="https://en.wikipedia.org/wiki/Codex_Sinaiticus" target="_blank">Codex Sinaiticus – Wikipedia</a>
+            </span>
+          </div>
+        </li>
+        <li>
+          <span class="manuscript-bullet"><i class="fas fa-circle"></i></span>
+          <div class="manuscript-box">
+            <strong>The Codex Vaticanus:</strong>
+            Another important 4th-century Greek manuscript containing most of the Old and New Testaments. It is considered one of the best witnesses to the original biblical text.
+            <span class="manuscript-ref">
+              <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+              Reference: <a href="https://en.wikipedia.org/wiki/Codex_Vaticanus" target="_blank">Codex Vaticanus – Wikipedia</a>
+            </span>
+          </div>
+        </li>
+        <li>
+          <span class="manuscript-bullet"><i class="fas fa-circle"></i></span>
+          <div class="manuscript-box">
+            <strong>The Chester Beatty Papyri:</strong>
+            A collection of early papyrus manuscripts of the New Testament, dating from the 2nd to 4th centuries AD, providing valuable evidence for the early transmission of the biblical text.
+            <span class="manuscript-ref">
+              <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+              Reference: <a href="https://en.wikipedia.org/wiki/Chester_Beatty_Papyri" target="_blank">Chester Beatty Papyri – Wikipedia</a>
+            </span>
+          </div>
+        </li>
+        <li>
+          <span class="manuscript-bullet"><i class="fas fa-circle"></i></span>
+          <div class="manuscript-box">
+            <strong>The John Rylands Papyrus (P52):</strong>
+            The earliest known fragment of the New Testament, containing a portion of the Gospel of John and dated to around 125 AD.
+            <span class="manuscript-ref">
+              <i class="fab fa-wikipedia-w" style="color:#6a11cb"></i>
+              Reference: <a href="https://en.wikipedia.org/wiki/Rylands_Library_Papyrus_P52" target="_blank">Rylands Library Papyrus P52 – Wikipedia</a>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <h2><i class="fas fa-bullseye" style="color:#2575fc; margin-right:0.5em;"></i>Prophecy and Fulfillment</h2>
+    <h3><i class="fas fa-landmark" style="color:#6a11cb; margin-right:0.5em;"></i>Daniel 2</h3>
+    <div class="quote">
+      "The God of heaven will set up a kingdom which shall never be destroyed... it shall break in pieces and consume all these kingdoms, and it shall stand forever."
+    </div>
+    <div class="bible-verse">
+      <b>Isaiah 46:9-10</b> — "I am God, and there is none like Me, declaring the end from the beginning, and from ancient times things that are not yet done."
+    </div>
+    <p>
+      The prophecy of Daniel 2 predicted the rise and fall of world empires—Babylon, Medo-Persia, Greece, Rome, and divided Europe—centuries before they occurred.
+    </p>
+    <ul>
+      <li>
+        <strong>Messianic Prophecies:</strong> The Old Testament contains over 300 prophecies about the Messiah, all fulfilled in the life, death, and resurrection of Jesus Christ.
+        <span class="readmore-link" onclick="toggleReadMore('rm-proph1')">Read more</span>
+        <div class="readmore-box" id="rm-proph1">
+          <b>Examples:</b>
+          <ul>
+            <li>
+              Born in Bethlehem (Micah 5:2; fulfilled in Matthew 2:1)
+              <span class="bible-verse"><b>Micah 5:2</b> — "But you, Bethlehem Ephrathah... out of you shall come forth to Me the One to be Ruler in Israel..."</span>
+              <span class="bible-verse"><b>Matthew 2:1</b> — "Now after Jesus was born in Bethlehem of Judea..."</span>
+            </li>
+            <li>
+              Born of a virgin (Isaiah 7:14; fulfilled in Matthew 1:22-23)
+              <span class="bible-verse"><b>Isaiah 7:14</b> — "Behold, the virgin shall conceive and bear a Son, and shall call His name Immanuel."</span>
+              <span class="bible-verse"><b>Matthew 1:22-23</b> — "So all this was done that it might be fulfilled... 'Behold, the virgin shall be with child...'"</span>
+            </li>
+            <li>
+              Crucified (Psalm 22; fulfilled in John 19:23-24)
+              <span class="bible-verse"><b>Psalm 22:16</b> — "They pierced My hands and My feet."</span>
+              <span class="bible-verse"><b>John 19:23-24</b> — "Then the soldiers, when they had crucified Jesus, took His garments..."</span>
+            </li>
+            <li>
+              Resurrected (Isaiah 53:10-11; fulfilled in Acts 2:31)
+              <span class="bible-verse"><b>Isaiah 53:10-11</b> — "He shall see His seed, He shall prolong His days... He shall see the labor of His soul, and be satisfied."</span>
+              <span class="bible-verse"><b>Acts 2:31</b> — "He, foreseeing this, spoke concerning the resurrection of the Christ..."</span>
+            </li>
+          </ul>
+          These fulfillments, written centuries apart, demonstrate the Bible’s supernatural accuracy.
+        </div>
+      </li>
+      <li>
+        <strong>Destruction of Jerusalem:</strong> Jesus predicted the destruction of Jerusalem and the temple (Luke 21:6, Matthew 24:2).
+        <span class="readmore-link" onclick="toggleReadMore('rm-proph2')">Read more</span>
+        <div class="readmore-box" id="rm-proph2">
+          In AD 70, the Romans destroyed Jerusalem and the temple, just as Jesus foretold. Not one stone was left upon another, fulfilling His words exactly. <br>
+          <span class="bible-verse"><b>Luke 21:6</b> — "As for these things which you see, the days will come in which not one stone shall be left upon another that shall not be thrown down."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Regathering of Israel:</strong> The Bible predicted that the Jewish people would be scattered and later regathered (Ezekiel 36:24, Isaiah 11:11-12).
+        <span class="readmore-link" onclick="toggleReadMore('rm-proph3')">Read more</span>
+        <div class="readmore-box" id="rm-proph3">
+          After centuries of dispersion, the modern state of Israel was established in 1948, fulfilling ancient prophecies of regathering. <br>
+          <span class="bible-verse"><b>Ezekiel 36:24</b> — "For I will take you from among the nations, gather you out of all countries, and bring you into your own land."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Rise and Fall of Nations:</strong> Daniel 7 and 8 accurately describe the succession of world empires and even specific rulers.
+        <span class="readmore-link" onclick="toggleReadMore('rm-proph4')">Read more</span>
+        <div class="readmore-box" id="rm-proph4">
+          Daniel 8:21-22 specifically names Greece and its first king (Alexander the Great), and predicts the division of his empire after his death. These details were fulfilled with remarkable precision.
+          <span class="bible-verse"><b>Daniel 8:21-22</b> — "And the male goat is the kingdom of Greece. The large horn that is between its eyes is the first king. As for the broken horn and the four that stood up in its place, four kingdoms shall arise out of that nation..."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Spread of the Gospel:</strong> Jesus predicted that His message would be preached in all the world (Matthew 24:14).
+        <span class="readmore-link" onclick="toggleReadMore('rm-proph5')">Read more</span>
+        <div class="readmore-box" id="rm-proph5">
+          Today, the Bible is translated into thousands of languages and the gospel is preached worldwide, fulfilling Jesus’ prophecy.<br>
+          <span class="bible-verse"><b>Matthew 24:14</b> — "And this gospel of the kingdom will be preached in all the world as a witness to all the nations, and then the end will come."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Rise of Knowledge and Travel:</strong> Daniel 12:4 predicted an increase in knowledge and travel in the time of the end.
+        <span class="readmore-link" onclick="toggleReadMore('rm-proph6')">Read more</span>
+        <div class="readmore-box" id="rm-proph6">
+          The explosion of scientific knowledge and global travel in the last two centuries is seen by many as a fulfillment of Daniel’s prophecy.<br>
+          <span class="bible-verse"><b>Daniel 12:4</b> — "Many shall run to and fro, and knowledge shall increase."</span>
+        </div>
+      </li>
+    </ul>
+    <div class="quote">
+      “The Bible unfolds truth with a simplicity and an adaptation to the needs and longings of the human heart, that has astonished and charmed the most highly cultivated minds, while to the humble and uncultured also it makes plain the way of life.”
+      <span class="quote-cite">— Ellen G. White, <em>Steps to Christ</em>, p. 107</span>
+    </div>
+
+    <h2><i class="fas fa-hands-helping" style="color:#2575fc; margin-right:0.5em;"></i>The Bible’s Power to Change Lives</h2>
+    <h3><i class="fas fa-lightbulb" style="color:#6a11cb; margin-right:0.5em;"></i>Psalm 119:105</h3>
+    <div class="quote">
+      "Your word is a lamp to my feet and a light to my path."
+    </div>
+    <div class="bible-verse">
+      <b>Hebrews 4:12</b> — "For the word of God is living and powerful, and sharper than any two-edged sword..."
+    </div>
+    <p>
+      The Bible has transformed countless lives, offering hope, guidance, and purpose to people of all backgrounds.
+    </p>
+    <ul>
+      <li>
+        <strong>Personal Testimonies:</strong> Millions have found freedom from addiction, despair, and destructive habits through the teachings and promises of Scripture.
+        <span class="readmore-link" onclick="toggleReadMore('rm-life1')">Read more</span>
+        <div class="readmore-box" id="rm-life1">
+          <b>John Newton</b>, former slave trader, became a Christian and wrote "Amazing Grace" after reading the Bible. Countless others have experienced similar transformation.<br>
+          <span class="bible-verse"><b>2 Corinthians 5:17</b> — "Therefore, if anyone is in Christ, he is a new creation; old things have passed away; behold, all things have become new."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Social Reform:</strong> The Bible inspired leaders like William Wilberforce (abolition of slavery) and Martin Luther King Jr. (civil rights movement).
+        <span class="readmore-link" onclick="toggleReadMore('rm-life2')">Read more</span>
+        <div class="readmore-box" id="rm-life2">
+          Wilberforce’s campaign to end the slave trade was motivated by his Christian faith. Dr. King’s vision of equality was rooted in biblical justice.<br>
+          <span class="bible-verse"><b>Micah 6:8</b> — "He has shown you, O man, what is good; and what does the Lord require of you but to do justly, to love mercy, and to walk humbly with your God?"</span>
+        </div>
+      </li>
+      <li>
+        <strong>Charity and Compassion:</strong> Hospitals, orphanages, and humanitarian organizations have been founded by people motivated by biblical principles.
+        <span class="readmore-link" onclick="toggleReadMore('rm-life3')">Read more</span>
+        <div class="readmore-box" id="rm-life3">
+          The Red Cross, Salvation Army, and many hospitals were started by Christians inspired by Jesus’ teachings.<br>
+          <span class="bible-verse"><b>James 1:27</b> — "Pure and undefiled religion before God and the Father is this: to visit orphans and widows in their trouble, and to keep oneself unspotted from the world."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Restoration of Relationships:</strong> Biblical teachings on forgiveness and reconciliation have healed families and communities.
+        <span class="readmore-link" onclick="toggleReadMore('rm-life4')">Read more</span>
+        <div class="readmore-box" id="rm-life4">
+          Many families and communities have been restored through the power of forgiveness taught in the Bible.<br>
+          <span class="bible-verse"><b>Ephesians 4:32</b> — "And be kind to one another, tenderhearted, forgiving one another, even as God in Christ forgave you."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Hope in Suffering:</strong> The Bible gives comfort and hope to people facing persecution, illness, and loss.
+        <span class="readmore-link" onclick="toggleReadMore('rm-life5')">Read more</span>
+        <div class="readmore-box" id="rm-life5">
+          Countless people have found strength to endure trials through God’s promises.<br>
+          <span class="bible-verse"><b>Romans 8:28</b> — "And we know that all things work together for good to those who love God, to those who are the called according to His purpose."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Guidance for Daily Living:</strong> The Bible offers practical wisdom for relationships, work, and personal growth.
+        <span class="readmore-link" onclick="toggleReadMore('rm-life6')">Read more</span>
+        <div class="readmore-box" id="rm-life6">
+          Proverbs and the teachings of Jesus provide timeless advice for living with integrity, kindness, and purpose.<br>
+          <span class="bible-verse"><b>Proverbs 3:5-6</b> — "Trust in the Lord with all your heart, and lean not on your own understanding; in all your ways acknowledge Him, and He shall direct your paths."</span>
+        </div>
+      </li>
+      <li>
+        <strong>Peace and Purpose:</strong> The Bible gives peace to troubled hearts and a sense of purpose to those searching for meaning.
+        <span class="readmore-link" onclick="toggleReadMore('rm-life7')">Read more</span>
+        <div class="readmore-box" id="rm-life7">
+          Many testify to finding peace and direction for their lives through the promises of God.<br>
+          <span class="bible-verse"><b>Philippians 4:6-7</b> — "Be anxious for nothing, but in everything by prayer and supplication, with thanksgiving, let your requests be made known to God; and the peace of God, which surpasses all understanding, will guard your hearts and minds through Christ Jesus."</span>
+        </div>
+      </li>
+    </ul>
+    <div class="quote">
+      “The Bible is the most comprehensive and the most instructive history which men possess. It came fresh from the fountain of eternal truth, and a divine hand has preserved its purity through all the ages.”
+      <span class="quote-cite">— Ellen G. White, <em>Testimonies for the Church</em>, vol. 5, p. 437</span>
+    </div>
+
+    <h2><i class="fas fa-flag-checkered" style="color:#2575fc; margin-right:0.5em;"></i>Conclusion</h2>
+    <p>
+      The Bible stands the test of time as a reliable record of God’s work in history and in human hearts. Its facts are supported by archaeology, manuscript evidence, fulfilled prophecy, and its power to change lives. While faith is essential, the evidence for the Bible’s truthfulness is strong and enduring.
+      <span class="readmore-link" onclick="toggleReadMore('rm-conc1')">Read more</span>
+    </p>
+    <div class="readmore-box" id="rm-conc1">
+      <ul>
+        <li>
+          <strong>Enduring Influence:</strong> The Bible remains the world’s best-selling and most translated book, impacting cultures, languages, and laws across the globe.
+        </li>
+        <li>
+          <strong>Consistency and Preservation:</strong> Despite being written over 1,500 years by more than 40 authors, the Bible maintains a unified message and has been remarkably preserved through centuries of copying and translation.
+        </li>
+        <li>
+          <strong>Invitation to Experience:</strong> Beyond historical and scientific evidence, the Bible invites each person to experience its power personally—through prayer, study, and a relationship with its Author.
+        </li>
+        <li>
+          <strong>Living Relevance:</strong> Its teachings continue to provide wisdom, moral guidance, and hope for individuals and societies today.
+        </li>
+        <li>
+          <strong>Promise of Eternal Life:</strong> The Bible offers hope beyond this life to all who believe in Jesus Christ.
+          <div class="bible-verse"><b>John 3:16</b> — "For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."</div>
+        </li>
+        <li>
+          <strong>God's Word Never Fails:</strong> The Bible’s promises and prophecies have stood the test of time and continue to be fulfilled.
+          <div class="bible-verse"><b>Isaiah 40:8</b> — "The grass withers, the flower fades, but the word of our God stands forever."</div>
+        </li>
+      </ul>
+    </div>
+    <div class="quote">
+      “The Bible is its own expositor. Scripture is to be compared with scripture. The student should learn to view the word as a whole, and to see the relation of its parts.”
+      <span class="quote-cite">— Ellen G. White, <em>Education</em>, p. 190</span>
+    </div>
+  </div>
+  <script>
+    function toggleReadMore(id) {
+      var box = document.getElementById(id);
+      if (box.style.display === 'none' || box.style.display === '') {
+        // Hide all other readmore boxes first
+        document.querySelectorAll('.readmore-box').forEach(function(el) {
+          el.style.display = 'none';
+        });
+        box.style.display = 'block';
+      } else {
+        box.style.display = 'none';
+      }
+    }
+    // Hide all readmore boxes when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.classList.contains('readmore-link') && !e.target.closest('.readmore-box')) {
+        document.querySelectorAll('.readmore-box').forEach(function(el) {
+          el.style.display = 'none';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
