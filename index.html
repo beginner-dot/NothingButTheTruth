@@ -1,21 +1,23 @@
 # NothingButTheTruth
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nothing ButTheTruth</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-
+    <title>ReTemplate_2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; max-width: 100vw; overflow-x: hidden; }
         body {
             font-family: Arial, sans-serif;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8));
             color: white;
-            height: 100vh;
+            min-height: 100vh;
+        }
+        header {
+            margin-top: 18px;
         }
         .navbar {
             display: flex;
@@ -27,32 +29,91 @@
             position: relative;
             z-index: 1000;
         }
-        .logo { font-size: 1.5em; font-weight: bold; }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .logo img {
+            height: 32px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
         .hamburger {
-            display: flex; flex-direction: column; justify-content: space-between;
-            width: 30px; height: 20px; cursor: pointer; z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            cursor: pointer;
+            z-index: 2000;
+            font-size: 1.5em;
+            color: white;
+            position: relative;
+            width: 30px;
+            height: 24px;
         }
         .hamburger span {
-            display: block; height: 3px; width: 100%; background-color: white;
-            border-radius: 2px; transition: all 0.3s ease;
+            background: white;
+            height: 3px;
+            width: 100%;
+            margin: 3px 0;
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(.4,0,.2,1);
+            display: block;
         }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
         .sidebar {
-            position: fixed; top: 0; left: -250px; width: 250px; height: 100%;
-            background-color: rgba(51, 51, 51, 0.8); display: flex; flex-direction: column;
-            justify-content: center; transition: left 0.3s ease; z-index: 999;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100vh;
+            background: rgba(20, 20, 30, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: left 0.3s cubic-bezier(.4,0,.2,1);
+            z-index: 1500;
+            pointer-events: none;
+            overflow-y: auto;
         }
-        .sidebar.active { left: 0; }
-        .nav-links { list-style: none; padding: 0; text-align: center; }
-        .nav-links li { margin: 20px 0; }
+        .sidebar.active {
+            left: 0;
+            pointer-events: auto;
+        }
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+        .nav-links li {
+            margin: 20px 0;
+        }
         .nav-links a {
-            text-decoration: none; color: white; font-size: 1.2em;
-            display: flex; align-items: center; gap: 10px; transition: color 0.3s ease;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s cubic-bezier(.4,0,.2,1);
         }
         .nav-links a:hover { color: #00ff55; }
         .nav-links i { font-size: 1.2em; }
+
         /* Scroll Fade Animation */
         .scroll-fade {
             opacity: 0;
@@ -63,20 +124,165 @@
             opacity: 1;
             transform: translateY(0);
         }
+
         /* Top Section */
         .top-section {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
-            height: 50vh;
+            min-height: 40vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .top-section .square-gradient {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 18px;
+            opacity: 0.18;
+            filter: blur(0.5px);
+        }
+        .top-section .sq1 { width: 120px; height: 120px; top: 20px; left: 30px; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%); opacity: 0.18; }
+        .top-section .sq2 { width: 90px; height: 90px; top: 80px; right: 60px; background: linear-gradient(120deg, #6a11cb 0%, #fff 100%); opacity: 0.13; }
+        .top-section .sq3 { width: 60px; height: 60px; bottom: 40px; left: 80px; background: linear-gradient(120deg, #2575fc 0%, #ffd803 100%); opacity: 0.15; }
+        .top-section .sq4 { width: 160px; height: 60px; top: 120px; left: 50%; transform: translateX(-50%) rotate(8deg); background: linear-gradient(90deg, #6a11cb 0%, #ffd803 100%); opacity: 0.11; }
+        .top-section .sq5 { width: 70px; height: 140px; bottom: 30px; right: 40px; background: linear-gradient(120deg, #ffd803 0%, #6a11cb 100%); opacity: 0.14; }
+        .top-section .sq6 { width: 40px; height: 40px; top: 40px; right: 120px; background: linear-gradient(135deg, #2575fc 0%, #fff 100%); opacity: 0.12; }
+        .top-section .sq7 { width: 100px; height: 40px; bottom: 80px; left: 30px; background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%); opacity: 0.13; }
+        .top-section .sq8 { width: 60px; height: 100px; top: 180px; left: 10px; background: linear-gradient(120deg, #ffd803 0%, #6a11cb 100%); opacity: 0.10; }
+        .top-section .sq9 { width: 80px; height: 80px; bottom: 10px; right: 120px; background: linear-gradient(135deg, #2575fc 0%, #fff 100%); opacity: 0.09; }
+        .top-section .sq10 { width: 50px; height: 50px; top: 60px; left: 60%; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%); opacity: 0.10; }
+        .top-section .sq11 { width: 30px; height: 90px; bottom: 120px; right: 30px; background: linear-gradient(120deg, #6a11cb 0%, #ffd803 100%); opacity: 0.08; }
+        .top-section > *:not(.square-gradient) {
+            position: relative;
+            z-index: 1;
+        }
+        .glass-intro {
+            background: rgba(255,255,255,0.13);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255,255,255,0.18);
+            padding: 2.5em 2em 2em 2em;
+            margin: 60px 0 30px 0;
+            display: inline-block;
+            max-width: 95vw;
         }
         .top-section h1 { font-size: 3em; margin-bottom: 10px; }
         .top-section p { font-size: 1.2em; max-width: 600px; line-height: 1.6; }
-        /* Bottom Section */
+
+        /* Modern Slides (Cards) */
+        .modern-slides {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px 20px;
+            background-color: #fff;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
+            flex-wrap: wrap;
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+        .slides-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+            width: 300px;
+            color: #222;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+        }
+        .slides-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+        }
+        .slides-card img {
+            width:100%;
+            height:180px;
+            object-fit:cover;
+        }
+        .slides-card .slides-text {
+            padding: 20px;
+        }
+        .slides-card h3 { margin-bottom: 10px; }
+
+        /* Hero Section (now used as belowhead) */
+        .hero-section {
+            width: 100%;
+            min-height: 55vh;
+            background: linear-gradient(120deg, #6a11cb 60%, #2575fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 0 40px 0;
+            background-size: 200% 200%;
+            transition: background-position 0.6s cubic-bezier(.4,0,.2,1), box-shadow 0.3s, transform 0.3s;
+            background-position: 0% 50%;
+        }
+        .hero-section:hover {
+            background-position: 100% 50%;
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 1.5px 8px #6a11cb44;
+        }
+        .hero-content {
+            z-index: 1;
+            color: #fff;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background: rgba(0,0,0,0.18);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.13);
+            backdrop-filter: blur(2px);
+        }
+        .hero-section h1 {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+        .hero-section p {
+            font-size: 1.3em;
+            margin-bottom: 32px;
+            color: #e0e0e0;
+        }
+        .hero-btn, .cta-button {
+            display: inline-block;
+            padding: 15px 38px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #ffd803 0%, #6a11cb 100%);
+            color: #222;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .hero-btn:hover, .cta-button:hover {
+            background: linear-gradient(90deg, #6a11cb 0%, #ffd803 100%);
+            color: #fff;
+            transform: translateY(-3px) scale(1.04);
+        }
+        @media (max-width: 700px) {
+            .hero-section h1 { font-size: 2em; }
+            .hero-section p { font-size: 1em; }
+            .hero-content { padding: 18px 6vw; }
+        }
+
+        /* Slideshow Styles */
         .bottom-section {
             background-color: white;
             color: #333;
@@ -84,52 +290,177 @@
             padding: 40px 20px;
             text-align: center;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 40px;
-            background-color: white;
             flex-wrap: wrap;
             gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
+        .slideshow-container {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 16/9;
+            height: auto;
+            margin: 0 auto 20px auto;
+            position: relative;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border-radius: 12px;
+            overflow: hidden;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            align-items: center;
+        }
+        @media (max-width: 1200px) {
+            .slideshow-container {
+                max-width: 98vw;
+            }
+        }
+        @media (max-width: 900px) {
+            .slideshow-container {
+                max-width: 98vw;
+            }
+        }
+        @media (max-width: 600px) {
+            .slideshow-container {
+                max-width: 100vw;
+                width: 100vw;
+            }
+        }
+        .slideshow-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+        }
+        .slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            display: block;
+        }
+        .slide-text {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            max-width: 95%;
+            min-width: 60%;
+            box-sizing: border-box;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+        .dots-container {
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+            padding: 5px;
+            background: transparent;
+            position: relative;
+            z-index: 2;
+        }
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: #717171;
+        }
+        .fade {
+            animation: fadeEffect 1.5s ease-in-out;
+        }
+        @keyframes fadeEffect {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+        @media screen and (max-width: 900px) {
+            .bottom-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 24px;
+                max-width: 98vw;
+            }
+            .slideshow-container {
+                max-width: 98vw;
+                min-width: 0;
+                height: 220px;
+            }
+            .slide, .slide img {
+                height: 220px;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .bottom-section {
+                max-width: 100vw;
+                padding: 10px 0;
+            }
+            .slideshow-container {
+                min-width: 0;
+                max-width: 100vw;
+                width: 100%;
+                height: 160px;
+            }
+            .slide {
+                height: 100%;
+                position: absolute;
+                width: 100%;
+            }
+            .slide img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+                display: block;
+            }
+            .slide-text {
+                font-size: 0.8em;
+                padding: 4px 4px;
+            }
+            .nav-links a {
+                font-size: 1em;
+            }
+        }
+
         .leftdiv, .StrDiv {
             flex: 1;
             max-width: 400px;
             text-align: center;
             padding: 20px;
         }
-        .belowhead {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            background-size: 200% 200%;
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
-            max-width: 400px;
-            margin: 20px auto;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInSlideUp 5s ease-in-out forwards, backgroundAnimation 6s infinite alternate;
-        }
-        @keyframes fadeInSlideUp {
-            0% { opacity: 0; transform: translateY(20px);}
-            100% { opacity: 1; transform: translateY(0);}
-        }
-        @keyframes backgroundAnimation {
-            0% { background-position: 0% 50%;}
-            100% { background-position: 100% 50%;}
-        }
+
+        /* Purpose Box */
         .purpose-box-alt {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: white;
             padding: 40px 20px;
             border-radius: 12px;
-            margin: 50px auto;
+            margin: 50px auto 15px auto;
             max-width: 900px;
             text-align: center;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 15px;
         }
         .purpose-box-alt:hover {
             transform: translateY(-5px);
@@ -155,51 +486,7 @@
             cursor: pointer;
             box-shadow: inset 0 0 0 2em #1ea664;
         }
-        /* Slides */
-        .modern-slides {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 40px 20px;
-            background-color: #f9f9f9;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .slides {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            text-align: center;
-            flex: 1 1 calc(33.33% - 20px);
-            max-width: 300px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 1s ease-in-out forwards;
-        }
-        @keyframes slideUp {
-            0% { opacity: 0; transform: translateY(20px);}
-            100% { opacity: 1; transform: translateY(0);}
-        }
-        .slides img {
-            width: 100%;
-            height: auto;
-            border-bottom: 5px solid rgba(0, 0, 0, 0.1);
-        }
-        .slides-text { padding: 20px; }
-        .slides-text h3 { font-size: 1.5em; margin-bottom: 10px; color: #333; }
-        .slides-text p { font-size: 1em; color: #666; line-height: 1.6; }
-        .slides:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
-        @media screen and (max-width: 768px) {
-            .slides { flex: 1 1 calc(50% - 20px);}
-        }
-        @media screen and (max-width: 480px) {
-            .slides { flex: 1 1 100%;}
-        }
+
         /* Studies Section */
         .Studies {
             text-align: center;
@@ -208,18 +495,48 @@
             margin-bottom: 20px;
         }
         .flex-wrap {
+            position: relative;
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             justify-content: center;
             padding: 20px;
             background-color: #6f00ffdd;
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+        }
+        .flex-wrap .flex-square {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 10px;
+            opacity: 0.09;
+            filter: blur(0.5px);
+        }
+        .flex-wrap .flex-sq1 { width: 90px; height: 90px; top: 10px; left: 20px; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%);}
+        .flex-wrap .flex-sq2 { width: 60px; height: 120px; bottom: 20px; right: 40px; background: linear-gradient(120deg, #6a11cb 0%, #fff 100%);}
+        .flex-wrap .flex-sq3 { width: 120px; height: 40px; top: 60px; right: 120px; background: linear-gradient(120deg, #2575fc 0%, #ffd803 100%);}
+        .flex-wrap .flex-sq4 { width: 50px; height: 50px; bottom: 60px; left: 80px; background: linear-gradient(90deg, #6a11cb 0%, #ffd803 100%);}
+        .flex-wrap .flex-sq5 { width: 40px; height: 100px; top: 120px; left: 60%; background: linear-gradient(120deg, #ffd803 0%, #6a11cb 100%);}
+        .flex-wrap .flex-sq6 { width: 80px; height: 80px; bottom: 10px; right: 120px; background: linear-gradient(135deg, #2575fc 0%, #fff 100%);}
+        .flex-wrap .flex-sq7 { width: 60px; height: 60px; top: 40px; left: 80%; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%);}
+        .flex-wrap .flex-sq8 { width: 30px; height: 90px; bottom: 120px; right: 30px; background: linear-gradient(120deg, #6a11cb 0%, #ffd803 100%);}
+        .flex-wrap .flex-sq9 { width: 100px; height: 30px; top: 30px; left: 70%; background: linear-gradient(120deg, #ffd803 0%, #6a11cb 100%);}
+        .flex-wrap .flex-sq10 { width: 60px; height: 60px; bottom: 40px; right: 60%; background: linear-gradient(135deg, #2575fc 0%, #ffd803 100%);}
+        .flex-wrap .flex-sq11 { width: 40px; height: 100px; top: 90px; left: 10%; background: linear-gradient(120deg, #6a11cb 0%, #fff 100%);}
+        .flex-wrap .flex-sq12 { width: 80px; height: 40px; bottom: 80px; left: 40%; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%);}
+        .flex-wrap .flex-sq13 { width: 50px; height: 120px; top: 160px; right: 10%; background: linear-gradient(120deg, #2575fc 0%, #ffd803 100%);}
+        .flex-wrap .flex-sq14 { width: 70px; height: 70px; bottom: 10px; left: 10%; background: linear-gradient(135deg, #ffd803 0%, #6a11cb 100%);}
+        .flex-wrap > *:not(.flex-square) {
+            position: relative;
+            z-index: 1;
         }
         .box {
             flex: 1 1 300px;
             max-width: 350px;
             background-color: #3a3636;
-            color: white;
+            color: #fff;
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
@@ -232,14 +549,24 @@
             height: 70px;
             transition-duration: 0.4s;
             border: 2px solid #c9c9c9;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+        }
+        .box.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .box:hover {
-            background-color: #333;
-            color: #eeff00ad;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+            background-color: #000896;
+            color: #fff;
             cursor: pointer;
-            box-shadow: inset 0 0 2em 3em #1ea664;
         }
-        /* Responsive: Stack boxes on small screens */
+        .box a {
+            color: #fff !important;
+        }
         @media (max-width: 900px) {
             .flex-wrap { flex-direction: column; align-items: center; }
             .box { max-width: 95vw; width: 100%; margin: 10px 0; }
@@ -261,6 +588,7 @@
                 overflow-wrap: break-word;
             }
         }
+
         /* Footer */
         .footer {
             background-color: #333;
@@ -276,54 +604,189 @@
             margin: 0 5px;
         }
         .footer a:hover { text-decoration: underline; }
+
+        /* Arrows for slideshow */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 28px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background: rgba(0,0,0,0.3);
+            transition: background 0.3s;
+            z-index: 2;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev {
+            left: 0;
+        }
+        .prev:hover, .next:hover {
+            background: #6a11cb;
+            color: #fff;
+        }
+        .DIVIDER path {
+            fill: url(#divider-gradient);
+        }
+
+        .inspiration-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 30px 20px;
+            margin: 40px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .inspiration-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .inspiration-section h2:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border-radius: 2px;
+        }
+        .inspiration-section blockquote {
+            font-size: 1.2em;
+            margin: 10px 0;
+            padding: 10px 20px;
+            border-left: 4px solid #ffd803;
+            color: #333;
+            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        .inspiration-section blockquote:hover {
+            transform: translateY(-3px);
+        }
+        .inspiration-section blockquote span {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Sermons Section */
+        .Sermons {
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            margin-bottom: 20px;
+            margin-top: 40px;
+            /* Center the heading */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sermons-flex-wrap {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #2575fc 60%, #6a11cb 100%);
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            border-radius: 14px;
+        }
+
+        /* Inspiration Scrollshow Styles */
+        .inspiration-slideshow-container {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 48px 60px 48px; /* Add bottom padding for arrows */
+        }
+        
+      
+        
     </style>
 </head>
 <body>
     <header>
         <nav class="navbar scroll-fade">
-            <div class="logo">Nothing But The Truth</div>
-            <div class="hamburger">
+           <div class="WebsiteName">I am still thinking about the Name of the Website.. .</div>
+            <div class="hamburger" tabindex="0" aria-label="Open menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <div class="sidebar"> 
+            <div class="sidebar" tabindex="-1">
+                <div style="margin-bottom: 30px; text-align: center;">
+                </div>
                 <ul class="nav-links">
                     <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
-                    <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
-                    <li><a href="#portfolio"><i class="fas fa-briefcase"></i> Portfolio</a></li>
-                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#studies"><i class="fas fa-book-open"></i> Studies</a></li>
+                    <li><a href="#messages"><i class="fas fa-envelope"></i> Messages</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
     <section class="top-section scroll-fade">
-        <h1>Website Still In Progress</h1>
-        <h3>To the reader:</h3>
-        <p> Our website is dedicated to providing you with the unchanged, untampered Gospel as it is written in the Holy Bible. </p>
+        <!-- Many square gradients -->
+        <div class="square-gradient sq1"></div>
+        <div class="square-gradient sq2"></div>
+        <div class="square-gradient sq3"></div>
+        <div class="square-gradient sq4"></div>
+        <div class="square-gradient sq5"></div>
+        <div class="square-gradient sq6"></div>
+        <div class="square-gradient sq7"></div>
+        <div class="square-gradient sq8"></div>
+        <div class="square-gradient sq9"></div>
+        <div class="square-gradient sq10"></div>
+        <div class="square-gradient sq11"></div>
+        <div class="glass-intro">
+            <h1><i class="fas fa-tools" style="color:#ffd803"></i> Website Still In Progress</h1>
+            <h3><i class="fas fa-user" style="color:#ffd803"></i> To the reader:</h3>
+            <p><i class="fas fa-bible" style="color:#ffd803"></i> Our website is dedicated to providing you with the unchanged, untampered Gospel as it is written in the Holy Bible. </p>
+        </div>
     </section>
 
+    <!-- Modern Slides (Cards) -->
     <section class="modern-slides scroll-fade">
-        <div class="slides scroll-fade">
+        <div class="slides-card">
             <img src="https://i.pinimg.com/736x/21/23/90/212390b2e32b32fecb4aafd55158fc05.jpg" alt="Slide 1">
             <div class="slides-text">
-                <h3>The Bible</h3>
+                <h3><i class="fas fa-bible" style="color:#ffd803"></i> The Bible</h3>
                 <p>Explore the teachings of the Bible and its timeless wisdom.</p>
             </div>
         </div>
-        <div class="slides scroll-fade">
+        <div class="slides-card">
             <img src="https://i.pinimg.com/474x/e0/ce/f2/e0cef296d632cc0fe4aa2a7230524b25.jpg" alt="Slide 2">
             <div class="slides-text">
                 <h3>Prayer</h3>
                 <p>Experience the power of prayer and its impact on life.</p>
             </div>
         </div>
-        <div class="slides scroll-fade">
+        <div class="slides-card">
             <img src="https://i.pinimg.com/474x/3a/8d/4d/3a8d4daa6a1b6a9b6ad28e79c5898d84.jpg" alt="Slide 3">
             <div class="slides-text">
-                <h3>Slide 3</h3>
+                <h3>Nature</h3>
                 <p>Discover the beauty of nature and how it reflects God's creation.</p>
             </div>
         </div>
@@ -331,42 +794,182 @@
 
     <section class="bottom-section scroll-fade">
         <div class="leftdiv scroll-fade"></div>
-        <div class="belowhead scroll-fade">
-            <h2>Welcome to Our Mission</h2>
-            <p>
-                We are committed to sharing the unchanged and untampered Gospel as it is written in the Holy Bible. Explore our resources and join us in spreading the truth.
-            </p>
-            <button class="cta-button">Learn More</button>
+        <!-- Hero section moved here as belowhead replacement -->
+        <section class="hero-section scroll-fade" style="margin-bottom: 30px;">
+            <div class="hero-content">
+                <h1>Welcome to Our Mission</h1>
+                <p>
+                    We are committed to sharing the unchanged and untampered Gospel as it is written in the Holy Bible. Explore our resources and join us in spreading the truth.
+                </p>
+                <button class="cta-button">Learn More</button>
+            </div>
+        </section>
+        <div class="slideshow-container scroll-fade">
+            <div class="slide fade">
+                <img src="https://i.pinimg.com/736x/21/23/90/212390b2e32b32fecb4aafd55158fc05.jpg" alt="Slide 1">
+                <div class="slide-text">
+                    <h3> The Bible</h3>
+                    <p>Explore the teachings of the Bible and its timeless wisdom.</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="https://i.pinimg.com/474x/e0/ce/f2/e0cef296d632cc0fe4aa2a7230524b25.jpg" alt="Slide 2">
+                <div class="slide-text">
+                    <h3>Prayer</h3>
+                    <p>Experience the power of prayer and its impact on life.</p>
+                </div>
+            </div>
+            <div class="slide fade">
+                <img src="https://i.pinimg.com/474x/3a/8d/4d/3a8d4daa6a1b6a9b6ad28e79c5898d84.jpg" alt="Slide 3">
+                <div class="slide-text">
+                    <h3>Nature</h3>
+                    <p>Discover the beauty of nature and how it reflects God's creation.</p>
+                </div>
+            </div>
+            <!-- Add arrows -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
         </div>
         <div class="StrDiv scroll-fade"></div>
     </section>
 
     <section class="purpose-box-alt scroll-fade">
         <div class="purpose-content">
-            <h2>About the Bible</h2>
-            <p>The Bible is a collection of sacred texts or scriptures that speak about God and the history of the World. It contains present events and the future of our world. The scriptures also explain Heaven as the Holy City of God, and explains The Trinity of The Holy God.</p>
-            <a href="http://www.unnamedweb.rf.gd/why_the_bible_is_God's_word.html">
-                <button class="bt1">How is the Bible God's Message to us</button>
+            <h2><i class="fas fa-info-circle" style="color:#ffd803"></i> About the Bible</h2>
+            <p><i class="fas fa-bible" style="color:#ffd803"></i> The Bible is a collection of sacred texts or scriptures that speak about God and the history of the World. It contains present events and the future of our world. The scriptures also explain Heaven as the Holy City of God, and explains The Trinity of The Holy God.</p>
+            <a href="http://www.unnamedweb.rf.gd/why_the_bible_is_God%27s_word.html">
+                <button class="bt1"><i class="fas fa-arrow-right"></i> How is the Bible God's Message to us</button>
             </a>
         </div>
     </section>
 
-    <div class="Studies scroll-fade"><h2>Our Studies</h2></div>
-    <div class="flex-wrap scroll-fade">
-        <div class="box scroll-fade">Is the Bible Facts or Fiction?</div>
-        <div class="box scroll-fade">Is the Bible God's Word to Humanity?</div>
-        <div class="box scroll-fade">A tale of Cities</div>
-        <div class="box scroll-fade"> Still In Progress</div>
-        <div class="box scroll-fade"> Still In Progress</div>
-        <div class="box scroll-fade"> Still In Progress</div>
+    <svg class="DIVIDER" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100">
+      <defs>
+        <linearGradient id="divider-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#6a11cb"/>
+          <stop offset="100%" stop-color="#2575fc"/>
+        </linearGradient>
+      </defs>
+      <g>
+        <path d="M0 100V0h1000v4L0 100z" opacity="1"></path>
+        <path d="M0 100V0h1000v24L0 100z" opacity=".5"></path>
+        <path d="M0 100V0h1000v44L0 100z" opacity=".4"></path>
+        <path d="M0 100V0h1000v64L0 100z" opacity=".3"></path>
+        <path d="M0 100V0h1000v84L0 100z" opacity=".2"></path>
+      </g>
+    </svg>
+
+    <div class="Studies scroll-fade">
+      <h2><i class="fas fa-graduation-cap" style="color:#ffd803"></i> Our Studies</h2>
     </div>
+    <div class="flex-wrap scroll-fade">
+        <!-- Slightly visible square gradients -->
+        <div class="flex-square flex-sq1"></div>
+        <div class="flex-square flex-sq2"></div>
+        <div class="flex-square flex-sq3"></div>
+        <div class="flex-square flex-sq4"></div>
+        <div class="flex-square flex-sq5"></div>
+        <div class="flex-square flex-sq6"></div>
+        <div class="flex-square flex-sq7"></div>
+        <div class="flex-square flex-sq8"></div>
+        <div class="flex-square flex-sq9"></div>
+        <div class="flex-square flex-sq10"></div>
+        <div class="flex-square flex-sq11"></div>
+        <div class="flex-square flex-sq12"></div>
+        <div class="flex-square flex-sq13"></div>
+        <div class="flex-square flex-sq14"></div>
+        <div class="box"><a href="http://www.unnamedweb.rf.gd/Facts_or_Fiction.html" style="text-decoration:none;"><i class="fas fa-question-circle" style="color:#ffd803"></i> Is The Bible Facts or Fiction?</a></div>
+        <div class="box"><a href="http://www.unnamedweb.rf.gd/why_the_bible_is_God%27s_word.html" style="text-decoration:none;"><i class="fas fa-book-bible" style="color:#ffd803"></i> Is the Bible God's Word to Humanity?</a></div>
+        <div class="box"><i class="fas fa-city" style="color:#ffd803"></i>    A Tale of Cities</div>
+        <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div>
+        <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div>
+        <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div>
+    </div>
+
+    <div class="inspiration-section scroll-fade" id="inspiration-scrollshow">
+        <h2>Be Inspired</h2>
+        <div class="inspiration-slideshow-container">
+            <div class="inspiration-slide fade" style="display:block;">
+                <blockquote>
+                    "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future."
+                    <br><span>- Jeremiah 29:11</span>
+                </blockquote>
+            </div>
+            <div class="inspiration-slide fade">
+                <blockquote>
+                    "The Lord is my shepherd; I shall not want."
+                    <br><span>- Psalm 23:1</span>
+                </blockquote>
+            </div>
+            <div class="inspiration-slide fade">
+                <blockquote>
+                    "Let all that you do be done in love."
+                    <br><span>- 1 Corinthians 16:14</span>
+                </blockquote>
+            </div><div class="inspiration-dots-container">
+                <span class="inspiration-dot" onclick="currentInspirationSlide(1)"></span>
+                <span class="inspiration-dot" onclick="currentInspirationSlide(2)"></span>
+                <span class="inspiration-dot" onclick="currentInspirationSlide(3)"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sermons Section -->
+    <div class="Sermons scroll-fade">
+      <h2 style="margin:0 auto;"><i class="fas fa-microphone" style="color:#ffd803"></i> Sermons</h2>
+    </div>
+    <div class="sermons-flex-wrap scroll-fade">
+        <div class="flex-square flex-sq1"></div>
+        <div class="flex-square flex-sq2"></div>
+        <div class="flex-square flex-sq3"></div>
+        <div class="flex-square flex-sq4"></div>
+        <div class="flex-square flex-sq5"></div>
+        <div class="flex-square flex-sq6"></div>
+        <div class="flex-square flex-sq7"></div>
+        <div class="flex-square flex-sq8"></div>
+        <div class="flex-square flex-sq9"></div>
+        <div class="flex-square flex-sq10"></div>
+        <div class="flex-square flex-sq11"></div>
+        <div class="flex-square flex-sq12"></div>
+        <div class="flex-square flex-sq13"></div>
+        <div class="flex-square flex-sq14"></div>
+        <div class="box">
+            <a href="Official/Studies/a_tale_of_cities.html" style="text-decoration:none;">
+                <i class="fas fa-city" style="color:#ffd803"></i> A Tale of Cities
+            </a>
+        </div>
+        <div class="box">
+            <a href="#" style="text-decoration:none;">
+                <i class="fas fa-cross" style="color:#ffd803"></i> The Power of the Cross
+            </a>
+        </div>
+        <div class="box">
+            <a href="#" style="text-decoration:none;">
+                <i class="fas fa-heart" style="color:#ffd803"></i> Love That Saves
+            </a>
+        </div>
+        <div class="box">
+            <i class="fas fa-spinner" style="color:#ffd803"></i> More Sermons Coming Soon
+        </div>
+        <div class="box">
+            <i class="fas fa-spinner" style="color:#ffd803"></i> More Sermons Coming Soon
+        </div>
+    </div>
+
+    
 
     <footer class="footer scroll-fade">
         <p>&copy; 2025 My Website. All rights reserved.</p>
-        <p>Follow us on:
-            <a href="https://facebook.com" target="_blank">Facebook</a> |
-            <a href="https://twitter.com" target="_blank">Twitter</a> |
-            <a href="https://instagram.com" target="_blank">Instagram</a>
+        <p>
+            <i class="fas fa-share-alt" style="color:#ffd803"></i> Follow us on:
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook" style="color:#4267B2"></i> Facebook</a> |
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter</a> |
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram" style="color:#E1306C"></i> Instagram</a>
         </p>
     </footer>
 
@@ -375,9 +978,27 @@
         document.addEventListener("DOMContentLoaded", function () {
             const hamburger = document.querySelector(".hamburger");
             const sidebar = document.querySelector(".sidebar");
-            hamburger.addEventListener("click", () => {
+
+            hamburger.addEventListener("click", function (e) {
+                e.stopPropagation();
                 hamburger.classList.toggle("active");
                 sidebar.classList.toggle("active");
+            });
+
+            sidebar.addEventListener("click", function (e) {
+                e.stopPropagation();
+            });
+
+            document.addEventListener("click", function () {
+                hamburger.classList.remove("active");
+                sidebar.classList.remove("active");
+            });
+
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape") {
+                    hamburger.classList.remove("active");
+                    sidebar.classList.remove("active");
+                }
             });
         });
 
@@ -388,6 +1009,12 @@
                 threshold: 0.15,
                 rootMargin: "0px 0px -40px 0px"
             };
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top < window.innerHeight && rect.bottom > 0
+                );
+            }
             const appearOnScroll = new IntersectionObserver(function(entries, observer) {
                 entries.forEach(entry => {
                     if (!entry.isIntersecting) return;
@@ -396,9 +1023,114 @@
                 });
             }, appearOptions);
             faders.forEach(fader => {
-                appearOnScroll.observe(fader);
+                if (isInViewport(fader)) {
+                    setTimeout(() => fader.classList.add('visible'), 200);
+                } else {
+                    appearOnScroll.observe(fader);
+                }
             });
         });
+
+        // Slideshow functionality
+        let slideIndex = 1;
+        let slideTimer = null;
+
+        function showSlides(n) {
+            const slides = document.querySelectorAll(".slide");
+            const dots = document.querySelectorAll(".dot");
+            if (n === undefined) n = slideIndex;
+            if (n > slides.length) n = 1;
+            if (n < 1) n = slides.length;
+            slides.forEach(slide => slide.style.display = "none");
+            dots.forEach(dot => dot.classList.remove("active"));
+            slides[n - 1].style.display = "block";
+            dots[n - 1].classList.add("active");
+            slideIndex = n;
+            clearTimeout(slideTimer);
+            slideTimer = setTimeout(() => showSlides(slideIndex + 1), 5000);
+        }
+
+        function currentSlide(n) {
+            showSlides(n);
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex + n);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => showSlides(1));
+
+        // Animate .box divs one by one as you scroll
+        document.addEventListener("DOMContentLoaded", function () {
+        // Animate Studies boxes
+        const studiesBoxes = document.querySelectorAll('.flex-wrap .box');
+        let hasAnimatedStudies = false;
+        function animateStudiesBoxes() {
+            if (hasAnimatedStudies) return;
+            const flexWrap = document.querySelector('.flex-wrap');
+            const rect = flexWrap.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                hasAnimatedStudies = true;
+                studiesBoxes.forEach((box, i) => {
+                    setTimeout(() => {
+                        box.classList.add('visible');
+                    }, i * 180);
+                });
+            }
+        }
+        window.addEventListener('scroll', animateStudiesBoxes);
+        animateStudiesBoxes();
+
+        // Animate Sermons boxes
+        const sermonsBoxes = document.querySelectorAll('.sermons-flex-wrap .box');
+        let hasAnimatedSermons = false;
+        function animateSermonsBoxes() {
+            if (hasAnimatedSermons) return;
+            const sermonsWrap = document.querySelector('.sermons-flex-wrap');
+            if (!sermonsWrap) return;
+            const rect = sermonsWrap.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                hasAnimatedSermons = true;
+                sermonsBoxes.forEach((box, i) => {
+                    setTimeout(() => {
+                        box.classList.add('visible');
+                    }, i * 180);
+                });
+            }
+        }
+        window.addEventListener('scroll', animateSermonsBoxes);
+        animateSermonsBoxes();
+    });
+
+    // Inspiration Slideshow functionality
+    let inspirationSlideIndex = 1;
+    let inspirationTimer = null;
+
+    function showInspirationSlide(n) {
+        const slides = document.querySelectorAll(".inspiration-slide");
+        const dots = document.querySelectorAll(".inspiration-dot");
+        if (slides.length === 0) return;
+        if (n > slides.length) inspirationSlideIndex = 1;
+        if (n < 1) inspirationSlideIndex = slides.length;
+        slides.forEach(slide => slide.style.display = "none");
+        dots.forEach(dot => dot.classList.remove("active"));
+        slides[inspirationSlideIndex - 1].style.display = "block";
+        dots[inspirationSlideIndex - 1].classList.add("active");
+        clearTimeout(inspirationTimer);
+        inspirationTimer = setTimeout(() => plusInspirationSlide(1), 7000);
+    }
+
+    function plusInspirationSlide(n) {
+        showInspirationSlide(inspirationSlideIndex += n);
+    }
+
+    function currentInspirationSlide(n) {
+        showInspirationSlide(inspirationSlideIndex = n);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        showInspirationSlide(inspirationSlideIndex);
+    });
     </script>
 </body>
 </html>
