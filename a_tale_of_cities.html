@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Tale of Cities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #f3f4fa;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(90deg, #3a1c71 0%, #6a11cb 50%, #2575fc 100%);
+            padding: 0 28px;
+            height: 62px;
+            color: #fff;
+            box-shadow: 0 2px 12px rgba(58,28,113,0.10);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar .logo {
+            font-size: 1.6em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 8px #6a11cb44;
+        }
+        .navbar .logo i {
+            margin-right: 10px;
+            color: #ffd803;
+        }
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.08em;
+            padding: 8px 18px;
+            border-radius: 7px;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .navbar ul li a:hover,
+        .navbar ul li.active a {
+            background: linear-gradient(90deg, #ffd803 0%, #6a11cb 100%);
+            color: #222;
+            box-shadow: 0 2px 8px #6a11cb33;
+        }
+        .study-header {
+            background: linear-gradient(120deg, #6a11cb 60%, #2575fc 100%);
+            padding: 54px 0 28px 0;
+            text-align: center;
+            position: relative;
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(99,102,241,0.13);
+            overflow: hidden;
+        }
+        .study-header::before, .study-header::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(32px);
+            opacity: 0.18;
+            z-index: 0;
+        }
+        .study-header::before {
+            width: 220px; height: 220px;
+            left: -80px; top: -60px;
+            background: radial-gradient(circle, #ffd803 0%, #6a11cb 80%);
+        }
+        .study-header::after {
+            width: 180px; height: 180px;
+            right: -60px; bottom: -40px;
+            background: radial-gradient(circle, #2575fc 0%, #fff 80%);
+        }
+        .study-header h1 {
+            font-size: 2.7em;
+            margin: 0 0 12px 0;
+            color: #ffd803;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 12px #3730a366;
+            position: relative;
+            z-index: 1;
+        }
+        .study-header p {
+            font-size: 1.18em;
+            color: #f3f4fa;
+            margin: 0;
+            opacity: 0.93;
+            position: relative;
+            z-index: 1;
+        }
+        .study-content {
+            background: linear-gradient(120deg, #fff 80%, #e0e7ff 100%);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px 0 rgba(106,17,203,0.13), 0 1.5px 8px #2575fc22;
+            max-width: 950px;
+            margin: 44px auto 36px auto;
+            padding: 2.6em 2em 2.2em 2em;
+            color: #23234f;
+            font-size: 1.16em;
+            line-height: 1.8;
+            border: 1.5px solid #c7d2fe;
+            position: relative;
+            z-index: 1;
+        }
+        .study-content h2, .study-content h3 {
+            color: #6a11cb;
+            margin-top: 1.6em;
+        }
+        .study-content p {
+            color: #23234f;
+            font-size: 1.16em;
+            line-height: 1.8;
+            margin-bottom: 1.2em;
+        }
+        .study-content blockquote, .study-content .bible {
+            background: linear-gradient(90deg, #e0e7ff 60%, #c7d2fe 100%);
+            border-left: 4px solid #6a11cb;
+            margin: 1.5em 0;
+            padding: 1em 1.5em;
+            color: #373737;
+            border-radius: 10px;
+            font-style: italic;
+        }
+        .study-content ul, .study-content ol {
+            margin-left: 2em;
+            margin-bottom: 1.2em;
+        }
+        .study-content strong {
+            color: #2575fc;
+        }
+        .footer {
+            background: linear-gradient(90deg, #3a1c71 0%, #6a11cb 50%, #2575fc 100%);
+            color: #fff;
+            text-align: center;
+            padding: 22px 0 12px 0;
+            position: relative;
+            width: 100%;
+            font-size: 1em;
+            margin-top: 48px;
+            box-shadow: 0 -2px 12px #6a11cb22;
+        }
+        .footer a {
+            color: #ffd803;
+            text-decoration: none;
+            margin: 0 5px;
+            transition: color 0.2s;
+        }
+        .footer a:hover { text-decoration: underline; color: #fff; }
+        @media (max-width: 700px) {
+            .study-header h1 { font-size: 1.4em; }
+            .study-content { padding: 1.1em 0.5em; }
+            .navbar { flex-direction: column; height: auto; padding: 0 8px; }
+            .navbar ul { flex-wrap: wrap; gap: 8px; }
+        }
+        .study-content {
+            word-break: break-word;
+        }
+        /* Subtle fade-in for content */
+        .study-content, .study-header {
+            animation: fadeIn 1.2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><i class="fas fa-bible"></i> Study</div>
+        <ul>
+            <li><a href="../Ind.html"><i class="fas fa-home"></i> Home</a></li>
+            <li class="active"><a href="#"><i class="fas fa-city"></i> A Tale of Cities</a></li>
+            <li><a href="facts_or_fiction.html"><i class="fas fa-question-circle"></i> Facts or Fiction</a></li>
+            <li><a href="why_the_bible_is_God%27s_word.html"><i class="fas fa-book-bible"></i> Why the Bible?</a></li>
+        </ul>
+    </nav>
+    <header class="study-header">
+        <h1>A Tale of Cities</h1>
+        <p>Sermon</p>
+    </header>
+    <main>
+        <section class="study-content">
+<pre style="white-space: pre-wrap; font-family: inherit; color: inherit; background: none; border: none; margin: 0; padding: 0;">
+Please Allow me to take a moment of your time to share with you what I have learned about two different cities.
+
+And if my sermon is a bit long,  please stay with me because my Job here is to explain that Hope Lives
+ & there is light at the end of the tunnel.
+
+so as I said, Iam going to talk about 2 cities.
+
+and they are
+1. Babylon,
+2. Jerusalem
+
+
+
+
+Remember the following part: The systems that form a foundation or the life of a city are economic, political, and
+religious. so a city is built by systems, namely an economic system, a political system and a religious system. and allow me to add a social system to the list.
+
+The scriptures explain the city as the locus or the location of a great and continuing battle between the God of Israel and the church,
+and the god of the world.
+
+Lets talk about the first city: Babylon.
+"Babylon" originates from the Akkadian language, where it was called "Bābilim", meaning "Gate of the Gods".
+Babylon is first introduced in Genesis 11 when humanity decides to build a Tower of Babel, but that's another story,
+For now, just keep in mind that Babylon is a symbol of a city entirely given over to Satan,
+because
+Babylon is a city that is greedy and bound by self-serving rules and laws.
+Babylon has a social system which is dehumanizing, it undermines and weakens the humanity of individuals' by stripping away their dignity, their identity and undermining their sense of worth because it prioritizes control and profit over the well-being and the value of people.
+Babylon has an economic system that is focused on benefiting the rich and exploiting the poor.
+Babylon has a lot of politics whereby the privileged use their power to oppress the inferior.
+Babylon has a religious system that ignores a covenant with God and it prioritizes or idolises power and wealth.
+
+
+now the second city is Jerusalem.
+So Jerusalem, by contrast, is seen in its idealized form as the city of God.
+Jerusalem is introduced in Genesis 14 in the figure of the king of Salem. Jerusalem means foundation of Salem. salem is derived from the Hebrew word Shalom and Shalom means peace so Jerusalem is a City of peace.
+ As a social system, Jerusalem is called to witness to God’s shalom, “Pray for the peace of Jerusalem",
+Jerusalem has an economic system which has fair and responsible management of resources, making sure that benefits and opportunities are distributed in a fair manner that includes everyone.
+Jerusalem has a political system where there is communal living and a justice framework where working together and fairness shape its governance.
+also, Jerusalem has policies that prioritize the collective good and not individual gain.
+And religiously, Jerusalem is portrayed as the spiritual center of the world, a model city living in trust
+and faith under the lordship of Yahweh, The God of Israel.
+
+
+If You did not get what I just said, its okay, just know that Babylon symbolizes  pride, Oppression, and human rebellion against God.
+
+ while Jerusalem Symbolizes holiness, peace, and divine presence.
+
+now today, Every city has both Babylon and Jerusalem in it, because every city is the battleground between the
+god of Babylon and the God of Jerusalem for domination and control. this means every city is the battleground
+between God and Satan for domination of its people and their structures.
+
+But since every city is a battleground, the people living in the city are caught in the middle of the battle and they suffer as a result. Moreover, The Lord God of Jerusalem has allowed the impure systems of Babylon to influence large percentages of the majority of cities.
+The impure Governing systems of Babylon Dominate over the pure systems of Jerusalem so as a result, the lives of the people in the cities are influenced negatively in a huge manner, and it has reached a point where it seems like Babylonian ways are normal ways of living.
+fairness does not exist, there is a lot of Pride, greed, oppression, Idolatry, suffering & chaos.
+
+as we observe, the god of Babylon is winning. But where is the God of Jerusalem in our cities..? where is his love and power..? doesn't he care..? The God of Babylon is making big moves in the battle and The almighty God is allowing this..? This is their battle, it is not ours we are just caught up in the middle so why is he silent..? He says he cares but why isn't he showing it..?
+unfairness everywhere , injustice, inequality, unrighteous laws, The Babylonian system is ruling and it has become normal So where is God..?
+
+
+Beloved God knows what he is doing. God is Love, God Loves and God does everything with Love. He could just wipe out all the Governing systems, but remember that this is a battle between Him and the god of Babylon and this god of Babylon is so determined to take the whole population down with him and that is exactly what our God of Love is focused on _ He is focused on saving The people who are caught between the battle.
+
+
+before God can win the battle, before He can make big moves of conquering the cities and erasing The systems of Babylon, He saves the inhabitants individually, He touches each person living in the cities, he connects to the heart of each person - on the particular person's level, offering salvation to each person so that anyone who wants to be saved can actually be saved from the systems of the city, and from the god of Babylon.
+
+You see God is powerful enough to conquer all the cities of the whole world at the same time, but he is loving and patient enough to care for each individual living in these cities, and so he makes means to save the people of these cities, one by one.
+
+and once You have accepted him, he covers You with his love, and shows himself to others through You when you don't even know. I don't think You understand, I said other people in the city will see God in you when you are not even aware.
+
+ Yuu may be doubting your faith, your worth, You may not feel like it, but he is with you and others see him in you and through You.
+
+and because Yuu accepted him, he knows that those who will not accept him will be influenced by the god of Babylon to treat you in hurtful, evil ways. so now You will be hurt by the systems of the city and the people of the city and this will be an ongoing battle where the god of Babylon will keep poking you non stop, using his systems and using his people, in different ways, everyday. and one thing about the devil _ when you overcome a challenge he throws at you, he will give you a bigger and a more difficult one, and he will stop at nothing. he can even take things to the next level just like he did with Job, he can make sure that you lose everything, and remain with nothing left just to shake your faith in God.
+
+but because we serve a Loving God, we already know what will happen. once God has the complete number of those who have accepted him, He is going to crush Babylonian systems:
+
+which is where a brand new city comes in,
+
+Revelation 21:2 & 3
+
+And I John saw the holy city, new Jerusalem, coming down from God out of heaven, prepared as a bride adorned for her husband.  And I heard a great voice out of heaven saying, Behold, the tabernacle of God is with men, and he will dwell with them, and they shall be his people, and God himself shall be with them, and be their God.
+ 
+(John 14:2, 3.)
+ “In my Father’s house, are many mansions; if it were not so, I would have told you. I go to prepare a place for you. And if I go and prepare a place for you, I will come again, and receive you unto myself; that where I am, there ye may be also.
+
+
+Revelation 22:5
+And there will no longer be any night; and they will not have need of the light of a lamp nor the light of the sun, because the Lord God will illumine them; and they will reign forever and ever.
+
+1 Peter 1:3-5
+3 Blessed be the God and Father of our Lord Jesus Christ, who according to His abundant mercy has begotten us again to a living hope through the resurrection of Jesus Christ from the dead, 4 to an inheritance [a]incorruptible and undefiled and that does not fade away, reserved in heaven for you, who are kept by the power of God through faith for salvation ready to be revealed in the last time.
+
+
+
+Before I sit down, let me emphasize this:
+The Old Jerusalem was built by human power, human hands; but the builder and maker of the New Jerusalem, is God Himself. I don't know God, but I know that he is beautiful _ I know that he only creates beautiful things, and I know that he creates the beautiful beauty that beautifies other things to become beautiful. Which means the city will be extremely beautiful in appearance,  Holy in nature, with a fair and Perfect system. the New Jerusalem is unimaginable. but that does not mean you are not worthy to enter into the city. because He is building it for you.
+
+You see it might be frightening and scary to think of such a beautiful, Holy and perfect city, but do not be afraid, instead Be Happy because God is creating a city where the god of Babylon will never ever reach us. Imagine it as an empty city, waiting for You to occupy it. a city free from Babylonian systems, A Jerusalem that is updated, a fair and just GOVERNMENT,  and as a bonus, He will be present in the city. I said as a bonus, he himself will be our king in that city , I said He will dwell in that city, and that's our  bonus..
+
+
+The requirement for inhabiting this city, is a relationship with God. we just need a relationship with God,
+we just need to Love him with all our hearts, and then love one another _ because that is what the ten commandments are based on: Love for God, and love for one another. we should pray for this love, We should pray for him to enable us to be able to love him unconditionally, and pray for him to help us love everyone.
+because opening up our hearts to this love is all we need to enter the city, because when we pray and ask for that love, we will have the knowledge on how to practice that love. The blood of Jesus Christ will wash us clean, and the Holy Spirit will Always protect us, and we will know that nothing is impossible with God. This will Open up our hearts to being instruments of His justice, which will allow him to work through us to be lights in the darkness, and he will enable us to Give hope to others while we live on this chaotic world by sharing his word.
+
+So let us pray for a more stronger relationship with God. Let us pray for our love to increase, then let us allow His spirit to move within us and we will be able to practice this love.
+
+and no matter what, please do not lose hope, keep the faith. look _ it is going to get more tough, but keep the faith. The systems and laws are going to change, Babylon is going to turn against you, but keep the faith. never stop praying, even when it seems like God does not hear, keep praying in Jesus name and remember, The New Jerusalem was made for You, so that You can be set free. so pray about it.
+
+
+Amen.
+</pre>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2025 My Website. All rights reserved.</p>
+        <p>
+            <i class="fas fa-share-alt" style="color:#ffd803"></i> Follow us on:
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook" style="color:#4267B2"></i> Facebook</a> |
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter</a> |
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram" style="color:#E1306C"></i> Instagram</a>
+        </p>
+    </footer>
+</body>
+</html>
