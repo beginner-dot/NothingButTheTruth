@@ -783,7 +783,7 @@ function showPollResults() {
 // Attach event listeners to poll buttons
 pollButtons.forEach(btn => {
   btn.addEventListener("click", function() {
-    submitVote(this.textContent.replace(/^[^\w]+/, '').trim());
+    submitVote(this.textContent.trim());
   });
 });
 
