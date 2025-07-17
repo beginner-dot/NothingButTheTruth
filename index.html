@@ -8,6 +8,7 @@
     <title>ReTemplate_2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="indexstyles.css">
 
    
@@ -316,6 +317,109 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+<section class="weekly-challenge">
+  <h2>📆 Weekly Faith Challenge</h2>
+
+  <div class="challenge-verse">
+    <blockquote>
+      <p>
+        “And we know that in all things God works for the good of those who love him,  
+        who have been called according to his purpose.”
+      </p>
+      <footer>— <strong>Romans 8:28 (NIV)</strong></footer>
+    </blockquote>
+  </div>
+
+  <div class="challenge-card" id="challengeCard">
+    <h3>Overcoming Trials</h3>
+    <em>🗓️ Week of July 14–20, 2025</em>
+    <p>📝 Share a moment when you faced a challenge and saw God work through it—what did you learn, feel, or see?</p>
+  </div>
+
+  <div class="submission-form">
+    <h4>📣 Share Your Reflection</h4>
+    <form id="challengeForm">
+      <textarea name="reflection" placeholder="Type your story here..." required></textarea><br>
+      <input type="text" name="name" placeholder="Your name (optional)"><br>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="submissionOutput"></div>
+  </div>
+
+  <div class="submissions-display">
+  <h4>💬 Shared Testimonies</h4>
+  <div id="submissionList">
+    <!-- User stories will be displayed here -->
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+
+<section class="weekly-poll">
+  <h2>🗳️ Weekly Poll</h2>
+  <p id="pollQuestion">What strengthens your faith most during tough times?</p>
+
+  <div class="poll-options">
+    <button>🙏 Prayer</button>
+    <button>🎶 Worship Music</button>
+    <button>📓 Journaling</button>
+    <button>👥 Community</button>
+  </div>
+
+  <div id="pollResults" class="poll-results"></div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
     <footer class="footer scroll-fade">
@@ -361,31 +465,26 @@
                 threshold: 0.15,
                 rootMargin: "0px 0px -40px 0px"
             };
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return (
-                    rect.top < window.innerHeight && rect.bottom > 0
-                );
-            }
+
             const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
 
-                    // Staggered animation for .box elements inside .flex-wrap or .sermons-flex-wrap
-                    if (entry.target.classList.contains('flex-wrap') || entry.target.classList.contains('sermons-flex-wrap')) {
-                        const boxes = entry.target.querySelectorAll('.box');
-                        boxes.forEach((box, i) => {
-                            setTimeout(() => box.classList.add('visible'), i * 180);
-                        });
-                    }
+            // Staggered animation for .box elements inside .flex-wrap or .sermons-flex-wrap
+            if (entry.target.classList.contains('flex-wrap') || entry.target.classList.contains('sermons-flex-wrap')) {
+                const boxes = entry.target.querySelectorAll('.box');
+                boxes.forEach((box, i) => {
+                    setTimeout(() => box.classList.add('visible'), i * 180);
                 });
-            }, appearOptions);
+            }
+        });
+    }, appearOptions);
 
-            faders.forEach(fader => {
-                appearOnScroll.observe(fader);
-            });
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
         });
 
         // Slideshow functionality
@@ -500,5 +599,196 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
     </script>
+
+
+
+
+
+
+
+
+
+
+<script>
+// 🌟 Weekly Challenge Data
+const weeklyChallenge = {
+  theme: "Overcoming Trials",
+  verse: "Romans 8:28",
+  prompt: "Share a moment when you faced a challenge and saw God work through it—what did you learn, feel, or see?",
+  week: "July 14–20, 2025"
+};
+
+// 🌟 Render Challenge Card
+document.addEventListener("DOMContentLoaded", function () {
+  const challengeCard = document.getElementById("challengeCard");
+  if (challengeCard) {
+    challengeCard.innerHTML = `
+      <h3>${weeklyChallenge.theme}</h3>
+      <strong>📖 ${weeklyChallenge.verse}</strong>
+      <em>🗓️ Week of ${weeklyChallenge.week}</em>
+      <p>📝 ${weeklyChallenge.prompt}</p>
+    `;
+  }
+// 🌟 Element References
+const form = document.getElementById("challengeForm");
+const submissionList = document.getElementById("submissionList");
+const outputMessage = document.getElementById("submissionOutput");
+
+// 🧠 Load and Render All Submissions
+function renderSubmissions() {
+  submissionList.innerHTML = "";
+  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+
+  submissions.forEach(({ name, story }, index) => {
+    const entry = createTestimonyEntry(name, story, index);
+    submissionList.appendChild(entry);
+  });
+}
+
+// 🧩 Create Testimony Entry with Edit/Delete
+function createTestimonyEntry(name, story, index) {
+  const entry = document.createElement("div");
+  entry.className = "testimony-entry";
+
+  entry.innerHTML = `
+    <p><strong>${name}</strong>: ${story}</p>
+    <button onclick="editEntry(${index})">✏️ Edit</button>
+    <button onclick="deleteEntry(${index})">🗑️ Delete</button>
+  `;
+
+  return entry;
+}
+
+// 💾 Save to LocalStorage
+function saveToLocalStorage(name, story) {
+  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+  submissions.unshift({ name, story });
+  localStorage.setItem("submissions", JSON.stringify(submissions));
+}
+
+// 💬 Show Feedback Message
+function showOutputMessage(message, isError = false) {
+  outputMessage.textContent = message;
+  outputMessage.style.color = isError ? "#ff8080" : "#aaf0d1";
+  outputMessage.style.opacity = 1;
+  setTimeout(() => {
+    outputMessage.style.opacity = 0;
+  }, 3000);
+}
+
+// ✍️ Edit Submission
+function editEntry(index) {
+  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+  const item = submissions[index];
+  form.reflection.value = item.story;
+  form.name.value = item.name;
+
+  deleteEntry(index); // Remove old version so new one can be saved
+  showOutputMessage("📝 Edit your entry and resubmit to update.");
+}
+
+// 🗑️ Delete Submission
+function deleteEntry(index) {
+  let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+  submissions.splice(index, 1);
+  localStorage.setItem("submissions", JSON.stringify(submissions));
+  renderSubmissions();
+  showOutputMessage("🗑️ Entry deleted.");
+}
+
+// ✅ Handle Form Submission
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const story = form.reflection.value.trim();
+  const name = form.name.value.trim() || "Anonymous";
+
+  if (story === "") {
+    showOutputMessage("⚠️ Please share your reflection before submitting.", true);
+    return;
+  }
+
+  saveToLocalStorage(name, story);
+  renderSubmissions();
+  showOutputMessage("🌟 Thank you for sharing!");
+  form.reset();
+});
+
+// 🔁 Load saved entries on page load
+window.addEventListener("DOMContentLoaded", renderSubmissions);
+</script>
+
+
+
+
+
+
+
+
+<script>// Weekly Poll Functionality
+
+
+const pollResultsContainer = document.getElementById("pollResults");
+const pollButtons = document.querySelectorAll(".poll-options button");
+
+// Prevent multiple votes per session (optional)
+function hasVoted() {
+  return localStorage.getItem("hasVoted") === "true";
+}
+
+function setVoted() {
+  localStorage.setItem("hasVoted", "true");
+}
+
+function getPollData() {
+  return JSON.parse(localStorage.getItem("pollVotes")) || {};
+}
+
+function savePollData(data) {
+  localStorage.setItem("pollVotes", JSON.stringify(data));
+}
+
+function submitVote(option) {
+  if (hasVoted()) {
+    alert("You have already voted. Thank you!");
+    return;
+  }
+  const votes = getPollData();
+  votes[option] = (votes[option] || 0) + 1;
+  savePollData(votes);
+  setVoted();
+  showPollResults();
+}
+
+function showPollResults() {
+  const votes = getPollData();
+  const total = Object.values(votes).reduce((a, b) => a + b, 0);
+  pollResultsContainer.innerHTML = "";
+
+  if (total === 0) {
+    pollResultsContainer.textContent = "No votes yet. Be the first to vote!";
+    return;
+  }
+
+  for (const [option, count] of Object.entries(votes)) {
+    const percent = ((count / total) * 100).toFixed(1);
+    const bar = document.createElement("div");
+    bar.className = "poll-bar";
+    bar.style.width = `${percent}%`;
+    bar.textContent = `${option} - ${count} votes (${percent}%)`;
+    pollResultsContainer.appendChild(bar);
+  }
+}
+
+// Attach event listeners to poll buttons
+pollButtons.forEach(btn => {
+  btn.addEventListener("click", function() {
+    submitVote(this.textContent.replace(/^[^\w]+/, '').trim());
+  });
+});
+
+// Initialize poll display on load
+window.addEventListener("DOMContentLoaded", showPollResults);
+
 </body>
 </html>
