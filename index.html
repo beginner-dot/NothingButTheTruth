@@ -749,10 +749,6 @@ function savePollData(data) {
 }
 
 function submitVote(option) {
-  if (hasVoted()) {
-    alert("You have already voted. Thank you!");
-    return;
-  }
   const votes = getPollData();
   votes[option] = (votes[option] || 0) + 1;
   savePollData(votes);
