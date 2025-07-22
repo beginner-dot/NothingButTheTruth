@@ -3,738 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NothingButTheTruth - Sharing the unchanged Gospel as written in the Holy Bible. Explore studies, sermons, and inspirational messages.">
     <title>ReTemplate_2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { width: 100%; max-width: 100vw; overflow-x: hidden; }
-        body {
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-            background: linear-gradient(135deg, rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8));
-            color: white;
-            min-height: 100vh;
-        }
-        header {
-            margin-top: 18px;
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(51, 51, 51, 0.8);
-            padding: 10px 20px;
-            color: white;
-            position: relative;
-            z-index: 1000;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        .logo img {
-            height: 32px;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-end;
-            cursor: pointer;
-            z-index: 2000;
-            font-size: 1.5em;
-            color: white;
-            position: relative;
-            width: 30px;
-            height: 24px;
-        }
-        .hamburger span {
-            background: white;
-            height: 3px;
-            width: 100%;
-            margin: 3px 0;
-            border-radius: 2px;
-            transition: all 0.3s cubic-bezier(.4,0,.2,1);
-            display: block;
-        }
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100vh;
-            background: rgba(20, 20, 30, 0.85);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: left 0.3s cubic-bezier(.4,0,.2,1);
-            z-index: 1500;
-            pointer-events: none;
-            overflow-y: auto;
-        }
-        .sidebar.active {
-            left: 0;
-            pointer-events: auto;
-        }
-        .nav-links {
-            list-style: none;
-            padding: 0;
-            text-align: center;
-        }
-        .nav-links li {
-            margin: 20px 0;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            font-size: 1.2em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: color 0.3s cubic-bezier(.4,0,.2,1);
-        }
-        .nav-links a:hover { color: #00ff55; }
-        .nav-links i { font-size: 1.2em; }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="indexstyles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-        /* Scroll Fade Animation */
-        .scroll-fade {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1.5s cubic-bezier(.4,0,.2,1), transform 1.5s cubic-bezier(.4,0,.2,1);
-        }
-        .scroll-fade.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Top Section */
-        .top-section {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: white;
-            min-height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .top-section .square-gradient {
-            position: absolute;
-            z-index: 0;
-            pointer-events: none;
-            border-radius: 18px;
-            opacity: 0.18;
-            filter: blur(0.5px);
-        }
-        .top-section .sq1 { width: 120px; height: 120px; top: 20px; left: 30px; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%); opacity: 0.18; }
-        .top-section .sq2 { width: 90px; height: 90px; top: 80px; right: 60px; background: linear-gradient(120deg, #6a11cb 0%, #fff 100%); opacity: 0.13; }
-        .top-section .sq3 { width: 60px; height: 60px; bottom: 40px; left: 80px; background: linear-gradient(120deg, #2575fc 0%, #ffd803 100%); opacity: 0.15; }
-        .top-section .sq4 { width: 160px; height: 60px; top: 120px; left: 50%; transform: translateX(-50%) rotate(8deg); background: linear-gradient(90deg, #6a11cb 0%, #ffd803 100%); opacity: 0.11; }
-        .top-section .sq5 { width: 70px; height: 140px; bottom: 30px; right: 40px; background: linear-gradient(120deg, #ffd803 0%, #6a11cb 100%); opacity: 0.14; }
-        .top-section .sq6 { width: 40px; height: 40px; top: 40px; right: 120px; background: linear-gradient(135deg, #2575fc 0%, #fff 100%); opacity: 0.12; }
-        .top-section .sq7 { width: 100px; height: 40px; bottom: 80px; left: 30px; background: linear-gradient(120deg, #6a11cb 0%, #2575fc 100%); opacity: 0.13; }
-        .top-section .sq8 { width: 60px; height: 100px; top: 180px; left: 10px; background: linear-gradient(120deg, #ffd803 0%, #6a11cb 100%); opacity: 0.10; }
-        .top-section .sq9 { width: 80px; height: 80px; bottom: 10px; right: 120px; background: linear-gradient(135deg, #2575fc 0%, #fff 100%); opacity: 0.09; }
-        .top-section .sq10 { width: 50px; height: 50px; top: 60px; left: 60%; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%); opacity: 0.10; }
-        .top-section .sq11 { width: 30px; height: 90px; bottom: 120px; right: 30px; background: linear-gradient(120deg, #6a11cb 0%, #ffd803 100%); opacity: 0.08; }
-        .top-section > *:not(.square-gradient) {
-            position: relative;
-            z-index: 1;
-        }
-        .glass-intro {
-            background: rgba(255,255,255,0.13);
-            border-radius: 22px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1.5px solid rgba(255,255,255,0.18);
-            padding: 2.5em 2em 2em 2em;
-            margin: 60px 0 30px 0;
-            display: inline-block;
-            max-width: 95vw;
-        }
-        .top-section h1 { font-size: 3em; margin-bottom: 10px; }
-        .top-section p { font-size: 1.2em; max-width: 600px; line-height: 1.6; }
-
-        /* Modern Slides (Cards) */
-        .modern-slides {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px 20px;
-            background-color: #fff;
-            border-top-left-radius: 14px;
-            border-top-right-radius: 14px;
-            flex-wrap: wrap;
-            max-width: 1250px;
-            margin: 0 auto;
-        }
-        .slides-card {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            overflow: hidden;
-            text-align: center;
-            width: 300px;
-            color: #222;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-        }
-        .slides-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-        }
-        .slides-card img {
-            width:100%;
-            height:180px;
-            object-fit:cover;
-        }
-        .slides-card .slides-text {
-            padding: 20px;
-        }
-        .slides-card h3 { margin-bottom: 10px; }
-
-        /* Hero Section (now used as belowhead) */
-        .hero-section {
-            width: 100%;
-            min-height: 55vh;
-            background: linear-gradient(120deg, #6a11cb 60%, #2575fc 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            padding: 60px 0 40px 0;
-            background-size: 200% 200%;
-            transition: background-position 0.6s cubic-bezier(.4,0,.2,1), box-shadow 0.3s, transform 0.3s;
-            background-position: 0% 50%;
-        }
-        .hero-section:hover {
-            background-position: 100% 50%;
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.18), 0 1.5px 8px #6a11cb44;
-        }
-        .hero-content {
-            z-index: 1;
-            color: #fff;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            background: rgba(0,0,0,0.18);
-            border-radius: 18px;
-            box-shadow: 0 8px 32px 0 rgba(31,38,135,0.13);
-            backdrop-filter: blur(2px);
-        }
-        .hero-section h1 {
-            font-size: 2.8em;
-            font-weight: bold;
-            margin-bottom: 18px;
-            letter-spacing: 1px;
-        }
-        .hero-section p {
-            font-size: 1.3em;
-            margin-bottom: 32px;
-            color: #e0e0e0;
-        }
-        .hero-btn, .cta-button {
-            display: inline-block;
-            padding: 15px 38px;
-            font-size: 1.1em;
-            border-radius: 8px;
-            background: linear-gradient(90deg, #ffd803 0%, #6a11cb 100%);
-            color: #222;
-            font-weight: bold;
-            text-decoration: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.13);
-            transition: background 0.3s, color 0.3s, transform 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .hero-btn:hover, .cta-button:hover {
-            background: linear-gradient(90deg, #6a11cb 0%, #ffd803 100%);
-            color: #fff;
-            transform: translateY(-3px) scale(1.04);
-        }
-        @media (max-width: 700px) {
-            .hero-section h1 { font-size: 2em; }
-            .hero-section p { font-size: 1em; }
-            .hero-content { padding: 18px 6vw; }
-        }
-
-        /* Slideshow Styles */
-        .bottom-section {
-            background-color: white;
-            color: #333;
-            min-height: 50vh;
-            padding: 40px 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .slideshow-container {
-            width: 100%;
-            max-width: 900px;
-            aspect-ratio: 16/9;
-            height: auto;
-            margin: 0 auto 20px auto;
-            position: relative;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            border-radius: 12px;
-            overflow: hidden;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-            align-items: center;
-        }
-        @media (max-width: 1200px) {
-            .slideshow-container {
-                max-width: 98vw;
-            }
-        }
-        @media (max-width: 900px) {
-            .slideshow-container {
-                max-width: 98vw;
-            }
-        }
-        @media (max-width: 600px) {
-            .slideshow-container {
-                max-width: 100vw;
-                width: 100vw;
-            }
-        }
-        .slideshow-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-        }
-        .slide {
-            display: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-        }
-        .slide img {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            object-fit: cover;
-            display: block;
-        }
-        .slide-text {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-align: center;
-            max-width: 95%;
-            min-width: 60%;
-            box-sizing: border-box;
-            font-size: 1em;
-            line-height: 1.5;
-        }
-        .dots-container {
-            text-align: center;
-            margin-top: auto;
-            width: 100%;
-            padding: 5px;
-            background: transparent;
-            position: relative;
-            z-index: 2;
-        }
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 5px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .dot.active {
-            background-color: #717171;
-        }
-        .fade {
-            animation: fadeEffect 1.5s ease-in-out;
-        }
-        @keyframes fadeEffect {
-            from { opacity: 0.4; }
-            to { opacity: 1; }
-        }
-        @media screen and (max-width: 900px) {
-            .bottom-section {
-                flex-direction: column;
-                align-items: center;
-                gap: 24px;
-                max-width: 98vw;
-            }
-            .slideshow-container {
-                max-width: 98vw;
-                min-width: 0;
-                height: 220px;
-            }
-            .slide, .slide img {
-                height: 220px;
-            }
-        }
-        @media screen and (max-width: 600px) {
-            .bottom-section {
-                max-width: 100vw;
-                padding: 10px 0;
-            }
-            .slideshow-container {
-                min-width: 0;
-                max-width: 100vw;
-                width: 100%;
-                height: 160px;
-            }
-            .slide {
-                height: 100%;
-                position: absolute;
-                width: 100%;
-            }
-            .slide img {
-                height: 100%;
-                width: 100%;
-                object-fit: cover;
-                border-radius: 10px;
-                display: block;
-            }
-            .slide-text {
-                font-size: 0.8em;
-                padding: 4px 4px;
-            }
-            .nav-links a {
-                font-size: 1em;
-            }
-        }
-
-        .leftdiv, .StrDiv {
-            flex: 1;
-            max-width: 400px;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* Purpose Box */
-        .purpose-box-alt {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: white;
-            padding: 40px 20px;
-            border-radius: 12px;
-            margin: 50px auto 15px auto;
-            max-width: 900px;
-            text-align: center;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .purpose-box-alt:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-        }
-        .purpose-box-alt h2 { font-size: 2.5em; margin-bottom: 20px; font-weight: bold; }
-        .purpose-box-alt p { font-size: 1.2em; line-height: 1.8; margin: 0 auto; max-width: 700px; }
-        .bt1 {
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 8px;
-            transition-duration: 0.4s;
-            background-color: rgb(58, 58, 58);
-            color: rgb(202, 202, 202);
-            border: 2px solid #c9c9c9;
-        }
-        .bt1:hover {
-            background-color: #333;
-            color: #eeff00ad;
-            cursor: pointer;
-            box-shadow: inset 0 0 0 2em #1ea664;
-        }
-
-        /* Studies Section */
-        .Studies {
-            text-align: center;
-            color: white;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        .flex-wrap {
-            position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            padding: 20px;
-            background-color: #6f00ffdd;
-            overflow: hidden;
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-        }
-        .flex-wrap .flex-square {
-            position: absolute;
-            z-index: 0;
-            pointer-events: none;
-            border-radius: 10px;
-            opacity: 0.09;
-            filter: blur(0.5px);
-        }
-        .flex-wrap .flex-sq1 { width: 90px; height: 90px; top: 10px; left: 20px; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%);}
-        .flex-wrap .flex-sq2 { width: 60px; height: 120px; bottom: 20px; right: 40px; background: linear-gradient(120deg, #6a11cb 0%, #fff 100%);}
-        .flex-wrap .flex-sq3 { width: 120px; height: 40px; top: 60px; right: 120px; background: linear-gradient(120deg, #2575fc 0%, #ffd803 100%);}
-        .flex-wrap .flex-sq4 { width: 50px; height: 50px; bottom: 60px; left: 80px; background: linear-gradient(90deg, #6a11cb 0%, #ffd803 100%);}
-        .flex-wrap .flex-sq5 { width: 40px; height: 100px; top: 120px; left: 60%; background: linear-gradient(120deg, #ffd803 0%, #6a11cb 100%);}
-        .flex-wrap .flex-sq6 { width: 80px; height: 80px; bottom: 10px; right: 120px; background: linear-gradient(135deg, #2575fc 0%, #fff 100%);}
-        .flex-wrap .flex-sq7 { width: 60px; height: 60px; top: 40px; left: 80%; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%);}
-        .flex-wrap .flex-sq8 { width: 30px; height: 90px; bottom: 120px; right: 30px; background: linear-gradient(120deg, #6a11cb 0%, #ffd803 100%);}
-        .flex-wrap .flex-sq9 { width: 100px; height: 30px; top: 30px; left: 70%; background: linear-gradient(120deg, #ffd803 0%, #6a11cb 100%);}
-        .flex-wrap .flex-sq10 { width: 60px; height: 60px; bottom: 40px; right: 60%; background: linear-gradient(135deg, #2575fc 0%, #ffd803 100%);}
-        .flex-wrap .flex-sq11 { width: 40px; height: 100px; top: 90px; left: 10%; background: linear-gradient(120deg, #6a11cb 0%, #fff 100%);}
-        .flex-wrap .flex-sq12 { width: 80px; height: 40px; bottom: 80px; left: 40%; background: linear-gradient(135deg, #ffd803 0%, #2575fc 100%);}
-        .flex-wrap .flex-sq13 { width: 50px; height: 120px; top: 160px; right: 10%; background: linear-gradient(120deg, #2575fc 0%, #ffd803 100%);}
-        .flex-wrap .flex-sq14 { width: 70px; height: 70px; bottom: 10px; left: 10%; background: linear-gradient(135deg, #ffd803 0%, #6a11cb 100%);}
-        .flex-wrap > *:not(.flex-square) {
-            position: relative;
-            z-index: 1;
-        }
-        .box {
-            flex: 1 1 300px;
-            max-width: 350px;
-            background-color: #3a3636;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 70px;
-            transition-duration: 0.4s;
-            border: 2px solid #c9c9c9;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
-        }
-        .box.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-            background-color: #000896;
-            color: #fff;
-            cursor: pointer;
-        }
-        .box a {
-            color: #fff !important;
-        }
-        @media (max-width: 900px) {
-            .flex-wrap { flex-direction: column; align-items: center; }
-            .box { max-width: 95vw; width: 100%; margin: 10px 0; }
-        }
-        @media (max-width: 600px) {
-            .flex-wrap { flex-direction: column; align-items: center; gap: 8px; padding: 10px; }
-            .box {
-                flex: 1 1 auto;
-                max-width: 95%;
-                font-size: 0.95em;
-                padding: 10px 4px;
-                height: auto;
-                margin: 4px;
-                border-radius: 10px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.13);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow-wrap: break-word;
-            }
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            position: relative;
-            width: 100%;
-        }
-        .footer a {
-            color: #4FC6FF;
-            text-decoration: none;
-            margin: 0 5px;
-        }
-        .footer a:hover { text-decoration: underline; }
-
-        /* Arrows for slideshow */
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -22px;
-            color: #fff;
-            font-weight: bold;
-            font-size: 28px;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            background: rgba(0,0,0,0.3);
-            transition: background 0.3s;
-            z-index: 2;
-        }
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-        .prev {
-            left: 0;
-        }
-        .prev:hover, .next:hover {
-            background: #6a11cb;
-            color: #fff;
-        }
-        .DIVIDER path {
-            fill: url(#divider-gradient);
-        }
-
-        .inspiration-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 30px 20px;
-            margin: 40px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 800px;
-            width: 90%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .inspiration-section h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        .inspiration-section h2:after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 4px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            border-radius: 2px;
-        }
-        .inspiration-section blockquote {
-            font-size: 1.2em;
-            margin: 10px 0;
-            padding: 10px 20px;
-            border-left: 4px solid #ffd803;
-            color: #333;
-            position: relative;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-        .inspiration-section blockquote:hover {
-            transform: translateY(-3px);
-        }
-        .inspiration-section blockquote span {
-            display: block;
-            margin-top: 5px;
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        /* Sermons Section */
-        .Sermons {
-            text-align: center;
-            color: white;
-            font-size: 2em;
-            margin-bottom: 20px;
-            margin-top: 40px;
-            /* Center the heading */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .sermons-flex-wrap {
-            position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #2575fc 60%, #6a11cb 100%);
-            overflow: hidden;
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-            border-radius: 14px;
-        }
-
-        /* Inspiration Scrollshow Styles */
-        .inspiration-slideshow-container {
-            position: relative;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 0 48px 60px 48px; /* Add bottom padding for arrows */
-        }
-        
-      
-        
-    </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
         <nav class="navbar scroll-fade">
-           <div class="WebsiteName">I am still thinking about the Name of the Website.. .</div>
+           <div class="WebsiteName">NothingButTheTruth</div>
             <div class="hamburger" tabindex="0" aria-label="Open menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <div class="sidebar" tabindex="-1">
-                <div style="margin-bottom: 30px; text-align: center;">
-                </div>
+                <div class="navbar-sidebar-header">
                 <ul class="nav-links">
                     <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#studies"><i class="fas fa-book-open"></i> Studies</a></li>
@@ -742,6 +34,7 @@
                     <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
                     <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -757,7 +50,7 @@
         <div class="square-gradient sq7"></div>
         <div class="square-gradient sq8"></div>
         <div class="square-gradient sq9"></div>
-        <div class="square-gradient sq10"></div>
+
         <div class="square-gradient sq11"></div>
         <div class="glass-intro">
             <h1><i class="fas fa-tools" style="color:#ffd803"></i> Website Still In Progress</h1>
@@ -766,60 +59,165 @@
         </div>
     </section>
 
-    <!-- Modern Slides (Cards) -->
-    <section class="modern-slides scroll-fade">
-        <div class="slides-card">
-            <img src="https://i.pinimg.com/736x/21/23/90/212390b2e32b32fecb4aafd55158fc05.jpg" alt="Slide 1">
-            <div class="slides-text">
-                <h3><i class="fas fa-bible" style="color:#ffd803"></i> The Bible</h3>
-                <p>Explore the teachings of the Bible and its timeless wisdom.</p>
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <!-- Modern Slides (Cards) -->
+<section class="modern-slides scroll-fade">
+  <div class="flip-card-container">
+    <!-- Bible Card -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://i.pinimg.com/736x/21/23/90/212390b2e32b32fecb4aafd55158fc05.jpg" alt="The Holy Bible Is God's Word" />
+          <h3><i class="fas fa-book-open" style="color:#ffd803"></i> The Bible</h3>
         </div>
-        <div class="slides-card">
-            <img src="https://i.pinimg.com/474x/e0/ce/f2/e0cef296d632cc0fe4aa2a7230524b25.jpg" alt="Slide 2">
-            <div class="slides-text">
-                <h3>Prayer</h3>
-                <p>Experience the power of prayer and its impact on life.</p>
-            </div>
+        <div class="flip-card-back bible-card">
+          <div class="glass-background"></div>
+          <div class="glass-effect">
+            <p><i class="fas fa-book-open"></i> Explore the teachings of the Bible and its timeless wisdom.</p>
+          </div>
         </div>
-        <div class="slides-card">
-            <img src="https://i.pinimg.com/474x/3a/8d/4d/3a8d4daa6a1b6a9b6ad28e79c5898d84.jpg" alt="Slide 3">
-            <div class="slides-text">
-                <h3>Nature</h3>
-                <p>Discover the beauty of nature and how it reflects God's creation.</p>
-            </div>
+      </div>
+    </div>
+
+    <!-- Prayer Card -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://i.pinimg.com/474x/e0/ce/f2/e0cef296d632cc0fe4aa2a7230524b25.jpg" alt="Prayer is communication with God" />
+          <h3><i class="fas fa-hands-praying" style="color:#ffd803"></i> Prayer</h3>
         </div>
-    </section>
+        <div class="flip-card-back prayer-card">
+          <div class="glass-background"></div>
+          <div class="glass-effect">
+            <p><i class="fas fa-hands-praying"></i> Experience the power of prayer and its impact on life.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nature Card -->
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="https://i.pinimg.com/474x/3a/8d/4d/3a8d4daa6a1b6a9b6ad28e79c5898d84.jpg" alt="Sunlight shining through trees in nature" />
+          <h3><i class="fas fa-leaf" style="color:#ffd803"></i> Nature</h3>
+        </div>
+        <div class="flip-card-back nature-card">
+          <div class="glass-background"></div>
+          <div class="glass-effect">
+            <p><i class="fas fa-leaf"></i> Discover the beauty of nature and how it reflects God's creation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function flipCard(card) {
+    const isFlipped = card.classList.contains("flipped");
+
+    document.querySelectorAll(".flip-card").forEach(c => c.classList.remove("flipped"));
+
+    if (!isFlipped) {
+      card.classList.add("flipped");
+    }
+  }
+
+  document.querySelectorAll(".flip-card").forEach(card => {
+    card.addEventListener("click", () => flipCard(card));
+  });
+</script>
+
+
+
+
+
+
+
+
 
     <section class="bottom-section scroll-fade">
         <div class="leftdiv scroll-fade"></div>
         <!-- Hero section moved here as belowhead replacement -->
-        <section class="hero-section scroll-fade" style="margin-bottom: 30px;">
-            <div class="hero-content">
-                <h1>Welcome to Our Mission</h1>
-                <p>
-                    We are committed to sharing the unchanged and untampered Gospel as it is written in the Holy Bible. Explore our resources and join us in spreading the truth.
-                </p>
-                <button class="cta-button">Learn More</button>
-            </div>
-        </section>
+        
+
+<section class="weekly-feature scroll-fade">
+  <div class="weekly-verse">
+    <h2><i class="fas fa-fire" style="color:#ffd803"></i> Verse of the Week</h2>
+    <blockquote>
+      “Let your light shine before others, so that they may see your good works and give glory to your Father who is in heaven.”
+      <span>- Matthew 5:16</span>
+    </blockquote>
+  </div>
+
+  <div class="weekly-devotional">
+    <h3><i class="fas fa-book-reader"></i> Weekly Devotional</h3>
+    <p>This week, focus on being a reflection of Christ’s light. In your conversations, actions, and decisions—choose to glorify God. 
+    Even the smallest acts of kindness can reveal God’s love to others. Shine boldly, but humbly.</p>
+    <p class="devotion-footer">🕊️ Pray. Act. Reflect.</p>
+  </div>
+</section>
+
+<style>
+
+</style>
+
+
+<style> 
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const slides = document.querySelectorAll(".verse-slide-show blockquote");
+  let verseIndex = 0;
+
+  function showVerse(index) {
+    slides.forEach((s, i) => s.classList.toggle("active", i === index));
+  }
+
+  function rotateVerses() {
+    verseIndex = (verseIndex + 1) % slides.length;
+    showVerse(verseIndex);
+  }
+
+  showVerse(verseIndex);
+  setInterval(rotateVerses, 7000);
+});
+</script>
+
         <div class="slideshow-container scroll-fade">
             <div class="slide fade">
-                <img src="https://i.pinimg.com/736x/21/23/90/212390b2e32b32fecb4aafd55158fc05.jpg" alt="Slide 1">
+                <img src="https://i.pinimg.com/736x/21/23/90/212390b2e32b32fecb4aafd55158fc05.jpg" alt="Holy Bible cover with gold cross">
                 <div class="slide-text">
                     <h3> The Bible</h3>
                     <p>Explore the teachings of the Bible and its timeless wisdom.</p>
                 </div>
             </div>
             <div class="slide fade">
-                <img src="https://i.pinimg.com/474x/e0/ce/f2/e0cef296d632cc0fe4aa2a7230524b25.jpg" alt="Slide 2">
+                <img src="https://i.pinimg.com/474x/e0/ce/f2/e0cef296d632cc0fe4aa2a7230524b25.jpg" alt="Prayer hands with sunlight">
                 <div class="slide-text">
                     <h3>Prayer</h3>
                     <p>Experience the power of prayer and its impact on life.</p>
                 </div>
             </div>
             <div class="slide fade">
-                <img src="https://i.pinimg.com/474x/3a/8d/4d/3a8d4daa6a1b6a9b6ad28e79c5898d84.jpg" alt="Slide 3">
+                <img src="https://i.pinimg.com/474x/3a/8d/4d/3a8d4daa6a1b6a9b6ad28e79c5898d84.jpg" alt="Sunlight shining through trees in nature">
                 <div class="slide-text">
                     <h3>Nature</h3>
                     <p>Discover the beauty of nature and how it reflects God's creation.</p>
@@ -841,7 +239,7 @@
         <div class="purpose-content">
             <h2><i class="fas fa-info-circle" style="color:#ffd803"></i> About the Bible</h2>
             <p><i class="fas fa-bible" style="color:#ffd803"></i> The Bible is a collection of sacred texts or scriptures that speak about God and the history of the World. It contains present events and the future of our world. The scriptures also explain Heaven as the Holy City of God, and explains The Trinity of The Holy God.</p>
-            <a href="http://www.unnamedweb.rf.gd/why_the_bible_is_God%27s_word.html">
+            <a href="Official/Studies/why_the_bible_is_God's_word.html">
                 <button class="bt1"><i class="fas fa-arrow-right"></i> How is the Bible God's Message to us</button>
             </a>
         </div>
@@ -882,9 +280,9 @@
         <div class="flex-square flex-sq12"></div>
         <div class="flex-square flex-sq13"></div>
         <div class="flex-square flex-sq14"></div>
-       <li> <div class="box"><a href="Facts_or_Fiction.html" style="text-decoration:none;"><i class="fas fa-question-circle" style="color:#ffd803"></i> Is The Bible Facts or Fiction?</a></div></li>
-       <li> <div class="box"><a href="why_the_bible_is_God's_word.html" style="text-decoration:none;"><i class="fas fa-book-bible" style="color:#ffd803"></i> Is the Bible God's Word to Humanity?</a></div></li>
-        <li> <div class="box"><i class="fas fa-city" style="color:#ffd803"></i>    A Tale of Cities</div></li>
+       <li> <div class="box"><a href="Official/Studies/facts_or_fiction.html" style="text-decoration:none;"><i class="fas fa-question-circle" style="color:#ffd803"></i> Is The Bible Facts or Fiction?</a></div></li>
+       <li> <div class="box"><a href="Official/Studies/why_the_bible_is_God's_word.html" style="text-decoration:none;"><i class="fas fa-book-bible" style="color:#ffd803"></i> Is the Bible God's Word to Humanity?</a></div></li>
+        <li> <div class="box"><a href="Official/Studies/are_angels_real.html" style="text-decoration:none;"><i class="fas fa-city" style="color:#ffd803"></i>    Are Angels Real?</a></div></li>
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
@@ -895,8 +293,8 @@
         <div class="inspiration-slideshow-container">
             <div class="inspiration-slide fade" style="display:block;">
                 <blockquote>
-                    "For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future."
-                    <br><span>- Jeremiah 29:11</span>
+                    "Look to the LORD and his strength; seek his face always."
+                    <br><span>- 1 Chronicles 16:11</span>
                 </blockquote>
             </div>
             <div class="inspiration-slide fade">
@@ -938,7 +336,7 @@
         <div class="flex-square flex-sq13"></div>
         <div class="flex-square flex-sq14"></div>
         <div class="box">
-            <a href="Official/Studies/a_tale_of_cities.html" style="text-decoration:none;">
+            <a href="Official/Sermons/a_tale_of_cities.html" style="text-decoration:none;">
                 <i class="fas fa-city" style="color:#ffd803"></i> A Tale of Cities
             </a>
         </div>
@@ -960,15 +358,195 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+<!-- Load Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+
+<div class="weekly-poll">
+  <h2>Weekly Poll: What strengthens your faith most?</h2>
+  <div class="countdown">Poll ends in: <span id="time-remaining">--</span></div>
+  <div class="countdown-bar"><div id="countdown-fill"></div></div>
+  <div class="poll-options">
+    <button class="poll-btn" onclick="submitVote('Prayer')">Prayer</button>
+    <button class="poll-btn" onclick="submitVote('Worship')">Worship</button>
+    <button class="poll-btn" onclick="submitVote('Study')">Study</button>
+  </div>
+  <canvas id="pollPieChart" width="300" height="300"></canvas>
+  <div id="pollResults">
+    <div class="poll-option"><span class="option-label">Prayer</span><div class="progress-bar"><div class="progress-fill" id="fill-prayer"></div></div></div>
+    <div class="poll-option"><span class="option-label">Worship</span><div class="progress-bar"><div class="progress-fill" id="fill-worship"></div></div></div>
+    <div class="poll-option"><span class="option-label">Study</span><div class="progress-bar"><div class="progress-fill" id="fill-study"></div></div></div>
+  </div>
+  <div id="thankYouMessage" style="display: none; color: #00bfa6;">🎉 Thank you for participating!</div>
+  <div class="poll-winner"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <button id="toggleGames" class="toggle-button">🎮 Explore Bible Games</button>
+
+  <section class="game-section" id="games">
+    <h1 class="dart"><span class="emoji">🎯</span></h1>
+    <h2>BIBLE GAMES</h2>
+    <p class="section-subtitle">#### Game Section Still In Progress ####</p>
+    <div class="game-grid">
+      <div class="game-card">
+        <h3>🔍 Verse Hunt</h3>
+        <p>Test your memory under pressure!</p>
+        <a href="challenges/verse-hunt.html"><button>Play Now</button></a>
+      </div>
+      <div class="game-card coming-soon">
+        <h3>🎭 Bible Charades</h3>
+        <p>Act out characters and verses. No words. Only fun.</p>
+        <button disabled>Coming Soon</button>
+      </div>
+      <div class="game-card coming-soon">
+        <h3>👥 Faith Feud</h3>
+        <p>Team quiz battle on Bible themes!</p>
+        <button disabled>Coming Soon</button>
+      </div>
+      <div class="game-card coming-soon">
+        <h3>🤔 Blessed or Bluffed?</h3>
+        <p>Can you spot the fake verse? Let’s see.</p>
+        <button disabled>Coming Soon</button>
+      </div>
+      <div class="game-card coming-soon">
+        <h3>🧠 Commandment Catch-Up</h3>
+        <p>Race to match all 10 commandments. Fast fingers win!</p>
+        <button disabled>Coming Soon</button>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+<section class="weekly-challenge">
+  <h2>📆 Weekly Faith Challenge</h2>
+
+  <div class="challenge-verse">
+    <blockquote>
+      <p>
+        “And we know that in all things God works for the good of those who love him,  
+        who have been called according to his purpose.”
+      </p>
+      <footer>— <strong>Romans 8:28 (NIV)</strong></footer>
+    </blockquote>
+  </div>
+
+  <div class="challenge-card" id="challengeCard">
+    <h3>Overcoming Trials</h3>
+    <em>🗓️ Week of July 14–20, 2025</em>
+    <p>📝 Share a moment when you faced a challenge and saw God work through it—what did you learn, feel, or see?</p>
+  </div>
+
+  <div class="submission-form">
+    <h4>📣 Share Your Reflection</h4>
+    <form id="challengeForm">
+      <textarea name="reflection" placeholder="Type your story here..." required></textarea><br>
+      <input type="text" name="name" placeholder="Your name (optional)"><br>
+      <button type="submit">Submit</button>
+    </form>
+    <div id="submissionOutput"></div>
+  </div>
+
+  <div class="submissions-display">
+  <h4>💬 Shared Testimonies</h4>
+  <div id="submissionList">
+    <!-- User stories will be displayed here -->
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+<svg class="section-divider" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 60" preserveAspectRatio="none" style="display:block; width:100%; height:60px;">
+  <path d="M0,0 C250,60 750,0 1000,60 L1000,0 L0,0 Z" fill="url(#poll-game-gradient)" />
+  <defs>
+    <linearGradient id="poll-game-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffd803"/>
+      <stop offset="100%" stop-color="#6a11cb"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
     <footer class="footer scroll-fade">
         <p>&copy; 2025 My Website. All rights reserved.</p>
         <p>
             <i class="fas fa-share-alt" style="color:#ffd803"></i> Follow us on:
-            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook" style="color:#4267B2"></i> Facebook</a> |
-            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter</a> |
-            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram" style="color:#E1306C"></i> Instagram</a>
         </p>
     </footer>
 
@@ -1008,27 +586,27 @@
                 threshold: 0.15,
                 rootMargin: "0px 0px -40px 0px"
             };
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return (
-                    rect.top < window.innerHeight && rect.bottom > 0
-                );
-            }
+
             const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                });
-            }, appearOptions);
-            faders.forEach(fader => {
-                if (isInViewport(fader)) {
-                    setTimeout(() => fader.classList.add('visible'), 200);
-                } else {
-                    appearOnScroll.observe(fader);
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+    
+                // Staggered animation for .box elements inside .flex-wrap or .sermons-flex-wrap
+                if (entry.target.classList.contains('flex-wrap') || entry.target.classList.contains('sermons-flex-wrap')) {
+                    const boxes = entry.target.querySelectorAll('.box');
+                    boxes.forEach((box, i) => {
+                        setTimeout(() => box.classList.add('visible'), i * 180);
+                    });
                 }
             });
+        }, appearOptions);
+    
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
         });
+    });
 
         // Slideshow functionality
         let slideIndex = 1;
@@ -1130,6 +708,524 @@
     document.addEventListener("DOMContentLoaded", function() {
         showInspirationSlide(inspirationSlideIndex);
     });
-    </script>
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<script>
+// 🌟 Weekly Challenge Data
+const weeklyChallenge = {
+  theme: "Overcoming Trials",
+  verse: "Romans 8:28",
+  prompt: "Share a moment when you faced a challenge and saw God work through it—what did you learn, feel, or see?",
+  week: "July 14–20, 2025"
+};
+
+// 🌟 Render Challenge Card
+document.addEventListener("DOMContentLoaded", function () {
+  const challengeCard = document.getElementById("challengeCard");
+  if (challengeCard) {
+    challengeCard.innerHTML = `
+      <h3>${weeklyChallenge.theme}</h3>
+      <strong>📖 ${weeklyChallenge.verse}</strong>
+      <em>🗓️ Week of ${weeklyChallenge.week}</em>
+      <p>📝 ${weeklyChallenge.prompt}</p>
+    `;
+  }
+});
+
+// 🌟 Element References
+const challengeForm = document.getElementById("challengeForm");
+const submissionList = document.getElementById("submissionList");
+const outputMessage = document.getElementById("submissionOutput");
+
+// 🧠 Load and Render All Submissions
+function renderSubmissions() {
+  submissionList.innerHTML = "";
+  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+
+  submissions.forEach(({ name, story }, index) => {
+    const entry = createTestimonyEntry(name, story, index);
+    submissionList.appendChild(entry);
+  });
+}
+
+// 🧩 Create Testimony Entry with Edit/Delete
+function createTestimonyEntry(name, story, index) {
+  const entry = document.createElement("div");
+  entry.className = "testimony-entry";
+
+  entry.innerHTML = `
+    <p><strong>${name}</strong>: ${story}</p>
+    <button onclick="editEntry(${index})">✏️ Edit</button>
+    <button onclick="deleteEntry(${index})">🗑️ Delete</button>
+  `;
+
+  return entry;
+}
+
+// 💾 Save to LocalStorage
+function saveToLocalStorage(name, story) {
+  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+  submissions.unshift({ name, story });
+  localStorage.setItem("submissions", JSON.stringify(submissions));
+}
+
+// 💬 Show Feedback Message
+function showOutputMessage(message, isError = false) {
+  outputMessage.textContent = message;
+  outputMessage.style.color = isError ? "#ff8080" : "#aaf0d1";
+  outputMessage.style.opacity = 1;
+  setTimeout(() => {
+    outputMessage.style.opacity = 0;
+  }, 3000);
+}
+
+// ✍️ Edit Submission
+function editEntry(index) {
+  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+  const item = submissions[index];
+  challengeForm.reflection.value = item.story;
+  challengeForm.name.value = item.name;
+  
+  deleteEntry(index); // Remove old version so new one can be saved
+  showOutputMessage("📝 Edit your entry and resubmit to update.");
+}
+
+// 🗑️ Delete Submission
+function deleteEntry(index) {
+  let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+  submissions.splice(index, 1);
+  localStorage.setItem("submissions", JSON.stringify(submissions));
+  renderSubmissions();
+  showOutputMessage("🗑️ Entry deleted.");
+}
+
+// ✅ Handle Form Submission
+challengeForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const story = challengeForm.reflection.value.trim();
+  const name = challengeForm.name.value.trim() || "Anonymous";
+
+  if (story === "") {
+    showOutputMessage("⚠️ Please share your reflection before submitting.", true);
+    return;
+  }
+
+  saveToLocalStorage(name, story);
+  renderSubmissions();
+  showOutputMessage("🌟 Thank you for sharing!");
+  challengeForm.reset();
+});
+
+// 🔁 Load saved entries on page load
+window.addEventListener("DOMContentLoaded", renderSubmissions);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+const pollOptions = ["Prayer", "Worship", "Study"];
+let pollData = pollOptions.map(opt => getPollData()[opt] || 0);
+const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
+
+let pollEndTime = parseInt(localStorage.getItem("pollEndTime")) || (Date.now() + oneWeekMs);
+localStorage.setItem("pollEndTime", pollEndTime);
+
+const pieChart = new Chart(document.getElementById("pollPieChart").getContext("2d"), {
+  type: "pie",
+  data: {
+    labels: pollOptions,
+    datasets: [{
+      data: pollData,
+      backgroundColor: ["#1E90FF", "#00BFA6", "#00FF9D"]
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'bottom' } }
+  }
+});
+
+function getPollData() {
+  return JSON.parse(localStorage.getItem("pollVotes")) || {};
+}
+
+function savePollData(data) {
+  localStorage.setItem("pollVotes", JSON.stringify(data));
+}
+
+function hasVoted() {
+  return localStorage.getItem("hasVoted") === "true";
+}
+
+function setVoted() {
+  localStorage.setItem("hasVoted", "true");
+  document.getElementById("thankYouMessage").style.display = "block";
+  document.querySelectorAll(".poll-btn").forEach(btn => btn.disabled = true);
+}
+
+function submitVote(option) {
+  if (hasVoted()) return;
+  const votes = getPollData();
+  votes[option] = (votes[option] || 0) + 1;
+  savePollData(votes);
+  setVoted();
+  pollData = pollOptions.map(opt => votes[opt] || 0);
+  updatePollResults();
+  pieChart.data.datasets[0].data = pollData;
+  pieChart.update();
+  showWinner();
+}
+
+function updatePollResults() {
+  const total = pollData.reduce((a, b) => a + b, 0);
+  pollOptions.forEach((opt, i) => {
+    const percent = total ? (pollData[i] / total) * 100 : 0;
+    document.getElementById(`fill-${opt.toLowerCase()}`).style.width = `${percent}%`;
+  });
+}
+
+function showWinner() {
+  const maxVotes = Math.max(...pollData);
+  const winnerIndex = pollData.indexOf(maxVotes);
+  if (maxVotes > 0) {
+    document.querySelector(".poll-winner").textContent = `🏆 Most voted: ${pollOptions[winnerIndex]}`;
+  }
+}
+
+function archiveOldPoll() {
+  const archive = JSON.parse(localStorage.getItem("pollArchive") || "[]");
+  const result = {};
+  pollOptions.forEach(opt => {
+    result[opt] = getPollData()[opt] || 0;
+  });
+  archive.push({ date: new Date().toISOString(), result });
+  localStorage.setItem("pollArchive", JSON.stringify(archive));
+}
+
+function updateCountdown() {
+  const now = Date.now();
+  const remaining = pollEndTime - now;
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+  document.getElementById("time-remaining").textContent =
+    `${days} Days : ${hours} Hours : ${minutes} Minutes : ${seconds} Seconds`;
+  document.getElementById("countdown-fill").style.width = `${(remaining / oneWeekMs) * 100}%`;
+
+  if (remaining <= 0) {
+    archiveOldPoll();
+    localStorage.removeItem("hasVoted");
+    localStorage.removeItem("pollVotes");
+    localStorage.setItem("pollEndTime", Date.now() + oneWeekMs);
+    location.reload();
+    return;
+  }
+
+  setTimeout(updateCountdown, 1000);
+}
+
+updateCountdown();
+updatePollResults();
+showWinner();
+if (hasVoted()) setVoted();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// 🔁 Verse List
+const verseQuestions = [
+  {
+    clue: "Which verse says: “I can do all things through Christ who strengthens me.”",
+    answer: "Philippians 4:13",
+    options: ["Philippians 4:13", "Romans 8:28", "Joshua 1:9", "John 3:16"]
+  },
+  {
+    clue: "Which verse says: “For God so loved the world...”",
+    answer: "John 3:16",
+    options: ["John 3:16", "Genesis 1:1", "Matthew 6:33", "Proverbs 3:5"]
+  },
+  {
+    clue: "Which verse says: “Trust in the Lord with all your heart.”",
+    answer: "Proverbs 3:5",
+    options: ["Psalm 23:1", "Proverbs 3:5", "Isaiah 40:31", "Luke 1:37"]
+  },
+  {
+    clue: "Which verse says: “The Lord is my shepherd, I shall not want.”",
+    answer: "Psalm 23:1",
+    options: ["Psalm 23:1", "John 14:6", "James 1:5", "Romans 5:8"]
+  },
+  {
+    clue: "Which verse says: “In the beginning, God created the heavens and the earth.”",
+    answer: "Genesis 1:1",
+    options: ["Genesis 1:1", "John 1:1", "Psalm 100:1", "Romans 3:23"]
+  },
+  {
+    clue: "Which verse says: “Jesus answered, I am the way, the truth, and the life.”",
+    answer: "John 14:6",
+    options: ["John 14:6", "John 3:16", "1 Peter 5:7", "Romans 5:8"]
+  },
+  {
+    clue: "Which verse says: “Cast all your anxiety on Him because He cares for you.”",
+    answer: "1 Peter 5:7",
+    options: ["1 Peter 5:7", "Matthew 11:28", "Hebrews 11:1", "Isaiah 41:10"]
+  },
+  {
+    clue: "Which verse says: “But those who hope in the Lord will renew their strength.”",
+    answer: "Isaiah 40:31",
+    options: ["Isaiah 40:31", "Proverbs 3:5", "Romans 8:28", "Psalm 46:10"]
+  },
+  {
+    clue: "Which verse says: “Come to me, all you who are weary and burdened...”",
+    answer: "Matthew 11:28",
+    options: ["Matthew 11:28", "Luke 1:37", "John 10:10", "James 1:5"]
+  },
+  {
+    clue: "Which verse says: “And we know that in all things God works for the good...”",
+    answer: "Romans 8:28",
+    options: ["Romans 8:28", "1 Corinthians 13:4", "Matthew 5:16", "Genesis 1:1"]
+  }
+];
+
+let currentIndex = 0;
+let timer = 30;
+let countdown;
+
+const clueEl = document.getElementById("verseClue");
+const feedbackEl = document.getElementById("verseFeedback");
+const timeDisplay = document.getElementById("timeDisplay");
+const encouragementEl = document.getElementById("encouragement");
+const verseScoreEl = document.getElementById("verseScore");
+const highScoreEl = document.getElementById("highScore");
+const clockVisual = document.getElementById("clockVisual");
+
+// 🕒 Countdown
+function startCountdown() {
+  timer = 30;
+  timeDisplay.textContent = timer;
+  clockVisual.style.animationPlayState = "running";
+
+  clearInterval(countdown); // stop old timers
+  countdown = setInterval(() => {
+    timer--;
+    timeDisplay.textContent = timer;
+
+    if (timer <= 0) {
+      clearInterval(countdown);
+      clockVisual.style.animationPlayState = "paused";
+      feedbackEl.textContent = "⏰ Time's up!";
+      disableOptions();
+      setTimeout(() => {
+        nextVerse();
+      }, 2000);
+    }
+  }, 1000);
+}
+
+// 🧠 Load Verse
+function loadVerseQuestion() {
+  const q = verseQuestions[currentIndex];
+  clueEl.textContent = q.clue;
+
+  q.options.forEach((opt, i) => {
+    const btn = document.getElementById(`opt${i}`);
+    btn.textContent = opt;
+    btn.disabled = false;
+    btn.onclick = () => submitVerse(opt, q.answer);
+  });
+
+  feedbackEl.textContent = "";
+  startCountdown();
+}
+
+// ✅ Disable options
+function disableOptions() {
+  document.querySelectorAll(".verse-options button").forEach(btn => {
+    btn.disabled = true;
+  });
+}
+
+// ✅ Answer Check
+function submitVerse(choice, correct) {
+  clearInterval(countdown);
+  clockVisual.style.animationPlayState = "paused";
+
+  if (choice === correct) {
+    feedbackEl.textContent = "✅ Correct!";
+    incrementScore();
+  } else {
+    feedbackEl.textContent = "❌ That’s not it. Try again next time!";
+    localStorage.setItem("verseStreak", "0");
+    updateScoreDisplay();
+  }
+
+  disableOptions();
+
+  setTimeout(() => {
+    nextVerse();
+  }, 2000);
+}
+
+// ⬆️ Score System
+function incrementScore() {
+  let score = parseInt(localStorage.getItem("verseScore")) || 0;
+  let highScore = parseInt(localStorage.getItem("highVerseScore")) || 0;
+  let streak = parseInt(localStorage.getItem("verseStreak")) || 0;
+
+  score++;
+  streak++;
+
+  localStorage.setItem("verseScore", score);
+  localStorage.setItem("verseStreak", streak);
+  if (score > highScore) {
+    localStorage.setItem("highVerseScore", score);
+  }
+
+  updateScoreDisplay();
+}
+
+// 🧹 Reset
+function resetScore() {
+  localStorage.setItem("verseScore", "0");
+  localStorage.setItem("highVerseScore", "0");
+  localStorage.setItem("verseStreak", "0");
+  feedbackEl.textContent = "🧹 Score reset!";
+  updateScoreDisplay();
+  currentIndex = 0;
+  loadVerseQuestion();
+}
+
+// 🧮 Update UI
+function updateScoreDisplay() {
+  const score = parseInt(localStorage.getItem("verseScore")) || 0;
+  const highScore = parseInt(localStorage.getItem("highVerseScore")) || 0;
+  const streak = parseInt(localStorage.getItem("verseStreak")) || 0;
+
+  verseScoreEl.textContent = score;
+  highScoreEl.textContent = highScore;
+
+  if (streak >= 20) {
+    encouragementEl.textContent = "🚀 You’re on a holy rampage!";
+  } else if (streak >= 10) {
+    encouragementEl.textContent = "⚡ Bible Beast Mode!";
+  } else if (streak >= 5) {
+    encouragementEl.textContent = "🔥 You’re warming up!";
+  } else {
+    encouragementEl.textContent = "";
+  }
+}
+
+// 🔁 Next Question
+function nextVerse() {
+  currentIndex = (currentIndex + 1) % verseQuestions.length;
+  loadVerseQuestion();
+}
+
+// 🚀 Init
+window.addEventListener("DOMContentLoaded", () => {
+  updateScoreDisplay();
+  loadVerseQuestion();
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+  <script>
+    const toggleBtn = document.getElementById("toggleGames");
+    const gameSection = document.getElementById("games");
+
+    toggleBtn.addEventListener("click", () => {
+      const isVisible = gameSection.classList.contains("visible");
+
+      if (isVisible) {
+        gameSection.classList.remove("visible");
+        gameSection.classList.add("exiting");
+        toggleBtn.textContent = "🎮 Explore Bible Games";
+
+        setTimeout(() => {
+          gameSection.classList.remove("exiting");
+          gameSection.style.maxHeight = "";
+          gameSection.style.opacity = "";
+          gameSection.style.display = "none";
+        }, 600);
+      } else {
+        gameSection.style.maxHeight = "";
+        gameSection.style.opacity = "";
+        gameSection.style.display = "";
+        gameSection.classList.remove("exiting");
+        gameSection.classList.add("visible");
+        toggleBtn.textContent = "⬆️ Hide Bible Games";
+      }
+    });
+  </script>
+
+
+
+
+
 </body>
 </html>

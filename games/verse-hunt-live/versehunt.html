@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Verse Hunt - Blue-Purple Edition</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #2a3aeb, #7b2cbf); /* deep blue to purple */
+    color: #e0e8ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px #4a7fff, 0 0 30px #7b99ff;
+  }
+  .subtitle {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    color: #a9bfff;
+    text-shadow: 0 0 8px rgba(120, 145, 255, 0.6);
+  }
+  .game-box {
+    background: rgba(50, 80, 255, 0.12); /* transparent deep blue */
+    border: 1px solid rgba(120, 140, 255, 0.3);
+    padding: 30px;
+    border-radius: 22px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 35px rgba(75, 115, 255, 0.4);
+    position: relative;
+    color: #e0e8ff;
+  }
+  .question {
+    font-size: 1.5em;
+    margin-bottom: 25px;
+    text-shadow: 0 0 8px #668cff;
+  }
+  .options button {
+    display: block;
+    margin: 12px auto;
+    padding: 14px 26px;
+    font-size: 1.05em;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #3769ff, #6a8bff);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(55, 105, 255, 0.7);
+    font-weight: 600;
+  }
+  .options button:hover {
+    background: linear-gradient(135deg, #5a8bff, #a4b8ff);
+    transform: scale(1.04);
+    box-shadow: 0 6px 18px rgba(90, 139, 255, 0.9);
+  }
+  #feedback {
+    font-size: 1.3em;
+    margin-top: 20px;
+    color: #a4b8ff;
+    text-shadow: 0 0 8px #88aaff;
+    min-height: 1.5em;
+  }
+  #timer, #score, #level {
+    font-weight: bold;
+    margin-top: 20px;
+    color: #a4b8ff;
+    text-shadow: 0 0 6px #668cff;
+  }
+  #highScore {
+    margin-top: 20px;
+    font-weight: 700;
+    color: #ffdd33;
+    text-shadow: 0 0 12px #ffdd33;
+  }
+  audio {
+    display: none;
+  }
+  #muteBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #3769ff, #6a8bff);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 16px;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 5px 14px rgba(55, 105, 255, 0.7);
+    transition: background 0.3s ease;
+    z-index: 9999;
+  }
+  #muteBtn:hover {
+    background: linear-gradient(135deg, #5a8bff, #a4b8ff);
+  }
+  /* Confetti container */
+  #confetti {
+    pointer-events: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    z-index: 9998;
+  }
+  .confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 14px;
+    background-color: #6a8bff;
+    opacity: 0.85;
+    transform-origin: center;
+    animation: confetti-fall linear forwards;
+    border-radius: 3px;
+    will-change: transform;
+    box-shadow: 0 0 8px #a4b8ff;
+  }
+  @keyframes confetti-fall {
+    0% {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(100vh) rotate(720deg);
+    }
+  }
+</style>
+</head>
+<body>
+  <button id="muteBtn">🔈 Mute</button>
+
+  <h1>📖 Verse Hunt</h1>
+  <div class="subtitle">Find the correct Bible verse!</div>
+
+  <div class="game-box">
+    <div id="level">Level: 1</div>
+    <div id="score">Score: 0</div>
+    <div id="timer">Time Left: 20s</div>
+    <div id="highScore">High Score: 0</div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <div id="feedback"></div>
+  </div>
+
+  <div id="confetti"></div>
+
+  <audio id="bg-music" src="https://cdn.pixabay.com/download/audio/2022/02/15/audio_99a816ea62.mp3?filename=relaxing-synth-loop-7699.mp3" loop></audio>
+  <audio id="correct-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3"></audio>
+  <audio id="wrong-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+  <audio id="beep" src="https://assets.mixkit.co/sfx/preview/mixkit-classic-alarm-995.mp3"></audio>
+
+<script>
+  const questions = [
+    {
+      clue: "Which verse says: 'I can do all things through Christ who strengthens me.'",
+      answer: "Philippians 4:13",
+      options: ["Philippians 4:13", "Romans 8:28", "John 3:16", "Joshua 1:9"]
+    },
+    {
+      clue: "Which verse says: 'For God so loved the world...'",
+      answer: "John 3:16",
+      options: ["John 3:16", "Genesis 1:1", "Matthew 5:9", "Philippians 4:13"]
+    },
+    {
+      clue: "Which verse says: 'Be strong and courageous. Do not be afraid.'",
+      answer: "Joshua 1:9",
+      options: ["Psalm 23:1", "Joshua 1:9", "Romans 12:2", "John 10:10"]
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let level = 1;
+  let timer;
+  let timeLeft = 20;
+
+  const questionEl = document.getElementById("question");
+  const optionsEl = document.getElementById("options");
+  const feedbackEl = document.getElementById("feedback");
+  const timerEl = document.getElementById("timer");
+  const scoreEl = document.getElementById("score");
+  const levelEl = document.getElementById("level");
+  const highScoreEl = document.getElementById("highScore");
+
+  const correctSound = document.getElementById("correct-sound");
+  const wrongSound = document.getElementById("wrong-sound");
+  const beepSound = document.getElementById("beep");
+  const bgMusic = document.getElementById("bg-music");
+  const muteBtn = document.getElementById("muteBtn");
+
+  let highScore = parseInt(localStorage.getItem("verseHuntHighScore")) || 0;
+  highScoreEl.textContent = `High Score: ${highScore}`;
+
+  let musicPlaying = true;
+  bgMusic.volume = 0.3;
+  bgMusic.play().catch(() => {});
+
+  muteBtn.addEventListener("click", () => {
+    if(musicPlaying) {
+      bgMusic.pause();
+      muteBtn.textContent = "🔇 Unmute";
+    } else {
+      bgMusic.play();
+      muteBtn.textContent = "🔈 Mute";
+    }
+    musicPlaying = !musicPlaying;
+  });
+
+  function loadQuestion() {
+    if(current >= questions.length) {
+      endGame();
+      return;
+    }
+    const q = questions[current];
+    questionEl.textContent = q.clue;
+    optionsEl.innerHTML = "";
+    q.options.forEach(option => {
+      const btn = document.createElement("button");
+      btn.textContent = option;
+      btn.onclick = () => handleAnswer(option);
+      optionsEl.appendChild(btn);
+    });
+    feedbackEl.textContent = "";
+    timeLeft = 20;
+    timerEl.textContent = `Time Left: ${timeLeft}s`;
+    clearInterval(timer);
+    timer = setInterval(updateTimer, 1000);
+  }
+
+  function updateTimer() {
+    timeLeft--;
+    timerEl.textContent = `Time Left: ${timeLeft}s`;
+    if (timeLeft === 5) beepSound.play();
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      feedbackEl.textContent = "⏰ Time’s up!";
+      wrongSound.play();
+      setTimeout(() => nextQuestion(), 2000);
+    }
+  }
+
+  function handleAnswer(selected) {
+    clearInterval(timer);
+    const correct = questions[current].answer;
+    if (selected === correct) {
+      score += 10;
+      feedbackEl.textContent = "✅ Correct!";
+      correctSound.play();
+    } else {
+      feedbackEl.textContent = `❌ Wrong! Correct answer: ${correct}`;
+      wrongSound.play();
+    }
+    scoreEl.textContent = `Score: ${score}`;
+    setTimeout(() => nextQuestion(), 2000);
+  }
+
+  function nextQuestion() {
+    current++;
+    if (current > 0 && current % 3 === 0) {
+      level++;
+      levelEl.textContent = `Level: ${level}`;
+    }
+    loadQuestion();
+  }
+
+  function endGame() {
+    questionEl.textContent = "🎉 Game Over!";
+    optionsEl.innerHTML = "";
+    feedbackEl.textContent = `Your Final Score: ${score}`;
+    timerEl.textContent = "";
+    if(score > highScore) {
+      highScore = score;
+      localStorage.setItem("verseHuntHighScore", highScore);
+      highScoreEl.textContent = `High Score: ${highScore} 🔥 New!`;
+    }
+    launchConfetti();
+  }
+
+  function launchConfetti() {
+    const confettiContainer = document.getElementById("confetti");
+    const colors = ['#6a8bff', '#4a79ff', '#a4b8ff', '#7b99ff', '#8cb4ff'];
+    const count = 80;
+    for(let i=0; i<count; i++) {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti-piece");
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.top = Math.random() * -50 + "px";
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      confetti.style.animationDelay = (Math.random() * 3) + "s";
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confettiContainer.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 6000);
+    }
+  }
+
+  loadQuestion();
+</script>
+</body>
+</html>

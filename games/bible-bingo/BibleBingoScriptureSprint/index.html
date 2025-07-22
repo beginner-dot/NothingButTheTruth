@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bible Bingo: Scripture Sprint</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="bible-bingo">
+    <h2>🎲 Bible Bingo: Scripture Sprint</h2>
+    <p>Select your team:</p>
+    <div class="team-buttons">
+      <button onclick="setTeam('Team A')">🔴 Team A</button>
+      <button onclick="setTeam('Team B')">🔵 Team B</button>
+    </div>
+    <p>Team Score (🔴 Team A): <span id="teamAScore">0</span> | (🔵 Team B): <span id="teamBScore">0</span></p>
+    <div id="bingoBoard" class="bingo-grid"></div>
+    <p id="bingoFeedback"></p>
+    <p>📊 Your Line Score: <span id="lineScore">0</span></p>
+    <p>🏅 High Score: <span id="highScore">0</span></p>
+    <p id="encouragementMessage"></p>
+    <button onclick="resetBingo()">🔄 Reset Board</button>
+    <button onclick="toggleFullscreen()">📱 Fullscreen</button>
+  </section>
+  <div id="versePopup" class="verse-popup hidden"></div>
+  <script src="script.js"></script>
+</body>
+</html>
