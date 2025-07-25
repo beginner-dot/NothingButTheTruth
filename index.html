@@ -13,8 +13,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>
@@ -128,21 +129,6 @@
   </div>
 </section>
 
-<script>
-  function flipCard(card) {
-    const isFlipped = card.classList.contains("flipped");
-
-    document.querySelectorAll(".flip-card").forEach(c => c.classList.remove("flipped"));
-
-    if (!isFlipped) {
-      card.classList.add("flipped");
-    }
-  }
-
-  document.querySelectorAll(".flip-card").forEach(card => {
-    card.addEventListener("click", () => flipCard(card));
-  });
-</script>
 
 
 
@@ -155,32 +141,37 @@
     <section class="bottom-section scroll-fade">
         <div class="leftdiv scroll-fade"></div>
         <!-- Hero section moved here as belowhead replacement -->
-        
-
-<section class="weekly-feature scroll-fade">
+      
+<section class="weekly-feature scroll-fade verse-day">
   <div class="weekly-verse">
-    <h2><i class="fas fa-fire" style="color:#ffd803"></i> Verse of the Week</h2>
+    <h2><i class="fas fa-fire" style="color:#ffd803"></i> Verse of the Day</h2>
     <blockquote>
-      “Let your light shine before others, so that they may see your good works and give glory to your Father who is in heaven.”
-      <span>- Matthew 5:16</span>
+      <span id="verseText"></span>
+      <br />
+      <span id="verseRef" style="font-weight: bold; font-style: italic;"></span>
     </blockquote>
-  </div>
-
-  <div class="weekly-devotional">
-    <h3><i class="fas fa-book-reader"></i> Weekly Devotional</h3>
-    <p>This week, focus on being a reflection of Christ’s light. In your conversations, actions, and decisions—choose to glorify God. 
-    Even the smallest acts of kindness can reveal God’s love to others. Shine boldly, but humbly.</p>
-    <p class="devotion-footer">🕊️ Pray. Act. Reflect.</p>
+    <button class="devotion-btn" onclick="toggleDevotion()">Daily Devotion</button>
   </div>
 </section>
 
-<style>
+<!-- Devotion Modal -->
+<div id="devotionModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span id="closeDevotion" class="close-button">&times;</span>
+    <div class="devotion-content">
+      <h3>Daily Devotion</h3>
+      <p id="devotionText"></p>
+    </div>
+  </div>
+</div>
 
-</style>
+<script>
+  // Your existing JS here (with updateVerseOfTheDay, updateDevotionOfTheDay, toggleDevotion, etc.)
+</script>
 
 
-<style> 
-</style>
+
+</section>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -239,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="purpose-content">
             <h2><i class="fas fa-info-circle" style="color:#ffd803"></i> About the Bible</h2>
             <p><i class="fas fa-bible" style="color:#ffd803"></i> The Bible is a collection of sacred texts or scriptures that speak about God and the history of the World. It contains present events and the future of our world. The scriptures also explain Heaven as the Holy City of God, and explains The Trinity of The Holy God.</p>
-            <a href="Official/Studies/why_the_bible_is_God's_word.html">
+            <a href="Studies/why_the_bible_is_God's_word.html">
                 <button class="bt1"><i class="fas fa-arrow-right"></i> How is the Bible God's Message to us</button>
             </a>
         </div>
@@ -280,9 +271,9 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="flex-square flex-sq12"></div>
         <div class="flex-square flex-sq13"></div>
         <div class="flex-square flex-sq14"></div>
-       <li> <div class="box"><a href="Official/Studies/facts_or_fiction.html" style="text-decoration:none;"><i class="fas fa-question-circle" style="color:#ffd803"></i> Is The Bible Facts or Fiction?</a></div></li>
-       <li> <div class="box"><a href="Official/Studies/why_the_bible_is_God's_word.html" style="text-decoration:none;"><i class="fas fa-book-bible" style="color:#ffd803"></i> Is the Bible God's Word to Humanity?</a></div></li>
-        <li> <div class="box"><a href="Official/Studies/are_angels_real.html" style="text-decoration:none;"><i class="fas fa-city" style="color:#ffd803"></i>    Are Angels Real?</a></div></li>
+       <li> <div class="box"><a href="Studies/facts_or_fiction.html" style="text-decoration:none;"><i class="fas fa-question-circle" style="color:#ffd803"></i> Is The Bible Facts or Fiction?</a></div></li>
+       <li> <div class="box"><a href="Studies/why_the_bible_is_God's_word.html" style="text-decoration:none;"><i class="fas fa-book-bible" style="color:#ffd803"></i> Is the Bible God's Word to Humanity?</a></div></li>
+        <li> <div class="box"><a href="Studies/are_angels_real.html" style="text-decoration:none;"><i class="fas fa-city" style="color:#ffd803"></i>    Are Angels Real?</a></div></li>
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
@@ -336,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="flex-square flex-sq13"></div>
         <div class="flex-square flex-sq14"></div>
         <div class="box">
-            <a href="Official/Sermons/a_tale_of_cities.html" style="text-decoration:none;">
+            <a href="Sermons/a_tale_of_cities.html" style="text-decoration:none;">
                 <i class="fas fa-city" style="color:#ffd803"></i> A Tale of Cities
             </a>
         </div>
@@ -366,119 +357,319 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-<!-- Load Chart.js -->
+
+
+
+<!-- Include Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<section class="poll-section">
+  <h1 class="poll-header">Weekly Poll</h1>
+  <h2 class="poll-question">What strengthens your faith most?</h2>
 
+  <form id="voteForm">
+    <label class="vote-option">
+      <input type="radio" name="vote" value="Prayer"> 🙏 Prayer
+    </label>
+    <label class="vote-option">
+      <input type="radio" name="vote" value="Worship"> 🎵 Worship
+    </label>
+    <label class="vote-option">
+      <input type="radio" name="vote" value="Study"> 📖 Study
+    </label>
+    <button type="submit" class="vote-submit">Submit</button>
+  </form>
 
+  <p id="countdown" class="countdown-text">Loading countdown...</p>
 
-<div class="weekly-poll">
-  <h2>Weekly Poll: What strengthens your faith most?</h2>
-  <div class="countdown">Poll ends in: <span id="time-remaining">--</span></div>
-  <div class="countdown-bar"><div id="countdown-fill"></div></div>
-  <div class="poll-options">
-    <button class="poll-btn" onclick="submitVote('Prayer')">Prayer</button>
-    <button class="poll-btn" onclick="submitVote('Worship')">Worship</button>
-    <button class="poll-btn" onclick="submitVote('Study')">Study</button>
-  </div>
-  <canvas id="pollPieChart" width="300" height="300"></canvas>
-  <div id="pollResults">
-    <div class="poll-option"><span class="option-label">Prayer</span><div class="progress-bar"><div class="progress-fill" id="fill-prayer"></div></div></div>
-    <div class="poll-option"><span class="option-label">Worship</span><div class="progress-bar"><div class="progress-fill" id="fill-worship"></div></div></div>
-    <div class="poll-option"><span class="option-label">Study</span><div class="progress-bar"><div class="progress-fill" id="fill-study"></div></div></div>
-  </div>
-  <div id="thankYouMessage" style="display: none; color: #00bfa6;">🎉 Thank you for participating!</div>
-  <div class="poll-winner"></div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-  <button id="toggleGames" class="toggle-button">🎮 Explore Bible Games</button>
-
-  <section class="game-section" id="games">
-    <h1 class="dart"><span class="emoji">🎯</span></h1>
-    <h2>BIBLE GAMES</h2>
-    <p class="section-subtitle">#### Game Section Still In Progress ####</p>
-    <div class="game-grid">
-      <div class="game-card">
-        <h3>🔍 Verse Hunt</h3>
-        <p>Test your memory under pressure!</p>
-        <a href="challenges/verse-hunt.html"><button>Play Now</button></a>
-      </div>
-      <div class="game-card coming-soon">
-        <h3>🎭 Bible Charades</h3>
-        <p>Act out characters and verses. No words. Only fun.</p>
-        <button disabled>Coming Soon</button>
-      </div>
-      <div class="game-card coming-soon">
-        <h3>👥 Faith Feud</h3>
-        <p>Team quiz battle on Bible themes!</p>
-        <button disabled>Coming Soon</button>
-      </div>
-      <div class="game-card coming-soon">
-        <h3>🤔 Blessed or Bluffed?</h3>
-        <p>Can you spot the fake verse? Let’s see.</p>
-        <button disabled>Coming Soon</button>
-      </div>
-      <div class="game-card coming-soon">
-        <h3>🧠 Commandment Catch-Up</h3>
-        <p>Race to match all 10 commandments. Fast fingers win!</p>
-        <button disabled>Coming Soon</button>
-      </div>
-    </div>
-  </section>
-
-
-
-
-
-
-
-<section class="weekly-challenge">
-  <h2>📆 Weekly Faith Challenge</h2>
-
-  <div class="challenge-verse">
-    <blockquote>
-      <p>
-        “And we know that in all things God works for the good of those who love him,  
-        who have been called according to his purpose.”
-      </p>
-      <footer>— <strong>Romans 8:28 (NIV)</strong></footer>
-    </blockquote>
+  <div class="chart-container">
+    <canvas id="voteChart"></canvas>
   </div>
 
-  <div class="challenge-card" id="challengeCard">
-    <h3>Overcoming Trials</h3>
-    <em>🗓️ Week of July 14–20, 2025</em>
-    <p>📝 Share a moment when you faced a challenge and saw God work through it—what did you learn, feel, or see?</p>
-  </div>
-
-  <div class="submission-form">
-    <h4>📣 Share Your Reflection</h4>
-    <form id="challengeForm">
-      <textarea name="reflection" placeholder="Type your story here..." required></textarea><br>
-      <input type="text" name="name" placeholder="Your name (optional)"><br>
-      <button type="submit">Submit</button>
-    </form>
-    <div id="submissionOutput"></div>
-  </div>
-
-  <div class="submissions-display">
-  <h4>💬 Shared Testimonies</h4>
-  <div id="submissionList">
-    <!-- User stories will be displayed here -->
-  </div>
-</div>
+  <div id="thankYouMessage" class="thank-you">🎉 Thank you for voting!</div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button id="toggleGames" class="toggle-button">🎮 Explore Bible Games</button>
+
+<section class="game-section" id="games">
+  <h1 class="dart"><span class="emoji">🎯</span></h1>
+  <h2>BIBLE GAMES</h2>
+  <p class="section-subtitle">#### Game Section Still In Progress ####</p>
+  <div class="game-grid">
+    <div class="game-card">
+      <h3>🔍 Verse Hunt</h3>
+      <p>Test your memory under pressure!</p>
+      <a href="challenges/verse-hunt.html"><button>Play Now</button></a>
+    </div>
+    <div class="game-card coming-soon">
+      <h3>🎭 Bible Charades</h3>
+      <p>Act out characters and verses. No words. Only fun.</p>
+      <button disabled>Coming Soon</button>
+    </div>
+    <div class="game-card coming-soon">
+      <h3>👥 Faith Feud</h3>
+      <p>Team quiz battle on Bible themes!</p>
+      <button disabled>Coming Soon</button>
+    </div>
+    <div class="game-card coming-soon">
+      <h3>🤔 Blessed or Bluffed?</h3>
+      <p>Can you spot the fake verse? Let’s see.</p>
+      <button disabled>Coming Soon</button>
+    </div>
+    <div class="game-card coming-soon">
+      <h3>🧠 Commandment Catch-Up</h3>
+      <p>Race to match all 10 commandments. Fast fingers win!</p>
+      <button disabled>Coming Soon</button>
+    </div>
+  </div>
+
+  <!-- Bible Icon Background SVG -->
+  <svg class="background-shapes" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" aria-hidden="true" focusable="false">
+    <!-- Scroll (replaces cross) -->
+    <rect x="370" y="150" width="40" height="140" rx="12" ry="12" fill="rgba(255, 215, 0, 0.25)" />
+    <line x1="385" y1="170" x2="405" y2="170" stroke="rgba(255, 215, 0, 0.4)" stroke-width="4" />
+    <line x1="385" y1="200" x2="405" y2="200" stroke="rgba(255, 215, 0, 0.4)" stroke-width="4" />
+    <line x1="385" y1="230" x2="405" y2="230" stroke="rgba(255, 215, 0, 0.4)" stroke-width="4" />
+    
+    <!-- Bible Book -->
+    <rect x="550" y="400" width="80" height="100" rx="10" ry="10" fill="rgba(30, 144, 255, 0.25)"/>
+    <line x1="590" y1="400" x2="590" y2="500" stroke="rgba(255, 255, 255, 0.3)" stroke-width="4" />
+    
+    <!-- Dove -->
+    <path d="M180 480c20-30 40-40 60-30s20 20 10 30-40 40-60 30-20-20-10-30z" fill="rgba(0, 255, 157, 0.25)" />
+    
+    <!-- Fish -->
+    <ellipse cx="650" cy="150" rx="50" ry="20" fill="rgba(106, 17, 203, 0.25)" />
+    <polygon points="680,150 720,130 720,170" fill="rgba(106, 17, 203, 0.25)" />
+  </svg>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section id="question-of-the-week" class="question-week-section">
+  <div class="question-container">
+    <h2>🕊️ Question of the Week</h2>
+    <p id="question-text">Which of the following men walked with God and was taken to heaven without dying?</p>
+<div class="options">
+  <button class="option-btn" data-correct="false">Moses</button>
+  <button class="option-btn" data-correct="false">Elijah</button>
+  <button class="option-btn" data-correct="true">Enoch</button>
+  <button class="option-btn" data-correct="false">Abraham</button>
+</div>
+
+    <button id="submit-btn" class="submit-btn" disabled>Submit</button>
+  </div>
+
+  <!-- Correct answer popup -->
+  <div id="correct-popup" class="correct-popup hidden">
+    <p>Correct! Enoch walked with God and was taken to heaven without dying. (Genesis 5:24)</p>
+  </div>
+
+  <!-- Incorrect answer popup -->
+<div id="incorrect-popup" class="incorrect-popup hidden">
+  <p>Oops! That's not the right answer. Try exploring more to learn!</p>
+</div>
+
+
+  <!-- Child button revealed after correct answer -->
+  <button id="explore-more-btn" class="explore-more-btn hidden">Explore 5 More Questions</button>
+
+  <!-- Mini-game container -->
+  <div id="mini-game" class="mini-game hidden">
+    <h3>🎮 Bible Quiz Challenge</h3>
+    <div id="game-question-text"></div>
+    <div id="game-options" class="options"></div>
+    <button id="game-submit-btn" class="submit-btn" disabled>Submit</button>
+    <div id="timer">Time Left: <span id="time-left">20</span>s</div>
+  </div>
+
+  <!-- Game results -->
+  <div id="game-results" class="game-results hidden">
+    <h3>Score: <span id="score"></span> / 5</h3>
+    <p>Thank you for playing!</p>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const options = Array.from(document.querySelectorAll(".option-btn"));
+  const submitBtn = document.getElementById("submit-btn");
+  const correctPopup = document.getElementById("correct-popup");
+  const exploreMoreBtn = document.getElementById("explore-more-btn");
+
+  let selectedOption = null;
+
+  // When option clicked, mark selected & enable submit
+  options.forEach(btn => {
+    btn.addEventListener("click", () => {
+      options.forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      selectedOption = btn;
+      submitBtn.disabled = false;
+    });
+  });
+
+  submitBtn.addEventListener("click", () => {
+    if (!selectedOption) {
+      alert("Please select an option!"); // debug
+      return;
+    }
+
+    // Disable buttons & submit
+    options.forEach(b => b.disabled = true);
+    submitBtn.disabled = true;
+
+    // Set popup message based on correctness
+    if (selectedOption.dataset.correct === "true") {
+      correctPopup.querySelector("p").textContent = "Correct, Enoch walked with God and was taken to heaven without dying. (Genesis 5:24)";
+    } else {
+      correctPopup.querySelector("p").textContent = "Oops! The correct answer is Enoch.";
+    }
+
+    // Show popup
+    correctPopup.classList.remove("hidden");
+    correctPopup.classList.add("show");
+
+    // Show explore more button after 700ms
+    setTimeout(() => {
+      exploreMoreBtn.classList.remove("hidden");
+      exploreMoreBtn.classList.add("show");
+    }, 700);
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="worship-challenge" class="fade-in">
+  <div class="challenge-container">
+    <h2>🔥 Worship Upgrade Challenge</h2>
+    <p class="challenge-subtext">Complete a new challenge each day to upgrade your worship life.</p>
+
+    <ul class="daily-challenges" id="challenge-list">
+      <li>
+        <input type="checkbox" id="day1" />
+        <label for="day1">Mon – Pray before every task today.</label>
+        <div class="extras">
+          <button class="verse-btn" data-day="0">📖 Verse</button>
+          <button class="devotion-btn" data-day="0">💡 Devotion</button>
+        </div>
+      </li>
+      <li>
+        <input type="checkbox" id="day2" />
+        <label for="day2">Tue – Serve someone without expecting thanks.</label>
+        <div class="extras">
+          <button class="verse-btn" data-day="1">📖 Verse</button>
+          <button class="devotion-btn" data-day="1">💡 Devotion</button>
+        </div>
+      </li>
+      <li>
+        <input type="checkbox" id="day3" />
+        <label for="day3">Wed – Speak only life today.</label>
+        <div class="extras">
+          <button class="verse-btn" data-day="2">📖 Verse</button>
+          <button class="devotion-btn" data-day="2">💡 Devotion</button>
+        </div>
+      </li>
+      <li>
+        <input type="checkbox" id="day4" />
+        <label for="day4">Thu – Work like Jesus is your boss.</label>
+        <div class="extras">
+          <button class="verse-btn" data-day="3">📖 Verse</button>
+          <button class="devotion-btn" data-day="3">💡 Devotion</button>
+        </div>
+      </li>
+      <li>
+        <input type="checkbox" id="day5" />
+        <label for="day5">Fri – Reflect & write down your moment of worship.</label>
+        <div class="extras">
+          <button class="verse-btn" data-day="4">📖 Verse</button>
+          <button class="devotion-btn" data-day="4">💡 Devotion</button>
+        </div>
+      </li>
+    </ul>
+
+    <div class="challenge-footer">
+      <p id="streak">🔥 Your current streak: 0 days</p>
+    </div>
+  </div>
+
+  <div id="quote-popup" class="quote-popup hidden">
+    <div class="quote-content">
+      <p id="quote-text"></p>
+      <button id="close-quote">Close</button>
+    </div>
+  </div>
+
+<div id="bottom-popup" class="bottom-popup hidden" role="dialog" aria-modal="true" aria-labelledby="bottom-popup-content">
+  <button id="bottom-popup-close" aria-label="Close popup">&times;</button>
+  <div id="bottom-popup-content"></div>
+</div>
+
+
+</section>
+
+
+
+
+
 
 
 
@@ -658,6 +849,16 @@ document.addEventListener("DOMContentLoaded", function () {
         window.addEventListener('scroll', animateStudiesBoxes);
         animateStudiesBoxes();
 
+
+
+
+
+
+
+
+
+
+
         // Animate Sermons boxes
         const sermonsBoxes = document.querySelectorAll('.sermons-flex-wrap .box');
         let hasAnimatedSermons = false;
@@ -730,115 +931,24 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 
 
+
+
+
+
 <script>
-// 🌟 Weekly Challenge Data
-const weeklyChallenge = {
-  theme: "Overcoming Trials",
-  verse: "Romans 8:28",
-  prompt: "Share a moment when you faced a challenge and saw God work through it—what did you learn, feel, or see?",
-  week: "July 14–20, 2025"
-};
+  function flipCard(card) {
+    const isFlipped = card.classList.contains("flipped");
 
-// 🌟 Render Challenge Card
-document.addEventListener("DOMContentLoaded", function () {
-  const challengeCard = document.getElementById("challengeCard");
-  if (challengeCard) {
-    challengeCard.innerHTML = `
-      <h3>${weeklyChallenge.theme}</h3>
-      <strong>📖 ${weeklyChallenge.verse}</strong>
-      <em>🗓️ Week of ${weeklyChallenge.week}</em>
-      <p>📝 ${weeklyChallenge.prompt}</p>
-    `;
+    document.querySelectorAll(".flip-card").forEach(c => c.classList.remove("flipped"));
+
+    if (!isFlipped) {
+      card.classList.add("flipped");
+    }
   }
-});
 
-// 🌟 Element References
-const challengeForm = document.getElementById("challengeForm");
-const submissionList = document.getElementById("submissionList");
-const outputMessage = document.getElementById("submissionOutput");
-
-// 🧠 Load and Render All Submissions
-function renderSubmissions() {
-  submissionList.innerHTML = "";
-  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
-
-  submissions.forEach(({ name, story }, index) => {
-    const entry = createTestimonyEntry(name, story, index);
-    submissionList.appendChild(entry);
+  document.querySelectorAll(".flip-card").forEach(card => {
+    card.addEventListener("click", () => flipCard(card));
   });
-}
-
-// 🧩 Create Testimony Entry with Edit/Delete
-function createTestimonyEntry(name, story, index) {
-  const entry = document.createElement("div");
-  entry.className = "testimony-entry";
-
-  entry.innerHTML = `
-    <p><strong>${name}</strong>: ${story}</p>
-    <button onclick="editEntry(${index})">✏️ Edit</button>
-    <button onclick="deleteEntry(${index})">🗑️ Delete</button>
-  `;
-
-  return entry;
-}
-
-// 💾 Save to LocalStorage
-function saveToLocalStorage(name, story) {
-  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
-  submissions.unshift({ name, story });
-  localStorage.setItem("submissions", JSON.stringify(submissions));
-}
-
-// 💬 Show Feedback Message
-function showOutputMessage(message, isError = false) {
-  outputMessage.textContent = message;
-  outputMessage.style.color = isError ? "#ff8080" : "#aaf0d1";
-  outputMessage.style.opacity = 1;
-  setTimeout(() => {
-    outputMessage.style.opacity = 0;
-  }, 3000);
-}
-
-// ✍️ Edit Submission
-function editEntry(index) {
-  const submissions = JSON.parse(localStorage.getItem("submissions")) || [];
-  const item = submissions[index];
-  challengeForm.reflection.value = item.story;
-  challengeForm.name.value = item.name;
-  
-  deleteEntry(index); // Remove old version so new one can be saved
-  showOutputMessage("📝 Edit your entry and resubmit to update.");
-}
-
-// 🗑️ Delete Submission
-function deleteEntry(index) {
-  let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
-  submissions.splice(index, 1);
-  localStorage.setItem("submissions", JSON.stringify(submissions));
-  renderSubmissions();
-  showOutputMessage("🗑️ Entry deleted.");
-}
-
-// ✅ Handle Form Submission
-challengeForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const story = challengeForm.reflection.value.trim();
-  const name = challengeForm.name.value.trim() || "Anonymous";
-
-  if (story === "") {
-    showOutputMessage("⚠️ Please share your reflection before submitting.", true);
-    return;
-  }
-
-  saveToLocalStorage(name, story);
-  renderSubmissions();
-  showOutputMessage("🌟 Thank you for sharing!");
-  challengeForm.reset();
-});
-
-// 🔁 Load saved entries on page load
-window.addEventListener("DOMContentLoaded", renderSubmissions);
 </script>
 
 
@@ -854,116 +964,587 @@ window.addEventListener("DOMContentLoaded", renderSubmissions);
 
 
 
-<script>
 
-const pollOptions = ["Prayer", "Worship", "Study"];
-let pollData = pollOptions.map(opt => getPollData()[opt] || 0);
-const oneWeekMs = 7 * 24 * 60 * 60 * 1000;
 
-let pollEndTime = parseInt(localStorage.getItem("pollEndTime")) || (Date.now() + oneWeekMs);
-localStorage.setItem("pollEndTime", pollEndTime);
 
-const pieChart = new Chart(document.getElementById("pollPieChart").getContext("2d"), {
-  type: "pie",
-  data: {
-    labels: pollOptions,
-    datasets: [{
-      data: pollData,
-      backgroundColor: ["#1E90FF", "#00BFA6", "#00FF9D"]
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { position: 'bottom' } }
-  }
-});
 
-function getPollData() {
-  return JSON.parse(localStorage.getItem("pollVotes")) || {};
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Load Chart.js normally -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Firebase + your code as a module -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getFirestore, doc, onSnapshot, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAFb6AHyBQZwMOrUtgf_-6WJgbmYA4hS8o",
+    authDomain: "nothingbutthetruth-1cd23.firebaseapp.com",
+    projectId: "nothingbutthetruth-1cd23",
+    storageBucket: "nothingbutthetruth-1cd23.appspot.com",
+    messagingSenderId: "253692400115",
+    appId: "1:253692400115:web:7eb36acdf69382d28d0286",
+    measurementId: "G-LXVCQNJ6VJ"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const pollDocRef = doc(db, "polls", "current");
+
+  const pollOptions = ["Prayer", "Worship", "Study"];
+  const voteForm = document.getElementById("voteForm");
+  const countdown = document.getElementById("countdown");
+  const chartCanvas = document.getElementById("voteChart");
+  let pieChart;
+
+
+  // Set poll reset time (e.g., next midnight UTC)
+function getNextMidnight() {
+  const now = new Date();
+  const midnight = new Date(now);
+  midnight.setUTCHours(24, 0, 0, 0); // next midnight UTC
+  return midnight;
 }
 
-function savePollData(data) {
-  localStorage.setItem("pollVotes", JSON.stringify(data));
-}
-
-function hasVoted() {
-  return localStorage.getItem("hasVoted") === "true";
-}
-
-function setVoted() {
-  localStorage.setItem("hasVoted", "true");
-  document.getElementById("thankYouMessage").style.display = "block";
-  document.querySelectorAll(".poll-btn").forEach(btn => btn.disabled = true);
-}
-
-function submitVote(option) {
-  if (hasVoted()) return;
-  const votes = getPollData();
-  votes[option] = (votes[option] || 0) + 1;
-  savePollData(votes);
-  setVoted();
-  pollData = pollOptions.map(opt => votes[opt] || 0);
-  updatePollResults();
-  pieChart.data.datasets[0].data = pollData;
-  pieChart.update();
-  showWinner();
-}
-
-function updatePollResults() {
-  const total = pollData.reduce((a, b) => a + b, 0);
-  pollOptions.forEach((opt, i) => {
-    const percent = total ? (pollData[i] / total) * 100 : 0;
-    document.getElementById(`fill-${opt.toLowerCase()}`).style.width = `${percent}%`;
-  });
-}
-
-function showWinner() {
-  const maxVotes = Math.max(...pollData);
-  const winnerIndex = pollData.indexOf(maxVotes);
-  if (maxVotes > 0) {
-    document.querySelector(".poll-winner").textContent = `🏆 Most voted: ${pollOptions[winnerIndex]}`;
-  }
-}
-
-function archiveOldPoll() {
-  const archive = JSON.parse(localStorage.getItem("pollArchive") || "[]");
-  const result = {};
-  pollOptions.forEach(opt => {
-    result[opt] = getPollData()[opt] || 0;
-  });
-  archive.push({ date: new Date().toISOString(), result });
-  localStorage.setItem("pollArchive", JSON.stringify(archive));
-}
+const pollResetTime = getNextMidnight();
 
 function updateCountdown() {
-  const now = Date.now();
-  const remaining = pollEndTime - now;
-  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
-
-  document.getElementById("time-remaining").textContent =
-    `${days} Days : ${hours} Hours : ${minutes} Minutes : ${seconds} Seconds`;
-  document.getElementById("countdown-fill").style.width = `${(remaining / oneWeekMs) * 100}%`;
-
-  if (remaining <= 0) {
-    archiveOldPoll();
-    localStorage.removeItem("hasVoted");
-    localStorage.removeItem("pollVotes");
-    localStorage.setItem("pollEndTime", Date.now() + oneWeekMs);
-    location.reload();
+  const now = new Date();
+  const diffMs = pollResetTime - now;
+  if (diffMs <= 0) {
+    countdown.textContent = "Poll ended. Refresh page to update.";
     return;
   }
-
-  setTimeout(updateCountdown, 1000);
+  const hrs = Math.floor(diffMs / (1000 * 60 * 60));
+  const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diffMs % (1000 * 60)) / 1000);
+  countdown.textContent = `Poll ends in: ${hrs}h ${mins}m ${secs}s`;
 }
 
+// Start the countdown timer
 updateCountdown();
-updatePollResults();
-showWinner();
-if (hasVoted()) setVoted();
+setInterval(updateCountdown, 1000);
+
+
+  // Initialize with placeholder data for immediate pie chart display
+  function createChart(data) {
+    if (pieChart) pieChart.destroy();
+    const ctx = chartCanvas.getContext("2d");
+    pieChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: pollOptions,
+        datasets: [{
+          label: "Votes",
+          data: data,
+          backgroundColor: ["#1E90FF", "#00BFA6", "#00FF9D"]
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: "bottom" }
+        },
+        animation: {
+          duration: 600
+        }
+      }
+    });
+  }
+
+  // Start with placeholder so chart is visible immediately
+  createChart([1, 1, 1]);
+
+  // Update chart with real Firebase data
+  onSnapshot(pollDocRef, async (docSnap) => {
+    if (!docSnap.exists()) {
+      await setDoc(pollDocRef, {
+        Prayer: 0,
+        Worship: 0,
+        Study: 0
+      });
+      createChart([1,1,1]);
+      return;
+    }
+    const data = pollOptions.map(option => docSnap.data()[option] || 0);
+    createChart(data);
+  });
+
+  // Vote handling
+  voteForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(voteForm);
+    const selected = formData.get("vote");
+    if (!selected) return alert("Please select an option");
+
+    const votedKey = "voted_this_week";
+    if (localStorage.getItem(votedKey)) {
+      alert("You've already voted this week!");
+      return;
+    }
+
+    await updateDoc(pollDocRef, {
+      [selected]: increment(1)
+    });
+
+    localStorage.setItem(votedKey, "true");
+    alert("🎉 Vote submitted!");
+  });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  // Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyAFb6AHyBQZwMOrUtgf_-6WJgbmYA4hS8o",
+    authDomain: "nothingbutthetruth-1cd23.firebaseapp.com",
+    projectId: "nothingbutthetruth-1cd23",
+    storageBucket: "nothingbutthetruth-1cd23.appspot.com",
+    messagingSenderId: "253692400115",
+    appId: "1:253692400115:web:7eb36acdf69382d28d0286",
+    measurementId: "G-LXVCQNJ6VJ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Unique userId stored locally
+  const userId = localStorage.getItem("worshipUpgradeUserId") || (() => {
+    const id = "user_" + Date.now() + "_" + Math.random().toString(36).substring(2, 9);
+    localStorage.setItem("worshipUpgradeUserId", id);
+    return id;
+  })();
+
+  // Daily Quotes array (for popup)
+  const dailyQuotes = [
+    "“Pray continually.” — 1 Thessalonians 5:17",
+    "“Serve one another humbly in love.” — Galatians 5:13",
+    "“Let no corrupting talk come out of your mouths...” — Ephesians 4:29",
+    "“Whatever you do, work heartily, as for the Lord.” — Colossians 3:23",
+    "“Sing to the Lord a new song.” — Psalm 96:1"
+  ];
+
+  const challengeStartDate = new Date("2025-07-21");
+
+  // DOM elements
+  const streakEl = document.getElementById("streak");  // <-- fixed this to match your HTML
+  const progressBar = document.getElementById("progress-bar");
+  const challengeSection = document.getElementById("worship-challenge");
+  const checkboxes = document.querySelectorAll("#worship-challenge input[type=checkbox]");
+
+  // Bottom popup elements for verse/devotion display
+  const bottomPopup = document.getElementById("bottom-popup");
+  const bottomPopupContent = document.getElementById("bottom-popup-content");
+  const bottomPopupClose = document.getElementById("bottom-popup-close");
+
+  // Calculate today's index for daily quote popup
+  function getTodayIndex() {
+    const now = new Date();
+    const diff = Math.floor((now - challengeStartDate) / (1000 * 60 * 60 * 24));
+    return diff >= 0 && diff < dailyQuotes.length ? diff : null;
+  }
+
+  // Show daily quote popup on page load
+  function showDailyQuote() {
+    const index = getTodayIndex();
+    if (index !== null) {
+      showBottomPopup(dailyQuotes[index]);
+    }
+  }
+
+  // Show bottom popup with text
+  function showBottomPopup(text) {
+    bottomPopupContent.textContent = text;
+    bottomPopup.classList.remove("hidden");
+    bottomPopup.classList.add("visible");
+  }
+
+  // Hide bottom popup
+  function hideBottomPopup() {
+    bottomPopup.classList.remove("visible");
+    setTimeout(() => bottomPopup.classList.add("hidden"), 400);
+  }
+
+  // Close button event for bottom popup
+  bottomPopupClose.addEventListener("click", hideBottomPopup);
+
+  // Calculate consecutive streak from progress array
+  function calculateStreak(progressArray) {
+    let streak = 0;
+    for (let i = 0; i < progressArray.length; i++) {
+      if (progressArray[i]) streak++;
+      else break;
+    }
+    return streak;
+  }
+
+  // Load progress from Firestore; fallback to localStorage; default all false
+  async function loadProgress() {
+    try {
+      const docRef = doc(db, "worshipUpgrade", userId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        return docSnap.data().progress;
+      }
+    } catch (error) {
+      console.warn("Firebase load failed:", error);
+    }
+    const saved = localStorage.getItem("worshipUpgradeProgress");
+    return saved ? JSON.parse(saved) : new Array(dailyQuotes.length).fill(false);
+  }
+
+  // Save progress to Firestore and localStorage
+  async function saveProgress(progress) {
+    localStorage.setItem("worshipUpgradeProgress", JSON.stringify(progress));
+    try {
+      await setDoc(doc(db, "worshipUpgrade", userId), { progress });
+    } catch (error) {
+      console.error("Firebase save failed:", error);
+    }
+  }
+
+  // Update UI based on progress (checkboxes, streak, progress bar)
+  function updateUI(progress) {
+    checkboxes.forEach((cb, i) => cb.checked = progress[i]);
+    const streak = calculateStreak(progress);
+    streakEl.textContent = `🔥 Your current streak: ${streak} day${streak !== 1 ? "s" : ""}`;
+
+    if (progressBar) {
+      const completed = progress.filter(Boolean).length;
+      const percent = (completed / progress.length) * 100;
+      progressBar.style.width = percent + "%";
+    }
+  }
+
+  // Add event listeners to checkboxes to save and update UI on change
+  checkboxes.forEach((cb) => {
+    cb.addEventListener("change", () => {
+      const progress = Array.from(checkboxes).map(cb => cb.checked);
+      saveProgress(progress);
+      updateUI(progress);
+    });
+  });
+
+  // Sample verses and devotions for each day
+  const verses = [
+    "“Pray continually.” — 1 Thessalonians 5:17",
+    "“Serve one another humbly in love.” — Galatians 5:13",
+    "“Let no corrupting talk come out of your mouths...” — Ephesians 4:29",
+    "“Whatever you do, work heartily, as for the Lord.” — Colossians 3:23",
+    "“Sing to the Lord a new song.” — Psalm 96:1"
+  ];
+
+  const devotions = [
+    "Spend time in quiet prayer and meditation today.",
+    "Look for someone to serve selflessly today.",
+    "Watch your words and speak life to those around you.",
+    "Put your whole heart into your work as if serving Jesus.",
+    "Reflect on your worship moments and write them down."
+  ];
+
+  // Verse & Devotion buttons event listeners to show popup
+  const verseButtons = document.querySelectorAll(".verse-btn");
+  const devotionButtons = document.querySelectorAll(".devotion-btn");
+
+  verseButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const day = parseInt(btn.getAttribute("data-day"));
+      showBottomPopup(verses[day] || "No verse available.");
+    });
+  });
+
+  devotionButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const day = parseInt(btn.getAttribute("data-day"));
+      showBottomPopup(devotions[day] || "No devotion available.");
+    });
+  });
+
+  // Intersection Observer for fade-in animation on scroll
+  document.addEventListener("DOMContentLoaded", async () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          challengeSection.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(challengeSection);
+
+    showDailyQuote();
+
+    const progress = await loadProgress();
+    updateUI(progress);
+  });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  document.getElementById('toggleGames').addEventListener('click', () => {
+    const gamesSection = document.getElementById('games');
+    const btn = document.getElementById('toggleGames');
+
+    if (gamesSection.classList.contains('active')) {
+      gamesSection.classList.remove('active');
+      btn.textContent = '🎮 Explore Bible Games';
+    } else {
+      gamesSection.classList.add('active');
+      btn.textContent = '✖ Close Bible Games';
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>document.addEventListener("DOMContentLoaded", () => {
+  const section = document.getElementById("question-of-the-week");
+  const options = Array.from(section.querySelectorAll(".option-btn"));
+  const submitBtn = section.querySelector("#submit-btn");
+  const correctPopup = section.querySelector("#correct-popup");
+  const exploreMoreBtn = section.querySelector("#explore-more-btn");
+  const miniGame = section.querySelector("#mini-game");
+  const gameQuestionText = section.querySelector("#game-question-text");
+  const gameOptions = section.querySelector("#game-options");
+  const gameSubmitBtn = section.querySelector("#game-submit-btn");
+  const timerEl = section.querySelector("#time-left");
+  const gameResults = section.querySelector("#game-results");
+  const scoreEl = section.querySelector("#score");
+
+  // Mini-game questions
+  const miniGameQuestions = [
+    { q: "Who built the ark?", options: ["Noah", "Moses", "Abraham", "David"], answer: 0 },
+    { q: "How many days did Jesus fast?", options: ["10", "40", "7", "3"], answer: 1 },
+    { q: "What is the last book of the Bible?", options: ["Revelation", "Genesis", "Psalms", "Exodus"], answer: 0 },
+    { q: "Who was thrown into the lions' den?", options: ["Daniel", "Elijah", "Peter", "Paul"], answer: 0 },
+    { q: "Jesus turned water into what?", options: ["Milk", "Wine", "Oil", "Juice"], answer: 1 },
+  ];
+
+  // Scroll reveal animation trigger
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        section.classList.add("visible");
+        observer.unobserve(section);
+      }
+    },
+    { threshold: 0.3 }
+  );
+  observer.observe(section);
+
+  // Track selected option for weekly question
+  let selectedOption = null;
+  options.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      options.forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      selectedOption = btn;
+      submitBtn.disabled = false; // Enable submit only after selection
+    })
+  );
+
+  // Submit button logic for weekly question
+  submitBtn.addEventListener("click", () => {
+    if (!selectedOption) return; // No option selected, do nothing
+
+    // Disable all option buttons and the submit button after voting
+    options.forEach((b) => (b.disabled = true));
+    submitBtn.disabled = true;
+
+    // Show popup based on correctness
+    if (selectedOption.dataset.correct === "true") {
+      correctPopup.querySelector("p").textContent = "Correct! Enoch was taken up to heaven.";
+    } else {
+      correctPopup.querySelector("p").textContent = "Oops! The correct answer is Enoch.";
+    }
+    correctPopup.classList.add("show");
+
+    // Show 'Explore More' button after popup animation (700ms delay)
+    setTimeout(() => {
+      exploreMoreBtn.classList.add("show");
+    }, 700);
+  });
+
+  // Explore More button starts mini-game
+  exploreMoreBtn.addEventListener("click", () => {
+    // Hide weekly question UI parts
+    correctPopup.classList.remove("show");
+    exploreMoreBtn.classList.remove("show");
+    section.querySelector(".question-container").classList.add("hidden");
+
+    // Show mini-game UI
+    miniGame.classList.remove("hidden");
+
+    // Start mini-game
+    startMiniGame();
+  });
+
+  // Mini-game state
+  let currentQIndex = 0;
+  let score = 0;
+  let timerId = null;
+  let timeLeft = 20;
+  let selectedGameOption = null;
+
+  // Load mini-game question and options
+  function loadQuestion(index) {
+    const q = miniGameQuestions[index];
+    gameQuestionText.textContent = q.q;
+    gameOptions.innerHTML = ""; // Clear previous options
+    selectedGameOption = null;
+    gameSubmitBtn.disabled = true;
+    timeLeft = 20;
+    timerEl.textContent = timeLeft;
+
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement("button");
+      btn.className = "option-btn";
+      btn.textContent = opt;
+      btn.dataset.index = i;
+      btn.addEventListener("click", () => {
+        Array.from(gameOptions.children).forEach((b) => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        selectedGameOption = btn;
+        gameSubmitBtn.disabled = false; // Enable submit after option selected
+      });
+      gameOptions.appendChild(btn);
+    });
+
+    // Start countdown timer for question
+    clearInterval(timerId);
+    timerId = setInterval(() => {
+      timeLeft--;
+      timerEl.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(timerId);
+        gameSubmitBtn.disabled = true;
+        moveToNextQuestion();
+      }
+    }, 1000);
+  }
+
+  // Move to next question or end game
+  function moveToNextQuestion() {
+    // Check answer if option selected
+    if (selectedGameOption) {
+      const correctIndex = miniGameQuestions[currentQIndex].answer;
+      if (parseInt(selectedGameOption.dataset.index, 10) === correctIndex) {
+        score++;
+      }
+    }
+
+    currentQIndex++;
+    if (currentQIndex < miniGameQuestions.length) {
+      loadQuestion(currentQIndex);
+    } else {
+      endGame();
+    }
+  }
+
+  // Mini-game submit button
+  gameSubmitBtn.addEventListener("click", () => {
+    clearInterval(timerId);
+    moveToNextQuestion();
+  });
+
+  // Start mini-game fresh
+  function startMiniGame() {
+    currentQIndex = 0;
+    score = 0;
+    gameResults.classList.add("hidden");
+    miniGame.classList.remove("hidden");
+    loadQuestion(currentQIndex);
+  }
+
+  // End game and show score
+  function endGame() {
+    miniGame.classList.add("hidden");
+    gameResults.classList.remove("hidden");
+    scoreEl.textContent = score;
+  }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -990,200 +1571,25 @@ if (hasVoted()) setVoted();
 
 
 <script>
-// 🔁 Verse List
-const verseQuestions = [
-  {
-    clue: "Which verse says: “I can do all things through Christ who strengthens me.”",
-    answer: "Philippians 4:13",
-    options: ["Philippians 4:13", "Romans 8:28", "Joshua 1:9", "John 3:16"]
-  },
-  {
-    clue: "Which verse says: “For God so loved the world...”",
-    answer: "John 3:16",
-    options: ["John 3:16", "Genesis 1:1", "Matthew 6:33", "Proverbs 3:5"]
-  },
-  {
-    clue: "Which verse says: “Trust in the Lord with all your heart.”",
-    answer: "Proverbs 3:5",
-    options: ["Psalm 23:1", "Proverbs 3:5", "Isaiah 40:31", "Luke 1:37"]
-  },
-  {
-    clue: "Which verse says: “The Lord is my shepherd, I shall not want.”",
-    answer: "Psalm 23:1",
-    options: ["Psalm 23:1", "John 14:6", "James 1:5", "Romans 5:8"]
-  },
-  {
-    clue: "Which verse says: “In the beginning, God created the heavens and the earth.”",
-    answer: "Genesis 1:1",
-    options: ["Genesis 1:1", "John 1:1", "Psalm 100:1", "Romans 3:23"]
-  },
-  {
-    clue: "Which verse says: “Jesus answered, I am the way, the truth, and the life.”",
-    answer: "John 14:6",
-    options: ["John 14:6", "John 3:16", "1 Peter 5:7", "Romans 5:8"]
-  },
-  {
-    clue: "Which verse says: “Cast all your anxiety on Him because He cares for you.”",
-    answer: "1 Peter 5:7",
-    options: ["1 Peter 5:7", "Matthew 11:28", "Hebrews 11:1", "Isaiah 41:10"]
-  },
-  {
-    clue: "Which verse says: “But those who hope in the Lord will renew their strength.”",
-    answer: "Isaiah 40:31",
-    options: ["Isaiah 40:31", "Proverbs 3:5", "Romans 8:28", "Psalm 46:10"]
-  },
-  {
-    clue: "Which verse says: “Come to me, all you who are weary and burdened...”",
-    answer: "Matthew 11:28",
-    options: ["Matthew 11:28", "Luke 1:37", "John 10:10", "James 1:5"]
-  },
-  {
-    clue: "Which verse says: “And we know that in all things God works for the good...”",
-    answer: "Romans 8:28",
-    options: ["Romans 8:28", "1 Corinthians 13:4", "Matthew 5:16", "Genesis 1:1"]
-  }
-];
+  document.addEventListener("DOMContentLoaded", () => {
+    const elements = document.querySelectorAll(".scroll-fade");
 
-let currentIndex = 0;
-let timer = 30;
-let countdown;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add a slight delay per item for the "one by one" effect
+          setTimeout(() => {
+            entry.target.classList.add("visible");
+          }, index * 150); // 150ms stagger
+          observer.unobserve(entry.target); // Remove to animate once
+        }
+      });
+    }, {
+      threshold: 0.1,
+    });
 
-const clueEl = document.getElementById("verseClue");
-const feedbackEl = document.getElementById("verseFeedback");
-const timeDisplay = document.getElementById("timeDisplay");
-const encouragementEl = document.getElementById("encouragement");
-const verseScoreEl = document.getElementById("verseScore");
-const highScoreEl = document.getElementById("highScore");
-const clockVisual = document.getElementById("clockVisual");
-
-// 🕒 Countdown
-function startCountdown() {
-  timer = 30;
-  timeDisplay.textContent = timer;
-  clockVisual.style.animationPlayState = "running";
-
-  clearInterval(countdown); // stop old timers
-  countdown = setInterval(() => {
-    timer--;
-    timeDisplay.textContent = timer;
-
-    if (timer <= 0) {
-      clearInterval(countdown);
-      clockVisual.style.animationPlayState = "paused";
-      feedbackEl.textContent = "⏰ Time's up!";
-      disableOptions();
-      setTimeout(() => {
-        nextVerse();
-      }, 2000);
-    }
-  }, 1000);
-}
-
-// 🧠 Load Verse
-function loadVerseQuestion() {
-  const q = verseQuestions[currentIndex];
-  clueEl.textContent = q.clue;
-
-  q.options.forEach((opt, i) => {
-    const btn = document.getElementById(`opt${i}`);
-    btn.textContent = opt;
-    btn.disabled = false;
-    btn.onclick = () => submitVerse(opt, q.answer);
+    elements.forEach(el => observer.observe(el));
   });
-
-  feedbackEl.textContent = "";
-  startCountdown();
-}
-
-// ✅ Disable options
-function disableOptions() {
-  document.querySelectorAll(".verse-options button").forEach(btn => {
-    btn.disabled = true;
-  });
-}
-
-// ✅ Answer Check
-function submitVerse(choice, correct) {
-  clearInterval(countdown);
-  clockVisual.style.animationPlayState = "paused";
-
-  if (choice === correct) {
-    feedbackEl.textContent = "✅ Correct!";
-    incrementScore();
-  } else {
-    feedbackEl.textContent = "❌ That’s not it. Try again next time!";
-    localStorage.setItem("verseStreak", "0");
-    updateScoreDisplay();
-  }
-
-  disableOptions();
-
-  setTimeout(() => {
-    nextVerse();
-  }, 2000);
-}
-
-// ⬆️ Score System
-function incrementScore() {
-  let score = parseInt(localStorage.getItem("verseScore")) || 0;
-  let highScore = parseInt(localStorage.getItem("highVerseScore")) || 0;
-  let streak = parseInt(localStorage.getItem("verseStreak")) || 0;
-
-  score++;
-  streak++;
-
-  localStorage.setItem("verseScore", score);
-  localStorage.setItem("verseStreak", streak);
-  if (score > highScore) {
-    localStorage.setItem("highVerseScore", score);
-  }
-
-  updateScoreDisplay();
-}
-
-// 🧹 Reset
-function resetScore() {
-  localStorage.setItem("verseScore", "0");
-  localStorage.setItem("highVerseScore", "0");
-  localStorage.setItem("verseStreak", "0");
-  feedbackEl.textContent = "🧹 Score reset!";
-  updateScoreDisplay();
-  currentIndex = 0;
-  loadVerseQuestion();
-}
-
-// 🧮 Update UI
-function updateScoreDisplay() {
-  const score = parseInt(localStorage.getItem("verseScore")) || 0;
-  const highScore = parseInt(localStorage.getItem("highVerseScore")) || 0;
-  const streak = parseInt(localStorage.getItem("verseStreak")) || 0;
-
-  verseScoreEl.textContent = score;
-  highScoreEl.textContent = highScore;
-
-  if (streak >= 20) {
-    encouragementEl.textContent = "🚀 You’re on a holy rampage!";
-  } else if (streak >= 10) {
-    encouragementEl.textContent = "⚡ Bible Beast Mode!";
-  } else if (streak >= 5) {
-    encouragementEl.textContent = "🔥 You’re warming up!";
-  } else {
-    encouragementEl.textContent = "";
-  }
-}
-
-// 🔁 Next Question
-function nextVerse() {
-  currentIndex = (currentIndex + 1) % verseQuestions.length;
-  loadVerseQuestion();
-}
-
-// 🚀 Init
-window.addEventListener("DOMContentLoaded", () => {
-  updateScoreDisplay();
-  loadVerseQuestion();
-});
-
 </script>
 
 
@@ -1193,37 +1599,125 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
+// weekly verse + devotion share functionality
 
-  <script>
-    const toggleBtn = document.getElementById("toggleGames");
-    const gameSection = document.getElementById("games");
+<script>
+  function shareVerse() {
+  const verseText = `"Let your light shine before others..." - Matthew 5:16`;
+  const shareData = {
+    title: "Verse of the Week - NothingButTheTruth",
+    text: verseText,
+    url: window.location.href
+  };
 
-    toggleBtn.addEventListener("click", () => {
-      const isVisible = gameSection.classList.contains("visible");
+  if (navigator.share) {
+    navigator.share(shareData)
+      .then(() => console.log('Verse shared successfully'))
+      .catch(err => console.error('Sharing failed', err));
+  } else {
+    // Fallback: copy to clipboard
+    navigator.clipboard.writeText(`${verseText} - ${window.location.href}`);
+    alert("Verse copied to clipboard! You can now share it anywhere.");
+  }
+}
 
-      if (isVisible) {
-        gameSection.classList.remove("visible");
-        gameSection.classList.add("exiting");
-        toggleBtn.textContent = "🎮 Explore Bible Games";
+</script>
 
-        setTimeout(() => {
-          gameSection.classList.remove("exiting");
-          gameSection.style.maxHeight = "";
-          gameSection.style.opacity = "";
-          gameSection.style.display = "none";
-        }, 600);
-      } else {
-        gameSection.style.maxHeight = "";
-        gameSection.style.opacity = "";
-        gameSection.style.display = "";
-        gameSection.classList.remove("exiting");
-        gameSection.classList.add("visible");
-        toggleBtn.textContent = "⬆️ Hide Bible Games";
-      }
+
+
+
+
+
+<script>
+  function toggleDevotion() {
+    const modal = document.getElementById('devotionModal');
+    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
+
+
+
+
+
+
+<script>
+// === Your verses and devotions arrays ===
+const verses = [
+  { text: "“Let your light shine before others, so that they may see your good works and give glory to your Father who is in heaven.”", ref: "Matthew 5:16" },
+  { text: "“Trust in the Lord with all your heart...”", ref: "Proverbs 3:5" },
+  { text: "“I can do all things through Christ who strengthens me.”", ref: "Philippians 4:13" },
+  // Add more as you want
+];
+
+const devotions = [
+  "Reflect on how your actions today can glorify God.",
+  "Lean on faith when making difficult decisions today.",
+  "Remember Christ’s strength empowers you in every challenge.",
+  // Add more as you want
+];
+
+// === Helper to get current day index in cycle ===
+function getDailyIndex() {
+  const startDate = new Date("2025-07-21"); // Your chosen start date
+  const today = new Date();
+  const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
+  return diffDays % verses.length; // assumes verses.length == devotions.length
+}
+
+// === Update verse and devotion on page ===
+function updateVerseOfTheDay() {
+  const index = getDailyIndex();
+  const verseTextEl = document.getElementById("verseText");
+  const verseRefEl = document.getElementById("verseRef");
+
+  if (verseTextEl && verseRefEl) {
+    verseTextEl.textContent = verses[index].text;
+    verseRefEl.textContent = `- ${verses[index].ref}`;
+  }
+}
+
+function updateDevotionOfTheDay() {
+  const index = getDailyIndex();
+  const devotionTextEl = document.getElementById("devotionText");
+  if (devotionTextEl) {
+    devotionTextEl.textContent = devotions[index];
+  }
+}
+
+// === Show devotion modal popup ===
+function toggleDevotion() {
+  const modal = document.getElementById('devotionModal');
+  if (!modal) return;
+  
+  if (modal.style.display === 'block') {
+    modal.style.display = 'none';
+  } else {
+    updateDevotionOfTheDay();
+    modal.style.display = 'block';
+  }
+}
+
+// === Close devotion modal when clicking outside or on close button ===
+document.addEventListener("DOMContentLoaded", () => {
+  updateVerseOfTheDay();
+
+  const modal = document.getElementById('devotionModal');
+  const closeBtn = document.getElementById('closeDevotion');
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
     });
-  </script>
+  }
 
-
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
+</script>
 
 
 

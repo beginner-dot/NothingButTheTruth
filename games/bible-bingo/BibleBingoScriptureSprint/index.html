@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,5 +25,80 @@
   </section>
   <div id="versePopup" class="verse-popup hidden"></div>
   <script src="script.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+// Bible trivia set
+const questions = [
+  {
+    question: "Who said, 'As for me and my house, we will serve the Lord'?",
+    answer: "Joshua"
+  },
+  {
+    question: "Which verse begins with 'For God so loved the world'?",
+    answer: "John 3:16"
+  },
+  {
+    question: "Who was swallowed by a great fish?",
+    answer: "Jonah"
+  },
+  {
+    question: "Finish the verse: 'I can do all things...'",
+    answer: "through Christ who strengthens me"
+  },
+  {
+    question: "What fruit did Eve eat in the Garden of Eden?",
+    answer: "fruit"
+  }
+];
+
+function getWeekNumber(date) {
+  const firstDay = new Date(date.getFullYear(), 0, 1);
+  const pastDays = (date - firstDay) / 86400000;
+  return Math.ceil((pastDays + firstDay.getDay() + 1) / 7);
+}
+
+const currentWeek = getWeekNumber(new Date());
+const currentQuestion = questions[currentWeek % questions.length];
+
+document.getElementById("bible-question").textContent = currentQuestion.question;
+
+document.getElementById("submit-answer").addEventListener("click", () => {
+  const userAnswer = document.getElementById("user-answer").value.trim().toLowerCase();
+  const correctAnswer = currentQuestion.answer.toLowerCase();
+
+  const feedback = document.getElementById("answer-feedback");
+  const correctEl = document.getElementById("correct-answer");
+
+  feedback.classList.remove("correct", "incorrect", "hidden");
+  correctEl.classList.remove("hidden");
+
+  if (userAnswer === correctAnswer) {
+    feedback.textContent = "✅ Correct! Well done!";
+    feedback.classList.add("correct");
+  } else {
+    feedback.textContent = "❌ Oops! Not quite.";
+    feedback.classList.add("incorrect");
+  }
+
+  feedback.classList.add("visible");
+  correctEl.textContent = `✔️ Answer: ${currentQuestion.answer}`;
+  correctEl.classList.add("visible");
+});
+</script>
+
+
 </body>
 </html>
