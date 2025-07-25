@@ -1,452 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bible Relay Race Plus</title>
-<style>
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #fef7e3;
-    margin: 0; padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    color: #3a3a3a;
-  }
-  h1 {
-    margin-bottom: 10px;
-  }
-  #game {
-    max-width: 480px;
-    width: 90vw;
-    background: #fff9db;
-    padding: 20px;
-    border-radius: 14px;
-    box-shadow: 0 0 15px rgba(180, 142, 61, 0.3);
-    text-align: center;
-  }
-  .scoreboard {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  .team {
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-weight: 700;
-    min-width: 120px;
-  }
-  .team.active {
-    background: #f9e08b;
-    box-shadow: 0 0 10px #d6ad3b;
-  }
-  .team.red {
-    background: #f28b8b;
-    color: white;
-  }
-  .team.blue {
-    background: #6b8ce4;
-    color: white;
-  }
-  #timer {
-    font-weight: 700;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-    color: #b48e3d;
-  }
-  #question {
-    font-size: 1.25rem;
-    min-height: 80px;
-    margin-bottom: 15px;
-    padding: 10px;
-  }
-  #answerInput, #unscrambleInput {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border-radius: 8px;
-    border: 2px solid #b48e3d;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-  }
-  .multiple-choice {
-    margin-bottom: 15px;
-  }
-  .multiple-choice button {
-    background: #b48e3d;
-    border: none;
-    color: white;
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 700;
-    transition: background-color 0.25s ease;
-  }
-  .multiple-choice button:hover:not(:disabled) {
-    background-color: #d6ad3b;
-  }
-  .multiple-choice button:disabled {
-    background-color: #ccc;
-    cursor: default;
-  }
-  button {
-    background-color: #b48e3d;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 10px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.25s ease;
-    margin: 5px 2px;
-  }
-  button:hover:not(:disabled) {
-    background-color: #d6ad3b;
-  }
-  button:disabled {
-    background-color: #ccc;
-    cursor: default;
-  }
-  #feedback {
-    min-height: 40px;
-    font-weight: 700;
-    margin-top: 15px;
-    color: #4b662d;
-  }
-  #lifelines {
-    margin-top: 10px;
-  }
-  #lifelines button {
-    background: #4b662d;
-    padding: 8px 15px;
-    font-size: 0.9rem;
-    margin: 0 5px;
-  }
-  #lifelines button:disabled {
-    background: #9c9c9c;
-    cursor: default;
-  }
-  /* Responsive */
-  @media (max-width: 480px) {
-    #answerInput, #unscrambleInput {
-      font-size: 0.9rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bible Relay Race</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f0f0f0, #d6e4f0);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
     }
+
+    header {
+      background-color: #8a2be2;
+      color: white;
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .instructions, .scoreboard, .question-area, .controls {
+      margin: 1rem auto;
+      max-width: 700px;
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-highlight {
+      font-weight: bold;
+      color: #d9534f;
+    }
+
+    #timer {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      color: #007bff;
+    }
+
+    .question {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 80%;
+      margin-bottom: 1rem;
+    }
+
     button {
-      font-size: 0.9rem;
-      padding: 10px 18px;
-      margin: 4px 1px;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
     }
-    .team {
-      min-width: 90px;
-      padding: 8px 12px;
-      font-size: 0.9rem;
+
+    button:hover {
+      background-color: #45a049;
     }
-  }
-</style>
+
+    #hintButton {
+      background-color: #f0ad4e;
+    }
+
+    #hintButton.used {
+      background-color: #d9534f;
+    }
+
+    .message {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
+
 <body>
+  <header>Bible Relay Race Game</header>
 
-<div id="game">
-  <h1>🏃‍♂️ Bible Relay Race Plus</h1>
+  <div class="instructions">
+    <h2>How to Play</h2>
+    <ol style="text-align: left;">
+      <li>Team Red starts the game.</li>
+      <li>Click the <strong>Start Game</strong> button to begin.</li>
+      <li>Each team takes turns answering questions.</li>
+      <li>Questions are timed. You get 30 seconds per question.</li>
+      <li>If you need help, use the <strong>Hint</strong> button. But using it reduces your score by half for that question.</li>
+      <li>Click <strong>Submit</strong> to check your answer.</li>
+      <li>If time runs out and no answer was submitted, click <strong>Next Question</strong> to continue.</li>
+      <li>Different types of questions will appear — typing, true/false, matching, etc.</li>
+    </ol>
+  </div>
+
   <div class="scoreboard">
-    <div id="teamRed" class="team red active">🔴 Team Red: <span id="scoreRed">0</span></div>
-    <div id="teamBlue" class="team blue">🔵 Team Blue: <span id="scoreBlue">0</span></div>
-  </div>
-  <div id="timer">Time left: <span id="timeLeft">30</span> sec</div>
-  <div id="question"></div>
-
-  <!-- Input fields -->
-  <input id="answerInput" type="text" placeholder="Type your answer here" autocomplete="off" style="display:none;" />
-  
-  <div id="multipleChoiceContainer" class="multiple-choice" style="display:none;"></div>
-
-  <input id="unscrambleInput" type="text" placeholder="Unscramble the word" autocomplete="off" style="display:none;" />
-
-  <!-- Action buttons -->
-  <button id="submitBtn" disabled>Submit Answer</button>
-  <button id="startBtn">Start Game</button>
-
-  <div id="lifelines">
-    <button id="hintBtn" title="Reveal first letter">💡 Hint</button>
-    <button id="skipBtn" title="Skip this question">⏭️ Skip</button>
+    <p><span class="team-highlight">Team Red</span> Score: <span id="teamRedScore">0</span></p>
+    <p><span class="team-highlight" style="color: blue;">Team Blue</span> Score: <span id="teamBlueScore">0</span></p>
+    <p>Current Turn: <span id="currentTeam">Red</span></p>
   </div>
 
-  <div id="feedback"></div>
-</div>
+  <div class="controls">
+    <button onclick="startGame()">Start Game</button>
+    <button id="nextBtn" onclick="showNextQuestion()" style="display:none;">Next Question</button>
+  </div>
 
-<script>
-  const questions = [
-    // Multiple Choice
-    {
-      type: 'mcq',
-      q: "Who built the ark?",
-      choices: ["Moses", "Noah", "Abraham", "David"],
-      a: "Noah"
-    },
-    {
-      type: 'mcq',
-      q: "Where was Jesus born?",
-      choices: ["Nazareth", "Bethlehem", "Jerusalem", "Capernaum"],
-      a: "Bethlehem"
-    },
-    // Fill-in-the-blank
-    {
-      type: 'fitb',
-      q: "Who parted the ____ Sea?",
-      a: ["red"]
-    },
-    {
-      type: 'fitb',
-      q: "Jesus turned water into ____.",
-      a: ["wine"]
-    },
-    // Unscramble
-    {
-      type: 'unscramble',
-      q: "Unscramble the Bible character: NOSHA",
-      a: ["jonah"]
-    },
-    {
-      type: 'unscramble',
-      q: "Unscramble the place: TLMEMEBHAH",
-      a: ["bethlehem"]
+  <div class="question-area" style="display:none;">
+    <div id="timer">Time: 30s</div>
+    <div id="question" class="question">Press 'Next Question' to begin.</div>
+    <input type="text" id="answerInput" placeholder="Type your answer here" />
+    <br />
+    <button id="submitAnswer" onclick="submitAnswer()">Submit</button>
+    <button id="hintButton" onclick="useHint()">Hint</button>
+    <div id="message" class="message"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "Who led the Israelites out of Egypt?", a: "Moses", hint: "Starts with M" },
+      { q: "What was the first miracle of Jesus?", a: "Water into wine", hint: "It happened at a wedding" },
+      { q: "Name one of the Ten Commandments", a: "Thou shalt not steal", hint: "Don't take what isn't yours" },
+      { q: "Who betrayed Jesus?", a: "Judas", hint: "He got silver" },
+      { q: "In what city was Jesus born?", a: "Bethlehem", hint: "Starts with B" },
+      { q: "What is the first book of the Bible?", a: "Genesis", hint: "It means 'beginning'" },
+      { q: "True or False: Paul wrote the book of Psalms.", a: "False", hint: "David did" },
+      { q: "Complete this: ‘Love your ______ as yourself’", a: "neighbor", hint: "It's the person next door" },
+      { q: "How many days did God take to create the world?", a: "6", hint: "Less than a week" },
+      { q: "What river did John the Baptist baptize people in?", a: "Jordan", hint: "It’s not the Nile" }
+    ];
+
+    let currentQuestion = 0;
+    let timer;
+    let timeLeft = 30;
+    let currentTeam = 'Red';
+    let redScore = 0;
+    let blueScore = 0;
+    let hintUsed = false;
+
+    function startGame() {
+      document.querySelector(".question-area").style.display = "block";
+      document.getElementById("nextBtn").style.display = "inline-block";
     }
-  ];
 
-  let currentTeam = "red";
-  let scoreRed = 0;
-  let scoreBlue = 0;
-  let currentQuestionIndex = null;
-  let timerInterval = null;
-  let timeLeft = 30;
+    function showNextQuestion() {
+      document.getElementById("message").textContent = "";
+      document.getElementById("answerInput").value = "";
+      document.getElementById("hintButton").classList.remove("used");
+      document.getElementById("hintButton").disabled = false;
+      hintUsed = false;
 
-  const questionEl = document.getElementById("question");
-  const answerInput = document.getElementById("answerInput");
-  const unscrambleInput = document.getElementById("unscrambleInput");
-  const multipleChoiceContainer = document.getElementById("multipleChoiceContainer");
-  const submitBtn = document.getElementById("submitBtn");
-  const startBtn = document.getElementById("startBtn");
-  const feedbackEl = document.getElementById("feedback");
-  const timerEl = document.getElementById("timeLeft");
-  const scoreRedEl = document.getElementById("scoreRed");
-  const scoreBlueEl = document.getElementById("scoreBlue");
-  const teamRedEl = document.getElementById("teamRed");
-  const teamBlueEl = document.getElementById("teamBlue");
-  const hintBtn = document.getElementById("hintBtn");
-  const skipBtn = document.getElementById("skipBtn");
+      const q = questions[currentQuestion];
+      document.getElementById("question").textContent = q.q;
 
-  let usedHintThisQuestion = false;
-
-  function shuffle(array) {
-    let arr = array.slice();
-    for (let i = arr.length -1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i +1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
-  function pickRandomQuestion() {
-    let index;
-    do {
-      index = Math.floor(Math.random() * questions.length);
-    } while(index === currentQuestionIndex);
-    currentQuestionIndex = index;
-    return questions[index];
-  }
-
-  function setTeam(team) {
-    currentTeam = team;
-    team === "red" ? teamRedEl.classList.add("active") : teamRedEl.classList.remove("active");
-    team === "blue" ? teamBlueEl.classList.add("active") : teamBlueEl.classList.remove("active");
-  }
-
-  function startTurn() {
-    feedbackEl.textContent = "";
-    usedHintThisQuestion = false;
-    timeLeft = 30;
-    timerEl.textContent = timeLeft;
-    submitBtn.disabled = true;
-
-    answerInput.style.display = "none";
-    unscrambleInput.style.display = "none";
-    multipleChoiceContainer.style.display = "none";
-
-    answerInput.value = "";
-    unscrambleInput.value = "";
-
-    const question = pickRandomQuestion();
-    setTeam(currentTeam);
-
-    if(question.type === "mcq") {
-      questionEl.textContent = question.q;
-      multipleChoiceContainer.style.display = "block";
-      multipleChoiceContainer.innerHTML = '';
-      const choices = shuffle(question.choices);
-      choices.forEach(choice => {
-        const btn = document.createElement("button");
-        btn.textContent = choice;
-        btn.onclick = () => {
-          if(submitBtn.disabled) submitBtn.disabled = false;
-          answerInput.value = choice;
-          highlightSelected(choice);
+      clearInterval(timer);
+      timeLeft = 30;
+      document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").textContent = `Time: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          document.getElementById("message").textContent = "Time's up! Click Next Question.";
         }
-        multipleChoiceContainer.appendChild(btn);
-      });
-    } else if (question.type === "fitb") {
-      questionEl.textContent = question.q;
-      answerInput.style.display = "block";
-      answerInput.value = "";
-      answerInput.focus();
-      submitBtn.disabled = false;
-    } else if (question.type === "unscramble") {
-      questionEl.textContent = question.q;
-      unscrambleInput.style.display = "block";
-      unscrambleInput.value = "";
-      unscrambleInput.focus();
-      submitBtn.disabled = false;
+      }, 1000);
     }
 
-    if(timerInterval) clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      timeLeft--;
-      timerEl.textContent = timeLeft;
-      if(timeLeft <= 0) {
-        clearInterval(timerInterval);
-        feedbackEl.textContent = `⏰ Time's up! No points scored for ${currentTeam === "red" ? "Team Red" : "Team Blue"}.`;
-        endTurn();
-      }
-    }, 1000);
+    function submitAnswer() {
+      clearInterval(timer);
+      const userAnswer = document.getElementById("answerInput").value.trim().toLowerCase();
+      const correctAnswer = questions[currentQuestion].a.toLowerCase();
+      let message = "";
 
-    // Reset buttons style for MCQ
-    if(question.type === "mcq") resetMCQButtons();
-  }
-
-  function highlightSelected(choice) {
-    Array.from(multipleChoiceContainer.children).forEach(btn => {
-      btn.style.backgroundColor = btn.textContent === choice ? "#d6ad3b" : "#b48e3d";
-    });
-  }
-
-  function resetMCQButtons() {
-    Array.from(multipleChoiceContainer.children).forEach(btn => {
-      btn.style.backgroundColor = "#b48e3d";
-    });
-  }
-
-  function endTurn() {
-    answerInput.disabled = true;
-    unscrambleInput.disabled = true;
-    submitBtn.disabled = true;
-    startBtn.disabled = false;
-    multipleChoiceContainer.querySelectorAll("button").forEach(btn => btn.disabled = true);
-    switchTeam();
-  }
-
-  function switchTeam() {
-    if(currentTeam === "red") {
-      currentTeam = "blue";
-    } else {
-      currentTeam = "red";
-    }
-    setTeam(currentTeam);
-  }
-
-  submitBtn.addEventListener("click", () => {
-    let userAnswer = "";
-
-    const question = questions[currentQuestionIndex];
-    if(question.type === "mcq") {
-      userAnswer = answerInput.value.trim().toLowerCase();
-    } else if(question.type === "fitb") {
-      userAnswer = answerInput.value.trim().toLowerCase();
-    } else if(question.type === "unscramble") {
-      userAnswer = unscrambleInput.value.trim().toLowerCase();
-    }
-
-    if(!userAnswer) {
-      feedbackEl.textContent = "⚠️ Please enter/select an answer!";
-      return;
-    }
-
-    let isCorrect = false;
-    if(question.type === "mcq") {
-      isCorrect = (userAnswer === question.a.toLowerCase());
-    } else {
-      isCorrect = question.a.some(ans => ans.toLowerCase() === userAnswer);
-    }
-
-    if(isCorrect) {
-      feedbackEl.textContent = `✅ Correct! ${currentTeam === "red" ? "Team Red" : "Team Blue"} scores a point!`;
-      if(currentTeam === "red") {
-        scoreRed++;
-        scoreRedEl.textContent = scoreRed;
+      if (userAnswer === "") {
+        message = "You didn’t answer. Click Next Question.";
+      } else if (userAnswer === correctAnswer) {
+        if (currentTeam === 'Red') {
+          redScore += hintUsed ? 0.5 : 1;
+          document.getElementById("teamRedScore").textContent = redScore;
+        } else {
+          blueScore += hintUsed ? 0.5 : 1;
+          document.getElementById("teamBlueScore").textContent = blueScore;
+        }
+        message = hintUsed ? "Correct! (Half point used due to hint)" : "Correct! Full point awarded!";
       } else {
-        scoreBlue++;
-        scoreBlueEl.textContent = scoreBlue;
+        message = `Oops! Correct answer was: ${questions[currentQuestion].a}`;
       }
-      clearInterval(timerInterval);
-      endTurn();
-    } else {
-      feedbackEl.textContent = `❌ Incorrect, try again!`;
-      if(question.type === "mcq") {
-        resetMCQButtons();
-        answerInput.value = "";
-        submitBtn.disabled = true;
-      } else if(question.type === "fitb") {
-        answerInput.value = "";
-        answerInput.focus();
-      } else {
-        unscrambleInput.value = "";
-        unscrambleInput.focus();
-      }
+
+      document.getElementById("message").textContent = message;
+      currentTeam = currentTeam === 'Red' ? 'Blue' : 'Red';
+      document.getElementById("currentTeam").textContent = currentTeam;
+      currentQuestion = (currentQuestion + 1) % questions.length;
     }
-  });
 
-  startBtn.addEventListener("click", () => {
-    startTurn();
-    answerInput.focus();
-  });
-
-  answerInput.addEventListener("keydown", e => {
-    if(e.key === "Enter" && !submitBtn.disabled) submitBtn.click();
-  });
-  unscrambleInput.addEventListener("keydown", e => {
-    if(e.key === "Enter" && !submitBtn.disabled) submitBtn.click();
-  });
-
-  // Lifelines
-  hintBtn.addEventListener("click", () => {
-    if(usedHintThisQuestion) return;
-    usedHintThisQuestion = true;
-    const question = questions[currentQuestionIndex];
-    let hintText = "";
-    if(question.type === "mcq") {
-      hintText = `Hint: The answer starts with "${question.a[0]}"`;
-    } else if(question.type === "fitb" || question.type === "unscramble") {
-      hintText = `Hint: The answer starts with "${question.a[0][0]}"`;
+    function useHint() {
+      document.getElementById("message").textContent = `Hint: ${questions[currentQuestion].hint}`;
+      document.getElementById("hintButton").classList.add("used");
+      document.getElementById("hintButton").disabled = true;
+      hintUsed = true;
     }
-    feedbackEl.textContent = hintText;
-    hintBtn.disabled = true;
-  });
-
-  skipBtn.addEventListener("click", () => {
-    feedbackEl.textContent = `⏭️ Question skipped!`;
-    clearInterval(timerInterval);
-    endTurn();
-  });
-
-  // Init
-  let usedHintThisQuestion = false;
-  setTeam(currentTeam);
-</script>
-
+  </script>
 </body>
+
 </html>
