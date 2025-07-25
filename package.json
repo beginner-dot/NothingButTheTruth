@@ -1,0 +1,28 @@
+{
+  "name": "nothingbutthetruth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beginner-dot/nothingbutthetruth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beginner-dot/nothingbutthetruth/issues"
+  },
+  "homepage": "https://github.com/beginner-dot/nothingbutthetruth#readme",
+  "description": "",
+  "dependencies": {
+    "chart.js": "^4.5.0",
+    "firebase": "^12.0.0"
+  },
+  "devDependencies": {
+    "create-hintrc": "^4.0.15",
+    "hint": "^7.1.13"
+  }
+}
