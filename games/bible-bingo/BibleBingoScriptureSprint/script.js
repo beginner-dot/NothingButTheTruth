@@ -7,9 +7,9 @@ let board = [];
 const boardSize = 5;
 
 // Prompts
+// Added 50 more questions to prompts array
 const prompts = [
-  { text: "🧱 Story of Jericho", verse: "Joshua 6:20" }
-, 
+  { text: "🧱 Story of Jericho", verse: "Joshua 6:20" },
   { text: "🌟 Beatitude verse", verse: "Matthew 5:3" },
   { text: "🕊️ Verse on peace", verse: "John 14:27" },
   { text: "💪 Verse on strength", verse: "Philippians 4:13" },
@@ -33,8 +33,7 @@ const prompts = [
   { text: "💡 Wisdom verse", verse: "Proverbs 3:5" },
   { text: "🛐 Worship verse", verse: "John 4:24" },
   { text: "👣 Jesus’ footsteps", verse: "1 Peter 2:21" },
-  { text: "💬 Proverbs quote", verse: "Proverbs 3:6" 
-, },
+  { text: "💬 Proverbs quote", verse: "Proverbs 3:6" },
   { text: "🦁 Daniel’s lion story", verse: "Daniel 6:22" },
   { text: "🌊 Miracle by Jesus", verse: "Matthew 14:25" },
   { text: "🛐 Verse on worship", verse: "John 4:24" },
@@ -57,8 +56,7 @@ const prompts = [
   { text: "⚓ Hope verse", verse: "Hebrews 11:1" },
   { text: "👼 Angel story", verse: "Luke 1:26" },
   { text: "🧍 Commandment ref", verse: "Exodus 20:1" },
-  { text: "💓 God’s love", verse: "John 3:16" }
-, 
+  { text: "💓 God’s love", verse: "John 3:16" },
   { text: "🌟 Beatitude verse", verse: "Matthew 5:9" },
   { text: "🕊️ Verse on faith", verse: "Hebrews 11:6" },
   { text: "💪 Verse on strength", verse: "Isaiah 40:31" },
@@ -230,6 +228,14 @@ function startGame() {
   loadScores();
   createBoard();
 }
+
+// Add event listener for start button
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("startBtn");
+  if (startBtn) {
+    startBtn.addEventListener("click", startGame);
+  }
+});
 
 // Init
 window.addEventListener("DOMContentLoaded", () => {
