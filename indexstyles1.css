@@ -111,14 +111,10 @@ body {
         .nav-links i { font-size: 1.2em; }
 
 .scroll-fade {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform;
+    /* Removed animation styles to improve scroll performance */
 }
 .scroll-fade.visible {
-    opacity: 1;
-    transform: translateY(0);
+    /* Removed animation styles to improve scroll performance */
 }
 
         /* Top Section */
@@ -1810,4 +1806,3 @@ canvas#voteChart {
   transform: scale(1);
 }
         }
-        
