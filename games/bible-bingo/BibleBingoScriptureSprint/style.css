@@ -81,6 +81,14 @@
     }
 
 
+.team-buttons button.active {
+  background-color: #4CAF50; /* Greenish highlight */
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 10px #4CAF50;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
 
 
 

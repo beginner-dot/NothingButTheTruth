@@ -1,18 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Bible Bingo: Scripture Sprint</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0; padding: 1rem;
+      display: flex; justify-content: center;
+    }
+    .bible-bingo {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      max-width: 720px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      width: 100%;
+    }
+    h2, h3 {
+      margin-top: 0;
+    }
+
+    .bingo-instructions {
+      text-align: left;
+      background: #fff9e6;
+      padding: 1rem;
+      border-radius: 12px;
+      margin: 1rem auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .team-buttons {
+      margin: 1rem 0;
+      display: flex;
+      gap: 1rem;
+    }
+    .team-buttons button {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      background: white;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+    .team-buttons button:hover {
+      border-color: #888;
+    }
+    /* Highlight active team */
+    .team-buttons button.active {
+      background-color: #4CAF50; /* green highlight */
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 0 10px #4CAF50;
+      transform: scale(1.05);
+    }
+
+    .bingo-grid {
+      margin: 1rem 0;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      user-select: none;
+    }
+    /* Example tile style */
+    .bingo-tile {
+      background: #e2e2e2;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .bingo-tile.marked {
+      background: #4caf50;
+      color: white;
+      cursor: default;
+    }
+
+    #versePopup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      max-width: 400px;
+      z-index: 1000;
+    }
+    .hidden {
+      display: none;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+  </style>
 </head>
 <body>
   <section class="bible-bingo">
     <h2>🎲 Bible Bingo: Scripture Sprint</h2>
+
+    <!-- 📖 GAME INSTRUCTIONS START -->
+    <section class="bingo-instructions">
+      <h3>📝 How to Play</h3>
+      <p><strong>🎯 Objective:</strong> Complete lines on your bingo board by clicking tiles that match Bible prompts. Each completed line scores a point for your team!</p>
+
+      <ol>
+        <li><strong>Pick Your Team:</strong> Choose 🔴 Team A or 🔵 Team B to begin.</li>
+        <li><strong>Start Playing:</strong> The board loads automatically with Bible-themed prompts like “🙏 Verse about prayer”.</li>
+        <li><strong>Click a Tile:</strong> When you know a matching verse, click the tile to mark it and see a reference popup.</li>
+        <li><strong>Score a Line:</strong> Get 5 in a row (horizontal, vertical, or diagonal) to complete a line and earn a point.</li>
+        <li><strong>Track Your Progress:</strong> Scores and achievements are saved automatically in your browser.</li>
+        <li><strong>Reset Anytime:</strong> Use the 🔄 Reset Board button to start a new round with the same grid.</li>
+        <li><strong>Need Space?</strong> Hit 📱 Fullscreen to focus!</li>
+      </ol>
+
+      <h3>📌 Rules</h3>
+      <ul>
+        <li>✅ Only mark tiles when you know a valid Bible verse for the prompt.</li>
+        <li>🚫 No reusing completed lines — each must be new!</li>
+        <li>🧠 Compete solo or with a group to see who completes the most lines!</li>
+        <li>💾 Scores are saved locally. Refresh won’t reset unless browser storage is cleared.</li>
+      </ul>
+    </section>
+    <!-- 📖 GAME INSTRUCTIONS END -->
+
     <p>Select your team:</p>
     <div class="team-buttons">
-      <button onclick="setTeam('Team A')">🔴 Team A</button>
-      <button onclick="setTeam('Team B')">🔵 Team B</button>
+      <button id="teamAButton" onclick="setTeam('Team A')">🔴 Team A</button>
+      <button id="teamBButton" onclick="setTeam('Team B')">🔵 Team B</button>
     </div>
     <p>Team Score (🔴 Team A): <span id="teamAScore">0</span> | (🔵 Team B): <span id="teamBScore">0</span></p>
     <div id="bingoBoard" class="bingo-grid"></div>
@@ -23,86 +148,226 @@
     <button onclick="resetBingo()">🔄 Reset Board</button>
     <button onclick="toggleFullscreen()">📱 Fullscreen</button>
   </section>
+
   <div id="versePopup" class="verse-popup hidden"></div>
 
-
-  
-  <script src="script.js"></script>
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <script>
-// Bible trivia set
-const questions = [
-  {
-    question: "Who said, 'As for me and my house, we will serve the Lord'?",
-    answer: "Joshua"
-  },
-  {
-    question: "Which verse begins with 'For God so loved the world'?",
-    answer: "John 3:16"
-  },
-  {
-    question: "Who was swallowed by a great fish?",
-    answer: "Jonah"
-  },
-  {
-    question: "Finish the verse: 'I can do all things...'",
-    answer: "through Christ who strengthens me"
-  },
-  {
-    question: "What fruit did Eve eat in the Garden of Eden?",
-    answer: "fruit"
-  }
-];
+    // Globals
+    let currentTeam = null;
+    let lineScore = 0;
+    let highScore = 0;
+    let teamAScore = 0;
+    let teamBScore = 0;
 
-function getWeekNumber(date) {
-  const firstDay = new Date(date.getFullYear(), 0, 1);
-  const pastDays = (date - firstDay) / 86400000;
-  return Math.ceil((pastDays + firstDay.getDay() + 1) / 7);
-}
+    // Example bingo prompts — you can customize these
+    const bingoPrompts = [
+      "🙏 Verse about prayer",
+      "✝️ Verse about Jesus",
+      "💖 Verse about love",
+      "🕊️ Verse about peace",
+      "🌈 Verse about promise",
+      "📖 Verse about wisdom",
+      "🔥 Verse about faith",
+      "🛡️ Verse about protection",
+      "💡 Verse about light",
+      "🎵 Verse about worship",
+      "⚓ Verse about hope",
+      "🌿 Verse about growth",
+      "🏆 Verse about victory",
+      "💧 Verse about cleansing",
+      "👑 Verse about kingship",
+      "💪 Verse about strength",
+      "🕊️ Verse about Holy Spirit",
+      "✉️ Verse about message",
+      "🌍 Verse about creation",
+      "❤️ Verse about compassion",
+      "🌟 Verse about guidance",
+      "⛪ Verse about church",
+      "⚡ Verse about power",
+      "📜 Verse about law",
+      "🤲 Verse about giving"
+    ];
 
-const currentWeek = getWeekNumber(new Date());
-const currentQuestion = questions[currentWeek % questions.length];
+    // On page load, init
+    window.onload = () => {
+      // Restore saved team from localStorage
+      const savedTeam = localStorage.getItem('currentTeam');
+      if (savedTeam) {
+        setTeam(savedTeam);
+      }
+      // Load scores from localStorage or init
+      teamAScore = parseInt(localStorage.getItem('teamAScore')) || 0;
+      teamBScore = parseInt(localStorage.getItem('teamBScore')) || 0;
+      lineScore = parseInt(localStorage.getItem('lineScore')) || 0;
+      highScore = parseInt(localStorage.getItem('highScore')) || 0;
 
-document.getElementById("bible-question").textContent = currentQuestion.question;
+      updateScoresUI();
+      buildBingoBoard();
+    };
 
-document.getElementById("submit-answer").addEventListener("click", () => {
-  const userAnswer = document.getElementById("user-answer").value.trim().toLowerCase();
-  const correctAnswer = currentQuestion.answer.toLowerCase();
+    // Update score displays
+    function updateScoresUI() {
+      document.getElementById('teamAScore').textContent = teamAScore;
+      document.getElementById('teamBScore').textContent = teamBScore;
+      document.getElementById('lineScore').textContent = lineScore;
+      document.getElementById('highScore').textContent = highScore;
+    }
 
-  const feedback = document.getElementById("answer-feedback");
-  const correctEl = document.getElementById("correct-answer");
+    // Highlight the selected team button and save team
+    function setTeam(team) {
+      const teamAButton = document.getElementById('teamAButton');
+      const teamBButton = document.getElementById('teamBButton');
 
-  feedback.classList.remove("correct", "incorrect", "hidden");
-  correctEl.classList.remove("hidden");
+      if (team === 'Team A') {
+        teamAButton.classList.add('active');
+        teamBButton.classList.remove('active');
+      } else if (team === 'Team B') {
+        teamBButton.classList.add('active');
+        teamAButton.classList.remove('active');
+      }
 
-  if (userAnswer === correctAnswer) {
-    feedback.textContent = "✅ Correct! Well done!";
-    feedback.classList.add("correct");
-  } else {
-    feedback.textContent = "❌ Oops! Not quite.";
-    feedback.classList.add("incorrect");
-  }
+      currentTeam = team;
+      localStorage.setItem('currentTeam', team);
 
-  feedback.classList.add("visible");
-  correctEl.textContent = `✔️ Answer: ${currentQuestion.answer}`;
-  correctEl.classList.add("visible");
-});
-</script>
+      // Optional feedback
+      document.getElementById('bingoFeedback').textContent = `You picked ${team}. Let’s sprint!`;
+    }
 
+    // Build bingo board grid with clickable tiles
+    function buildBingoBoard() {
+      const board = document.getElementById('bingoBoard');
+      board.innerHTML = '';
 
+      // Shuffle prompts so board is different each game
+      const shuffled = bingoPrompts
+        .map(value => ({ value, sort: Math.random() }))
+        .sort((a,b) => a.sort - b.sort)
+        .map(({value}) => value);
+
+      // Create 25 tiles (5x5)
+      for (let i = 0; i < 25; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'bingo-tile';
+        tile.textContent = shuffled[i];
+        tile.dataset.index = i;
+        tile.addEventListener('click', () => tileClicked(tile));
+        board.appendChild(tile);
+      }
+
+      // Clear line score for new round
+      lineScore = 0;
+      localStorage.setItem('lineScore', lineScore);
+      updateScoresUI();
+    }
+
+    // When user clicks a tile
+    function tileClicked(tile) {
+      if (!currentTeam) {
+        alert("Please select a team first!");
+        return;
+      }
+      if (tile.classList.contains('marked')) {
+        return; // Already marked
+      }
+
+      // Mark tile
+      tile.classList.add('marked');
+
+      // Show popup with a fake verse reference for demo
+      showVersePopup(`${tile.textContent} — John 3:16`);
+
+      // Check for completed line
+      if (checkLineCompleted()) {
+        lineScore++;
+        localStorage.setItem('lineScore', lineScore);
+
+        // Update team score
+        if (currentTeam === 'Team A') {
+          teamAScore++;
+          localStorage.setItem('teamAScore', teamAScore);
+        } else if (currentTeam === 'Team B') {
+          teamBScore++;
+          localStorage.setItem('teamBScore', teamBScore);
+        }
+
+        // Update high score if needed
+        if (lineScore > highScore) {
+          highScore = lineScore;
+          localStorage.setItem('highScore', highScore);
+        }
+
+        updateScoresUI();
+        showEncouragement();
+      }
+    }
+
+    // Dummy line check (replace with real logic)
+    function checkLineCompleted() {
+      // For demo, let's say every 5th tile clicked completes a line
+      // In reality, you'd check for 5 in a row (horizontal/vertical/diag)
+      // We'll just count total marked tiles mod 5 == 0 for demo
+      const markedTiles = document.querySelectorAll('.bingo-tile.marked').length;
+      return markedTiles % 5 === 0;
+    }
+
+    // Show popup with verse text
+    function showVersePopup(text) {
+      const popup = document.getElementById('versePopup');
+      popup.textContent = text;
+      popup.classList.remove('hidden');
+
+      setTimeout(() => {
+        popup.classList.add('hidden');
+      }, 2500);
+    }
+
+    // Encourage user after scoring a line
+    function showEncouragement() {
+      const messages = [
+        "Awesome! Keep it up! 🏅",
+        "Great sprint! You're on fire! 🔥",
+        "You're rocking those Scriptures! 📖",
+        "Keep going, champion! ✨",
+        "Victory is near! ⚡"
+      ];
+      const message = messages[Math.floor(Math.random() * messages.length)];
+      document.getElementById('encouragementMessage').textContent = message;
+
+      // Clear message after 3 seconds
+      setTimeout(() => {
+        document.getElementById('encouragementMessage').textContent = '';
+      }, 3000);
+    }
+
+    // Reset the bingo board & scores for a new round
+    function resetBingo() {
+      if (confirm("Are you sure you want to reset the board? Your progress will be cleared.")) {
+        lineScore = 0;
+        localStorage.setItem('lineScore', lineScore);
+
+        // Optionally reset team scores if you want
+        // teamAScore = 0;
+        // teamBScore = 0;
+        // localStorage.setItem('teamAScore', teamAScore);
+        // localStorage.setItem('teamBScore', teamBScore);
+
+        buildBingoBoard();
+        updateScoresUI();
+        document.getElementById('bingoFeedback').textContent = '';
+      }
+    }
+
+    // Toggle fullscreen for better focus
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+  </script>
 </body>
 </html>

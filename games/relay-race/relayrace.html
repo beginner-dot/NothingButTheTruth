@@ -22,7 +22,10 @@
       font-size: 1.5rem;
     }
 
-    .instructions, .scoreboard, .question-area, .controls {
+    .instructions,
+    .scoreboard,
+    .question-area,
+    .controls {
       margin: 1rem auto;
       max-width: 700px;
       background: white;
@@ -146,8 +149,25 @@
     let hintUsed = false;
 
     function startGame() {
+      // Shuffle questions using Fisher-Yates algorithm
+      for (let i = questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questions[i], questions[j]] = [questions[j], questions[i]];
+      }
+
+      // Reset game state
+      currentQuestion = 0;
+      currentTeam = 'Red';
+      redScore = 0;
+      blueScore = 0;
+      document.getElementById("teamRedScore").textContent = redScore;
+      document.getElementById("teamBlueScore").textContent = blueScore;
+      document.getElementById("currentTeam").textContent = currentTeam;
       document.querySelector(".question-area").style.display = "block";
       document.getElementById("nextBtn").style.display = "inline-block";
+
+      // Start first question
+      showNextQuestion();
     }
 
     function showNextQuestion() {

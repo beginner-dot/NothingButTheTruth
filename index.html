@@ -600,14 +600,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
+<!-- Section -->
 <section id="worship-challenge" class="fade-in">
   <div class="challenge-container">
     <h2>🔥 Worship Upgrade Challenge</h2>
     <p class="challenge-subtext">Complete a new challenge each day to upgrade your worship life.</p>
 
     <ul class="daily-challenges" id="challenge-list">
+      <!-- DAILY CHALLENGES -->
       <li>
         <input type="checkbox" id="day1" />
         <label for="day1">Mon – Pray before every task today.</label>
@@ -655,20 +655,13 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 
-  <div id="quote-popup" class="quote-popup hidden">
-    <div class="quote-content">
-      <p id="quote-text"></p>
-      <button id="close-quote">Close</button>
-    </div>
+  <!-- Verse/Devotion Popup -->
+  <div id="bottom-popup" class="bottom-popup hidden" role="dialog" aria-modal="true">
+    <button id="bottom-popup-close" aria-label="Close popup">&times;</button>
+    <div id="bottom-popup-content"></div>
   </div>
-
-<div id="bottom-popup" class="bottom-popup hidden" role="dialog" aria-modal="true" aria-labelledby="bottom-popup-content">
-  <button id="bottom-popup-close" aria-label="Close popup">&times;</button>
-  <div id="bottom-popup-content"></div>
-</div>
-
-
 </section>
+
 
 
 
@@ -1723,6 +1716,56 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+<script>
+  // Verses and devotions (adjust/add more as needed)
+  const verses = [
+    { text: "“Let your light shine before others...”", ref: "Matthew 5:16" },
+    { text: "“Trust in the Lord with all your heart...”", ref: "Proverbs 3:5" },
+    { text: "“I can do all things through Christ...”", ref: "Philippians 4:13" },
+    { text: "“Be still and know that I am God.”", ref: "Psalm 46:10" },
+    { text: "“Your word is a lamp to my feet...”", ref: "Psalm 119:105" },
+  ];
+
+  const devotions = [
+    "Reflect on how your actions today can glorify God.",
+    "Lean on faith when making difficult decisions today.",
+    "Remember Christ’s strength empowers you.",
+    "Pause. Breathe. Trust God's timing.",
+    "Let scripture guide your steps today.",
+  ];
+
+  // Show popup with content
+  function showPopup(content) {
+    const popup = document.getElementById("bottom-popup");
+    const contentBox = document.getElementById("bottom-popup-content");
+
+    contentBox.innerHTML = content;
+    popup.classList.remove("hidden");
+    popup.classList.add("visible");
+  }
+
+  // Close popup
+  document.getElementById("bottom-popup-close").addEventListener("click", () => {
+    const popup = document.getElementById("bottom-popup");
+    popup.classList.remove("visible");
+    popup.classList.add("hidden");
+  });
+
+  // Event delegation for verse/devotion buttons
+  document.getElementById("challenge-list").addEventListener("click", (e) => {
+    if (e.target.classList.contains("verse-btn")) {
+      const index = parseInt(e.target.dataset.day);
+      const verse = verses[index];
+      showPopup(`<h3>📖 Verse</h3><p>${verse.text}</p><small><strong>${verse.ref}</strong></small>`);
+    }
+
+    if (e.target.classList.contains("devotion-btn")) {
+      const index = parseInt(e.target.dataset.day);
+      const devotion = devotions[index];
+      showPopup(`<h3>💡 Devotion</h3><p>${devotion}</p>`);
+    }
+  });
+</script>
 
 
 </body>
