@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Bible Bingo: Scripture Sprint</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet" />
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Simple static user ID for demo — replace with real auth later
+    const userId = "defaultUser";
+  </script>
+</head>
+<body>
+  <div id="instructionsOverlay" class="overlay">
+    <div class="overlay-content">
+      <h2>📜 How to Play Bible Bingo</h2>
+      <ul>
+        <li>Select your team: 🔴 Team A or 🔵 Team B</li>
+        <li>Click tiles when you know the verse or match the clue</li>
+        <li>Complete 5 tiles in a row (horizontal, vertical, or diagonal) to score!</li>
+        <li>Scores and progress are saved automatically</li>
+        <li>Fullscreen mode gives you more space, especially on mobile</li>
+      </ul>
+      <button onclick="startGame()" class="start-btn">🚀 Start Game</button>
+    </div>
+  </div>
+
+  <div id="rotateOverlay" class="overlay hidden">
+    <div class="overlay-content">
+      <h2>📱 Please rotate your device</h2>
+      <p>This game is best played in landscape orientation.</p>
+    </div>
+  </div>
+
+  <main class="bingo-container hidden">
+    <h1>🎲 Bible Bingo: Scripture Sprint</h1>
+
+    <section class="controls">
+      <div class="teams">
+        <button onclick="setTeam('Team A')" id="teamA" class="active">🔴 Team A</button>
+        <button onclick="setTeam('Team B')" id="teamB">🔵 Team B</button>
+      </div>
+      <div class="scoreboard">
+        <p>Lines: <span id="lineScore">0</span> | High Score: <span id="highScore">0</span></p>
+        <p>Team A: <span id="teamAScore">0</span> | Team B: <span id="teamBScore">0</span></p>
+      </div>
+    </section>
+
+    <section id="bingoBoard" class="bingo-grid"></section>
+
+    <p id="bingoFeedback" class="feedback"></p>
+    <p id="encouragementMessage" class="encouragement">🌱 Ready for a fresh start!</p>
+
+    <div class="buttons">
+      <button onclick="resetBingo()">🔄 Reset Board</button>
+      <button onclick="toggleFullscreen()">📱 Fullscreen</button>
+    </div>
+
+    <div id="versePopup" class="verse-popup hidden"></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
