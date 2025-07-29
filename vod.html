@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Devotions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #f0fdf4, #e0f7fa);
+      color: #2c3e50;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      color: #00897b;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .devotions-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      animation: slideUp 1s ease-out;
+    }
+
+    .devotion-card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .devotion-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .devotion-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #00796b;
+    }
+
+    .devotion-snippet {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #00bfa6;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .read-more:hover {
+      color: #00796b;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>📖 All Devotions</h1>
+
+  <div class="devotions-container">
+
+    <div class="devotion-card">
+      <div class="devotion-title">Anchor of Hope</div>
+      <div class="devotion-snippet">In life’s storms, hope in Christ anchors the soul. Discover how to hold fast.</div>
+      <a href="Devotions/anchor_of_hope.html" class="read-more">Read More →</a>
+    </div>
+
+    <div class="devotion-card">
+      <div class="devotion-title">Called to Shine</div>
+      <div class="devotion-snippet">You were never meant to blend in. Step into your divine spotlight and shine!</div>
+      <a href="Devotions/called_to_shine.html" class="read-more">Read More →</a>
+    </div>
+
+    <div class="devotion-card">
+      <div class="devotion-title">Do It for God</div>
+      <div class="devotion-snippet">When no one’s watching, your worship becomes real. Learn to do all things for Him.</div>
+      <a href="Devotions/do_it_for_god.html" class="read-more">Read More →</a>
+    </div>
+
+    <div class="devotion-card">
+      <div class="devotion-title">Hannah's Devotion: A Prayer of Faith</div>
+      <div class="devotion-snippet">From barren cries to bold prayers, Hannah shows us the power of persistence.</div>
+      <a href="Devotions/hannahs_devotion_a_prayer_of_faith.html" class="read-more">Read More →</a>
+    </div>
+
+    <div class="devotion-card">
+      <div class="devotion-title">Love That Saves</div>
+      <div class="devotion-snippet">God's love isn't just emotional — it's redemptive, powerful, and rescuing.</div>
+      <a href="Devotions/love_that_saves.html" class="read-more">Read More →</a>
+    </div>
+
+    <div class="devotion-card">
+      <div class="devotion-title">The Power of the Cross</div>
+      <div class="devotion-snippet">More than a symbol — the cross broke chains, won hearts, and rewrote destinies.</div>
+      <a href="Devotions/the_power_of_the_cross.html" class="read-more">Read More →</a>
+    </div>
+
+    <div class="devotion-card">
+      <div class="devotion-title">Unshackled by Grace</div>
+      <div class="devotion-snippet">Grace doesn’t just forgive — it frees. Here's how to walk unchained.</div>
+      <a href="Devotions/unshackled_by_grace.html" class="read-more">Read More →</a>
+    </div>
+
+    <div class="devotion-card">
+      <div class="devotion-title">Walking in the Light</div>
+      <div class="devotion-snippet">In a world of shadows, God calls us to walk boldly in His light. Let’s do that together.</div>
+      <a href="Devotions/walking_in_the_light.html" class="read-more">Read More →</a>
+    </div>
+
+  </div>
+</body>
+</html>

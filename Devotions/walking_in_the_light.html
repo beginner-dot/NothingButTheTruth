@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Walking in the Light - Devotion</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #e9e6f7 0%, #e3f0fa 100%);
+    color: #222;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+  .main-content {
+    max-width: 900px;
+    margin: 40px auto 40px auto;
+    padding: 2.5vw 6vw 3vw 6vw;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 8px 32px 0 rgba(60,60,120,0.10);
+    min-height: 80vh;
+    position: relative;
+  }
+  .header-section {
+    text-align: center;
+    margin-bottom: 2.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: none;
+    background: linear-gradient(120deg, #2575fc 0%, #6a11cb 100%);
+    border-radius: 0 0 32px 32px;
+    color: #fff;
+    box-shadow: 0 8px 32px 0 rgba(37,117,252,0.15), 0 2px 12px 0 rgba(106,17,203,0.10);
+    position: relative;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    overflow: hidden;
+  }
+  .header-section::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: -80px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, #ffd803 0%, #2575fc 70%, transparent 100%);
+    opacity: 0.18;
+    z-index: 0;
+  }
+  .header-section::after {
+    content: "";
+    position: absolute;
+    bottom: -60px;
+    right: -80px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, #6a11cb 0%, #fff 80%, transparent 100%);
+    opacity: 0.13;
+    z-index: 0;
+  }
+  .header-section h1 {
+    margin: 0;
+    font-size: 2.7rem;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    text-shadow: 0 4px 24px rgba(37,117,252,0.18), 0 1px 0 #fff;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    padding: 0.4em 1.2em;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 2px 16px 0 rgba(37,117,252,0.08);
+  }
+  .header-section .header-subtitle {
+    display: block;
+    margin-top: 1.2em;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #eaf4fd;
+    letter-spacing: 0.5px;
+    z-index: 1;
+    position: relative;
+    text-shadow: 0 2px 8px rgba(37,117,252,0.13);
+  }
+  h2 {
+    color: #2575fc;
+    margin-top: 2rem;
+    margin-bottom: 0.7rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  h3 {
+    color: #6a11cb;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  .quote {
+    margin: 1.2em 0;
+    padding: 1em 1.5em;
+    background: linear-gradient(90deg, #f3f0fa 0%, #eaf4fd 100%);
+    border-left: 5px solid #6a11cb;
+    border-radius: 8px;
+    color: #333;
+    font-style: italic;
+    font-size: 1.08em;
+    box-shadow: 0 8px 32px 0 rgba(106,17,203,0.25), 0 24px 80px 0 rgba(37,117,252,0.25);
+    position: relative;
+  }
+  .quote-cite {
+    display: block;
+    margin-top: 0.5em;
+    color: #6a11cb;
+    font-size: 0.95em;
+    font-style: normal;
+  }
+  ul {
+    color: #222;
+    font-size: 1.05em;
+    line-height: 1.7;
+    margin-bottom: 1.2em;
+  }
+  .readmore-link {
+    color: #2575fc;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 0.5em;
+    font-size: 0.98em;
+  }
+  .readmore-box {
+    display: none;
+    margin-top: 1em;
+    background: rgba(60, 30, 90, 0.68);
+    color: #fff;
+    border-radius: 14px;
+    border: 6px double #32006a;
+    padding: 1.3em 1.5em 1.3em 3.5em;
+    font-size: 1.07em;
+    font-style: normal;
+    font-weight: 400;
+    position: relative;
+    box-shadow: 0 20px 80px 0 rgb(0, 0, 0);
+    transition: box-shadow 0.3s, background 0.3s, border 0.3s;
+    overflow: hidden;
+    letter-spacing: 0.01em;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .readmore-box::before {
+    content: "💡";
+    position: absolute;
+    left: 0.7em;
+    top: 0.7em;
+    font-size: 1.5em;
+    filter: drop-shadow(0 1px 2px #0002);
+    pointer-events: none;
+  }
+  .readmore-box a {
+    color: #eebbc3;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  .readmore-box:hover {
+    box-shadow: 0 12px 36px 0 rgba(35,41,70,0.22);
+    background: #16161a;
+    border-color: #ffd803;
+  }
+  .manuscript-section {
+    box-shadow: 0 8px 32px 0 rgb(0, 0, 86);
+    border-radius: 16px;
+    background: #fafaff;
+    padding: 2em 1.5em;
+    margin: 2em 0;
+  }
+  .key-concepts-heading {
+    text-align: center;
+    font-size: 2.1em;
+    margin-bottom: 1.3em;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+  }
+  .manuscript-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .manuscript-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5em;
+    position: relative;
+    padding-left: 2.2em;
+  }
+  .manuscript-bullet {
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    font-size: 1.3em;
+    color: #2575fc;
+  }
+  .manuscript-box {
+    background: none;
+    border: none;
+    border-radius: 10px;
+    color: #222;
+    font-size: 1.07em;
+    position: relative;
+    box-shadow: none;
+    width: 100%;
+  }
+  .manuscript-box strong {
+    font-size: 1.08em;
+    display: inline-block;
+    margin-bottom: 0.2em;
+  }
+  .manuscript-ref {
+    display: block;
+    background: #f2f2f2;
+    border-radius: 7px;
+    margin-top: 0.7em;
+    margin-bottom: 0.2em;
+    padding: 0.7em 1.1em;
+    font-size: 0.98em;
+    color: #222;
+    box-shadow: 0 2px 8px 0 rgba(37,117,252,0.07);
+  }
+  .manuscript-ref i {
+    margin-right: 0.5em;
+  }
+  .key-concept-divider {
+    border: none;
+    border-top: 2px solid #d1d1e0;
+    margin: 1.5em 0;
+  }
+  .bible-verse {
+    background: #eaf4fd;
+    border-left: 4px solid #2575fc;
+    border-radius: 7px;
+    padding: 0.7em 1.2em;
+    margin: 1em 0;
+    font-style: italic;
+    color: #222;
+    font-size: 1.08em;
+    box-shadow: 0 2px 8px 0 rgba(37,117,252,0.07);
+  }
+  .readmore-box .bible-verse,
+  .manuscript-ref .bible-verse {
+    display: block;
+    margin: 1em 0 0.5em 0;
+    padding: 0.6em 1em;
+    background: #eaf4fd;
+    border-left: 4px solid #2575fc;
+    border-radius: 7px;
+    font-style: italic;
+    color: #222;
+    font-size: 1em;
+    box-shadow: 0 2px 8px 0 rgba(37,117,252,0.07);
+  }
+  @media (max-width: 700px) {
+    body {
+      font-size: 0.98em;
+    }
+    .main-content {
+      padding: 7vw 3vw 5vw 3vw;
+      margin: 8vw 1vw;
+    }
+    .header-section h1 {
+      font-size: 1.4rem;
+    }
+    .header-section::after {
+      width: 40px;
+      height: 3px;
+    }
+    .manuscript-list li {
+      padding-left: 1.5em;
+    }
+    .manuscript-bullet {
+      font-size: 1.1em;
+      left: 0;
+    }
+    .bible-verse,
+    .quote,
+    .manuscript-box,
+    .readmore-box {
+      font-size: 0.97em;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="header-section">
+    <h1>Walking in the Light</h1>
+    <span class="header-subtitle">A Devotion Based on 1 John 1:7</span>
+  </div>
+  <div class="main-content">
+    <h2>The Path of Righteousness</h2>
+    <p>As we walk in the light, we are called to follow the path of righteousness. Ellen White writes, "The path of the just is as the shining light, that shineth more and more unto the perfect day." (Steps to Christ, p. 65)</p>
+    <div class="quote">
+      <p>"If we walk in the light, as He is in the light, we have fellowship one with another, and the blood of Jesus Christ His Son cleanseth us from all sin." (1 John 1:7)</p>
+      <span class="quote-cite">- The Bible</span>
+    </div>
+    <h3>The Importance of Scripture</h3>
+    <p>The Bible is our guidebook for walking in the light. In the book "The Ministry of Healing," Ellen White emphasizes the importance of Scripture in our lives: "The Word of God is the source of all spiritual knowledge and power." (The Ministry of Healing, p. 455)</p>
+    <ul>
+      <li>Read the Bible daily to gain spiritual knowledge and power.</li>
+      <li>Study the Bible with others to gain a deeper understanding of God's Word.</li>
+      <li>Apply the teachings of the Bible to your daily life.</li>
+    </ul>
+    <div class="readmore-box">
+      <p>As we walk in the light, we are called to share the light with others. In the book "The Desire of Ages," Ellen White writes, "The light of the world was shining in the darkness, and the darkness comprehended it not." (The Desire of Ages, p. 233)</p>
+      <p>Let us shine the light of God's love to those around us.</p>
+    </div>
+    <div class="manuscript-section">
+      <h2 class="key-concepts-heading">Key Concepts</h2>
+      <ul class="manuscript-list">
+        <li>
+          <span class="manuscript-bullet">•</span>
+          <div class="manuscript-box">
+            <strong>Walking in the Light</strong>
+            <p>As we walk in the light, we are called to follow the path of righteousness.</p>
+            <span class="manuscript-ref"><i class="fa fa-book"></i> 1 John 1:7</span>
+          </div>
+        </li>
+        <li>
+          <span class="manuscript-bullet">•</span>
+          <div class="manuscript-box">
+            <strong>The Importance of Scripture</strong>
+            <p>The Bible is our guidebook for walking in the light.</p>
+            <span class="manuscript-ref"><i class="fa fa-book"></i> The Ministry of Healing, p. 455</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="bible-verse">
+      <p>"For God, who commanded the light to shine out of darkness, hath shined in our hearts, to give the light of the knowledge of the glory of God in the face of Jesus Christ." (2 Corinthians 4:6)</p>
+    </div>
+
+    <!-- Additional content added to enrich the devotion -->
+    <h2>Living Out the Light Daily</h2>
+    <p>Walking in the light is not just a one-time decision but a daily commitment. It means choosing honesty, kindness, and integrity in every situation. It means reflecting God's love in our actions and words, even when it's difficult.</p>
+    <p>Remember, the light we walk in is a source of strength and guidance. When we face challenges, we can rely on God's light to illuminate our path and give us courage.</p>
+
+    <h3>Practical Ways to Walk in the Light</h3>
+    <ul>
+      <li>Start each day with prayer, asking God to guide your steps.</li>
+      <li>Be intentional about speaking words that build others up.</li>
+      <li>Seek forgiveness and offer forgiveness freely.</li>
+      <li>Engage in acts of service to those in need around you.</li>
+      <li>Keep your heart open to the Holy Spirit's leading.</li>
+    </ul>
+
+    <!-- Mini Challenge Section -->
+    <div class="manuscript-section" style="background: #dff0d8; border-color: #3c763d;">
+      <h2 class="key-concepts-heading" style="color: #3c763d;">Mini Challenge</h2>
+      <p>Reflect on your daily walk in the light. This week, try the following challenge:</p>
+      <ul>
+        <li>Each day, write down one way you chose to walk in the light.</li>
+        <li>Share a scripture verse about light or righteousness with a friend or family member.</li>
+        <li>Pray for the strength to continue walking in the light, especially in difficult moments.</li>
+      </ul>
+      <p>At the end of the week, review your notes and consider how walking in the light has impacted your life and those around you.</p>
+    </div>
+  </div>
+</body>
+</html>

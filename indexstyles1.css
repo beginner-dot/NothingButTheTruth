@@ -1806,3 +1806,248 @@ canvas#voteChart {
   transform: scale(1);
 }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Ten Commandments Section */
+
+#ten-commandments {
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #fffef6, #e6f7f9);
+  color: #2b2b2b;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #1E90FF;
+}
+
+.tablets-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.tablet {
+  background: #f1f1f1;
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  perspective: 1200px; /* Needed for 3D flip */
+}
+
+.card {
+  margin-bottom: 30px;
+  height: 160px;
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+  background: white;
+}
+
+.card:hover {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-front {
+  background: #f9fafb;
+  color: #2b2b2b;
+}
+
+.card-back {
+  background: #00BFA6;
+  color: white;
+  transform: rotateY(180deg);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #00BFA6;
+  user-select: none;
+}
+
+.card-front h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.speak-btn {
+  margin-top: 6px;
+  background: #1E90FF;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 1.1rem;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.speak-btn:hover {
+  background: #166fc1;
+}
+
+.more-btn {
+  margin-top: 12px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  background: white;
+  color: #00BFA6;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.more-btn:hover {
+  background: #e0f7fa;
+}
+
+.quiz-btn-container {
+  margin-top: 40px;
+}
+
+.quiz-btn {
+  background: #1E90FF;
+  color: white;
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(30,144,255,0.5);
+  transition: background-color 0.3s ease;
+}
+
+.quiz-btn:hover {
+  background: #166fc1;
+}
+
+/* Modal styles */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(43,43,43,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 36px;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  position: relative;
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  color: #2b2b2b;
+}
+
+.modal-content h3 {
+  margin-bottom: 18px;
+  font-size: 1.5rem;
+  color: #1E90FF;
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1E90FF;
+  cursor: pointer;
+  user-select: none;
+}
+
+.close-btn:hover {
+  color: #166fc1;
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .tablets-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .tablet {
+    max-width: 100%;
+  }
+}

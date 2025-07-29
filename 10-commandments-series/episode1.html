@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>10 Commandments Series - Episode 1</title>
+  <link rel="stylesheet" href="episode1.css" />
+  <script defer src="episode1.js"></script>
+</head>
+<body>
+  <section class="commandment-card combined-commandment" id="commandment1">
+    <div class="cmd-icon bounce-in">
+      <!-- New combined interactive icon SVG -->
+      <svg class="icon interactive-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="120" height="120" role="img" aria-label="No Idols Commandment Icon">
+        <defs>
+          <radialGradient id="grad3" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00bfa6" />
+            <stop offset="100%" stop-color="#004d40" />
+          </radialGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%" >
+            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#00bfa6" flood-opacity="0.7"/>
+          </filter>
+        </defs>
+        <!-- Circle background -->
+        <circle cx="32" cy="32" r="28" fill="url(#grad3)" stroke="#00796b" stroke-width="3" filter="url(#glow)"/>
+        <!-- Idol silhouette -->
+        <path d="M22 44 L42 44 L42 36 L34 28 L26 36 L26 44 Z" fill="#fff" filter="url(#glow)"/>
+        <circle cx="34" cy="24" r="6" fill="#fff" filter="url(#glow)"/>
+        <!-- Prohibition sign -->
+        <circle cx="32" cy="32" r="28" fill="none" stroke="#d32f2f" stroke-width="4"/>
+        <line x1="18" y1="18" x2="46" y2="46" stroke="#d32f2f" stroke-width="4" stroke-linecap="round"/>
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 32 32" to="360 32 32" dur="15s" repeatCount="indefinite"/>
+      </svg>
+    </div>
+    <h2 class="cmd-title">Commandment 1</h2>
+    <p class="cmd-verse fade-in-delay">“You shall have no other gods before Me.”</p>
+    <div class="button-group">
+      <button class="scripture-btn" onclick="showScripture('Exodus 20:3', 'God must come first — above all else.')">📜 View Scripture</button>
+      <button class="challenge-btn" onclick="openReflectModal()">🙏 Reflect & Pray</button>
+      <button class="cmd-btn pulse" onclick="openChallengeModal()">📜 View Challenge</button>
+    </div>
+    <p class="cmd-text fade-in-delay additional-content">The first commandment reminds us to keep God as the highest priority in our lives. It challenges us to examine what idols or distractions might be taking His place. Reflect on your daily choices and ask God to help you put Him first in all things.</p>
+  </section>
+
+  <div id="cmd1-challenge-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Mini Challenge</h3>
+      <p>Identify 3 specific actions you can take this week to remove distractions and put God first in your daily life. Commit to praying for strength to follow through.</p>
+      <form id="challenge-form">
+        <label for="action1">Action 1:</label>
+        <input type="text" id="action1" name="action1" required maxlength="100" />
+        <label for="action2">Action 2:</label>
+        <input type="text" id="action2" name="action2" required maxlength="100" />
+        <label for="action3">Action 3:</label>
+        <input type="text" id="action3" name="action3" required maxlength="100" />
+        <div class="notification-optin">
+          <input type="checkbox" id="notify" name="notify" />
+          <label for="notify">Send me reminder notifications on my phone</label>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <div id="progress-container" class="hidden">
+        <h4>Your Progress</h4>
+        <ul id="progress-list"></ul>
+        <button id="clear-progress">Clear Progress</button>
+      </div>
+      <p class="privacy-note">Your submissions are stored only on your device and are private. We respect your privacy and your spiritual growth.</p>
+      <button onclick="closeChallengeModal()">Close</button>
+    </div>
+  </div>
+
+  <div id="cmd1-reflect-modal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Reflect & Pray</h3>
+      <p>Spend time reflecting on your relationship with God. Consider areas where you may have unintentionally placed other priorities above Him. Pray for guidance and renewed focus.</p>
+      <p><em>“But seek first his kingdom and his righteousness, and all these things will be given to you as well.” — Matthew 6:33</em></p>
+      <button onclick="closeReflectModal()">Close</button>
+    </div>
+  </div>
+</body>
+</html>

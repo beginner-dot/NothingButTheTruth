@@ -173,24 +173,7 @@
 
 </section>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const slides = document.querySelectorAll(".verse-slide-show blockquote");
-  let verseIndex = 0;
 
-  function showVerse(index) {
-    slides.forEach((s, i) => s.classList.toggle("active", i === index));
-  }
-
-  function rotateVerses() {
-    verseIndex = (verseIndex + 1) % slides.length;
-    showVerse(verseIndex);
-  }
-
-  showVerse(verseIndex);
-  setInterval(rotateVerses, 7000);
-});
-</script>
 
         <div class="slideshow-container scroll-fade">
             <div class="slide fade">
@@ -252,6 +235,47 @@ document.addEventListener("DOMContentLoaded", function () {
       </g>
     </svg>
 
+   
+    
+    
+    
+    
+    
+    
+
+
+    // Inspiration Section
+
+<div class="inspiration-section scroll-fade" id="inspiration-scrollshow">
+  <h2>Be Inspired</h2>
+  <div class="inspiration-slideshow-container">
+    <div class="inspiration-slide active">
+      <blockquote data-text='"Be strong and courageous. Do not be afraid; the LORD your God is with you wherever you go." - Joshua 1:9'></blockquote>
+    </div>
+    <div class="inspiration-slide">
+      <blockquote data-text='"The LORD is my light and my salvation—whom shall I fear?" - Psalm 27:1'></blockquote>
+    </div>
+    <div class="inspiration-slide">
+      <blockquote data-text='"Cast all your anxiety on him because he cares for you." - 1 Peter 5:7'></blockquote>
+    </div>
+  </div>
+  <div class="inspiration-dots-container">
+    <span class="inspiration-dot active" onclick="currentInspirationSlide(0)"></span>
+    <span class="inspiration-dot" onclick="currentInspirationSlide(1)"></span>
+    <span class="inspiration-dot" onclick="currentInspirationSlide(2)"></span>
+  </div>
+</div>
+    
+    
+
+
+
+    
+    
+    
+    
+    
+    
     <div class="Studies scroll-fade">
       <h2><i class="fas fa-graduation-cap" style="color:#ffd803"></i> Studies</h2>
     </div>
@@ -279,34 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
     </div>
 
-    <div class="inspiration-section scroll-fade" id="inspiration-scrollshow">
-        <h2>Be Inspired</h2>
-        <div class="inspiration-slideshow-container">
-            <div class="inspiration-slide fade" style="display:block;">
-                <blockquote>
-                    "Look to the LORD and his strength; seek his face always."
-                    <br><span>- 1 Chronicles 16:11</span>
-                </blockquote>
-            </div>
-            <div class="inspiration-slide fade">
-                <blockquote>
-                    "The Lord is my shepherd; I shall not want."
-                    <br><span>- Psalm 23:1</span>
-                </blockquote>
-            </div>
-            <div class="inspiration-slide fade">
-                <blockquote>
-                    "Let all that you do be done in love."
-                    <br><span>- 1 Corinthians 16:14</span>
-                </blockquote>
-            </div><div class="inspiration-dots-container">
-                <span class="inspiration-dot" onclick="currentInspirationSlide(1)"></span>
-                <span class="inspiration-dot" onclick="currentInspirationSlide(2)"></span>
-                <span class="inspiration-dot" onclick="currentInspirationSlide(3)"></span>
-            </div>
-        </div>
-    </div>
-
+ 
     <!-- Sermons Section -->
     <div class="Sermons scroll-fade">
       <h2 style="margin:0 auto;"><i class="fas fa-microphone" style="color:#ffd803"></i> Devotions</h2>
@@ -348,14 +345,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 <i class="fas fa-heart" style="color:#ffd803"></i> Love That Saves
             </a>
         </div>
-        <div class="box">
-            <i class="fas fa-spinner" style="color:#ffd803"></i> More Devotions Coming Soon
+
+         <div class="box">
+            <a href="Devotions/anchor_of_hope.html" style="text-decoration:none;">
+                <i class="fas fa-heart" style="color:#ffd803"></i> Anchor of Hope
+            </a>
         </div>
+
+
+    <a href="all_devotions.html" class="devotion-button">📖 All Devotions</a>
+
+
+
+
     </div>
-
-
-
-
 
 
 
@@ -767,35 +770,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Scroll Fade Animation
-        // Removed scroll fade animation to improve scroll performance on mobile
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     const faders = document.querySelectorAll('.scroll-fade');
-        //     const appearOptions = {
-        //         threshold: 0.15,
-        //         rootMargin: "0px 0px -40px 0px"
-        //     };
-
-        //     const appearOnScroll = new IntersectionObserver(function(entries, observer) {
-        //     entries.forEach(entry => {
-        //         if (!entry.isIntersecting) return;
-        //         entry.target.classList.add('visible');
-        //         observer.unobserve(entry.target);
-    
-        //         // Staggered animation for .box elements inside .flex-wrap or .sermons-flex-wrap
-        //         if (entry.target.classList.contains('flex-wrap') || entry.target.classList.contains('sermons-flex-wrap')) {
-        //             const boxes = entry.target.querySelectorAll('.box');
-        //             boxes.forEach((box, i) => {
-        //                 setTimeout(() => box.classList.add('visible'), i * 180);
-        //             });
-        //         }
-        //     });
-        // }, appearOptions);
-    
-        // faders.forEach(fader => {
-        //     appearOnScroll.observe(fader);
-        // });
-        // });
 
         // Slideshow functionality
         let slideIndex = 1;
@@ -878,46 +852,8 @@ document.addEventListener("DOMContentLoaded", () => {
         animateSermonsBoxes();
     });
 
-    // Inspiration Slideshow functionality
-    let inspirationSlideIndex = 1;
-    let inspirationTimer = null;
+   
 
-    function showInspirationSlide(n) {
-        const slides = document.querySelectorAll(".inspiration-slide");
-        const dots = document.querySelectorAll(".inspiration-dot");
-        if (slides.length === 0) return;
-        if (n > slides.length) inspirationSlideIndex = 1;
-        if (n < 1) inspirationSlideIndex = slides.length;
-        slides.forEach(slide => slide.style.display = "none");
-        dots.forEach(dot => dot.classList.remove("active"));
-        slides[inspirationSlideIndex - 1].style.display = "block";
-        dots[inspirationSlideIndex - 1].classList.add("active");
-        clearTimeout(inspirationTimer);
-        inspirationTimer = setTimeout(() => plusInspirationSlide(1), 7000);
-    }
-
-    function plusInspirationSlide(n) {
-        showInspirationSlide(inspirationSlideIndex += n);
-    }
-
-    function currentInspirationSlide(n) {
-        showInspirationSlide(inspirationSlideIndex = n);
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        showInspirationSlide(inspirationSlideIndex);
-    });
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    const targetId = this.getAttribute('href').slice(1);
-    const target = document.getElementById(targetId);
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-});
 </script>
 
 
@@ -925,6 +861,66 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 
 
+ // Inspiration Slideshow functionality
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".inspiration-slide");
+  const dots = document.querySelectorAll(".inspiration-dot");
+  let currentIndex = 0;
+  let typingTimer = null;
+  let slideTimer = null;
+
+  function typeText(element, text, callback) {
+    let i = 0;
+    element.textContent = "";
+    clearInterval(typingTimer);
+
+    typingTimer = setInterval(() => {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+      } else {
+        clearInterval(typingTimer);
+        if (callback) callback();
+      }
+    }, 30);
+  }
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+
+    const blockquote = slides[index].querySelector("blockquote");
+    const text = blockquote.getAttribute("data-text");
+
+    if (slideTimer) clearTimeout(slideTimer);
+
+    typeText(blockquote, text, () => {
+      slideTimer = setTimeout(() => {
+        nextSlide();
+      }, 6000);
+    });
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }
+
+  window.currentInspirationSlide = (index) => {
+    if (slideTimer) clearTimeout(slideTimer);
+    currentIndex = index;
+    showSlide(index);
+  };
+
+  showSlide(currentIndex);
+});
+</script>
 
 
 
@@ -1645,6 +1641,9 @@ const verses = [
   { text: "“Let your light shine before others, so that they may see your good works and give glory to your Father who is in heaven.”", ref: "Matthew 5:16" },
   { text: "“Trust in the Lord with all your heart...”", ref: "Proverbs 3:5" },
   { text: "“I can do all things through Christ who strengthens me.”", ref: "Philippians 4:13" },
+  { text: "“Be still, and know that I am God.”", ref: "Psalm 46:10" },
+  { text: "“Your word is a lamp to my feet and a light to my path.”", ref: "Psalm 119:105" },
+  
   // Add more as you want
 ];
 
@@ -1652,6 +1651,9 @@ const devotions = [
   "Reflect on how your actions today can glorify God.",
   "Lean on faith when making difficult decisions today.",
   "Remember Christ’s strength empowers you in every challenge.",
+  "Pause. Breathe. Trust God's timing in your life.",
+  "Let scripture guide your steps today and every day.",
+  
   // Add more as you want
 ];
 
