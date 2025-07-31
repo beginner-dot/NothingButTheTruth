@@ -2037,3 +2037,69 @@ body {
       opacity: 1;
       transform: scale(1);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* === Dark Mode Styles === */
+body.dark-mode {
+  background: linear-gradient(135deg, rgba(15, 5, 30, 0.9), rgba(10, 20, 50, 0.9));
+  color: #ddd;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* Adjust navbar background in dark mode */
+body.dark-mode .navbar {
+  background-color: rgba(10, 10, 20, 0.85);
+  color: #ccc;
+}
+
+/* Nav links color in dark mode */
+body.dark-mode .nav-links a {
+  color: #ccc;
+}
+
+body.dark-mode .nav-links a:hover {
+  color: #7aff8c; /* subtle neon greenish hover */
+}
+
+/* Toggle button styles */
+#darkModeToggle {
+  cursor: pointer;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  border: 2px solid white;
+  border-radius: 20px;
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  user-select: none;
+  align-self: center;
+}
+
+/* Button hover effect */
+#darkModeToggle:hover {
+  background-color: white;
+  color: #6a11cb; /* match purple from your palette */
+  border-color: #6a11cb;
+}
+
+/* Smooth transition on body */
+body {
+  transition: background 0.4s ease, color 0.4s ease;
+}

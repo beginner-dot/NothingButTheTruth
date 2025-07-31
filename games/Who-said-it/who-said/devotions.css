@@ -1,0 +1,23 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e9e6f7 0%, #e3f0fa 100%);
+  color: #222;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}

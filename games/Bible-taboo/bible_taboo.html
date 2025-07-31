@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bible Gridlock: The Forbidden Phrase - Multiplayer</title>
+  <style>
+    /* ====== CSS ====== */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #fff3e0);
+      color: #333;
+      margin: 0; padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: #ffffffcc;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    h1 {
+      text-align: center;
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+    .instructions {
+      margin-bottom: 2rem;
+    }
+    .instructions h2 {
+      color: #004d40;
+      margin-bottom: 0.5rem;
+    }
+    .instructions ul {
+      list-style-type: disc;
+      padding-left: 1.4rem;
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    button {
+      background-color: #00796b;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 1.15rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      flex: 1 1 150px;
+      min-width: 150px;
+      max-width: 220px;
+      user-select: none;
+    }
+    button:hover:not(:disabled) {
+      background-color: #004d40;
+    }
+    button:disabled {
+      background-color: #9e9e9e;
+      cursor: not-allowed;
+    }
+    #sessionIdDisplay {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #004d40;
+      text-align: center;
+      margin-bottom: 1rem;
+      word-break: break-word;
+    }
+    #joinError {
+      color: red;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1rem;
+      min-height: 1.2em;
+    }
+    .game-area {
+      display: none;
+      text-align: center;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      background: #ffffffdd;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      margin-top: 1rem;
+    }
+    .timer {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #00796b;
+      margin: 1rem 0;
+    }
+    .card {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 1rem 0;
+    }
+    .forbidden {
+      font-style: italic;
+      color: #c62828;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .score {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+      font-weight: 600;
+    }
+    .message {
+      font-size: 1.2rem;
+      color: #00796b;
+      min-height: 1.5em;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .end-message {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #004d40;
+      margin-top: 2rem;
+    }
+    .leaderboard {
+      max-height: 200px;
+      overflow-y: auto;
+      background: #e0f2f1;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    }
+    .leaderboard h3 {
+      margin-top: 0;
+      text-align: center;
+      color: #004d40;
+    }
+    .leaderboard ol {
+      padding-left: 1.4rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      button {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+      .timer {
+        font-size: 2.4rem;
+      }
+      .card {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bible Gridlock: The Forbidden Phrase - Multiplayer</h1>
+
+    <div class="instructions">
+      <h2>How to Play</h2>
+      <ul>
+        <li>Split into teams of 3–6 people.</li>
+        <li>One player is the <strong>Describer</strong>.</li>
+        <li>The Describer gets a Bible topic &amp; 5 forbidden words.</li>
+        <li>They have <strong>1 minute</strong> to describe the topic WITHOUT saying any forbidden word.</li>
+        <li>Their team must guess the topic correctly to earn points.</li>
+        <li>If a forbidden word is said or time runs out, no points are earned and the game moves on only when "Next Question" is pressed.</li>
+        <li>The game consists of 10 questions per play.</li>
+        <li>Host creates a game, shares the session ID. Players join with the code.</li>
+        <li>Game starts only when host presses "Start Game".</li>
+      </ul>
+    </div>
+
+    <div class="btn-group">
+      <button id="createGameBtn">➕ Create Game</button>
+      <button id="joinGameBtn">🔗 Join Game</button>
+      <button id="startGameBtn" disabled>▶️ Start Game</button>
+    </div>
+
+    <div id="sessionIdDisplay"></div>
+
+    <div style="text-align:center; margin-bottom:1rem;">
+      <input id="joinSessionInput" type="text" placeholder="Enter Session ID to Join" style="padding:0.6rem 1rem; font-size:1rem; width: 60%; max-width: 320px; border-radius: 6px; border: 2px solid #00796b;"/>
+    </div>
+    <div id="joinError"></div>
+
+    <div class="game-area" id="gameArea">
+      <div class="timer" id="timer">60</div>
+      <div class="card" id="topicCard"></div>
+      <div class="forbidden" id="forbiddenWords"></div>
+      <div class="score" id="scoreBoard">Score: 0 | Streak: 0 | Question: 0 / 10</div>
+      <div class="message" id="motivator"></div>
+
+      <div style="margin-top: 1rem;">
+        <button id="gotItBtn" disabled>✅ Got It!</button>
+        <button id="nextBtn" disabled>Next Question</button>
+      </div>
+
+      <div class="end-message" id="endMessage" style="display:none;"></div>
+      <div style="text-align:center; margin-top: 1rem;">
+        <button id="restartBtn" style="display:none;">🔄 Play Again</button>
+      </div>
+
+      <div class="leaderboard" id="leaderboard" style="display:none;">
+        <h3>Leaderboard</h3>
+        <ol id="leaderboardList"></ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    // Your Firebase config here (replace with your actual config)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFb6AHyBQZwMOrUtgf_-6WJgbmYA4hS8o",
+      authDomain: "nothingbutthetruth-1cd23.firebaseapp.com",
+      databaseURL: "https://nothingbutthetruth-1cd23-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "nothingbutthetruth-1cd23",
+      storageBucket: "nothingbutthetruth-1cd23.appspot.com",
+      messagingSenderId: "253692400115",
+      appId: "1:253692400115:web:7eb36acdf69382d28d0286",
+      measurementId: "G-LXVCQNJ6VJ"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // DOM Elements
+    const createGameBtn = document.getElementById('createGameBtn');
+    const joinGameBtn = document.getElementById('joinGameBtn');
+    const startGameBtn = document.getElementById('startGameBtn');
+    const sessionIdDisplay = document.getElementById('sessionIdDisplay');
+    const joinSessionInput = document.getElementById('joinSessionInput');
+    const joinError = document.getElementById('joinError');
+
+    const gameArea = document.getElementById('gameArea');
+    const timerDisplay = document.getElementById('timer');
+    const topicCard = document.getElementById('topicCard');
+    const forbiddenWords = document.getElementById('forbiddenWords');
+    const scoreBoard = document.getElementById('scoreBoard');
+    const motivator = document.getElementById('motivator');
+    const gotItBtn = document.getElementById('gotItBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const endMessage = document.getElementById('endMessage');
+    const restartBtn = document.getElementById('restartBtn');
+    const leaderboardDiv = document.getElementById('leaderboard');
+    const leaderboardList = document.getElementById('leaderboardList');
+
+    // Game variables
+    const cards = [
+      { topic: "David & Goliath", forbidden: ["Giant", "Slingshot", "Stone", "Fight", "Fear"] },
+      { topic: "Noah's Ark", forbidden: ["Flood", "Boat", "Animals", "Rain", "Pairs"] },
+      { topic: "Ten Commandments", forbidden: ["Moses", "Law", "Stone", "Mountain", "Israel"] },
+      { topic: "Jesus' Baptism", forbidden: ["Water", "Jordan", "John", "Dove", "Baptize"] },
+      { topic: "Garden of Eden", forbidden: ["Snake", "Fruit", "Tree", "Eve", "Apple"] },
+      { topic: "Paul in Prison", forbidden: ["Chains", "Jail", "Silas", "Earthquake", "Sing"] },
+      { topic: "Jonah and the Whale", forbidden: ["Fish", "Three days", "Nineveh", "Storm", "Run"] },
+      { topic: "The Prodigal Son", forbidden: ["Father", "Lost", "Return", "Farmer", "Fatted calf"] },
+      { topic: "The Good Samaritan", forbidden: ["Neighbor", "Road", "Robbers", "Priest", "Levite"] },
+      { topic: "The Last Supper", forbidden: ["Bread", "Wine", "Judas", "Disciples", "Betray"] }
+    ];
+
+    const totalQuestions = 10;
+    let gameDeck = [];
+    let currentIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let timer;
+    let timeLeft = 60;
+    let gameActive = false;
+
+    let sessionId = null;
+    let isHost = false;
+    let gameStarted = false;
+
+    // Utility: shuffle array
+    function shuffleArray(array) {
+      for(let i = array.length -1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i +1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    // Generate random session ID
+    function generateSessionId() {
+      return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    // Update Firebase session data
+    function updateSessionData(data) {
+      if(!sessionId) return;
+      db.ref('sessions/' + sessionId).update(data);
+    }
+
+    // Reset game variables
+    function resetGameVars() {
+      score = 0;
+      streak = 0;
+      currentIndex = 0;
+      gameActive = false;
+      gameStarted = false;
+      timeLeft = 60;
+      motivator.textContent = '';
+      endMessage.style.display = 'none';
+      restartBtn.style.display = 'none';
+      leaderboardDiv.style.display = 'none';
+      gotItBtn.disabled = true;
+      nextBtn.disabled = true;
+      scoreBoard.textContent = `Score: 0 | Streak: 0 | Question: 0 / ${totalQuestions}`;
+    }
+
+    // Show question card
+    function showQuestion() {
+      if(currentIndex >= gameDeck.length || currentIndex >= totalQuestions) {
+        endGame();
+        return;
+      }
+      const card = gameDeck[currentIndex];
+      topicCard.textContent = card.topic;
+      forbiddenWords.textContent = "Forbidden words: " + card.forbidden.join(", ");
+      scoreBoard.textContent = `Score: ${score} | Streak: ${streak} | Question: ${currentIndex + 1} / ${totalQuestions}`;
+      motivator.textContent = '';
+      timeLeft = 60;
+      timerDisplay.textContent = timeLeft;
+      gotItBtn.disabled = false;
+      nextBtn.disabled = true;
+      startTimer();
+    }
+
+    // Timer functions
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+        if(timeLeft <= 0) {
+          clearInterval(timer);
+          motivator.textContent = "Time's up!";
+          gotItBtn.disabled = true;
+          nextBtn.disabled = false;
+          streak = 0;
+          updateScore();
+          updateSessionData({currentQuestion: currentIndex + 1, score, streak, gameStarted});
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    // Update score display & sync
+    function updateScore() {
+      scoreBoard.textContent = `Score: ${score} | Streak: ${streak} | Question: ${currentIndex + 1} / ${totalQuestions}`;
+    }
+
+    // End game & show leaderboard
+    async function endGame() {
+      gameActive = false;
+      gameStarted = false;
+      stopTimer();
+      gotItBtn.disabled = true;
+      nextBtn.disabled = true;
+      endMessage.style.display = 'block';
+      endMessage.textContent = `Game over! Your final score is ${score}.`;
+      restartBtn.style.display = 'inline-block';
+
+      // Save score in leaderboard
+      if(sessionId && isHost) {
+        const scoresRef = db.ref(`sessions/${sessionId}/leaderboard`);
+        const newScoreRef = scoresRef.push();
+        await newScoreRef.set({score, timestamp: Date.now()});
+        displayLeaderboard();
+      }
+    }
+
+    // Display leaderboard
+    function displayLeaderboard() {
+      leaderboardDiv.style.display = 'block';
+      leaderboardList.innerHTML = '';
+      db.ref(`sessions/${sessionId}/leaderboard`).orderByChild('score').limitToLast(10).once('value', snapshot => {
+        const scores = [];
+        snapshot.forEach(child => {
+          scores.push(child.val());
+        });
+        scores.sort((a,b) => b.score - a.score);
+        scores.forEach((s,i) => {
+          const li = document.createElement('li');
+          li.textContent = `Score: ${s.score} (${new Date(s.timestamp).toLocaleString()})`;
+          leaderboardList.appendChild(li);
+        });
+      });
+    }
+
+    // Event handlers
+
+    // Create game
+    createGameBtn.addEventListener('click', () => {
+      sessionId = generateSessionId();
+      isHost = true;
+      resetGameVars();
+      gameDeck = [...cards];
+      shuffleArray(gameDeck);
+      sessionIdDisplay.textContent = `Session ID: ${sessionId}`;
+      joinError.textContent = '';
+      gameArea.style.display = 'block';
+      startGameBtn.disabled = false;
+      joinSessionInput.value = '';
+      updateSessionData({host: true, gameStarted: false});
+    });
+
+    // Join game
+    joinGameBtn.addEventListener('click', async () => {
+      const enteredId = joinSessionInput.value.trim().toUpperCase();
+      if(!enteredId) {
+        joinError.textContent = "Please enter a session ID to join.";
+        return;
+      }
+      // Check if session exists
+      const snapshot = await db.ref(`sessions/${enteredId}`).get();
+      if(!snapshot.exists()) {
+        joinError.textContent = "Session ID not found.";
+        return;
+      }
+      sessionId = enteredId;
+      isHost = false;
+      resetGameVars();
+      gameArea.style.display = 'block';
+      sessionIdDisplay.textContent = `Joined Session: ${sessionId}`;
+      joinError.textContent = '';
+      startGameBtn.disabled = true;
+      // Listen to game start and updates
+      listenForGameUpdates();
+    });
+
+    // Start game (host only)
+    startGameBtn.addEventListener('click', () => {
+      if(!isHost || !sessionId) return;
+      gameStarted = true;
+      updateSessionData({gameStarted: true});
+      startGameBtn.disabled = true;
+      gameDeck = [...cards];
+      shuffleArray(gameDeck);
+      currentIndex = 0;
+      score = 0;
+      streak = 0;
+      gameActive = true;
+      showQuestion();
+      updateSessionData({currentQuestion: currentIndex, score, streak, gameStarted});
+    });
+
+    // Got it button (team guessed right)
+    gotItBtn.addEventListener('click', () => {
+      if(!gameActive) return;
+      score += 10 + streak * 2;
+      streak++;
+      updateScore();
+      motivator.textContent = "Great job! Keep going!";
+      gotItBtn.disabled = true;
+      nextBtn.disabled = false;
+      stopTimer();
+      updateSessionData({score, streak});
+    });
+
+    // Next question button
+    nextBtn.addEventListener('click', () => {
+      if(!gameActive) return;
+      currentIndex++;
+      if(currentIndex >= totalQuestions) {
+        endGame();
+      } else {
+        showQuestion();
+        updateSessionData({currentQuestion: currentIndex, score, streak});
+      }
+      nextBtn.disabled = true;
+      gotItBtn.disabled = false;
+      motivator.textContent = '';
+    });
+
+    // Restart game button
+    restartBtn.addEventListener('click', () => {
+      if(!sessionId) return;
+      resetGameVars();
+      if(isHost) {
+        startGameBtn.disabled = false;
+        endMessage.style.display = 'none';
+        leaderboardDiv.style.display = 'none';
+      }
+    });
+
+    // Listen for game updates (for joining players)
+    function listenForGameUpdates() {
+      if(!sessionId) return;
+      const sessionRef = db.ref(`sessions/${sessionId}`);
+
+      sessionRef.on('value', snapshot => {
+        const data = snapshot.val();
+        if(!data) return;
+
+        if(data.gameStarted && !gameActive) {
+          gameStarted = true;
+          gameActive = true;
+          currentIndex = data.currentQuestion || 0;
+          score = data.score || 0;
+          streak = data.streak || 0;
+          showQuestionJoin(data);
+        }
+
+        // Update score & question display for joiners
+        if(gameActive) {
+          score = data.score || score;
+          streak = data.streak || streak;
+          currentIndex = data.currentQuestion || currentIndex;
+          scoreBoard.textContent = `Score: ${score} | Streak: ${streak} | Question: ${currentIndex + 1} / ${totalQuestions}`;
+        }
+      });
+    }
+
+    // Show question to joiners (no timer)
+    function showQuestionJoin(data) {
+      const card = cards[currentIndex] || cards[0];
+      topicCard.textContent = card.topic;
+      forbiddenWords.textContent = "Forbidden words: " + card.forbidden.join(", ");
+      scoreBoard.textContent = `Score: ${score} | Streak: ${streak} | Question: ${currentIndex + 1} / ${totalQuestions}`;
+      motivator.textContent = 'Waiting for host...';
+      timerDisplay.textContent = '';
+      gotItBtn.disabled = true;
+      nextBtn.disabled = true;
+    }
+  </script>
+</body>
+</html>

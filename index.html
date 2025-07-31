@@ -33,7 +33,9 @@
                     <li><a href="#studies"><i class="fas fa-book-open"></i> Studies</a></li>
                     <li><a href="#messages"><i class="fas fa-envelope"></i> Messages</a></li>
                     <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
-                    <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+<button id="darkModeToggle">🌙 Dark Mode</button>
+
+
                 </ul>
                 </div>
             </div>
@@ -73,7 +75,6 @@
   <div class="notification-banner">🔔 More devotions added!</div>
  >
 </div>
-
 
 
 <div class="readmore-box">
@@ -313,6 +314,7 @@
        <li> <div class="box"><a href="Studies/facts_or_fiction.html" style="text-decoration:none;"><i class="fas fa-question-circle" style="color:#ffd803"></i> Is The Bible Facts or Fiction?</a></div></li>
        <li> <div class="box"><a href="Studies/why_the_bible_is_God's_word.html" style="text-decoration:none;"><i class="fas fa-book-bible" style="color:#ffd803"></i> Is the Bible God's Word to Humanity?</a></div></li>
         <li> <div class="box"><a href="Studies/are_angels_real.html" style="text-decoration:none;"><i class="fas fa-city" style="color:#ffd803"></i>    Are Angels Real?</a></div></li>
+        
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
         <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
@@ -449,15 +451,16 @@
   <p>Scripture in Motion, Faith in Action!</p>
   <a href="games/relay-race/relayrace.html"><button>Play Now</button></a>
 </div>
-    <div class="game-card coming-soon">
-      <h3>🤔 Blessed or Bluffed?</h3>
-      <p>Can you spot the fake verse? Let’s see.</p>
-      <button disabled>Coming Soon</button>
+    <div class="game-card">
+      <h3>🤔 Bible Gridlock </h3>
+      <p>Can you navigate the verses without getting stuck?</p>
+      <a href="games/bible-gridlock/biblegridlock.html"><button>Play Now</button></a>
     </div>
-    <div class="game-card coming-soon">
-      <h3>🧠 Commandment Catch-Up</h3>
-      <p>Race to match all 10 commandments. Fast fingers win!</p>
-      <button disabled>Coming Soon</button>
+    <div class="game-card">
+      <h3>💭 Who Said It?</h3>
+      <p>Test your knowledge of Bible quotes and their speakers!</p>
+      <a href="games/who-said-it/who-said/who_said.html"><button>Play Now</button></a>
+   
     </div>
   </div>
 
@@ -1663,7 +1666,7 @@ const verses = [
 ];
 
 const devotions = [
-  "Reflect on how your actions today can glorify God.",
+  " Reflect on how your actions today can glorify God. ",
   "Lean on faith when making difficult decisions today.",
   "Remember Christ’s strength empowers you in every challenge.",
   "Pause. Breathe. Trust God's timing in your life.",
@@ -1784,6 +1787,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 </script>
+
+
+
+
+
+
+
+
+
+
+// Dark Mode Toggle Script
+
+<script>
+const toggleButton = document.getElementById('darkModeToggle');
+const body = document.body;
+
+// On page load, apply saved or system preference
+if (localStorage.getItem('darkMode') === 'enabled') {
+  body.classList.add('dark-mode');
+  toggleButton.textContent = '☀️ Light Mode';
+} else if (
+  !localStorage.getItem('darkMode') &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches
+) {
+  body.classList.add('dark-mode');
+  toggleButton.textContent = '☀️ Light Mode';
+}
+
+toggleButton.addEventListener('click', () => {
+  body.classList.toggle('dark-mode');
+  if (body.classList.contains('dark-mode')) {
+    localStorage.setItem('darkMode', 'enabled');
+    toggleButton.textContent = '☀️ Light Mode';
+  } else {
+    localStorage.setItem('darkMode', 'disabled');
+    toggleButton.textContent = '🌙 Dark Mode';
+  }
+});
+</script>
+
+
 
 
 </body>
