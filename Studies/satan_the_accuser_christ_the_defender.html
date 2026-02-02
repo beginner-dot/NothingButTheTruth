@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Satan the Accuser, Christ the Defender - One Day Study</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e9e6f7 0%, #e3f0fa 100%);
+      color: #222;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .main-content {
+      max-width: 900px;
+      margin: 40px auto 40px auto;
+      padding: 2.5vw 6vw 3vw 6vw;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px 0 rgba(60,60,120,0.10);
+      min-height: 80vh;
+      position: relative;
+    }
+    .header-section {
+      text-align: center;
+      margin-bottom: 2.2rem;
+      padding-bottom: 1.2rem;
+      background: linear-gradient(120deg, #2575fc 0%, #6a11cb 100%);
+      border-radius: 0 0 32px 32px;
+      color: #fff;
+      box-shadow: 0 8px 32px 0 rgba(37,117,252,0.15), 0 2px 12px 0 rgba(106,17,203,0.10);
+      position: relative;
+      padding-top: 2.5rem;
+      overflow: hidden;
+    }
+    .header-section::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      left: -80px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, #ffd803 0%, #2575fc 70%, transparent 100%);
+      opacity: 0.18;
+      z-index: 0;
+    }
+    .header-section::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      right: -80px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, #6a11cb 0%, #fff 80%, transparent 100%);
+      opacity: 0.13;
+      z-index: 0;
+    }
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 2.7rem;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      text-shadow: 0 4px 24px rgba(37,117,252,0.18), 0 1px 0 #fff;
+      display: inline-block;
+      padding: 0.4em 1.2em;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 2px 16px 0 rgba(37,117,252,0.08);
+    }
+    .study-meta {
+      position: relative;
+      z-index: 1;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #eaf4fd;
+      letter-spacing: 0.5px;
+      margin-top: 1.2em;
+      text-shadow: 0 2px 8px rgba(37,117,252,0.13);
+    }
+    .study-section {
+      margin-bottom: 2rem;
+      line-height: 1.75;
+    }
+    .study-section h2 {
+      font-size: 1.6rem;
+      color: #2575fc;
+      margin-top: 1.8rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid #6a11cb;
+      padding-left: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .study-section h3 {
+      font-size: 1.2rem;
+      color: #6a11cb;
+      margin-top: 1.3rem;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
+    .study-section p {
+      margin-bottom: 1.2rem;
+      text-align: justify;
+      font-size: 1.05em;
+      line-height: 1.8;
+    }
+    .key-verse {
+      background: linear-gradient(90deg, #f3f0fa 0%, #eaf4fd 100%);
+      border-left: 5px solid #6a11cb;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #333;
+      border-radius: 8px;
+      font-size: 1.08em;
+      box-shadow: 0 8px 32px 0 rgba(106,17,203,0.25), 0 24px 80px 0 rgba(37,117,252,0.25);
+      position: relative;
+    }
+    .share-buttons {
+      display: flex;
+      gap: 10px;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: #f0e6fd;
+      border-radius: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: white;
+    }
+    .share-btn:hover {
+      transform: scale(1.1);
+    }
+    .share-btn.facebook {
+      background: #1877f2;
+      box-shadow: 0 4px 12px rgba(24,119,242,0.3);
+    }
+    .share-btn.twitter {
+      background: #1da1f2;
+      box-shadow: 0 4px 12px rgba(29,161,242,0.3);
+    }
+    .share-btn.whatsapp {
+      background: #25d366;
+      box-shadow: 0 4px 12px rgba(37,211,102,0.3);
+    }
+    .share-btn.email {
+      background: #6a11cb;
+      box-shadow: 0 4px 12px rgba(106,17,203,0.3);
+    }
+    .share-btn.copy {
+      background: #2575fc;
+      box-shadow: 0 4px 12px rgba(37,117,252,0.3);
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      background: linear-gradient(120deg, #2575fc 0%, #6a11cb 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .back-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,117,252,0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="main-content">
+    <div class="header-section">
+      <h1>Satan the Accuser, Christ the Defender</h1>
+      <p class="study-meta">A Study on God's Defense Against Satan's Accusations</p>
+    </div>
+
+    <div class="share-buttons">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html" target="_blank" class="share-btn facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/intent/tweet?url=https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html&text=Satan the Accuser, Christ the Defender" target="_blank" class="share-btn twitter" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://wa.me/?text=Check out this study: Satan the Accuser, Christ the Defender https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html" target="_blank" class="share-btn whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:?subject=Satan the Accuser, Christ the Defender&body=Check out this study: https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html" class="share-btn email" title="Share via Email"><i class="fas fa-envelope"></i></a>
+      <button class="share-btn copy" onclick="copyToClipboard()" title="Copy Link"><i class="fas fa-link"></i></button>
+    </div>
+
+    <div class="study-section">
+      <h2>Satan's Accusations</h2>
+      
+      <p>Satan accuses those who follow the Lord, but not because he is upset with their sins. He boasts about their faults, knowing he can only have power over them if they break God's law. Satan points out the sins of people who follow God— And not because he cares, but because he knows he can only harm them if they disobey God. He uses their mistakes to try and gain power over them.</p>
+
+      <p>His accusations come only from hatred for Christ. Seeing Christ's power in people, he tries to pull away those who have accepted salvation. He leads men and women to lose trust in God and turn away from His love. He tempts them to break the law and then claims them as his captives, arguing that Christ cannot take them from him.</p>
+
+      <p>Satan knows that those who ask for forgiveness will get it, so he shows their sins to discourage them. He tries to make even their best efforts seem bad. In many subtle and cruel ways, he works to condemn them.</p>
+    </div>
+
+    <div class="study-section">
+      <h2>Christ Our Advocate</h2>
+      
+      <p>We cannot face the enemy's charges by ourselves. But Jesus, our Advocate, makes a strong case for all who turn to Him with repentance and faith. He wins complete victory over their accuser by the powerful work of Calvary. His perfect obedience to God's law has given Him all power in heaven and earth, and to the accuser of His people He says:</p>
+
+      <div class="key-verse">
+        Zechariah 3:2 - "And the Lord said unto Satan, The Lord rebuke thee, O Satan; even the Lord that hath chosen Jerusalem rebuke thee: is not this a brand plucked out of the fire?"
+      </div>
+    </div>
+
+    <div class="study-section">
+      <h2>The Vision of Joshua: What It Means</h2>
+      
+      <p>This verse is part of a vision where Joshua the high priest stands before God, and Satan is accusing him. But instead of agreeing with Satan, God defends Joshua. He says, "The Lord rebuke you!" and calls Joshua a brand plucked out of the fire—meaning someone rescued from destruction. Listen also to what he promises those who trust Him:</p>
+
+      <div class="key-verse">
+        Zechariah 3:3-4 - "Now Joshua was clothed with filthy garments, and stood before the angel. And he answered and spake unto those that stood before him, saying, Take away the filthy garments from him. And unto him he said, Behold, I have caused thine iniquity to pass from thee, and I will clothe thee with change of raiment."
+      </div>
+
+      <p>All who have put on Christ's righteousness will stand faithful and true. The promise to Joshua is for everyone: "If you will ... keep My command, ... I will give you places to walk among these who stand here." (Zechariah 3:7) Angels will walk beside them even now, and they will stand at last among the angels around God's throne.</p>
+    </div>
+
+    <div class="study-section">
+      <h2>For God's People in the Last Days</h2>
+      
+      <p>Zechariah's vision is especially true for God's people in the last days of the great day of atonement. The remnant will face great trouble. Those who keep God's commandments and the faith of Jesus will feel the anger of the dragon and his armies. Here is a small group resisting his power. If he could wipe them from the earth, he would win completely. Soon he will cause the evil powers of the earth to try to destroy God's people.</p>
+
+      <p>Those who are true to God will be criticized and treated unfairly. They will be "betrayed even by parents and brothers, relatives and friends," even to death. (Luke 21:16) Just as Joshua pleaded before the Angel, the remnant church, with broken hearts and strong faith, will ask for forgiveness and help through Jesus their Advocate. They know their sinfulness and unworthiness well, and they are ready to despair.</p>
+
+      <p>The tempter stands ready to accuse them. He points to their dirty clothes, their faults, their weakness and foolishness, their sins of ingratitude, their difference from Christ, which have dishonored their Savior. He tries to scare them by saying their case is hopeless. He hopes they will give in to his temptations and turn away from God.</p>
+
+      <p>Satan knows exactly the sins he has tempted God's people to commit, and he uses these accusations against them. He says they have lost God's protection because of their sins; they deserve to be excluded from God's favor just like he does. "Are these," he says, "to take my place in heaven, and the place of the angels who joined me? They say they obey God's law, but have they not loved themselves? Have they not put their own interests above serving God? Have they not loved the things of the world? Look at their selfishness, their anger, their hatred of each other. Justice says God must judge them."</p>
+    </div>
+
+    <div class="study-section">
+      <h2>Jesus Pleads for You</h2>
+      
+      <p>But here you are, Christ's followers. You have turned away from your sins and come to the Lord with sorrow. And please never forget this: the divine Advocate pleads for you. He who has been most hurt by our ungratefulness says, "I gave My life for these people. They may have faults, but they have repented, and I have forgiven and accepted them."</p>
+
+      <p>Satan's attacks are strong. The fire seems ready to burn God's people, but Jesus will bring them through like gold tested by fire. Their earthly faults will be removed, so Christ can show His image perfectly through them.</p>
+
+      <p>Sometimes it may seem the Lord has forgotten His church, but nothing in the world is more precious to God than you, His church. He does not let His people be defeated by Satan's temptations. He will punish those who lie about Him, but He will be kind to all who repent.</p>
+
+      <p>In the last days, God's people will sigh and cry over the evil done in the land. With tears, they will warn the wicked about the danger of breaking God's law, and they will humble themselves before the Lord in repentance. The wicked will mock their serious warnings. But the pain of God's people shows they are gaining back the good character lost because of sin. It is because they are drawing closer to Christ, because they focus on His perfect purity, that they clearly see how sinful sin is. A crown of glory waits for those who bow at the foot of the cross.</p>
+
+      <p>God's faithful, praying people do not know how safely He protects them. Satan pushes the rulers of this world to try to destroy them, but if God's children could see, they would find angels camped around them.</p>
+    </div>
+
+    <div class="study-section">
+      <h2>Clothed in Christ's Righteousness</h2>
+      
+      <p>As God's people ask for pure hearts, Christ puts on them the spotless robe of His righteousness. The despised remnant are dressed in glorious clothes, never to be spoiled again by the world's corruption. Their names stay in the Lamb's book of life. They have resisted the tricks of the deceiver. Now they are safe forever, their sins given to the one who started sin.</p>
+
+      <p>While Satan has been making his accusations, holy angels, unseen, have been marking God's faithful ones. These stand on Mount Zion, with the Father's name written on their foreheads. They sing the song that no one can learn except the redeemed from the earth.</p>
+
+      <div class="key-verse">
+        Revelation 14:5 (KJV) - "And in their mouth was found no guile: for they are without fault before the throne of God."
+      </div>
+
+      <p>This verse doesn't mean they lived a perfect life. It means they put on the righteousness of Christ and therefore they have been made clean and blameless in God's sight.</p>
+    </div>
+
+    <div class="study-section">
+      <h2>The Promise Fulfilled</h2>
+      
+      <p>Now God's words to Joshua have been fully fulfilled:</p>
+
+      <div class="key-verse">
+        Zechariah 3:8 - "Hear now, O Joshua the high priest, thou, and thy fellows that sit before thee: for they are men wondered at: for, behold, I will bring forth my servant the BRANCH."
+      </div>
+
+      <p>Here Christ is shown as the Redeemer and Savior of His people. Now the remnant have become "a wonderful sign" as their tears and shame during their journey change to joy and honor in the presence of God and the Lamb.</p>
+
+      <div class="key-verse">
+        Isaiah 4:2–3 (KJV) - Verse 2: "In that day shall the branch of the Lord be beautiful and glorious, and the fruit of the earth shall be excellent and comely for them that are escaped of Israel." Verse 3: "And it shall come to pass, that he that is left in Zion, and he that remaineth in Jerusalem, shall be called holy, even every one that is written among the living in Jerusalem."
+      </div>
+
+      <p>"The branch of the Lord" refers to the coming Messiah—Jesus—who will be beautiful, glorious, and fruitful. Those who survive judgment and remain faithful ("escaped of Israel") will enjoy His blessings. The people left in Zion will be called holy, marked by God as belonging to Him.</p>
+    </div>
+
+    <div class="study-section">
+      <h2>Your Victory in Christ</h2>
+      
+      <p>You may see your sins as too great for you to enter heaven. But Jesus' sacrifice is far greater than your sins. This is not fiction—it may seem too good to be true, but God is not a man that he should lie. Only the truth comes from him. Just pray and trust him. Like really, really, really trust him with this.</p>
+
+      <p>Because: "The people left in Zion will be called holy, marked by God as belonging to Him" and "in their mouth was found no guile: for they are without fault before the throne of God."</p>
+    </div>
+
+    <div class="share-buttons">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html" target="_blank" class="share-btn facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/intent/tweet?url=https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html&text=Satan the Accuser, Christ the Defender" target="_blank" class="share-btn twitter" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://wa.me/?text=Check out this study: Satan the Accuser, Christ the Defender https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html" target="_blank" class="share-btn whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:?subject=Satan the Accuser, Christ the Defender&body=Check out this study: https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html" class="share-btn email" title="Share via Email"><i class="fas fa-envelope"></i></a>
+      <button class="share-btn copy" onclick="copyToClipboard()" title="Copy Link"><i class="fas fa-link"></i></button>
+    </div>
+
+    <div class="study-section">
+      <h2>Your Victory in Christ</h2>
+      
+      <p>You may see your sins as too great for you to enter heaven. But Jesus' sacrifice is far greater than your sins. This is not fiction—it may seem too good to be true, but God is not a man that he should lie. Only the truth comes from him. Just pray and trust him. Like really, really, really trust him with this.</p>
+
+      <p>Because: "The people left in Zion will be called holy, marked by God as belonging to Him" and "in their mouth was found no guile: for they are without fault before the throne of God."</p>
+    </div>
+
+    <a href="../index.html" class="back-button">← Back to Home</a>
+  </div>
+
+  <script>
+    function copyToClipboard() {
+      const url = 'https://nothingbutthetruth.com/Studies/satan_the_accuser_christ_the_defender.html';
+      navigator.clipboard.writeText(url).then(() => {
+        alert('Link copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>
