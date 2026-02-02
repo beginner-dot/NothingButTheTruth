@@ -314,7 +314,7 @@
     <li>Click Start Game to start a new session or <strong>Join Game</strong> to enter an existing session ID.</li>
     <li>After creating or joining, click <strong>Start Game</strong> to begin.</li>
     <li>Read the Bible quote shown and select who said it from the multiple-choice answers.</li>
-    <li>You have 60 seconds to answer each question.</li>
+    <li>You have 30 seconds to answer each question.</li>
     <li>Correct answers earn points and build streaks. Every 3 correct answers triggers a confetti celebration!</li>
     <li>If time runs out or you answer incorrectly, the correct answer is highlighted.</li>
     <li>Click <strong>Next Question</strong> to move forward. The game ends after 10 questions.</li>
@@ -329,8 +329,7 @@
 <div id="controls">
   <button id="create-game" class="btn-main btn-create">Create Game</button>
   <button id="join-game" class="btn-main btn-join">Join Game</button>
-   <button id="start-game" style="display:none;">Start Game</button>
-
+  <button id="start-game" class="btn-main btn-start" style="display:none;">Start Game</button>
 </div>
 
 <div id="scoreboard">Score: 0 | Question: 0 / 0</div>
@@ -344,6 +343,7 @@
 
 <button id="next-question" class="btn-next" disabled>Next Question</button>
 
+  <button id="exit-game" class="btn-main" style="display:none; background-color: #d9534f; margin-top: 1rem;" onclick="window.location.href='/'">↩ Back to Home</button>
 <div id="endScreen" role="region" aria-live="polite" aria-atomic="true"></div>
 
 <div id="instructions">
@@ -426,7 +426,7 @@ const quizData = [
 
 // Constants & Globals
 const totalQuestions = 10;
-const questionDuration = 60; // seconds
+const questionDuration = 30; // seconds
 
 let userId = null;
 let sessionId = null;
@@ -449,6 +449,7 @@ const createGameBtn = document.getElementById("create-game");
 const joinGameBtn = document.getElementById("join-game");
 const startGameBtn = document.getElementById("start-game");
 const nextQuestionBtn = document.getElementById("next-question");
+const exitGameBtn = document.getElementById("exit-game");
 const sessionIdSpan = document.getElementById("session-id");
 const sessionInfo = document.getElementById("session-info");
 const quoteBox = document.getElementById("quoteBox");
@@ -574,6 +575,7 @@ function updateQuestionUI(data) {
     answerButtons.innerHTML = "";
     timerDisplay.textContent = "";
     message.textContent = "";
+    exitGameBtn.style.display = "none";
     return;
   }
 
@@ -584,9 +586,11 @@ function updateQuestionUI(data) {
     quoteBox.textContent = "";
     answerButtons.innerHTML = "";
     timerDisplay.textContent = "";
+    exitGameBtn.style.display = "inline-block";
     return;
   }
   endScreen.style.display = "none";
+  exitGameBtn.style.display = "none";
 
   const currentQ = questions[currentQuestionIndex];
   quoteBox.textContent = currentQ.quote;
@@ -810,6 +814,7 @@ function resetGame() {
   scoreboard.textContent = "";
   message.textContent = "";
   endScreen.style.display = "none";
+  exitGameBtn.style.display = "none";
   instructions.style.display = "block";
 
   createGameBtn.disabled = false;

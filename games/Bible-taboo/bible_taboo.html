@@ -209,6 +209,7 @@
       <div class="end-message" id="endMessage" style="display:none;"></div>
       <div style="text-align:center; margin-top: 1rem;">
         <button id="restartBtn" style="display:none;">🔄 Play Again</button>
+        <button id="exitBtn" style="display:none;" onclick="window.location.href='/'">↩ Back to Games</button>
       </div>
 
       <div class="leaderboard" id="leaderboard" style="display:none;">
@@ -378,6 +379,7 @@
       endMessage.style.display = 'block';
       endMessage.textContent = `Game over! Your final score is ${score}.`;
       restartBtn.style.display = 'inline-block';
+      document.getElementById('exitBtn').style.display = 'inline-block';
 
       // Save score in leaderboard
       if(sessionId && isHost) {

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bible Games - Nothing But The Truth</title>
+    <link rel="stylesheet" href="Indexstyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .all-games-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-section {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header-section h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-weight: 800;
+        }
+
+        .header-section p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: white;
+            color: #667eea;
+            transform: translateX(-5px);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .game-card:nth-child(1) { animation-delay: 0.1s; }
+        .game-card:nth-child(2) { animation-delay: 0.2s; }
+        .game-card:nth-child(3) { animation-delay: 0.3s; }
+        .game-card:nth-child(4) { animation-delay: 0.4s; }
+        .game-card:nth-child(5) { animation-delay: 0.5s; }
+        .game-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+        }
+
+        .game-card-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+
+        .game-card h3 {
+            font-size: 1.8rem;
+            color: #333;
+            margin: 0 0 0.8rem 0;
+        }
+
+        .game-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .game-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.95rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .play-btn:active {
+            transform: scale(0.98);
+        }
+
+        .coming-soon {
+            opacity: 0.6;
+        }
+
+        .coming-soon .play-btn {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .coming-soon .play-btn:hover {
+            transform: scale(1);
+            box-shadow: none;
+        }
+
+        .badge-new {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2rem;
+            margin: 3rem 0 2rem 0;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .coming-soon-games {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .game-card-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="all-games-container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-btn">← Back to Home</a>
+
+        <!-- Header -->
+        <div class="header-section">
+            <h1>🎮 All Bible Games</h1>
+            <p>Choose from our complete collection of scripture-based games!</p>
+        </div>
+
+        <!-- Available Games -->
+        <h2 class="section-title">Available Games</h2>
+        <div class="games-grid">
+            <!-- Verse Hunt -->
+            <div class="game-card">
+                <div class="game-card-content">
+                    <div class="difficulty-badge">⭐⭐⭐⭐</div>
+                    <h3>🔍 Verse Hunt</h3>
+                    <p>Find verses under time pressure. Race against the clock to answer scripture questions correctly. Test your biblical knowledge with varying difficulty levels!</p>
+                    <div class="game-meta">
+                        <span>⏱️ 5-10 min</span>
+                        <span>🎯 Single Player</span>
+                    </div>
+                </div>
+                <a href="games/verse-hunt-live/versehunt.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
+            </div>
+
+            <!-- Who Said It -->
+            <div class="game-card">
+                <div class="game-card-content">
+                    <div class="difficulty-badge">⭐⭐⭐⭐</div>
+                    <h3>💭 Who Said It?</h3>
+                    <p>Match famous biblical quotes to their speakers. Test your knowledge of scripture by identifying who said these memorable verses and statements!</p>
+                    <div class="game-meta">
+                        <span>⏱️ 8-15 min</span>
+                        <span>👥 Multiplayer</span>
+                    </div>
+                </div>
+                <a href="games/who-said-it/who-said/who_said.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
+            </div>
+
+            <!-- Bible Relay Race -->
+            <div class="game-card">
+                <div class="game-card-content">
+                    <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
+                    <h3>👥 Bible Relay Race</h3>
+                    <p>Scripture in motion! Answer questions in rapid succession to win the race. Teams compete to answer the most questions correctly!</p>
+                    <div class="game-meta">
+                        <span>⏱️ 10-20 min</span>
+                        <span>👥 Team Game</span>
+                    </div>
+                </div>
+                <a href="games/relay-race/relayrace.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
+            </div>
+
+            <!-- Bible Bingo -->
+            <div class="game-card">
+                <div class="game-card-content">
+                    <div class="difficulty-badge">⭐⭐⭐</div>
+                    <h3>🎭 Bible Bingo</h3>
+                    <p>Team up and test your scripture knowledge. Match verses to complete your bingo card and earn lines for points!</p>
+                    <div class="game-meta">
+                        <span>⏱️ 8-15 min</span>
+                        <span>👥 Team Game</span>
+                    </div>
+                </div>
+                <a href="games/bible-bingo/BibleBingoScriptureSprint/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
+            </div>
+
+            <!-- Bible Taboo / GridLock -->
+            <div class="game-card">
+                <div class="game-card-content">
+                    <div class="difficulty-badge">⭐⭐</div>
+                    <h3>🤔 Bible GridLock</h3>
+                    <p>Navigate through biblical facts and verses. Answer correctly to unlock the grid path and complete the challenge!</p>
+                    <div class="game-meta">
+                        <span>⏱️ 6-12 min</span>
+                        <span>👥 Multiplayer</span>
+                    </div>
+                </div>
+                <a href="games/bible-taboo/bible_taboo.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
+            </div>
+        </div>
+
+        <!-- Coming Soon Games -->
+        <h2 class="section-title">Coming Soon</h2>
+        <div class="games-grid coming-soon-games">
+            <!-- Scripture Sprint -->
+            <div class="game-card coming-soon">
+                <div class="game-card-content">
+                    <div class="difficulty-badge">⭐⭐⭐</div>
+                    <h3>📜 Scripture Sprint</h3>
+                    <p>Race to match verse references with their content. Combo system awards bonus points for correct consecutive answers!</p>
+                    <div class="game-meta">
+                        <span>⏱️ 5-8 min</span>
+                        <span class="badge-new">Coming Soon</span>
+                    </div>
+                </div>
+                <button class="play-btn" disabled>🔒 Coming Soon</button>
+            </div>
+
+            <!-- Translation Challenge -->
+            <div class="game-card coming-soon">
+                <div class="game-card-content">
+                    <div class="difficulty-badge">⭐⭐⭐⭐</div>
+                    <h3>🌍 Translation Challenge</h3>
+                    <p>Identify Bible translations. Learn the nuances between KJV, NIV, ESV, and more with this educational game!</p>
+                    <div class="game-meta">
+                        <span>⏱️ 10-12 min</span>
+                        <span class="badge-new">Coming Soon</span>
+                    </div>
+                </div>
+                <button class="play-btn" disabled>🔒 Coming Soon</button>
+            </div>
+
+            <!-- Timeline Master -->
+            <div class="game-card coming-soon">
+                <div class="game-card-content">
+                    <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
+                    <h3>⏳ Bible Timeline Master</h3>
+                    <p>Order biblical events chronologically. Master Old Testament, New Testament, or test yourself with a complete Bible timeline!</p>
+                    <div class="game-meta">
+                        <span>⏱️ 8-15 min</span>
+                        <span class="badge-new">Coming Soon</span>
+                    </div>
+                </div>
+                <button class="play-btn" disabled>🔒 Coming Soon</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

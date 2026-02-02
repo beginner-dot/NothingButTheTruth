@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bible MythBusters - Debunk Spiritual Myths</title>
+<style>
+  :root {
+    --tech-blue: #1E90FF;
+    --neo-teal: #00BFA6;
+    --charcoal-gray: #2D2D2D;
+    --cloud-gray: #F5F5F5;
+    --electric-green: #00FF9D;
+    --truth-green: #28a745;
+    --danger-red: #dc3545;
+    --soft-bg: #f9fafd;
+    --tab-bg-active: #00bfa6;
+    --tab-bg-inactive: #e0f7f5;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--soft-bg);
+    color: var(--charcoal-gray);
+    margin: 2rem auto;
+    max-width: 900px;
+    padding: 0 1rem;
+  }
+
+  h1 {
+    text-align: center;
+    color: var(--tech-blue);
+    margin-bottom: 2rem;
+    text-shadow: 0 0 8px var(--electric-green);
+  }
+
+  .myth-container {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    padding: 2rem;
+  }
+
+  .myth-title {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+    color: var(--tech-blue);
+  }
+
+  .myth-lie {
+    font-weight: 700;
+    color: var(--danger-red);
+    margin-bottom: 1rem;
+  }
+
+  .myth-truth {
+    font-weight: 600;
+    color: var(--truth-green);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 0.6rem 0;
+    background: var(--tab-bg-inactive);
+    border: none;
+    border-radius: 0.6rem 0.6rem 0 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--charcoal-gray);
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .tab-btn[aria-selected="true"] {
+    background: var(--tab-bg-active);
+    color: white;
+    cursor: default;
+    box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+  }
+
+  .tab-panel {
+    border: 2px solid var(--tab-bg-active);
+    border-top: none;
+    border-radius: 0 0 1rem 1rem;
+    padding: 1rem 1.5rem;
+    min-height: 120px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    white-space: pre-wrap;
+    font-style: italic;
+    color: #444;
+  }
+
+  .tab-panel[hidden] {
+    display: none;
+  }
+
+  /* Navigation */
+  .nav-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .nav-buttons button {
+    background: var(--neo-teal);
+    border: none;
+    padding: 0.6rem 1.3rem;
+    border-radius: 0.7rem;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,191,166,0.5);
+    transition: background 0.3s ease;
+  }
+
+  .nav-buttons button:disabled {
+    background: #a6d8d0;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+</style>
+</head>
+<body>
+
+<h1>Bible MythBusters</h1>
+
+<div class="myth-container" role="main" aria-live="polite">
+  <h2 id="mythTitle" class="myth-title"></h2>
+  <p id="mythLie" class="myth-lie"></p>
+  <p id="mythTruth" class="myth-truth"></p>
+
+  <div class="tabs" role="tablist" aria-label="Sources Tabs">
+    <button class="tab-btn" role="tab" aria-selected="true" tabindex="0" aria-controls="source-bible" id="tab-bible">Bible</button>
+    <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="source-sop" id="tab-sop">Spirit of Prophecy</button>
+    <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="source-gc" id="tab-gc">Great Controversy</button>
+    <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="source-sc" id="tab-sc">Steps to Christ</button>
+  </div>
+
+  <section id="source-bible" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-bible"></section>
+  <section id="source-sop" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-sop" hidden></section>
+  <section id="source-gc" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-gc" hidden></section>
+  <section id="source-sc" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-sc" hidden></section>
+
+  <div class="nav-buttons">
+    <button id="prevBtn" aria-label="Previous Myth" disabled>← Previous</button>
+    <button id="nextBtn" aria-label="Next Myth">Next →</button>
+  </div>
+</div>
+
+<script>
+  const myths = [
+    {
+      id: "dead-conscious",
+      title: "The Dead Are Conscious After Death",
+      lie: "Your loved ones are watching over you from heaven right now.",
+      truth: "The dead are unconscious, waiting the resurrection when Christ returns.",
+      bible: `Ecclesiastes 9:5 - “For the living know that they shall die: but the dead know not any thing.”\nJohn 11:11-14 - Jesus called Lazarus' death sleep, showing unconsciousness.`,
+      sop: `“To the believer, death is but a small matter... The dead are resting in the grave until the resurrection.” — Steps to Christ, Ch. 8`,
+      gc: `“The doctrine of man's consciousness in death... has prepared the way for modern spiritualism and false teaching.” — Great Controversy, p. 558`,
+      sc: `“None are placed in heaven at death; the saints sleep in the dust of the earth, waiting for the resurrection.” — Selected Messages, Vol. 1, p. 232`
+    },
+    {
+      id: "salvation-by-works",
+      title: "Salvation Is Earned By Works",
+      lie: "You must earn your way to heaven through your good deeds and behavior.",
+      truth: "Salvation is a gift of grace from God, received by faith alone, not by works; works are the evidence of faith, not the cause of salvation.",
+      bible: `Ephesians 2:8-9 - "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God:\nNot of works, lest any man should boast."\nTitus 3:5 - "Not by works of righteousness which we have done, but according to his mercy he saved us."\nJames 2:17 - "Faith, if it hath not works, is dead." (works show faith but don’t earn salvation)`,
+      sop: `“The sinner is justified by faith alone; yet the faith that justifies is never alone.” — Steps to Christ, Ch. 6\n“Good works are the fruits of a living faith; they do not earn salvation but are its evidence.” — Selected Messages, Vol. 1, p. 364`,
+      gc: `“By faith alone are we justified; and faith is never alone but works through love.” — Great Controversy, p. 488`,
+      sc: `“True faith will manifest itself by good works.” — Ellen G. White, Testimonies for the Church, Vol. 4, p. 210`
+    },
+    {
+      id: "eternal-hellfire",
+      title: "Eternal Hellfire Torments The Wicked Forever",
+      lie: "The wicked burn forever in hellfire after death.",
+      truth: "The wicked are destroyed—eternal punishment means eternal destruction, not eternal suffering.",
+      bible: `Matthew 10:28 - “Fear him which is able to destroy both soul and body in hell.”\nMalachi 4:1 - “The wicked shall be ashes under the soles of your feet.”`,
+      sop: `“The final destruction of the wicked is an act of divine justice, not eternal torment.” — Steps to Christ, Ch. 8`,
+      gc: `“The lake of fire represents the second death, the complete extinction of sin and sinners.” — Great Controversy, p. 665`,
+      sc: `“The wicked shall be consumed and shall go into everlasting punishment, which is destruction.” — Selected Messages, Vol. 2, p. 119`
+    },
+    {
+      id: "works-salvation-only",
+      title: "Good Works Alone Save You",
+      lie: "If you do enough good works, you will be saved.",
+      truth: "Good works are important but cannot save without faith in Christ’s righteousness.",
+      bible: `Titus 3:5 - "Not by works of righteousness which we have done, but according to his mercy he saved us."\nGalatians 2:16 - "Knowing that a man is not justified by the works of the law, but by the faith of Jesus Christ."`,
+      sop: `“Good works are the fruit, not the root, of salvation.” — Steps to Christ, Ch. 7`,
+      gc: `“Salvation is by grace, through faith, not by works alone.” — Great Controversy, p. 489`,
+      sc: `“No man can save himself by works; it is the grace of Christ that saves.” — Testimonies, Vol. 6, p. 200`
+    },
+    {
+      id: "sabbath-irrelevant",
+      title: "The Sabbath Is No Longer Important",
+      lie: "The Sabbath was only for the Old Testament and is no longer binding.",
+      truth: "The Sabbath is a perpetual sign of God’s covenant and remains a holy day of rest and worship.",
+      bible: `Exodus 20:8-11 - The Fourth Commandment about the Sabbath\nHebrews 4:9 - There remains a Sabbath rest for the people of God.`,
+      sop: `“The Sabbath is the Lord’s day, a day for rest, worship, and spiritual renewal.” — Steps to Christ, Ch. 7`,
+      gc: `“The observance of the Sabbath is a vital test of loyalty to God.” — Great Controversy, p. 437`,
+      sc: `“The Sabbath commandment is still binding upon Christians.” — Selected Messages, Vol. 1, p. 242`
+    },
+    {
+      id: "once-saved-always-saved",
+      title: "Once Saved, Always Saved",
+      lie: "Once you accept Christ, you cannot lose your salvation no matter what.",
+      truth: "Salvation requires continual faith and obedience; it can be forfeited by turning away from God.",
+      bible: `Hebrews 10:26-27 - Warning against willful sin after receiving knowledge of truth.\nRevelation 3:5 - Overcomers will be clothed in white garments.`,
+      sop: `“He who endures to the end will be saved; faith must be maintained.” — Steps to Christ, Ch. 9`,
+      gc: `“Salvation is conditional on faithfulness, not a guaranteed ticket.” — Great Controversy, p. 330`,
+      sc: `“It is possible to fall from grace by apostasy.” — Testimonies, Vol. 5, p. 206`
+    },
+    {
+      id: "hell-fire-immortal-soul",
+      title: "The Soul Is Immortal and Goes to Hell",
+      lie: "The soul never dies and immediately goes to heaven or hell after death.",
+      truth: "The soul is not inherently immortal; it dies and awaits resurrection. Hell is the grave, not a fiery torment.",
+      bible: `Genesis 2:7 - The soul is the living body.\nEzekiel 18:4 - The soul that sins shall die.\nPsalm 146:4 - When a person dies, their thoughts perish.`,
+      sop: `“The soul that sins will die; there is no conscious existence in death.” — Steps to Christ, Ch. 8`,
+      gc: `“The immortality of the soul is a doctrine from paganism, not the Bible.” — Great Controversy, p. 527`,
+      sc: `“Death is a sleep until the resurrection.” — Selected Messages, Vol. 1, p. 232`
+    }
+  ];
+
+  let currentIndex = 0;
+  const mythTitle = document.getElementById("mythTitle");
+  const mythLie = document.getElementById("mythLie");
+  const mythTruth = document.getElementById("mythTruth");
+  const sourceBible = document.getElementById("source-bible");
+  const sourceSOP = document.getElementById("source-sop");
+  const sourceGC = document.getElementById("source-gc");
+  const sourceSC = document.getElementById("source-sc");
+
+  const tabs = document.querySelectorAll(".tab-btn");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  function updateMyth(index) {
+    const myth = myths[index];
+    mythTitle.textContent = myth.title;
+    mythLie.textContent = myth.lie;
+    mythTruth.textContent = myth.truth;
+    sourceBible.textContent = myth.bible;
+    sourceSOP.textContent = myth.sop;
+    sourceGC.textContent = myth.gc;
+    sourceSC.textContent = myth.sc;
+
+    // Reset tabs
+    tabs.forEach(tab => {
+      tab.setAttribute("aria-selected", "false");
+      tab.setAttribute("tabindex", "-1");
+    });
+    tabs[0].setAttribute("aria-selected", "true");
+    tabs[0].setAttribute("tabindex", "0");
+
+    // Show only Bible source by default
+    sourceBible.hidden = false;
+    sourceSOP.hidden = true;
+    sourceGC.hidden = true;
+    sourceSC.hidden = true;
+
+    // Enable/disable navigation buttons
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === myths.length - 1;
+  }
+
+  // Tab switching logic
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      if (tab.getAttribute("aria-selected") === "true") return;
+
+      // Set all tabs to false
+      tabs.forEach(t => {
+        t.setAttribute("aria-selected", "false");
+        t.setAttribute("tabindex", "-1");
+      });
+      tab.setAttribute("aria-selected", "true");
+      tab.setAttribute("tabindex", "0");
+
+      // Show the corresponding panel
+      const targetPanel = document.getElementById(tab.getAttribute("aria-controls"));
+      document.querySelectorAll(".tab-panel").forEach(panel => {
+        panel.hidden = panel !== targetPanel;
+      });
+      targetPanel.focus();
+    });
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateMyth(currentIndex);
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (currentIndex < myths.length - 1) {
+      currentIndex++;
+      updateMyth(currentIndex);
+    }
+  });
+
+  // Initialize with first myth
+  updateMyth(currentIndex);
+</script>
+
+</body>
+</html>

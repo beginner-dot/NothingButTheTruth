@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="NothingButTheTruth - Sharing the unchanged Gospel as written in the Holy Bible. Explore studies, sermons, and inspirational messages.">
-    <title>ReTemplate_2</title>
+    <title>NothingButTheTruth</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -33,58 +33,85 @@
                     <li><a href="#studies"><i class="fas fa-book-open"></i> Studies</a></li>
                     <li><a href="#messages"><i class="fas fa-envelope"></i> Messages</a></li>
                     <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
-<button id="darkModeToggle">🌙 Dark Mode</button>
-
-
                 </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-    <section class="top-section scroll-fade">
-        <!-- Many square gradients -->
-        <div class="square-gradient sq1"></div>
-        <div class="square-gradient sq2"></div>
-        <div class="square-gradient sq3"></div>
-        <div class="square-gradient sq4"></div>
-        <div class="square-gradient sq5"></div>
-        <div class="square-gradient sq6"></div>
-        <div class="square-gradient sq7"></div>
-        <div class="square-gradient sq8"></div>
-        <div class="square-gradient sq9"></div>
-
-        <div class="square-gradient sq11"></div>
-        <div class="glass-intro">
-            <h1><i class="fas fa-tools" style="color:#ffd803"></i> Website Still In Progress</h1>
-            <h3><i class="fas fa-user" style="color:#ffd803"></i> To the reader:</h3>
-            <p><i class="fas fa-bible" style="color:#ffd803"></i> Our website is dedicated to providing you with the unchanged, untampered Gospel as it is written in the Holy Bible. </p>
+    <section class="hero-section">
+        <div class="hero-background">
+            <div class="animated-gradient-1"></div>
+            <div class="animated-gradient-2"></div>
+            <div class="hero-pattern"></div>
         </div>
+        
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-icon">✨</span>
+                Discover Biblical Truth
+            </div>
+            
+            <h1 class="hero-title">
+                Nothing But The Truth
+            </h1>
+            
+            <p class="hero-subtitle">
+                Experience God's Word in its purest form. Dive into transformative Bible studies, daily inspirations, and interactive faith-building experiences.
+            </p>
+            
+            <div class="hero-cta-group">
+                <a href="all-studies.html" class="cta-button primary">Explore Studies</a>
+                <a href="vod.html" class="cta-button secondary">Daily Devotions</a>
+            </div>
+            
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">In-Depth Studies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Devotions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Bible Games</div>
+                </div>
+            </div>
+        </div>
+        
+      
     </section>
 
 
+      <div class="scroll-indicator">
+            <span>Scroll to explore</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
 
 
 
 
 
-
-   
-
-<div class="readmore-box">
-  <div class="notification-banner">🔔 More devotions added!</div>
- >
-</div>
-
-
-<div class="readmore-box">
-  <div class="notification-banner">🔔 More updates coming soon ❕❗ </div>
-  <div class="read-more-content">
+<!-- Motto Section with Featured Verse -->
+<section class="motto-section">
+  <div class="motto-content">
+    <div class="motto-badge">✨ Our Motto</div>
+    <blockquote class="motto-verse">
+      "Your word is a lamp to my feet and a light to my path."
+    </blockquote>
+    <p class="motto-ref">— Psalm 119:105</p>
+    <div class="motto-divider"></div>
+    <p class="motto-description">We believe in sharing God's Word in its purest form, uncovering timeless truths that transform hearts and renew minds.</p>
   </div>
+</section>
+
+<!-- Simple Notification Banner -->
+<div class="simple-notification-bar">
+  <span class="notification-icon">✨</span>
+  <span class="notification-text">We are still working on the website, We are still making progress!</span>
 </div>
-
-
-
 
 
 
@@ -154,21 +181,100 @@
 
 
 
-    <section class="bottom-section scroll-fade">
-        <div class="leftdiv scroll-fade"></div>
-        <!-- Hero section moved here as belowhead replacement -->
-      
-<section class="weekly-feature scroll-fade verse-day">
-  <div class="weekly-verse">
-    <h2><i class="fas fa-fire" style="color:#ffd803"></i> Verse of the Day</h2>
-    <blockquote>
-      <span id="verseText"></span>
-      <br />
-      <span id="verseRef" style="font-weight: bold; font-style: italic;"></span>
-    </blockquote>
-    <button class="devotion-btn" onclick="toggleDevotion()">Daily Devotion</button>
-  </div>
-</section>
+    <section class="verse-of-day-section scroll-fade">
+      <div class="verse-container">
+        <div class="section-title">
+          <h2><i class="fas fa-fire"></i> Daily Inspiration</h2>
+          <p class="section-subtitle">A verse to guide your journey</p>
+        </div>
+
+        <!-- Social Media Style Post -->
+        <div class="verse-post">
+          <!-- Post Header -->
+          <div class="post-header">
+            <div class="post-author">
+              <div class="author-avatar">
+                <i class="fas fa-book-open"></i>
+              </div>
+              <div class="author-info">
+                <h4>Daily Verse</h4>
+                <span class="post-time">Today at dawn</span>
+              </div>
+            </div>
+            <button class="post-menu" onclick="toggleVerseMenu()">
+              <i class="fas fa-ellipsis-h"></i>
+            </button>
+          </div>
+
+          <!-- Post Content -->
+          <div class="post-content">
+            <blockquote class="verse-text-social" id="verseText"></blockquote>
+            <div class="verse-meta">
+              <span class="verse-ref-social" id="verseRef"></span>
+              <span class="verse-counter" id="verseCounter">1 of 5</span>
+            </div>
+          </div>
+
+          <!-- Post Stats -->
+          <div class="post-stats">
+            <span class="stat-item"><i class="fas fa-heart"></i> <span id="likeCount">247</span> Likes</span>
+            <span class="stat-item"><i class="fas fa-share"></i> <span id="shareCount">89</span> Shares</span>
+          </div>
+
+          <!-- Post Actions -->
+          <div class="post-actions">
+            <button class="action-btn like-btn" id="likeBtn" onclick="toggleLike()">
+              <i class="far fa-heart"></i>
+              <span>Like</span>
+            </button>
+            <button class="action-btn" onclick="toggleDevotion()">
+              <i class="fas fa-book"></i>
+              <span>Devotion</span>
+            </button>
+            <button class="action-btn" onclick="copyToClipboard()">
+              <i class="fas fa-copy"></i>
+              <span>Copy</span>
+            </button>
+            <button class="action-btn" onclick="saveVerse()">
+              <i class="far fa-bookmark"></i>
+              <span>Save</span>
+            </button>
+          </div>
+
+          <!-- Social Media Share -->
+          <div class="social-share-section">
+            <p class="share-text">Share this verse:</p>
+            <div class="social-buttons">
+              <button class="social-btn facebook" onclick="shareOnFacebook()" title="Share on Facebook">
+                <i class="fab fa-facebook-f"></i>
+              </button>
+              <button class="social-btn twitter" onclick="shareOnTwitter()" title="Share on Twitter">
+                <i class="fab fa-twitter"></i>
+              </button>
+              <button class="social-btn whatsapp" onclick="shareOnWhatsApp()" title="Share on WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+              </button>
+              <button class="social-btn telegram" onclick="shareOnTelegram()" title="Share on Telegram">
+                <i class="fab fa-telegram-plane"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="verse-navigation">
+            <button class="nav-btn prev-verse" onclick="previousVerse()">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="verse-counter-visual">
+              <div id="verseProgress" class="progress-bar"></div>
+            </div>
+            <button class="nav-btn next-verse" onclick="nextVerse()">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
 <!-- Devotion Modal -->
 <div id="devotionModal" class="modal" style="display:none;">
@@ -260,9 +366,9 @@
     
 
 
-    // Inspiration Section
+    <!-- Inspiration Section - Hidden -->
 
-<div class="inspiration-section scroll-fade" id="inspiration-scrollshow">
+<div class="inspiration-section scroll-fade" id="inspiration-scrollshow" style="display: none;">
   <h2>Be Inspired</h2>
   <div class="inspiration-slideshow-container">
     <div class="inspiration-slide active">
@@ -315,17 +421,17 @@
        <li> <div class="box"><a href="Studies/why_the_bible_is_God's_word.html" style="text-decoration:none;"><i class="fas fa-book-bible" style="color:#ffd803"></i> Is the Bible God's Word to Humanity?</a></div></li>
         <li> <div class="box"><a href="Studies/are_angels_real.html" style="text-decoration:none;"><i class="fas fa-city" style="color:#ffd803"></i>    Are Angels Real?</a></div></li>
         
-        <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
-        <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
-        <li> <div class="box"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
+        <li> <div class="box in-progress"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
+        <li> <div class="box in-progress"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
+        <li> <div class="box in-progress"><i class="fas fa-spinner" style="color:#ffd803"></i> Still In Progress</div></li>
     </div>
 
  
-    <!-- Sermons Section -->
-    <div class="Sermons scroll-fade">
-      <h2 style="margin:0 auto;"><i class="fas fa-microphone" style="color:#ffd803"></i> Devotions</h2>
+    <!-- Devotions Section -->
+    <div class="Devotions scroll-fade">
+      <h2><i class="fas fa-microphone" style="color:#ffd803"></i> Devotions</h2>
     </div>
-    <div class="sermons-flex-wrap scroll-fade">
+    <div class="devotions-flex-wrap scroll-fade">
         <div class="flex-square flex-sq1"></div>
         <div class="flex-square flex-sq2"></div>
         <div class="flex-square flex-sq3"></div>
@@ -340,41 +446,12 @@
         <div class="flex-square flex-sq12"></div>
         <div class="flex-square flex-sq13"></div>
         <div class="flex-square flex-sq14"></div>
-        <div class="box">
-            <a href="Devotions/hannahs_devotion.html" style="text-decoration:none;">
-                <i class="fas fa-city" style="color:#ffd803"></i> Hanna's Devotion: A Prayer of Faith
-            </a>
-        </div>
-        <div class="box">
-            <a href="Devotions/called_to_shine.html" style="text-decoration:none;">
-                <i class="fas fa-cross" style="color:#ffd803"></i> Called to Shine
-            </a>
-        </div>
-       
- <div class="box">
-            <a href="Devotions/Do_it_for_God.html" style="text-decoration:none;">
-                <i class="fas fa-heart" style="color:#ffd803"></i> Faithful In All Things
-            </a>
-        </div>
-
- <div class="box">
-            <a href="Devotions/love_that_saves.html" style="text-decoration:none;">
-                <i class="fas fa-heart" style="color:#ffd803"></i> Love That Saves
-            </a>
-        </div>
-
-         <div class="box">
-            <a href="Devotions/anchor_of_hope.html" style="text-decoration:none;">
-                <i class="fas fa-heart" style="color:#ffd803"></i> Anchor of Hope
-            </a>
-        </div>
-
-
-    <a href="vod.html" class="devotion-button">📖 All Devotions</a>
-
-
-
-
+        <li> <div class="box"><a href="Devotions/hannahs_devotion.html" style="text-decoration:none;"><i class="fas fa-city" style="color:#ffd803"></i> Hanna's Devotion: A Prayer of Faith</a></div></li>
+        <li> <div class="box"><a href="Devotions/called_to_shine.html" style="text-decoration:none;"><i class="fas fa-cross" style="color:#ffd803"></i> Called to Shine</a></div></li>
+        <li> <div class="box"><a href="Devotions/Do_it_for_God.html" style="text-decoration:none;"><i class="fas fa-heart" style="color:#ffd803"></i> Faithful In All Things</a></div></li>
+        <li> <div class="box"><a href="Devotions/love_that_saves.html" style="text-decoration:none;"><i class="fas fa-heart" style="color:#ffd803"></i> Love That Saves</a></div></li>
+        <li> <div class="box"><a href="Devotions/anchor_of_hope.html" style="text-decoration:none;"><i class="fas fa-heart" style="color:#ffd803"></i> Anchor of Hope</a></div></li>
+        <li> <a href="vod.html" class="devotion-button">📖 All Devotions</a></li>
     </div>
 
 
@@ -389,17 +466,17 @@
 
 <section class="poll-section">
   <h1 class="poll-header">Weekly Poll</h1>
-  <h2 class="poll-question">What strengthens your faith most?</h2>
+  <h2 class="poll-question">How do you deepen your spiritual connection?</h2>
 
   <form id="voteForm">
     <label class="vote-option">
-      <input type="radio" name="vote" value="Prayer"> 🙏 Prayer
+      <input type="radio" name="vote" value="Daily Prayer"> 🙏 Daily Prayer & Meditation
     </label>
     <label class="vote-option">
-      <input type="radio" name="vote" value="Worship"> 🎵 Worship
+      <input type="radio" name="vote" value="Scripture Study"> 📖 Scripture Study & Reading
     </label>
     <label class="vote-option">
-      <input type="radio" name="vote" value="Study"> 📖 Study
+      <input type="radio" name="vote" value="Worship Music"> 🎵 Worship & Music
     </label>
     <button type="submit" class="vote-submit">Submit</button>
   </form>
@@ -411,6 +488,25 @@
   </div>
 
   <div id="thankYouMessage" class="thank-you">🎉 Thank you for voting!</div>
+
+  <!-- Poll Share Buttons -->
+  <div class="poll-share-section">
+    <p class="poll-share-text">Share this poll:</p>
+    <div class="poll-social-buttons">
+      <button class="poll-social-btn facebook" onclick="sharePollOnFacebook()" title="Share on Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+      <button class="poll-social-btn twitter" onclick="sharePollOnTwitter()" title="Share on Twitter">
+        <i class="fab fa-twitter"></i>
+      </button>
+      <button class="poll-social-btn whatsapp" onclick="sharePollOnWhatsApp()" title="Share on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </button>
+      <button class="poll-social-btn telegram" onclick="sharePollOnTelegram()" title="Share on Telegram">
+        <i class="fab fa-telegram-plane"></i>
+      </button>
+    </div>
+  </div>
 </section>
 
 
@@ -429,38 +525,156 @@
 
 
 
-<button id="toggleGames" class="toggle-button">🎮 Explore Bible Games</button>
-
-<section class="game-section" id="games">
+<section class="game-section active" id="games">
   <h1 class="dart"><span class="emoji">🎯</span></h1>
-  <h2>BIBLE GAMES</h2>
-  <p class="section-subtitle">#### Game Section Still In Progress ####</p>
-  <div class="game-grid">
-    <div class="game-card">
+  <h2>Bible Games Hub</h2>
+  <p class="section-subtitle">Test your biblical knowledge through interactive games. Challenge yourself, climb the leaderboards, and earn achievements!</p>
+  <div class="game-grid" id="mainGameGrid">
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐⭐</div>
       <h3>🔍 Verse Hunt</h3>
-      <p>Test your memory under pressure!</p>
-      <a href="games/verse-hunt-live/versehunt.html"><button>Play Now</button></a>
+      <p class="game-description">Find verses under time pressure. Race against the clock to answer scripture questions correctly.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 5-10 min</span>
+      </div>
+      <a href="games/verse-hunt-live/versehunt.html"><button class="play-btn">▶ Play Now</button></a>
     </div>
-<div class="game-card">
-  <h3>🎭 Bible Bingo</h3>
-  <p> Team Up, Verse Up, Shout Bingo! </p>
-  <a href="games/bible-bingo/BibleBingoScriptureSprint/index.html"><button>Play Now</button></a>
-</div>
-<div class="game-card">
-  <h3>👥 Bible Relay Race</h3>
-  <p>Scripture in Motion, Faith in Action!</p>
-  <a href="games/relay-race/relayrace.html"><button>Play Now</button></a>
-</div>
-    <div class="game-card">
-      <h3>🤔 Bible Gridlock </h3>
-      <p>Can you navigate the verses without getting stuck?</p>
-      <a href="games/bible-gridlock/biblegridlock.html"><button>Play Now</button></a>
-    </div>
-    <div class="game-card">
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐⭐</div>
       <h3>💭 Who Said It?</h3>
-      <p>Test your knowledge of Bible quotes and their speakers!</p>
-      <a href="games/who-said-it/who-said/who_said.html"><button>Play Now</button></a>
-   
+      <p class="game-description">Match famous biblical quotes to their speakers. Test your knowledge of scripture!</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 8-15 min</span>
+      </div>
+      <a href="games/who-said-it/who-said/who_said.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
+      <h3>👥 Bible Relay Race</h3>
+      <p class="game-description">Scripture in motion! Answer questions in rapid succession to win the race.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 10-20 min</span>
+      </div>
+      <a href="games/relay-race/relayrace.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+  </div>
+
+  <!-- Explore More Section -->
+  <div class="explore-more-container">
+    <a href="all-games.html" style="text-decoration: none;"><button class="explore-btn" id="exploreBtn">
+      <span class="explore-text">🎮 Explore All Games</span>
+      <span class="explore-arrow">→</span>
+    </button></a>
+    <div class="games-count">+5 more games available</div>
+  </div>
+
+  <!-- Hidden Games Grid -->
+  <div class="game-grid all-games-grid" id="allGamesGrid" style="display: none;">
+    <div class="game-card">
+      <div class="difficulty-badge">⭐⭐⭐</div>
+      <h3>🎭 Bible Bingo</h3>
+      <p class="game-description">Team up and test your scripture knowledge. Match verses to complete your bingo card.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 8-15 min</span>
+      </div>
+      <a href="games/bible-bingo/BibleBingoScriptureSprint/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card">
+      <div class="difficulty-badge">⭐⭐</div>
+      <h3>🤔 Bible GridLock</h3>
+      <p class="game-description">Navigate through biblical facts and verses. Answer correctly to unlock the grid path.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 6-12 min</span>
+      </div>
+      <a href="games/bible-taboo/bible_taboo.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card">
+      <div class="difficulty-badge">⭐⭐⭐⭐</div>
+      <h3>💭 Who Said It?</h3>
+      <p class="game-description">Match famous biblical quotes to their speakers. Test your knowledge of scripture!</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 8-15 min</span>
+      </div>
+      <a href="games/who-said-it/who-said/who_said.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card coming-soon">
+      <div class="difficulty-badge">⭐⭐⭐</div>
+      <h3>📜 Scripture Sprint</h3>
+      <p class="game-description">Race to match verse references with their content. Combo system awards bonus points!</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 5-8 min</span>
+        <span class="badge-new">Coming Soon</span>
+      </div>
+      <button class="play-btn disabled" disabled>🔒 Coming Soon</button>
+    </div>
+
+    <div class="game-card coming-soon">
+      <div class="difficulty-badge">⭐⭐⭐⭐</div>
+      <h3>🌍 Translation Challenge</h3>
+      <p class="game-description">Identify Bible translations. Learn the nuances between KJV, NIV, ESV, and more.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 10-12 min</span>
+        <span class="badge-new">Coming Soon</span>
+      </div>
+      <button class="play-btn disabled" disabled>🔒 Coming Soon</button>
+    </div>
+
+    <div class="game-card coming-soon">
+      <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
+      <h3>⏳ Bible Timeline Master</h3>
+      <p class="game-description">Order biblical events chronologically. Master Old Testament, New Testament, or mix!</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 8-15 min</span>
+        <span class="badge-new">Coming Soon</span>
+      </div>
+      <button class="play-btn disabled" disabled>🔒 Coming Soon</button>
+    </div>
+  </div>
+
+  <!-- Game Stats & Resources -->
+  <div class="games-stats-section">
+    <div class="leaderboard-preview">
+      <h3>🎯 Winning Strategies</h3>
+      <div class="leaderboard-items">
+        <div class="leaderboard-item">
+          <span class="rank">✓</span>
+          <span class="name">Focus on familiar verses</span>
+          <span class="score">Faster recall</span>
+        </div>
+        <div class="leaderboard-item">
+          <span class="rank">✓</span>
+          <span class="name">Build your streak</span>
+          <span class="score">Bonus multiplier</span>
+        </div>
+        <div class="leaderboard-item">
+          <span class="rank">✓</span>
+          <span class="name">Practice daily</span>
+          <span class="score">Master Scripture</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="achievements-preview">
+      <h3>📚 Scripture Resources</h3>
+      <div class="achievements-grid" style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0;">
+          <span style="font-size: 1.5em;">📖</span>
+          <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.9em;"><strong>Bible Versions:</strong> KJV, NIV, ESV, NRSV</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0;">
+          <span style="font-size: 1.5em;">🔍</span>
+          <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.9em;"><strong>Study Tools:</strong> Topical & Concordance</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 8px 0;">
+          <span style="font-size: 1.5em;">💡</span>
+          <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.9em;"><strong>Learning:</strong> Grow in God's Word</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -475,6 +689,7 @@
     <!-- Bible Book -->
     <rect x="550" y="400" width="80" height="100" rx="10" ry="10" fill="rgba(30, 144, 255, 0.25)"/>
     <line x1="590" y1="400" x2="590" y2="500" stroke="rgba(255, 255, 255, 0.3)" stroke-width="4" />
+
     
     <!-- Dove -->
     <path d="M180 480c20-30 40-40 60-30s20 20 10 30-40 40-60 30-20-20-10-30z" fill="rgba(0, 255, 157, 0.25)" />
@@ -496,31 +711,31 @@
 
 <section id="question-of-the-week" class="question-week-section">
   <div class="question-container">
-    <h2>🕊️ Question of the Week</h2>
-    <p id="question-text">Which of the following men walked with God and was taken to heaven without dying?</p>
+    <h2>� Question of the Week</h2>
+    <p id="question-text">How many commandments did God give to Moses on Mount Sinai?</p>
 <div class="options">
-  <button class="option-btn" data-correct="false">Moses</button>
-  <button class="option-btn" data-correct="false">Elijah</button>
-  <button class="option-btn" data-correct="true">Enoch</button>
-  <button class="option-btn" data-correct="false">Abraham</button>
+  <button class="option-btn" data-correct="false">Five</button>
+  <button class="option-btn" data-correct="true">Ten</button>
+  <button class="option-btn" data-correct="false">Twenty</button>
+  <button class="option-btn" data-correct="false">Twelve</button>
 </div>
 
-    <button id="submit-btn" class="submit-btn" disabled>Submit</button>
+    <button id="submit-btn" class="submit-btn" disabled>Submit Answer</button>
   </div>
 
   <!-- Correct answer popup -->
   <div id="correct-popup" class="correct-popup hidden">
-    <p>Correct! Enoch walked with God and was taken to heaven without dying. (Genesis 5:24)</p>
+    <p></p>
   </div>
 
   <!-- Incorrect answer popup -->
 <div id="incorrect-popup" class="incorrect-popup hidden">
-  <p>Oops! That's not the right answer. Try exploring more to learn!</p>
+  <p></p>
 </div>
 
 
   <!-- Child button revealed after correct answer -->
-  <button id="explore-more-btn" class="explore-more-btn hidden">Explore 5 More Questions</button>
+  <button id="explore-more-btn" class="explore-more-btn hidden">Explore More Questions</button>
 
   <!-- Mini-game container -->
   <div id="mini-game" class="mini-game hidden">
@@ -577,9 +792,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Set popup message based on correctness
     if (selectedOption.dataset.correct === "true") {
-      correctPopup.querySelector("p").textContent = "Correct, Enoch walked with God and was taken to heaven without dying. (Genesis 5:24)";
+      correctPopup.querySelector("p").textContent = "✅ Correct! 📖 Did You Know? The Ten Commandments were written by God's finger on two stone tablets and represent the foundation of God's moral law for humanity. These commandments are found in Exodus 20:1-17 and Deuteronomy 5:4-21.";
     } else {
-      correctPopup.querySelector("p").textContent = "Oops! The correct answer is Enoch.";
+      correctPopup.querySelector("p").textContent = "❌ Incorrect! 📖 Did You Know? The correct answer is Ten. The Ten Commandments were written by God's finger on two stone tablets and represent the foundation of God's moral law for humanity. These commandments are found in Exodus 20:1-17 and Deuteronomy 5:4-21.";
     }
 
     // Show popup
@@ -624,55 +839,72 @@ document.addEventListener("DOMContentLoaded", () => {
 <!-- Section -->
 <section id="worship-challenge" class="fade-in">
   <div class="challenge-container">
-    <h2>🔥 Worship Upgrade Challenge</h2>
-    <p class="challenge-subtext">Complete a new challenge each day to upgrade your worship life.</p>
+    <h2>� Daily Worship Upgrade</h2>
+    <p class="challenge-subtext">Transform your spiritual life with daily challenges. Complete all 7 for a weekly blessing.</p>
 
     <ul class="daily-challenges" id="challenge-list">
       <!-- DAILY CHALLENGES -->
       <li>
         <input type="checkbox" id="day1" />
-        <label for="day1">Mon – Pray before every task today.</label>
+        <label for="day1">Mon – Start your day with 10 minutes of prayer and gratitude.</label>
         <div class="extras">
           <button class="verse-btn" data-day="0">📖 Verse</button>
-          <button class="devotion-btn" data-day="0">💡 Devotion</button>
+          <button class="video-btn" data-day="0">🎥 Video Guide</button>
         </div>
       </li>
       <li>
         <input type="checkbox" id="day2" />
-        <label for="day2">Tue – Serve someone without expecting thanks.</label>
+        <label for="day2">Tue – Read and meditate on Scripture for 15 minutes.</label>
         <div class="extras">
           <button class="verse-btn" data-day="1">📖 Verse</button>
-          <button class="devotion-btn" data-day="1">💡 Devotion</button>
+          <button class="video-btn" data-day="1">🎥 Video Guide</button>
         </div>
       </li>
       <li>
         <input type="checkbox" id="day3" />
-        <label for="day3">Wed – Speak only life today.</label>
+        <label for="day3">Wed – Practice forgiveness. Call or message someone you hurt.</label>
         <div class="extras">
           <button class="verse-btn" data-day="2">📖 Verse</button>
-          <button class="devotion-btn" data-day="2">💡 Devotion</button>
+          <button class="video-btn" data-day="2">🎥 Video Guide</button>
         </div>
       </li>
       <li>
         <input type="checkbox" id="day4" />
-        <label for="day4">Thu – Work like Jesus is your boss.</label>
+        <label for="day4">Thu – Worship through song. Spend 20 minutes worshipping God.</label>
         <div class="extras">
           <button class="verse-btn" data-day="3">📖 Verse</button>
-          <button class="devotion-btn" data-day="3">💡 Devotion</button>
+          <button class="video-btn" data-day="3">🎥 Video Guide</button>
         </div>
       </li>
       <li>
         <input type="checkbox" id="day5" />
-        <label for="day5">Fri – Reflect & write down your moment of worship.</label>
+        <label for="day5">Fri – Serve others. Give time, resources, or kind words.</label>
         <div class="extras">
           <button class="verse-btn" data-day="4">📖 Verse</button>
-          <button class="devotion-btn" data-day="4">💡 Devotion</button>
+          <button class="video-btn" data-day="4">🎥 Video Guide</button>
+        </div>
+      </li>
+      <li>
+        <input type="checkbox" id="day6" />
+        <label for="day6">Sat – Share your faith. Tell someone about Jesus or your testimony.</label>
+        <div class="extras">
+          <button class="verse-btn" data-day="5">📖 Verse</button>
+          <button class="video-btn" data-day="5">🎥 Video Guide</button>
+        </div>
+      </li>
+      <li>
+        <input type="checkbox" id="day7" />
+        <label for="day7">Sun – Praise and reflection. Spend time in corporate worship or journaling.</label>
+        <div class="extras">
+          <button class="verse-btn" data-day="6">📖 Verse</button>
+          <button class="video-btn" data-day="6">🎥 Video Guide</button>
         </div>
       </li>
     </ul>
 
     <div class="challenge-footer">
       <p id="streak">🔥 Your current streak: 0 days</p>
+      <p id="progress">📊 This week: 0/7 completed</p>
     </div>
   </div>
 
@@ -706,8 +938,58 @@ document.addEventListener("DOMContentLoaded", () => {
   </defs>
 </svg>
 
+<!-- Video Section -->
+<section class="video-section scroll-fade">
+  <div class="video-container">
+    <h2><i class="fas fa-video" style="color:#ffd803"></i> Video Messages</h2>
+    <p class="video-subtitle">Watch inspiring messages and teachings</p>
+    
+    <div class="videos-grid">
+      <!-- Video Card 1 -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen="" style="border-radius: 8px;"></iframe>
+        </div>
+        <h3>📽️ Video Title 1</h3>
+        <p>Brief description of your video content goes here.</p>
+      </div>
 
+      <!-- Video Card 2 -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen="" style="border-radius: 8px;"></iframe>
+        </div>
+        <h3>📽️ Video Title 2</h3>
+        <p>Brief description of your video content goes here.</p>
+      </div>
 
+      <!-- Video Card 3 -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen="" style="border-radius: 8px;"></iframe>
+        </div>
+        <h3>📽️ Video Title 3</h3>
+        <p>Brief description of your video content goes here.</p>
+      </div>
+    </div>
+
+    <!-- Background Decorative Elements -->
+    <div class="video-bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+  </div>
+</section>
 
    
 
@@ -823,6 +1105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Animate Studies boxes
         const studiesBoxes = document.querySelectorAll('.flex-wrap .box');
         let hasAnimatedStudies = false;
+        let throttleTimer = null;
         function animateStudiesBoxes() {
             if (hasAnimatedStudies) return;
             const flexWrap = document.querySelector('.flex-wrap');
@@ -836,7 +1119,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
         }
-        window.addEventListener('scroll', animateStudiesBoxes);
+        window.addEventListener('scroll', () => {
+            if (throttleTimer) return;
+            throttleTimer = setTimeout(() => {
+                animateStudiesBoxes();
+                throttleTimer = null;
+            }, 100);
+        }, { passive: true });
         animateStudiesBoxes();
 
 
@@ -849,25 +1138,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-        // Animate Sermons boxes
-        const sermonsBoxes = document.querySelectorAll('.sermons-flex-wrap .box');
-        let hasAnimatedSermons = false;
-        function animateSermonsBoxes() {
-            if (hasAnimatedSermons) return;
-            const sermonsWrap = document.querySelector('.sermons-flex-wrap');
-            if (!sermonsWrap) return;
-            const rect = sermonsWrap.getBoundingClientRect();
+        // Animate Devotions boxes
+        const devotionsBoxes = document.querySelectorAll('.devotions-flex-wrap .box');
+        let hasAnimatedDevotions = false;
+        let devotionThrottleTimer = null;
+        function animateDevotionsBoxes() {
+            if (hasAnimatedDevotions) return;
+            const devotionsWrap = document.querySelector('.devotions-flex-wrap');
+            if (!devotionsWrap) return;
+            const rect = devotionsWrap.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom > 0) {
-                hasAnimatedSermons = true;
-                sermonsBoxes.forEach((box, i) => {
+                hasAnimatedDevotions = true;
+                devotionsBoxes.forEach((box, i) => {
                     setTimeout(() => {
                         box.classList.add('visible');
                     }, i * 180);
                 });
             }
         }
-        window.addEventListener('scroll', animateSermonsBoxes);
-        animateSermonsBoxes();
+        window.addEventListener('scroll', () => {
+            if (devotionThrottleTimer) return;
+            devotionThrottleTimer = setTimeout(() => {
+                animateDevotionsBoxes();
+                devotionThrottleTimer = null;
+            }, 100);
+        }, { passive: true });
+        animateDevotionsBoxes();
     });
 
    
@@ -1007,39 +1303,63 @@ document.addEventListener("DOMContentLoaded", () => {
   const db = getFirestore(app);
   const pollDocRef = doc(db, "polls", "current");
 
-  const pollOptions = ["Prayer", "Worship", "Study"];
+  const pollOptions = ["Daily Prayer", "Scripture Study", "Worship Music"];
   const voteForm = document.getElementById("voteForm");
   const countdown = document.getElementById("countdown");
   const chartCanvas = document.getElementById("voteChart");
   let pieChart;
 
-
-  // Set poll reset time (e.g., next midnight UTC)
-function getNextMidnight() {
-  const now = new Date();
-  const midnight = new Date(now);
-  midnight.setUTCHours(24, 0, 0, 0); // next midnight UTC
-  return midnight;
-}
-
-const pollResetTime = getNextMidnight();
-
-function updateCountdown() {
-  const now = new Date();
-  const diffMs = pollResetTime - now;
-  if (diffMs <= 0) {
-    countdown.textContent = "Poll ended. Refresh page to update.";
-    return;
+  // Calculate poll times: Saturday evening 6 PM to Friday evening 6 PM
+  function getPollTimes() {
+    const now = new Date();
+    const currentDay = now.getDay(); // 0 = Sunday, 6 = Saturday
+    
+    let pollStart = new Date(now);
+    let pollEnd = new Date(now);
+    
+    // Set times to 6 PM (18:00)
+    pollStart.setHours(18, 0, 0, 0);
+    pollEnd.setHours(18, 0, 0, 0);
+    
+    // If today is Saturday (6), start is today at 6 PM
+    if (currentDay === 6) {
+      pollStart.setDate(pollStart.getDate()); // Today
+      pollEnd.setDate(pollEnd.getDate() + 6); // Next Friday
+    } 
+    // If today is Sunday to Friday, find last Saturday and next Friday
+    else if (currentDay === 0) {
+      // Sunday
+      pollStart.setDate(pollStart.getDate() - 1); // Yesterday (Saturday)
+      pollEnd.setDate(pollEnd.getDate() + 5); // Next Friday
+    } else if (currentDay >= 1 && currentDay <= 5) {
+      // Monday to Friday
+      pollStart.setDate(pollStart.getDate() - (currentDay - 6)); // Last Saturday
+      pollEnd.setDate(pollEnd.getDate() + (5 - currentDay)); // This Friday
+    }
+    
+    return { start: pollStart, end: pollEnd };
   }
-  const hrs = Math.floor(diffMs / (1000 * 60 * 60));
-  const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-  const secs = Math.floor((diffMs % (1000 * 60)) / 1000);
-  countdown.textContent = `Poll ends in: ${hrs}h ${mins}m ${secs}s`;
-}
 
-// Start the countdown timer
-updateCountdown();
-setInterval(updateCountdown, 1000);
+  const pollTimes = getPollTimes();
+  const pollEndTime = pollTimes.end;
+
+  function updateCountdown() {
+    const now = new Date();
+    const diffMs = pollEndTime - now;
+    if (diffMs <= 0) {
+      countdown.textContent = "Poll ended. Refresh page to update.";
+      return;
+    }
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const hrs = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diffMs % (1000 * 60)) / 1000);
+    countdown.textContent = `Poll ends in: ${days}d ${hrs}h ${mins}m ${secs}s`;
+  }
+
+  // Start the countdown timer
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 
 
   // Initialize with placeholder data for immediate pie chart display
@@ -1104,7 +1424,29 @@ setInterval(updateCountdown, 1000);
     });
 
     localStorage.setItem(votedKey, "true");
-    alert("🎉 Vote submitted!");
+    
+    // Show thank you message with animation
+    const thankYouMsg = document.getElementById('thankYouMessage');
+    if (thankYouMsg) {
+      thankYouMsg.classList.add('show');
+      
+      // Auto hide after 3 seconds
+      setTimeout(() => {
+        thankYouMsg.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Animate the pie chart
+    const chartCanvas = document.getElementById('voteChart');
+    if (chartCanvas) {
+      chartCanvas.style.animation = 'none';
+      setTimeout(() => {
+        chartCanvas.style.animation = 'chartPulse 0.6s ease-out';
+      }, 10);
+    }
+    
+    // Reset form
+    voteForm.reset();
   });
 </script>
 
@@ -1338,20 +1680,7 @@ setInterval(updateCountdown, 1000);
 
 
 
-<script>
-  document.getElementById('toggleGames').addEventListener('click', () => {
-    const gamesSection = document.getElementById('games');
-    const btn = document.getElementById('toggleGames');
 
-    if (gamesSection.classList.contains('active')) {
-      gamesSection.classList.remove('active');
-      btn.textContent = '🎮 Explore Bible Games';
-    } else {
-      gamesSection.classList.add('active');
-      btn.textContent = '✖ Close Bible Games';
-    }
-  });
-</script>
 
 
 
@@ -1431,9 +1760,9 @@ setInterval(updateCountdown, 1000);
 
     // Show popup based on correctness
     if (selectedOption.dataset.correct === "true") {
-      correctPopup.querySelector("p").textContent = "Correct! Enoch was taken up to heaven.";
+      correctPopup.querySelector("p").textContent = "✅ Correct! 📖 Did You Know? The Ten Commandments were written by God's finger on two stone tablets and represent the foundation of God's moral law for humanity. These commandments are found in Exodus 20:1-17 and Deuteronomy 5:4-21.";
     } else {
-      correctPopup.querySelector("p").textContent = "Oops! The correct answer is Enoch.";
+      correctPopup.querySelector("p").textContent = "❌ Incorrect! 📖 Did You Know? The correct answer is Ten. The Ten Commandments were written by God's finger on two stone tablets and represent the foundation of God's moral law for humanity. These commandments are found in Exodus 20:1-17 and Deuteronomy 5:4-21.";
     }
     correctPopup.classList.add("show");
 
@@ -1677,30 +2006,206 @@ const devotions = [
 
 // === Helper to get current day index in cycle ===
 function getDailyIndex() {
-  const startDate = new Date("2025-07-21"); // Your chosen start date
+  const startDate = new Date("2025-01-01"); // Reset cycle yearly
   const today = new Date();
+  today.setHours(0, 0, 0, 0); // Reset to midnight
   const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-  return diffDays % verses.length; // assumes verses.length == devotions.length
+  return Math.abs(diffDays) % verses.length;
 }
+
+// Current verse index for manual navigation
+let currentVerseIndex = getDailyIndex();
 
 // === Update verse and devotion on page ===
 function updateVerseOfTheDay() {
-  const index = getDailyIndex();
   const verseTextEl = document.getElementById("verseText");
   const verseRefEl = document.getElementById("verseRef");
+  const verseCounterEl = document.getElementById("verseCounter");
+  const progressBar = document.getElementById("verseProgress");
 
   if (verseTextEl && verseRefEl) {
-    verseTextEl.textContent = verses[index].text;
-    verseRefEl.textContent = `- ${verses[index].ref}`;
+    verseTextEl.textContent = verses[currentVerseIndex].text;
+    verseRefEl.textContent = verses[currentVerseIndex].ref;
+    
+    // Update counter
+    if (verseCounterEl) {
+      verseCounterEl.textContent = `${currentVerseIndex + 1} of ${verses.length}`;
+    }
+    
+    // Update progress bar
+    if (progressBar) {
+      const progress = ((currentVerseIndex + 1) / verses.length) * 100;
+      progressBar.style.width = progress + '%';
+    }
+
+    // Reset like button state
+    const likeBtn = document.getElementById('likeBtn');
+    const likeCount = document.getElementById('likeCount');
+    if (likeBtn) {
+      likeBtn.classList.remove('active');
+      likeBtn.innerHTML = '<i class="far fa-heart"></i><span>Like</span>';
+    }
   }
 }
 
 function updateDevotionOfTheDay() {
-  const index = getDailyIndex();
   const devotionTextEl = document.getElementById("devotionText");
   if (devotionTextEl) {
-    devotionTextEl.textContent = devotions[index];
+    devotionTextEl.textContent = devotions[currentVerseIndex];
   }
+}
+
+// === Navigate to next verse ===
+function nextVerse() {
+  currentVerseIndex = (currentVerseIndex + 1) % verses.length;
+  updateVerseOfTheDay();
+  
+  // Add animation
+  const verseText = document.querySelector('.verse-text-social');
+  if (verseText) {
+    verseText.style.animation = 'none';
+    setTimeout(() => {
+      verseText.style.animation = 'fadeInUp 0.6s ease-out 0.2s both';
+    }, 10);
+  }
+}
+
+// === Navigate to previous verse ===
+function previousVerse() {
+  currentVerseIndex = (currentVerseIndex - 1 + verses.length) % verses.length;
+  updateVerseOfTheDay();
+  
+  // Add animation
+  const verseText = document.querySelector('.verse-text-social');
+  if (verseText) {
+    verseText.style.animation = 'none';
+    setTimeout(() => {
+      verseText.style.animation = 'fadeInUp 0.6s ease-out 0.2s both';
+    }, 10);
+  }
+}
+
+// === Toggle like button ===
+function toggleLike() {
+  const likeBtn = document.getElementById('likeBtn');
+  const likeCount = document.getElementById('likeCount');
+  
+  if (likeBtn.classList.contains('active')) {
+    likeBtn.classList.remove('active');
+    likeBtn.innerHTML = '<i class="far fa-heart"></i><span>Like</span>';
+    if (likeCount) likeCount.textContent = parseInt(likeCount.textContent) - 1;
+  } else {
+    likeBtn.classList.add('active');
+    likeBtn.innerHTML = '<i class="fas fa-heart"></i><span>Liked</span>';
+    if (likeCount) likeCount.textContent = parseInt(likeCount.textContent) + 1;
+  }
+}
+
+// === Copy verse to clipboard ===
+function copyToClipboard() {
+  const verseText = document.getElementById('verseText').textContent;
+  const verseRef = document.getElementById('verseRef').textContent;
+  const fullText = `"${verseText}" - ${verseRef}`;
+  
+  navigator.clipboard.writeText(fullText).then(() => {
+    const copyBtn = event.target.closest('.action-btn');
+    if (copyBtn) {
+      const originalHTML = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+      setTimeout(() => {
+        copyBtn.innerHTML = originalHTML;
+      }, 2000);
+    }
+  }).catch(err => console.error('Copy failed:', err));
+}
+
+// === Social Media Share Functions ===
+function shareOnFacebook() {
+  const verseText = document.getElementById('verseText').textContent;
+  const verseRef = document.getElementById('verseRef').textContent;
+  const fullText = `"${verseText}" - ${verseRef}`;
+  const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(fullText)}`;
+  window.open(url, '_blank', 'width=600,height=400');
+}
+
+function shareOnTwitter() {
+  const verseText = document.getElementById('verseText').textContent;
+  const verseRef = document.getElementById('verseRef').textContent;
+  const text = `"${verseText}" - ${verseRef}`;
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
+  window.open(url, '_blank', 'width=600,height=300');
+}
+
+function shareOnWhatsApp() {
+  const verseText = document.getElementById('verseText').textContent;
+  const verseRef = document.getElementById('verseRef').textContent;
+  const text = `"${verseText}" - ${verseRef}`;
+  const url = `https://wa.me/?text=${encodeURIComponent(text + ' ' + window.location.href)}`;
+  window.open(url, '_blank');
+}
+
+function shareOnTelegram() {
+  const verseText = document.getElementById('verseText').textContent;
+  const verseRef = document.getElementById('verseRef').textContent;
+  const text = `"${verseText}" - ${verseRef}`;
+  const url = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+
+// === Poll Social Share Functions ===
+function sharePollOnFacebook() {
+  const pollText = "How do you deepen your spiritual connection? Join the weekly poll";
+  const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(pollText)}`;
+  window.open(url, '_blank', 'width=600,height=400');
+}
+
+function sharePollOnTwitter() {
+  const pollText = "How do you deepen your spiritual connection? Share your thoughts in our weekly poll 🙏";
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(pollText)}&url=${encodeURIComponent(window.location.href)}`;
+  window.open(url, '_blank', 'width=600,height=300');
+}
+
+function sharePollOnWhatsApp() {
+  const pollText = "How do you deepen your spiritual connection? Join this weekly poll and vote 🙏";
+  const url = `https://wa.me/?text=${encodeURIComponent(pollText + ' ' + window.location.href)}`;
+  window.open(url, '_blank');
+}
+
+function sharePollOnTelegram() {
+  const pollText = "How do you deepen your spiritual connection? Join the weekly poll";
+  const url = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(pollText)}`;
+  window.open(url, '_blank');
+}
+
+// === Save verse to local storage ===
+function saveVerse() {
+  let saved = JSON.parse(localStorage.getItem('savedVerses')) || [];
+  const currentVerse = verses[currentVerseIndex];
+  
+  const alreadySaved = saved.some(v => v.ref === currentVerse.ref);
+  
+  if (alreadySaved) {
+    saved = saved.filter(v => v.ref !== currentVerse.ref);
+  } else {
+    saved.push(currentVerse);
+  }
+  
+  localStorage.setItem('savedVerses', JSON.stringify(saved));
+  
+  const saveBtn = document.querySelector('.action-btn:has(i.fa-bookmark)');
+  if (saveBtn) {
+    if (alreadySaved) {
+      saveBtn.innerHTML = '<i class="far fa-bookmark"></i><span>Save</span>';
+    } else {
+      saveBtn.innerHTML = '<i class="fas fa-bookmark"></i><span>Saved</span>';
+    }
+  }
+}
+
+// === Toggle verse menu ===
+function toggleVerseMenu() {
+  // Can add more functionality later (share, report, etc.)
+  console.log('Menu clicked');
 }
 
 // === Show devotion modal popup ===
@@ -1718,7 +2223,26 @@ function toggleDevotion() {
 
 // === Close devotion modal when clicking outside or on close button ===
 document.addEventListener("DOMContentLoaded", () => {
+  currentVerseIndex = getDailyIndex();
   updateVerseOfTheDay();
+  
+  // Auto-update verse at midnight
+  function scheduleNextUpdate() {
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    
+    const timeUntilMidnight = tomorrow - now;
+    
+    setTimeout(() => {
+      currentVerseIndex = getDailyIndex();
+      updateVerseOfTheDay();
+      scheduleNextUpdate(); // Recursively schedule the next update
+    }, timeUntilMidnight);
+  }
+  
+  scheduleNextUpdate();
 
   const modal = document.getElementById('devotionModal');
   const closeBtn = document.getElementById('closeDevotion');
@@ -1786,6 +2310,34 @@ document.addEventListener("DOMContentLoaded", () => {
       showPopup(`<h3>💡 Devotion</h3><p>${devotion}</p>`);
     }
   });
+
+  // Games Explore Button
+  const exploreBtn = document.getElementById('exploreBtn');
+  const allGamesGrid = document.getElementById('allGamesGrid');
+  let gamesExpanded = false;
+
+  if (exploreBtn) {
+    exploreBtn.addEventListener('click', () => {
+      gamesExpanded = !gamesExpanded;
+
+      if (gamesExpanded) {
+        allGamesGrid.style.display = 'grid';
+        exploreBtn.innerHTML = '<span class="explore-text">🎮 Show Less Games</span><span class="explore-arrow">↑</span>';
+        exploreBtn.style.background = 'linear-gradient(135deg, rgba(106, 201, 255, 0.25), rgba(147, 112, 219, 0.2))';
+        allGamesGrid.classList.remove('hidden');
+
+        // Smooth scroll to show all games
+        setTimeout(() => {
+          allGamesGrid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      } else {
+        allGamesGrid.style.display = 'none';
+        exploreBtn.innerHTML = '<span class="explore-text">🎮 Explore All Games</span><span class="explore-arrow">→</span>';
+        exploreBtn.style.background = 'linear-gradient(135deg, rgba(106, 201, 255, 0.12), rgba(147, 112, 219, 0.08))';
+        allGamesGrid.classList.add('hidden');
+      }
+    });
+  }
 </script>
 
 
@@ -1797,34 +2349,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Dark Mode Toggle Script
-
 <script>
-const toggleButton = document.getElementById('darkModeToggle');
-const body = document.body;
-
-// On page load, apply saved or system preference
-if (localStorage.getItem('darkMode') === 'enabled') {
-  body.classList.add('dark-mode');
-  toggleButton.textContent = '☀️ Light Mode';
-} else if (
-  !localStorage.getItem('darkMode') &&
-  window.matchMedia('(prefers-color-scheme: dark)').matches
-) {
-  body.classList.add('dark-mode');
-  toggleButton.textContent = '☀️ Light Mode';
-}
-
-toggleButton.addEventListener('click', () => {
-  body.classList.toggle('dark-mode');
-  if (body.classList.contains('dark-mode')) {
-    localStorage.setItem('darkMode', 'enabled');
-    toggleButton.textContent = '☀️ Light Mode';
-  } else {
-    localStorage.setItem('darkMode', 'disabled');
-    toggleButton.textContent = '🌙 Dark Mode';
-  }
-});
+// Ensure dark mode is default
+document.body.classList.add('dark-mode');
+document.body.classList.remove('light-mode');
 </script>
 
 

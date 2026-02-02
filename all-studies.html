@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Studies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, rgba(15, 10, 30, 0.95), rgba(10, 20, 50, 0.95));
+      color: #ddd;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #ff6b9d, #c06c84);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      transform: translateX(-5px);
+      box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #ffd803, #ff6b9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .studies-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      animation: slideUp 1s ease-out;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .study-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(100, 150, 255, 0.05));
+      border: 1px solid rgba(255, 215, 3, 0.3);
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .study-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(255, 215, 3, 0.15);
+      border-color: rgba(255, 215, 3, 0.6);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(100, 150, 255, 0.1));
+    }
+
+    .study-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #ffd803;
+    }
+
+    .study-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 0.8rem;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .study-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #bbb;
+      margin-bottom: 1.5rem;
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ff6b9d;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 8px 16px;
+      border-radius: 50px;
+      background: rgba(255, 107, 157, 0.1);
+    }
+
+    .read-more:hover {
+      background: rgba(255, 107, 157, 0.25);
+      transform: translateX(5px);
+      color: #ff8ab5;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .studies-container {
+        grid-template-columns: 1fr;
+      }
+
+      .study-card {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button">
+    <i class="fas fa-arrow-left"></i>
+    Back to Home
+  </a>
+
+  <h1><i class="fas fa-book-open"></i> All Studies</h1>
+
+  <div class="studies-container">
+
+    <div class="study-card">
+      <div class="study-icon"><i class="fas fa-question-circle"></i></div>
+      <div class="study-title">Is The Bible Facts or Fiction?</div>
+      <div class="study-description">Explore the historical, archaeological, and textual evidence that demonstrates the Bible's reliability and authenticity.</div>
+      <a href="Studies/facts_or_fiction.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="study-card">
+      <div class="study-icon"><i class="fas fa-book-bible"></i></div>
+      <div class="study-title">Is the Bible God's Word to Humanity?</div>
+      <div class="study-description">Discover divine inspiration, fulfilled prophecies, and why Christians believe the Bible is God's ultimate message to mankind.</div>
+      <a href="Studies/why_the_bible_is_God's_word.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="study-card">
+      <div class="study-icon"><i class="fas fa-angel"></i></div>
+      <div class="study-title">Are Angels Real?</div>
+      <div class="study-description">Uncover biblical truths about celestial beings, their roles in God's plan, and what Scripture reveals about the angelic realm.</div>
+      <a href="Studies/are_angels_real.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="study-card">
+      <div class="study-icon"><i class="fas fa-shield"></i></div>
+      <div class="study-title">The Armor of God</div>
+      <div class="study-description">Learn about spiritual warfare and how to equip yourself with God's armor for victory in life's battles.</div>
+      <a href="Studies/armor.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+  </div>
+</body>
+</html>

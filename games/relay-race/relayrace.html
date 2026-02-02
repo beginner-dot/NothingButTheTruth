@@ -114,6 +114,7 @@
   <div class="controls">
     <button onclick="startGame()">Start Game</button>
     <button id="nextBtn" onclick="showNextQuestion()" style="display:none;">Next Question</button>
+    <button id="exitBtn" onclick="window.location.href='/'" style="display:none;">↩ Back to Games</button>
   </div>
 
   <div class="question-area" style="display:none;">
@@ -147,6 +148,8 @@
     let redScore = 0;
     let blueScore = 0;
     let hintUsed = false;
+    let totalQuestionsToPlay = 10;
+    let questionsAnswered = 0;
 
     function startGame() {
       // Shuffle questions using Fisher-Yates algorithm
@@ -217,7 +220,24 @@
       document.getElementById("message").textContent = message;
       currentTeam = currentTeam === 'Red' ? 'Blue' : 'Red';
       document.getElementById("currentTeam").textContent = currentTeam;
-      currentQuestion = (currentQuestion + 1) % questions.length;
+      questionsAnswered++;
+      
+      // Check if game should end
+      if (questionsAnswered >= totalQuestionsToPlay) {
+        endGame();
+      } else {
+        currentQuestion = (currentQuestion + 1) % questions.length;
+      }
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      document.querySelector(".question-area").style.display = "none";
+      document.getElementById("nextBtn").style.display = "none";
+      const winner = redScore > blueScore ? "🔴 Team Red" : blueScore > redScore ? "🔵 Team Blue" : "It's a Tie!";
+      const message = `<h2>Game Over!</h2><p>${winner} wins!</p><p style="font-size:1.3em;">🔴 Red: ${redScore} | 🔵 Blue: ${blueScore}</p>`;
+      document.body.insertAdjacentHTML('beforeend', `<div style="text-align:center; margin-top:2rem; padding:2rem; background:#f0f0f0; border-radius:10px;">${message}</div>`);
+      document.getElementById("exitBtn").style.display = "inline-block";
     }
 
     function useHint() {

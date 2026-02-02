@@ -3,108 +3,283 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verse Hunt - Blue-Purple Edition</title>
+<title>Verse Hunt - Professional Bible Challenge</title>
 <style>
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #2a3aeb, #7b2cbf); /* deep blue to purple */
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a4d 0%, #2a3aeb 40%, #7b2cbf 100%);
     color: #e0e8ff;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 30px;
     min-height: 100vh;
     overflow-x: hidden;
+    position: relative;
   }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(106, 201, 255, 0.1), transparent),
+                radial-gradient(circle at 80% 80%, rgba(147, 112, 219, 0.1), transparent);
+    pointer-events: none;
+    z-index: 0;
+  }
+
   h1 {
-    font-size: 3em;
+    font-size: 3.5em;
     margin-bottom: 10px;
     text-shadow: 0 0 20px #4a7fff, 0 0 30px #7b99ff;
+    position: relative;
+    z-index: 1;
   }
+
   .subtitle {
     font-size: 1.2em;
     margin-bottom: 40px;
     color: #a9bfff;
     text-shadow: 0 0 8px rgba(120, 145, 255, 0.6);
+    position: relative;
+    z-index: 1;
   }
-  .game-box {
-    background: rgba(50, 80, 255, 0.12); /* transparent deep blue */
-    border: 1px solid rgba(120, 140, 255, 0.3);
-    padding: 30px;
-    border-radius: 22px;
+
+  .start-screen {
+    background: linear-gradient(135deg, rgba(50, 80, 255, 0.15), rgba(123, 44, 191, 0.15));
+    border: 2px solid rgba(120, 140, 255, 0.4);
+    padding: 50px 40px;
+    border-radius: 25px;
     max-width: 600px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 0 35px rgba(75, 115, 255, 0.4);
+    box-shadow: 0 0 50px rgba(75, 115, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     position: relative;
-    color: #e0e8ff;
+    z-index: 2;
   }
-  .question {
-    font-size: 1.5em;
-    margin-bottom: 25px;
-    text-shadow: 0 0 8px #668cff;
+
+  .start-screen h2 {
+    font-size: 2.2em;
+    margin: 0 0 20px 0;
+    background: linear-gradient(135deg, #6ac9ff, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-  .options button {
-    display: block;
-    margin: 12px auto;
-    padding: 14px 26px;
-    font-size: 1.05em;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #3769ff, #6a8bff);
-    color: white;
+
+  .start-screen p {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 15px 0;
+    line-height: 1.6;
+  }
+
+  .difficulty-select {
+    display: flex;
+    gap: 12px;
+    margin: 30px 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .difficulty-btn {
+    padding: 12px 24px;
+    font-size: 1em;
+    border: 2px solid rgba(106, 201, 255, 0.4);
+    border-radius: 12px;
+    background: rgba(106, 201, 255, 0.1);
+    color: #6ac9ff;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    width: 100%;
-    box-shadow: 0 4px 12px rgba(55, 105, 255, 0.7);
+    transition: all 0.3s ease;
     font-weight: 600;
   }
-  .options button:hover {
-    background: linear-gradient(135deg, #5a8bff, #a4b8ff);
-    transform: scale(1.04);
-    box-shadow: 0 6px 18px rgba(90, 139, 255, 0.9);
+
+  .difficulty-btn:hover {
+    background: rgba(106, 201, 255, 0.2);
+    border-color: rgba(106, 201, 255, 0.7);
+    transform: scale(1.05);
   }
-  #feedback {
+
+  .difficulty-btn.selected {
+    background: linear-gradient(135deg, #6ac9ff, #4da8ff);
+    color: #0a0a1a;
+    border-color: #6ac9ff;
+    box-shadow: 0 8px 20px rgba(106, 201, 255, 0.4);
+  }
+
+  .play-button {
+    margin-top: 30px;
+    padding: 16px 50px;
     font-size: 1.3em;
-    margin-top: 20px;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #6ac9ff, #4da8ff);
+    color: #0a0a1a;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(106, 201, 255, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .play-button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 35px rgba(106, 201, 255, 0.6);
+  }
+
+  .play-button:active {
+    transform: scale(0.98);
+  }
+
+  .game-box {
+    background: linear-gradient(135deg, rgba(50, 80, 255, 0.15), rgba(123, 44, 191, 0.15));
+    border: 2px solid rgba(120, 140, 255, 0.4);
+    padding: 40px;
+    border-radius: 25px;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(75, 115, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    color: #e0e8ff;
+    display: none;
+    backdrop-filter: blur(10px);
+    z-index: 2;
+  }
+
+  .game-box.active {
+    display: block;
+  }
+
+  .game-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(106, 201, 255, 0.08);
+    border-radius: 15px;
+    border: 1px solid rgba(106, 201, 255, 0.2);
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-label {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 5px;
+  }
+
+  .stat-value {
+    font-size: 1.6em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #6ac9ff, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .question {
+    font-size: 1.6em;
+    margin-bottom: 30px;
+    text-shadow: 0 0 8px #668cff;
+    line-height: 1.6;
+  }
+
+  .options button {
+    display: block;
+    margin: 14px auto;
+    padding: 16px 28px;
+    font-size: 1.05em;
+    border: 2px solid rgba(106, 201, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(106, 201, 255, 0.1);
+    color: #e0e8ff;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    font-weight: 600;
+  }
+
+  .options button:hover:not(:disabled) {
+    background: rgba(106, 201, 255, 0.25);
+    border-color: rgba(106, 201, 255, 0.7);
+    transform: translateX(8px);
+    box-shadow: 0 8px 20px rgba(106, 201, 255, 0.3);
+  }
+
+  .options button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  #feedback {
+    font-size: 1.4em;
+    margin-top: 25px;
     color: #a4b8ff;
     text-shadow: 0 0 8px #88aaff;
-    min-height: 1.5em;
+    min-height: 1.8em;
+    font-weight: 600;
   }
-  #timer, #score, #level {
-    font-weight: bold;
+
+  .timer-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(106, 201, 255, 0.1);
+    border-radius: 10px;
     margin-top: 20px;
-    color: #a4b8ff;
-    text-shadow: 0 0 6px #668cff;
+    overflow: hidden;
+    border: 1px solid rgba(106, 201, 255, 0.2);
   }
-  #highScore {
-    margin-top: 20px;
-    font-weight: 700;
-    color: #ffdd33;
-    text-shadow: 0 0 12px #ffdd33;
+
+  .timer-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00d4ff, #6ac9ff);
+    width: 100%;
+    transition: width 0.1s linear;
   }
+
   audio {
     display: none;
   }
+
   #muteBtn {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #3769ff, #6a8bff);
-    border: none;
-    padding: 10px 16px;
+    background: linear-gradient(135deg, #6ac9ff, #4da8ff);
+    border: 2px solid rgba(106, 201, 255, 0.5);
+    padding: 12px 18px;
     border-radius: 16px;
-    color: white;
+    color: #0a0a1a;
     cursor: pointer;
     font-weight: 700;
     box-shadow: 0 5px 14px rgba(55, 105, 255, 0.7);
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
     z-index: 9999;
+    font-size: 0.95em;
   }
+
   #muteBtn:hover {
-    background: linear-gradient(135deg, #5a8bff, #a4b8ff);
+    background: linear-gradient(135deg, #7dd8ff, #5db8ff);
+    transform: scale(1.05);
   }
+
   /* Confetti container */
   #confetti {
     pointer-events: none;
@@ -116,6 +291,7 @@
     overflow: visible;
     z-index: 9998;
   }
+
   .confetti-piece {
     position: absolute;
     width: 10px;
@@ -128,6 +304,7 @@
     will-change: transform;
     box-shadow: 0 0 8px #a4b8ff;
   }
+
   @keyframes confetti-fall {
     0% {
       opacity: 1;
@@ -138,20 +315,200 @@
       transform: translateY(100vh) rotate(720deg);
     }
   }
+
+  /* Score Popup */
+  .score-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: linear-gradient(135deg, rgba(50, 80, 255, 0.2), rgba(123, 44, 191, 0.2));
+    border: 2px solid rgba(106, 201, 255, 0.6);
+    padding: 60px 50px;
+    border-radius: 30px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 80px rgba(75, 115, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    z-index: 10000;
+    opacity: 0;
+    animation: popupIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes popupIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.7);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .score-popup h2 {
+    font-size: 2.8em;
+    margin: 0 0 20px 0;
+    background: linear-gradient(135deg, #00d4ff, #6ac9ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .score-popup-thank-you {
+    font-size: 1.3em;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 15px 0 30px 0;
+    font-style: italic;
+  }
+
+  .score-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 30px 0;
+  }
+
+  .score-stat {
+    background: rgba(106, 201, 255, 0.12);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgba(106, 201, 255, 0.3);
+  }
+
+  .score-stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95em;
+    margin-bottom: 8px;
+  }
+
+  .score-stat-value {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #6ac9ff;
+  }
+
+  .restart-btn {
+    margin-top: 30px;
+    padding: 14px 40px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #6ac9ff, #4da8ff);
+    color: #0a0a1a;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(106, 201, 255, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .restart-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(106, 201, 255, 0.5);
+  }
+
+  .exit-btn {
+    margin-top: 20px;
+    padding: 10px 25px;
+    font-size: 0.95em;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .exit-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.2em;
+    }
+
+    .game-box,
+    .start-screen {
+      padding: 25px;
+    }
+
+    .game-header {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .score-stats {
+      grid-template-columns: 1fr;
+    }
+
+    #muteBtn {
+      top: 15px;
+      right: 15px;
+      padding: 10px 14px;
+      font-size: 0.85em;
+    }
+
+    .score-popup {
+      padding: 40px 30px;
+    }
+  }
 </style>
 </head>
 <body>
   <button id="muteBtn">🔈 Mute</button>
 
   <h1>📖 Verse Hunt</h1>
-  <div class="subtitle">Find the correct Bible verse!</div>
+  <div class="subtitle">Race through Bible verses and master scripture!</div>
 
-  <div class="game-box">
-    <div id="level">Level: 1</div>
-    <div id="score">Score: 0</div>
-    <div id="timer">Time Left: 20s</div>
-    <div id="highScore">High Score: 0</div>
-    <div class="question" id="question"></div>
+  <!-- Start Screen -->
+  <div class="start-screen" id="startScreen">
+    <h2>Welcome to Verse Hunt</h2>
+    <p>Test your Bible knowledge with timed challenges!</p>
+    
+    <p style="margin-top: 30px; font-weight: 600;">Choose Difficulty:</p>
+    <div class="difficulty-select">
+      <button class="difficulty-btn" data-difficulty="easy">🟢 Easy</button>
+      <button class="difficulty-btn" data-difficulty="medium">🟡 Medium</button>
+      <button class="difficulty-btn" data-difficulty="hard">🔴 Hard</button>
+    </div>
+
+    <button class="play-button" id="startBtn">▶ Start Game</button>
+  </div>
+
+  <!-- Game Box -->
+  <div class="game-box" id="gameBox">
+    <div class="game-header">
+      <div class="stat-item">
+        <div class="stat-label">Score</div>
+        <div class="stat-value" id="score">0</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Streak</div>
+        <div class="stat-value" id="streak">0</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Level</div>
+        <div class="stat-value" id="level">1</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-label">Progress</div>
+        <div class="stat-value" id="progress">1/10</div>
+      </div>
+    </div>
+
+    <div id="question" class="question"></div>
+    <div class="timer-bar">
+      <div class="timer-bar-fill" id="timerBar"></div>
+    </div>
     <div class="options" id="options"></div>
     <div id="feedback"></div>
   </div>
@@ -164,52 +521,151 @@
   <audio id="beep" src="https://assets.mixkit.co/sfx/preview/mixkit-classic-alarm-995.mp3"></audio>
 
 <script>
-  const questions = [
-    {
-      clue: "Which verse says: 'I can do all things through Christ who strengthens me.'",
-      answer: "Philippians 4:13",
-      options: ["Philippians 4:13", "Romans 8:28", "John 3:16", "Joshua 1:9"]
-    },
-    {
-      clue: "Which verse says: 'For God so loved the world...'",
-      answer: "John 3:16",
-      options: ["John 3:16", "Genesis 1:1", "Matthew 5:9", "Philippians 4:13"]
-    },
-    {
-      clue: "Which verse says: 'Be strong and courageous. Do not be afraid.'",
-      answer: "Joshua 1:9",
-      options: ["Psalm 23:1", "Joshua 1:9", "Romans 12:2", "John 10:10"]
-    }
-  ];
+  // Extended question set with 60+ questions per difficulty
+  const questionSets = {
+    easy: [
+      { clue: "Which verse says: 'I can do all things through Christ who strengthens me.'", answer: "Philippians 4:13", options: ["Philippians 4:13", "Romans 8:28", "John 3:16", "Joshua 1:9"] },
+      { clue: "Which verse says: 'For God so loved the world...'", answer: "John 3:16", options: ["John 3:16", "Genesis 1:1", "Matthew 5:9", "Philippians 4:13"] },
+      { clue: "Which verse says: 'Be strong and courageous. Do not be afraid.'", answer: "Joshua 1:9", options: ["Psalm 23:1", "Joshua 1:9", "Romans 12:2", "John 10:10"] },
+      { clue: "Which verse says: 'Trust in the Lord with all your heart...'", answer: "Proverbs 3:5", options: ["Proverbs 3:5", "Psalm 37:5", "Isaiah 26:3", "Proverbs 22:6"] },
+      { clue: "Which verse says: 'The Lord is my shepherd...'", answer: "Psalm 23:1", options: ["Psalm 23:1", "Isaiah 40:11", "Jeremiah 23:4", "Ezekiel 34:31"] },
+      { clue: "Which verse is the shortest in the Bible?", answer: "John 11:35", options: ["John 11:35", "John 15:11", "Luke 19:41", "Matthew 26:38"] },
+      { clue: "Which verse starts with 'Love is patient, love is kind...'?", answer: "1 Corinthians 13:4", options: ["1 Corinthians 13:4", "1 John 4:8", "Song of Solomon 3:4", "Proverbs 10:12"] },
+      { clue: "Which verse says: 'In the beginning was the Word...'?", answer: "John 1:1", options: ["John 1:1", "Genesis 1:1", "Proverbs 8:1", "Revelation 1:1"] },
+      { clue: "Which verse says: 'Come to me, all you who are weary...'", answer: "Matthew 11:28", options: ["Matthew 11:28", "John 4:14", "Isaiah 40:31", "Philippians 4:6"] },
+      { clue: "Which verse says: 'God is love...'", answer: "1 John 4:8", options: ["1 John 4:8", "1 Corinthians 13:13", "John 3:16", "Romans 5:8"] },
+      { clue: "Which verse says: 'All have sinned and fall short of God's glory'?", answer: "Romans 3:23", options: ["Romans 3:23", "Isaiah 53:6", "Proverbs 20:9", "Ecclesiastes 7:20"] },
+      { clue: "Which verse says: 'Faith is confidence in what we hope for...'", answer: "Hebrews 11:1", options: ["Hebrews 11:1", "Romans 10:17", "Proverbs 22:19", "Ephesians 3:17"] },
+      { clue: "Which verse says: 'For God has not given us a spirit of fear...'", answer: "2 Timothy 1:7", options: ["2 Timothy 1:7", "Romans 8:15", "John 14:27", "Philippians 4:7"] },
+      { clue: "Which verse says: 'Judge not, or you too will be judged'?", answer: "Matthew 7:1", options: ["Matthew 7:1", "Romans 14:10", "James 4:11", "John 8:7"] },
+      { clue: "Which verse says: 'As a man thinks, so he is...'", answer: "Proverbs 23:7", options: ["Proverbs 23:7", "Proverbs 27:12", "Philippians 4:8", "Isaiah 26:3"] },
+      { clue: "Which book of the Bible has the most chapters?", answer: "Psalms", options: ["Psalms", "Isaiah", "Jeremiah", "Matthew"] },
+      { clue: "Which verse says: 'The greatest of these is love...'", answer: "1 Corinthians 13:13", options: ["1 Corinthians 13:13", "John 13:35", "1 John 4:7", "1 Peter 4:8"] },
+      { clue: "Which verse says: 'Seek first the kingdom of God...'", answer: "Matthew 6:33", options: ["Matthew 6:33", "Proverbs 8:11", "1 Timothy 6:11", "Colossians 3:1"] },
+      { clue: "Which verse says: 'You are the light of the world...'", answer: "Matthew 5:14", options: ["Matthew 5:14", "John 8:12", "Ephesians 5:8", "Philippians 2:15"] },
+      { clue: "Which verse says: 'Let the peace of Christ rule in your hearts'?", answer: "Colossians 3:15", options: ["Colossians 3:15", "John 14:27", "Philippians 4:7", "Isaiah 26:3"] }
+    ],
+    medium: [
+      { clue: "Complete: 'All things work together for good...' - Romans 8:28 (to whom?)", answer: "those who love God", options: ["those who love God", "the righteous", "believers", "all people"] },
+      { clue: "Which verse says: 'I have set before you life and death, blessings and curses.'", answer: "Deuteronomy 30:15", options: ["Deuteronomy 30:15", "Joshua 24:15", "Proverbs 10:16", "Jeremiah 17:10"] },
+      { clue: "Finish: 'Whether you eat or drink or whatever you do...' (1 Corinthians 10:31)", answer: "do it all for the glory of God", options: ["do it all for the glory of God", "do it in love", "do it with thankfulness", "do it in faith"] },
+      { clue: "Who said: 'I am the way and the truth and the life'?", answer: "Jesus", options: ["Jesus", "Peter", "Paul", "John the Baptist"] },
+      { clue: "Complete: 'Love covers a multitude of...' - 1 Peter 4:8", answer: "sins", options: ["sins", "wrongs", "mistakes", "faults"] },
+      { clue: "Which book contains: 'There is a time for everything, a season for every activity'?", answer: "Ecclesiastes", options: ["Ecclesiastes", "Proverbs", "Job", "Lamentations"] },
+      { clue: "Who declared: 'I am Alpha and Omega, the first and the last'?", answer: "Jesus (or God)", options: ["Jesus (or God)", "John the apostle", "Moses", "The angel Gabriel"] },
+      { clue: "Which verse warns: 'The love of money is the root of all evil'?", answer: "1 Timothy 6:10", options: ["1 Timothy 6:10", "Proverbs 15:27", "Luke 16:14", "Ecclesiastes 5:10"] },
+      { clue: "Which verse says: 'Where two or three gather in my name, I am with them'?", answer: "Matthew 18:20", options: ["Matthew 18:20", "Matthew 28:20", "John 14:14", "Hebrews 10:25"] },
+      { clue: "Which verse says: 'Take every thought captive to obey Christ'?", answer: "2 Corinthians 10:5", options: ["2 Corinthians 10:5", "Philippians 4:8", "Romans 12:2", "Colossians 3:2"] },
+      { clue: "Complete: 'Blessed is the one who does not condemn themselves...'", answer: "Romans 14:22", options: ["Romans 14:22", "James 1:25", "Proverbs 28:14", "1 John 3:21"] },
+      { clue: "Which verse says: 'Cast all your anxiety on him because he cares for you'?", answer: "1 Peter 5:7", options: ["1 Peter 5:7", "Philippians 4:6", "Matthew 6:25", "1 Thessalonians 5:17"] },
+      { clue: "Which verse says: 'Now we see only a reflection as in a mirror...'", answer: "1 Corinthians 13:12", options: ["1 Corinthians 13:12", "2 Corinthians 3:18", "Ephesians 5:2", "Hebrews 10:1"] },
+      { clue: "Which verse says: 'Be transformed by the renewing of your mind'?", answer: "Romans 12:2", options: ["Romans 12:2", "2 Corinthians 5:17", "Ephesians 4:23", "Titus 3:5"] },
+      { clue: "Complete: 'No one has ever seen God, but...', John 1:18", answer: "the one and only Son has made him known", options: ["the one and only Son has made him known", "we know him through faith", "he reveals himself to believers", "we see him in Jesus"] },
+      { clue: "Which verse says: 'For the wages of sin is death, but the gift of God is eternal life'?", answer: "Romans 6:23", options: ["Romans 6:23", "John 3:16", "John 10:28", "1 John 5:11"] },
+      { clue: "Which verse says: 'The fear of the Lord is the beginning of wisdom'?", answer: "Proverbs 9:10", options: ["Proverbs 9:10", "Proverbs 1:7", "Job 28:28", "Psalm 111:10"] },
+      { clue: "Which verse says: 'Delight yourself in the Lord and he will give you the desires'?", answer: "Psalm 37:4", options: ["Psalm 37:4", "Proverbs 19:21", "Matthew 6:33", "Philippians 4:19"] },
+      { clue: "Which verse says: 'The righteous will live by faith...'", answer: "Habakkuk 2:4", options: ["Habakkuk 2:4", "Romans 1:17", "Hebrews 10:38", "Galatians 3:11"] },
+      { clue: "Which verse says: 'Let nothing be done from selfish ambition...'", answer: "Philippians 2:3", options: ["Philippians 2:3", "1 Peter 5:3", "Proverbs 11:2", "James 3:16"] }
+    ],
+    hard: [
+      { clue: "Which epistle begins with 'Paul, called to be an apostle of Christ Jesus...'?", answer: "1 Corinthians", options: ["1 Corinthians", "Romans", "Galatians", "Ephesians"] },
+      { clue: "In what book does God speak from a burning bush?", answer: "Exodus", options: ["Exodus", "Leviticus", "Numbers", "Deuteronomy"] },
+      { clue: "Complete: 'Let the peace of Christ rule...' - Colossians 3:15 (and be...?)", answer: "thankful", options: ["thankful", "joyful", "faithful", "truthful"] },
+      { clue: "Which prophet said 'Here I am! Send me'?", answer: "Isaiah", options: ["Isaiah", "Jeremiah", "Ezekiel", "Daniel"] },
+      { clue: "What does 'Selah' likely mean in the Psalms?", answer: "A musical interlude or pause", options: ["A musical interlude or pause", "Forever", "Always", "Amen"] },
+      { clue: "Which verse says: 'The fear of the Lord is the beginning of wisdom'?", answer: "Proverbs 9:10", options: ["Proverbs 9:10", "Proverbs 1:7", "Job 28:28", "Psalm 111:10"] },
+      { clue: "What is the longest book of the Bible by chapter count?", answer: "Psalms", options: ["Psalms", "Genesis", "Isaiah", "Matthew"] },
+      { clue: "Complete: 'No temptation...except what is common to mankind. And God is faithful...' (1 Corinthians 10:13)", answer: "he will not let you be tempted beyond what you can bear", options: ["he will not let you be tempted beyond what you can bear", "he gives the victory", "he forgives all sins", "he sets you free"] },
+      { clue: "Which verse says: 'Resist the devil, and he will flee from you'?", answer: "James 4:7", options: ["James 4:7", "1 Peter 5:8", "Ephesians 6:11", "1 John 4:4"] },
+      { clue: "Complete: 'He predestined us to be adopted as his sons...'", answer: "through Jesus Christ", options: ["through Jesus Christ", "for his glory", "as co-heirs with Christ", "in love"] },
+      { clue: "Which verse says: 'The Spirit himself testifies with our spirit that we are God's children'?", answer: "Romans 8:16", options: ["Romans 8:16", "Galatians 4:6", "1 John 3:24", "1 John 4:13"] },
+      { clue: "Complete: 'Therefore, as God's chosen people, holy and dearly loved, clothe yourselves with...'", answer: "compassion, kindness, humility, gentleness and patience", options: ["compassion, kindness, humility, gentleness and patience", "faith, hope and love", "truth and righteousness", "wisdom and understanding"] },
+      { clue: "Which verse says: 'The wages of sin is death, but the gift of God is eternal life in Christ'?", answer: "Romans 6:23", options: ["Romans 6:23", "John 10:28", "1 John 5:11", "Titus 1:2"] },
+      { clue: "Which verse says: 'Now to him who is able to do immeasurably more than all we ask...'", answer: "Ephesians 3:20", options: ["Ephesians 3:20", "Philippians 4:7", "2 Corinthians 9:8", "1 Peter 1:5"] },
+      { clue: "Complete: 'I have been crucified with Christ and I no longer live, but Christ lives in me...'", answer: "the life I now live in the body, I live by faith in the Son of God", options: ["the life I now live in the body, I live by faith in the Son of God", "for he is my life", "therefore I am free", "in his resurrection I am alive"] },
+      { clue: "Which verse says: 'If any of you lacks wisdom, you should ask God...'?", answer: "James 1:5", options: ["James 1:5", "Proverbs 2:3", "Ephesians 1:17", "Colossians 1:9"] },
+      { clue: "Complete: 'Therefore do not worry about tomorrow...'", answer: "for tomorrow will worry about itself", options: ["for tomorrow will worry about itself", "for God will provide", "for today has enough trouble of its own", "each day is sufficient"] },
+      { clue: "Which verse says: 'Set your minds on things above, not on earthly things'?", answer: "Colossians 3:2", options: ["Colossians 3:2", "Romans 12:2", "Philippians 3:19", "1 Peter 1:13"] },
+      { clue: "Complete: 'May the grace of the Lord Jesus Christ, and the love of God...'", answer: "and the fellowship of the Holy Spirit be with you all", options: ["and the fellowship of the Holy Spirit be with you all", "sustain us forever", "guide our paths", "dwell in us richly"] },
+      { clue: "Which verse says: 'Now we see only a reflection as in a mirror; then we shall see face to face'?", answer: "1 Corinthians 13:12", options: ["1 Corinthians 13:12", "2 Corinthians 3:18", "Ephesians 1:18", "Hebrews 10:1"] }
+    ]
+  };
 
+  let currentDifficulty = 'easy';
+  let questions = [];
   let current = 0;
   let score = 0;
+  let streak = 0;
+  let maxStreak = 0;
   let level = 1;
   let timer;
   let timeLeft = 20;
+  let timePerQuestion = 20;
+  let gameActive = false;
 
-  const questionEl = document.getElementById("question");
-  const optionsEl = document.getElementById("options");
-  const feedbackEl = document.getElementById("feedback");
-  const timerEl = document.getElementById("timer");
-  const scoreEl = document.getElementById("score");
-  const levelEl = document.getElementById("level");
-  const highScoreEl = document.getElementById("highScore");
+  const startScreen = document.getElementById('startScreen');
+  const gameBox = document.getElementById('gameBox');
+  const questionEl = document.getElementById('question');
+  const optionsEl = document.getElementById('options');
+  const feedbackEl = document.getElementById('feedback');
+  const timerBarEl = document.getElementById('timerBar');
+  const scoreEl = document.getElementById('score');
+  const streakEl = document.getElementById('streak');
+  const levelEl = document.getElementById('level');
+  const progressEl = document.getElementById('progress');
 
-  const correctSound = document.getElementById("correct-sound");
-  const wrongSound = document.getElementById("wrong-sound");
-  const beepSound = document.getElementById("beep");
-  const bgMusic = document.getElementById("bg-music");
-  const muteBtn = document.getElementById("muteBtn");
-
-  let highScore = parseInt(localStorage.getItem("verseHuntHighScore")) || 0;
-  highScoreEl.textContent = `High Score: ${highScore}`;
+  const correctSound = document.getElementById('correct-sound');
+  const wrongSound = document.getElementById('wrong-sound');
+  const beepSound = document.getElementById('beep');
+  const bgMusic = document.getElementById('bg-music');
+  const muteBtn = document.getElementById('muteBtn');
 
   let musicPlaying = true;
   bgMusic.volume = 0.3;
   bgMusic.play().catch(() => {});
 
-  muteBtn.addEventListener("click", () => {
+  // Shuffle array
+  function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // Difficulty selection
+  document.querySelectorAll('.difficulty-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('selected'));
+      e.target.classList.add('selected');
+      currentDifficulty = e.target.dataset.difficulty;
+
+      if (currentDifficulty === 'easy') timePerQuestion = 32;
+      else if (currentDifficulty === 'medium') timePerQuestion = 20;
+      else timePerQuestion = 12;
+    });
+  });
+
+  // Start game
+  document.getElementById('startBtn').addEventListener('click', startGame);
+
+  function startGame() {
+    questions = shuffle(questionSets[currentDifficulty]);
+    current = 0;
+    score = 0;
+    streak = 0;
+    maxStreak = 0;
+    level = 1;
+    gameActive = true;
+
+    startScreen.style.display = 'none';
+    gameBox.classList.add('active');
+
+    loadQuestion();
+  }
+
+  muteBtn.addEventListener('click', () => {
     if(musicPlaying) {
       bgMusic.pause();
       muteBtn.textContent = "🔇 Unmute";
@@ -221,50 +677,68 @@
   });
 
   function loadQuestion() {
-    if(current >= questions.length) {
+    if(current >= 10) {
       endGame();
       return;
     }
+
     const q = questions[current];
     questionEl.textContent = q.clue;
     optionsEl.innerHTML = "";
-    q.options.forEach(option => {
+    const shuffledOptions = shuffle(q.options);
+    shuffledOptions.forEach(option => {
       const btn = document.createElement("button");
       btn.textContent = option;
-      btn.onclick = () => handleAnswer(option);
+      btn.onclick = () => handleAnswer(option, q.answer);
       optionsEl.appendChild(btn);
     });
     feedbackEl.textContent = "";
-    timeLeft = 20;
-    timerEl.textContent = `Time Left: ${timeLeft}s`;
+    timeLeft = timePerQuestion;
+    updateTimerBar();
+    progressEl.textContent = `${current + 1}/10`;
     clearInterval(timer);
     timer = setInterval(updateTimer, 1000);
   }
 
   function updateTimer() {
     timeLeft--;
-    timerEl.textContent = `Time Left: ${timeLeft}s`;
-    if (timeLeft === 5) beepSound.play();
+    updateTimerBar();
+    if (timeLeft === 2) beepSound.play();
     if (timeLeft <= 0) {
       clearInterval(timer);
-      feedbackEl.textContent = "⏰ Time’s up!";
+      feedbackEl.textContent = "⏰ Time's up!";
       wrongSound.play();
-      setTimeout(() => nextQuestion(), 2000);
+      streak = 0;
+      streakEl.textContent = streak;
+      setTimeout(() => nextQuestion(), 1500);
     }
   }
 
-  function handleAnswer(selected) {
+  function updateTimerBar() {
+    const percentage = (timeLeft / timePerQuestion) * 100;
+    timerBarEl.style.width = percentage + '%';
+  }
+
+  function handleAnswer(selected, correct) {
     clearInterval(timer);
-    const correct = questions[current].answer;
-    if (selected === correct) {
-      score += 10;
-      feedbackEl.textContent = "✅ Correct!";
+    const isCorrect = selected === correct;
+
+    if (isCorrect) {
+      const pointsEarned = (10 * level) + (streak + 1) * 2;
+      score += pointsEarned;
+      streak++;
+      if (streak > maxStreak) maxStreak = streak;
+      feedbackEl.textContent = `✅ Correct! +${pointsEarned} points`;
       correctSound.play();
+      launchConfetti();
     } else {
-      feedbackEl.textContent = `❌ Wrong! Correct answer: ${correct}`;
+      feedbackEl.textContent = `❌ Wrong! Correct: ${correct}`;
       wrongSound.play();
+      streak = 0;
     }
-    scoreEl.textContent = `Score: ${score}`;
+
+    scoreEl.textContent = score;
+    streakEl.textContent = streak;
     setTimeout(() => nextQuestion(), 2000);
   }
 
@@ -272,28 +746,50 @@
     current++;
     if (current > 0 && current % 3 === 0) {
       level++;
-      levelEl.textContent = `Level: ${level}`;
+      levelEl.textContent = level;
     }
     loadQuestion();
   }
 
   function endGame() {
-    questionEl.textContent = "🎉 Game Over!";
-    optionsEl.innerHTML = "";
-    feedbackEl.textContent = `Your Final Score: ${score}`;
-    timerEl.textContent = "";
-    if(score > highScore) {
-      highScore = score;
-      localStorage.setItem("verseHuntHighScore", highScore);
-      highScoreEl.textContent = `High Score: ${highScore} 🔥 New!`;
-    }
+    gameActive = false;
+    gameBox.classList.remove('active');
+    
+    const popup = document.createElement('div');
+    popup.className = 'score-popup';
+    popup.innerHTML = `
+      <h2>🎉 Game Over!</h2>
+      <p class="score-popup-thank-you">Thank you for playing Verse Hunt! Keep growing in God's Word.</p>
+      <div class="score-stats">
+        <div class="score-stat">
+          <div class="score-stat-label">Final Score</div>
+          <div class="score-stat-value">${score}</div>
+        </div>
+        <div class="score-stat">
+          <div class="score-stat-label">Max Streak</div>
+          <div class="score-stat-value">${maxStreak}</div>
+        </div>
+        <div class="score-stat">
+          <div class="score-stat-label">Level Reached</div>
+          <div class="score-stat-value">${level}</div>
+        </div>
+        <div class="score-stat">
+          <div class="score-stat-label">Accuracy</div>
+          <div class="score-stat-value">${Math.round((score / (current * 10)) * 100)}%</div>
+        </div>
+      </div>
+      <button class="restart-btn" onclick="location.reload()">Play Again</button>
+      <button class="exit-btn" onclick="window.location.href='/'">Exit to Home</button>
+    `;
+    
+    document.body.appendChild(popup);
     launchConfetti();
   }
 
   function launchConfetti() {
     const confettiContainer = document.getElementById("confetti");
-    const colors = ['#6a8bff', '#4a79ff', '#a4b8ff', '#7b99ff', '#8cb4ff'];
-    const count = 80;
+    const colors = ['#6ac9ff', '#4a79ff', '#a4b8ff', '#7b99ff', '#8cb4ff'];
+    const count = 60;
     for(let i=0; i<count; i++) {
       const confetti = document.createElement("div");
       confetti.classList.add("confetti-piece");
@@ -301,14 +797,12 @@
       confetti.style.left = Math.random() * window.innerWidth + "px";
       confetti.style.top = Math.random() * -50 + "px";
       confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      confetti.style.animationDelay = (Math.random() * 3) + "s";
+      confetti.style.animationDelay = (Math.random() * 0.5) + "s";
       confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
       confettiContainer.appendChild(confetti);
       setTimeout(() => confetti.remove(), 6000);
     }
   }
-
-  loadQuestion();
 </script>
 </body>
 </html>
