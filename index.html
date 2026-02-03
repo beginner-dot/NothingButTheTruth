@@ -957,8 +957,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
 <!-- Video Section -->
 <section class="video-section scroll-fade">
   <div class="video-container">
@@ -979,6 +977,9 @@ document.addEventListener("DOMContentLoaded", () => {
             allowfullscreen>
           </iframe>
         </div>
+        <div class="fullscreen-box">
+          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+        </div>
         <h3>📽️ Video Title 1</h3>
         <p>Brief description of your video content goes here.</p>
       </div>
@@ -992,6 +993,9 @@ document.addEventListener("DOMContentLoaded", () => {
             allowfullscreen 
             style="border-radius: 8px;">
           </iframe>
+        </div>
+        <div class="fullscreen-box">
+          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
         </div>
         <h3>📽️ Video Title 2</h3>
         <p>Brief description of your video content goes here.</p>
@@ -1007,6 +1011,9 @@ document.addEventListener("DOMContentLoaded", () => {
             style="border-radius: 8px;">
           </iframe>
         </div>
+        <div class="fullscreen-box">
+          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+        </div>
         <h3>📽️ Video Title 3</h3>
         <p>Brief description of your video content goes here.</p>
       </div>
@@ -1020,6 +1027,20 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </section>
+
+<script>
+function openFullscreen(button) {
+  const iframe = button.closest('.video-card').querySelector('iframe');
+  if (iframe.requestFullscreen) {
+    iframe.requestFullscreen();
+  } else if (iframe.webkitRequestFullscreen) { // Safari
+    iframe.webkitRequestFullscreen();
+  } else if (iframe.msRequestFullscreen) { // IE11
+    iframe.msRequestFullscreen();
+  }
+}
+</script>
+
 
 
    
