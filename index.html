@@ -955,7 +955,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
 <!-- Video Section -->
 <section class="video-section scroll-fade">
   <div class="video-container">
@@ -979,14 +978,15 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="fullscreen-box">
           <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
         </div>
-        <h3>📽️ Video Title 1</h3>
-        <p>Brief description of your video content goes here.</p>
+        <h3>📽️ Video Section Intro</h3>
+        <p>Introduction to the video section.</p>
       </div>
 
       <!-- Video Card 2 -->
       <div class="video-card">
         <div class="video-wrapper">
-          <iframe src="https://player.vimeo.com/video/1161556719?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+          <!-- Restrict playback to first 9 minutes 37 seconds -->
+          <iframe src="https://player.vimeo.com/video/1161556719#t=0,577?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
             width="100%" height="315" 
             frameborder="0" 
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
@@ -999,8 +999,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="fullscreen-box">
           <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
         </div>
-        <h3>📽️ Video Title 2</h3>
-        <p>The story of the 10 commandments.</p>
+        <h3>📽️ The Story of the 10 Commandments</h3>
+        <p>How The Holy Commandments came to be</p>
       </div>
 
       <!-- Video Card 3 -->
@@ -1042,6 +1042,7 @@ function openFullscreen(button) {
   }
 }
 </script>
+
 
 
 
