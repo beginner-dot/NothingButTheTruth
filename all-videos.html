@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Videos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, rgba(15,5,30,0.95), rgba(5,0,15,0.95));
+      color: #eee;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2rem;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #ff6b9d, #c06c84);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .back-button:hover { transform: translateX(-5px); box-shadow: 0 8px 20px rgba(255,107,157,0.3); }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #ffd803, #ff6b9d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .videos-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      animation: slideUp 1s ease-out;
+      position: relative;
+      z-index: 1;
+    }
+
+    .video-card {
+      background: rgba(255,255,255,0.02);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.2);
+    }
+    .video-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,215,3,0.5);
+      box-shadow: 0 12px 40px 0 rgba(255,215,3,0.3);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    .video-card h3 {
+      font-size: 1.3rem;
+      margin: 20px 15px 10px 15px;
+      color: #fff;
+      font-weight: 600;
+    }
+    .video-card p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.7);
+      margin: 0 15px 20px 15px;
+      line-height: 1.5;
+    }
+
+    /* decorative shapes (same as index video section) */
+    .video-bg-shapes { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .shape { position: absolute; border-radius: 50%; opacity: 0.1; }
+    .shape-1 { width: 300px; height: 300px; background: linear-gradient(135deg, #ffd803, #6a11cb); top: -100px; left: -50px; animation: float 8s ease-in-out infinite; }
+    .shape-2 { width: 250px; height: 250px; background: linear-gradient(135deg, #2575fc, #ffd803); bottom: -50px; right: 10%; animation: float 10s ease-in-out infinite reverse; }
+    .shape-3 { width: 200px; height: 200px; background: linear-gradient(135deg, #6a11cb, #2575fc); top: 50%; right: -100px; animation: float 12s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes slideUp { from { transform: translateY(20px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Home</a>
+  <h1>🎥 All Videos</h1>
+  <div class="videos-container">
+    <!-- copy video cards from the index page -->
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://player.vimeo.com/video/1161336091?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+            width="100%" height="315" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            title="Avatar_Video_Intro." 
+            style="border-radius: 8px;" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="fullscreen-box">
+          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+        </div>
+        <h3>📽️ Video Section Intro</h3>
+        <p>Introduction to the video section.</p>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://player.vimeo.com/video/1161556719#t=0,577?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+            width="100%" height="315" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            title="The story of the 10 commandments" 
+            style="border-radius: 8px;" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="fullscreen-box">
+          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+        </div>
+        <h3>📽️ The Story of the 10 Commandments</h3>
+        <p>How The Holy Commandments came to be</p>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://player.vimeo.com/video/1161783888#t=0,577?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+            width="100%" height="315" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            title="1st Commandment" 
+            style="border-radius: 8px;" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="fullscreen-box">
+          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+        </div>
+        <h3>📽️ 1st Commandment</h3>
+        <p>The first of the Holy Commandments.</p>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://player.vimeo.com/video/1161805673?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+            width="100%" height="315" 
+            frameborder="0" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            title="2nd Commandment" 
+            style="border-radius: 8px;" 
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="fullscreen-box">
+          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+        </div>
+        <h3>📽️ 2nd Commandment</h3>
+        <p>The second of the Holy Commandments.</p>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe width="100%" height="315" src="" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+            allowfullscreen 
+            style="border-radius: 8px;">
+          </iframe>
+        </div>
+        <div class="fullscreen-box">
+          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+        </div>
+        <h3>📽️ Video Title 5</h3>
+        <p>Coming soon</p>
+      </div>
+  </div>
+
+  <!-- decorative shapes -->
+  <div class="video-bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+<script>
+function openFullscreen(button) {
+  const iframe = button.closest('.video-card').querySelector('iframe');
+  if (iframe.requestFullscreen) {
+    iframe.requestFullscreen();
+  } else if (iframe.webkitRequestFullscreen) { // Safari
+    iframe.webkitRequestFullscreen();
+  } else if (iframe.msRequestFullscreen) { // IE11
+    iframe.msRequestFullscreen();
+  }
+}
+</script>
+</body>
+</html>
