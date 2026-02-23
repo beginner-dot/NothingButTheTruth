@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="indexstyles.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -139,6 +140,7 @@
     </div>
 </section>
 
+
 <script>
     // PARALLAX EFFECT: Icons move based on mouse position
     document.addEventListener('mousemove', (e) => {
@@ -198,6 +200,11 @@
     });
 
     // TYPEWRITER EFFECT: animate the hero heading on load
+</script>
+
+<!-- library script (moved to bottom) -->
+
+<script>
     function typeTitle() {
         const title = document.getElementById('main-title');
         const text = title.textContent.trim();
@@ -620,6 +627,86 @@
         <li> <div class="box"><a href="Devotions/walking_in_the_light.html" style="text-decoration:none;"><i class="fas fa-sun" style="color:#ffd803"></i> Walking in the Light</a></div></li>
         <li> <div class="box"><a href="vod.html" class="devotion-button" style="text-decoration:none;">📖 All Devotions</a></div></li>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 10 Commandments mini-series -->
+<section id="stories-section" class="stories-section">
+    <!-- decorative cubes container -->
+    <div class="cubes-wrapper">
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <!-- additional smaller cubes/emojis -->
+        <div class="cube small"></div>
+        <div class="cube small"></div>
+        <div class="cube small"></div>
+        <div class="emoji" style="font-size:24px;">📜</div>
+        <div class="emoji" style="font-size:30px;">📖</div>
+        <div class="emoji" style="font-size:20px;">✝️</div>
+    </div>
+    <header>
+        <h2>10 Commandments Mini-Series</h2>
+        <p>Short video episodes outlining the Ten Commandments.</p>
+        <input type="text" id="search-bar" placeholder="Search episodes..." />
+    </header>
+    <div id="stories-container" class="stories-container"></div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2732,6 +2819,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
+
+<script src="script.js"></script>
 
 
 

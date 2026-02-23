@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "THE STORY OF THE TEN COMMANDMENTS - DISCOVER HOW THE TEN COMMANDMENTS CAME TO BE",
+    "subtitle": "Origins of the Law",
+    "category": "10 Commandments",
+    "reference": "Exodus 20",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "quizId": "quiz1",
+    "summary": "An overview of the importance and relevance of the Ten Commandments in the Christian life."
+  },
+  {
+    "id": 2,
+    "title": "The First Commandment - Thou shalt have no other Gods before me",
+    "subtitle": "First Commandment",
+    "category": "10 Commandments",
+    "reference": "Exodus 20:3",
+    "videoUrl": "https://www.youtube.com/embed/3JZ_D3ELwOQ",
+    "quizId": "quiz2",
+    "summary": "Explains the meaning of placing God first and avoiding idolatry."
+  },
+  {
+    "id": 3,
+    "title": "The Second Commandment: No Graven Images",
+    "subtitle": "Understanding idolatry",
+    "category": "10 Commandments",
+    "reference": "Exodus 20:4-6",
+    "videoUrl": "https://www.youtube.com/embed/V-_O7nl0Ii0",
+    "quizId": "quiz3",
+    "summary": "Description of the second commandment and why God forbids idols."
+  }
+]

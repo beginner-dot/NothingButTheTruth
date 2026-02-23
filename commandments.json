@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "THE STORY OF THE TEN COMMANDMENTS - DISCOVER HOW THE TEN COMMANDMENTS CAME TO BE",
+    "subtitle": "Origins of the Law",
+    "category": "Episode 1",
+    "reference": "Exodus 20",
+    "videoUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "quizId": "quiz1",
+    "summary": "An overview of the importance and relevance of the Ten Commandments in the Christian life.",
+    "transcript": "[Transcript placeholder] In this episode we explain how Moses received the Ten Commandments on Mount Sinai, discussing the historical and spiritual context behind the law."
+  },
+  {
+    "id": 2,
+    "title": "Thou shalt have no other Gods before me - A short explanatory video of the first Commandment",
+    "subtitle": "First Commandment",
+    "category": "Episode 2",
+    "reference": "Exodus 20:3",
+    "videoUrl": "https://www.youtube.com/embed/3JZ_D3ELwOQ",
+    "quizId": "quiz2",
+    "summary": "Explains the meaning of placing God first and avoiding idolatry.",
+    "transcript": "[Transcript placeholder] This narration explores the first commandment, emphasizing exclusive worship of the one true God and the dangers of idolatry in ancient culture."
+  },
+  {
+    "id": 3,
+    "title": "The Second Commandment: No Graven Images",
+    "subtitle": "Understanding idolatry",
+    "category": "Episode 3",
+    "reference": "Exodus 20:4-6",
+    "videoUrl": "https://www.youtube.com/embed/V-_O7nl0Ii0",
+    "quizId": "quiz3",
+    "summary": "Description of the second commandment and why God forbids idols.",
+    "transcript": "[Transcript placeholder] In this segment we dive into the prohibition against making images, discussing its implications for worship and how it preserves the transcendence of God."
+  }
+]
