@@ -166,14 +166,18 @@ body {
 
         /* --- BACKGROUND ENGINE --- */
         .hero-viewport {
-            height: 100vh;
+            /* allow hero to grow with content; previously clipped stats hud */
+            min-height: 100vh;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             background: radial-gradient(circle at center, #0a1128 0%, #010206 100%);
-            overflow: hidden;
+            overflow: visible; /* let stats-hud and other elements show outside viewport */
+            /* ensure content sits below navbar */
+            padding-top: 60px; /* adjust if navbar is taller */
+            padding-bottom: 120px; /* extra breathing room before next section */
         }
 
         /* Floating 3D Icons Layers */
@@ -192,6 +196,11 @@ body {
             animation: float3D 15s infinite ease-in-out;
         }
 
+        /* smaller emoji adjustments so added emojis look balanced */
+        .parallax-layer .float-icon[style] {
+          transition: transform 0.6s ease;
+        }
+
         /* Moving Data Texture */
         .matrix-overlay {
             position: absolute;
@@ -200,6 +209,36 @@ body {
             opacity: 0.2;
             z-index: 2;
         }
+
+        /* video bubbles decorative shapes (small, different sizes) */
+        .video-bubbles {
+          position: absolute;
+          inset: auto 10% 10% 10%;
+          pointer-events: none;
+          z-index: 0;
+        }
+        .video-bubbles .bubble {
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(255,215,0,0.12);
+          box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        /* more bubbles with varied random positions */
+        .video-bubbles .b-s1 { width: 36px; height: 36px; left: 6%; top: 12%; }
+        .video-bubbles .b-s2 { width: 24px; height: 24px; left: 16%; top: 22%; }
+        .video-bubbles .b-s3 { width: 30px; height: 30px; left: 30%; top: 8%; }
+        .video-bubbles .b-s4 { width: 20px; height: 20px; left: 42%; top: 18%; }
+        .video-bubbles .b-s5 { width: 28px; height: 28px; left: 54%; top: 6%; }
+        .video-bubbles .b-s6 { width: 18px; height: 18px; left: 68%; top: 14%; }
+        .video-bubbles .b-s7 { width: 22px; height: 22px; left: 76%; top: 26%; }
+        .video-bubbles .b-s8 { width: 26px; height: 26px; left: 88%; top: 10%; }
+        .video-bubbles .b-s9 { width: 20px; height: 20px; left: 12%; top: 36%; }
+        .video-bubbles .b-s10 { width: 24px; height: 24px; left: 34%; top: 30%; }
+        .video-bubbles .b-s11 { width: 18px; height: 18px; left: 52%; top: 28%; }
+        .video-bubbles .b-s12 { width: 26px; height: 26px; left: 72%; top: 34%; }
+        .video-bubbles .b-s13 { width: 22px; height: 22px; left: 92%; top: 28%; }
+        .video-wrapper.video-placeholder { background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); display:flex; align-items:center; justify-content:center; min-height:200px; border-radius:8px; }
+        .video-placeholder-inner { color: rgba(255,255,255,0.75); padding: 1rem; text-align:center; }
 
         /* --- CONTENT CONTAINER --- */
         .hero-container {
@@ -248,11 +287,25 @@ body {
 
         .hero-subtitle {
             font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.85);
             max-width: 650px;
             margin: 0 auto 40px;
-            line-height: 1.6;
+            line-height: 1.8;
             letter-spacing: 0.5px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subtitle-wrap {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0.6rem 1rem;
+          background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+          border-radius: 12px;
+          backdrop-filter: blur(6px) saturate(120%);
+          box-shadow: 0 6px 20px rgba(2,4,10,0.45);
+          max-width: 720px;
+          margin: 0 auto 28px;
         }
 
         /* --- ADVANCED BLADE BUTTONS --- */
@@ -260,6 +313,18 @@ body {
             display: flex;
             gap: 25px;
             justify-content: center;
+        }
+
+        .flip-hint {
+          text-align: center;
+          color: rgba(255,255,255,0.85);
+          background: rgba(0,0,0,0.25);
+          display: inline-block;
+          padding: 0.4rem 0.8rem;
+          border-radius: 8px;
+          margin: 0 auto 1rem;
+          font-size: 0.95rem;
+          backdrop-filter: blur(4px);
         }
 
         .blade-btn {
@@ -308,6 +373,9 @@ body {
             justify-content: center;
             gap: 50px;
             margin-top: 70px;
+            margin-bottom: 80px; /* ensure subsequent sections start below HUD */
+            position: relative;
+            z-index: 2000; /* stay on top of flip cards */
         }
 
         .hud-card {
@@ -392,7 +460,19 @@ body {
   background: #fff;
   border-radius: 16px;
   box-shadow: 2px 12px 16px rgba(0,0,0,0.07);
+  position: relative;
+  z-index: 1; /* ensure it stays behind hud and other overlay elements */
 }
+
+/* modern slides section should not climb above the HUD */
+.modern-slides {
+  position: relative;
+  z-index: 0;
+  margin-top: 40px; /* keep some space below stats hud so nothing overlaps */
+}
+
+/* ensure HUD really floats above everything */
+.stats-hud { z-index: 3000 !important; }
 
 .flip-card {
   width: 85vw;
@@ -504,6 +584,24 @@ body {
 
   .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
+  }
+}
+
+/* small screen adjustments */
+@media (max-width: 737px) {
+  /* push hero title downward for better centering */
+  .hero-container {
+    margin-top: 15vh; /* move almost to vertical center */
+  }
+  .hero-title {
+    margin-top: 20px;
+  }
+  /* ensure stats HUD has space above flip cards */
+  .stats-hud {
+    margin-bottom: 60px;
+  }
+  .flip-card-container {
+    margin-top: 60px;
   }
 }
 
@@ -3710,6 +3808,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
   margin-bottom: 40px;
+  justify-items: center;
 }
 
 .video-card {
@@ -3720,6 +3819,8 @@ body {
   overflow: hidden;
   transition: all 0.4s ease;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .video-card:hover {
@@ -3735,6 +3836,7 @@ body {
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
+  max-height: 400px;
 }
 
 .video-wrapper iframe {
@@ -3743,6 +3845,332 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.video-wrapper mux-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 8px;
+}
+
+/* Portrait aspect ratio override (9:16) - ONLY used on all-videos page */
+.video-wrapper.portrait-wrap {
+  padding-bottom: 177.78%;
+  max-height: none;
+}
+
+/* Beautiful All Videos Button */
+.all-videos-hero-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.btn-all-videos {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 25%, #2575fc 50%, #6a11cb 75%, #ff6b9d 100%);
+  background-size: 300% 300%;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+  letter-spacing: 0.5px;
+  animation: slideUp 0.8s ease-out;
+}
+
+.btn-all-videos::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-all-videos:hover::before {
+  left: 100%;
+}
+
+.btn-all-videos .btn-icon {
+  font-size: 1.4rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.btn-all-videos .btn-text {
+  letter-spacing: 0.8px;
+}
+
+.btn-all-videos .btn-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+  animation: slideArrow 1.5s ease-in-out infinite;
+}
+
+.btn-all-videos:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 15px 35px rgba(255, 107, 157, 0.6);
+  background-position: 300% center;
+}
+
+.btn-all-videos:active {
+  transform: scale(0.98) translateY(-1px);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes slideArrow {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments for all-videos button */
+@media (max-width: 768px) {
+  .btn-all-videos {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    gap: 10px;
+  }
+  
+  .btn-all-videos .btn-icon {
+    font-size: 1.2rem;
+  }
+}
+
+
+.quiz-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.quiz-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  backdrop-filter: blur(3px);
+}
+
+.quiz-content {
+  position: relative;
+  background: linear-gradient(135deg, rgba(10, 20, 40, 0.98), rgba(20, 30, 60, 0.98));
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(106, 17, 203, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+.quiz-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.quiz-close:hover {
+  color: #6a11cb;
+}
+
+.quiz-questions {
+  color: #ddd;
+}
+
+.quiz-question {
+  margin-bottom: 1.5rem;
+}
+
+.quiz-question p {
+  color: #fff;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.quiz-options label {
+  display: block;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  background: rgba(106, 17, 203, 0.1);
+  border: 1px solid rgba(106, 17, 203, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #ddd;
+}
+
+.quiz-options label:hover {
+  background: rgba(106, 17, 203, 0.2);
+  border-color: rgba(106, 17, 203, 0.6);
+}
+
+.quiz-options input[type="radio"] {
+  margin-right: 0.8rem;
+  cursor: pointer;
+}
+
+/* Action Buttons for Quiz and Study */
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quiz-btn, .study-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* default gradient backgrounds */
+.quiz-btn { background: linear-gradient(135deg, #6a11cb, #ff0055); }
+.study-btn { background: linear-gradient(135deg, #2575fc, #ffd803); }
+
+.quiz-btn:hover, .study-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.quiz-btn:active, .study-btn:active {
+  transform: translateY(0);
+}
+
+/* Study Modal Styles */
+.study-text p { color: #fff; }
+
+.study-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.study-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  backdrop-filter: blur(3px);
+}
+
+.study-content {
+  position: relative;
+  background: linear-gradient(135deg, rgba(10, 20, 40, 0.98), rgba(20, 30, 60, 0.98));
+  border-radius: 16px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(37, 117, 252, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+.study-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 5001;
+}
+
+.study-close:hover {
+  color: #2575fc;
+}
+
+/* Animations for modals */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .video-card h3 {

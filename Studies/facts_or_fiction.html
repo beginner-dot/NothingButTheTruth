@@ -293,8 +293,19 @@
       }
     }
   </style>
+<link rel="stylesheet" href="study-style.css">
 </head>
 <body>
+  <!-- SVG Gradient Border -->
+  <svg class="gradient-border" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="border-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#6a11cb"/>
+        <stop offset="100%" stop-color="#2575fc"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="98" height="98" fill="none" stroke="url(#border-gradient)" stroke-width="2"/>
+  </svg>
   <div class="main-content">
     <div class="header-section">
       <h1>

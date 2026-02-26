@@ -78,6 +78,45 @@
 .cubes-wrapper .emoji:nth-of-type(10) { top: 55%; left: 60%; animation-delay: 9s; }
 .cubes-wrapper .emoji:nth-of-type(11) { top: 70%; left: 35%; animation-delay: 13s; }
 
+/* extra small cube sizes and front overlap control */
+.cube.size-s1 { width: 48px; height: 48px; }
+.cube.size-s2 { width: 34px; height: 34px; }
+.cube.size-s3 { width: 52px; height: 52px; }
+.cube.size-s4 { width: 28px; height: 28px; }
+.cube.size-s5 { width: 44px; height: 44px; }
+.cube.size-s6 { width: 36px; height: 36px; }
+.cube.size-s7 { width: 56px; height: 56px; }
+.cube.size-s8 { width: 40px; height: 40px; }
+.cube.size-s9 { width: 30px; height: 30px; }
+.cube.size-s10 { width: 24px; height: 24px; }
+
+.cubes-wrapper .cube.front { z-index: 3; opacity: 0.95; }
+.stories-section header { position: relative; z-index: 1; }
+
+/* additional small cube sizes */
+.cube.size-s11 { width: 66px; height: 66px; }
+.cube.size-s12 { width: 22px; height: 22px; }
+.cube.size-s13 { width: 50px; height: 50px; }
+.cube.size-s14 { width: 42px; height: 42px; }
+.cube.size-s15 { width: 26px; height: 26px; }
+.cube.size-s16 { width: 58px; height: 58px; }
+.cube.size-s17 { width: 32px; height: 32px; }
+.cube.size-s18 { width: 46px; height: 46px; }
+.cube.size-s19 { width: 20px; height: 20px; }
+.cube.size-s20 { width: 72px; height: 72px; }
+
+/* place the additional small cubes in varied positions */
+.cubes-wrapper .cube.small.size-s11 { top: 12%; left: 52%; animation-delay: 1s; }
+.cubes-wrapper .cube.small.size-s12 { top: 28%; left: 6%; animation-delay: 3s; }
+.cubes-wrapper .cube.small.size-s13 { top: 46%; left: 22%; animation-delay: 5s; }
+.cubes-wrapper .cube.small.size-s14 { top: 62%; left: 12%; animation-delay: 7s; }
+.cubes-wrapper .cube.small.size-s15 { top: 10%; left: 82%; animation-delay: 2s; }
+.cubes-wrapper .cube.small.size-s16 { top: 36%; left: 72%; animation-delay: 4s; }
+.cubes-wrapper .cube.small.size-s17 { top: 54%; left: 44%; animation-delay: 6s; }
+.cubes-wrapper .cube.small.size-s18 { top: 70%; left: 62%; animation-delay: 8s; }
+.cubes-wrapper .cube.small.size-s19 { top: 80%; left: 22%; animation-delay: 9s; }
+.cubes-wrapper .cube.small.size-s20 { top: 4%; left: 68%; animation-delay: 2.5s; }
+
 @keyframes floatCube {
     0% { transform: translate(0,0) rotate(0deg); }
     25% { transform: translate(20px,-30px) rotate(15deg); }
@@ -101,7 +140,8 @@
 
 .stories-section h2 {
     font-size: 2.5rem;
-    color: var(--deep-navy);
+    color: #6a11cb; /* match studies/devotions purple */
+    font-family: 'Playfair Display', serif;
     margin: 0;
 }
 

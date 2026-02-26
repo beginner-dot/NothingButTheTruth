@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All Videos</title>
+  <!-- social/SEO metadata -->
+  <meta property="og:title" content="NothingButTheTruth - All Videos" />
+  <meta property="og:description" content="Browse our complete video library including the Ten Commandments mini‑series, Bible stories, and historical clips." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.example/all-videos.html" />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
@@ -82,6 +87,14 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
     }
+    .video-wrapper mux-player {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 8px;
+    }
 
     .video-card h3 {
       font-size: 1.3rem;
@@ -105,104 +118,134 @@
     @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
     @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     @keyframes slideUp { from { transform: translateY(20px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+    /* folder accordion styles */
+    .folder { margin-bottom: 1.5rem; }
+    .folder-header { cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 1rem; background: rgba(255,255,255,0.05); border-radius: 6px; transition: background 0.3s; }
+    .folder-header:hover { background: rgba(255,255,255,0.1); }
+    .folder-header .arrow { transition: transform 0.3s ease; display: inline-block; }
+    .folder.open .arrow { transform: rotate(90deg); }
+    .folder-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .folder.open .folder-content { max-height: 2000px; }
+    .empty-note { color: rgba(255,255,255,0.6); padding: 1rem; font-style: italic; }
   </style>
 </head>
 <body>
   <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Home</a>
   <h1>🎥 All Videos</h1>
-  <div class="videos-container">
-    <!-- copy video cards from the index page -->
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://player.vimeo.com/video/1161336091?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-            width="100%" height="315" 
-            frameborder="0" 
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            title="Avatar_Video_Intro." 
-            style="border-radius: 8px;" 
-            allowfullscreen>
-          </iframe>
+  <!-- folders containing video groups -->
+  <div class="folder open">
+    <div class="folder-header">Ten Commandments Mini-Series <span class="arrow">▶</span></div>
+    <div class="folder-content">
+      <div class="videos-container">
+        <!-- dynamic containers filled by script -->
+        <div class="video-card">
+          <div class="video-wrapper" id="ep1"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>🎬 Story of the Ten Commandments</h3>
+          <p>An overview of how the commandments came to be.</p>
         </div>
-        <div class="fullscreen-box">
-          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+        <div class="video-card">
+          <div class="video-wrapper" id="ep2"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 1st Commandment - No other Gods</h3>
+          <p>Exclusive worship of the one true God.</p>
         </div>
-        <h3>📽️ Video Section Intro</h3>
-        <p>Introduction to the video section.</p>
+        <div class="video-card">
+          <div class="video-wrapper" id="ep3"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 2nd Commandment - No Graven Images</h3>
+          <p>The prohibition against idols.</p>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper" id="ep4"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 3rd Commandment - Respect the Sabbath</h3>
+          <p>Remember and keep holy the Sabbath day.</p>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper" id="ep5"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 4th Commandment - Honor your parents</h3>
+          <p>Family obedience and respect.</p>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper" id="ep6"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 5th Commandment - Do not murder</h3>
+          <p>The sanctity of human life.</p>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper" id="ep7"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 6th Commandment - No adultery</h3>
+          <p>Faithfulness in marriage.</p>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper" id="ep8"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 7th Commandment - Do not steal</h3>
+          <p>Honesty and respect for others’ property.</p>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper" id="ep9"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 8th Commandment - Do not lie</h3>
+          <p>The power and penalty of falsehood.</p>
+        </div>
+        <div class="video-card">
+          <div class="video-wrapper video-placeholder">
+            <div class="video-placeholder-inner">to be uploaded soon</div>
+          </div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📽️ 10th Commandment - Coming soon</h3>
+          <p>Stay tuned for the final episode.</p>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://player.vimeo.com/video/1161556719#t=0,577?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-            width="100%" height="315" 
-            frameborder="0" 
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            title="The story of the 10 commandments" 
-            style="border-radius: 8px;" 
-            allowfullscreen>
-          </iframe>
+  <div class="folder">
+    <div class="folder-header">Bible Stories <span class="arrow">▶</span></div>
+    <div class="folder-content">
+      <div class="videos-container">
+        <div class="video-card">
+          <div class="video-wrapper" id="story1"></div>
+          <div class="fullscreen-box">
+            <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
+          </div>
+          <h3>📖 The Story of the Ten Commandments</h3>
+          <p>An animated retelling of the law’s origin.</p>
         </div>
-        <div class="fullscreen-box">
-          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
-        </div>
-        <h3>📽️ The Story of the 10 Commandments</h3>
-        <p>How The Holy Commandments came to be</p>
       </div>
+    </div>
+  </div>
 
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://player.vimeo.com/video/1161783888#t=0,577?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-            width="100%" height="315" 
-            frameborder="0" 
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            title="1st Commandment" 
-            style="border-radius: 8px;" 
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div class="fullscreen-box">
-          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
-        </div>
-        <h3>📽️ 1st Commandment</h3>
-        <p>The first of the Holy Commandments.</p>
-      </div>
-
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe src="https://player.vimeo.com/video/1161805673?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
-            width="100%" height="315" 
-            frameborder="0" 
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            title="2nd Commandment" 
-            style="border-radius: 8px;" 
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div class="fullscreen-box">
-          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
-        </div>
-        <h3>📽️ 2nd Commandment</h3>
-        <p>The second of the Holy Commandments.</p>
-      </div>
-
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe width="100%" height="315" src="" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
-            allowfullscreen 
-            style="border-radius: 8px;">
-          </iframe>
-        </div>
-        <div class="fullscreen-box">
-          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
-        </div>
-        <h3>📽️ Video Title 5</h3>
-        <p>Coming soon</p>
-      </div>
+  <div class="folder">
+    <div class="folder-header">Historical Videos <span class="arrow">▶</span></div>
+    <div class="folder-content">
+      <p class="empty-note">More historical content coming soon.</p>
+    </div>
   </div>
 
   <!-- decorative shapes -->
@@ -214,15 +257,64 @@
 
 <script>
 function openFullscreen(button) {
-  const iframe = button.closest('.video-card').querySelector('iframe');
-  if (iframe.requestFullscreen) {
-    iframe.requestFullscreen();
-  } else if (iframe.webkitRequestFullscreen) { // Safari
-    iframe.webkitRequestFullscreen();
-  } else if (iframe.msRequestFullscreen) { // IE11
-    iframe.msRequestFullscreen();
+  const card = button.closest('.video-card');
+  const player = card.querySelector('iframe, mux-player');
+  if (!player) return;
+  if (player.requestFullscreen) {
+    player.requestFullscreen();
+  } else if (player.webkitRequestFullscreen) { // Safari
+    player.webkitRequestFullscreen();
+  } else if (player.msRequestFullscreen) { // IE11
+    player.msRequestFullscreen();
   }
 }
+</script>
+
+<!-- mux player library & helper -->
+<script src="https://unpkg.com/@mux/mux-player"></script>
+<script src="mux-player.js"></script>
+
+<script>
+// folder accordion toggling
+document.querySelectorAll('.folder-header').forEach(h=>{
+  h.addEventListener('click',()=>{
+    h.parentElement.classList.toggle('open');
+  });
+});
+
+// metadata for dynamic video instantiation & SEO
+const muxVideos = [
+  {id:'ep1', play:'IvEpefz6ZAHjpG71jCPutOjQiBs701j5BZD6DPtnPlcY', color:'#ff0055', playEmoji:'✨', pauseEmoji:'⏸️', title:'THE STORY OF THE TEN COMMANDMENTS - DISCOVER HOW THE TEN COMMANDMENTS CAME TO BE', desc:'An overview of the importance and relevance of the Ten Commandments in the Christian life.'},
+  {id:'ep2', play:'At02BeC1XsfvnzLdph1i7WcMbgljkszxUGYd2tH5018Ow', color:'#0077cc', playEmoji:'▶️', pauseEmoji:'⏹️', title:'1st Commandment - No other Gods', desc:'Explains the meaning of placing God first and avoiding idols.'},
+  {id:'ep3', play:'cCbeBi2BZhcEEe8MNnYvlI4Cwn02w00wk29x31bHj02XE8', color:'#00cc77', playEmoji:'🎬', pauseEmoji:'⏸️', title:'2nd Commandment - No Graven Images', desc:'The prohibition against idols.'},
+  {id:'ep4', play:'tL02o02bj5IM7RSt6hywQmA5rrP0001t3qLBLOyz9wNKIqM', color:'#cc7700', playEmoji:'🔥', pauseEmoji:'⏸️', title:'3rd Commandment - Respect the Sabbath', desc:'Remember and keep holy the Sabbath day.'},
+  {id:'ep5', play:'fFpSPCm2u01rdH2XhpEjLg7C6CWQVD9kMWHSsuvD8Bgc', color:'#ff9900', playEmoji:'👪', pauseEmoji:'⏸️', title:'4th Commandment - Honor your parents', desc:'Family obedience and respect.'},
+  {id:'ep6', play:'3w3PIq4AHnH9MWsNIxY4kX01slQX8LHt02BeCvPXIawyc', color:'#008800', playEmoji:'🛡️', pauseEmoji:'⏸️', title:'5th Commandment - Do not murder', desc:'The sanctity of human life.'},
+  {id:'ep7', play:'ug848kYdAXqfuhzB1sKGdYKkV8EiC9OIHYsMplwObMs', color:'#aa00ff', playEmoji:'💔', pauseEmoji:'⏸️', title:'6th Commandment - No adultery', desc:'Faithfulness in marriage.'},
+  {id:'ep8', play:'KrxyIaJWF8XmqX5xjzkz34aQYo6ECfkgUBvGv9QgnbY', color:'#ffaa00', playEmoji:'💰', pauseEmoji:'⏸️', title:'7th Commandment - Do not steal', desc:'Honesty and respect for others’ property.'},
+  {id:'ep9', play:'700Jk02F3jkWj9BbhwpUV4cAWWFcikk01sr01LMxCKrAFBo', color:'#007700', playEmoji:'🗣️', pauseEmoji:'⏸️', title:'8th Commandment - Do not lie', desc:'The power and penalty of falsehood.'},
+  {id:'story1', play:'IvEpefz6ZAHjpG71jCPutOjQiBs701j5BZD6DPtnPlcY', color:'#ff0055', playEmoji:'✨', pauseEmoji:'⏸️', title:'The Story of the Ten Commandments', desc:'An animated retelling of the law’s origin.'}
+];
+
+muxVideos.forEach(v=>{
+  const container = document.getElementById(v.id);
+  if (container) {
+    createMuxExperience(v.play, v.color, v.playEmoji, v.pauseEmoji, container);
+    // add structured data
+    const ld = {
+      "@context":"http://schema.org",
+      "@type":"VideoObject",
+      name: v.title,
+      description: v.desc,
+      contentUrl: `https://stream.mux.com/${v.play}.m3u8`,
+      embedUrl: `https://mux.com/embed/${v.play}`
+    };
+    const scr = document.createElement('script');
+    scr.type='application/ld+json';
+    scr.textContent = JSON.stringify(ld);
+    document.body.appendChild(scr);
+  }
+});
 </script>
 </body>
 </html>
