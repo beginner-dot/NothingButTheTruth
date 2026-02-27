@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Christ The Savior — Steps to Christ Ch. 2 | NothingButTheTruth</title>
+  <meta name="description" content="A study from Steps to Christ, Chapter 2 (pages 17–18) on humanity's fall, the condition of the unrenewed heart, and Christ as the only power that can change us from sin to holiness.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0c0c1a; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #7c3aed, #a855f7); border-radius: 99px; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #060812;
+      color: #e0dce8;
+      min-height: 100vh;
+      line-height: 1.8;
+    }
+
+    /* ===== HERO BANNER ===== */
+    .study-hero {
+      position: relative;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      background: linear-gradient(160deg, #0a0a1a 0%, #1a0730 40%, #0d1225 100%);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+      overflow: hidden;
+    }
+    .study-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(168, 85, 247, 0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .study-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #aaa;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+      z-index: 10;
+    }
+    .back-link:hover {
+      background: rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #fff;
+      transform: translateX(-3px);
+    }
+
+    .hero-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      display: block;
+      filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.35));
+    }
+    .study-hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 0.3rem;
+    }
+    .study-hero .source-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 0.6rem;
+      padding: 7px 18px;
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #c084fc;
+      position: relative;
+      z-index: 1;
+    }
+    .study-hero .source-tag i { font-size: 0.75rem; }
+
+    /* ===== MAIN CONTENT WRAPPER ===== */
+    .content-wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+    }
+
+    /* ===== CHAPTER INTRO STRIP ===== */
+    .chapter-intro {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 1rem 1.4rem;
+      background: rgba(168, 85, 247, 0.06);
+      border: 1px solid rgba(168, 85, 247, 0.12);
+      border-radius: 14px;
+      margin-bottom: 2.5rem;
+      font-size: 0.9rem;
+      color: #b8a9d4;
+    }
+    .chapter-intro i {
+      font-size: 1.3rem;
+      color: #a855f7;
+    }
+
+    /* ===== PARAGRAPH BLOCKS ===== */
+    .passage-block {
+      position: relative;
+      margin-bottom: 2.2rem;
+      padding: 1.8rem 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .passage-block:hover {
+      border-color: rgba(168, 85, 247, 0.15);
+      background: rgba(255, 255, 255, 0.045);
+    }
+    .passage-block .paragraph-number {
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      background: #0e0e22;
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      color: #a855f7;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 50px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .passage-block p {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      line-height: 2;
+      color: #d4cfe0;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    /* ===== SCRIPTURE REFERENCES (inline) ===== */
+    .scripture-ref {
+      display: inline;
+      color: #c084fc;
+      font-style: italic;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.92em;
+    }
+
+    /* ===== PULL-QUOTE HIGHLIGHT ===== */
+    .pull-quote {
+      position: relative;
+      margin: 2.5rem 0;
+      padding: 1.8rem 2rem 1.8rem 2.4rem;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
+      border-left: 4px solid #a855f7;
+      border-radius: 0 14px 14px 0;
+      font-family: 'Lora', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.9;
+      color: #e0d6f2;
+    }
+    .pull-quote::before {
+      content: '\201C';
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 2.8rem;
+      color: rgba(168, 85, 247, 0.25);
+      font-family: 'DM Serif Display', serif;
+      line-height: 1;
+    }
+
+    /* ===== VERSE CALLOUT BOX ===== */
+    .verse-box {
+      margin: 2rem 0;
+      padding: 1.4rem 1.6rem;
+      background: rgba(220, 38, 38, 0.06);
+      border: 1px solid rgba(220, 38, 38, 0.15);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .verse-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, #dc2626, #a855f7);
+      border-radius: 4px 0 0 4px;
+    }
+    .verse-box .verse-text {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #e8d5d5;
+      padding-left: 0.5rem;
+    }
+    .verse-box .verse-ref {
+      display: block;
+      margin-top: 0.6rem;
+      padding-left: 0.5rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #c084fc;
+    }
+
+    /* ===== SHARE BAR ===== */
+    .share-bar {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2.5rem 0 1rem;
+      padding: 1.2rem;
+      background: rgba(168, 85, 247, 0.05);
+      border: 1px solid rgba(168, 85, 247, 0.1);
+      border-radius: 14px;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #fff;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+    .share-btn:hover { transform: scale(1.12); }
+    .share-btn.facebook  { background: #1877f2; box-shadow: 0 4px 12px rgba(24,119,242,0.3); }
+    .share-btn.twitter   { background: #1da1f2; box-shadow: 0 4px 12px rgba(29,161,242,0.3); }
+    .share-btn.whatsapp  { background: #25d366; box-shadow: 0 4px 12px rgba(37,211,102,0.3); }
+    .share-btn.email     { background: #7c3aed; box-shadow: 0 4px 12px rgba(124,58,237,0.3); }
+    .share-btn.copy-link { background: #a855f7; box-shadow: 0 4px 12px rgba(168,85,247,0.3); }
+
+    /* ===== BOTTOM NAV ===== */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .bottom-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      color: #c084fc;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: all 0.3s ease;
+    }
+    .bottom-nav a:hover {
+      background: rgba(168, 85, 247, 0.2);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #fff;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 700px) {
+      .study-hero { padding: 3.5rem 1.2rem 2rem; }
+      .content-wrapper { padding: 1.5rem 1rem 3rem; }
+      .passage-block { padding: 1.3rem 1.2rem; }
+      .pull-quote { padding: 1.4rem 1.2rem 1.4rem 1.6rem; }
+      .back-link { top: 0.8rem; left: 0.8rem; padding: 7px 14px; font-size: 0.78rem; }
+      .bottom-nav { flex-direction: column; align-items: stretch; text-align: center; }
+      .bottom-nav a { justify-content: center; }
+    }
+
+    /* ===== ENTRANCE ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .passage-block { animation: fadeUp 0.6s ease-out both; }
+    .passage-block:nth-child(1) { animation-delay: 0.1s; }
+    .passage-block:nth-child(2) { animation-delay: 0.2s; }
+    .passage-block:nth-child(3) { animation-delay: 0.3s; }
+    .passage-block:nth-child(4) { animation-delay: 0.4s; }
+    .passage-block:nth-child(5) { animation-delay: 0.5s; }
+    .pull-quote { animation: fadeUp 0.6s ease-out both; animation-delay: 0.35s; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <header class="study-hero">
+    <a href="../all-studies.html" class="back-link"><i class="fas fa-arrow-left"></i> All Studies</a>
+    <span class="hero-icon">✝️</span>
+    <h1>Christ The Savior</h1>
+    <div class="source-tag">
+      <i class="fas fa-book-open"></i>
+      Steps to Christ &mdash; Chapter 2, Pages 17 &amp; 18
+    </div>
+  </header>
+
+  <!-- ===== BODY ===== -->
+  <div class="content-wrapper">
+
+    <div class="chapter-intro">
+      <i class="fas fa-feather-pointed"></i>
+      <span>This passage is taken directly from <strong>Steps to Christ</strong> by Ellen G. White. The text is presented unedited and in full, exactly as originally written.</span>
+    </div>
+
+    <!-- ── PARAGRAPH 1 ── -->
+    <div class="passage-block">
+      <span class="paragraph-number">§ 1</span>
+      <p>"Man was originally endowed with noble powers and a well-balanced mind. He was perfect in his being, and in harmony with God. His thoughts were pure, his aims holy. But through disobedience, his powers were perverted, and selfishness took the place of love. His nature became so weakened through transgression that it was impossible for him, in his own strength, to resist the power of evil. He was made captive by Satan, and would have remained so forever had not God specially interposed. It was the tempter's purpose to thwart the divine plan in man's creation, and fill the earth with woe and desolation. And he would point to all this evil as the result of God's work in creating man.</p>
+    </div>
+
+    <!-- ── PARAGRAPH 2 ── -->
+    <div class="passage-block">
+      <span class="paragraph-number">§ 2</span>
+      <p>In his sinless state, man held joyful communion with Him "in whom are hid all the treasures of wisdom and knowledge." <span class="scripture-ref">Colossians 2:3.</span> But after his sin, he could no longer find joy in holiness, and he sought to hide from the presence of God. Such is still the condition of the unrenewed heart. It is not in harmony with God, and finds no joy in communion with Him. The sinner could not be happy in God's presence; he would shrink from the companionship of holy beings. Could he be permitted to enter heaven, it would have no joy for him. The spirit of unselfish love that reigns there—every heart responding to the heart of Infinite Love—would touch no answering chord in his soul. His thoughts, his interests, his motives, would be alien to those that actuate the sinless dwellers there. He would be a discordant note in the melody of heaven. Heaven would be to him a place of torture; he would long to be hidden from Him who is its light, and the center of its joy. It is no arbitrary decree on the part of God that excludes the wicked from heaven; they are shut out by their own unfitness for its companionship. The glory of God would be to them a consuming fire. They would welcome destruction, that they might be hidden from the face of Him who died to redeem them.</p>
+    </div>
+
+    <!-- ── PULL QUOTE ── -->
+    <div class="pull-quote">
+      They are shut out by their own unfitness for its companionship. The glory of God would be to them a consuming fire.
+    </div>
+
+    <!-- ── PARAGRAPH 3 ── -->
+    <div class="passage-block">
+      <span class="paragraph-number">§ 3</span>
+      <p>It is impossible for us, of ourselves, to escape from the pit of sin in which we are sunken. Our hearts are evil, and we cannot change them. "Who can bring a clean thing out of an unclean? not one." "The carnal mind is enmity against God: for it is not subject to the law of God, neither indeed can be." <span class="scripture-ref">Job 14:4; Romans 8:7.</span> Education, culture, the exercise of the will, human effort, all have their proper sphere, but here they are powerless. They may produce an outward correctness of behavior, but they cannot change the heart; they cannot purify the springs of life. There must be a power working from within, a new life from above, before men can be changed from sin to holiness. That power is Christ. His grace alone can quicken the lifeless faculties of the soul, and attract it to God, to holiness.</p>
+    </div>
+
+    <!-- ── KEY VERSE ── -->
+    <div class="verse-box">
+      <div class="verse-text">"There must be a power working from within, a new life from above, before men can be changed from sin to holiness. That power is Christ."</div>
+      <span class="verse-ref">— Steps to Christ, p. 18</span>
+    </div>
+
+    <!-- ── PARAGRAPH 4 ── -->
+    <div class="passage-block">
+      <span class="paragraph-number">§ 4</span>
+      <p>The Saviour said, "Except a man be born from above," unless he shall receive a new heart, new desires, purposes, and motives, leading to a new life, "he cannot see the kingdom of God." <span class="scripture-ref">John 3:3, margin.</span> The idea that it is necessary only to develop the good that exists in man by nature, is a fatal deception. "The natural man receiveth not the things of the Spirit of God: for they are foolishness unto him: neither can he know them, because they are spiritually discerned." "Marvel not that I said unto thee, Ye must be born again." <span class="scripture-ref">1 Corinthians 2:14; John 3:7.</span> Of Christ it is written, "In Him was life; and the life was the light of men"—the only "name under heaven given among men, whereby we must be saved." <span class="scripture-ref">John 1:4; Acts 4:12.</span>"</p>
+    </div>
+
+    <!-- ── CLOSING VERSE ── -->
+    <div class="verse-box">
+      <div class="verse-text">"In Him was life; and the life was the light of men"—the only "name under heaven given among men, whereby we must be saved."</div>
+      <span class="verse-ref">John 1:4; Acts 4:12</span>
+    </div>
+
+    <!-- ── SHARE ── -->
+    <div class="share-bar">
+      <a href="https://www.facebook.com/sharer/sharer.php?u=https://nothingbutthetruth.web.app/Studies/christ_the_savior.html" target="_blank" class="share-btn facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://twitter.com/intent/tweet?url=https://nothingbutthetruth.web.app/Studies/christ_the_savior.html&text=Christ The Savior — Steps to Christ Ch. 2" target="_blank" class="share-btn twitter" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://wa.me/?text=Christ The Savior — Steps to Christ Ch. 2 https://nothingbutthetruth.web.app/Studies/christ_the_savior.html" target="_blank" class="share-btn whatsapp" title="Share on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="mailto:?subject=Christ The Savior — Steps to Christ&body=Read this powerful passage: https://nothingbutthetruth.web.app/Studies/christ_the_savior.html" class="share-btn email" title="Share via Email"><i class="fas fa-envelope"></i></a>
+      <button class="share-btn copy-link" onclick="navigator.clipboard.writeText('https://nothingbutthetruth.web.app/Studies/christ_the_savior.html').then(()=>alert('Link copied!'))" title="Copy Link"><i class="fas fa-link"></i></button>
+    </div>
+
+    <!-- ── NAVIGATION ── -->
+    <nav class="bottom-nav">
+      <a href="../all-studies.html"><i class="fas fa-th-large"></i> All Studies</a>
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    </nav>
+
+  </div>
+
+</body>
+</html>

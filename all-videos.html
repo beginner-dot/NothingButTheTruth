@@ -248,6 +248,13 @@
     </div>
   </div>
 
+  <div class="folder">
+    <div class="folder-header">🧸 Kids Videos <span class="arrow">▶</span></div>
+    <div class="folder-content">
+      <p class="empty-note">Fun Bible videos for kids coming soon!</p>
+    </div>
+  </div>
+
   <!-- decorative shapes -->
   <div class="video-bg-shapes">
     <div class="shape shape-1"></div>
@@ -315,6 +322,39 @@ muxVideos.forEach(v=>{
     document.body.appendChild(scr);
   }
 });
+</script>
+
+<!-- Scroll-position restore -->
+<script>
+(function() {
+  var KEY = 'nbtt_scrollY_allvideos';
+  function saveScroll() { sessionStorage.setItem(KEY, window.scrollY || document.documentElement.scrollTop); }
+  function restoreScroll() {
+    var saved = sessionStorage.getItem(KEY);
+    if (saved !== null) {
+      var html = document.documentElement; var orig = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      window.scrollTo(0, parseInt(saved, 10));
+      requestAnimationFrame(function() {
+        window.scrollTo(0, parseInt(saved, 10));
+        setTimeout(function() { html.style.scrollBehavior = orig || ''; }, 120);
+      });
+    }
+  }
+  window.addEventListener('beforeunload', saveScroll);
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (link && !link.getAttribute('href').startsWith('#')) saveScroll();
+  });
+  var wasBackNav = false;
+  if (window.performance) {
+    var entries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+    if (entries && entries.length) { wasBackNav = entries[0].type === 'back_forward'; }
+    else if (performance.navigation) { wasBackNav = performance.navigation.type === 2; }
+  }
+  if (wasBackNav) { restoreScroll(); window.addEventListener('load', restoreScroll); }
+  window.addEventListener('pageshow', function(e) { if (e.persisted) restoreScroll(); });
+})();
 </script>
 </body>
 </html>

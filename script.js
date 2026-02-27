@@ -24,6 +24,9 @@ function renderStories(filter) {
     );
 
     list.forEach((story, index) => {
+        // Only show the first 3 episodes on the homepage
+        if (index >= 3) return;
+
         // choose embed markup: mux-player if we have a playbackId, otherwise legacy iframe
         let videoEmbed;
         if (story.playbackId) {

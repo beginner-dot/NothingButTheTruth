@@ -3,43 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="NothingButTheTruth - Sharing the unchanged Gospel as written in the Holy Bible. Explore video messages, studies, and inspirational messages.">
-    <!-- open graph for social & SEO -->
-    <meta property="og:title" content="NothingButTheTruth" />
-    <meta property="og:description" content="Watch our videos, studies, and devotions - all rooted in the unfiltered Word of God." />
+
+    <!-- ===== PRIMARY SEO META ===== -->
+    <title>NothingButTheTruth — Bible Studies, Devotions, Videos & Interactive Games</title>
+    <meta name="description" content="Explore the unfiltered Word of God at NothingButTheTruth. Free Bible studies, daily devotions, scripture-based videos, interactive games, and the Ten Commandments series — truth documented and delivered for the modern seeker.">
+    <meta name="keywords" content="Bible study, daily devotions, scripture, Gospel, Ten Commandments, Christian faith, Bible games, Bible videos, NothingButTheTruth, Word of God, prayer, Holy Bible, baptism, armor of God, angels">
+    <meta name="author" content="NothingButTheTruth">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <link rel="canonical" href="https://nothingbutthetruth.web.app/">
+
+    <!-- ===== OPEN GRAPH (Facebook, LinkedIn, Discord) ===== -->
+    <meta property="og:site_name" content="NothingButTheTruth" />
+    <meta property="og:title" content="NothingButTheTruth — The Unfiltered Word of God" />
+    <meta property="og:description" content="Free Bible studies, daily devotions, scripture-based videos, and interactive games. Pure truth, documented and delivered for the modern seeker." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://yourdomain.example/" />
-    <title>NothingButTheTruth</title>
+    <meta property="og:url" content="https://nothingbutthetruth.web.app/" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ===== TWITTER CARD ===== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NothingButTheTruth — Bible Studies, Devotions & Videos">
+    <meta name="twitter:description" content="Explore the unfiltered Word of God. Free Bible studies, daily devotions, interactive games, and the Ten Commandments video series.">
+
+    <!-- ===== FONTS — preconnect for speed ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans&family=Pacifico&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- ===== STYLESHEETS ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="indexstyles.css">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- ===== STRUCTURED DATA — Organization + WebSite ===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://nothingbutthetruth.web.app/#website",
+          "url": "https://nothingbutthetruth.web.app/",
+          "name": "NothingButTheTruth",
+          "description": "Sharing the unchanged Gospel as written in the Holy Bible. Bible studies, devotions, videos, and interactive games.",
+          "inLanguage": "en-US"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://nothingbutthetruth.web.app/#organization",
+          "name": "NothingButTheTruth",
+          "url": "https://nothingbutthetruth.web.app/",
+          "description": "A Christian platform sharing the unfiltered Word of God through Bible studies, devotions, videos, and interactive games."
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://nothingbutthetruth.web.app/#homepage",
+          "url": "https://nothingbutthetruth.web.app/",
+          "name": "NothingButTheTruth — Bible Studies, Devotions, Videos & Interactive Games",
+          "isPartOf": { "@id": "https://nothingbutthetruth.web.app/#website" },
+          "about": { "@id": "https://nothingbutthetruth.web.app/#organization" },
+          "description": "Explore the unfiltered Word of God. Free Bible studies, daily devotions, interactive scripture games, and the Ten Commandments video series.",
+          "inLanguage": "en-US"
+        }
+      ]
+    }
+    </script>
 
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar scroll-fade">
+    <!-- Skip to main content — accessibility + SEO -->
+    <a href="#hero-viewport" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;padding:8px 16px;background:#a855f7;color:#fff;text-decoration:none;font-weight:700;font-size:1rem;" onfocus="this.style.left='16px';this.style.top='16px';this.style.width='auto';this.style.height='auto';" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px';">Skip to main content</a>
+
+    <header role="banner">
+        <nav class="navbar scroll-fade" aria-label="Primary navigation">
            <div class="WebsiteName"></div>
-            <div class="hamburger" tabindex="0" aria-label="Open menu">
+            <div class="hamburger" tabindex="0" aria-label="Open menu" role="button" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <div class="sidebar" tabindex="-1">
+            <div class="sidebar" tabindex="-1" role="dialog" aria-label="Navigation menu">
                 <div class="navbar-sidebar-header">
-                <ul class="nav-links">
-                    <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="#studies"><i class="fas fa-book-open"></i> Studies</a></li>
-                    <li><a href="#messages"><i class="fas fa-envelope"></i> Messages</a></li>
-                    <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
-                    <li><a href="all-videos.html"><i class="fas fa-video"></i> Videos</a></li>
+                <ul class="nav-links" role="list">
+                    <li><a href="#home"><i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
+                    <li><a href="#studies"><i class="fas fa-book-open" aria-hidden="true"></i> Studies</a></li>
+                    <li><a href="#messages"><i class="fas fa-envelope" aria-hidden="true"></i> Messages</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog" aria-hidden="true"></i> Settings</a></li>
+                    <li><a href="all-videos.html"><i class="fas fa-video" aria-hidden="true"></i> Videos</a></li>
                 </ul>
                 </div>
             </div>
@@ -89,204 +142,402 @@
 
 
 
-<section class="hero-viewport">
-    <div class="matrix-overlay"></div>
+<main>
+<section class="hero-viewport" id="hero-viewport" role="region" aria-label="Welcome to NothingButTheTruth — Bible studies, devotions, videos and games">
+    <div class="matrix-overlay" aria-hidden="true"></div>
+    <!-- Ambient glow behind glass card -->
+    <div class="ambient-glow" aria-hidden="true"></div>
     
-    <div class="parallax-layer" id="icon-layer">
-        <i class="fas fa-cross float-icon" style="top: 15%; left: 10%; animation-delay: 0s;"></i>
-        <i class="fas fa-book-bible float-icon" style="top: 60%; left: 15%; animation-delay: 2s;"></i>
-        <i class="fas fa-dove float-icon" style="top: 20%; left: 80%; animation-delay: 4s;"></i>
-        <i class="fas fa-crown float-icon" style="top: 70%; left: 85%; animation-delay: 1s;"></i>
-        <i class="fas fa-scroll float-icon" style="top: 40%; left: 45%; animation-delay: 5s;"></i>
-        <!-- additional emoji icons for extra flair -->
-        <i class="fas fa-star float-icon" style="top: 25%; left: 60%; animation-delay: 3s;"></i>
-        <i class="fas fa-quote-right float-icon" style="top: 50%; left: 30%; animation-delay: 6s;"></i>
-        <i class="fas fa-heart float-icon" style="top: 80%; left: 50%; animation-delay: 1.5s;"></i>
-        <!-- Additional background emojis -->
-        <span class="float-icon" style="top: 35%; left: 5%; animation-delay: 0.5s; font-size: 1.8em;">🌳</span>
-        <span class="float-icon" style="top: 65%; left: 75%; animation-delay: 2.5s; font-size: 1.8em;">🌸</span>
-        <span class="float-icon" style="top: 30%; left: 92%; animation-delay: 3.5s; font-size: 1.8em;">🌍</span>
-        <span class="float-icon" style="top: 55%; left: 8%; animation-delay: 4.5s; font-size: 1.8em;">🙏</span>
-        <span class="float-icon" style="top: 75%; left: 60%; animation-delay: 2s; font-size: 1.8em;">🤲</span>
-        <span class="float-icon" style="top: 45%; left: 88%; animation-delay: 5.5s; font-size: 1.8em;">🛐</span>
-        <span class="float-icon" style="top: 70%; left: 25%; animation-delay: 1s; font-size: 1.8em;">💧</span>
-        <!-- 20 additional bible emojis (varied sizes) -->
-        <span class="float-icon" style="top: 5%; left: 12%; animation-delay: 1.2s; font-size:1.4em;">📖</span>
-        <span class="float-icon" style="top: 6%; left: 20%; animation-delay: 1.5s; font-size:1.1em;">📚</span>
-        <span class="float-icon" style="top: 3%; left: 40%; animation-delay: 2.1s; font-size:1.2em;">📜</span>
-        <span class="float-icon" style="top: 10%; left: 55%; animation-delay: 2.6s; font-size:0.9em;">📘</span>
-        <span class="float-icon" style="top: 14%; left: 72%; animation-delay: 3.0s; font-size:1.0em;">📗</span>
-        <span class="float-icon" style="top: 2%; left: 85%; animation-delay: 3.4s; font-size:1.3em;">📚</span>
-        <span class="float-icon" style="top: 18%; left: 6%; animation-delay: 2.8s; font-size:0.95em;">📜</span>
-        <span class="float-icon" style="top: 22%; left: 28%; animation-delay: 3.1s; font-size:1.05em;">📖</span>
-        <span class="float-icon" style="top: 26%; left: 44%; animation-delay: 3.6s; font-size:0.85em;">📖</span>
-        <span class="float-icon" style="top: 32%; left: 60%; animation-delay: 4.1s; font-size:1.0em;">📜</span>
-        <span class="float-icon" style="top: 38%; left: 76%; animation-delay: 4.6s; font-size:1.15em;">📘</span>
-        <span class="float-icon" style="top: 42%; left: 88%; animation-delay: 5.0s; font-size:0.9em;">📗</span>
-        <span class="float-icon" style="top: 48%; left: 18%; animation-delay: 5.4s; font-size:0.95em;">📚</span>
-        <span class="float-icon" style="top: 52%; left: 34%; animation-delay: 5.8s; font-size:0.8em;">📜</span>
-        <span class="float-icon" style="top: 58%; left: 50%; animation-delay: 6.2s; font-size:1.05em;">📖</span>
-        <span class="float-icon" style="top: 62%; left: 66%; animation-delay: 6.6s; font-size:0.9em;">📚</span>
-        <span class="float-icon" style="top: 68%; left: 80%; animation-delay: 7.0s; font-size:1.0em;">📜</span>
-        <span class="float-icon" style="top: 72%; left: 92%; animation-delay: 7.4s; font-size:0.85em;">📖</span>
-        <span class="float-icon" style="top: 78%; left: 70%; animation-delay: 7.8s; font-size:0.95em;">📚</span>
-        <span class="float-icon" style="top: 82%; left: 40%; animation-delay: 8.2s; font-size:0.9em;">📜</span>
-        <!-- 10 additional dove emojis (varied sizes) -->
-        <span class="float-icon" style="top: 4%; left: 6%; animation-delay: 1.8s; font-size:0.85em;">🕊️</span>
-        <span class="float-icon" style="top: 9%; left: 34%; animation-delay: 2.2s; font-size:0.8em;">🕊️</span>
-        <span class="float-icon" style="top: 16%; left: 58%; animation-delay: 2.9s; font-size:0.95em;">🕊️</span>
-        <span class="float-icon" style="top: 24%; left: 86%; animation-delay: 3.3s; font-size:0.75em;">🕊️</span>
-        <span class="float-icon" style="top: 36%; left: 2%; animation-delay: 3.8s; font-size:0.7em;">🕊️</span>
-        <span class="float-icon" style="top: 46%; left: 24%; animation-delay: 4.4s; font-size:0.9em;">🕊️</span>
-        <span class="float-icon" style="top: 54%; left: 44%; animation-delay: 4.9s; font-size:0.8em;">🕊️</span>
-        <span class="float-icon" style="top: 64%; left: 68%; animation-delay: 5.5s; font-size:0.75em;">🕊️</span>
-        <span class="float-icon" style="top: 74%; left: 52%; animation-delay: 6.0s; font-size:0.7em;">🕊️</span>
-        <span class="float-icon" style="top: 86%; left: 22%; animation-delay: 6.6s; font-size:0.65em;">🕊️</span>
+    <div class="parallax-layer" id="icon-layer" aria-hidden="true">
+        <!-- Dove emojis – varied sizes -->
+        <span class="float-icon emoji-reactive" style="top:2%; left:3%; animation-delay:0.3s; font-size:2.2em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:8%; left:18%; animation-delay:1.1s; font-size:1.4em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:5%; left:38%; animation-delay:2.0s; font-size:1.8em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:12%; left:55%; animation-delay:0.7s; font-size:1.0em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:3%; left:72%; animation-delay:3.2s; font-size:2.0em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:9%; left:90%; animation-delay:1.6s; font-size:1.2em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:20%; left:8%; animation-delay:2.4s; font-size:0.9em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:28%; left:30%; animation-delay:4.0s; font-size:1.6em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:35%; left:65%; animation-delay:3.5s; font-size:1.3em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:18%; left:82%; animation-delay:0.9s; font-size:2.4em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:45%; left:5%; animation-delay:5.0s; font-size:1.1em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:55%; left:20%; animation-delay:2.8s; font-size:0.8em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:60%; left:45%; animation-delay:6.1s; font-size:1.5em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:50%; left:78%; animation-delay:1.4s; font-size:1.9em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:68%; left:92%; animation-delay:3.8s; font-size:1.0em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:72%; left:60%; animation-delay:4.5s; font-size:0.7em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:80%; left:35%; animation-delay:5.5s; font-size:1.7em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:88%; left:12%; animation-delay:7.0s; font-size:1.2em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:85%; left:75%; animation-delay:6.5s; font-size:0.9em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:92%; left:50%; animation-delay:4.8s; font-size:2.1em;">🕊️</span>
+
+        <!-- Prayer / worship emojis -->
+        <span class="float-icon emoji-reactive" style="top:4%; left:10%; animation-delay:0.5s; font-size:1.6em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:15%; left:25%; animation-delay:1.8s; font-size:2.0em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:7%; left:48%; animation-delay:3.0s; font-size:1.2em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:22%; left:70%; animation-delay:2.3s; font-size:1.8em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:30%; left:88%; animation-delay:4.2s; font-size:1.0em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:40%; left:15%; animation-delay:5.2s; font-size:1.4em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:52%; left:55%; animation-delay:3.6s; font-size:2.2em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:65%; left:80%; animation-delay:1.2s; font-size:0.9em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:75%; left:42%; animation-delay:6.3s; font-size:1.5em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:90%; left:25%; animation-delay:5.8s; font-size:1.1em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:38%; left:52%; animation-delay:2.6s; font-size:1.7em;">🤲</span>
+        <span class="float-icon emoji-reactive" style="top:58%; left:10%; animation-delay:4.7s; font-size:1.3em;">🤲</span>
+        <span class="float-icon emoji-reactive" style="top:78%; left:85%; animation-delay:7.2s; font-size:1.6em;">🤲</span>
+        <span class="float-icon emoji-reactive" style="top:14%; left:42%; animation-delay:3.9s; font-size:1.1em;">🛐</span>
+        <span class="float-icon emoji-reactive" style="top:48%; left:70%; animation-delay:5.4s; font-size:1.8em;">🛐</span>
+        <span class="float-icon emoji-reactive" style="top:82%; left:55%; animation-delay:6.8s; font-size:1.0em;">🛐</span>
+
+        <!-- Bible / scroll emojis -->
+        <span class="float-icon emoji-reactive" style="top:6%; left:22%; animation-delay:1.3s; font-size:1.5em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:11%; left:60%; animation-delay:2.5s; font-size:1.8em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:25%; left:5%; animation-delay:3.7s; font-size:1.2em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:33%; left:40%; animation-delay:4.3s; font-size:2.0em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:42%; left:75%; animation-delay:1.9s; font-size:0.9em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:56%; left:30%; animation-delay:5.6s; font-size:1.6em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:66%; left:88%; animation-delay:6.2s; font-size:1.3em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:76%; left:15%; animation-delay:7.5s; font-size:1.0em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:86%; left:65%; animation-delay:4.1s; font-size:1.7em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:10%; left:80%; animation-delay:2.1s; font-size:1.4em;">📜</span>
+        <span class="float-icon emoji-reactive" style="top:26%; left:50%; animation-delay:3.3s; font-size:1.1em;">📜</span>
+        <span class="float-icon emoji-reactive" style="top:44%; left:25%; animation-delay:5.1s; font-size:1.9em;">📜</span>
+        <span class="float-icon emoji-reactive" style="top:62%; left:58%; animation-delay:6.7s; font-size:0.8em;">📜</span>
+        <span class="float-icon emoji-reactive" style="top:84%; left:40%; animation-delay:7.8s; font-size:1.5em;">📜</span>
+        <span class="float-icon emoji-reactive" style="top:16%; left:95%; animation-delay:1.5s; font-size:1.2em;">📚</span>
+        <span class="float-icon emoji-reactive" style="top:36%; left:12%; animation-delay:4.6s; font-size:1.6em;">📚</span>
+        <span class="float-icon emoji-reactive" style="top:54%; left:85%; animation-delay:5.9s; font-size:1.0em;">📚</span>
+        <span class="float-icon emoji-reactive" style="top:70%; left:48%; animation-delay:7.1s; font-size:1.3em;">📚</span>
+
+        <!-- Cross, crown, nature extras -->
+        <span class="float-icon emoji-reactive" style="top:1%; left:50%; animation-delay:0.2s; font-size:1.8em;">✝️</span>
+        <span class="float-icon emoji-reactive" style="top:19%; left:62%; animation-delay:2.7s; font-size:1.3em;">✝️</span>
+        <span class="float-icon emoji-reactive" style="top:47%; left:38%; animation-delay:5.3s; font-size:2.0em;">✝️</span>
+        <span class="float-icon emoji-reactive" style="top:73%; left:8%; animation-delay:6.4s; font-size:1.1em;">✝️</span>
+        <span class="float-icon emoji-reactive" style="top:91%; left:82%; animation-delay:7.6s; font-size:1.5em;">✝️</span>
+        <span class="float-icon emoji-reactive" style="top:8%; left:85%; animation-delay:1.7s; font-size:1.4em;">👑</span>
+        <span class="float-icon emoji-reactive" style="top:34%; left:72%; animation-delay:3.4s; font-size:1.0em;">👑</span>
+        <span class="float-icon emoji-reactive" style="top:64%; left:18%; animation-delay:5.7s; font-size:1.7em;">👑</span>
+        <span class="float-icon emoji-reactive" style="top:88%; left:38%; animation-delay:7.3s; font-size:1.2em;">👑</span>
+        <span class="float-icon emoji-reactive" style="top:23%; left:15%; animation-delay:2.9s; font-size:1.5em;">💧</span>
+        <span class="float-icon emoji-reactive" style="top:57%; left:68%; animation-delay:4.4s; font-size:1.8em;">🌍</span>
+        <span class="float-icon emoji-reactive" style="top:41%; left:92%; animation-delay:6.0s; font-size:1.1em;">🌸</span>
+        <span class="float-icon emoji-reactive" style="top:79%; left:28%; animation-delay:7.7s; font-size:1.6em;">🌳</span>
+
+        <!-- Extra density fill emojis -->
+        <span class="float-icon emoji-reactive" style="top:3%; left:30%; animation-delay:0.8s; font-size:1.9em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:7%; left:65%; animation-delay:1.3s; font-size:1.3em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:13%; left:48%; animation-delay:2.2s; font-size:2.1em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:17%; left:4%; animation-delay:3.1s; font-size:1.0em;">✝️</span>
+        <span class="float-icon emoji-reactive" style="top:21%; left:55%; animation-delay:1.9s; font-size:1.7em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:27%; left:20%; animation-delay:4.2s; font-size:1.2em;">🤲</span>
+        <span class="float-icon emoji-reactive" style="top:31%; left:78%; animation-delay:3.6s; font-size:2.3em;">📜</span>
+        <span class="float-icon emoji-reactive" style="top:37%; left:35%; animation-delay:5.1s; font-size:0.9em;">🛐</span>
+        <span class="float-icon emoji-reactive" style="top:43%; left:60%; animation-delay:2.5s; font-size:1.5em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:49%; left:10%; animation-delay:4.8s; font-size:1.8em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:53%; left:42%; animation-delay:6.3s; font-size:1.1em;">👑</span>
+        <span class="float-icon emoji-reactive" style="top:59%; left:75%; animation-delay:3.2s; font-size:2.0em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:63%; left:5%; animation-delay:5.7s; font-size:1.4em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:67%; left:50%; animation-delay:7.0s; font-size:0.8em;">✝️</span>
+        <span class="float-icon emoji-reactive" style="top:71%; left:82%; animation-delay:4.1s; font-size:1.6em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:77%; left:22%; animation-delay:6.6s; font-size:2.2em;">📚</span>
+        <span class="float-icon emoji-reactive" style="top:83%; left:58%; animation-delay:5.3s; font-size:1.0em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:87%; left:88%; animation-delay:7.5s; font-size:1.3em;">🤲</span>
+        <span class="float-icon emoji-reactive" style="top:93%; left:32%; animation-delay:4.6s; font-size:1.8em;">🛐</span>
+        <span class="float-icon emoji-reactive" style="top:95%; left:70%; animation-delay:6.9s; font-size:1.5em;">📜</span>
+        <span class="float-icon emoji-reactive" style="top:11%; left:35%; animation-delay:2.8s; font-size:2.0em;">💧</span>
+        <span class="float-icon emoji-reactive" style="top:29%; left:95%; animation-delay:5.0s; font-size:1.2em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:46%; left:32%; animation-delay:3.9s; font-size:1.7em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:69%; left:38%; animation-delay:6.2s; font-size:1.4em;">📖</span>
+        <span class="float-icon emoji-reactive" style="top:81%; left:68%; animation-delay:7.8s; font-size:1.1em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:39%; left:18%; animation-delay:4.4s; font-size:2.1em;">✝️</span>
+        <span class="float-icon emoji-reactive" style="top:51%; left:90%; animation-delay:5.6s; font-size:0.9em;">👑</span>
+        <span class="float-icon emoji-reactive" style="top:61%; left:28%; animation-delay:7.3s; font-size:1.6em;">🕊️</span>
+        <span class="float-icon emoji-reactive" style="top:74%; left:95%; animation-delay:3.7s; font-size:1.3em;">🙏</span>
+        <span class="float-icon emoji-reactive" style="top:96%; left:15%; animation-delay:8.0s; font-size:1.9em;">📜</span>
     </div>
 
-    <div class="hero-container">
-        <h1 class="hero-title" id="main-title">✨NothingButTheTRUTH✨</h1>
-        
-        <p class="hero-subtitle">
-            📖 Experience the unfiltered Word of God through our interactive platform. 
-            Pure Truth, documented and delivered for the modern seeker.
-        </p>
+    <div class="hero-container" id="hero-card">
+        <div class="glass-card">
+            <h1 class="hero-title" id="main-title" data-text="NothingButTheTRUTH" style="opacity:0;"></h1>
+            
+            <p class="hero-subtitle hero-stagger">
+                <span aria-hidden="true">📖</span> Experience the unfiltered <strong>Word of God</strong> through our interactive platform. 
+                Pure Truth, documented and delivered for the modern seeker.
+            </p>
 
-        <div class="button-group">
-            <a href="all-videos.html" class="blade-btn btn-main">🎥 Watch Videos</a>
-            <a href="all-studies.html" class="blade-btn">📚 Explore Studies</a>
+            <nav class="button-group hero-stagger" aria-label="Quick access">
+                <a href="all-videos.html" class="blade-btn btn-main" title="Watch Bible-based video messages and the Ten Commandments series"><span aria-hidden="true">🎥</span> Watch Videos</a>
+                <a href="all-studies.html" class="blade-btn" title="Browse free in-depth Bible studies on faith, baptism, angels, and more"><span aria-hidden="true">📚</span> Explore Studies</a>
+            </nav>
         </div>
 
-        <div class="stats-hud">
-            <a href="all-games.html" class="hud-card">
-                <span class="hud-val">05</span>
+        <nav class="stats-hud hero-stagger" aria-label="Content overview">
+            <a href="all-games.html" class="hud-card" title="Play interactive Bible games — Bingo, Taboo, Relay Race and more">
+                <span class="hud-val" data-target="5" aria-label="5 games available">00</span>
                 <span class="hud-lab">Games</span>
             </a>
-            <a href="all-studies.html" class="hud-card">
-                <span class="hud-val">12</span>
+            <a href="all-studies.html" class="hud-card" title="Read 12+ in-depth Bible studies">
+                <span class="hud-val" data-target="12" aria-label="12 studies available">00</span>
                 <span class="hud-lab">Studies</span>
             </a>
-            <a href="vod.html" class="hud-card">
-                <span class="hud-val">13</span>
+            <a href="vod.html" class="hud-card" title="Read daily devotions — Anchor of Hope, Faith Under Fire, and more">
+                <span class="hud-val" data-target="13" aria-label="13 devotions available">00</span>
                 <span class="hud-lab">Devotions</span>
             </a>
-            <a href="all-videos.html" class="hud-card">
-                <span class="hud-val">05</span>
+            <a href="all-videos.html" class="hud-card" title="Watch scripture-based video series including the Ten Commandments">
+                <span class="hud-val" data-target="5" aria-label="5 videos available">00</span>
                 <span class="hud-lab">Videos</span>
             </a>
-        </div>
+        </nav>
     </div>
 </section>
 
 
 <script>
-    // PARALLAX EFFECT: Icons move based on mouse position
+    // ============================
+    // PARALLAX EFFECT + MAGNETIC FLOAT
+    // ============================
+    const heroCard = document.getElementById('hero-card');
+    const iconLayer = document.getElementById('icon-layer');
+    const heroViewport = document.getElementById('hero-viewport');
+
+    // Magnetic float — card subtly drifts toward the mouse
     document.addEventListener('mousemove', (e) => {
         const moveX = (e.clientX - window.innerWidth / 2) * 0.02;
         const moveY = (e.clientY - window.innerHeight / 2) * 0.02;
-        document.getElementById('icon-layer').style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
+        if (iconLayer) iconLayer.style.transform = `translate(${moveX}px, ${moveY}px)`;
 
-    // RESPONSIVE SCALING: use ResizeObserver + transform to guarantee fit
+        // Magnetic float on glass card (replaces tilt)
+        if (heroCard && heroViewport) {
+            const rect = heroViewport.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = (e.clientX - cx) / rect.width;
+            const dy = (e.clientY - cy) / rect.height;
+            const floatX = dx * 12; // max 12px drift
+            const floatY = dy * 8;  // max 8px drift
+            heroCard.style.transform = `translate(${floatX}px, ${floatY}px)`;
+        }
+    });
+    // Reset float when mouse leaves
+    if (heroViewport) {
+        heroViewport.addEventListener('mouseleave', () => {
+            if (heroCard) heroCard.style.transform = 'translate(0, 0)';
+        });
+    }
+
+    // ============================
+    // TOUCH-REACTIVE EMOJIS (only touched one glows)
+    // ============================
+    function initReactiveEmojis() {
+        const emojis = document.querySelectorAll('.emoji-reactive');
+        
+        // Mouse proximity — only nearby emojis react
+        document.addEventListener('mousemove', (e) => {
+            emojis.forEach(em => {
+                const r = em.getBoundingClientRect();
+                const ex = r.left + r.width / 2;
+                const ey = r.top + r.height / 2;
+                const dist = Math.hypot(e.clientX - ex, e.clientY - ey);
+                if (dist < 100) {
+                    const scale = 1 + (1 - dist / 100) * 0.6;
+                    em.style.transform = `scale(${scale})`;
+                    em.style.filter = `drop-shadow(0 0 ${10 + (1 - dist/100) * 18}px rgba(168, 85, 247, ${0.4 + (1 - dist/100) * 0.5}))`;
+                    em.style.zIndex = '5';
+                } else {
+                    em.style.transform = '';
+                    em.style.filter = '';
+                    em.style.zIndex = '';
+                }
+            });
+        });
+
+        // Touch — ONLY the touched emoji grows + glows
+        emojis.forEach(em => {
+            em.addEventListener('touchstart', function(e) {
+                // grow + glow this emoji
+                this.classList.add('emoji-touched');
+            }, { passive: true });
+
+            em.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.classList.remove('emoji-touched');
+                }, 600);
+            }, { passive: true });
+        });
+    }
+
+    // ============================
+    // SCROLL-TRIGGERED HUD COUNTERS
+    // ============================
+    let hudCounted = false;
+    function animateCounters() {
+        if (hudCounted) return;
+        const vals = document.querySelectorAll('.stats-hud .hud-val[data-target]');
+        if (!vals.length) return;
+
+        const firstVal = vals[0];
+        const rect = firstVal.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            hudCounted = true;
+            vals.forEach(el => {
+                const target = parseInt(el.getAttribute('data-target'), 10);
+                let current = 0;
+                const duration = 1200; // ms
+                const steps = 30;
+                const stepTime = duration / steps;
+                const increment = target / steps;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    el.textContent = String(Math.round(current)).padStart(2, '0');
+                }, stepTime);
+            });
+        }
+    }
+    window.addEventListener('scroll', animateCounters);
+
+    // ============================
+    // RESPONSIVE SCALING
+    // ============================
     function fitTitle() {
         const title = document.getElementById('main-title');
-        const container = title.parentElement;
-        // reset any previous scaling
+        if (!title) return;
+        const container = title.closest('.glass-card') || title.parentElement;
         title.style.transform = '';
-        // measure text width using a Range so negative letter-spacing is included
         const range = document.createRange();
         range.selectNodeContents(title);
         let titleWidth = range.getBoundingClientRect().width;
         const containerWidth = container.getBoundingClientRect().width;
-        // apply safety margin (98% of container) to avoid any clipping
-        let ratio = (containerWidth * 0.98) / titleWidth;
+        let ratio = (containerWidth * 0.95) / titleWidth;
         if (ratio < 1) {
             title.style.transform = `scale(${ratio})`;
-            title.style.transformOrigin = 'left center';
-            // verify after transform in next frame
-            requestAnimationFrame(() => {
-                const newWidth = title.getBoundingClientRect().width;
-                if (newWidth > containerWidth) {
-                    // compute extra shrink factor
-                    const extra = containerWidth / newWidth;
-                    title.style.transform = `scale(${ratio * extra})`;
-                }
-            });
+            title.style.transformOrigin = 'center center';
         }
     }
 
     async function performFit() {
-        // wait for fonts to load so measurements are accurate
         if (document.fonts && document.fonts.ready) {
             await document.fonts.ready;
         }
         fitTitle();
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    // ============================
+    // BALLOON POP TITLE — letters pop in one by one with bounce
+    // ============================
+    function balloonPopTitle() {
         const title = document.getElementById('main-title');
-        const container = title.parentElement;
-        if (window.ResizeObserver) {
+        if (!title) return;
+        const text = title.getAttribute('data-text') || '';
+        title.innerHTML = '';
+        title.style.opacity = '1';
+        const letters = text.split('');
+        letters.forEach((char, i) => {
+            const span = document.createElement('span');
+            span.className = 'balloon-letter';
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.animationDelay = `${i * 55}ms`;
+            // Position each letter within the continuous white→gold gradient
+            const pct = letters.length > 1 ? (i / (letters.length - 1)) * 100 : 0;
+            span.style.backgroundPosition = `${pct}% 0`;
+            title.appendChild(span);
+        });
+        // Fit title after all letters have popped
+        const totalPop = letters.length * 55 + 500;
+        setTimeout(() => requestAnimationFrame(() => performFit()), totalPop);
+    }
+
+    // ============================
+    // MASTER LOAD SEQUENCE — everything in order, no glitch
+    // ============================
+    document.addEventListener('DOMContentLoaded', () => {
+        // Step 0: Immediately show navbar (prevent scroll-fade invisible flash)
+        const navbar = document.querySelector('.navbar.scroll-fade');
+        if (navbar) navbar.classList.add('visible');
+
+        // Merge HUD data-target update here (no separate listener)
+        updateHudCounts();
+
+        const title = document.getElementById('main-title');
+        const container = title ? (title.closest('.glass-card') || title.parentElement) : null;
+
+        // Step 1: Start balloon-pop title IMMEDIATELY (no delay)
+        balloonPopTitle();
+
+        // Setup resize observers after kick-off (non-blocking)
+        if (title && container && window.ResizeObserver) {
             const ro = new ResizeObserver(fitTitle);
             ro.observe(container);
             ro.observe(title);
         }
-        performFit();
-        // also adjust on window resize/orientationchange
         window.addEventListener('resize', performFit);
         window.addEventListener('orientationchange', performFit);
-    });
+        initReactiveEmojis();
 
-    // TYPEWRITER EFFECT: animate the hero heading on load
-</script>
+        // Step 2: Calculate balloon-pop total duration for sequencing
+        const titleText = title ? (title.getAttribute('data-text') || '') : '';
+        const popDuration = titleText.length * 55 + 500;
 
-<!-- library script (moved to bottom) -->
+        // Stagger items & HUD cards are hidden by CSS rules (no FOUC)
+        const staggerItems = document.querySelectorAll('.hero-stagger');
+        const hudCards = document.querySelectorAll('.hud-card');
 
-<script>
-    function typeTitle() {
-        const title = document.getElementById('main-title');
-        const text = title.textContent.trim();
-        title.textContent = '';
-        let i = 0;
-        const ticker = setInterval(() => {
-            if (i < text.length) {
-                title.textContent += text.charAt(i);
-                i++;
-            } else {
-                clearInterval(ticker);
-                // after typing completes, wait a frame before fitting
-                requestAnimationFrame(() => {
-                    performFit();
-                });
+        // Step 3: After title pops in, fade in subtitle
+        setTimeout(() => {
+            if (staggerItems[0]) {
+                staggerItems[0].style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+                staggerItems[0].style.opacity = '1';
+                staggerItems[0].style.transform = 'translateY(0)';
             }
-        }, 80);
-    }
-    window.addEventListener('load', typeTitle);
+        }, popDuration + 100);
+
+        // Step 4: Buttons
+        setTimeout(() => {
+            if (staggerItems[1]) {
+                staggerItems[1].style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+                staggerItems[1].style.opacity = '1';
+                staggerItems[1].style.transform = 'translateY(0)';
+            }
+        }, popDuration + 400);
+
+        // Step 5: HUD container
+        setTimeout(() => {
+            if (staggerItems[2]) {
+                staggerItems[2].style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+                staggerItems[2].style.opacity = '1';
+                staggerItems[2].style.transform = 'translateY(0)';
+            }
+        }, popDuration + 650);
+
+        // Step 6: HUD cards pop in one by one
+        hudCards.forEach((card, i) => {
+            setTimeout(() => {
+                card.style.transition = 'opacity 0.35s ease-out, transform 0.35s ease-out';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, popDuration + 800 + i * 120);
+        });
+
+        // Step 7: Trigger counter animation after HUD is visible
+        setTimeout(animateCounters, popDuration + 1400);
+    });
 
     // dynamically refresh HUD numbers based on page content
     function updateHudCounts() {
         const games = document.querySelectorAll('#games .play-btn:not(.disabled)').length;
-        let studies = document.querySelectorAll('#studies-list .box a').length;
-        // subtract the 'All Studies' link if present
-        if (document.querySelector('#studies-list .box a[href="all-studies.html"]')) {
-          studies -= 1;
-        }
-        const devotions = document.querySelectorAll('#devotions-list .box a').length;
+        /* Homepage shows 7 preview items; HUD reflects total content available */
+        const studies = 20;
+        const devotions = 13;
         const vals = document.querySelectorAll('.stats-hud .hud-card .hud-val');
-        if (vals[0]) vals[0].textContent = String(games).padStart(2, '0');
-        if (vals[1]) vals[1].textContent = String(studies).padStart(2, '0');
-        if (vals[2]) vals[2].textContent = String(devotions).padStart(2, '0');
-
-        // update games-count message beneath explore button
-        const visible = document.querySelectorAll('#mainGameGrid .game-card:not(.coming-soon)').length;
-        const total = document.querySelectorAll('#games .game-card:not(.coming-soon)').length;
-        const extra = total - visible;
-        const gamesCountDiv = document.querySelector('.games-count');
-        if (gamesCountDiv) {
-            gamesCountDiv.textContent = extra > 0 ? `+${extra} more games available` : '';
-        }
+        if (vals[0]) vals[0].setAttribute('data-target', String(games || 5));
+        if (vals[1]) vals[1].setAttribute('data-target', String(studies));
+        if (vals[2]) vals[2].setAttribute('data-target', String(devotions));
     }
-    document.addEventListener('DOMContentLoaded', updateHudCounts);
 </script>
 
 
@@ -599,79 +850,176 @@
     
     
     
-    <div class="Studies scroll-fade">
-      <h2><i class="fas fa-graduation-cap" style="color:#ffd803"></i> Studies</h2>
-    </div>
-    <div class="flex-wrap scroll-fade" id="studies-list">
-        <!-- Slightly visible square gradients -->
-        <div class="flex-square flex-sq1"></div>
-        <div class="flex-square flex-sq2"></div>
-        <div class="flex-square flex-sq3"></div>
-        <div class="flex-square flex-sq4"></div>
-        <div class="flex-square flex-sq5"></div>
-        <div class="flex-square flex-sq6"></div>
-        <div class="flex-square flex-sq7"></div>
-        <div class="flex-square flex-sq8"></div>
-        <div class="flex-square flex-sq9"></div>
-        <div class="flex-square flex-sq10"></div>
-        <div class="flex-square flex-sq11"></div>
-        <div class="flex-square flex-sq12"></div>
-        <div class="flex-square flex-sq13"></div>
-        <div class="flex-square flex-sq14"></div>
-       <li> <div class="box"><a href="Studies/facts_or_fiction.html" style="text-decoration:none;"><i class="fas fa-question-circle" style="color:#ffd803"></i> Is the Bible Facts or Fiction?</a></div></li>
-       <li> <div class="box"><a href="Studies/history_of_christian_faith.html" style="text-decoration:none;"><i class="fas fa-landmark" style="color:#ffd803"></i> History of the Christian Faith</a></div></li>
-       <li> <div class="box"><a href="Studies/why_the_bible_is_God's_word.html" style="text-decoration:none;"><i class="fas fa-book-bible" style="color:#ffd803"></i> Is the Bible God's Word to Humanity?</a></div></li>
-       <li> <div class="box"><a href="Studies/meaning_and_history_of_baptism.html" style="text-decoration:none;"><i class="fas fa-water" style="color:#ffd803"></i> Meaning & History of Baptism</a></div></li>
-        <li> <div class="box"><a href="Studies/are_angels_real.html" style="text-decoration:none;"><i class="fas fa-angel" style="color:#ffd803"></i> Are Angels Real?</a></div></li>
-        <li> <div class="box"><a href="Studies/armor.html" style="text-decoration:none;"><i class="fas fa-shield" style="color:#ffd803"></i> The Armor of God</a></div></li>
-        <li> <div class="box"><a href="Studies/the_nature_of_sin_and_gods_law.html" style="text-decoration:none;"><i class="fas fa-fire" style="color:#ffd803"></i> Lucifer's Fall</a></div></li>
-        <li> <div class="box"><a href="Studies/satan_the_accuser_christ_the_defender.html" style="text-decoration:none;"><i class="fas fa-shield-alt" style="color:#ffd803"></i> Satan the Accuser, Christ the Defender</a></div></li>
-        <li> <div class="box"><a href="Studies/jesus_is_real.html" style="text-decoration:none;"><i class="fas fa-heart" style="color:#ffd803"></i> Jesus Is Real</a></div></li>
-        <li> <div class="box"><a href="Studies/a_tale_of_cities.html" style="text-decoration:none;"><i class="fas fa-city" style="color:#ffd803"></i> A Tale of Cities</a></div></li>
-        <li> <div class="box"><a href="Studies/God_has_a_purpose_each_time_He_communicates.html" style="text-decoration:none;"><i class="fas fa-comment" style="color:#ffd803"></i> God Has a Purpose Each Time He Communicates</a></div></li>
-        <li> <div class="box"><a href="Studies/preparing_people_to_meet_God_pt_1.html" style="text-decoration:none;"><i class="fas fa-person-hiking" style="color:#ffd803"></i> Preparing People to Meet God (Pt 1)</a></div></li>
-        <li> <div class="box"><a href="Studies/preparing_people_to_meet_God_pt_2.html" style="text-decoration:none;"><i class="fas fa-person-hiking" style="color:#ffd803"></i> Preparing People to Meet God (Pt 2)</a></div></li>
-        <li> <div class="box"><a href="Studies/preparing_people_to_meet_God_pt_3.html" style="text-decoration:none;"><i class="fas fa-person-hiking" style="color:#ffd803"></i> Preparing People to Meet God (Pt 3)</a></div></li>
-        
-        <!-- link to all studies -->
-        <li> <div class="box"><a href="all-studies.html" style="text-decoration:none; margin-top:10px;" class="devotion-button">📖 All Studies</a></div></li>
-    </div>
+    <!-- ═══════════════════════════════════════════
+         STUDIES SECTION — Knowledge Library
+    ═══════════════════════════════════════════ -->
+    <section class="nx-section nx-studies-section scroll-fade" id="studies">
+      <!-- Floating Bubbles -->
+      <div class="nx-bubbles-container">
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+      </div>
+      <div class="nx-section-inner">
 
- 
-    <!-- Devotions Section -->
-    <div class="Devotions scroll-fade">
-      <h2><i class="fas fa-microphone" style="color:#ffd803"></i> Devotions</h2>
-    </div>
-    <div class="devotions-flex-wrap scroll-fade" id="devotions-list">
-        <div class="flex-square flex-sq1"></div>
-        <div class="flex-square flex-sq2"></div>
-        <div class="flex-square flex-sq3"></div>
-        <div class="flex-square flex-sq4"></div>
-        <div class="flex-square flex-sq5"></div>
-        <div class="flex-square flex-sq6"></div>
-        <div class="flex-square flex-sq7"></div>
-        <div class="flex-square flex-sq8"></div>
-        <div class="flex-square flex-sq9"></div>
-        <div class="flex-square flex-sq10"></div>
-        <div class="flex-square flex-sq11"></div>
-        <div class="flex-square flex-sq12"></div>
-        <div class="flex-square flex-sq13"></div>
-        <div class="flex-square flex-sq14"></div>
-        <li> <div class="box"><a href="Devotions/anchor_of_hope.html" style="text-decoration:none;"><i class="fas fa-anchor" style="color:#ffd803"></i> Anchor of Hope</a></div></li>
-        <li> <div class="box"><a href="Devotions/a_tale_of_cities.html" style="text-decoration:none;"><i class="fas fa-city" style="color:#ffd803"></i> A Tale of Cities</a></div></li>
-        <li> <div class="box"><a href="Devotions/called_to_shine.html" style="text-decoration:none;"><i class="fas fa-lightbulb" style="color:#ffd803"></i> Called to Shine</a></div></li>
-        <li> <div class="box"><a href="Devotions/Do_it_for_God.html" style="text-decoration:none;"><i class="fas fa-praying-hands" style="color:#ffd803"></i> Faithful In All Things</a></div></li>
-        <li> <div class="box"><a href="Devotions/faith_under_fire.html" style="text-decoration:none;"><i class="fas fa-fire" style="color:#ffd803"></i> Faith Under Fire</a></div></li>
-        <li> <div class="box"><a href="Devotions/final_invitation.html" style="text-decoration:none;"><i class="fas fa-hand-holding-heart" style="color:#ffd803"></i> Final Invitation</a></div></li>
-        <li> <div class="box"><a href="Devotions/hannahs_devotion.html" style="text-decoration:none;"><i class="fas fa-heart-hands" style="color:#ffd803"></i> Hannah's Devotion: A Prayer of Faith</a></div></li>
-        <li> <div class="box"><a href="Devotions/love_that_saves.html" style="text-decoration:none;"><i class="fas fa-heart" style="color:#ffd803"></i> Love That Saves</a></div></li>
-        <li> <div class="box"><a href="Devotions/Take_up_The_Cross.html" style="text-decoration:none;"><i class="fas fa-cross" style="color:#ffd803"></i> Take up The Cross</a></div></li>
-        <li> <div class="box"><a href="Devotions/the_mustard_seed.html" style="text-decoration:none;"><i class="fas fa-leaf" style="color:#ffd803"></i> The Mustard Seed</a></div></li>
-        <li> <div class="box"><a href="Devotions/the_power_of_the_cross.html" style="text-decoration:none;"><i class="fas fa-infinity" style="color:#ffd803"></i> The Power of the Cross</a></div></li>
-        <li> <div class="box"><a href="Devotions/unshackled_by_grace.html" style="text-decoration:none;"><i class="fas fa-dove" style="color:#ffd803"></i> Unshackled by Grace</a></div></li>
-        <li> <div class="box"><a href="Devotions/walking_in_the_light.html" style="text-decoration:none;"><i class="fas fa-sun" style="color:#ffd803"></i> Walking in the Light</a></div></li>
-        <li> <div class="box"><a href="vod.html" class="devotion-button" style="text-decoration:none;">📖 All Devotions</a></div></li>
-    </div>
+        <!-- Section Header -->
+        <div class="nx-section-header">
+          <span class="nx-section-badge"><i class="fas fa-microscope"></i> Deep Dive</span>
+          <h2 class="nx-section-title">Bible Studies</h2>
+          <p class="nx-section-sub">In-depth explorations of Scripture — carefully researched, faithfully presented.</p>
+          <div class="nx-header-line"></div>
+        </div>
+
+        <!-- Studies Grid -->
+        <div class="nx-card-grid" id="studies-list">
+
+          <a href="Studies/facts_or_fiction.html" class="nx-card" data-accent="var(--nx-gold)">
+            <span class="nx-card-num">01</span>
+            <div class="nx-card-icon"><i class="fas fa-question-circle"></i></div>
+            <h3>Is the Bible Facts or Fiction?</h3>
+            <p class="nx-card-hint">Evidence & Reliability</p>
+          </a>
+
+          <a href="Studies/history_of_christian_faith.html" class="nx-card" data-accent="var(--nx-purple)">
+            <span class="nx-card-num">02</span>
+            <div class="nx-card-icon"><i class="fas fa-landmark"></i></div>
+            <h3>History of the Christian Faith</h3>
+            <p class="nx-card-hint">Origins & Legacy</p>
+          </a>
+
+          <a href="Studies/why_the_bible_is_God's_word.html" class="nx-card" data-accent="var(--nx-gold)">
+            <span class="nx-card-num">03</span>
+            <div class="nx-card-icon"><i class="fas fa-book-bible"></i></div>
+            <h3>Is the Bible God's Word to Humanity?</h3>
+            <p class="nx-card-hint">Inspiration & Prophecy</p>
+          </a>
+
+          <a href="Studies/meaning_and_history_of_baptism.html" class="nx-card" data-accent="var(--nx-blue)">
+            <span class="nx-card-num">04</span>
+            <div class="nx-card-icon"><i class="fas fa-water"></i></div>
+            <h3>Meaning & History of Baptism</h3>
+            <p class="nx-card-hint">Covenant & Symbol</p>
+          </a>
+
+          <a href="Studies/are_angels_real.html" class="nx-card" data-accent="var(--nx-pink)">
+            <span class="nx-card-num">05</span>
+            <div class="nx-card-icon"><i class="fas fa-feather-pointed"></i></div>
+            <h3>Are Angels Real?</h3>
+            <p class="nx-card-hint">Heavenly Beings</p>
+          </a>
+
+          <a href="Studies/armor.html" class="nx-card" data-accent="var(--nx-green)">
+            <span class="nx-card-num">06</span>
+            <div class="nx-card-icon"><i class="fas fa-shield-halved"></i></div>
+            <h3>The Armor of God</h3>
+            <p class="nx-card-hint">Spiritual Warfare</p>
+          </a>
+
+          <a href="Studies/the_nature_of_sin_and_gods_law.html" class="nx-card" data-accent="var(--nx-red)">
+            <span class="nx-card-num">07</span>
+            <div class="nx-card-icon"><i class="fas fa-fire"></i></div>
+            <h3>Lucifer's Fall</h3>
+            <p class="nx-card-hint">Sin & God's Law</p>
+          </a>
+
+        </div>
+
+        <!-- View All CTA -->
+        <div class="nx-section-cta">
+          <a href="all-studies.html" class="nx-cta-btn nx-cta-studies">
+            <span>Browse All Studies</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         DEVOTIONS SECTION — Spiritual Journey
+    ═══════════════════════════════════════════ -->
+    <section class="nx-section nx-devos-section scroll-fade" id="devotions">
+      <!-- Floating Blocks -->
+      <div class="nx-blocks-container">
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+      </div>
+      <div class="nx-section-inner">
+
+        <!-- Section Header -->
+        <div class="nx-section-header">
+          <span class="nx-section-badge nx-badge-warm"><i class="fas fa-dove"></i> Meditate</span>
+          <h2 class="nx-section-title">Devotions</h2>
+          <p class="nx-section-sub">Short, powerful readings to draw you closer to God each day.</p>
+          <div class="nx-header-line nx-line-warm"></div>
+        </div>
+
+        <!-- Devotions Grid -->
+        <div class="nx-devo-grid" id="devotions-list">
+
+          <a href="Devotions/anchor_of_hope.html" class="nx-devo-card">
+            <div class="nx-devo-emoji">⚓</div>
+            <h3>Anchor of Hope</h3>
+          </a>
+
+          <a href="Devotions/a_tale_of_cities.html" class="nx-devo-card">
+            <div class="nx-devo-emoji">🏙️</div>
+            <h3>A Tale of Cities</h3>
+          </a>
+
+          <a href="Devotions/called_to_shine.html" class="nx-devo-card">
+            <div class="nx-devo-emoji">💡</div>
+            <h3>Called to Shine</h3>
+          </a>
+
+          <a href="Devotions/Do_it_for_God.html" class="nx-devo-card">
+            <div class="nx-devo-emoji">🙏</div>
+            <h3>Faithful In All Things</h3>
+          </a>
+
+          <a href="Devotions/faith_under_fire.html" class="nx-devo-card">
+            <div class="nx-devo-emoji">🔥</div>
+            <h3>Faith Under Fire</h3>
+          </a>
+
+          <a href="Devotions/final_invitation.html" class="nx-devo-card">
+            <div class="nx-devo-emoji">💌</div>
+            <h3>Final Invitation</h3>
+          </a>
+
+          <a href="Devotions/hannahs_devotion.html" class="nx-devo-card">
+            <div class="nx-devo-emoji">🤲</div>
+            <h3>Hannah's Devotion</h3>
+          </a>
+
+        </div>
+
+        <!-- View All CTA -->
+        <div class="nx-section-cta">
+          <a href="vod.html" class="nx-cta-btn nx-cta-devos">
+            <span>Browse All Devotions</span>
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
 
 
 
@@ -1304,26 +1652,20 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="video-card">
           <div class="video-wrapper" id="home-ep1"></div>
           <div class="fullscreen-box"><button onclick="openFullscreen(this)">⛶ Fullscreen</button></div>
-          <h3>🎬 Story of the Ten Commandments</h3>
+          <h3>🎬 VID 1</h3>
           <p>An overview of how the commandments came to be.</p>
         </div>
         <div class="video-card">
           <div class="video-wrapper" id="home-ep2"></div>
           <div class="fullscreen-box"><button onclick="openFullscreen(this)">⛶ Fullscreen</button></div>
-          <h3>📽️ 1st Commandment - No other Gods</h3>
+          <h3>📽️ VID 2</h3>
           <p>Exclusive worship of the one true God.</p>
         </div>
         <div class="video-card">
           <div class="video-wrapper" id="home-ep3"></div>
           <div class="fullscreen-box"><button onclick="openFullscreen(this)">⛶ Fullscreen</button></div>
-          <h3>📽️ 2nd Commandment - No Graven Images</h3>
+          <h3>📽️ VID 3</h3>
           <p>The prohibition against idols.</p>
-        </div>
-        <div class="video-card">
-          <div class="video-wrapper" id="home-ep4"></div>
-          <div class="fullscreen-box"><button onclick="openFullscreen(this)">⛶ Fullscreen</button></div>
-          <h3>📽️ 3rd Commandment - Respect the Sabbath</h3>
-          <p>Honoring God's day of rest and worship.</p>
         </div>
       </div>
       <div class="all-videos-hero-link">
@@ -1368,8 +1710,7 @@ const homeVideos = [
   {id:'intro-video', play:'IvEpefz6ZAHjpG71jCPutOjQiBs701j5BZD6DPtnPlcY', color:'#ffd803', playEmoji:'🎥', pauseEmoji:'⏸️', title:'Site Introduction', desc:'Welcome intro to NothingButTheTruth.'},
   {id:'home-ep1', play:'IvEpefz6ZAHjpG71jCPutOjQiBs701j5BZD6DPtnPlcY', color:'#ff0055', playEmoji:'✨', pauseEmoji:'⏸️', title:'THE STORY OF THE TEN COMMANDMENTS - DISCOVER HOW THE TEN COMMANDMENTS CAME TO BE', desc:'An overview of the importance and relevance of the Ten Commandments in the Christian life.'},
   {id:'home-ep2', play:'At02BeC1XsfvnzLdph1i7WcMbgljkszxUGYd2tH5018Ow', color:'#0077cc', playEmoji:'▶️', pauseEmoji:'⏹️', title:'1st Commandment - No other Gods', desc:'Explains the meaning of placing God first and avoiding idols.'},
-  {id:'home-ep3', play:'cCbeBi2BZhcEEe8MNnYvlI4Cwn02w00wk29x31bHj02XE8', color:'#00cc77', playEmoji:'🎬', pauseEmoji:'⏸️', title:'2nd Commandment - No Graven Images', desc:'The prohibition against idols.'},
-  {id:'home-ep4', play:'tL02o02bj5IM7RSt6hywQmA5rrP0001t3qLBLOyz9wNKIqM', color:'#cc7700', playEmoji:'🔥', pauseEmoji:'⏸️', title:'3rd Commandment - Respect the Sabbath', desc:'Explains the importance of honoring God\'s holy day and resting.'}
+  {id:'home-ep3', play:'cCbeBi2BZhcEEe8MNnYvlI4Cwn02w00wk29x31bHj02XE8', color:'#00cc77', playEmoji:'🎬', pauseEmoji:'⏸️', title:'2nd Commandment - No Graven Images', desc:'The prohibition against idols.'}
 ];
 homeVideos.forEach(v=>{
   const container = document.getElementById(v.id);
@@ -1431,11 +1772,11 @@ homeVideos.forEach(v=>{
 
 
     
-
-    <footer class="footer scroll-fade">
-        <p>&copy; 2025 My Website. All rights reserved.</p>
+</main>
+    <footer class="footer scroll-fade" role="contentinfo">
+        <p>&copy; 2025 NothingButTheTruth. All rights reserved.</p>
         <p>
-            <i class="fas fa-share-alt" style="color:#ffd803"></i> Follow us on:
+            <i class="fas fa-share-alt" style="color:#ffd803" aria-hidden="true"></i> Follow us on:
         </p>
     </footer>
 
@@ -1582,6 +1923,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Tell the observer to watch every single .box on the page
     document.querySelectorAll('.box').forEach(box => observer.observe(box));
+
+    // Watch new nx-card and nx-devo-card elements
+    document.querySelectorAll('.nx-card, .nx-devo-card').forEach(card => observer.observe(card));
     
     // Also watch your general "scroll-fade" elements (like the slideshow)
     document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
@@ -2873,6 +3217,61 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script src="script.js"></script>
+
+<!-- Scroll-position restore: saves where you were, so the back button returns you there -->
+<script>
+(function() {
+  var KEY = 'nbtt_scrollY';
+
+  function saveScroll() {
+    sessionStorage.setItem(KEY, window.scrollY || document.documentElement.scrollTop);
+  }
+
+  function restoreScroll() {
+    var saved = sessionStorage.getItem(KEY);
+    if (saved !== null) {
+      var html = document.documentElement;
+      var orig = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      window.scrollTo(0, parseInt(saved, 10));
+      requestAnimationFrame(function() {
+        window.scrollTo(0, parseInt(saved, 10));
+        setTimeout(function() { html.style.scrollBehavior = orig || ''; }, 120);
+      });
+    }
+  }
+
+  // Save scroll position before leaving
+  window.addEventListener('beforeunload', saveScroll);
+
+  // Also save on every link click (safety net for mobile browsers that skip beforeunload)
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (link && !link.getAttribute('href').startsWith('#')) saveScroll();
+  });
+
+  // Detect back/forward navigation on full page load
+  var wasBackNav = false;
+  if (window.performance) {
+    var entries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+    if (entries && entries.length) {
+      wasBackNav = entries[0].type === 'back_forward';
+    } else if (performance.navigation) {
+      wasBackNav = performance.navigation.type === 2;
+    }
+  }
+  if (wasBackNav) {
+    restoreScroll();
+    window.addEventListener('load', restoreScroll);
+  }
+
+  // Handle bfcache (back-forward cache) — browser restores page from memory,
+  // inline scripts don't re-run, but pageshow fires with persisted=true
+  window.addEventListener('pageshow', function(e) {
+    if (e.persisted) restoreScroll();
+  });
+})();
+</script>
 
 
 

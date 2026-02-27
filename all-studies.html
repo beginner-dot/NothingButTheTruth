@@ -3,262 +3,834 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Studies</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <title>All Studies — NothingButTheTruth</title>
+  <meta name="description" content="Browse all Bible studies by category at NothingButTheTruth. Topics include Jesus Christ, the Bible, spiritual growth, prophecy, and the great controversy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Nunito', sans-serif;
-      background: linear-gradient(135deg, rgba(15, 10, 30, 0.95), rgba(10, 20, 50, 0.95));
+      font-family: 'Poppins', sans-serif;
+      background: #060812;
       color: #ddd;
-      padding: 2rem;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== PAGE HEADER ===== */
+    .page-hero {
+      position: relative;
+      padding: 3rem 2rem 2.5rem;
+      text-align: center;
+      background: linear-gradient(160deg, #0a0a1a 0%, #10082a 40%, #0d1225 100%);
+      border-bottom: 1px solid rgba(168, 85, 247, 0.15);
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .back-button {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 2rem;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, #ff6b9d, #c06c84);
-      color: white;
+      padding: 10px 22px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ccc;
       text-decoration: none;
       border-radius: 50px;
       font-weight: 600;
+      font-size: 0.85rem;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
       transition: all 0.3s ease;
+      z-index: 10;
     }
-
     .back-button:hover {
-      transform: translateX(-5px);
-      box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+      background: rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #fff;
+      transform: translateX(-4px);
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-      font-size: 2.5rem;
-      background: linear-gradient(135deg, #ffd803, #ff6b9d);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: fadeIn 1s ease-out;
+    .page-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: #fff;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    .page-title i { color: #a855f7; margin-right: 0.3em; }
+
+    .page-subtitle {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto 1.2rem;
     }
 
-    .studies-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      animation: slideUp 1s ease-out;
-      max-width: 1200px;
+    .page-stats {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      color: #c084fc;
+      font-weight: 600;
+    }
+    .stat-pill i { font-size: 0.75rem; }
+
+    /* ===== SEARCH BAR ===== */
+    .search-wrap {
+      max-width: 480px;
+      margin: 1.5rem auto 0;
+      position: relative;
+    }
+    .search-wrap i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(168, 85, 247, 0.5);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+    #study-search {
+      width: 100%;
+      padding: 12px 18px 12px 42px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 12px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    #study-search::placeholder { color: rgba(255, 255, 255, 0.3); }
+    #study-search:focus {
+      border-color: #a855f7;
+      box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+    }
+
+    /* ===== CATEGORY FILTER CHIPS ===== */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 900px;
+      margin: 1.5rem auto 0;
+      padding: 0 1rem;
+    }
+    .filter-chip {
+      padding: 8px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .filter-chip:hover {
+      background: rgba(168, 85, 247, 0.1);
+      border-color: rgba(168, 85, 247, 0.3);
+      color: #c084fc;
+    }
+    .filter-chip.active {
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .content-area {
+      max-width: 1300px;
       margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ===== CATEGORY SECTIONS ===== */
+    .category-section {
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.6s ease-out both;
+    }
+    .category-section:nth-child(2) { animation-delay: 0.1s; }
+    .category-section:nth-child(3) { animation-delay: 0.2s; }
+    .category-section:nth-child(4) { animation-delay: 0.3s; }
+    .category-section:nth-child(5) { animation-delay: 0.4s; }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .category-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .category-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: #fff;
+    }
+    .category-count {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      font-weight: 600;
+      margin-left: auto;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Per-category accent colors */
+    .cat-jesus .category-icon-wrap  { background: linear-gradient(135deg, #dc2626, #f87171); }
+    .cat-jesus .study-card          { --accent: #f87171; --accent-bg: rgba(248,113,113,0.08); }
+
+    .cat-bible .category-icon-wrap  { background: linear-gradient(135deg, #d97706, #fbbf24); }
+    .cat-bible .study-card          { --accent: #fbbf24; --accent-bg: rgba(251,191,36,0.08); }
+
+    .cat-growth .category-icon-wrap { background: linear-gradient(135deg, #059669, #34d399); }
+    .cat-growth .study-card         { --accent: #34d399; --accent-bg: rgba(52,211,153,0.08); }
+
+    .cat-prophecy .category-icon-wrap { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+    .cat-prophecy .study-card        { --accent: #a78bfa; --accent-bg: rgba(167,139,250,0.08); }
+
+    .cat-controversy .category-icon-wrap { background: linear-gradient(135deg, #be185d, #f472b6); }
+    .cat-controversy .study-card        { --accent: #f472b6; --accent-bg: rgba(244,114,182,0.08); }
+
+    /* ===== STUDY CARDS GRID ===== */
+    .studies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1rem;
     }
 
     .study-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(100, 150, 255, 0.05));
-      border: 1px solid rgba(255, 215, 3, 0.3);
+      position: relative;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 16px;
-      padding: 1.8rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      padding: 1.5rem 1.5rem 1.3rem;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: default;
+      display: flex;
+      flex-direction: column;
     }
-
+    .study-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent, #a855f7);
+      border-radius: 16px 0 0 16px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
     .study-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(255, 215, 3, 0.15);
-      border-color: rgba(255, 215, 3, 0.6);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(100, 150, 255, 0.1));
+      background: var(--accent-bg, rgba(168, 85, 247, 0.06));
+      border-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
     }
+    .study-card:hover::before { opacity: 1; }
 
-    .study-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #ffd803;
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 0.6rem;
     }
-
-    .study-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin-bottom: 0.8rem;
+    .card-emoji {
+      font-size: 1.6rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
       color: #fff;
-      letter-spacing: 0.5px;
+      line-height: 1.35;
     }
 
-    .study-description {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #bbb;
-      margin-bottom: 1.5rem;
+    .card-desc {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
     }
 
-    .read-more {
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent, #a855f7);
+      opacity: 0.7;
+    }
+    .read-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      color: #ff6b9d;
+      gap: 6px;
+      padding: 8px 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 50px;
+      color: #fff;
       text-decoration: none;
+      font-size: 0.8rem;
       font-weight: 600;
       transition: all 0.3s ease;
-      padding: 8px 16px;
-      border-radius: 50px;
-      background: rgba(255, 107, 157, 0.1);
+    }
+    .read-btn:hover {
+      background: var(--accent-bg, rgba(168,85,247,0.15));
+      border-color: var(--accent, #a855f7);
+      color: var(--accent, #a855f7);
+      transform: translateX(3px);
+    }
+    .read-btn i { font-size: 0.7rem; transition: transform 0.3s; }
+    .read-btn:hover i { transform: translateX(3px); }
+
+    /* ===== NO RESULTS ===== */
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: rgba(255,255,255,0.35);
+      display: none;
+    }
+    .no-results i { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .no-results.visible { display: block; }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .read-more:hover {
-      background: rgba(255, 107, 157, 0.25);
-      transform: translateX(5px);
-      color: #ff8ab5;
-    }
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(10, 0, 20, 0.9); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #6b21a8, #a855f7, #6b21a8); border-radius: 10px; }
+    html { scrollbar-width: thin; scrollbar-color: #6b21a8 rgba(10, 0, 20, 0.9); }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
+    /* ===== MOBILE ===== */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .studies-container {
-        grid-template-columns: 1fr;
-      }
-
-      .study-card {
-        padding: 1.2rem;
-      }
+      .page-hero { padding: 4.5rem 1rem 2rem; }
+      .back-button { top: 1rem; left: 1rem; padding: 8px 16px; font-size: 0.8rem; }
+      .page-title { font-size: 1.8rem; }
+      .page-stats { gap: 1rem; }
+      .studies-grid { grid-template-columns: 1fr; }
+      .content-area { padding: 1.5rem 1rem 3rem; }
+      .category-name { font-size: 1.2rem; }
+      .filter-bar { gap: 8px; }
+      .filter-chip { font-size: 0.75rem; padding: 6px 14px; }
+    }
+    @media (max-width: 400px) {
+      .page-stats { flex-direction: column; align-items: center; gap: 0.5rem; }
     }
   </style>
 </head>
 <body>
-  <a href="index.html" class="back-button">
-    <i class="fas fa-arrow-left"></i>
-    Back to Home
-  </a>
 
-  <h1><i class="fas fa-book-open"></i> All Studies</h1>
-  <p id="study-count" style="text-align:center; margin-bottom:1rem; font-size:1.1rem; color:#ffd803;"></p>
-
-  <div class="studies-container">
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-question-circle"></i></div>
-      <div class="study-title">Is The Bible Facts or Fiction?</div>
-      <div class="study-description">Explore the historical, archaeological, and textual evidence that demonstrates the Bible's reliability and authenticity.</div>
-      <a href="Studies/facts_or_fiction.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-landmark"></i></div>
-      <div class="study-title">History of the Christian Faith</div>
-      <div class="study-description">A sweeping overview of Christian history from Eden through the early church, apostasy, Reformation and the final conflict.</div>
-      <a href="Studies/history_of_christian_faith.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-book-bible"></i></div>
-      <div class="study-title">Is the Bible God&#39;s Word to Humanity?</div>
-      <div class="study-description">Discover divine inspiration, fulfilled prophecies, and why Christians believe the Bible is God&#39;s ultimate message to mankind.</div>
-      <a href="Studies/why_the_bible_is_God's_word.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-water"></i></div>
-      <div class="study-title">Meaning & History of Baptism</div>
-      <div class="study-description">Explore the biblical origin of baptism, its symbolic meaning, and how human tradition altered it over the ages.</div>
-      <a href="Studies/meaning_and_history_of_baptism.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-angel"></i></div>
-      <div class="study-title">Are Angels Real?</div>
-      <div class="study-description">Uncover biblical truths about celestial beings, their roles in God's plan, and what Scripture reveals about the angelic realm.</div>
-      <a href="Studies/are_angels_real.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-shield"></i></div>
-      <div class="study-title">The Armor of God</div>
-      <div class="study-description">Learn about spiritual warfare and how to equip yourself with God's armor for victory in life's battles.</div>
-      <a href="Studies/armor.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-fire"></i></div>
-      <div class="study-title">Lucifer's Fall</div>
-      <div class="study-description">Explore the nature of sin and God's sovereignty through the story of Lucifer's rebellion and what it reveals about God's law and government.</div>
-      <a href="Studies/the_nature_of_sin_and_gods_law.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-shield-alt"></i></div>
-      <div class="study-title">Satan the Accuser, Christ the Defender</div>
-      <div class="study-description">Discover how Christ defends His people against Satan's accusations and what it means to be clothed in His righteousness in the last days.</div>
-      <a href="Studies/satan_the_accuser_christ_the_defender.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-heart"></i></div>
-      <div class="study-title">Jesus Is Real</div>
-      <div class="study-description">Explore the historical reality of Christ's incarnation, authentic suffering, and what His genuine humanity and sacrifice mean for our faith.</div>
-      <a href="Studies/jesus_is_real.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-city"></i></div>
-      <div class="study-title">A Tale of Cities</div>
-      <div class="study-description">Journey through the cities of the Bible and discover the spiritual significance of urban centers in God's redemptive history.</div>
-      <a href="Studies/a_tale_of_cities.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-comment"></i></div>
-      <div class="study-title">God Has a Purpose Each Time He Communicates</div>
-      <div class="study-description">Understand how God's communication with humanity reveals His character and guides His people toward spiritual maturity and hope.</div>
-      <a href="Studies/God_has_a_purpose_each_time_He_communicates.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-person-hiking"></i></div>
-      <div class="study-title">Preparing People to Meet God (Part 1)</div>
-      <div class="study-description">The first part of our comprehensive study on readiness and preparation for eternity through spiritual transformation.</div>
-      <a href="Studies/preparing_people_to_meet_God_pt_1.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-person-hiking"></i></div>
-      <div class="study-title">Preparing People to Meet God (Part 2)</div>
-      <div class="study-description">The second part continues exploring spiritual readiness and the transformative power of faith in meeting our Creator.</div>
-      <a href="Studies/preparing_people_to_meet_God_pt_2.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
-    <div class="study-card">
-      <div class="study-icon"><i class="fas fa-person-hiking"></i></div>
-      <div class="study-title">Preparing People to Meet God (Part 3)</div>
-      <div class="study-description">The final part concludes our exploration of spiritual preparation and the eternal significance of encountering God.</div>
-      <a href="Studies/preparing_people_to_meet_God_pt_3.html" class="read-more">Read Study <i class="fas fa-arrow-right"></i></a>
-    </div>
-
+<!-- ===== PAGE HERO ===== -->
+<div class="page-hero">
+  <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Home</a>
+  <h1 class="page-title"><i class="fas fa-book-open"></i> All Studies</h1>
+  <p class="page-subtitle">Explore the unfiltered Word of God, organized by topic.</p>
+  <div class="page-stats">
+    <span class="stat-pill"><i class="fas fa-layer-group"></i> <span id="cat-count">5</span> Categories</span>
+    <span class="stat-pill"><i class="fas fa-scroll"></i> <span id="study-count">15</span> Studies</span>
   </div>
-  <script>
-    // update study count paragraph
-    document.addEventListener('DOMContentLoaded', function() {
-      var count = document.querySelectorAll('.study-card').length;
-      var el = document.getElementById('study-count');
-      if (el) el.textContent = 'Total studies: ' + count;
+
+  <!-- Search -->
+  <div class="search-wrap">
+    <i class="fas fa-search"></i>
+    <input type="text" id="study-search" placeholder="Search studies by title or keyword...">
+  </div>
+
+  <!-- Filter Chips -->
+  <div class="filter-bar">
+    <span class="filter-chip active" data-filter="all">All</span>
+    <span class="filter-chip" data-filter="jesus">✝️ About Jesus Christ</span>
+    <span class="filter-chip" data-filter="bible">📖 The Bible</span>
+    <span class="filter-chip" data-filter="growth">🌱 Spiritual Growth</span>
+    <span class="filter-chip" data-filter="prophecy">🔮 History & Prophecy</span>
+    <span class="filter-chip" data-filter="controversy">⚔️ The Great Controversy</span>
+    <span class="filter-chip" data-filter="pillars">⛪ Two Monumental Pillars</span>
+  </div>
+</div>
+
+<!-- ===== CONTENT ===== -->
+<div class="content-area">
+
+  <!-- ── ABOUT JESUS CHRIST ── -->
+  <div class="category-section cat-jesus" data-category="jesus">
+    <div class="category-header">
+      <div class="category-icon-wrap">✝️</div>
+      <h2 class="category-name">About Jesus Christ</h2>
+      <span class="category-count">7 studies</span>
+    </div>
+    <div class="studies-grid">
+
+      <div class="study-card" data-keywords="jesus real incarnation suffering humanity sacrifice faith">
+        <div class="card-top">
+          <span class="card-emoji">❤️</span>
+          <h3 class="card-title">Jesus Is Real</h3>
+        </div>
+        <p class="card-desc">Explore the historical reality of Christ's incarnation, authentic suffering, and what His genuine humanity and sacrifice mean for our faith.</p>
+        <div class="card-footer">
+          <span class="card-tag">Christology</span>
+          <a href="Studies/jesus_is_real.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="satan accuser christ defender righteousness last days judgment">
+        <div class="card-top">
+          <span class="card-emoji">🛡️</span>
+          <h3 class="card-title">Satan the Accuser, Christ the Defender</h3>
+        </div>
+        <p class="card-desc">Discover how Christ defends His people against Satan's accusations and what it means to be clothed in His righteousness in the last days.</p>
+        <div class="card-footer">
+          <span class="card-tag">Redemption</span>
+          <a href="Studies/satan_the_accuser_christ_the_defender.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="christ savior steps grace sin holiness born again new life redemption">
+        <div class="card-top">
+          <span class="card-emoji">✝️</span>
+          <h3 class="card-title">Christ The Savior</h3>
+        </div>
+        <p class="card-desc">From Steps to Christ Ch. 2 — humanity's fall, the condition of the unrenewed heart, and why Christ alone can change us from sin to holiness.</p>
+        <div class="card-footer">
+          <span class="card-tag">Salvation</span>
+          <a href="Studies/christ_the_savior.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="word made flesh incarnation john 1 mystery godliness mediator human nature">
+        <div class="card-top">
+          <span class="card-emoji">📜</span>
+          <h3 class="card-title">God "The Word" Made Flesh</h3>
+        </div>
+        <p class="card-desc">John 1 and The Review and Herald, April 5, 1906 — the doctrine of the incarnation, the great mystery of godliness, and Christ's genuine human nature.</p>
+        <div class="card-footer">
+          <span class="card-tag">Incarnation</span>
+          <a href="Studies/the_word_made_flesh.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="lamb of god ransom salvation plan angels heaven adam eve fall sacrifice death resurrection">
+        <div class="card-top">
+          <span class="card-emoji">🐑</span>
+          <h3 class="card-title">Jesus Christ "The Lamb Of God"</h3>
+        </div>
+        <p class="card-desc">Spirit of Prophecy Vol. 1, Ch. 4 — After the fall of man, Jesus offers His life as a ransom and reveals the plan of salvation to the angelic host.</p>
+        <div class="card-footer">
+          <span class="card-tag">Plan of Salvation</span>
+          <a href="Studies/the_lamb_of_god.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="childhood jesus nazareth youth temple twelve character obedience carpenter family">
+        <div class="card-top">
+          <span class="card-emoji">👦</span>
+          <h3 class="card-title">The Childhood of Jesus Christ</h3>
+        </div>
+        <p class="card-desc">The Story of Jesus, Chapter 5 — Jesus' humble life in Nazareth, His sweet unselfish character, His education from Scripture and nature, and His visit to the temple at age twelve.</p>
+        <div class="card-footer">
+          <span class="card-tag">Life of Christ</span>
+          <a href="Studies/the_childhood_of_jesus_christ.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="where is jesus now high priest intercession sanctuary heaven judgment mediator angels church holy spirit">
+        <div class="card-top">
+          <span class="card-emoji">👑</span>
+          <h3 class="card-title">Where Is Jesus Right Now?</h3>
+        </div>
+        <p class="card-desc">A Biblical and Spirit of Prophecy study on Christ's present ministry — His intercession in the heavenly sanctuary, His role as Judge and Advocate, and His daily work for every believer.</p>
+        <div class="card-footer">
+          <span class="card-tag">Present Ministry</span>
+          <a href="Studies/where_is_jesus_right_now.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── THE BIBLE ── -->
+  <div class="category-section cat-bible" data-category="bible">
+    <div class="category-header">
+      <div class="category-icon-wrap">📖</div>
+      <h2 class="category-name">The Bible</h2>
+      <span class="category-count">3 studies</span>
+    </div>
+    <div class="studies-grid">
+
+      <div class="study-card" data-keywords="bible facts fiction historical archaeological evidence reliability">
+        <div class="card-top">
+          <span class="card-emoji">❓</span>
+          <h3 class="card-title">Is The Bible Facts or Fiction?</h3>
+        </div>
+        <p class="card-desc">Explore the historical, archaeological, and textual evidence that demonstrates the Bible's reliability and authenticity.</p>
+        <div class="card-footer">
+          <span class="card-tag">Apologetics</span>
+          <a href="Studies/facts_or_fiction.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="bible god word humanity inspiration prophecies divine">
+        <div class="card-top">
+          <span class="card-emoji">📜</span>
+          <h3 class="card-title">Is the Bible God's Word to Humanity?</h3>
+        </div>
+        <p class="card-desc">Discover divine inspiration, fulfilled prophecies, and why Christians believe the Bible is God's ultimate message to mankind.</p>
+        <div class="card-footer">
+          <span class="card-tag">Inspiration</span>
+          <a href="Studies/why_the_bible_is_God's_word.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="god purpose communicates character spiritual maturity hope">
+        <div class="card-top">
+          <span class="card-emoji">💬</span>
+          <h3 class="card-title">God Has a Purpose Each Time He Communicates</h3>
+        </div>
+        <p class="card-desc">Understand how God's communication with humanity reveals His character and guides His people toward spiritual maturity and hope.</p>
+        <div class="card-footer">
+          <span class="card-tag">Revelation</span>
+          <a href="Studies/God_has_a_purpose_each_time_He_communicates.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SPIRITUAL GROWTH ── -->
+  <div class="category-section cat-growth" data-category="growth">
+    <div class="category-header">
+      <div class="category-icon-wrap">🌱</div>
+      <h2 class="category-name">Spiritual Growth</h2>
+      <span class="category-count">4 studies</span>
+    </div>
+    <div class="studies-grid">
+
+      <div class="study-card" data-keywords="armor god spiritual warfare victory battle shield sword">
+        <div class="card-top">
+          <span class="card-emoji">🛡️</span>
+          <h3 class="card-title">The Armor of God</h3>
+        </div>
+        <p class="card-desc">Learn about spiritual warfare and how to equip yourself with God's armor for victory in life's battles.</p>
+        <div class="card-footer">
+          <span class="card-tag">Warfare</span>
+          <a href="Studies/armor.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="preparing people meet god readiness eternity transformation part 1">
+        <div class="card-top">
+          <span class="card-emoji">🥾</span>
+          <h3 class="card-title">Preparing People to Meet God (Part 1)</h3>
+        </div>
+        <p class="card-desc">The first part of our comprehensive study on readiness and preparation for eternity through spiritual transformation.</p>
+        <div class="card-footer">
+          <span class="card-tag">Series · Part 1</span>
+          <a href="Studies/preparing_people_to_meet_God_pt_1.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="preparing people meet god faith transformation part 2">
+        <div class="card-top">
+          <span class="card-emoji">🥾</span>
+          <h3 class="card-title">Preparing People to Meet God (Part 2)</h3>
+        </div>
+        <p class="card-desc">The second part continues exploring spiritual readiness and the transformative power of faith in meeting our Creator.</p>
+        <div class="card-footer">
+          <span class="card-tag">Series · Part 2</span>
+          <a href="Studies/preparing_people_to_meet_God_pt_2.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="preparing people meet god eternal significance encounter part 3">
+        <div class="card-top">
+          <span class="card-emoji">🥾</span>
+          <h3 class="card-title">Preparing People to Meet God (Part 3)</h3>
+        </div>
+        <p class="card-desc">The final part concludes our exploration of spiritual preparation and the eternal significance of encountering God.</p>
+        <div class="card-footer">
+          <span class="card-tag">Series · Part 3</span>
+          <a href="Studies/preparing_people_to_meet_God_pt_3.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── HISTORY & PROPHECY ── -->
+  <div class="category-section cat-prophecy" data-category="prophecy">
+    <div class="category-header">
+      <div class="category-icon-wrap">🔮</div>
+      <h2 class="category-name">History & Prophecy</h2>
+      <span class="category-count">2 studies</span>
+    </div>
+    <div class="studies-grid">
+
+      <div class="study-card" data-keywords="history christian faith eden church apostasy reformation conflict">
+        <div class="card-top">
+          <span class="card-emoji">🏛️</span>
+          <h3 class="card-title">History of the Christian Faith</h3>
+        </div>
+        <p class="card-desc">A sweeping overview of Christian history from Eden through the early church, apostasy, Reformation and the final conflict.</p>
+        <div class="card-footer">
+          <span class="card-tag">Church History</span>
+          <a href="Studies/history_of_christian_faith.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="tale cities bible spiritual significance urban redemptive history">
+        <div class="card-top">
+          <span class="card-emoji">🏙️</span>
+          <h3 class="card-title">A Tale of Cities</h3>
+        </div>
+        <p class="card-desc">Journey through the cities of the Bible and discover the spiritual significance of urban centers in God's redemptive history.</p>
+        <div class="card-footer">
+          <span class="card-tag">Prophecy</span>
+          <a href="Studies/a_tale_of_cities.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── TWO MONUMENTAL PILLARS ── -->
+  <div class="category-section cat-pillars" data-category="pillars">
+    <div class="category-header">
+      <div class="category-icon-wrap">⛪</div>
+      <h2 class="category-name">Two Monumental Pillars</h2>
+      <span class="category-count">2 studies</span>
+    </div>
+    <div class="studies-grid">
+
+      <div class="study-card" data-keywords="baptism meaning history symbolic tradition water ordinance pillar">
+        <div class="card-top">
+          <span class="card-emoji">💧</span>
+          <h3 class="card-title">Meaning & History of Baptism</h3>
+        </div>
+        <p class="card-desc">Explore the biblical origin of baptism, its symbolic meaning, and how human tradition altered it over the ages.</p>
+        <div class="card-footer">
+          <span class="card-tag">Ordinance</span>
+          <a href="Studies/meaning_and_history_of_baptism.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="lords supper communion bread wine passover covenant foot washing ordinance pillar">
+        <div class="card-top">
+          <span class="card-emoji">🍞</span>
+          <h3 class="card-title">The Lord's Supper</h3>
+        </div>
+        <p class="card-desc">Discover the meaning and importance of the Lord's Supper as taught by Jesus Christ — from its Passover roots to the eschatological hope of His return.</p>
+        <div class="card-footer">
+          <span class="card-tag">Ordinance</span>
+          <a href="Studies/the_lords_supper.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── THE GREAT CONTROVERSY ── -->
+  <div class="category-section cat-controversy" data-category="controversy">
+    <div class="category-header">
+      <div class="category-icon-wrap">⚔️</div>
+      <h2 class="category-name">The Great Controversy</h2>
+      <span class="category-count">2 studies</span>
+    </div>
+    <div class="studies-grid">
+
+      <div class="study-card" data-keywords="angels real celestial beings roles plan scripture angelic realm">
+        <div class="card-top">
+          <span class="card-emoji">👼</span>
+          <h3 class="card-title">Are Angels Real?</h3>
+        </div>
+        <p class="card-desc">Uncover biblical truths about celestial beings, their roles in God's plan, and what Scripture reveals about the angelic realm.</p>
+        <div class="card-footer">
+          <span class="card-tag">Angelology</span>
+          <a href="Studies/are_angels_real.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="study-card" data-keywords="lucifer fall sin sovereignty rebellion law government nature">
+        <div class="card-top">
+          <span class="card-emoji">🔥</span>
+          <h3 class="card-title">Lucifer's Fall</h3>
+        </div>
+        <p class="card-desc">Explore the nature of sin and God's sovereignty through the story of Lucifer's rebellion and what it reveals about God's law and government.</p>
+        <div class="card-footer">
+          <span class="card-tag">Origin of Evil</span>
+          <a href="Studies/the_nature_of_sin_and_gods_law.html" class="read-btn">Read <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- No results message -->
+  <div class="no-results" id="no-results">
+    <i class="fas fa-search"></i>
+    <p>No studies match your search. Try a different keyword.</p>
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('study-search');
+  const chips = document.querySelectorAll('.filter-chip');
+  const sections = document.querySelectorAll('.category-section');
+  const noResults = document.getElementById('no-results');
+  let activeFilter = 'all';
+
+  // ── Filter chips ──
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      searchInput.value = '';
+      applyFilters();
     });
-  </script>
+  });
+
+  // ── Search ──
+  searchInput.addEventListener('input', () => {
+    // Reset chip to "All" when typing
+    if (activeFilter !== 'all') {
+      chips.forEach(c => c.classList.remove('active'));
+      chips[0].classList.add('active');
+      activeFilter = 'all';
+    }
+    applyFilters();
+  });
+
+  function applyFilters() {
+    const query = searchInput.value.trim().toLowerCase();
+    let totalVisible = 0;
+
+    sections.forEach(section => {
+      const cat = section.dataset.category;
+      const cards = section.querySelectorAll('.study-card');
+      let sectionVisible = 0;
+
+      // Category filter
+      if (activeFilter !== 'all' && cat !== activeFilter) {
+        section.style.display = 'none';
+        return;
+      }
+      section.style.display = '';
+
+      // Search filter
+      cards.forEach(card => {
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+        const keywords = (card.dataset.keywords || '').toLowerCase();
+        const match = !query || title.includes(query) || desc.includes(query) || keywords.includes(query);
+        card.style.display = match ? '' : 'none';
+        if (match) sectionVisible++;
+      });
+
+      section.style.display = sectionVisible > 0 ? '' : 'none';
+      totalVisible += sectionVisible;
+    });
+
+    noResults.classList.toggle('visible', totalVisible === 0);
+  }
+
+  // ── Dynamic counts ──
+  const totalStudies = document.querySelectorAll('.study-card').length;
+  const totalCats = document.querySelectorAll('.category-section').length;
+  document.getElementById('study-count').textContent = totalStudies;
+  document.getElementById('cat-count').textContent = totalCats;
+});
+</script>
+
+<!-- Scroll-position restore -->
+<script>
+(function() {
+  var KEY = 'nbtt_scrollY_allstudies';
+  function saveScroll() { sessionStorage.setItem(KEY, window.scrollY || document.documentElement.scrollTop); }
+  function restoreScroll() {
+    var saved = sessionStorage.getItem(KEY);
+    if (saved !== null) {
+      var html = document.documentElement; var orig = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      window.scrollTo(0, parseInt(saved, 10));
+      requestAnimationFrame(function() {
+        window.scrollTo(0, parseInt(saved, 10));
+        setTimeout(function() { html.style.scrollBehavior = orig || ''; }, 120);
+      });
+    }
+  }
+  window.addEventListener('beforeunload', saveScroll);
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (link && !link.getAttribute('href').startsWith('#')) saveScroll();
+  });
+  var wasBackNav = false;
+  if (window.performance) {
+    var entries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+    if (entries && entries.length) { wasBackNav = entries[0].type === 'back_forward'; }
+    else if (performance.navigation) { wasBackNav = performance.navigation.type === 2; }
+  }
+  if (wasBackNav) { restoreScroll(); window.addEventListener('load', restoreScroll); }
+  window.addEventListener('pageshow', function(e) { if (e.persisted) restoreScroll(); });
+})();
+</script>
 </body>
 </html>
