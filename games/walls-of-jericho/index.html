@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walls of Jericho — Rhythm Action Game | NothingButTheTruth</title>
+<meta name="description" content="March around Jericho, sound the trumpets, and bring down the walls! A rhythm-based action game based on Joshua 6. Free to play online.">
+<meta name="keywords" content="Walls of Jericho game, Bible action game, Bible rhythm game, Christian arcade game, Joshua game, trumpet game, NothingButTheTruth, free Bible games">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/walls-of-jericho/index.html">
+<meta property="og:title" content="Walls of Jericho — Rhythm Action Game">
+<meta property="og:description" content="March around Jericho, sound the trumpets, and bring down the walls! A rhythm action game.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/walls-of-jericho/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Walls of Jericho | NothingButTheTruth">
+<meta name="twitter:description" content="March around Jericho, sound the trumpets, and bring down the walls! Free rhythm action game.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Walls of Jericho","description":"March around Jericho and bring down the walls in this rhythm-based action game based on Joshua 6.","url":"https://nothingbutthetruth.web.app/games/walls-of-jericho/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root {
+  --bg:#0a0a14;--card:rgba(255,255,255,0.06);--purple:#6a11cb;--blue:#2575fc;
+  --green:#00ff9d;--gold:#ffd700;--red:#ff4757;--text:#fff;--sub:rgba(255,255,255,0.6);
+  --sand:#d4a574;--brick:#8b4513;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(212,165,116,.08),transparent 50%),radial-gradient(ellipse at 20% 20%,rgba(106,17,203,.1),transparent 50%);pointer-events:none}
+
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;position:relative;z-index:10}
+.back-btn{color:var(--sub);text-decoration:none;font-size:.95em;display:flex;align-items:center;gap:6px;transition:color .2s}
+.back-btn:hover{color:var(--text)}
+.logo{font-weight:800;font-size:1.1em;background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.screen{display:none;position:relative;z-index:5}.screen.active{display:block}
+
+/* Start Screen */
+.start-hero{text-align:center;padding:40px 20px;max-width:700px;margin:0 auto}
+.game-icon{font-size:4em;margin-bottom:16px;display:block}
+.start-hero h1{font-family:'DM Serif Display',serif;font-size:2.6em;margin-bottom:12px;background:linear-gradient(135deg,var(--sand),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-hero .tagline{color:var(--sub);font-size:1.1em;margin-bottom:36px}
+.how-to{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px;margin-bottom:36px;text-align:left}
+.how-to h3{margin-bottom:14px;font-size:1.15em}
+.how-to ul{list-style:none;padding:0}
+.how-to li{padding:6px 0;color:var(--sub);font-size:.95em}
+.how-to li::before{content:'✦ ';color:var(--sand)}
+.verse-box{background:rgba(212,165,116,.08);border:1px solid rgba(212,165,116,.2);border-radius:12px;padding:16px;margin-bottom:32px;font-style:italic;color:var(--sand);font-size:.95em}
+.start-btn{padding:18px 44px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--sand),var(--gold));color:#1a1a2e;font-weight:800;font-size:1.15em;cursor:pointer;transition:all .3s;font-family:inherit}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(212,165,116,.3)}
+
+/* Game Area */
+.game-area{max-width:600px;margin:0 auto;padding:0 16px 40px;text-align:center;position:relative}
+.game-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.game-top h2{font-size:1.2em;color:var(--sand)}
+.stats{display:flex;gap:16px;font-size:.9em}
+.stat{display:flex;align-items:center;gap:5px}
+.stat i{width:16px}
+
+/* March Ring */
+.march-ring{position:relative;width:320px;height:320px;margin:0 auto 30px;border-radius:50%}
+.wall-ring{position:absolute;inset:0;border-radius:50%;border:28px solid rgba(139,69,19,.6);transition:all .3s}
+.wall-ring::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:3px dashed rgba(212,165,116,.3)}
+.wall-hp-bar{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);width:80%;height:8px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.wall-hp-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--sand));border-radius:4px;transition:width .4s ease;width:100%}
+
+/* Wall damage states */
+.wall-ring.dmg-1{border-color:rgba(139,69,19,.5);box-shadow:inset 0 0 20px rgba(255,159,67,.1)}
+.wall-ring.dmg-2{border-color:rgba(139,69,19,.4);box-shadow:inset 0 0 30px rgba(255,159,67,.2)}
+.wall-ring.dmg-3{border-color:rgba(139,69,19,.3);box-shadow:inset 0 0 40px rgba(255,159,67,.3);border-style:dashed}
+.wall-ring.dmg-4{border-color:rgba(139,69,19,.2);box-shadow:inset 0 0 50px rgba(255,71,87,.3);border-style:dotted}
+.wall-ring.destroyed{animation:wallFall 1.2s ease forwards}
+@keyframes wallFall{
+  0%{border-width:28px;opacity:1;transform:scale(1)}
+  30%{border-width:35px;transform:scale(1.05)}
+  100%{border-width:0;opacity:0;transform:scale(1.5) rotate(15deg)}
+}
+
+/* Marcher */
+.marcher{position:absolute;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1.6em;transform:translate(-50%,-50%);transition:all .05s linear;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+
+/* City center */
+.city-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:2}
+.city-icon{font-size:2.8em;display:block}
+.city-label{font-size:.7em;color:var(--sand);font-weight:700;margin-top:4px}
+
+/* Lap counter ring */
+.lap-dots{display:flex;gap:5px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.lap-dot{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:.7em;color:rgba(255,255,255,.3);font-weight:700;transition:all .3s}
+.lap-dot.done{background:rgba(0,255,157,.15);border-color:var(--green);color:var(--green);box-shadow:0 0 10px rgba(0,255,157,.2)}
+.lap-dot.active{background:rgba(255,215,0,.15);border-color:var(--gold);color:var(--gold);box-shadow:0 0 10px rgba(255,215,0,.3);transform:scale(1.15)}
+.lap-dot.final{background:rgba(255,107,107,.15);border-color:var(--red);color:var(--red)}
+
+/* Action area */
+.action-area{margin-top:20px}
+.action-prompt{font-size:1em;color:var(--sub);margin-bottom:14px;min-height:24px}
+.action-prompt.urgent{color:var(--gold);font-weight:700;animation:urgentPulse .8s infinite}
+@keyframes urgentPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.03)}}
+
+/* Hit Zone */
+.hit-zone{position:relative;width:100%;max-width:400px;height:70px;margin:0 auto 20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden}
+.hit-target{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:56px;background:rgba(255,215,0,.1);border:2px solid rgba(255,215,0,.3);border-radius:10px;z-index:1}
+.hit-target .ht-label{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:.6em;color:var(--gold);white-space:nowrap}
+.note{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,rgba(212,165,116,.8),rgba(255,215,0,.8));display:flex;align-items:center;justify-content:center;font-size:1.3em;box-shadow:0 0 15px rgba(255,215,0,.3);z-index:2;transition:none}
+.note.hit-perfect{animation:hitBurst .4s ease forwards}
+.note.hit-good{animation:hitBurst .4s ease forwards;opacity:.7}
+.note.missed{animation:missedNote .3s ease forwards}
+@keyframes hitBurst{0%{transform:translateY(-50%) scale(1);opacity:1}100%{transform:translateY(-50%) scale(2);opacity:0}}
+@keyframes missedNote{0%{opacity:1}100%{opacity:0;transform:translateY(-50%) translateX(20px)}}
+
+.tap-btn{padding:18px 50px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--sand),var(--gold));color:#1a1a2e;font-weight:800;font-size:1.2em;cursor:pointer;transition:all .1s;font-family:inherit;user-select:none;-webkit-tap-highlight-color:transparent}
+.tap-btn:active{transform:scale(.95);background:linear-gradient(135deg,var(--gold),#ff9f43)}
+.tap-btn.btn-flash{animation:btnFlash .2s ease}
+@keyframes btnFlash{0%{box-shadow:0 0 0 transparent}50%{box-shadow:0 0 30px rgba(255,215,0,.5)}100%{box-shadow:0 0 0 transparent}}
+
+.hit-feedback{font-size:1.4em;font-weight:800;position:absolute;top:-30px;left:50%;transform:translateX(-50%);animation:feedbackPop .6s ease forwards;pointer-events:none;z-index:10}
+@keyframes feedbackPop{0%{opacity:0;transform:translateX(-50%) translateY(10px) scale(.5)}30%{opacity:1;transform:translateX(-50%) translateY(-10px) scale(1.2)}100%{opacity:0;transform:translateX(-50%) translateY(-30px) scale(1)}}
+
+/* Shout phase */
+.shout-phase{display:none;text-align:center}
+.shout-phase.active{display:block}
+.shout-msg{font-size:1.5em;font-weight:800;color:var(--gold);margin-bottom:20px;animation:shoutPulse 1s infinite}
+@keyframes shoutPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.shout-power{width:100%;max-width:350px;height:24px;background:rgba(255,255,255,.08);border-radius:12px;margin:0 auto 20px;overflow:hidden}
+.shout-fill{height:100%;border-radius:12px;width:0;transition:width .1s;background:linear-gradient(90deg,var(--sand),var(--gold),var(--red))}
+.shout-btn{padding:20px 60px;border:none;border-radius:16px;background:linear-gradient(135deg,#ff6b6b,#ff9f43);color:#fff;font-weight:800;font-size:1.3em;cursor:pointer;font-family:inherit;animation:shoutBtnPulse 1.5s infinite}
+@keyframes shoutBtnPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,107,.4)}50%{box-shadow:0 0 0 15px rgba(255,107,107,0)}}
+
+/* Screen shake */
+.shake{animation:shake .3s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* End Screen */
+.end-hero{text-align:center;padding:50px 20px;max-width:600px;margin:0 auto}
+.end-hero .end-emoji{font-size:4em;display:block;margin-bottom:16px;animation:endBounce .6s ease .2s both}
+@keyframes endBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+.end-hero h1{font-family:'DM Serif Display',serif;font-size:2.3em;margin-bottom:10px;background:linear-gradient(135deg,var(--sand),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.end-sub{color:var(--sub);font-size:1.05em;margin-bottom:10px}
+.score-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px auto;max-width:440px}
+.sb-item{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 10px}
+.sb-value{font-size:1.8em;font-weight:800;display:block}.sb-label{font-size:.7em;color:var(--sub);margin-top:2px}
+.end-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.end-btn{padding:14px 28px;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;transition:all .2s;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.end-btn:hover{transform:translateY(-2px)}
+.end-btn-primary{background:linear-gradient(135deg,var(--sand),var(--gold));color:#1a1a2e;box-shadow:0 4px 15px rgba(212,165,116,.3)}
+.end-btn-secondary{background:rgba(255,255,255,.08);color:var(--sub);border:1px solid rgba(255,255,255,.12)}
+.end-btn-home{background:rgba(255,215,0,.15);color:var(--gold);border:1px solid rgba(255,215,0,.3)}
+
+/* Rubble particles */
+.rubble{position:fixed;pointer-events:none;z-index:100}
+.rubble-piece{position:absolute;width:12px;height:12px;border-radius:3px;animation:rubbleFall 1.5s ease forwards}
+@keyframes rubbleFall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
+
+@media(max-width:500px){
+  .march-ring{width:250px;height:250px}
+  .wall-ring{border-width:20px}
+  .start-hero h1{font-size:2em}
+  .marcher{font-size:1.3em;width:28px;height:28px}
+  .city-icon{font-size:2em}
+  .tap-btn{padding:14px 36px;font-size:1em}
+  .hit-zone{height:56px}
+  .note{width:36px;height:36px;font-size:1em}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="../../all-games.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Games</a>
+  <span class="logo">NothingButTheTruth</span>
+</div>
+
+<!-- Start Screen -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <span class="game-icon">🎺</span>
+    <h1>Walls of Jericho</h1>
+    <p class="tagline">March around the city, sound the trumpets at the right moment, and bring the mighty walls crashing down!</p>
+    <div class="verse-box">
+      "So the people shouted when the priests blew with the trumpets... the wall fell down flat." — Joshua 6:20
+    </div>
+    <div class="how-to">
+      <h3><i class="fas fa-drum"></i> How to Play</h3>
+      <ul>
+        <li>You'll march around Jericho for 7 laps — just like Joshua's army</li>
+        <li>Trumpet notes will scroll across the hit zone</li>
+        <li>Tap the TRUMPET button when a note enters the gold target zone</li>
+        <li>Perfect timing = maximum wall damage. Early/late = less damage</li>
+        <li>On lap 7: SHOUT! Mash the shout button to bring down the walls!</li>
+        <li>Miss too many notes and the walls stay strong!</li>
+      </ul>
+    </div>
+    <button class="start-btn" onclick="startGame()"><i class="fas fa-play"></i> Begin the March</button>
+  </div>
+</div>
+
+<!-- Game Screen -->
+<div class="screen" id="gameScreen">
+  <div class="game-area" id="gameArea">
+    <div class="game-top">
+      <h2 id="lapTitle">Lap 1 of 7</h2>
+      <div class="stats">
+        <div class="stat"><i class="fas fa-star" style="color:var(--gold)"></i> <span class="stat-val" id="scoreVal">0</span></div>
+        <div class="stat"><i class="fas fa-fire" style="color:var(--red)"></i> <span class="stat-val" id="comboVal">x1</span></div>
+      </div>
+    </div>
+
+    <div class="lap-dots" id="lapDots"></div>
+
+    <div class="march-ring" id="marchRing">
+      <div class="wall-ring" id="wallRing"></div>
+      <div class="city-center">
+        <span class="city-icon">🏛️</span>
+        <span class="city-label">Jericho</span>
+      </div>
+      <div class="marcher" id="marcher">🚶</div>
+      <div class="wall-hp-bar"><div class="wall-hp-fill" id="wallHp"></div></div>
+    </div>
+
+    <!-- Rhythm section -->
+    <div class="action-area" id="rhythmPhase">
+      <p class="action-prompt" id="actionPrompt">Sound the trumpet when the note hits the target!</p>
+      <div class="hit-zone" id="hitZone">
+        <div class="hit-target"><span class="ht-label">🎯 HIT</span></div>
+      </div>
+      <button class="tap-btn" id="tapBtn" onmousedown="handleTap()" ontouchstart="handleTap(); event.preventDefault();">🎺 TRUMPET</button>
+    </div>
+
+    <!-- Shout phase (Lap 7) -->
+    <div class="shout-phase" id="shoutPhase">
+      <p class="shout-msg">SHOUT! BREAK THE WALLS!</p>
+      <div class="shout-power"><div class="shout-fill" id="shoutFill"></div></div>
+      <button class="shout-btn" id="shoutBtn" onmousedown="handleShout()" ontouchstart="handleShout(); event.preventDefault();">📣 SHOUT!</button>
+    </div>
+  </div>
+</div>
+
+<!-- End Screen -->
+<div class="screen" id="endScreen">
+  <div class="end-hero">
+    <span class="end-emoji" id="endEmoji">🎉</span>
+    <h1 id="endTitle">The Walls Have Fallen!</h1>
+    <p class="end-sub" id="endSub">Joshua would be proud!</p>
+    <div class="score-board">
+      <div class="sb-item"><span class="sb-value" style="color:var(--gold)" id="sbScore">0</span><span class="sb-label">Score</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--green)" id="sbPerfect">0</span><span class="sb-label">Perfects</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--sand)" id="sbMaxCombo">0</span><span class="sb-label">Best Combo</span></div>
+    </div>
+    <div class="end-actions">
+      <button class="end-btn end-btn-primary" onclick="goToStart()"><i class="fas fa-redo"></i> March Again</button>
+      <a href="../../all-games.html" class="end-btn end-btn-secondary"><i class="fas fa-gamepad"></i> All Games</a>
+      <a href="../../index.html" class="end-btn end-btn-home"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// GAME STATE
+// ═══════════════════════════════════════════
+let score = 0;
+let combo = 1;
+let maxCombo = 1;
+let perfects = 0;
+let currentLap = 0;
+let totalLaps = 7;
+let wallHealth = 100;
+let marchAngle = 0;
+let marchSpeed = 0.8;
+let marchRAF = null;
+let noteInterval = null;
+let notes = [];
+let gameActive = false;
+let notesInLap = 0;
+let notesPerLap = 8;
+let shoutPower = 0;
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function goToStart() { cleanup(); showScreen('startScreen'); }
+
+function cleanup() {
+  gameActive = false;
+  cancelAnimationFrame(marchRAF);
+  clearInterval(noteInterval);
+  notes.forEach(n => n.el && n.el.remove());
+  notes = [];
+}
+
+function startGame() {
+  cleanup();
+  score = 0; combo = 1; maxCombo = 1; perfects = 0;
+  currentLap = 0; wallHealth = 100; marchAngle = 0; shoutPower = 0;
+  notesInLap = 0;
+  updateUI();
+  buildLapDots();
+  showScreen('gameScreen');
+  document.getElementById('shoutPhase').classList.remove('active');
+  document.getElementById('rhythmPhase').style.display = '';
+  gameActive = true;
+  nextLap();
+}
+
+function buildLapDots() {
+  const container = document.getElementById('lapDots');
+  container.innerHTML = '';
+  for (let i = 1; i <= totalLaps; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'lap-dot' + (i === 7 ? ' final' : '');
+    dot.textContent = i;
+    dot.id = 'lap-dot-' + i;
+    container.appendChild(dot);
+  }
+}
+
+function nextLap() {
+  currentLap++;
+  notesInLap = 0;
+  if (currentLap > totalLaps) {
+    endGame(true);
+    return;
+  }
+
+  // Update dots
+  for (let i = 1; i <= totalLaps; i++) {
+    const dot = document.getElementById('lap-dot-' + i);
+    dot.classList.remove('active', 'done');
+    if (i < currentLap) dot.classList.add('done');
+    if (i === currentLap) dot.classList.add('active');
+  }
+
+  document.getElementById('lapTitle').textContent = 'Lap ' + currentLap + ' of ' + totalLaps;
+  marchSpeed = 0.6 + currentLap * 0.15; // Gets faster each lap
+
+  if (currentLap === 7) {
+    // After some trumpet notes, switch to shout phase
+    notesPerLap = 10;
+  } else {
+    notesPerLap = 6 + currentLap;
+  }
+
+  // Start marching animation
+  startMarching();
+
+  // Start spawning notes
+  const noteDelay = Math.max(700, 1500 - currentLap * 80);
+  noteInterval = setInterval(() => {
+    if (!gameActive) return;
+    spawnNote();
+    notesInLap++;
+    if (notesInLap >= notesPerLap) {
+      clearInterval(noteInterval);
+      // Wait for last note to pass, then advance
+      setTimeout(() => {
+        if (!gameActive) return;
+        if (currentLap === 7) {
+          startShoutPhase();
+        } else {
+          nextLap();
+        }
+      }, 2000);
+    }
+  }, noteDelay);
+}
+
+// ═══════════════════════════════════════════
+// MARCHING ANIMATION
+// ═══════════════════════════════════════════
+function startMarching() {
+  cancelAnimationFrame(marchRAF);
+  function march() {
+    if (!gameActive) return;
+    marchAngle += marchSpeed;
+    if (marchAngle >= 360) marchAngle -= 360;
+
+    const ring = document.getElementById('marchRing');
+    const marcher = document.getElementById('marcher');
+    const radius = ring.offsetWidth / 2 + 6;
+    const cx = ring.offsetWidth / 2;
+    const cy = ring.offsetHeight / 2;
+    const rad = (marchAngle - 90) * Math.PI / 180;
+    const x = cx + radius * Math.cos(rad);
+    const y = cy + radius * Math.sin(rad);
+    marcher.style.left = x + 'px';
+    marcher.style.top = y + 'px';
+
+    marchRAF = requestAnimationFrame(march);
+  }
+  march();
+}
+
+// ═══════════════════════════════════════════
+// NOTES (rhythm targets)
+// ═══════════════════════════════════════════
+function spawnNote() {
+  const hitZone = document.getElementById('hitZone');
+  const el = document.createElement('div');
+  el.className = 'note';
+  el.textContent = '🎵';
+  el.style.left = '-44px';
+  hitZone.appendChild(el);
+
+  const noteObj = { el, x: -44, active: true, hit: false };
+  notes.push(noteObj);
+
+  function moveNote() {
+    if (!noteObj.active) return;
+    const speed = 1.5 + currentLap * 0.3;
+    noteObj.x += speed;
+    el.style.left = noteObj.x + 'px';
+
+    const zoneW = hitZone.offsetWidth;
+    if (noteObj.x > zoneW + 50) {
+      // Missed!
+      if (!noteObj.hit) {
+        combo = 1;
+        document.getElementById('comboVal').textContent = 'x1';
+        showFeedback('MISS', 'var(--red)');
+        el.classList.add('missed');
+      }
+      noteObj.active = false;
+      setTimeout(() => el.remove(), 300);
+      return;
+    }
+    requestAnimationFrame(moveNote);
+  }
+  requestAnimationFrame(moveNote);
+}
+
+function handleTap() {
+  if (!gameActive) return;
+  const btn = document.getElementById('tapBtn');
+  btn.classList.remove('btn-flash');
+  void btn.offsetWidth;
+  btn.classList.add('btn-flash');
+
+  const hitZone = document.getElementById('hitZone');
+  const zoneW = hitZone.offsetWidth;
+  const targetCenter = zoneW / 2;
+  const perfectRange = 25;
+  const goodRange = 50;
+
+  // Find the closest active note
+  let best = null;
+  let bestDist = Infinity;
+  notes.forEach(n => {
+    if (!n.active || n.hit) return;
+    const noteCenterX = n.x + 22; // half of 44px note width
+    const dist = Math.abs(noteCenterX - targetCenter);
+    if (dist < bestDist) { bestDist = dist; best = n; }
+  });
+
+  if (best && bestDist <= goodRange) {
+    best.hit = true;
+    best.active = false;
+
+    let pts, label, color;
+    if (bestDist <= perfectRange) {
+      pts = 100 * combo;
+      label = 'PERFECT!';
+      color = 'var(--gold)';
+      perfects++;
+      best.el.classList.add('hit-perfect');
+    } else {
+      pts = 50 * combo;
+      label = 'GOOD';
+      color = 'var(--green)';
+      best.el.classList.add('hit-good');
+    }
+
+    score += pts;
+    combo++;
+    if (combo > maxCombo) maxCombo = combo;
+
+    // Damage wall
+    const dmg = bestDist <= perfectRange ? 3.5 : 2;
+    wallHealth = Math.max(0, wallHealth - dmg);
+    updateWallVisual();
+
+    // Screen shake on perfect
+    if (bestDist <= perfectRange) {
+      document.getElementById('gameArea').classList.remove('shake');
+      void document.getElementById('gameArea').offsetWidth;
+      document.getElementById('gameArea').classList.add('shake');
+    }
+
+    showFeedback(label + ' +' + pts, color);
+    setTimeout(() => best.el.remove(), 400);
+  } else {
+    // Mis-tap
+    combo = 1;
+    showFeedback('TOO EARLY', 'var(--sub)');
+  }
+
+  updateUI();
+}
+
+function showFeedback(text, color) {
+  const hitZone = document.getElementById('hitZone');
+  const fb = document.createElement('div');
+  fb.className = 'hit-feedback';
+  fb.style.color = color;
+  fb.textContent = text;
+  hitZone.appendChild(fb);
+  setTimeout(() => fb.remove(), 600);
+}
+
+function updateWallVisual() {
+  const ring = document.getElementById('wallRing');
+  const hp = document.getElementById('wallHp');
+  hp.style.width = wallHealth + '%';
+
+  ring.className = 'wall-ring';
+  if (wallHealth <= 20) ring.classList.add('dmg-4');
+  else if (wallHealth <= 40) ring.classList.add('dmg-3');
+  else if (wallHealth <= 60) ring.classList.add('dmg-2');
+  else if (wallHealth <= 80) ring.classList.add('dmg-1');
+}
+
+function updateUI() {
+  document.getElementById('scoreVal').textContent = score;
+  document.getElementById('comboVal').textContent = 'x' + combo;
+}
+
+// ═══════════════════════════════════════════
+// SHOUT PHASE (Lap 7 finale)
+// ═══════════════════════════════════════════
+function startShoutPhase() {
+  document.getElementById('rhythmPhase').style.display = 'none';
+  const sp = document.getElementById('shoutPhase');
+  sp.classList.add('active');
+  shoutPower = 0;
+  document.getElementById('shoutFill').style.width = '0%';
+  document.getElementById('actionPrompt').textContent = '';
+
+  // Auto-decay
+  const decayTimer = setInterval(() => {
+    if (!gameActive) { clearInterval(decayTimer); return; }
+    shoutPower = Math.max(0, shoutPower - 0.3);
+    document.getElementById('shoutFill').style.width = shoutPower + '%';
+  }, 50);
+
+  // Check for full shout
+  const checkTimer = setInterval(() => {
+    if (!gameActive) { clearInterval(checkTimer); clearInterval(decayTimer); return; }
+    if (shoutPower >= 100) {
+      clearInterval(checkTimer);
+      clearInterval(decayTimer);
+      wallsCollapse();
+    }
+  }, 100);
+
+  // Timeout: 8 seconds to fill the bar
+  setTimeout(() => {
+    if (!gameActive) return;
+    if (shoutPower < 100) {
+      clearInterval(checkTimer);
+      clearInterval(decayTimer);
+      // Partial success
+      wallHealth = Math.max(0, wallHealth - (shoutPower * 0.5));
+      updateWallVisual();
+      endGame(wallHealth <= 0);
+    }
+  }, 8000);
+}
+
+function handleShout() {
+  if (!gameActive) return;
+  shoutPower = Math.min(100, shoutPower + 4);
+  document.getElementById('shoutFill').style.width = shoutPower + '%';
+
+  // Screen shake
+  document.getElementById('gameArea').classList.remove('shake');
+  void document.getElementById('gameArea').offsetWidth;
+  document.getElementById('gameArea').classList.add('shake');
+}
+
+function wallsCollapse() {
+  gameActive = false;
+  wallHealth = 0;
+  updateWallVisual();
+
+  // Dramatic wall destruction
+  document.getElementById('wallRing').classList.add('destroyed');
+  spawnRubble();
+
+  score += 500; // Bonus for full shout
+  updateUI();
+
+  setTimeout(() => endGame(true), 2000);
+}
+
+function spawnRubble() {
+  const container = document.createElement('div');
+  container.className = 'rubble';
+  document.body.appendChild(container);
+
+  const colors = ['#8b4513', '#a0522d', '#cd853f', '#d2b48c', '#deb887'];
+  for (let i = 0; i < 40; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'rubble-piece';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.left = (20 + Math.random() * 60) + 'vw';
+    piece.style.top = (10 + Math.random() * 30) + 'vh';
+    piece.style.width = (6 + Math.random() * 14) + 'px';
+    piece.style.height = (6 + Math.random() * 14) + 'px';
+    piece.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+    piece.style.animationDelay = (Math.random() * 0.5) + 's';
+    container.appendChild(piece);
+  }
+  setTimeout(() => container.remove(), 3000);
+}
+
+function endGame(victory) {
+  cleanup();
+  let emoji, title, sub;
+  if (victory) {
+    emoji = '🏆';
+    title = 'The Walls Have Fallen!';
+    sub = 'You marched with faith and brought Jericho down!';
+  } else if (wallHealth <= 30) {
+    emoji = '💪';
+    title = 'Almost There!';
+    sub = 'The walls cracked but didn\'t fully collapse. Try again!';
+  } else {
+    emoji = '🧱';
+    title = 'The Walls Stand...';
+    sub = 'Keep your rhythm steady — Jericho will fall next time!';
+  }
+
+  document.getElementById('endEmoji').textContent = emoji;
+  document.getElementById('endTitle').textContent = title;
+  document.getElementById('endSub').textContent = sub;
+  document.getElementById('sbScore').textContent = score;
+  document.getElementById('sbPerfect').textContent = perfects;
+  document.getElementById('sbMaxCombo').textContent = maxCombo;
+
+  setTimeout(() => showScreen('endScreen'), 300);
+}
+</script>
+</body>
+</html>

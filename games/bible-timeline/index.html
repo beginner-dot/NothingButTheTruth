@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Timeline Master — Chronological Order Game | NothingButTheTruth</title>
+<meta name="description" content="Drag biblical events into the correct chronological order! Master Old Testament, New Testament, or tackle the full Bible timeline. Free interactive Bible game.">
+<meta name="keywords" content="Bible Timeline, chronological Bible game, Bible events order, Bible history game, Old Testament timeline, New Testament timeline, NothingButTheTruth, free Bible game">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/bible-timeline/index.html">
+<meta property="og:title" content="Bible Timeline Master — Chronological Order Game">
+<meta property="og:description" content="Drag biblical events into chronological order! Master Old Testament, New Testament, or the full Bible timeline.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/bible-timeline/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bible Timeline Master — NothingButTheTruth">
+<meta name="twitter:description" content="Drag biblical events into the correct order! Free interactive Bible game.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Bible Timeline Master","description":"Drag biblical events into the correct chronological order in this interactive Bible history game.","url":"https://nothingbutthetruth.web.app/games/bible-timeline/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070b14;--card:rgba(255,255,255,0.05);--glass:rgba(255,255,255,0.07);
+  --purple:#8b5cf6;--blue:#3b82f6;--green:#10b981;--gold:#f59e0b;
+  --pink:#ec4899;--red:#ef4444;--text:#f1f5f9;--sub:rgba(255,255,255,0.5);
+}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;
+  background-image:radial-gradient(ellipse at 30% 20%,rgba(59,130,246,0.1) 0%,transparent 55%),
+                   radial-gradient(ellipse at 70% 80%,rgba(139,92,246,0.08) 0%,transparent 55%)}
+
+/* Top bar */
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;
+  background:rgba(255,255,255,0.03);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.top-bar a{color:var(--sub);text-decoration:none;font-size:.85rem;transition:.3s}
+.top-bar a:hover{color:#fff}
+.top-bar h1{font-family:'DM Serif Display',serif;font-size:1.15rem;background:linear-gradient(135deg,var(--blue),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* Screens */
+.screen{display:none;max-width:700px;margin:0 auto;padding:32px 20px}.screen.active{display:block}
+
+/* Start */
+.start-hero{text-align:center;margin-top:40px}
+.start-hero h2{font-family:'DM Serif Display',serif;font-size:2.3rem;margin-bottom:12px;
+  background:linear-gradient(135deg,var(--blue),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.start-hero>p{color:var(--sub);max-width:480px;margin:0 auto 28px;line-height:1.7;font-size:.95rem}
+.how-to{display:grid;gap:14px;max-width:440px;margin:0 auto 32px;text-align:left}
+.how-to div{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid rgba(255,255,255,0.06)}
+.how-to .icon{font-size:1.3em;width:32px;text-align:center;flex-shrink:0}
+.how-to .txt{font-size:.85rem;color:var(--sub)}
+.how-to strong{color:#fff}
+
+.mode-pick{display:flex;gap:10px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+.mode-btn{padding:10px 20px;border:2px solid rgba(255,255,255,0.1);background:transparent;
+  color:var(--sub);border-radius:10px;cursor:pointer;font-family:'Poppins',sans-serif;
+  font-weight:600;font-size:.85rem;transition:.3s}
+.mode-btn:hover,.mode-btn.active{border-color:var(--blue);color:#fff;background:rgba(59,130,246,0.12)}
+
+.start-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 38px;
+  background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;
+  border-radius:14px;font-size:1.05rem;font-weight:700;cursor:pointer;
+  font-family:'Poppins',sans-serif;transition:transform .2s,box-shadow .3s;
+  box-shadow:0 4px 20px rgba(59,130,246,0.3)}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.45)}
+
+/* Game HUD */
+.game-hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:8px;flex-wrap:wrap}
+.hud-item{display:flex;align-items:center;gap:6px;font-size:.85rem;color:var(--sub);padding:8px 14px;
+  background:var(--card);border-radius:10px;border:1px solid rgba(255,255,255,0.06)}
+.hud-item .val{color:#fff;font-weight:700}
+
+.round-label{text-align:center;margin-bottom:20px;font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--sub)}
+
+/* Timeline zone */
+.timeline-instruction{text-align:center;color:var(--sub);font-size:.85rem;margin-bottom:16px;
+  padding:10px 16px;background:var(--card);border-radius:10px;border:1px solid rgba(255,255,255,0.05)}
+.timeline-instruction i{color:var(--blue);margin-right:6px}
+
+.timeline-zone{min-height:120px;border:2px dashed rgba(255,255,255,0.1);border-radius:16px;
+  padding:12px;margin-bottom:20px;background:rgba(255,255,255,0.02);transition:border-color .3s}
+.timeline-zone.dragover{border-color:var(--blue);background:rgba(59,130,246,0.05)}
+.timeline-zone .tz-label{text-align:center;color:rgba(255,255,255,0.15);font-size:.8rem;
+  text-transform:uppercase;letter-spacing:2px;padding:20px 0}
+
+/* Event cards */
+.event-pool{display:flex;flex-direction:column;gap:8px}
+.event-card{display:flex;align-items:center;gap:12px;padding:14px 18px;
+  background:var(--glass);border:2px solid rgba(255,255,255,0.08);border-radius:14px;
+  cursor:grab;user-select:none;transition:all .25s ease;position:relative}
+.event-card:active{cursor:grabbing}
+.event-card:hover{border-color:rgba(139,92,246,0.3);transform:translateX(4px)}
+.event-card.dragging{opacity:.4;transform:scale(0.96)}
+.event-card .evt-emoji{font-size:1.5em;flex-shrink:0;width:40px;text-align:center}
+.event-card .evt-name{font-size:.9rem;font-weight:600;color:#fff;flex:1}
+.event-card .evt-ref{font-size:.75rem;color:var(--sub)}
+.event-card .grip{color:rgba(255,255,255,0.2);font-size:.8rem}
+.event-card .order-num{position:absolute;top:-8px;left:-8px;width:24px;height:24px;border-radius:50%;
+  background:var(--purple);color:#fff;font-size:.7rem;font-weight:700;display:flex;align-items:center;
+  justify-content:center;opacity:0;transition:.3s}
+.timeline-zone .event-card .order-num{opacity:1}
+
+/* Correct / wrong reveal */
+.event-card.correct-pos{border-color:var(--green);background:rgba(16,185,129,0.1)}
+.event-card.correct-pos .order-num{background:var(--green)}
+.event-card.wrong-pos{border-color:var(--red);background:rgba(239,68,68,0.08)}
+.event-card.wrong-pos .order-num{background:var(--red)}
+.event-card .correct-order{display:none;font-size:.7rem;color:var(--green);font-weight:600;white-space:nowrap}
+.event-card.wrong-pos .correct-order{display:block}
+
+/* Submit / Next */
+.action-row{display:flex;gap:12px;justify-content:center;margin-top:20px}
+.action-btn{padding:12px 32px;border-radius:12px;font-family:'Poppins',sans-serif;font-weight:600;
+  font-size:.9rem;cursor:pointer;border:none;transition:.3s;display:inline-flex;align-items:center;gap:8px}
+.btn-submit{background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;box-shadow:0 4px 16px rgba(16,185,129,0.3)}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(16,185,129,0.4)}
+.btn-submit:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-next{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;box-shadow:0 4px 16px rgba(139,92,246,0.3)}
+.btn-next:hover{transform:translateY(-2px)}
+
+/* Results */
+.results-card{background:var(--glass);border:1px solid rgba(255,255,255,0.08);border-radius:20px;
+  padding:36px 28px;text-align:center;margin-top:24px}
+.results-card h2{font-family:'DM Serif Display',serif;font-size:2rem;margin-bottom:8px;
+  background:linear-gradient(135deg,var(--gold),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.results-card .grade{font-size:3.5rem;margin:16px 0}
+.stat-row{display:flex;justify-content:center;gap:16px;margin:20px 0;flex-wrap:wrap}
+.stat-box{padding:16px 22px;background:var(--card);border-radius:14px;border:1px solid rgba(255,255,255,0.06);min-width:110px}
+.stat-box .num{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#fff}
+.stat-box .lbl{font-size:.72rem;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+.btn-group{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.btn-group button,.btn-group a{padding:12px 28px;border-radius:12px;font-family:'Poppins',sans-serif;
+  font-weight:600;font-size:.9rem;cursor:pointer;text-decoration:none;transition:.3s;border:none;
+  display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;box-shadow:0 4px 16px rgba(139,92,246,0.3)}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-outline{background:transparent;border:2px solid rgba(255,255,255,0.15);color:var(--sub)}
+.btn-outline:hover{border-color:var(--purple);color:#fff}
+
+/* Confetti burst */
+.confetti-container{position:fixed;inset:0;pointer-events:none;z-index:200;overflow:hidden}
+.confetti{position:absolute;width:8px;height:8px;border-radius:2px;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(-10vh) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* Floating particles */
+.particles{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.particle{position:absolute;border-radius:50%;opacity:0;animation:pDrift linear infinite}
+@keyframes pDrift{0%{transform:translateY(0) scale(.5);opacity:0}5%{opacity:.35}50%{opacity:.2}100%{transform:translateY(-100vh) scale(1);opacity:0}}
+
+@media(max-width:600px){
+  .start-hero h2{font-size:1.7rem}
+  .event-card{padding:12px 14px}
+  .stat-row{gap:8px}.stat-box{min-width:80px;padding:12px 14px}
+}
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<div class="top-bar">
+  <a href="../../index.html"><i class="fas fa-arrow-left"></i> Home</a>
+  <h1>⏳ Bible Timeline Master</h1>
+  <a href="../../all-games.html">All Games <i class="fas fa-gamepad"></i></a>
+</div>
+
+<!-- ══ START ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <h2>Bible Timeline Master</h2>
+    <p>Drag biblical events into the correct chronological order. Test your knowledge of Scripture's story from Genesis to Revelation!</p>
+
+    <div class="how-to">
+      <div><span class="icon">📋</span><span class="txt"><strong>Drag</strong> event cards from the pool into the timeline zone</span></div>
+      <div><span class="icon">🔢</span><span class="txt"><strong>Order</strong> them from earliest to latest</span></div>
+      <div><span class="icon">✅</span><span class="txt"><strong>Submit</strong> to check your order & see results</span></div>
+      <div><span class="icon">🏆</span><span class="txt"><strong>Score</strong> points for each correctly placed event</span></div>
+    </div>
+
+    <div class="mode-pick">
+      <button class="mode-btn active" data-mode="ot">📜 Old Testament</button>
+      <button class="mode-btn" data-mode="nt">✝️ New Testament</button>
+      <button class="mode-btn" data-mode="mix">🌍 Mixed</button>
+    </div>
+
+    <button class="start-btn" id="startBtn"><i class="fas fa-play"></i> Start Game</button>
+  </div>
+</div>
+
+<!-- ══ GAME ══ -->
+<div class="screen" id="gameScreen">
+  <div class="game-hud">
+    <div class="hud-item"><i class="fas fa-star"></i> <span class="val" id="scoreDisplay">0</span></div>
+    <div class="hud-item"><i class="fas fa-hashtag"></i> <span class="val" id="roundDisplay">1/5</span></div>
+    <div class="hud-item"><i class="fas fa-check-circle"></i> <span class="val" id="perfectDisplay">0</span> perfect</div>
+  </div>
+  <div class="round-label" id="roundLabel">Round 1</div>
+  <div class="timeline-instruction"><i class="fas fa-info-circle"></i> Drag events into the timeline zone and arrange from <strong>earliest</strong> (top) to <strong>latest</strong> (bottom)</div>
+  
+  <div class="timeline-zone" id="timelineZone">
+    <div class="tz-label" id="tzLabel">↕ Drop events here in order</div>
+  </div>
+  
+  <div class="event-pool" id="eventPool"></div>
+  
+  <div class="action-row">
+    <button class="action-btn btn-submit" id="submitBtn" disabled><i class="fas fa-check"></i> Check Order</button>
+    <button class="action-btn btn-next" id="nextBtn" style="display:none"><i class="fas fa-arrow-right"></i> Next Round</button>
+  </div>
+</div>
+
+<!-- ══ RESULTS ══ -->
+<div class="screen" id="resultsScreen">
+  <div class="results-card">
+    <h2>Timeline Complete!</h2>
+    <div class="grade" id="gradeEmoji">🏆</div>
+    <div class="stat-row">
+      <div class="stat-box"><div class="num" id="finalScore">0</div><div class="lbl">Points</div></div>
+      <div class="stat-box"><div class="num" id="finalCorrect">0</div><div class="lbl">Correct</div></div>
+      <div class="stat-box"><div class="num" id="finalPerfect">0</div><div class="lbl">Perfect Rounds</div></div>
+      <div class="stat-box"><div class="num" id="finalAccuracy">0%</div><div class="lbl">Accuracy</div></div>
+    </div>
+    <div class="btn-group">
+      <button class="btn-primary" id="playAgainBtn"><i class="fas fa-redo"></i> Play Again</button>
+      <a class="btn-outline" href="../../all-games.html"><i class="fas fa-gamepad"></i> All Games</a>
+      <a class="btn-outline" href="../../index.html"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<div class="confetti-container" id="confetti"></div>
+
+<script>
+/* ════════════════════════════════════════════
+   BIBLE TIMELINE MASTER — chronological ordering
+   ════════════════════════════════════════════ */
+
+const OT_EVENTS = [
+  { name: "Creation of the World", emoji: "🌍", ref: "Genesis 1", order: 1 },
+  { name: "The Fall of Adam & Eve", emoji: "🍎", ref: "Genesis 3", order: 2 },
+  { name: "Cain Kills Abel", emoji: "⚔️", ref: "Genesis 4", order: 3 },
+  { name: "Noah's Flood", emoji: "🌊", ref: "Genesis 6-9", order: 4 },
+  { name: "Tower of Babel", emoji: "🏗️", ref: "Genesis 11", order: 5 },
+  { name: "God Calls Abraham", emoji: "🏜️", ref: "Genesis 12", order: 6 },
+  { name: "Destruction of Sodom & Gomorrah", emoji: "🔥", ref: "Genesis 19", order: 7 },
+  { name: "Birth of Isaac", emoji: "👶", ref: "Genesis 21", order: 8 },
+  { name: "Jacob's Ladder Dream", emoji: "🪜", ref: "Genesis 28", order: 9 },
+  { name: "Joseph Sold into Slavery", emoji: "⛓️", ref: "Genesis 37", order: 10 },
+  { name: "The Burning Bush", emoji: "🔥", ref: "Exodus 3", order: 11 },
+  { name: "Ten Plagues of Egypt", emoji: "🦗", ref: "Exodus 7-12", order: 12 },
+  { name: "Parting of the Red Sea", emoji: "🌊", ref: "Exodus 14", order: 13 },
+  { name: "Ten Commandments Given", emoji: "📜", ref: "Exodus 20", order: 14 },
+  { name: "Fall of Jericho", emoji: "🏰", ref: "Joshua 6", order: 15 },
+  { name: "David Defeats Goliath", emoji: "🗡️", ref: "1 Samuel 17", order: 16 },
+  { name: "David Becomes King", emoji: "👑", ref: "2 Samuel 5", order: 17 },
+  { name: "Solomon Builds the Temple", emoji: "🏛️", ref: "1 Kings 6", order: 18 },
+  { name: "Elijah on Mount Carmel", emoji: "⛰️", ref: "1 Kings 18", order: 19 },
+  { name: "Daniel in the Lion's Den", emoji: "🦁", ref: "Daniel 6", order: 20 },
+  { name: "Jonah and the Great Fish", emoji: "🐋", ref: "Jonah 1-2", order: 21 },
+  { name: "Nehemiah Rebuilds Jerusalem's Wall", emoji: "🧱", ref: "Nehemiah 2-6", order: 22 }
+];
+
+const NT_EVENTS = [
+  { name: "Birth of Jesus Christ", emoji: "⭐", ref: "Luke 2", order: 1 },
+  { name: "Jesus Baptized by John", emoji: "💧", ref: "Matthew 3", order: 2 },
+  { name: "Temptation in the Wilderness", emoji: "🏜️", ref: "Matthew 4", order: 3 },
+  { name: "Sermon on the Mount", emoji: "⛰️", ref: "Matthew 5-7", order: 4 },
+  { name: "Feeding the 5,000", emoji: "🍞", ref: "John 6", order: 5 },
+  { name: "Jesus Walks on Water", emoji: "🌊", ref: "Matthew 14", order: 6 },
+  { name: "Transfiguration", emoji: "✨", ref: "Matthew 17", order: 7 },
+  { name: "Raising of Lazarus", emoji: "🪦", ref: "John 11", order: 8 },
+  { name: "Triumphal Entry into Jerusalem", emoji: "🌿", ref: "Matthew 21", order: 9 },
+  { name: "The Last Supper", emoji: "🍷", ref: "Luke 22", order: 10 },
+  { name: "Jesus Arrested in Gethsemane", emoji: "⛓️", ref: "Matthew 26", order: 11 },
+  { name: "Crucifixion of Jesus", emoji: "✝️", ref: "Matthew 27", order: 12 },
+  { name: "Resurrection of Jesus", emoji: "🌅", ref: "Matthew 28", order: 13 },
+  { name: "Ascension of Jesus", emoji: "☁️", ref: "Acts 1", order: 14 },
+  { name: "Day of Pentecost", emoji: "🔥", ref: "Acts 2", order: 15 },
+  { name: "Conversion of Paul", emoji: "💡", ref: "Acts 9", order: 16 },
+  { name: "Paul's Missionary Journeys", emoji: "⛵", ref: "Acts 13-20", order: 17 },
+  { name: "Paul's Letter to the Romans", emoji: "📝", ref: "Romans", order: 18 },
+  { name: "Paul Shipwrecked on Malta", emoji: "🏝️", ref: "Acts 27-28", order: 19 },
+  { name: "John Writes Revelation", emoji: "📖", ref: "Revelation 1", order: 20 }
+];
+
+const $ = id => document.getElementById(id);
+const TOTAL_ROUNDS = 5, EVENTS_PER_ROUND = 5;
+let mode = 'ot', round = 0, score = 0, totalCorrect = 0, totalEvents = 0, perfectRounds = 0;
+let currentEvents = [], pool = [];
+let draggedEl = null;
+
+// Particles
+(function(){
+  const c = $('particles');
+  const cols=['rgba(59,130,246,.25)','rgba(139,92,246,.2)','rgba(16,185,129,.2)','rgba(245,158,11,.15)'];
+  for(let i=0;i<18;i++){
+    const p=document.createElement('div');p.className='particle';
+    const s=4+Math.random()*10;
+    Object.assign(p.style,{width:s+'px',height:s+'px',left:Math.random()*100+'%',bottom:'-20px',
+      background:cols[i%cols.length],animationDuration:(12+Math.random()*16)+'s',animationDelay:(Math.random()*10)+'s'});
+    c.appendChild(p);
+  }
+})();
+
+// Mode buttons
+document.querySelectorAll('.mode-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.mode-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    mode = b.dataset.mode;
+  });
+});
+
+$('startBtn').addEventListener('click', startGame);
+$('playAgainBtn').addEventListener('click', startGame);
+$('submitBtn').addEventListener('click', checkOrder);
+$('nextBtn').addEventListener('click', nextRound);
+
+function startGame() {
+  round = 0; score = 0; totalCorrect = 0; totalEvents = 0; perfectRounds = 0;
+  const src = mode === 'ot' ? OT_EVENTS : mode === 'nt' ? NT_EVENTS : [...OT_EVENTS, ...NT_EVENTS];
+  pool = shuffle([...src]);
+  showScreen($('gameScreen'));
+  updateHUD();
+  nextRound();
+}
+
+function nextRound() {
+  if (round >= TOTAL_ROUNDS) return endGame();
+  
+  // Pick events for this round
+  if (pool.length < EVENTS_PER_ROUND) {
+    const src = mode === 'ot' ? OT_EVENTS : mode === 'nt' ? NT_EVENTS : [...OT_EVENTS, ...NT_EVENTS];
+    pool = shuffle([...src]);
+  }
+  currentEvents = pool.splice(0, EVENTS_PER_ROUND);
+  // Sort by correct order for reference
+  currentEvents.sort((a, b) => a.order - b.order);
+  // Assign sequential correctOrder 1..5
+  currentEvents.forEach((e, i) => e.correctOrder = i + 1);
+  // Shuffle for display
+  const shuffled = shuffle([...currentEvents]);
+  
+  $('roundLabel').textContent = 'Round ' + (round + 1);
+  $('roundDisplay').textContent = (round + 1) + '/' + TOTAL_ROUNDS;
+  $('submitBtn').style.display = '';
+  $('submitBtn').disabled = true;
+  $('nextBtn').style.display = 'none';
+  
+  // Build cards in pool
+  const ep = $('eventPool');
+  ep.innerHTML = '';
+  shuffled.forEach((evt, i) => {
+    ep.appendChild(createCard(evt, i));
+  });
+  
+  // Clear timeline zone
+  const tz = $('timelineZone');
+  tz.innerHTML = '<div class="tz-label" id="tzLabel">↕ Drop events here in order</div>';
+  
+  setupDragDrop();
+}
+
+function createCard(evt, i) {
+  const card = document.createElement('div');
+  card.className = 'event-card';
+  card.draggable = true;
+  card.dataset.name = evt.name;
+  card.dataset.correctOrder = evt.correctOrder;
+  card.innerHTML =
+    '<span class="order-num"></span>' +
+    '<span class="grip"><i class="fas fa-grip-vertical"></i></span>' +
+    '<span class="evt-emoji">' + evt.emoji + '</span>' +
+    '<div style="flex:1"><div class="evt-name">' + evt.name + '</div><div class="evt-ref">' + evt.ref + '</div></div>' +
+    '<span class="correct-order"></span>';
+  return card;
+}
+
+function setupDragDrop() {
+  const tz = $('timelineZone');
+  const ep = $('eventPool');
+  
+  // Drag events on cards
+  document.querySelectorAll('.event-card').forEach(card => {
+    card.addEventListener('dragstart', e => {
+      draggedEl = card;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    card.addEventListener('dragend', () => {
+      if (draggedEl) draggedEl.classList.remove('dragging');
+      draggedEl = null;
+      tz.classList.remove('dragover');
+      updateOrderNums();
+    });
+  });
+  
+  // Timeline zone drop target
+  tz.addEventListener('dragover', e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    tz.classList.add('dragover');
+    
+    // Position indicator
+    const afterEl = getDragAfterElement(tz, e.clientY);
+    if (draggedEl) {
+      if (afterEl == null) {
+        tz.appendChild(draggedEl);
+      } else {
+        tz.insertBefore(draggedEl, afterEl);
+      }
+    }
+  });
+  tz.addEventListener('dragleave', () => tz.classList.remove('dragover'));
+  tz.addEventListener('drop', e => {
+    e.preventDefault();
+    tz.classList.remove('dragover');
+    // Hide placeholder text
+    const label = $('tzLabel');
+    if (label) label.style.display = 'none';
+    updateOrderNums();
+    checkSubmitReady();
+  });
+  
+  // Pool: allow dropping back
+  ep.addEventListener('dragover', e => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
+  ep.addEventListener('drop', e => {
+    e.preventDefault();
+    if (draggedEl) ep.appendChild(draggedEl);
+    updateOrderNums();
+    checkSubmitReady();
+  });
+  
+  // ── Touch support ──
+  document.querySelectorAll('.event-card').forEach(card => {
+    let touchClone = null, startY = 0, startX = 0;
+    
+    card.addEventListener('touchstart', function(e) {
+      draggedEl = this;
+      const touch = e.touches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+    }, { passive: true });
+    
+    card.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+      // Simple: on touchend we'll figure out where to put it
+    }, { passive: false });
+    
+    card.addEventListener('touchend', function(e) {
+      if (!draggedEl) return;
+      const touch = e.changedTouches[0];
+      const tzRect = tz.getBoundingClientRect();
+      
+      // If released over timeline zone
+      if (touch.clientY >= tzRect.top && touch.clientY <= tzRect.bottom) {
+        const label = $('tzLabel');
+        if (label) label.style.display = 'none';
+        const afterEl = getDragAfterElement(tz, touch.clientY);
+        if (afterEl == null) tz.appendChild(draggedEl);
+        else tz.insertBefore(draggedEl, afterEl);
+      } else {
+        // Put back in pool
+        if (!ep.contains(draggedEl)) ep.appendChild(draggedEl);
+      }
+      draggedEl = null;
+      updateOrderNums();
+      checkSubmitReady();
+    }, { passive: true });
+  });
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.event-card:not(.dragging)')];
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    }
+    return closest;
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+function updateOrderNums() {
+  const tz = $('timelineZone');
+  const cards = tz.querySelectorAll('.event-card');
+  cards.forEach((card, i) => {
+    card.querySelector('.order-num').textContent = i + 1;
+  });
+  // Pool cards: hide numbers
+  const poolCards = $('eventPool').querySelectorAll('.event-card');
+  poolCards.forEach(card => card.querySelector('.order-num').textContent = '');
+}
+
+function checkSubmitReady() {
+  const inZone = $('timelineZone').querySelectorAll('.event-card').length;
+  $('submitBtn').disabled = inZone < EVENTS_PER_ROUND;
+}
+
+function checkOrder() {
+  const tz = $('timelineZone');
+  const cards = tz.querySelectorAll('.event-card');
+  let correctCount = 0;
+  
+  cards.forEach((card, i) => {
+    const userOrder = i + 1;
+    const correctOrder = parseInt(card.dataset.correctOrder);
+    if (userOrder === correctOrder) {
+      card.classList.add('correct-pos');
+      correctCount++;
+    } else {
+      card.classList.add('wrong-pos');
+      card.querySelector('.correct-order').textContent = '#' + correctOrder;
+    }
+  });
+  
+  const roundPts = correctCount * 100;
+  const isPerfect = correctCount === EVENTS_PER_ROUND;
+  if (isPerfect) {
+    perfectRounds++;
+    score += roundPts + 200; // bonus for perfect
+    $('perfectDisplay').textContent = perfectRounds;
+    burstConfetti();
+  } else {
+    score += roundPts;
+  }
+  
+  totalCorrect += correctCount;
+  totalEvents += EVENTS_PER_ROUND;
+  round++;
+  
+  $('scoreDisplay').textContent = score;
+  $('submitBtn').style.display = 'none';
+  $('nextBtn').style.display = '';
+  $('nextBtn').innerHTML = round >= TOTAL_ROUNDS 
+    ? '<i class="fas fa-flag-checkered"></i> See Results' 
+    : '<i class="fas fa-arrow-right"></i> Next Round';
+  
+  // Disable dragging
+  cards.forEach(c => c.draggable = false);
+}
+
+function endGame() {
+  const accuracy = Math.round((totalCorrect / totalEvents) * 100);
+  $('finalScore').textContent = score;
+  $('finalCorrect').textContent = totalCorrect + '/' + totalEvents;
+  $('finalPerfect').textContent = perfectRounds;
+  $('finalAccuracy').textContent = accuracy + '%';
+  
+  const g = $('gradeEmoji');
+  if (accuracy >= 90) g.textContent = '🏆';
+  else if (accuracy >= 70) g.textContent = '⭐';
+  else if (accuracy >= 50) g.textContent = '📖';
+  else g.textContent = '💪';
+  
+  showScreen($('resultsScreen'));
+  if (accuracy >= 80) burstConfetti();
+}
+
+function showScreen(s) {
+  [$('startScreen'), $('gameScreen'), $('resultsScreen')].forEach(x => x.classList.remove('active'));
+  s.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function updateHUD() {
+  $('scoreDisplay').textContent = score;
+  $('perfectDisplay').textContent = perfectRounds;
+}
+
+function burstConfetti() {
+  const c = $('confetti');
+  const colors = ['#8b5cf6','#3b82f6','#10b981','#f59e0b','#ec4899','#ef4444'];
+  for (let i = 0; i < 50; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti';
+    el.style.left = Math.random() * 100 + '%';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+    el.style.animationDelay = (Math.random() * 0.5) + 's';
+    el.style.width = (5 + Math.random() * 8) + 'px';
+    el.style.height = (5 + Math.random() * 8) + 'px';
+    c.appendChild(el);
+  }
+  setTimeout(() => { c.innerHTML = ''; }, 4000);
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+</script>
+</body>
+</html>

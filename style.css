@@ -47,22 +47,57 @@
     position: absolute;
     width: 120px;
     height: 120px;
-    background: rgba(93,63,211,0.2);
-    border: 1px solid rgba(93,63,211,0.4);
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(106,17,203,0.12), rgba(37,117,252,0.08));
+    border: 1px solid rgba(139,92,246,0.2);
+    box-shadow: 0 0 25px rgba(106,17,203,0.15), inset 0 0 15px rgba(139,92,246,0.05);
+    backdrop-filter: blur(2px);
     animation: floatCube 30s linear infinite;
     transform: translateZ(0);
+}
+.cubes-wrapper .cube:nth-child(1) {
+    background: linear-gradient(135deg, rgba(126,34,206,0.15), rgba(59,130,246,0.1));
+    border-color: rgba(126,34,206,0.25);
+    box-shadow: 0 0 30px rgba(126,34,206,0.2), inset 0 0 20px rgba(126,34,206,0.05);
+}
+.cubes-wrapper .cube:nth-child(2) {
+    background: linear-gradient(145deg, rgba(37,99,235,0.12), rgba(147,51,234,0.08));
+    border-color: rgba(59,130,246,0.2);
+    box-shadow: 0 0 28px rgba(59,130,246,0.18), inset 0 0 15px rgba(59,130,246,0.04);
+    border-radius: 22px;
+}
+.cubes-wrapper .cube:nth-child(3) {
+    background: linear-gradient(160deg, rgba(168,85,247,0.14), rgba(96,165,250,0.08));
+    border-color: rgba(168,85,247,0.22);
+    box-shadow: 0 0 32px rgba(168,85,247,0.18), inset 0 0 18px rgba(168,85,247,0.04);
+    border-radius: 16px;
+}
+.cubes-wrapper .cube:nth-child(4) {
+    background: linear-gradient(120deg, rgba(109,40,217,0.13), rgba(37,117,252,0.09));
+    border-color: rgba(109,40,217,0.2);
+    box-shadow: 0 0 26px rgba(109,40,217,0.16), inset 0 0 14px rgba(109,40,217,0.05);
+    border-radius: 20px;
+}
+.cubes-wrapper .cube:nth-child(5) {
+    background: linear-gradient(180deg, rgba(88,28,135,0.12), rgba(67,56,202,0.08));
+    border-color: rgba(88,28,135,0.22);
+    box-shadow: 0 0 30px rgba(88,28,135,0.18), inset 0 0 16px rgba(88,28,135,0.04);
+    border-radius: 24px;
 }
 .cubes-wrapper .cube.small {
     width: 60px;
     height: 60px;
-    background: rgba(93,63,211,0.15);
-    border-color: rgba(93,63,211,0.3);
+    background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.06));
+    border-color: rgba(139,92,246,0.18);
+    border-radius: 12px;
+    box-shadow: 0 0 18px rgba(139,92,246,0.12), inset 0 0 10px rgba(139,92,246,0.03);
     animation-duration: 20s;
 }
 .cubes-wrapper .emoji {
     position: absolute;
-    opacity: 0.5;
+    opacity: 0.35;
     animation: floatCube 40s linear infinite;
+    filter: drop-shadow(0 0 8px rgba(139,92,246,0.4));
 }
 /* position cubes around the section with varied delays */
 .cubes-wrapper .cube:nth-child(1) { top: 5%; left: 10%; animation-delay: 0s; }
@@ -79,31 +114,31 @@
 .cubes-wrapper .emoji:nth-of-type(11) { top: 70%; left: 35%; animation-delay: 13s; }
 
 /* extra small cube sizes and front overlap control */
-.cube.size-s1 { width: 48px; height: 48px; }
-.cube.size-s2 { width: 34px; height: 34px; }
-.cube.size-s3 { width: 52px; height: 52px; }
-.cube.size-s4 { width: 28px; height: 28px; }
-.cube.size-s5 { width: 44px; height: 44px; }
-.cube.size-s6 { width: 36px; height: 36px; }
-.cube.size-s7 { width: 56px; height: 56px; }
-.cube.size-s8 { width: 40px; height: 40px; }
-.cube.size-s9 { width: 30px; height: 30px; }
-.cube.size-s10 { width: 24px; height: 24px; }
+.cube.size-s1  { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, rgba(126,34,206,0.14), rgba(96,165,250,0.08)); border-color: rgba(126,34,206,0.22); box-shadow: 0 0 16px rgba(126,34,206,0.18); }
+.cube.size-s2  { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(145deg, rgba(59,130,246,0.12), rgba(147,51,234,0.08)); border-color: rgba(59,130,246,0.2); box-shadow: 0 0 14px rgba(59,130,246,0.16); }
+.cube.size-s3  { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(160deg, rgba(168,85,247,0.13), rgba(37,117,252,0.07)); border-color: rgba(168,85,247,0.2); box-shadow: 0 0 18px rgba(168,85,247,0.15); }
+.cube.size-s4  { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(120deg, rgba(109,40,217,0.15), rgba(96,165,250,0.08)); border-color: rgba(109,40,217,0.22); box-shadow: 0 0 12px rgba(109,40,217,0.18); }
+.cube.size-s5  { width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, rgba(88,28,135,0.14), rgba(59,130,246,0.08)); border-color: rgba(88,28,135,0.2); box-shadow: 0 0 16px rgba(88,28,135,0.16); }
+.cube.size-s6  { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(150deg, rgba(139,92,246,0.12), rgba(37,99,235,0.07)); border-color: rgba(139,92,246,0.18); box-shadow: 0 0 14px rgba(139,92,246,0.14); }
+.cube.size-s7  { width: 56px; height: 56px; border-radius: 18px; background: linear-gradient(130deg, rgba(76,29,149,0.13), rgba(67,56,202,0.08)); border-color: rgba(76,29,149,0.2); box-shadow: 0 0 20px rgba(76,29,149,0.16); }
+.cube.size-s8  { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(140deg, rgba(126,34,206,0.12), rgba(96,165,250,0.07)); border-color: rgba(126,34,206,0.18); box-shadow: 0 0 15px rgba(126,34,206,0.14); }
+.cube.size-s9  { width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, rgba(37,99,235,0.14), rgba(147,51,234,0.08)); border-color: rgba(37,99,235,0.2); box-shadow: 0 0 12px rgba(37,99,235,0.16); }
+.cube.size-s10 { width: 24px; height: 24px; border-radius: 8px; background: linear-gradient(160deg, rgba(168,85,247,0.15), rgba(59,130,246,0.08)); border-color: rgba(168,85,247,0.22); box-shadow: 0 0 10px rgba(168,85,247,0.18); }
 
-.cubes-wrapper .cube.front { z-index: 3; opacity: 0.95; }
+.cubes-wrapper .cube.front { z-index: 3; opacity: 0.85; }
 .stories-section header { position: relative; z-index: 1; }
 
 /* additional small cube sizes */
-.cube.size-s11 { width: 66px; height: 66px; }
-.cube.size-s12 { width: 22px; height: 22px; }
-.cube.size-s13 { width: 50px; height: 50px; }
-.cube.size-s14 { width: 42px; height: 42px; }
-.cube.size-s15 { width: 26px; height: 26px; }
-.cube.size-s16 { width: 58px; height: 58px; }
-.cube.size-s17 { width: 32px; height: 32px; }
-.cube.size-s18 { width: 46px; height: 46px; }
-.cube.size-s19 { width: 20px; height: 20px; }
-.cube.size-s20 { width: 72px; height: 72px; }
+.cube.size-s11 { width: 66px; height: 66px; border-radius: 20px; background: linear-gradient(135deg, rgba(109,40,217,0.13), rgba(37,117,252,0.07)); border-color: rgba(109,40,217,0.2); box-shadow: 0 0 22px rgba(109,40,217,0.16); }
+.cube.size-s12 { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(150deg, rgba(88,28,135,0.15), rgba(96,165,250,0.08)); border-color: rgba(88,28,135,0.22); box-shadow: 0 0 10px rgba(88,28,135,0.18); }
+.cube.size-s13 { width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(130deg, rgba(139,92,246,0.12), rgba(59,130,246,0.07)); border-color: rgba(139,92,246,0.18); box-shadow: 0 0 18px rgba(139,92,246,0.14); }
+.cube.size-s14 { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(145deg, rgba(76,29,149,0.14), rgba(147,51,234,0.07)); border-color: rgba(76,29,149,0.2); box-shadow: 0 0 16px rgba(76,29,149,0.16); }
+.cube.size-s15 { width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(160deg, rgba(126,34,206,0.15), rgba(67,56,202,0.08)); border-color: rgba(126,34,206,0.22); box-shadow: 0 0 11px rgba(126,34,206,0.18); }
+.cube.size-s16 { width: 58px; height: 58px; border-radius: 16px; background: linear-gradient(120deg, rgba(37,99,235,0.13), rgba(168,85,247,0.07)); border-color: rgba(37,99,235,0.2); box-shadow: 0 0 20px rgba(37,99,235,0.15); }
+.cube.size-s17 { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, rgba(109,40,217,0.14), rgba(96,165,250,0.08)); border-color: rgba(109,40,217,0.2); box-shadow: 0 0 13px rgba(109,40,217,0.16); }
+.cube.size-s18 { width: 46px; height: 46px; border-radius: 12px; background: linear-gradient(140deg, rgba(168,85,247,0.12), rgba(37,117,252,0.07)); border-color: rgba(168,85,247,0.18); box-shadow: 0 0 17px rgba(168,85,247,0.14); }
+.cube.size-s19 { width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(150deg, rgba(88,28,135,0.16), rgba(59,130,246,0.08)); border-color: rgba(88,28,135,0.24); box-shadow: 0 0 9px rgba(88,28,135,0.2); }
+.cube.size-s20 { width: 72px; height: 72px; border-radius: 22px; background: linear-gradient(135deg, rgba(76,29,149,0.12), rgba(139,92,246,0.06)); border-color: rgba(76,29,149,0.18); box-shadow: 0 0 24px rgba(76,29,149,0.15); }
 
 /* place the additional small cubes in varied positions */
 .cubes-wrapper .cube.small.size-s11 { top: 12%; left: 52%; animation-delay: 1s; }

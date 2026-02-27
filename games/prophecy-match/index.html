@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prophecy Fulfilled — OT/NT Matching Game | NothingButTheTruth</title>
+<meta name="description" content="Match Old Testament prophecies with their New Testament fulfillments! Discover how Scripture connects across centuries. 3 difficulty levels with streak bonuses.">
+<meta name="keywords" content="Bible prophecy game, prophecy fulfillment, Old Testament New Testament match, Messianic prophecies, Bible prophecy quiz, Scripture connections, NothingButTheTruth">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/prophecy-match/index.html">
+<meta property="og:title" content="Prophecy Fulfilled — OT/NT Matching Game">
+<meta property="og:description" content="Match Old Testament prophecies with their New Testament fulfillments! Discover divine connections across centuries.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/prophecy-match/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Prophecy Fulfilled — OT/NT Matching Game | NothingButTheTruth">
+<meta name="twitter:description" content="Match Old Testament prophecies with New Testament fulfillments! Free Bible game.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Prophecy Fulfilled","description":"Match Old Testament prophecies with their New Testament fulfillments in this interactive Bible game.","url":"https://nothingbutthetruth.web.app/games/prophecy-match/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root {
+  --bg: #0a0a14;
+  --card: rgba(255,255,255,0.06);
+  --purple: #6a11cb;
+  --blue: #2575fc;
+  --green: #00ff9d;
+  --gold: #ffd700;
+  --red: #ff4757;
+  --text: #ffffff;
+  --sub: rgba(255,255,255,0.6);
+  --prophecy: rgba(139, 92, 246, 0.25);
+  --prophecy-border: rgba(139, 92, 246, 0.5);
+  --fulfill: rgba(37, 117, 252, 0.2);
+  --fulfill-border: rgba(37, 117, 252, 0.5);
+  --matched: rgba(0, 255, 157, 0.15);
+  --matched-border: rgba(0, 255, 157, 0.5);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(139,92,246,0.12), transparent 50%),
+              radial-gradient(ellipse at 80% 80%, rgba(37,117,252,0.08), transparent 50%);
+  pointer-events: none;
+}
+
+/* Top Bar */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  position: relative;
+  z-index: 10;
+}
+.back-btn {
+  color: var(--sub);
+  text-decoration: none;
+  font-size: 0.95em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: var(--text); }
+.logo { font-weight: 800; font-size: 1.1em; background: linear-gradient(135deg, var(--purple), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* Screens */
+.screen { display: none; position: relative; z-index: 5; }
+.screen.active { display: block; }
+
+/* Start Screen */
+.start-hero {
+  text-align: center;
+  padding: 40px 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.game-icon { font-size: 4em; margin-bottom: 16px; display: block; }
+.start-hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.6em;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #c084fc, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.start-hero .tagline { color: var(--sub); font-size: 1.1em; margin-bottom: 36px; max-width: 550px; margin-left: auto; margin-right: auto; }
+
+.how-to {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 36px;
+  text-align: left;
+}
+.how-to h3 { margin-bottom: 14px; font-size: 1.15em; }
+.how-to ul { list-style: none; padding: 0; }
+.how-to li { padding: 6px 0; color: var(--sub); font-size: 0.95em; }
+.how-to li::before { content: '✦ '; color: #c084fc; }
+
+.diff-pick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.diff-btn {
+  padding: 16px 30px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+  text-align: center;
+}
+.diff-btn small { display: block; color: var(--sub); font-size: 0.8em; font-weight: 400; margin-top: 4px; }
+.diff-btn:hover {
+  border-color: var(--purple);
+  background: rgba(139,92,246,0.15);
+  transform: translateY(-2px);
+}
+
+/* Game Screen */
+.game-area {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+.game-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.game-top h2 {
+  font-size: 1.3em;
+  background: linear-gradient(135deg, #c084fc, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stats {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95em;
+}
+.stat { display: flex; align-items: center; gap: 6px; }
+.stat i { font-size: 0.85em; }
+.stat-val { font-weight: 700; }
+.stat-timer { color: var(--gold); }
+.stat-score { color: var(--green); }
+.stat-streak { color: #ff6b9d; }
+
+/* Legend */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 20px;
+  font-size: 0.85em;
+  color: var(--sub);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+}
+.legend-dot.prophecy { background: var(--prophecy-border); }
+.legend-dot.fulfill { background: var(--fulfill-border); }
+
+/* Match area */
+.match-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.column-header {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1em;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(255,255,255,0.08);
+}
+.col-prophecy .column-header { color: #c084fc; }
+.col-fulfill .column-header { color: #60a5fa; }
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.match-card {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s;
+  position: relative;
+  user-select: none;
+}
+.match-card.prophecy-card {
+  background: var(--prophecy);
+  border-color: rgba(139,92,246,0.2);
+}
+.match-card.prophecy-card:hover {
+  border-color: var(--prophecy-border);
+  box-shadow: 0 0 15px rgba(139,92,246,0.2);
+}
+.match-card.fulfill-card {
+  background: var(--fulfill);
+  border-color: rgba(37,117,252,0.2);
+}
+.match-card.fulfill-card:hover {
+  border-color: var(--fulfill-border);
+  box-shadow: 0 0 15px rgba(37,117,252,0.2);
+}
+.match-card.selected {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 20px rgba(255,215,0,0.3) !important;
+  transform: scale(1.02);
+}
+.match-card.matched {
+  background: var(--matched) !important;
+  border-color: var(--matched-border) !important;
+  cursor: default;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.match-card.wrong {
+  animation: cardShake 0.4s ease;
+  border-color: var(--red) !important;
+  box-shadow: 0 0 15px rgba(255,71,87,0.3) !important;
+}
+@keyframes cardShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+.match-card .card-text {
+  font-size: 0.9em;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.match-card .card-ref {
+  font-size: 0.75em;
+  color: var(--sub);
+  margin-top: 4px;
+  font-style: italic;
+}
+.match-card.matched .card-ref { color: rgba(0,255,157,0.6); }
+
+/* Context popup */
+.context-popup {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 1px solid rgba(0,255,157,0.3);
+  border-radius: 14px;
+  padding: 16px 24px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 100;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+.context-popup.show {
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+.context-popup .cp-title { font-weight: 700; color: var(--green); font-size: 0.95em; margin-bottom: 6px; }
+.context-popup .cp-text { font-size: 0.85em; color: var(--sub); line-height: 1.5; }
+
+/* End Screen */
+.end-hero {
+  text-align: center;
+  padding: 50px 20px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.end-hero .end-emoji { font-size: 4em; display: block; margin-bottom: 16px; animation: endBounce 0.6s ease 0.2s both; }
+@keyframes endBounce {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.end-hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.3em;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #c084fc, #60a5fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.end-hero .end-sub { color: var(--sub); font-size: 1.05em; margin-bottom: 8px; }
+
+/* Score breakdown */
+.score-breakdown {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 28px auto;
+  max-width: 400px;
+}
+.sb-item {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px 10px;
+}
+.sb-value {
+  font-size: 2em;
+  font-weight: 800;
+  display: block;
+}
+.sb-label {
+  font-size: 0.75em;
+  color: var(--sub);
+  margin-top: 2px;
+}
+.sb-time .sb-value { color: var(--gold); }
+.sb-correct .sb-value { color: var(--green); }
+.sb-streak .sb-value { color: #ff6b9d; }
+
+/* Pairs review */
+.pairs-review {
+  text-align: left;
+  max-width: 500px;
+  margin: 24px auto 32px;
+}
+.pairs-review h3 { text-align: center; margin-bottom: 14px; font-size: 1em; color: var(--sub); }
+.pr-pair {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.85em;
+}
+.pr-pair:last-child { border-bottom: none; }
+.pr-icon { flex-shrink: 0; margin-top: 2px; }
+.pr-icon.correct { color: var(--green); }
+.pr-icon.wrong { color: var(--red); }
+.pr-texts { flex: 1; }
+.pr-prophecy { color: #c084fc; font-weight: 600; }
+.pr-arrow { color: var(--sub); margin: 0 4px; }
+.pr-fulfill { color: #60a5fa; font-weight: 600; }
+.pr-ref { font-size: 0.8em; color: var(--sub); font-style: italic; }
+
+.end-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.end-btn {
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.end-btn:hover { transform: translateY(-2px); }
+.end-btn-primary {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(139,92,246,0.3);
+}
+.end-btn-secondary {
+  background: rgba(255,255,255,0.08);
+  color: var(--sub);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.end-btn-home {
+  background: rgba(255,215,0,0.15);
+  color: var(--gold);
+  border: 1px solid rgba(255,215,0,0.3);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .match-area { grid-template-columns: 1fr; gap: 24px; }
+  .start-hero h1 { font-size: 2em; }
+  .match-card .card-text { font-size: 0.82em; }
+  .stats { gap: 12px; font-size: 0.85em; }
+  .score-breakdown { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .sb-value { font-size: 1.6em; }
+}
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <a href="../../all-games.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Games</a>
+  <span class="logo">NothingButTheTruth</span>
+</div>
+
+<!-- Start Screen -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <span class="game-icon">📜</span>
+    <h1>Prophecy Fulfilled</h1>
+    <p class="tagline">Match Old Testament prophecies with their New Testament fulfillments. Discover how Scripture connects across centuries!</p>
+
+    <div class="how-to">
+      <h3><i class="fas fa-scroll"></i> How to Play</h3>
+      <ul>
+        <li>Click an <strong style="color:#c084fc;">Old Testament prophecy</strong> card, then click the matching <strong style="color:#60a5fa;">New Testament fulfillment</strong></li>
+        <li>Correct matches are revealed with their biblical context</li>
+        <li>Wrong matches cost you points — think carefully before pairing</li>
+        <li>A <strong>streak bonus</strong> rewards consecutive correct matches</li>
+        <li>Race the clock — faster completion earns a higher score!</li>
+      </ul>
+    </div>
+
+    <h3 style="margin-bottom:14px; color:var(--sub);">Choose Difficulty</h3>
+    <div class="diff-pick">
+      <button class="diff-btn" onclick="startGame('beginner')">
+        📖 Beginner<small>4 pairs · Relaxed</small>
+      </button>
+      <button class="diff-btn" onclick="startGame('scholar')">
+        📚 Scholar<small>6 pairs · Challenging</small>
+      </button>
+      <button class="diff-btn" onclick="startGame('master')">
+        🏆 Master<small>8 pairs · Expert</small>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Game Screen -->
+<div class="screen" id="gameScreen">
+  <div class="game-area">
+    <div class="game-top">
+      <h2 id="gameTitle">Prophecy Fulfilled</h2>
+      <div class="stats">
+        <div class="stat stat-timer"><i class="fas fa-clock"></i> <span class="stat-val" id="timerVal">0:00</span></div>
+        <div class="stat stat-score"><i class="fas fa-star"></i> <span class="stat-val" id="scoreVal">0</span></div>
+        <div class="stat stat-streak"><i class="fas fa-fire"></i> <span class="stat-val" id="streakVal">0</span></div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot prophecy"></div> OT Prophecy</div>
+      <div class="legend-item"><div class="legend-dot fulfill"></div> NT Fulfillment</div>
+    </div>
+
+    <div class="match-area" id="matchArea">
+      <div class="col-prophecy" id="colProphecy">
+        <div class="column-header">📖 Old Testament</div>
+        <div class="card-list" id="prophecyList"></div>
+      </div>
+      <div class="col-fulfill" id="colFulfill">
+        <div class="column-header">✝️ New Testament</div>
+        <div class="card-list" id="fulfillList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Context popup for matched pairs -->
+  <div class="context-popup" id="contextPopup">
+    <div class="cp-title" id="cpTitle"></div>
+    <div class="cp-text" id="cpText"></div>
+  </div>
+</div>
+
+<!-- End Screen -->
+<div class="screen" id="endScreen">
+  <div class="end-hero">
+    <span class="end-emoji" id="endEmoji">🎉</span>
+    <h1 id="endTitle">Prophecy Master!</h1>
+    <p class="end-sub" id="endSub">You connected the Old and New Testaments beautifully.</p>
+
+    <div class="score-breakdown">
+      <div class="sb-item sb-time"><span class="sb-value" id="sbTime">0:00</span><span class="sb-label">Time</span></div>
+      <div class="sb-item sb-correct"><span class="sb-value" id="sbCorrect">0/0</span><span class="sb-label">Correct</span></div>
+      <div class="sb-item sb-streak"><span class="sb-value" id="sbStreak">0</span><span class="sb-label">Best Streak</span></div>
+    </div>
+
+    <div class="pairs-review" id="pairsReview">
+      <h3>📋 Prophecy Pairs Review</h3>
+      <div id="pairsReviewList"></div>
+    </div>
+
+    <div class="end-actions">
+      <button class="end-btn end-btn-primary" onclick="goToStart()"><i class="fas fa-redo"></i> Play Again</button>
+      <a href="../../all-games.html" class="end-btn end-btn-secondary"><i class="fas fa-gamepad"></i> All Games</a>
+      <a href="../../index.html" class="end-btn end-btn-home"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// PROPHECY PAIRS DATA
+// ═══════════════════════════════════════════
+const ALL_PAIRS = [
+  {
+    prophecy: "Born of a virgin",
+    propRef: "Isaiah 7:14",
+    fulfillment: "Virgin Mary conceives Jesus",
+    fulRef: "Matthew 1:22-23",
+    context: "Isaiah prophesied 700+ years before Christ that a virgin would conceive and bear a son called 'Immanuel' — God with us. Matthew records this exact fulfillment in Mary's miraculous conception."
+  },
+  {
+    prophecy: "Born in Bethlehem",
+    propRef: "Micah 5:2",
+    fulfillment: "Jesus born in Bethlehem of Judea",
+    fulRef: "Matthew 2:1-6",
+    context: "The prophet Micah named the exact town — tiny Bethlehem — as the birthplace of Israel's ruler. Despite living in Nazareth, Mary and Joseph traveled to Bethlehem for the Roman census, fulfilling this prophecy."
+  },
+  {
+    prophecy: "Preceded by a messenger",
+    propRef: "Isaiah 40:3",
+    fulfillment: "John the Baptist prepares the way",
+    fulRef: "Matthew 3:1-3",
+    context: "Isaiah described 'a voice crying in the wilderness' who would prepare the Lord's way. John the Baptist came baptizing in the Jordan and calling people to repentance, exactly as foretold."
+  },
+  {
+    prophecy: "Enter Jerusalem on a donkey",
+    propRef: "Zechariah 9:9",
+    fulfillment: "Jesus rides into Jerusalem on a colt",
+    fulRef: "Matthew 21:1-9",
+    context: "Zechariah described a king who would come 'humble, riding on a donkey.' On Palm Sunday, Jesus deliberately arranged to ride a donkey's colt into Jerusalem while crowds waved palm branches."
+  },
+  {
+    prophecy: "Betrayed for thirty pieces of silver",
+    propRef: "Zechariah 11:12-13",
+    fulfillment: "Judas betrays Jesus for 30 silver coins",
+    fulRef: "Matthew 26:14-15",
+    context: "Written 500+ years before, Zechariah names the exact price — 30 pieces of silver — that would be paid for the shepherd's rejection. Judas received this exact amount from the chief priests."
+  },
+  {
+    prophecy: "Silent before His accusers",
+    propRef: "Isaiah 53:7",
+    fulfillment: "Jesus stays silent before Pilate",
+    fulRef: "Matthew 27:12-14",
+    context: "Isaiah described the Suffering Servant as a lamb 'silent before its shearers.' When accused before Pilate, Jesus 'gave no answer, not even to a single charge,' amazing the governor."
+  },
+  {
+    prophecy: "Hands and feet pierced",
+    propRef: "Psalm 22:16",
+    fulfillment: "Jesus crucified — nails through hands and feet",
+    fulRef: "John 20:25-27",
+    context: "Written by David 1,000 years before Christ — and centuries before crucifixion was invented — Psalm 22 describes pierced hands and feet. Thomas later placed his fingers in those very nail marks."
+  },
+  {
+    prophecy: "Lots cast for His garments",
+    propRef: "Psalm 22:18",
+    fulfillment: "Soldiers gamble for Jesus' robe",
+    fulRef: "John 19:23-24",
+    context: "In the same psalm, David wrote 'they divide my clothes and cast lots for my garment.' At the cross, Roman soldiers did exactly this, rolling dice for Jesus' seamless tunic."
+  },
+  {
+    prophecy: "Not a bone will be broken",
+    propRef: "Psalm 34:20",
+    fulfillment: "Soldiers find Jesus already dead, no bones broken",
+    fulRef: "John 19:32-36",
+    context: "The Passover lamb could have no broken bones (Exodus 12:46). When soldiers came to break the legs of the crucified, Jesus was already dead — fulfilling both the Psalm and the Passover type."
+  },
+  {
+    prophecy: "Would rise from the dead",
+    propRef: "Psalm 16:10",
+    fulfillment: "Jesus rises on the third day",
+    fulRef: "Acts 2:31-32",
+    context: "David wrote 'You will not let your Holy One see decay.' Peter quoted this at Pentecost, declaring that David spoke prophetically of Christ's resurrection, which they all witnessed."
+  }
+];
+
+// ═══════════════════════════════════════════
+// GAME STATE
+// ═══════════════════════════════════════════
+let activePairs = [];
+let selectedProphecy = null;
+let selectedFulfill = null;
+let matchedPairs = [];
+let wrongGuesses = [];
+let score = 0;
+let streak = 0;
+let bestStreak = 0;
+let totalPairs = 0;
+let timerInterval = null;
+let seconds = 0;
+let difficulty = 'beginner';
+
+// ═══════════════════════════════════════════
+// SCREENS
+// ═══════════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function goToStart() {
+  clearInterval(timerInterval);
+  showScreen('startScreen');
+}
+
+// ═══════════════════════════════════════════
+// START GAME
+// ═══════════════════════════════════════════
+function startGame(diff) {
+  difficulty = diff;
+  const count = diff === 'beginner' ? 4 : diff === 'scholar' ? 6 : 8;
+
+  // Pick random pairs
+  const shuffled = [...ALL_PAIRS].sort(() => Math.random() - 0.5);
+  activePairs = shuffled.slice(0, count);
+  totalPairs = activePairs.length;
+
+  selectedProphecy = null;
+  selectedFulfill = null;
+  matchedPairs = [];
+  wrongGuesses = [];
+  score = 0;
+  streak = 0;
+  bestStreak = 0;
+  seconds = 0;
+
+  updateStats();
+  renderCards();
+  startTimer();
+
+  document.getElementById('gameTitle').textContent = `Prophecy Fulfilled — ${diff.charAt(0).toUpperCase() + diff.slice(1)}`;
+  showScreen('gameScreen');
+}
+
+// ═══════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════
+function startTimer() {
+  clearInterval(timerInterval);
+  seconds = 0;
+  timerInterval = setInterval(() => {
+    seconds++;
+    document.getElementById('timerVal').textContent = formatTime(seconds);
+  }, 1000);
+}
+function formatTime(s) {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+// ═══════════════════════════════════════════
+// RENDER CARDS
+// ═══════════════════════════════════════════
+function renderCards() {
+  const propList = document.getElementById('prophecyList');
+  const fulList = document.getElementById('fulfillList');
+
+  // Shuffle prophecies and fulfillments independently
+  const propOrder = [...activePairs].sort(() => Math.random() - 0.5);
+  const fulOrder = [...activePairs].sort(() => Math.random() - 0.5);
+
+  propList.innerHTML = '';
+  fulList.innerHTML = '';
+
+  propOrder.forEach(pair => {
+    const card = createCard(pair, 'prophecy');
+    propList.appendChild(card);
+  });
+
+  fulOrder.forEach(pair => {
+    const card = createCard(pair, 'fulfill');
+    fulList.appendChild(card);
+  });
+}
+
+function createCard(pair, type) {
+  const card = document.createElement('div');
+  const isMatched = matchedPairs.some(p => p === pair);
+
+  if (type === 'prophecy') {
+    card.className = 'match-card prophecy-card' + (isMatched ? ' matched' : '');
+    card.dataset.pairId = activePairs.indexOf(pair);
+    card.innerHTML = `<div class="card-text">${pair.prophecy}</div><div class="card-ref">${pair.propRef}</div>`;
+    if (!isMatched) {
+      card.onclick = () => selectCard(card, 'prophecy', pair);
+    }
+  } else {
+    card.className = 'match-card fulfill-card' + (isMatched ? ' matched' : '');
+    card.dataset.pairId = activePairs.indexOf(pair);
+    card.innerHTML = `<div class="card-text">${pair.fulfillment}</div><div class="card-ref">${pair.fulRef}</div>`;
+    if (!isMatched) {
+      card.onclick = () => selectCard(card, 'fulfill', pair);
+    }
+  }
+
+  return card;
+}
+
+// ═══════════════════════════════════════════
+// CARD SELECTION & MATCHING
+// ═══════════════════════════════════════════
+function selectCard(cardEl, type, pair) {
+  if (type === 'prophecy') {
+    // Deselect previous prophecy
+    document.querySelectorAll('.prophecy-card.selected').forEach(c => c.classList.remove('selected'));
+    selectedProphecy = { el: cardEl, pair: pair };
+    cardEl.classList.add('selected');
+  } else {
+    document.querySelectorAll('.fulfill-card.selected').forEach(c => c.classList.remove('selected'));
+    selectedFulfill = { el: cardEl, pair: pair };
+    cardEl.classList.add('selected');
+  }
+
+  // If both selected, attempt match
+  if (selectedProphecy && selectedFulfill) {
+    attemptMatch();
+  }
+}
+
+function attemptMatch() {
+  const propPair = selectedProphecy.pair;
+  const fulPair = selectedFulfill.pair;
+
+  if (propPair === fulPair) {
+    // Correct match!
+    matchedPairs.push(propPair);
+    streak++;
+    if (streak > bestStreak) bestStreak = streak;
+
+    // Score: base 100 + streak bonus + time bonus
+    const streakBonus = (streak - 1) * 25;
+    const timeBonus = Math.max(0, 50 - Math.floor(seconds / totalPairs));
+    score += 100 + streakBonus + timeBonus;
+
+    // Mark matched
+    selectedProphecy.el.classList.add('matched');
+    selectedFulfill.el.classList.add('matched');
+    selectedProphecy.el.classList.remove('selected');
+    selectedFulfill.el.classList.remove('selected');
+
+    // Show context popup
+    showContext(propPair);
+
+    updateStats();
+
+    // Check if all matched
+    if (matchedPairs.length === totalPairs) {
+      clearInterval(timerInterval);
+      setTimeout(() => showEnd(), 2500);
+    }
+  } else {
+    // Wrong match
+    streak = 0;
+    score = Math.max(0, score - 30);
+    wrongGuesses.push({ prophecy: propPair, fulfill: fulPair });
+
+    // Shake animation
+    selectedProphecy.el.classList.add('wrong');
+    selectedFulfill.el.classList.add('wrong');
+    setTimeout(() => {
+      selectedProphecy.el.classList.remove('wrong', 'selected');
+      selectedFulfill.el.classList.remove('wrong', 'selected');
+      selectedProphecy = null;
+      selectedFulfill = null;
+    }, 500);
+
+    updateStats();
+    return;
+  }
+
+  selectedProphecy = null;
+  selectedFulfill = null;
+}
+
+function updateStats() {
+  document.getElementById('scoreVal').textContent = score;
+  document.getElementById('streakVal').textContent = streak;
+}
+
+// ═══════════════════════════════════════════
+// CONTEXT POPUP
+// ═══════════════════════════════════════════
+function showContext(pair) {
+  const popup = document.getElementById('contextPopup');
+  document.getElementById('cpTitle').textContent = '✅ ' + pair.prophecy + ' → ' + pair.fulfillment;
+  document.getElementById('cpText').textContent = pair.context;
+  popup.classList.add('show');
+  setTimeout(() => popup.classList.remove('show'), 4000);
+}
+
+// ═══════════════════════════════════════════
+// END SCREEN
+// ═══════════════════════════════════════════
+function showEnd() {
+  const accuracy = matchedPairs.length;
+  const total = totalPairs;
+  const pct = accuracy / total;
+
+  let emoji, title, sub;
+  if (wrongGuesses.length === 0) {
+    emoji = '👑'; title = 'Prophecy Master!'; sub = 'Perfect — no wrong matches! You truly know how the Testaments connect.';
+  } else if (wrongGuesses.length <= 2) {
+    emoji = '🌟'; title = 'Outstanding Scholar!'; sub = 'Impressive knowledge of biblical prophecy and fulfillment!';
+  } else {
+    emoji = '📖'; title = 'Good Effort!'; sub = 'Keep studying — the connections between the Testaments are amazing!';
+  }
+
+  document.getElementById('endEmoji').textContent = emoji;
+  document.getElementById('endTitle').textContent = title;
+  document.getElementById('endSub').textContent = sub;
+  document.getElementById('sbTime').textContent = formatTime(seconds);
+  document.getElementById('sbCorrect').textContent = accuracy + '/' + total;
+  document.getElementById('sbStreak').textContent = bestStreak;
+
+  // Build pairs review
+  const reviewList = document.getElementById('pairsReviewList');
+  reviewList.innerHTML = '';
+  activePairs.forEach(pair => {
+    const wasWrong = wrongGuesses.some(w => w.prophecy === pair || w.fulfill === pair);
+    const div = document.createElement('div');
+    div.className = 'pr-pair';
+    div.innerHTML = `
+      <div class="pr-icon ${wasWrong ? 'wrong' : 'correct'}">${wasWrong ? '<i class="fas fa-times-circle"></i>' : '<i class="fas fa-check-circle"></i>'}</div>
+      <div class="pr-texts">
+        <span class="pr-prophecy">${pair.prophecy}</span>
+        <span class="pr-arrow">→</span>
+        <span class="pr-fulfill">${pair.fulfillment}</span>
+        <div class="pr-ref">${pair.propRef} → ${pair.fulRef}</div>
+      </div>`;
+    reviewList.appendChild(div);
+  });
+
+  showScreen('endScreen');
+}
+</script>
+</body>
+</html>

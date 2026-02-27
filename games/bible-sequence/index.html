@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Sequence Recall — Pattern Memory Game | NothingButTheTruth</title>
+<meta name="description" content="Watch the biblical symbols light up and repeat the pattern! A Simon Says-style memory challenge using Bible icons. Test your recall ability.">
+<meta name="keywords" content="Bible sequence game, Bible memory pattern, Simon Says Bible, Christian pattern game, Bible recall game, NothingButTheTruth, free Bible games">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/bible-sequence/index.html">
+<meta property="og:title" content="Bible Sequence Recall — Pattern Memory Game">
+<meta property="og:description" content="Watch the biblical symbols light up and repeat the pattern! A Simon Says-style memory challenge.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/bible-sequence/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bible Sequence Recall | NothingButTheTruth">
+<meta name="twitter:description" content="Watch the biblical symbols light up and repeat the pattern! Free memory challenge.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Bible Sequence Recall","description":"Watch biblical symbols light up and repeat the pattern in this Simon Says-style memory game.","url":"https://nothingbutthetruth.web.app/games/bible-sequence/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root {
+  --bg:#0a0a14;--card:rgba(255,255,255,0.06);--purple:#6a11cb;--blue:#2575fc;
+  --green:#00ff9d;--gold:#ffd700;--red:#ff4757;--text:#fff;--sub:rgba(255,255,255,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(106,17,203,.12),transparent 50%),radial-gradient(ellipse at 70% 60%,rgba(37,117,252,.08),transparent 50%);pointer-events:none}
+
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;position:relative;z-index:10}
+.back-btn{color:var(--sub);text-decoration:none;font-size:.95em;display:flex;align-items:center;gap:6px;transition:color .2s}
+.back-btn:hover{color:var(--text)}
+.logo{font-weight:800;font-size:1.1em;background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.screen{display:none;position:relative;z-index:5}.screen.active{display:block}
+
+/* Start Screen */
+.start-hero{text-align:center;padding:40px 20px;max-width:700px;margin:0 auto}
+.game-icon{font-size:4em;margin-bottom:16px;display:block}
+.start-hero h1{font-family:'DM Serif Display',serif;font-size:2.6em;margin-bottom:12px;background:linear-gradient(135deg,#00ff9d,#2575fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-hero .tagline{color:var(--sub);font-size:1.1em;margin-bottom:36px}
+.how-to{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px;margin-bottom:36px;text-align:left}
+.how-to h3{margin-bottom:14px;font-size:1.15em}
+.how-to ul{list-style:none;padding:0}
+.how-to li{padding:6px 0;color:var(--sub);font-size:.95em}
+.how-to li::before{content:'✦ ';color:var(--green)}
+.mode-pick{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.mode-btn{padding:16px 30px;border:2px solid rgba(255,255,255,.15);border-radius:14px;background:var(--card);color:var(--text);font-weight:700;font-size:1em;cursor:pointer;transition:all .3s;font-family:inherit;text-align:center}
+.mode-btn small{display:block;color:var(--sub);font-size:.8em;font-weight:400;margin-top:4px}
+.mode-btn:hover{border-color:var(--green);background:rgba(0,255,157,.08);transform:translateY(-2px)}
+
+/* Game Screen */
+.game-area{max-width:600px;margin:0 auto;padding:0 16px 60px;text-align:center}
+.game-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:10px}
+.game-top h2{font-size:1.3em;background:linear-gradient(135deg,#00ff9d,#2575fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stats{display:flex;gap:20px;font-size:.95em}
+.stat{display:flex;align-items:center;gap:6px}
+.stat-val{font-weight:700}
+
+.status-msg{font-size:1.2em;font-weight:700;margin-bottom:24px;min-height:36px;transition:all .3s}
+.status-watch{color:var(--gold);animation:statusPulse 1s infinite}
+.status-go{color:var(--green)}
+.status-wrong{color:var(--red)}
+@keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* Symbol Pads */
+.pads-container{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:400px;margin:0 auto 30px}
+.pads-container.pads-4{grid-template-columns:repeat(2,1fr)}
+.pads-container.pads-6{grid-template-columns:repeat(3,1fr)}
+.pads-container.pads-9{grid-template-columns:repeat(3,1fr)}
+
+.sym-pad{aspect-ratio:1;border-radius:18px;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:all .15s;user-select:none;-webkit-tap-highlight-color:transparent}
+.sym-pad .pad-icon{font-size:2.4em;filter:grayscale(.6) brightness(.7);transition:filter .15s,transform .15s}
+.sym-pad .pad-label{font-size:.7em;color:rgba(255,255,255,.4);font-weight:600;transition:color .15s}
+.sym-pad:hover{background:rgba(255,255,255,.08)}
+
+.sym-pad.lit{transform:scale(1.08);border-color:var(--active-color,var(--gold));background:var(--bg-glow,rgba(255,215,0,.15));box-shadow:0 0 30px var(--shadow-color,rgba(255,215,0,.3))}
+.sym-pad.lit .pad-icon{filter:grayscale(0) brightness(1.2);transform:scale(1.15)}
+.sym-pad.lit .pad-label{color:rgba(255,255,255,.9)}
+
+.sym-pad.player-tap{transform:scale(.95);background:rgba(255,255,255,.12)}
+
+.sym-pad.correct-flash{animation:correctFlash .4s ease}
+@keyframes correctFlash{0%{box-shadow:0 0 0 transparent}50%{box-shadow:0 0 25px rgba(0,255,157,.5);border-color:var(--green)}100%{box-shadow:0 0 0 transparent}}
+
+.sym-pad.wrong-flash{animation:wrongFlash .5s ease;border-color:var(--red)!important}
+@keyframes wrongFlash{0%,100%{background:rgba(255,71,87,.0)}30%,70%{background:rgba(255,71,87,.3)}}
+
+.sym-pad.disabled{pointer-events:none;opacity:.5}
+
+/* Progress dots */
+.progress-dots{display:flex;gap:6px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
+.p-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .3s}
+.p-dot.done{background:var(--green);box-shadow:0 0 8px rgba(0,255,157,.4)}
+.p-dot.current{background:var(--gold);box-shadow:0 0 8px rgba(255,215,0,.4);transform:scale(1.3)}
+.p-dot.fail{background:var(--red)}
+
+/* End Screen */
+.end-hero{text-align:center;padding:50px 20px;max-width:600px;margin:0 auto}
+.end-hero .end-emoji{font-size:4em;display:block;margin-bottom:16px;animation:endBounce .6s ease .2s both}
+@keyframes endBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+.end-hero h1{font-family:'DM Serif Display',serif;font-size:2.3em;margin-bottom:10px;background:linear-gradient(135deg,#00ff9d,#2575fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.end-sub{color:var(--sub);font-size:1.05em;margin-bottom:10px}
+.score-board{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:28px auto;max-width:300px}
+.sb-item{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 10px}
+.sb-value{font-size:2em;font-weight:800;display:block}.sb-label{font-size:.75em;color:var(--sub);margin-top:2px}
+.end-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.end-btn{padding:14px 28px;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;transition:all .2s;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.end-btn:hover{transform:translateY(-2px)}
+.end-btn-primary{background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;box-shadow:0 4px 15px rgba(0,255,157,.2)}
+.end-btn-secondary{background:rgba(255,255,255,.08);color:var(--sub);border:1px solid rgba(255,255,255,.12)}
+.end-btn-home{background:rgba(255,215,0,.15);color:var(--gold);border:1px solid rgba(255,215,0,.3)}
+
+@media(max-width:500px){
+  .start-hero h1{font-size:2em}
+  .sym-pad .pad-icon{font-size:1.8em}
+  .sym-pad .pad-label{font-size:.6em}
+  .pads-container{gap:10px;max-width:320px}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="../../all-games.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Games</a>
+  <span class="logo">NothingButTheTruth</span>
+</div>
+
+<!-- Start Screen -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <span class="game-icon">🧠</span>
+    <h1>Bible Sequence Recall</h1>
+    <p class="tagline">Watch the biblical symbols light up, then repeat the pattern from memory. How far can you go?</p>
+    <div class="how-to">
+      <h3><i class="fas fa-eye"></i> How to Play</h3>
+      <ul>
+        <li>Watch carefully as symbols light up in a sequence</li>
+        <li>After the pattern plays, tap the same symbols in the correct order</li>
+        <li>Each round adds one more step to the sequence</li>
+        <li>One mistake and it's game over — stay focused!</li>
+        <li>More pads = harder to track. Choose your challenge!</li>
+      </ul>
+    </div>
+    <h3 style="margin-bottom:14px;color:var(--sub)">Choose Your Challenge</h3>
+    <div class="mode-pick">
+      <button class="mode-btn" onclick="startGame(4)">🟢 4 Symbols<small>Beginner</small></button>
+      <button class="mode-btn" onclick="startGame(6)">🟡 6 Symbols<small>Intermediate</small></button>
+      <button class="mode-btn" onclick="startGame(9)">🔴 9 Symbols<small>Expert</small></button>
+    </div>
+  </div>
+</div>
+
+<!-- Game Screen -->
+<div class="screen" id="gameScreen">
+  <div class="game-area">
+    <div class="game-top">
+      <h2>Round <span id="roundVal">1</span></h2>
+      <div class="stats">
+        <div class="stat"><i class="fas fa-star" style="color:var(--gold)"></i> <span class="stat-val" id="scoreVal">0</span></div>
+        <div class="stat"><i class="fas fa-trophy" style="color:var(--green)"></i> <span class="stat-val" id="bestVal">0</span></div>
+      </div>
+    </div>
+    <div class="progress-dots" id="progressDots"></div>
+    <div class="status-msg" id="statusMsg">Watch carefully...</div>
+    <div class="pads-container" id="padsContainer"></div>
+  </div>
+</div>
+
+<!-- End Screen -->
+<div class="screen" id="endScreen">
+  <div class="end-hero">
+    <span class="end-emoji" id="endEmoji">🎉</span>
+    <h1 id="endTitle">Game Over</h1>
+    <p class="end-sub" id="endSub">Great effort!</p>
+    <div class="score-board">
+      <div class="sb-item"><span class="sb-value" style="color:var(--gold)" id="sbRound">0</span><span class="sb-label">Rounds Cleared</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--green)" id="sbBest">0</span><span class="sb-label">Best Ever</span></div>
+    </div>
+    <div class="end-actions">
+      <button class="end-btn end-btn-primary" onclick="goToStart()"><i class="fas fa-redo"></i> Play Again</button>
+      <a href="../../all-games.html" class="end-btn end-btn-secondary"><i class="fas fa-gamepad"></i> All Games</a>
+      <a href="../../index.html" class="end-btn end-btn-home"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// SYMBOL CATALOG
+// ═══════════════════════════════════════════
+const ALL_SYMBOLS = [
+  { icon: "✝️",  label: "Cross",     color: "#ff6b6b", bg: "rgba(255,107,107,.15)", shadow: "rgba(255,107,107,.3)" },
+  { icon: "📖",  label: "Bible",     color: "#ffd700", bg: "rgba(255,215,0,.15)",   shadow: "rgba(255,215,0,.3)"   },
+  { icon: "🕊️", label: "Dove",      color: "#ffffff", bg: "rgba(255,255,255,.12)", shadow: "rgba(255,255,255,.2)" },
+  { icon: "🔥",  label: "Fire",      color: "#ff9f43", bg: "rgba(255,159,67,.15)",  shadow: "rgba(255,159,67,.3)"  },
+  { icon: "💧",  label: "Water",     color: "#2575fc", bg: "rgba(37,117,252,.15)",  shadow: "rgba(37,117,252,.3)"  },
+  { icon: "⭐",  label: "Star",      color: "#ffd700", bg: "rgba(255,215,0,.15)",   shadow: "rgba(255,215,0,.3)"   },
+  { icon: "🦁",  label: "Lion",      color: "#ff9f43", bg: "rgba(255,159,67,.15)",  shadow: "rgba(255,159,67,.3)"  },
+  { icon: "🐑",  label: "Lamb",      color: "#ffffff", bg: "rgba(255,255,255,.12)", shadow: "rgba(255,255,255,.2)" },
+  { icon: "🗝️", label: "Key",       color: "#ffd700", bg: "rgba(255,215,0,.15)",   shadow: "rgba(255,215,0,.3)"   },
+  { icon: "🎺",  label: "Trumpet",   color: "#ffd700", bg: "rgba(255,215,0,.15)",   shadow: "rgba(255,215,0,.3)"   },
+  { icon: "🛡️", label: "Shield",    color: "#00ff9d", bg: "rgba(0,255,157,.12)",   shadow: "rgba(0,255,157,.3)"   },
+  { icon: "🌿",  label: "Olive",     color: "#00ff9d", bg: "rgba(0,255,157,.12)",   shadow: "rgba(0,255,157,.3)"   },
+];
+
+let padCount = 6;
+let activePads = [];
+let sequence = [];
+let playerIndex = 0;
+let round = 0;
+let score = 0;
+let bestScore = parseInt(localStorage.getItem('bsr_best') || '0');
+let isPlaying = false;
+let gameOver = false;
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function goToStart() { showScreen('startScreen'); }
+
+function startGame(count) {
+  padCount = count;
+  round = 0; score = 0; sequence = []; playerIndex = 0; isPlaying = false; gameOver = false;
+  document.getElementById('bestVal').textContent = bestScore;
+  document.getElementById('scoreVal').textContent = '0';
+
+  // Pick random symbols
+  const shuffled = [...ALL_SYMBOLS].sort(() => Math.random() - .5);
+  activePads = shuffled.slice(0, padCount);
+
+  renderPads();
+  showScreen('gameScreen');
+  setTimeout(() => nextRound(), 800);
+}
+
+function renderPads() {
+  const container = document.getElementById('padsContainer');
+  container.className = 'pads-container pads-' + padCount;
+  container.innerHTML = '';
+
+  activePads.forEach((sym, i) => {
+    const el = document.createElement('div');
+    el.className = 'sym-pad disabled';
+    el.dataset.idx = i;
+    el.style.setProperty('--active-color', sym.color);
+    el.style.setProperty('--bg-glow', sym.bg);
+    el.style.setProperty('--shadow-color', sym.shadow);
+    el.innerHTML = `<span class="pad-icon">${sym.icon}</span><span class="pad-label">${sym.label}</span>`;
+    el.addEventListener('click', () => handlePadClick(i));
+    container.appendChild(el);
+  });
+}
+
+function getPad(i) {
+  return document.querySelector(`.sym-pad[data-idx="${i}"]`);
+}
+
+function nextRound() {
+  round++;
+  playerIndex = 0;
+  isPlaying = false;
+
+  // Add a random index to the sequence
+  sequence.push(Math.floor(Math.random() * padCount));
+
+  document.getElementById('roundVal').textContent = round;
+  updateProgressDots();
+  setStatus('Watch carefully...', 'status-watch');
+  disablePads(true);
+
+  // Play the sequence
+  setTimeout(() => playSequence(), 600);
+}
+
+function playSequence() {
+  const speed = Math.max(350, 700 - round * 20); // Gets faster over time
+  let i = 0;
+
+  function lightNext() {
+    if (i >= sequence.length) {
+      // Sequence done — player's turn
+      setTimeout(() => {
+        setStatus('Your turn! Repeat the pattern', 'status-go');
+        disablePads(false);
+        isPlaying = true;
+      }, 300);
+      return;
+    }
+    const padIdx = sequence[i];
+    lightPad(padIdx, speed * 0.7);
+    i++;
+    setTimeout(lightNext, speed);
+  }
+  lightNext();
+}
+
+function lightPad(idx, duration) {
+  const pad = getPad(idx);
+  if (!pad) return;
+  pad.classList.add('lit');
+  setTimeout(() => pad.classList.remove('lit'), duration);
+}
+
+function handlePadClick(idx) {
+  if (!isPlaying || gameOver) return;
+
+  const pad = getPad(idx);
+  // Visual feedback
+  pad.classList.add('player-tap');
+  setTimeout(() => pad.classList.remove('player-tap'), 150);
+
+  if (idx === sequence[playerIndex]) {
+    // Correct!
+    pad.classList.add('correct-flash');
+    setTimeout(() => pad.classList.remove('correct-flash'), 400);
+    playerIndex++;
+
+    // Update progress dots
+    const dots = document.querySelectorAll('.p-dot');
+    if (dots[playerIndex - 1]) {
+      dots[playerIndex - 1].classList.add('done');
+      dots[playerIndex - 1].classList.remove('current');
+    }
+    if (dots[playerIndex]) {
+      dots[playerIndex].classList.add('current');
+    }
+
+    if (playerIndex === sequence.length) {
+      // Round complete!
+      score = round;
+      document.getElementById('scoreVal').textContent = score;
+      isPlaying = false;
+      disablePads(true);
+      setStatus('✅ Round ' + round + ' cleared!', '');
+      setTimeout(() => nextRound(), 1000);
+    }
+  } else {
+    // WRONG!
+    pad.classList.add('wrong-flash');
+    setStatus('❌ Wrong! The correct symbol was ' + activePads[sequence[playerIndex]].label, 'status-wrong');
+    isPlaying = false;
+    gameOver = true;
+    disablePads(true);
+
+    // Flash correct answer
+    setTimeout(() => {
+      lightPad(sequence[playerIndex], 1200);
+    }, 300);
+
+    // Mark fail on dots
+    const dots = document.querySelectorAll('.p-dot');
+    if (dots[playerIndex]) {
+      dots[playerIndex].classList.add('fail');
+    }
+
+    // Save best
+    if (score > bestScore) {
+      bestScore = score;
+      localStorage.setItem('bsr_best', bestScore);
+    }
+
+    setTimeout(() => showEnd(), 2000);
+  }
+}
+
+function disablePads(disabled) {
+  document.querySelectorAll('.sym-pad').forEach(p => {
+    disabled ? p.classList.add('disabled') : p.classList.remove('disabled');
+  });
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.className = 'status-msg ' + (cls || '');
+}
+
+function updateProgressDots() {
+  const container = document.getElementById('progressDots');
+  container.innerHTML = '';
+  for (let i = 0; i < sequence.length; i++) {
+    const dot = document.createElement('span');
+    dot.className = 'p-dot' + (i === 0 ? ' current' : '');
+    container.appendChild(dot);
+  }
+}
+
+function showEnd() {
+  let emoji, title, sub;
+  if (score >= 15) { emoji = '👑'; title = 'Legendary Memory!'; sub = 'You recalled ' + score + ' rounds — absolutely incredible!'; }
+  else if (score >= 10) { emoji = '🌟'; title = 'Memory Master!'; sub = 'You reached round ' + score + ' — outstanding focus!'; }
+  else if (score >= 5) { emoji = '💪'; title = 'Great Recall!'; sub = 'You lasted ' + score + ' rounds — solid performance!'; }
+  else if (score >= 2) { emoji = '📖'; title = 'Good Start!'; sub = 'You made it ' + score + ' rounds — keep training!'; }
+  else { emoji = '🙏'; title = 'Keep Practicing!'; sub = 'Memory grows stronger with practice!'; }
+
+  document.getElementById('endEmoji').textContent = emoji;
+  document.getElementById('endTitle').textContent = title;
+  document.getElementById('endSub').textContent = sub;
+  document.getElementById('sbRound').textContent = score;
+  document.getElementById('sbBest').textContent = bestScore;
+  showScreen('endScreen');
+}
+</script>
+</body>
+</html>

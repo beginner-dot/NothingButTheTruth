@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ark Builder — Stacking Game | NothingButTheTruth</title>
+<meta name="description" content="Build Noah's Ark by stacking animals and supplies before the flood! A fun stacking and timing game based on the story of Noah's Ark from Genesis 6-9.">
+<meta name="keywords" content="Ark Builder game, Noah Ark game, Bible stacking game, Christian kids game, Genesis flood game, NothingButTheTruth, free Bible games">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/ark-builder/index.html">
+<meta property="og:title" content="Ark Builder — Stacking Game">
+<meta property="og:description" content="Build Noah's Ark by stacking animals and supplies before the flood!">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/ark-builder/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ark Builder | NothingButTheTruth">
+<meta name="twitter:description" content="Build Noah's Ark by stacking animals and supplies before the flood!">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Ark Builder","description":"Stack animals and supplies onto Noah's Ark before the flood in this fun timing game based on Genesis 6-9.","url":"https://nothingbutthetruth.web.app/games/ark-builder/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root{--bg:#0a0a14;--card:rgba(255,255,255,.06);--purple:#6a11cb;--blue:#2575fc;--green:#00ff9d;--gold:#ffd700;--red:#ff4757;--amber:#c87533;--text:#fff;--sub:rgba(255,255,255,.6)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 50% 80%,rgba(200,117,51,.06),transparent 50%),radial-gradient(ellipse at 30% 20%,rgba(37,117,252,.06),transparent 50%);pointer-events:none}
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;position:relative;z-index:10}
+.back-btn{color:var(--sub);text-decoration:none;font-size:.95em;display:flex;align-items:center;gap:6px;transition:color .2s}.back-btn:hover{color:var(--text)}
+.logo{font-weight:800;font-size:1.1em;background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.screen{display:none;position:relative;z-index:5}.screen.active{display:block}
+
+/* Start */
+.start-hero{text-align:center;padding:40px 20px;max-width:700px;margin:0 auto}
+.game-icon{font-size:4em;margin-bottom:16px;display:block}
+.start-hero h1{font-family:'DM Serif Display',serif;font-size:2.6em;margin-bottom:12px;background:linear-gradient(135deg,var(--amber),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-hero .tagline{color:var(--sub);font-size:1.1em;margin-bottom:36px}
+.how-to{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px;margin-bottom:36px;text-align:left}
+.how-to h3{margin-bottom:14px;font-size:1.15em}.how-to ul{list-style:none;padding:0}
+.how-to li{padding:6px 0;color:var(--sub);font-size:.95em}.how-to li::before{content:'✦ ';color:var(--gold)}
+.verse-box{background:rgba(200,117,51,.06);border:1px solid rgba(200,117,51,.18);border-radius:12px;padding:16px;margin-bottom:32px;font-style:italic;color:var(--gold);font-size:.95em}
+.start-btn{padding:18px 44px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--amber),#8b4513);color:#fff;font-weight:800;font-size:1.15em;cursor:pointer;transition:all .3s;font-family:inherit}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(200,117,51,.25)}
+
+/* Game Area */
+.game-area{max-width:480px;margin:0 auto;padding:0 12px;position:relative}
+.game-header{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;flex-wrap:wrap;gap:8px}
+.game-header h2{font-size:1em;color:var(--gold)}
+.flood-bar-wrap{width:100%;background:rgba(255,255,255,.06);border-radius:8px;height:10px;margin:8px 0;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.flood-bar{height:100%;border-radius:8px;transition:width .5s;background:linear-gradient(90deg,var(--blue),var(--red))}
+.flood-label{font-size:.75em;color:var(--sub);display:flex;justify-content:space-between}
+
+.ark-scene{position:relative;width:100%;aspect-ratio:5/4;background:linear-gradient(180deg,rgba(10,10,30,.6),rgba(20,15,10,.8));border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden}
+.water{position:absolute;bottom:0;left:0;right:0;height:0;background:linear-gradient(180deg,rgba(37,117,252,.3),rgba(37,117,252,.6));transition:height 1s;z-index:1;border-radius:0 0 14px 14px}
+.water::before{content:'';position:absolute;top:-5px;left:0;right:0;height:10px;background:repeating-linear-gradient(90deg,transparent,transparent 20px,rgba(255,255,255,.1) 20px,rgba(255,255,255,.1) 40px);animation:waveMove 3s linear infinite}
+@keyframes waveMove{0%{transform:translateX(0)}100%{transform:translateX(-40px)}}
+
+.ark-base{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);width:80%;height:50px;background:linear-gradient(180deg,#8b6914,#5a3a0a);border-radius:0 0 40% 40%;border:2px solid rgba(139,105,20,.5);z-index:2}
+.ark-base::before{content:'⛵';position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:1.5em;opacity:.5}
+
+.drop-zone{position:absolute;top:0;left:0;right:0;bottom:80px;z-index:5}
+.falling-item{position:absolute;font-size:2em;z-index:4;transition:left .06s linear;cursor:pointer;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
+.stacked-item{position:absolute;font-size:1.5em;z-index:3;transition:all .3s ease;animation:landBounce .3s ease}
+@keyframes landBounce{0%{transform:scale(1.3)}50%{transform:scale(.9)}100%{transform:scale(1)}}
+
+.next-preview{text-align:center;margin:10px 0;font-size:.85em;color:var(--sub)}
+.next-preview span{font-size:1.5em;margin-left:6px}
+
+.tap-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--sub);font-size:.9em;z-index:6;animation:pulse 1.5s ease infinite;pointer-events:none}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* Stacked counter */
+.stacked-strip{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0;justify-content:center;min-height:30px}
+.stacked-badge{font-size:1.2em;animation:popIn .3s ease}
+@keyframes popIn{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+
+/* End */
+.end-hero{text-align:center;padding:50px 20px;max-width:600px;margin:0 auto}
+.end-emoji{font-size:4em;display:block;margin-bottom:16px;animation:endBounce .6s ease .2s both}
+@keyframes endBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+.end-hero h1{font-family:'DM Serif Display',serif;font-size:2.3em;margin-bottom:10px;background:linear-gradient(135deg,var(--amber),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.end-sub{color:var(--sub);font-size:1.05em;margin-bottom:10px}
+.score-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px auto;max-width:380px}
+.sb-item{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 10px}
+.sb-value{font-size:1.8em;font-weight:800;display:block}.sb-label{font-size:.7em;color:var(--sub);margin-top:2px}
+.fact-box{background:rgba(200,117,51,.08);border:1px solid rgba(200,117,51,.2);border-radius:12px;padding:16px;margin:20px auto;max-width:380px;font-size:.9em;color:var(--gold);text-align:left}
+.fact-box strong{display:block;margin-bottom:6px}
+.end-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.end-btn{padding:14px 28px;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;transition:all .2s;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.end-btn:hover{transform:translateY(-2px)}
+.end-btn-primary{background:linear-gradient(135deg,var(--amber),#8b4513);color:#fff;box-shadow:0 4px 15px rgba(200,117,51,.2)}
+.end-btn-secondary{background:rgba(255,255,255,.08);color:var(--sub);border:1px solid rgba(255,255,255,.12)}
+.end-btn-home{background:rgba(255,215,0,.15);color:var(--gold);border:1px solid rgba(255,215,0,.3)}
+@media(max-width:500px){.start-hero h1{font-size:2em}.ark-scene{border-radius:10px}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="../../all-games.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Games</a>
+  <span class="logo">NothingButTheTruth</span>
+</div>
+
+<!-- Start -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <span class="game-icon">🚢</span>
+    <h1>Ark Builder</h1>
+    <p class="tagline">Load Noah's Ark with animals and supplies before the flood waters rise!</p>
+    <div class="verse-box">"Make yourself an ark of gopher wood … and I will establish my covenant with you, and you shall come into the ark." — Genesis 6:14,18</div>
+    <div class="how-to">
+      <h3><i class="fas fa-hammer"></i> How to Play</h3>
+      <ul>
+        <li>Items fall from the sky — tap or click to drop them onto the ark</li>
+        <li>Use arrow keys or drag to position items left/right before dropping</li>
+        <li>Stack animals (🦁🐘🦒🐑🕊️) and supplies (🪵🥖🫗) on the ark</li>
+        <li>The flood waters rise steadily — load as many as you can!</li>
+        <li>Missed items fall in the water and are lost. Each pair of animals = bonus!</li>
+        <li>The game ends when the water reaches the ark deck</li>
+      </ul>
+    </div>
+    <button class="start-btn" onclick="startGame()"><i class="fas fa-play"></i> Build the Ark</button>
+  </div>
+</div>
+
+<!-- Game -->
+<div class="screen" id="gameScreen">
+  <div class="game-area">
+    <div class="game-header">
+      <h2>🚢 Score: <span id="scoreVal">0</span></h2>
+      <div style="font-size:.85em">Loaded: <strong id="loadedVal">0</strong></div>
+    </div>
+    <div class="flood-bar-wrap"><div class="flood-bar" id="floodBar" style="width:0%"></div></div>
+    <div class="flood-label"><span>🌤️ Dry</span><span>🌊 Flood</span></div>
+    <div class="next-preview">Next: <span id="nextItem">🦁</span></div>
+    <div class="ark-scene" id="arkScene">
+      <div class="water" id="water"></div>
+      <div class="ark-base" id="arkBase"></div>
+      <div class="drop-zone" id="dropZone"></div>
+      <div class="tap-hint" id="tapHint">Tap/Click to drop!</div>
+    </div>
+    <div class="stacked-strip" id="stackedStrip"></div>
+  </div>
+</div>
+
+<!-- End -->
+<div class="screen" id="endScreen">
+  <div class="end-hero">
+    <span class="end-emoji" id="endEmoji">🌈</span>
+    <h1 id="endTitle">The Flood Has Come!</h1>
+    <p class="end-sub" id="endSub"></p>
+    <div class="score-board">
+      <div class="sb-item"><span class="sb-value" style="color:var(--gold)" id="sbScore">0</span><span class="sb-label">Score</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--green)" id="sbLoaded">0</span><span class="sb-label">Items Loaded</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--blue)" id="sbPairs">0</span><span class="sb-label">Pairs</span></div>
+    </div>
+    <div class="fact-box" id="factBox"></div>
+    <div class="end-actions">
+      <button class="end-btn end-btn-primary" onclick="goToStart()"><i class="fas fa-redo"></i> Build Again</button>
+      <a href="../../all-games.html" class="end-btn end-btn-secondary"><i class="fas fa-gamepad"></i> All Games</a>
+      <a href="../../index.html" class="end-btn end-btn-home"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const ANIMALS=[
+  {emoji:'🦁',name:'Lion'},{emoji:'🐘',name:'Elephant'},{emoji:'🦒',name:'Giraffe'},
+  {emoji:'🐑',name:'Sheep'},{emoji:'🕊️',name:'Dove'},{emoji:'🐄',name:'Cow'},
+  {emoji:'🦅',name:'Eagle'},{emoji:'🐕',name:'Dog'},{emoji:'🐈',name:'Cat'},
+  {emoji:'🐎',name:'Horse'},{emoji:'🦌',name:'Deer'},{emoji:'🐇',name:'Rabbit'},
+];
+const SUPPLIES=[
+  {emoji:'🪵',name:'Wood'},{emoji:'🥖',name:'Bread'},{emoji:'🫗',name:'Water'},
+  {emoji:'🌾',name:'Grain'},{emoji:'🍎',name:'Fruit'},{emoji:'🧶',name:'Rope'},
+];
+const FACTS=[
+  '🌈 God placed a rainbow in the sky as a covenant promise to never flood the whole earth again. (Genesis 9:13)',
+  '🚢 The ark was about 450 feet long, 75 feet wide, and 45 feet high — larger than many modern ships! (Genesis 6:15)',
+  '🕊️ Noah sent out a dove, and it returned with an olive branch — a sign the waters had receded. (Genesis 8:11)',
+  '📖 Noah was 600 years old when the flood came. He was described as "righteous and blameless." (Genesis 7:6, 6:9)',
+  '⏳ It rained for 40 days and 40 nights, and the waters prevailed on the earth for 150 days. (Genesis 7:12,24)',
+  '🐾 God told Noah to bring two of every kind of animal, and seven pairs of every clean animal. (Genesis 7:2-3)',
+];
+
+let score=0,loaded=0,missed=0,floodLevel=0,gameActive=false,animId;
+let currentItem=null,nextItem=null,stackedItems=[];
+let animalCounts={},pairs=0;
+let arkScene,arkBase,dropZone,waterEl,floodSpeed=0.08;
+let sceneW=0,sceneH=0,deckY=0;
+let itemX=0,dropping=false;
+
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function goToStart(){showScreen('startScreen')}
+
+function randomItem(){
+  const pool=Math.random()<0.3?SUPPLIES:ANIMALS;
+  return {...pool[Math.floor(Math.random()*pool.length)]};
+}
+
+function startGame(){
+  score=0;loaded=0;missed=0;floodLevel=0;pairs=0;animalCounts={};stackedItems=[];
+  dropping=false;gameActive=true;
+  arkScene=document.getElementById('arkScene');
+  arkBase=document.getElementById('arkBase');
+  dropZone=document.getElementById('dropZone');
+  waterEl=document.getElementById('water');
+  sceneW=arkScene.clientWidth;sceneH=arkScene.clientHeight;
+  deckY=sceneH-80;
+  waterEl.style.height='0px';
+  document.getElementById('floodBar').style.width='0%';
+  document.getElementById('stackedStrip').innerHTML='';
+  document.getElementById('tapHint').style.display='';
+  updateUI();
+
+  // Clear existing items from scene
+  arkScene.querySelectorAll('.falling-item,.stacked-item').forEach(e=>e.remove());
+
+  nextItem=randomItem();
+  document.getElementById('nextItem').textContent=nextItem.emoji;
+  showScreen('gameScreen');
+  setTimeout(()=>{sceneW=arkScene.clientWidth;sceneH=arkScene.clientHeight;deckY=sceneH-80;spawnItem()},300);
+  animId=requestAnimationFrame(gameLoop);
+}
+
+function spawnItem(){
+  if(!gameActive)return;
+  currentItem=nextItem;nextItem=randomItem();
+  document.getElementById('nextItem').textContent=nextItem.emoji;
+  itemX=sceneW/2-15;dropping=false;
+  const el=document.createElement('div');
+  el.className='falling-item';el.id='currentFalling';
+  el.textContent=currentItem.emoji;el.style.top='10px';el.style.left=itemX+'px';
+  arkScene.appendChild(el);
+  document.getElementById('tapHint').style.display='none';
+}
+
+let fallY=10,fallSpeed=0;
+function gameLoop(){
+  if(!gameActive)return;
+  // Flood rises
+  floodLevel+=floodSpeed;
+  floodSpeed=0.08+loaded*0.003;
+  const maxFlood=deckY-30;
+  const waterH=Math.min(floodLevel,sceneH);
+  waterEl.style.height=waterH+'px';
+  document.getElementById('floodBar').style.width=Math.min(100,floodLevel/maxFlood*100)+'%';
+
+  if(floodLevel>=maxFlood){endGame();return}
+
+  // Falling
+  const el=document.getElementById('currentFalling');
+  if(el&&dropping){
+    fallY+=fallSpeed;fallSpeed+=0.4;
+    el.style.top=fallY+'px';
+    // Hit deck area?
+    const landY=deckY-stackedItems.length*12;
+    const arkLeft=sceneW*0.1, arkRight=sceneW*0.9;
+    if(fallY>=landY){
+      if(itemX>=arkLeft-20&&itemX<=arkRight){
+        // Landed on ark!
+        el.remove();
+        placeOnArk(itemX, landY);
+        loaded++;score+=10;
+        // Count animals for pairs
+        if(ANIMALS.some(a=>a.emoji===currentItem.emoji)){
+          animalCounts[currentItem.emoji]=(animalCounts[currentItem.emoji]||0)+1;
+          if(animalCounts[currentItem.emoji]%2===0){pairs++;score+=25}
+        }
+        updateUI();spawnItem();fallY=10;fallSpeed=0;
+      } else {
+        // Missed!
+        el.remove();missed++;spawnItem();fallY=10;fallSpeed=0;
+      }
+    }
+    if(fallY>sceneH+40){el.remove();missed++;spawnItem();fallY=10;fallSpeed=0}
+  }
+  animId=requestAnimationFrame(gameLoop);
+}
+
+function placeOnArk(x,y){
+  const el=document.createElement('div');el.className='stacked-item';
+  el.textContent=currentItem.emoji;
+  // Spread loaded items visually
+  const jitterX=(Math.random()-0.5)*40;
+  el.style.left=(x+jitterX)+'px';
+  el.style.top=(y-5)+'px';
+  arkScene.appendChild(el);
+  stackedItems.push({emoji:currentItem.emoji,name:currentItem.name});
+  const badge=document.createElement('span');badge.className='stacked-badge';badge.textContent=currentItem.emoji;
+  document.getElementById('stackedStrip').appendChild(badge);
+}
+
+function dropItem(){
+  if(!gameActive||dropping||!document.getElementById('currentFalling'))return;
+  dropping=true;fallY=parseInt(document.getElementById('currentFalling').style.top)||10;fallSpeed=1;
+}
+
+function moveItem(dir){
+  if(!gameActive||dropping)return;
+  const el=document.getElementById('currentFalling');if(!el)return;
+  itemX=Math.max(10,Math.min(sceneW-30,itemX+dir*20));
+  el.style.left=itemX+'px';
+}
+
+function updateUI(){
+  document.getElementById('scoreVal').textContent=score;
+  document.getElementById('loadedVal').textContent=loaded;
+}
+
+// Input
+document.addEventListener('keydown',e=>{
+  if(!gameActive)return;
+  if(e.key==='ArrowLeft')moveItem(-1);
+  if(e.key==='ArrowRight')moveItem(1);
+  if(e.key===' '||e.key==='ArrowDown'){e.preventDefault();dropItem()}
+});
+document.addEventListener('DOMContentLoaded',()=>{
+  // Touch/click on scene
+  let touchStartX=0;
+  const scene=document.getElementById('arkScene');
+  scene.addEventListener('click',e=>{
+    if(!gameActive)return;
+    const rect=scene.getBoundingClientRect();
+    const cx=e.clientX-rect.left;
+    // Move to tap position then drop
+    const el=document.getElementById('currentFalling');
+    if(el&&!dropping){itemX=Math.max(10,Math.min(sceneW-30,cx-15));el.style.left=itemX+'px';dropItem()}
+  });
+  scene.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX},{passive:true});
+  scene.addEventListener('touchmove',e=>{
+    if(!gameActive||dropping)return;
+    const dx=e.touches[0].clientX-touchStartX;
+    touchStartX=e.touches[0].clientX;
+    itemX=Math.max(10,Math.min(sceneW-30,itemX+dx));
+    const el=document.getElementById('currentFalling');
+    if(el)el.style.left=itemX+'px';
+  },{passive:true});
+  scene.addEventListener('touchend',()=>{if(gameActive&&!dropping)dropItem()});
+});
+
+function endGame(){
+  gameActive=false;cancelAnimationFrame(animId);
+  document.getElementById('sbScore').textContent=score;
+  document.getElementById('sbLoaded').textContent=loaded;
+  document.getElementById('sbPairs').textContent=pairs;
+  let emoji,title,sub;
+  if(loaded>=30){emoji='🌈';title='Master Builder!';sub=`You loaded ${loaded} items — the ark is full!`}
+  else if(loaded>=20){emoji='🚢';title='Great Captain!';sub=`You loaded ${loaded} items onto the ark!`}
+  else if(loaded>=10){emoji='⛵';title='Good Effort!';sub=`You loaded ${loaded} items. Keep building!`}
+  else{emoji='🌧️';title='The Rain Came Early!';sub=`You loaded ${loaded} items. Try to be faster!`}
+  document.getElementById('endEmoji').textContent=emoji;
+  document.getElementById('endTitle').textContent=title;
+  document.getElementById('endSub').textContent=sub;
+  document.getElementById('factBox').innerHTML='<strong>📖 Did You Know?</strong>'+FACTS[Math.floor(Math.random()*FACTS.length)];
+  showScreen('endScreen');
+}
+</script>
+</body>
+</html>

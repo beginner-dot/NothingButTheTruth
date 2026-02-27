@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Word Search — Puzzle Game | NothingButTheTruth</title>
+<meta name="description" content="Find hidden Bible words in the grid! A classic word search puzzle game with themes like Books of the Bible, Apostles, Fruits of the Spirit, and more.">
+<meta name="keywords" content="Bible word search, Bible puzzle game, Christian word search, Books of the Bible game, NothingButTheTruth, free Bible games">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/bible-word-search/index.html">
+<meta property="og:title" content="Bible Word Search — Puzzle Game">
+<meta property="og:description" content="Find hidden Bible words in a puzzle grid. Multiple themed categories!">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/bible-word-search/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bible Word Search | NothingButTheTruth">
+<meta name="twitter:description" content="Find hidden Bible words in a puzzle grid with multiple themes.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Bible Word Search","description":"Find hidden words in a word-search grid with Bible-themed categories.","url":"https://nothingbutthetruth.web.app/games/bible-word-search/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root{--bg:#0a0a14;--card:rgba(255,255,255,.06);--purple:#6a11cb;--blue:#2575fc;--green:#00ff9d;--gold:#ffd700;--red:#ff4757;--text:#fff;--sub:rgba(255,255,255,.6)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 25% 40%,rgba(37,117,252,.08),transparent 50%),radial-gradient(ellipse at 75% 60%,rgba(106,17,203,.08),transparent 50%);pointer-events:none}
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;position:relative;z-index:10}
+.back-btn{color:var(--sub);text-decoration:none;font-size:.95em;display:flex;align-items:center;gap:6px;transition:color .2s}.back-btn:hover{color:var(--text)}
+.logo{font-weight:800;font-size:1.1em;background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.screen{display:none;position:relative;z-index:5}.screen.active{display:block}
+
+/* Start Screen */
+.start-hero{text-align:center;padding:40px 20px;max-width:700px;margin:0 auto}
+.game-icon{font-size:4em;margin-bottom:16px;display:block}
+.start-hero h1{font-family:'DM Serif Display',serif;font-size:2.6em;margin-bottom:12px;background:linear-gradient(135deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-hero .tagline{color:var(--sub);font-size:1.1em;margin-bottom:36px}
+.how-to{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px;margin-bottom:36px;text-align:left}
+.how-to h3{margin-bottom:14px;font-size:1.15em}.how-to ul{list-style:none;padding:0}
+.how-to li{padding:6px 0;color:var(--sub);font-size:.95em}.how-to li::before{content:'✦ ';color:var(--blue)}
+.verse-box{background:rgba(37,117,252,.06);border:1px solid rgba(37,117,252,.18);border-radius:12px;padding:16px;margin-bottom:20px;font-style:italic;color:var(--blue);font-size:.95em}
+
+/* Theme Picker */
+.theme-picker{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:32px}
+.theme-card{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 14px;cursor:pointer;transition:all .25s;text-align:center}
+.theme-card:hover,.theme-card.selected{border-color:var(--blue);box-shadow:0 0 20px rgba(37,117,252,.2);transform:translateY(-2px)}
+.theme-card.selected{background:rgba(37,117,252,.12)}
+.theme-emoji{font-size:1.8em;display:block;margin-bottom:8px}
+.theme-name{font-weight:700;font-size:.95em}
+.theme-count{font-size:.75em;color:var(--sub)}
+
+.start-btn{padding:18px 44px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-weight:800;font-size:1.15em;cursor:pointer;transition:all .3s;font-family:inherit}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(37,117,252,.2)}
+.start-btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* Game Screen */
+.game-container{max-width:560px;margin:0 auto;padding:0 12px}
+.game-top{display:flex;justify-content:space-between;align-items:center;padding:8px 4px;flex-wrap:wrap;gap:8px}
+.game-top h2{font-size:1em;color:var(--blue)}
+.timer{font-size:.95em;display:flex;align-items:center;gap:5px}.timer-val{font-weight:700;color:var(--gold)}
+
+/* Grid */
+.grid-wrap{display:flex;justify-content:center;margin:12px 0}
+.grid{display:inline-grid;gap:2px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px;user-select:none;touch-action:none}
+.cell{width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95em;border-radius:6px;cursor:pointer;transition:all .15s;background:rgba(255,255,255,.04);color:var(--sub)}
+.cell:hover{background:rgba(37,117,252,.15)}
+.cell.selecting{background:rgba(37,117,252,.3);color:#fff;transform:scale(1.1);z-index:2}
+.cell.found{background:linear-gradient(135deg,rgba(37,117,252,.25),rgba(106,17,203,.2));color:var(--green);font-weight:800}
+
+/* Word List */
+.word-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+.word-tag{padding:6px 14px;border-radius:20px;font-size:.85em;font-weight:600;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--sub);transition:all .3s}
+.word-tag.found{background:rgba(0,255,157,.12);border-color:rgba(0,255,157,.3);color:var(--green);text-decoration:line-through;text-decoration-color:rgba(0,255,157,.4)}
+
+/* End */
+.end-hero{text-align:center;padding:50px 20px;max-width:600px;margin:0 auto}
+.end-emoji{font-size:4em;display:block;margin-bottom:16px;animation:endBounce .6s ease .2s both}
+@keyframes endBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+.end-hero h1{font-family:'DM Serif Display',serif;font-size:2.3em;margin-bottom:10px;background:linear-gradient(135deg,var(--blue),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.end-sub{color:var(--sub);font-size:1.05em;margin-bottom:10px}
+.score-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px auto;max-width:380px}
+.sb-item{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 10px}
+.sb-value{font-size:1.8em;font-weight:800;display:block}.sb-label{font-size:.7em;color:var(--sub);margin-top:2px}
+.end-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.end-btn{padding:14px 28px;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;transition:all .2s;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.end-btn:hover{transform:translateY(-2px)}
+.end-btn-primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;box-shadow:0 4px 15px rgba(37,117,252,.2)}
+.end-btn-secondary{background:rgba(255,255,255,.08);color:var(--sub);border:1px solid rgba(255,255,255,.12)}
+.end-btn-home{background:rgba(255,215,0,.15);color:var(--gold);border:1px solid rgba(255,215,0,.3)}
+@media(max-width:500px){.start-hero h1{font-size:2em}.cell{width:26px;height:26px;font-size:.82em}.grid{padding:6px}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="../../all-games.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Games</a>
+  <span class="logo">NothingButTheTruth</span>
+</div>
+
+<!-- Start -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <span class="game-icon">🔍</span>
+    <h1>Bible Word Search</h1>
+    <p class="tagline">Find the hidden words of Scripture in the puzzle grid!</p>
+    <div class="verse-box">"Your word is a lamp to my feet and a light to my path." — Psalm 119:105</div>
+    <div class="how-to">
+      <h3><i class="fas fa-puzzle-piece"></i> How to Play</h3>
+      <ul>
+        <li>Choose a theme category below</li>
+        <li>Click/tap a letter and drag to select the word</li>
+        <li>Words can go horizontal, vertical, or diagonal</li>
+        <li>Find all the words before time runs out!</li>
+        <li>Faster completion = higher score</li>
+      </ul>
+    </div>
+    <h3 style="margin-bottom:14px">Choose a Theme</h3>
+    <div class="theme-picker" id="themePicker"></div>
+    <button class="start-btn" id="startBtn" disabled onclick="startGame()"><i class="fas fa-search"></i> Start Searching</button>
+  </div>
+</div>
+
+<!-- Game -->
+<div class="screen" id="gameScreen">
+  <div class="game-container">
+    <div class="game-top">
+      <h2 id="themeTitle">Words</h2>
+      <div class="timer"><i class="fas fa-clock"></i> <span class="timer-val" id="timerVal">3:00</span></div>
+      <div style="font-size:.9em">Found: <strong id="foundCount">0</strong>/<strong id="totalCount">0</strong></div>
+    </div>
+    <div class="grid-wrap"><div class="grid" id="grid"></div></div>
+    <div class="word-list" id="wordList"></div>
+  </div>
+</div>
+
+<!-- End -->
+<div class="screen" id="endScreen">
+  <div class="end-hero">
+    <span class="end-emoji" id="endEmoji">🏆</span>
+    <h1 id="endTitle">Puzzle Complete!</h1>
+    <p class="end-sub" id="endSub"></p>
+    <div class="score-board">
+      <div class="sb-item"><span class="sb-value" style="color:var(--gold)" id="sbScore">0</span><span class="sb-label">Score</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--green)" id="sbWords">0</span><span class="sb-label">Words Found</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--blue)" id="sbTime">0:00</span><span class="sb-label">Time</span></div>
+    </div>
+    <div class="end-actions">
+      <button class="end-btn end-btn-primary" onclick="goToStart()"><i class="fas fa-redo"></i> Play Again</button>
+      <a href="../../all-games.html" class="end-btn end-btn-secondary"><i class="fas fa-gamepad"></i> All Games</a>
+      <a href="../../index.html" class="end-btn end-btn-home"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const THEMES = [
+  { id:'gospels', emoji:'📖', name:'The Gospels', words:['MATTHEW','MARK','LUKE','JOHN','PARABLE','MIRACLE','SERMON','CROSS','BAPTISM','DISCIPLE'] },
+  { id:'apostles', emoji:'👥', name:'The Apostles', words:['PETER','JAMES','JOHN','ANDREW','PHILIP','THOMAS','MATTHEW','SIMON','JUDAS','PAUL'] },
+  { id:'fruits', emoji:'🍇', name:'Fruits of the Spirit', words:['LOVE','JOY','PEACE','PATIENCE','KINDNESS','GOODNESS','FAITHFUL','GENTLE','CONTROL'] },
+  { id:'creation', emoji:'🌍', name:'Creation', words:['LIGHT','WATER','SKY','EARTH','STARS','ANIMALS','GARDEN','ADAM','EVE','SABBATH'] },
+  { id:'armor', emoji:'⚔️', name:'Armor of God', words:['TRUTH','RIGHTEOUSNESS','PEACE','FAITH','SALVATION','SPIRIT','SWORD','SHIELD','HELMET','BELT'] },
+  { id:'women', emoji:'👑', name:'Women of the Bible', words:['RUTH','ESTHER','MARY','SARAH','DEBORAH','HANNAH','MIRIAM','RAHAB','NAOMI','LYDIA'] },
+];
+
+const DIRS=[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]]; // 8 directions
+let gridSize=12, gridData=[], selectedCells=[], foundWords=new Set(), currentTheme=null;
+let timerSec=180, timerInterval=null, totalWords=0, startTime=0;
+let isSelecting=false;
+
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function goToStart(){clearInterval(timerInterval);showScreen('startScreen')}
+
+// Build theme picker
+(function(){
+  const c=document.getElementById('themePicker');
+  THEMES.forEach(t=>{
+    const d=document.createElement('div');d.className='theme-card';d.dataset.id=t.id;
+    d.innerHTML=`<span class="theme-emoji">${t.emoji}</span><span class="theme-name">${t.name}</span><span class="theme-count">${t.words.length} words</span>`;
+    d.onclick=()=>{
+      c.querySelectorAll('.theme-card').forEach(x=>x.classList.remove('selected'));
+      d.classList.add('selected'); currentTheme=t;
+      document.getElementById('startBtn').disabled=false;
+    };
+    c.appendChild(d);
+  });
+})();
+
+function startGame(){
+  if(!currentTheme)return;
+  foundWords.clear(); selectedCells=[]; isSelecting=false;
+  totalWords=currentTheme.words.length;
+  gridSize=currentTheme.words.some(w=>w.length>8)?13:12;
+  generateGrid();
+  renderGrid();
+  renderWordList();
+  document.getElementById('themeTitle').textContent=currentTheme.name;
+  document.getElementById('foundCount').textContent='0';
+  document.getElementById('totalCount').textContent=totalWords;
+  timerSec=180; startTime=Date.now(); updateTimer();
+  clearInterval(timerInterval);
+  timerInterval=setInterval(()=>{timerSec--;updateTimer();if(timerSec<=0){clearInterval(timerInterval);endGame(false)}},1000);
+  showScreen('gameScreen');
+}
+
+function generateGrid(){
+  gridData=Array.from({length:gridSize},()=>Array(gridSize).fill(''));
+  const words=[...currentTheme.words].sort((a,b)=>b.length-a.length);
+  for(const word of words){placeWord(word)}
+  // Fill blanks
+  const alpha='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for(let r=0;r<gridSize;r++)for(let c=0;c<gridSize;c++)if(!gridData[r][c])gridData[r][c]=alpha[Math.floor(Math.random()*26)];
+}
+
+function placeWord(word){
+  for(let attempt=0;attempt<200;attempt++){
+    const dir=DIRS[Math.floor(Math.random()*DIRS.length)];
+    const r=Math.floor(Math.random()*gridSize), c=Math.floor(Math.random()*gridSize);
+    let ok=true;
+    for(let i=0;i<word.length;i++){
+      const nr=r+dir[0]*i, nc=c+dir[1]*i;
+      if(nr<0||nr>=gridSize||nc<0||nc>=gridSize){ok=false;break}
+      if(gridData[nr][nc]&&gridData[nr][nc]!==word[i]){ok=false;break}
+    }
+    if(ok){
+      for(let i=0;i<word.length;i++)gridData[r+dir[0]*i][c+dir[1]*i]=word[i];
+      return;
+    }
+  }
+}
+
+function renderGrid(){
+  const g=document.getElementById('grid');
+  g.innerHTML='';g.style.gridTemplateColumns=`repeat(${gridSize},1fr)`;
+  for(let r=0;r<gridSize;r++)for(let c=0;c<gridSize;c++){
+    const d=document.createElement('div');d.className='cell';d.textContent=gridData[r][c];
+    d.dataset.r=r;d.dataset.c=c;
+    d.addEventListener('pointerdown',e=>{e.preventDefault();startSelect(r,c)});
+    d.addEventListener('pointerenter',()=>{if(isSelecting)extendSelect(r,c)});
+    d.addEventListener('pointerup',()=>endSelect());
+    g.appendChild(d);
+  }
+  document.addEventListener('pointerup',()=>{if(isSelecting)endSelect()});
+}
+
+function startSelect(r,c){isSelecting=true;selectedCells=[{r,c}];highlightSelected()}
+function extendSelect(r,c){
+  if(!isSelecting)return;
+  const start=selectedCells[0];
+  const dr=Math.sign(r-start.r), dc=Math.sign(c-start.c);
+  // Only allow straight lines
+  if(r!==start.r&&c!==start.c&&Math.abs(r-start.r)!==Math.abs(c-start.c))return;
+  selectedCells=[start];
+  let cr=start.r,cc=start.c;
+  while(cr!==r||cc!==c){cr+=dr;cc+=dc;selectedCells.push({r:cr,c:cc})}
+  highlightSelected();
+}
+function endSelect(){
+  if(!isSelecting)return;isSelecting=false;
+  const word=selectedCells.map(p=>gridData[p.r][p.c]).join('');
+  const rev=[...word].reverse().join('');
+  if(currentTheme.words.includes(word)&&!foundWords.has(word)){markFound(word)}
+  else if(currentTheme.words.includes(rev)&&!foundWords.has(rev)){markFound(rev)}
+  else{selectedCells.forEach(p=>{const el=cellAt(p.r,p.c);if(el&&!el.classList.contains('found'))el.classList.remove('selecting')})}
+  selectedCells=[];
+}
+
+function markFound(word){
+  foundWords.add(word);
+  // Mark cells
+  selectedCells.forEach(p=>{const el=cellAt(p.r,p.c);if(el){el.classList.remove('selecting');el.classList.add('found')}});
+  // Mark word tag
+  const tags=document.querySelectorAll('.word-tag');tags.forEach(t=>{if(t.dataset.word===word)t.classList.add('found')});
+  document.getElementById('foundCount').textContent=foundWords.size;
+  if(foundWords.size>=totalWords){clearInterval(timerInterval);setTimeout(()=>endGame(true),500)}
+}
+
+function highlightSelected(){
+  document.querySelectorAll('.cell.selecting').forEach(el=>el.classList.remove('selecting'));
+  selectedCells.forEach(p=>{const el=cellAt(p.r,p.c);if(el&&!el.classList.contains('found'))el.classList.add('selecting')});
+}
+function cellAt(r,c){return document.querySelector(`.cell[data-r="${r}"][data-c="${c}"]`)}
+
+function renderWordList(){
+  const wl=document.getElementById('wordList');wl.innerHTML='';
+  currentTheme.words.forEach(w=>{const t=document.createElement('span');t.className='word-tag';t.dataset.word=w;t.textContent=w;wl.appendChild(t)});
+}
+
+function updateTimer(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  document.getElementById('timerVal').textContent=m+':'+(s<10?'0':'')+s;
+}
+
+function endGame(won){
+  const elapsed=Math.floor((Date.now()-startTime)/1000);
+  const m=Math.floor(elapsed/60),s=elapsed%60;
+  const timeStr=m+':'+(s<10?'0':'')+s;
+  const baseScore=foundWords.size*100;
+  const timeBonus=won?Math.max(0,(180-elapsed)*2):0;
+  const total=baseScore+timeBonus;
+  document.getElementById('endEmoji').textContent=won?'🏆':'⏰';
+  document.getElementById('endTitle').textContent=won?'All Words Found!':'Time\'s Up!';
+  document.getElementById('endSub').textContent=won?`You found all ${totalWords} words in ${timeStr}!`:`You found ${foundWords.size} of ${totalWords} words.`;
+  document.getElementById('sbScore').textContent=total;
+  document.getElementById('sbWords').textContent=foundWords.size+'/'+totalWords;
+  document.getElementById('sbTime').textContent=timeStr;
+  showScreen('endScreen');
+}
+</script>
+</body>
+</html>

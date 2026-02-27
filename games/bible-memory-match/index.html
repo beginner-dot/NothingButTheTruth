@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Memory Match — Card Flip Pairs Game | NothingButTheTruth</title>
+<meta name="description" content="Flip cards to find matching biblical pairs! Match prophets to books, miracles to people, and more in this visual memory game. Free to play online.">
+<meta name="keywords" content="Bible memory game, Bible card matching, flip card Bible, Christian memory game, Bible pairs game, NothingButTheTruth, free Bible games">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/bible-memory-match/index.html">
+<meta property="og:title" content="Bible Memory Match — Card Flip Pairs Game">
+<meta property="og:description" content="Flip cards to find matching biblical pairs! A visual memory game.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/bible-memory-match/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bible Memory Match | NothingButTheTruth">
+<meta name="twitter:description" content="Flip cards to find matching biblical pairs! Free visual memory game.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Bible Memory Match","description":"Flip cards to find matching biblical pairs in this visual memory game.","url":"https://nothingbutthetruth.web.app/games/bible-memory-match/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root {
+  --bg:#0a0a14;--card:rgba(255,255,255,0.06);--purple:#6a11cb;--blue:#2575fc;
+  --green:#00ff9d;--gold:#ffd700;--red:#ff4757;--text:#fff;--sub:rgba(255,255,255,0.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(106,17,203,.15),transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(37,117,252,.1),transparent 50%);pointer-events:none}
+
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;position:relative;z-index:10}
+.back-btn{color:var(--sub);text-decoration:none;font-size:.95em;display:flex;align-items:center;gap:6px;transition:color .2s}
+.back-btn:hover{color:var(--text)}
+.logo{font-weight:800;font-size:1.1em;background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.screen{display:none;position:relative;z-index:5}.screen.active{display:block}
+
+/* Start Screen */
+.start-hero{text-align:center;padding:40px 20px;max-width:700px;margin:0 auto}
+.game-icon{font-size:4em;margin-bottom:16px;display:block}
+.start-hero h1{font-family:'DM Serif Display',serif;font-size:2.6em;margin-bottom:12px;background:linear-gradient(135deg,var(--gold),#ff6b35);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-hero .tagline{color:var(--sub);font-size:1.1em;margin-bottom:36px}
+.how-to{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px;margin-bottom:36px;text-align:left}
+.how-to h3{margin-bottom:14px;font-size:1.15em}
+.how-to ul{list-style:none;padding:0}
+.how-to li{padding:6px 0;color:var(--sub);font-size:.95em}
+.how-to li::before{content:'✦ ';color:var(--gold)}
+.diff-pick{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.diff-btn{padding:16px 30px;border:2px solid rgba(255,255,255,.15);border-radius:14px;background:var(--card);color:var(--text);font-weight:700;font-size:1em;cursor:pointer;transition:all .3s;font-family:inherit;text-align:center}
+.diff-btn small{display:block;color:var(--sub);font-size:.8em;font-weight:400;margin-top:4px}
+.diff-btn:hover{border-color:var(--purple);background:rgba(106,17,203,.15);transform:translateY(-2px)}
+
+/* Game */
+.game-area{max-width:700px;margin:0 auto;padding:0 16px 60px}
+.game-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.game-top h2{font-size:1.3em;background:linear-gradient(135deg,var(--gold),#ff6b35);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stats{display:flex;gap:20px;font-size:.95em}
+.stat{display:flex;align-items:center;gap:6px}
+.stat-val{font-weight:700}
+.stat-moves{color:var(--blue)}.stat-matches{color:var(--green)}.stat-timer{color:var(--gold)}
+
+/* Card Grid */
+.card-grid{display:grid;gap:10px;margin-bottom:30px;perspective:1200px}
+.grid-4x4{grid-template-columns:repeat(4,1fr)}
+.grid-4x5{grid-template-columns:repeat(4,1fr)}
+.grid-6x4{grid-template-columns:repeat(6,1fr)}
+
+.mem-card{aspect-ratio:.75;cursor:pointer;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.mem-card.flipped,.mem-card.matched{transform:rotateY(180deg)}
+.mem-card.matched{pointer-events:none}
+.mem-card.matched .card-face.back{box-shadow:0 0 20px rgba(0,255,157,.4);border-color:var(--green)}
+.mem-card.wrong .card-face.back{animation:wrongShake .4s ease;border-color:var(--red)!important;box-shadow:0 0 15px rgba(255,71,87,.4)!important}
+@keyframes wrongShake{0%,100%{transform:rotateY(180deg) translateX(0)}25%{transform:rotateY(180deg) translateX(-5px)}75%{transform:rotateY(180deg) translateX(5px)}}
+
+.card-face{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;border:2px solid rgba(255,255,255,.1)}
+.card-face.front{background:linear-gradient(135deg,rgba(106,17,203,.3),rgba(37,117,252,.3));border-color:rgba(106,17,203,.3)}
+.card-face.front .card-logo{font-size:2em;opacity:.6}
+.card-face.front::after{content:'?';position:absolute;font-size:1.6em;font-weight:800;color:rgba(255,255,255,.15)}
+
+.card-face.back{transform:rotateY(180deg);background:linear-gradient(145deg,#1a1a2e,#16213e);border-color:rgba(255,255,255,.15)}
+.card-icon{font-size:1.8em;margin-bottom:6px}
+.card-label{font-size:.72em;font-weight:700;line-height:1.25;color:rgba(255,255,255,.9);word-break:break-word}
+
+/* Matched pair glow pulse */
+.mem-card.matched .card-face.back{animation:matchGlow 1s ease forwards}
+@keyframes matchGlow{0%{box-shadow:0 0 0 rgba(0,255,157,0)}50%{box-shadow:0 0 25px rgba(0,255,157,.5)}100%{box-shadow:0 0 10px rgba(0,255,157,.25)}}
+
+/* End Screen */
+.end-hero{text-align:center;padding:50px 20px;max-width:600px;margin:0 auto}
+.end-hero .end-emoji{font-size:4em;display:block;margin-bottom:16px;animation:endBounce .6s ease .2s both}
+@keyframes endBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+.end-hero h1{font-family:'DM Serif Display',serif;font-size:2.3em;margin-bottom:10px;background:linear-gradient(135deg,var(--gold),#ff6b35);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.end-sub{color:var(--sub);font-size:1.05em;margin-bottom:10px}
+.score-breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px auto;max-width:380px}
+.sb-item{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 10px}
+.sb-value{font-size:2em;font-weight:800;display:block}.sb-label{font-size:.75em;color:var(--sub);margin-top:2px}
+.sb-time .sb-value{color:var(--gold)}.sb-moves .sb-value{color:var(--blue)}.sb-pairs .sb-value{color:var(--green)}
+.end-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.end-btn{padding:14px 28px;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;transition:all .2s;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.end-btn:hover{transform:translateY(-2px)}
+.end-btn-primary{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;box-shadow:0 4px 15px rgba(106,17,203,.3)}
+.end-btn-secondary{background:rgba(255,255,255,.08);color:var(--sub);border:1px solid rgba(255,255,255,.12)}
+.end-btn-home{background:rgba(255,215,0,.15);color:var(--gold);border:1px solid rgba(255,215,0,.3)}
+
+@media(max-width:500px){
+  .card-grid.grid-4x4{grid-template-columns:repeat(4,1fr);gap:6px}
+  .card-icon{font-size:1.4em;margin-bottom:4px}
+  .card-label{font-size:.62em}
+  .start-hero h1{font-size:2em}
+  .mem-card{aspect-ratio:.7}
+}
+@media(max-width:400px){
+  .card-grid.grid-6x4{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="../../all-games.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Games</a>
+  <span class="logo">NothingButTheTruth</span>
+</div>
+
+<!-- Start Screen -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <span class="game-icon">🃏</span>
+    <h1>Bible Memory Match</h1>
+    <p class="tagline">Flip cards and find matching biblical pairs. Train your memory with prophets, miracles, and Scripture!</p>
+    <div class="how-to">
+      <h3><i class="fas fa-brain"></i> How to Play</h3>
+      <ul>
+        <li>Click a card to flip it and reveal what's underneath</li>
+        <li>Click a second card — if the two cards form a biblical pair, they stay face-up</li>
+        <li>If they don't match, both flip back face-down</li>
+        <li>Remember card positions to find all pairs in fewer moves!</li>
+        <li>Complete the board as fast as possible for the best score</li>
+      </ul>
+    </div>
+    <h3 style="margin-bottom:14px;color:var(--sub)">Choose Difficulty</h3>
+    <div class="diff-pick">
+      <button class="diff-btn" onclick="startGame('easy')">🟢 Easy<small>8 cards · 4 pairs</small></button>
+      <button class="diff-btn" onclick="startGame('medium')">🟡 Medium<small>16 cards · 8 pairs</small></button>
+      <button class="diff-btn" onclick="startGame('hard')">🔴 Hard<small>20 cards · 10 pairs</small></button>
+    </div>
+  </div>
+</div>
+
+<!-- Game Screen -->
+<div class="screen" id="gameScreen">
+  <div class="game-area">
+    <div class="game-top">
+      <h2 id="gameTitle">Memory Match</h2>
+      <div class="stats">
+        <div class="stat stat-moves"><i class="fas fa-hand-pointer"></i> <span class="stat-val" id="movesVal">0</span></div>
+        <div class="stat stat-matches"><i class="fas fa-check-double"></i> <span class="stat-val" id="matchesVal">0</span></div>
+        <div class="stat stat-timer"><i class="fas fa-clock"></i> <span class="stat-val" id="timerVal">0:00</span></div>
+      </div>
+    </div>
+    <div class="card-grid" id="cardGrid"></div>
+  </div>
+</div>
+
+<!-- End Screen -->
+<div class="screen" id="endScreen">
+  <div class="end-hero">
+    <span class="end-emoji" id="endEmoji">🎉</span>
+    <h1 id="endTitle">All Matched!</h1>
+    <p class="end-sub" id="endSub">Great memory!</p>
+    <div class="score-breakdown">
+      <div class="sb-item sb-time"><span class="sb-value" id="sbTime">0:00</span><span class="sb-label">Time</span></div>
+      <div class="sb-item sb-moves"><span class="sb-value" id="sbMoves">0</span><span class="sb-label">Moves</span></div>
+      <div class="sb-item sb-pairs"><span class="sb-value" id="sbPairs">0</span><span class="sb-label">Pairs</span></div>
+    </div>
+    <div class="end-actions">
+      <button class="end-btn end-btn-primary" onclick="goToStart()"><i class="fas fa-redo"></i> Play Again</button>
+      <a href="../../all-games.html" class="end-btn end-btn-secondary"><i class="fas fa-gamepad"></i> All Games</a>
+      <a href="../../index.html" class="end-btn end-btn-home"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// PAIR DATA — each pair has two matching sides
+// ═══════════════════════════════════════════
+const PAIR_POOL = [
+  { a: { icon: "📖", label: "Genesis" },       b: { icon: "🌍", label: "Creation" } },
+  { a: { icon: "🕊️", label: "Noah" },          b: { icon: "🌈", label: "The Flood" } },
+  { a: { icon: "🔥", label: "Moses" },          b: { icon: "🌊", label: "Red Sea Parting" } },
+  { a: { icon: "👑", label: "David" },           b: { icon: "💪", label: "Defeated Goliath" } },
+  { a: { icon: "🦁", label: "Daniel" },          b: { icon: "🕳️", label: "Lions' Den" } },
+  { a: { icon: "🐋", label: "Jonah" },           b: { icon: "🐟", label: "Swallowed by Fish" } },
+  { a: { icon: "⭐", label: "Bethlehem" },       b: { icon: "👶", label: "Jesus Born" } },
+  { a: { icon: "🍞", label: "5 Loaves" },        b: { icon: "🐟", label: "2 Fish" } },
+  { a: { icon: "✝️", label: "Calvary" },         b: { icon: "🩸", label: "Crucifixion" } },
+  { a: { icon: "🪨", label: "Empty Tomb" },      b: { icon: "🌅", label: "Resurrection" } },
+  { a: { icon: "🔑", label: "Peter" },           b: { icon: "⛪", label: "Rock of Church" } },
+  { a: { icon: "⚡", label: "Paul" },            b: { icon: "🛤️", label: "Damascus Road" } },
+  { a: { icon: "🏛️", label: "Solomon" },         b: { icon: "⛩️", label: "Built the Temple" } },
+  { a: { icon: "💧", label: "Baptism" },         b: { icon: "🕊️", label: "Holy Spirit Descends" } },
+  { a: { icon: "🎺", label: "Joshua" },          b: { icon: "🧱", label: "Walls of Jericho" } },
+  { a: { icon: "🌾", label: "Ruth" },            b: { icon: "❤️", label: "Loyalty to Naomi" } },
+  { a: { icon: "🐑", label: "Good Shepherd" },   b: { icon: "✨", label: "Jesus (John 10)" } },
+  { a: { icon: "🍇", label: "Vine & Branches" }, b: { icon: "🌿", label: "Jesus (John 15)" } },
+  { a: { icon: "🗡️", label: "Sword of Spirit" }, b: { icon: "📜", label: "Word of God" } },
+  { a: { icon: "🛡️", label: "Shield of Faith" }, b: { icon: "⚔️", label: "Armor of God" } },
+];
+
+let cards = [];
+let flippedCards = [];
+let matchedCount = 0;
+let moves = 0;
+let totalPairs = 0;
+let timerInterval = null;
+let seconds = 0;
+let lockBoard = false;
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+function goToStart() { clearInterval(timerInterval); showScreen('startScreen'); }
+
+function startGame(diff) {
+  const pairCount = diff === 'easy' ? 4 : diff === 'medium' ? 8 : 10;
+  totalPairs = pairCount;
+  matchedCount = 0; moves = 0; seconds = 0; flippedCards = []; lockBoard = false;
+
+  // Pick random pairs
+  const shuffled = [...PAIR_POOL].sort(() => Math.random() - .5);
+  const chosen = shuffled.slice(0, pairCount);
+
+  // Create card array: each pair → 2 cards
+  cards = [];
+  chosen.forEach((pair, i) => {
+    cards.push({ id: i, side: 'a', icon: pair.a.icon, label: pair.a.label, pairId: i });
+    cards.push({ id: i, side: 'b', icon: pair.b.icon, label: pair.b.label, pairId: i });
+  });
+  // Shuffle cards
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+
+  updateStats();
+  renderGrid(diff);
+  startTimer();
+  document.getElementById('gameTitle').textContent = diff.charAt(0).toUpperCase() + diff.slice(1) + ' Mode';
+  showScreen('gameScreen');
+}
+
+function renderGrid(diff) {
+  const grid = document.getElementById('cardGrid');
+  grid.className = 'card-grid ' + (diff === 'easy' ? 'grid-4x4' : diff === 'medium' ? 'grid-4x4' : 'grid-4x5');
+  grid.innerHTML = '';
+
+  cards.forEach((card, idx) => {
+    const el = document.createElement('div');
+    el.className = 'mem-card';
+    el.dataset.idx = idx;
+    el.innerHTML = `
+      <div class="card-face front"><span class="card-logo">✝️</span></div>
+      <div class="card-face back"><span class="card-icon">${card.icon}</span><span class="card-label">${card.label}</span></div>
+    `;
+    el.addEventListener('click', () => handleFlip(el, idx));
+    grid.appendChild(el);
+  });
+}
+
+function handleFlip(el, idx) {
+  if (lockBoard) return;
+  if (el.classList.contains('flipped') || el.classList.contains('matched')) return;
+  if (flippedCards.length >= 2) return;
+
+  el.classList.add('flipped');
+  flippedCards.push({ el, idx, card: cards[idx] });
+
+  if (flippedCards.length === 2) {
+    moves++;
+    updateStats();
+    checkMatch();
+  }
+}
+
+function checkMatch() {
+  const [first, second] = flippedCards;
+  lockBoard = true;
+
+  if (first.card.pairId === second.card.pairId && first.card.side !== second.card.side) {
+    // Match!
+    setTimeout(() => {
+      first.el.classList.add('matched');
+      second.el.classList.add('matched');
+      matchedCount++;
+      updateStats();
+      flippedCards = [];
+      lockBoard = false;
+      if (matchedCount === totalPairs) {
+        clearInterval(timerInterval);
+        setTimeout(showEnd, 600);
+      }
+    }, 400);
+  } else {
+    // No match
+    setTimeout(() => {
+      first.el.classList.add('wrong');
+      second.el.classList.add('wrong');
+      setTimeout(() => {
+        first.el.classList.remove('flipped', 'wrong');
+        second.el.classList.remove('flipped', 'wrong');
+        flippedCards = [];
+        lockBoard = false;
+      }, 600);
+    }, 700);
+  }
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  seconds = 0;
+  timerInterval = setInterval(() => {
+    seconds++;
+    document.getElementById('timerVal').textContent = fmtTime(seconds);
+  }, 1000);
+}
+function fmtTime(s) { return Math.floor(s/60) + ':' + (s%60<10?'0':'') + s%60; }
+
+function updateStats() {
+  document.getElementById('movesVal').textContent = moves;
+  document.getElementById('matchesVal').textContent = matchedCount + '/' + totalPairs;
+  document.getElementById('timerVal').textContent = fmtTime(seconds);
+}
+
+function showEnd() {
+  const efficiency = totalPairs / Math.max(moves, 1);
+  let emoji, title, sub;
+  if (efficiency >= .9) { emoji = '👑'; title = 'Perfect Memory!'; sub = 'Incredible — almost no wasted moves!'; }
+  else if (efficiency >= .6) { emoji = '🌟'; title = 'Sharp Mind!'; sub = 'Great recall — you remembered most positions!'; }
+  else if (efficiency >= .4) { emoji = '💪'; title = 'Well Done!'; sub = 'Good effort — practice makes perfect!'; }
+  else { emoji = '📖'; title = 'Keep Practicing!'; sub = 'Memory improves with repetition — try again!'; }
+
+  document.getElementById('endEmoji').textContent = emoji;
+  document.getElementById('endTitle').textContent = title;
+  document.getElementById('endSub').textContent = sub;
+  document.getElementById('sbTime').textContent = fmtTime(seconds);
+  document.getElementById('sbMoves').textContent = moves;
+  document.getElementById('sbPairs').textContent = totalPairs;
+  showScreen('endScreen');
+}
+</script>
+</body>
+</html>

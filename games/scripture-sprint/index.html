@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scripture Sprint — Verse Matching Game | NothingButTheTruth</title>
+<meta name="description" content="Race to match Bible verse references with their content! Build combos for bonus points across 3 difficulty levels. A fast-paced Scripture knowledge game.">
+<meta name="keywords" content="Scripture Sprint, Bible verse matching, Bible reference game, Scripture game, Bible quiz speed, combo Bible game, NothingButTheTruth, free Bible games">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/scripture-sprint/index.html">
+<meta property="og:title" content="Scripture Sprint — Verse Matching Game">
+<meta property="og:description" content="Race to match Bible verse references with their content! Build combos for bonus points.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/scripture-sprint/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scripture Sprint — Verse Matching Game | NothingButTheTruth">
+<meta name="twitter:description" content="Race to match Bible verse references with their content! Free to play.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Scripture Sprint","description":"Race to match Bible verse references with their content in this fast-paced Scripture game.","url":"https://nothingbutthetruth.web.app/games/scripture-sprint/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a14;--card:rgba(255,255,255,0.06);--glass:rgba(255,255,255,0.08);
+  --purple:#8b5cf6;--blue:#3b82f6;--green:#10b981;--gold:#f59e0b;
+  --pink:#ec4899;--red:#ef4444;--text:#f1f5f9;--sub:rgba(255,255,255,0.55);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);
+  min-height:100vh;overflow-x:hidden;
+  background-image:radial-gradient(ellipse at 20% 50%,rgba(139,92,246,0.12) 0%,transparent 60%),
+                   radial-gradient(ellipse at 80% 30%,rgba(59,130,246,0.1) 0%,transparent 60%);}
+
+/* ── Top bar ── */
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;
+  background:rgba(255,255,255,0.04);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06)}
+.top-bar a{color:var(--sub);text-decoration:none;font-size:.85rem;transition:.3s}
+.top-bar a:hover{color:#fff}
+.top-bar h1{font-family:'DM Serif Display',serif;font-size:1.15rem;background:linear-gradient(135deg,var(--purple),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ── Screens ── */
+.screen{display:none;max-width:760px;margin:0 auto;padding:32px 20px;text-align:center}
+.screen.active{display:block}
+
+/* ── Start screen ── */
+.start-hero{margin-top:40px}
+.start-hero h2{font-family:'DM Serif Display',serif;font-size:2.4rem;margin-bottom:12px;
+  background:linear-gradient(135deg,var(--gold),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.start-hero p{color:var(--sub);max-width:480px;margin:0 auto 28px;line-height:1.7;font-size:.95rem}
+.how-to{display:grid;gap:14px;max-width:440px;margin:0 auto 36px;text-align:left}
+.how-to div{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border-radius:12px;border:1px solid rgba(255,255,255,0.06)}
+.how-to span.icon{font-size:1.4em;width:36px;text-align:center;flex-shrink:0}
+.how-to span.txt{font-size:.85rem;color:var(--sub)}
+.how-to strong{color:#fff}
+
+.diff-pick{display:flex;gap:10px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+.diff-btn{padding:10px 22px;border:2px solid rgba(255,255,255,0.12);background:transparent;color:var(--sub);
+  border-radius:10px;cursor:pointer;font-family:'Poppins',sans-serif;font-weight:600;font-size:.85rem;transition:.3s}
+.diff-btn:hover,.diff-btn.active{border-color:var(--purple);color:#fff;background:rgba(139,92,246,0.15)}
+
+.start-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 40px;
+  background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;border:none;
+  border-radius:14px;font-size:1.05rem;font-weight:700;cursor:pointer;
+  font-family:'Poppins',sans-serif;transition:transform .2s,box-shadow .3s;
+  box-shadow:0 4px 20px rgba(139,92,246,0.35)}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(139,92,246,0.5)}
+
+/* ── Game screen ── */
+.game-hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px;flex-wrap:wrap}
+.hud-item{display:flex;align-items:center;gap:6px;font-size:.85rem;color:var(--sub);
+  padding:8px 14px;background:var(--card);border-radius:10px;border:1px solid rgba(255,255,255,0.06)}
+.hud-item .val{color:#fff;font-weight:700;min-width:28px;text-align:center}
+.hud-item.combo .val{color:var(--gold)}
+.hud-item.timer .val{font-family:'DM Serif Display',serif;font-size:1.1rem}
+
+.timer-bar{height:6px;border-radius:4px;background:rgba(255,255,255,0.08);margin-bottom:24px;overflow:hidden}
+.timer-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--blue));transition:width .3s linear}
+.timer-fill.warn{background:linear-gradient(90deg,var(--gold),var(--red))}
+.timer-fill.danger{background:var(--red);animation:pulseFill .5s infinite alternate}
+@keyframes pulseFill{0%{opacity:.7}100%{opacity:1}}
+
+/* Question area */
+.question-card{background:var(--glass);border:1px solid rgba(255,255,255,0.08);border-radius:18px;
+  padding:28px 24px;margin-bottom:24px;position:relative;overflow:hidden}
+.question-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(circle,rgba(139,92,246,0.06) 0%,transparent 60%);pointer-events:none}
+.q-label{font-size:.75rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--purple);font-weight:700;margin-bottom:10px}
+.q-reference{font-family:'DM Serif Display',serif;font-size:1.6rem;color:#fff;line-height:1.4}
+.q-verse{font-size:1rem;color:var(--sub);line-height:1.7;margin-top:12px;font-style:italic}
+
+/* Answers */
+.answers{display:grid;gap:10px}
+.ans-btn{width:100%;text-align:left;padding:16px 20px;background:var(--card);border:2px solid rgba(255,255,255,0.08);
+  border-radius:14px;color:var(--text);font-size:.92rem;line-height:1.5;cursor:pointer;
+  font-family:'Poppins',sans-serif;transition:all .25s ease;position:relative;overflow:hidden}
+.ans-btn:hover:not(.disabled){border-color:rgba(139,92,246,0.4);background:rgba(139,92,246,0.1);transform:translateY(-1px)}
+.ans-btn.correct{border-color:var(--green);background:rgba(16,185,129,0.15);animation:correctPop .4s ease}
+.ans-btn.wrong{border-color:var(--red);background:rgba(239,68,68,0.12);animation:shake .4s ease}
+.ans-btn.disabled{pointer-events:none;opacity:.55}
+.ans-btn .ans-letter{font-weight:700;color:var(--purple);margin-right:8px}
+@keyframes correctPop{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* Combo streak banner */
+.combo-banner{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);
+  font-family:'DM Serif Display',serif;font-size:2.4rem;color:var(--gold);text-shadow:0 0 30px rgba(245,158,11,0.5);
+  pointer-events:none;z-index:100;transition:transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s}
+.combo-banner.show{transform:translate(-50%,-50%) scale(1);opacity:1}
+
+/* ── Results screen ── */
+.results-card{background:var(--glass);border:1px solid rgba(255,255,255,0.08);border-radius:20px;
+  padding:36px 28px;margin-top:24px;text-align:center}
+.results-card h2{font-family:'DM Serif Display',serif;font-size:2rem;margin-bottom:8px;
+  background:linear-gradient(135deg,var(--gold),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.results-card .grade{font-size:3.5rem;margin:16px 0}
+.stat-row{display:flex;justify-content:center;gap:20px;margin:20px 0;flex-wrap:wrap}
+.stat-box{padding:16px 24px;background:var(--card);border-radius:14px;border:1px solid rgba(255,255,255,0.06);min-width:110px}
+.stat-box .num{font-family:'DM Serif Display',serif;font-size:1.8rem;color:#fff}
+.stat-box .lbl{font-size:.75rem;color:var(--sub);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.missed-list{text-align:left;margin:24px 0}
+.missed-list h3{font-size:.9rem;color:var(--sub);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px}
+.missed-item{padding:14px 16px;background:var(--card);border-radius:12px;margin-bottom:8px;border-left:3px solid var(--red)}
+.missed-item strong{color:#fff;display:block;margin-bottom:4px;font-size:.9rem}
+.missed-item span{color:var(--sub);font-size:.82rem;font-style:italic;line-height:1.5}
+
+.btn-group{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.btn-group button,.btn-group a{padding:12px 28px;border-radius:12px;font-family:'Poppins',sans-serif;font-weight:600;
+  font-size:.9rem;cursor:pointer;text-decoration:none;transition:.3s;border:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;box-shadow:0 4px 16px rgba(139,92,246,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,92,246,0.45)}
+.btn-outline{background:transparent;border:2px solid rgba(255,255,255,0.15);color:var(--sub)}
+.btn-outline:hover{border-color:var(--purple);color:#fff}
+
+/* ── Progress dots ── */
+.progress-dots{display:flex;gap:6px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+.progress-dots .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.12);transition:.3s}
+.progress-dots .dot.done{background:var(--green);box-shadow:0 0 8px rgba(16,185,129,0.4)}
+.progress-dots .dot.miss{background:var(--red);box-shadow:0 0 8px rgba(239,68,68,0.4)}
+.progress-dots .dot.current{background:var(--purple);box-shadow:0 0 10px rgba(139,92,246,0.5);transform:scale(1.3)}
+
+/* ── Floating particles ── */
+.particles{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+.particle{position:absolute;border-radius:50%;opacity:0;animation:particleDrift linear infinite}
+@keyframes particleDrift{0%{transform:translateY(0) scale(.5);opacity:0}5%{opacity:.4}50%{opacity:.25}100%{transform:translateY(-100vh) scale(1);opacity:0}}
+
+@media(max-width:600px){
+  .start-hero h2{font-size:1.8rem}
+  .q-reference{font-size:1.2rem}
+  .results-card h2{font-size:1.5rem}
+  .stat-row{gap:10px}
+  .stat-box{min-width:90px;padding:12px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<div class="top-bar">
+  <a href="../../index.html"><i class="fas fa-arrow-left"></i> Home</a>
+  <h1>📜 Scripture Sprint</h1>
+  <a href="../../all-games.html">All Games <i class="fas fa-gamepad"></i></a>
+</div>
+
+<!-- ══ START SCREEN ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <h2>Scripture Sprint</h2>
+    <p>Race to match Bible verse references with their content! Build combos for bonus points and beat the clock.</p>
+
+    <div class="how-to">
+      <div><span class="icon">📖</span><span class="txt"><strong>Read</strong> the verse text shown on screen</span></div>
+      <div><span class="icon">🎯</span><span class="txt"><strong>Pick</strong> the correct reference from 4 options</span></div>
+      <div><span class="icon">🔥</span><span class="txt"><strong>Combo!</strong> Consecutive correct answers = bonus multiplier</span></div>
+      <div><span class="icon">⏱️</span><span class="txt"><strong>Speed</strong> matters — faster answers earn more points</span></div>
+    </div>
+
+    <div class="diff-pick">
+      <button class="diff-btn active" data-diff="easy">🌱 Easy</button>
+      <button class="diff-btn" data-diff="medium">⚡ Medium</button>
+      <button class="diff-btn" data-diff="hard">🔥 Hard</button>
+    </div>
+
+    <button class="start-btn" id="startBtn">
+      <i class="fas fa-play"></i> Start Sprint
+    </button>
+  </div>
+</div>
+
+<!-- ══ GAME SCREEN ══ -->
+<div class="screen" id="gameScreen">
+  <div class="progress-dots" id="progressDots"></div>
+  <div class="game-hud">
+    <div class="hud-item timer"><i class="fas fa-clock"></i> <span class="val" id="timerDisplay">30</span></div>
+    <div class="hud-item"><i class="fas fa-star"></i> <span class="val" id="scoreDisplay">0</span></div>
+    <div class="hud-item combo"><i class="fas fa-fire"></i> <span class="val" id="comboDisplay">0x</span></div>
+    <div class="hud-item"><i class="fas fa-hashtag"></i> <span class="val" id="questionNum">1/10</span></div>
+  </div>
+  <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
+  <div class="question-card">
+    <div class="q-label" id="qLabel">Match this verse</div>
+    <div class="q-verse" id="qVerse"></div>
+  </div>
+  <div class="answers" id="answersContainer"></div>
+</div>
+
+<!-- ══ RESULTS SCREEN ══ -->
+<div class="screen" id="resultsScreen">
+  <div class="results-card">
+    <h2>Sprint Complete!</h2>
+    <div class="grade" id="gradeEmoji">🏆</div>
+    <div class="stat-row">
+      <div class="stat-box"><div class="num" id="finalScore">0</div><div class="lbl">Points</div></div>
+      <div class="stat-box"><div class="num" id="finalCorrect">0</div><div class="lbl">Correct</div></div>
+      <div class="stat-box"><div class="num" id="finalCombo">0</div><div class="lbl">Best Combo</div></div>
+      <div class="stat-box"><div class="num" id="finalAccuracy">0%</div><div class="lbl">Accuracy</div></div>
+    </div>
+    <div class="missed-list" id="missedList"></div>
+    <div class="btn-group">
+      <button class="btn-primary" id="playAgainBtn"><i class="fas fa-redo"></i> Play Again</button>
+      <a class="btn-outline" href="../../all-games.html"><i class="fas fa-gamepad"></i> All Games</a>
+      <a class="btn-outline" href="../../index.html"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<div class="combo-banner" id="comboBanner"></div>
+
+<script>
+/* ════════════════════════════════════════════
+   SCRIPTURE SPRINT — verse → reference matching
+   ════════════════════════════════════════════ */
+
+const VERSES = [
+  { ref: "John 3:16", text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." },
+  { ref: "Psalm 23:1", text: "The Lord is my shepherd; I shall not want." },
+  { ref: "Philippians 4:13", text: "I can do all things through Christ which strengtheneth me." },
+  { ref: "Romans 8:28", text: "And we know that all things work together for good to them that love God, to them who are the called according to his purpose." },
+  { ref: "Proverbs 3:5", text: "Trust in the Lord with all thine heart; and lean not unto thine own understanding." },
+  { ref: "Isaiah 40:31", text: "But they that wait upon the Lord shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary." },
+  { ref: "Jeremiah 29:11", text: "For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end." },
+  { ref: "Matthew 28:19", text: "Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost." },
+  { ref: "Romans 3:23", text: "For all have sinned, and come short of the glory of God." },
+  { ref: "Ephesians 2:8", text: "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God." },
+  { ref: "Genesis 1:1", text: "In the beginning God created the heaven and the earth." },
+  { ref: "Joshua 1:9", text: "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed." },
+  { ref: "Psalm 119:105", text: "Thy word is a lamp unto my feet, and a light unto my path." },
+  { ref: "Matthew 5:14", text: "Ye are the light of the world. A city that is set on an hill cannot be hid." },
+  { ref: "Romans 6:23", text: "For the wages of sin is death; but the gift of God is eternal life through Jesus Christ our Lord." },
+  { ref: "Hebrews 11:1", text: "Now faith is the substance of things hoped for, the evidence of things not seen." },
+  { ref: "2 Timothy 1:7", text: "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind." },
+  { ref: "Galatians 5:22", text: "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith." },
+  { ref: "1 Corinthians 13:4", text: "Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up." },
+  { ref: "Psalm 46:10", text: "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth." },
+  { ref: "Matthew 6:33", text: "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you." },
+  { ref: "John 14:6", text: "Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me." },
+  { ref: "Isaiah 41:10", text: "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee." },
+  { ref: "Psalm 37:4", text: "Delight thyself also in the Lord; and he shall give thee the desires of thine heart." },
+  { ref: "Romans 12:2", text: "And be not conformed to this world: but be ye transformed by the renewing of your mind." },
+  { ref: "Colossians 3:23", text: "And whatsoever ye do, do it heartily, as to the Lord, and not unto men." },
+  { ref: "1 John 4:19", text: "We love him, because he first loved us." },
+  { ref: "2 Corinthians 5:17", text: "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new." },
+  { ref: "Psalm 139:14", text: "I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works." },
+  { ref: "Matthew 11:28", text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest." },
+  { ref: "Revelation 21:4", text: "And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying." },
+  { ref: "James 1:5", text: "If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not." },
+  { ref: "Proverbs 18:10", text: "The name of the Lord is a strong tower: the righteous runneth into it, and is safe." },
+  { ref: "1 Peter 5:7", text: "Casting all your care upon him; for he careth for you." },
+  { ref: "Deuteronomy 31:6", text: "Be strong and of a good courage, fear not, nor be afraid of them: for the Lord thy God, he it is that doth go with thee." },
+  { ref: "Mark 11:24", text: "Therefore I say unto you, What things soever ye desire, when ye pray, believe that ye receive them, and ye shall have them." },
+  { ref: "John 1:1", text: "In the beginning was the Word, and the Word was with God, and the Word was God." },
+  { ref: "Psalm 27:1", text: "The Lord is my light and my salvation; whom shall I fear? the Lord is the strength of my life; of whom shall I be afraid?" },
+  { ref: "Philippians 4:6", text: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God." },
+  { ref: "Hebrews 13:8", text: "Jesus Christ the same yesterday, and to day, and for ever." }
+];
+
+const DIFFICULTY = { easy: { time: 30, questions: 10 }, medium: { time: 20, questions: 15 }, hard: { time: 12, questions: 20 } };
+let diff = 'easy', questions = [], current = 0, score = 0, combo = 0, bestCombo = 0, missed = [];
+let timer, timeLeft, maxTime, answered;
+
+// DOM
+const $ = id => document.getElementById(id);
+const startScreen = $('startScreen'), gameScreen = $('gameScreen'), resultsScreen = $('resultsScreen');
+
+// ── Particles ──
+(function(){
+  const c = $('particles');
+  const colors = ['rgba(139,92,246,.3)','rgba(59,130,246,.25)','rgba(236,72,153,.2)','rgba(245,158,11,.2)'];
+  for(let i = 0; i < 20; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const s = 4 + Math.random()*12;
+    Object.assign(p.style,{
+      width:s+'px', height:s+'px', left:Math.random()*100+'%', bottom:'-20px',
+      background:colors[i%colors.length],
+      animationDuration:(10+Math.random()*18)+'s',
+      animationDelay:(Math.random()*12)+'s'
+    });
+    c.appendChild(p);
+  }
+})();
+
+// ── Difficulty buttons ──
+document.querySelectorAll('.diff-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.diff-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    diff = b.dataset.diff;
+  });
+});
+
+// ── Start game ──
+$('startBtn').addEventListener('click', startGame);
+$('playAgainBtn').addEventListener('click', startGame);
+
+function startGame() {
+  const cfg = DIFFICULTY[diff];
+  maxTime = cfg.time;
+  const pool = shuffle([...VERSES]);
+  questions = pool.slice(0, cfg.questions);
+  current = 0; score = 0; combo = 0; bestCombo = 0; missed = [];
+  showScreen(gameScreen);
+  buildProgressDots();
+  nextQuestion();
+}
+
+function showScreen(s) {
+  [startScreen, gameScreen, resultsScreen].forEach(x => x.classList.remove('active'));
+  s.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function buildProgressDots() {
+  const d = $('progressDots');
+  d.innerHTML = '';
+  questions.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (i === 0 ? ' current' : '');
+    d.appendChild(dot);
+  });
+}
+
+function nextQuestion() {
+  if (current >= questions.length) return endGame();
+  answered = false;
+  const q = questions[current];
+  $('questionNum').textContent = (current + 1) + '/' + questions.length;
+  $('qVerse').textContent = '"' + q.text + '"';
+  $('qLabel').textContent = 'Which verse is this?';
+  
+  // Build 4 options (1 correct + 3 distractors)
+  const distractors = VERSES.filter(v => v.ref !== q.ref);
+  const picks = shuffle(distractors).slice(0, 3);
+  picks.push(q);
+  const options = shuffle(picks);
+  
+  const letters = ['A', 'B', 'C', 'D'];
+  const ac = $('answersContainer');
+  ac.innerHTML = '';
+  options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'ans-btn';
+    btn.innerHTML = '<span class="ans-letter">' + letters[i] + '</span>' + opt.ref;
+    btn.addEventListener('click', () => checkAnswer(btn, opt.ref === q.ref, q));
+    ac.appendChild(btn);
+  });
+  
+  // Start timer
+  timeLeft = maxTime;
+  $('timerDisplay').textContent = timeLeft;
+  $('timerFill').style.width = '100%';
+  $('timerFill').className = 'timer-fill';
+  clearInterval(timer);
+  timer = setInterval(tickTimer, 1000);
+  
+  // Update progress dots
+  const dots = $('progressDots').children;
+  for (let i = 0; i < dots.length; i++) dots[i].classList.toggle('current', i === current);
+}
+
+function tickTimer() {
+  timeLeft--;
+  $('timerDisplay').textContent = timeLeft;
+  const pct = (timeLeft / maxTime) * 100;
+  const fill = $('timerFill');
+  fill.style.width = pct + '%';
+  fill.className = 'timer-fill' + (pct <= 20 ? ' danger' : pct <= 40 ? ' warn' : '');
+  if (timeLeft <= 0) {
+    clearInterval(timer);
+    checkAnswer(null, false, questions[current]);
+  }
+}
+
+function checkAnswer(btn, isCorrect, q) {
+  if (answered) return;
+  answered = true;
+  clearInterval(timer);
+  
+  const btns = $('answersContainer').querySelectorAll('.ans-btn');
+  btns.forEach(b => {
+    b.classList.add('disabled');
+    if (b.textContent.includes(q.ref.replace(/\s/g, ''))) {
+      // Find correct button by matching reference text
+    }
+  });
+  
+  // Highlight correct answer
+  btns.forEach(b => {
+    if (b.textContent.substring(1) === q.ref) b.classList.add('correct');
+  });
+  
+  const dots = $('progressDots').children;
+  
+  if (isCorrect) {
+    if (btn) btn.classList.add('correct');
+    combo++;
+    if (combo > bestCombo) bestCombo = combo;
+    const timeBonus = Math.round((timeLeft / maxTime) * 50);
+    const comboMult = Math.min(combo, 5);
+    const pts = (100 + timeBonus) * comboMult;
+    score += pts;
+    $('scoreDisplay').textContent = score;
+    $('comboDisplay').textContent = combo + 'x';
+    dots[current].classList.add('done');
+    dots[current].classList.remove('current');
+    
+    if (combo >= 3) showComboBanner(combo);
+  } else {
+    if (btn) btn.classList.add('wrong');
+    combo = 0;
+    $('comboDisplay').textContent = '0x';
+    missed.push(q);
+    dots[current].classList.add('miss');
+    dots[current].classList.remove('current');
+  }
+  
+  current++;
+  setTimeout(nextQuestion, 1100);
+}
+
+function showComboBanner(c) {
+  const b = $('comboBanner');
+  const msgs = { 3: '🔥 Triple!', 4: '⚡ Quad!', 5: '💥 Penta!!' };
+  b.textContent = msgs[c] || '🌟 ' + c + 'x Streak!';
+  b.classList.add('show');
+  setTimeout(() => b.classList.remove('show'), 1200);
+}
+
+function endGame() {
+  clearInterval(timer);
+  const correct = questions.length - missed.length;
+  const accuracy = Math.round((correct / questions.length) * 100);
+  
+  $('finalScore').textContent = score;
+  $('finalCorrect').textContent = correct + '/' + questions.length;
+  $('finalCombo').textContent = bestCombo + 'x';
+  $('finalAccuracy').textContent = accuracy + '%';
+  
+  // Grade emoji
+  const g = $('gradeEmoji');
+  if (accuracy >= 90) g.textContent = '🏆';
+  else if (accuracy >= 70) g.textContent = '⭐';
+  else if (accuracy >= 50) g.textContent = '📖';
+  else g.textContent = '💪';
+  
+  // Missed list
+  const ml = $('missedList');
+  if (missed.length > 0) {
+    ml.innerHTML = '<h3>📝 Review These Verses</h3>';
+    missed.forEach(m => {
+      ml.innerHTML += '<div class="missed-item"><strong>' + m.ref + '</strong><span>' + m.text + '</span></div>';
+    });
+  } else {
+    ml.innerHTML = '<p style="color:var(--green);font-weight:600;margin:16px 0">🎉 Perfect score — you got every verse right!</p>';
+  }
+  
+  showScreen(resultsScreen);
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+</script>
+</body>
+</html>

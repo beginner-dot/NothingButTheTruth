@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fruit of the Spirit Catcher — Arcade Game | NothingButTheTruth</title>
+<meta name="description" content="Catch the Fruits of the Spirit and dodge the works of the flesh! An arcade-style reaction game based on Galatians 5:22-23. Free to play online.">
+<meta name="keywords" content="Fruit of the Spirit game, Bible arcade game, Christian reaction game, Galatians 5 game, catch game, NothingButTheTruth, free Bible games">
+<meta name="author" content="NothingButTheTruth">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nothingbutthetruth.web.app/games/fruit-catcher/index.html">
+<meta property="og:title" content="Fruit of the Spirit Catcher — Arcade Game">
+<meta property="og:description" content="Catch the Fruits of the Spirit and dodge the works of the flesh! An arcade reaction game.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nothingbutthetruth.web.app/games/fruit-catcher/index.html">
+<meta property="og:site_name" content="NothingButTheTruth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fruit of the Spirit Catcher | NothingButTheTruth">
+<meta name="twitter:description" content="Catch the Fruits of the Spirit and dodge the works of the flesh! Free arcade game.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Fruit of the Spirit Catcher","description":"Catch the Fruits of the Spirit and dodge the works of the flesh in this arcade reaction game based on Galatians 5.","url":"https://nothingbutthetruth.web.app/games/fruit-catcher/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root{--bg:#0a0a14;--card:rgba(255,255,255,0.06);--purple:#6a11cb;--blue:#2575fc;--green:#00ff9d;--gold:#ffd700;--red:#ff4757;--text:#fff;--sub:rgba(255,255,255,0.6)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;user-select:none}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 30% 60%,rgba(0,200,100,.08),transparent 50%),radial-gradient(ellipse at 70% 30%,rgba(106,17,203,.08),transparent 50%);pointer-events:none}
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;position:relative;z-index:10}
+.back-btn{color:var(--sub);text-decoration:none;font-size:.95em;display:flex;align-items:center;gap:6px;transition:color .2s}.back-btn:hover{color:var(--text)}
+.logo{font-weight:800;font-size:1.1em;background:linear-gradient(135deg,var(--purple),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.screen{display:none;position:relative;z-index:5}.screen.active{display:block}
+
+.start-hero{text-align:center;padding:40px 20px;max-width:700px;margin:0 auto}
+.game-icon{font-size:4em;margin-bottom:16px;display:block}
+.start-hero h1{font-family:'DM Serif Display',serif;font-size:2.6em;margin-bottom:12px;background:linear-gradient(135deg,var(--green),#ffd700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.start-hero .tagline{color:var(--sub);font-size:1.1em;margin-bottom:36px}
+.how-to{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px;margin-bottom:36px;text-align:left}
+.how-to h3{margin-bottom:14px;font-size:1.15em}.how-to ul{list-style:none;padding:0}
+.how-to li{padding:6px 0;color:var(--sub);font-size:.95em}.how-to li::before{content:'✦ ';color:var(--green)}
+.verse-box{background:rgba(0,255,157,.06);border:1px solid rgba(0,255,157,.18);border-radius:12px;padding:16px;margin-bottom:32px;font-style:italic;color:var(--green);font-size:.95em}
+.start-btn{padding:18px 44px;border:none;border-radius:14px;background:linear-gradient(135deg,var(--green),#2575fc);color:#fff;font-weight:800;font-size:1.15em;cursor:pointer;transition:all .3s;font-family:inherit}
+.start-btn:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,255,157,.2)}
+
+/* Game Canvas */
+.game-area{position:relative;max-width:500px;margin:0 auto;overflow:hidden}
+.game-header{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;flex-wrap:wrap;gap:8px}
+.game-header h2{font-size:1.1em;color:var(--green)}
+.stats{display:flex;gap:16px;font-size:.9em}.stat{display:flex;align-items:center;gap:5px}.stat-val{font-weight:700}
+.lives{display:flex;gap:4px}
+.canvas-wrap{position:relative;width:100%;aspect-ratio:2/3;background:linear-gradient(180deg,rgba(10,10,20,.9),rgba(5,15,30,.95));border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;touch-action:none}
+canvas{display:block;width:100%;height:100%}
+.catch-flash{position:absolute;pointer-events:none;font-size:1.4em;font-weight:800;animation:flashUp .7s ease forwards;z-index:10}
+@keyframes flashUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-40px) scale(1.3)}}
+.basket{position:absolute;bottom:10px;width:70px;height:40px;background:linear-gradient(135deg,rgba(139,69,19,.8),rgba(160,82,45,.8));border-radius:0 0 14px 14px;border:2px solid rgba(210,180,140,.6);border-top:3px solid rgba(210,180,140,.8);display:flex;align-items:center;justify-content:center;font-size:1.7em;transition:left .05s linear;z-index:5}
+
+/* End */
+.end-hero{text-align:center;padding:50px 20px;max-width:600px;margin:0 auto}
+.end-emoji{font-size:4em;display:block;margin-bottom:16px;animation:endBounce .6s ease .2s both}
+@keyframes endBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}70%{transform:scale(.9)}100%{transform:scale(1)}}
+.end-hero h1{font-family:'DM Serif Display',serif;font-size:2.3em;margin-bottom:10px;background:linear-gradient(135deg,var(--green),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.end-sub{color:var(--sub);font-size:1.05em;margin-bottom:10px}
+.score-board{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px auto;max-width:380px}
+.sb-item{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 10px}
+.sb-value{font-size:1.8em;font-weight:800;display:block}.sb-label{font-size:.7em;color:var(--sub);margin-top:2px}
+.end-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.end-btn{padding:14px 28px;border:none;border-radius:12px;font-weight:700;font-size:1em;cursor:pointer;transition:all .2s;font-family:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.end-btn:hover{transform:translateY(-2px)}
+.end-btn-primary{background:linear-gradient(135deg,var(--green),var(--blue));color:#fff;box-shadow:0 4px 15px rgba(0,255,157,.2)}
+.end-btn-secondary{background:rgba(255,255,255,.08);color:var(--sub);border:1px solid rgba(255,255,255,.12)}
+.end-btn-home{background:rgba(255,215,0,.15);color:var(--gold);border:1px solid rgba(255,215,0,.3)}
+/* Verse learned list */
+.learned{margin:20px auto;max-width:380px;text-align:left}
+.learned h3{font-size:.95em;margin-bottom:10px;color:var(--gold)}
+.learned-item{display:flex;gap:8px;align-items:baseline;padding:5px 0;font-size:.85em;color:var(--sub)}
+.learned-item span:first-child{font-size:1.1em}
+@media(max-width:500px){.start-hero h1{font-size:2em}.canvas-wrap{border-radius:10px}.basket{width:56px;height:34px;font-size:1.3em}}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <a href="../../all-games.html" class="back-btn"><i class="fas fa-arrow-left"></i> All Games</a>
+  <span class="logo">NothingButTheTruth</span>
+</div>
+
+<!-- Start -->
+<div class="screen active" id="startScreen">
+  <div class="start-hero">
+    <span class="game-icon">🍇</span>
+    <h1>Fruit of the Spirit Catcher</h1>
+    <p class="tagline">Catch the fruits of the Spirit falling from heaven — dodge the works of the flesh!</p>
+    <div class="verse-box">"But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control." — Galatians 5:22-23</div>
+    <div class="how-to">
+      <h3><i class="fas fa-gamepad"></i> How to Play</h3>
+      <ul>
+        <li>Move the basket left and right to catch falling items</li>
+        <li>Catch fruits of the Spirit (🍇🍎🍊🍋🫒🍑🌸🍈💐) for points</li>
+        <li>Avoid the works of the flesh (💀🔥😡🐍☠️) — they cost a life!</li>
+        <li>Golden stars (⭐) give bonus points and a temporary speed boost</li>
+        <li>You have 3 lives. Speed increases as your score grows!</li>
+        <li>Each fruit caught teaches you a verse about that virtue</li>
+      </ul>
+    </div>
+    <button class="start-btn" onclick="startGame()"><i class="fas fa-play"></i> Start Catching</button>
+  </div>
+</div>
+
+<!-- Game -->
+<div class="screen" id="gameScreen">
+  <div class="game-area">
+    <div class="game-header">
+      <h2>Score: <span id="scoreVal">0</span></h2>
+      <div class="stats">
+        <div class="stat"><i class="fas fa-fire" style="color:var(--gold)"></i> <span class="stat-val" id="comboVal">x1</span></div>
+        <div class="stat lives" id="livesContainer"></div>
+      </div>
+    </div>
+    <div class="canvas-wrap" id="canvasWrap">
+      <canvas id="gameCanvas"></canvas>
+      <div class="basket" id="basket">🧺</div>
+    </div>
+  </div>
+</div>
+
+<!-- End -->
+<div class="screen" id="endScreen">
+  <div class="end-hero">
+    <span class="end-emoji" id="endEmoji">🍇</span>
+    <h1 id="endTitle">Well Done!</h1>
+    <p class="end-sub" id="endSub">You caught the fruits!</p>
+    <div class="score-board">
+      <div class="sb-item"><span class="sb-value" style="color:var(--gold)" id="sbScore">0</span><span class="sb-label">Score</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--green)" id="sbFruits">0</span><span class="sb-label">Fruits</span></div>
+      <div class="sb-item"><span class="sb-value" style="color:var(--blue)" id="sbCombo">0</span><span class="sb-label">Best Combo</span></div>
+    </div>
+    <div class="learned" id="learnedSection"></div>
+    <div class="end-actions">
+      <button class="end-btn end-btn-primary" onclick="goToStart()"><i class="fas fa-redo"></i> Play Again</button>
+      <a href="../../all-games.html" class="end-btn end-btn-secondary"><i class="fas fa-gamepad"></i> All Games</a>
+      <a href="../../index.html" class="end-btn end-btn-home"><i class="fas fa-home"></i> Home</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const FRUITS = [
+  { emoji:'🍇', name:'Love',         verse:'1 Cor 13:4 — "Love is patient, love is kind."' },
+  { emoji:'🍎', name:'Joy',          verse:'Neh 8:10 — "The joy of the Lord is your strength."' },
+  { emoji:'🍊', name:'Peace',        verse:'John 14:27 — "Peace I leave with you."' },
+  { emoji:'🍋', name:'Patience',     verse:'James 1:4 — "Let patience have its perfect work."' },
+  { emoji:'🫒', name:'Kindness',     verse:'Eph 4:32 — "Be kind to one another."' },
+  { emoji:'🍑', name:'Goodness',     verse:'Ps 23:6 — "Surely goodness shall follow me."' },
+  { emoji:'🌸', name:'Faithfulness', verse:'Lam 3:23 — "Great is Your faithfulness."' },
+  { emoji:'🍈', name:'Gentleness',   verse:'Prov 15:1 — "A gentle answer turns away wrath."' },
+  { emoji:'💐', name:'Self-Control', verse:'Prov 25:28 — "Like a city without walls is one lacking self-control."' },
+];
+const BADS = [
+  { emoji:'💀', name:'Hatred' },
+  { emoji:'🔥', name:'Wrath' },
+  { emoji:'😡', name:'Jealousy' },
+  { emoji:'🐍', name:'Deceit' },
+  { emoji:'☠️', name:'Strife' },
+];
+const BONUS = { emoji:'⭐', name:'Blessing' };
+
+let canvas, ctx, wrap, basketEl;
+let items=[], score=0, combo=1, maxCombo=1, lives=3, fruitsCaught=0;
+let basketX=0, basketW=70, gameActive=false, animId;
+let learnedFruits=new Set();
+let speed=1.5, spawnTimer=0, spawnInterval=55;
+let pointerDown=false, pointerX=0;
+
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function goToStart(){showScreen('startScreen')}
+
+function startGame(){
+  canvas=document.getElementById('gameCanvas');
+  wrap=document.getElementById('canvasWrap');
+  basketEl=document.getElementById('basket');
+  canvas.width=wrap.clientWidth; canvas.height=wrap.clientHeight;
+  ctx=canvas.getContext('2d');
+  items=[]; score=0; combo=1; maxCombo=1; lives=3; fruitsCaught=0; speed=1.5; spawnTimer=0; learnedFruits.clear();
+  basketW=basketEl.offsetWidth; basketX=(canvas.width-basketW)/2;
+  updateUI(); showScreen('gameScreen'); gameActive=true;
+  animId=requestAnimationFrame(gameLoop);
+}
+
+function gameLoop(){
+  if(!gameActive)return;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  spawnTimer++;
+  if(spawnTimer>=spawnInterval){spawnTimer=0;spawnItem()}
+  updateItems(); drawItems();
+  speed=1.5+score/500;
+  spawnInterval=Math.max(22,55-Math.floor(score/200));
+  animId=requestAnimationFrame(gameLoop);
+}
+
+function spawnItem(){
+  const r=Math.random();
+  let item;
+  if(r<0.12){item={...BADS[Math.floor(Math.random()*BADS.length)],type:'bad'}}
+  else if(r<0.17){item={...BONUS,type:'bonus'}}
+  else{const f=FRUITS[Math.floor(Math.random()*FRUITS.length)];item={...f,type:'good'}}
+  item.x=Math.random()*(canvas.width-30)+15;
+  item.y=-30; item.vy=speed*(0.8+Math.random()*0.5);
+  item.size=28+Math.random()*8;
+  items.push(item);
+}
+
+function updateItems(){
+  const bx=basketX, by=canvas.height-50, bw=basketW, bh=40;
+  for(let i=items.length-1;i>=0;i--){
+    const it=items[i];
+    it.y+=it.vy;
+    // Check basket collision
+    if(it.y+it.size/2>by && it.y<by+bh && it.x>bx-5 && it.x<bx+bw+5){
+      if(it.type==='good'){
+        score+=10*combo; combo++; if(combo>maxCombo)maxCombo=combo; fruitsCaught++;
+        if(it.verse)learnedFruits.add(it.name+'|'+it.verse);
+        showFlash(it.x,by,'+'+10*combo,var_green);
+      } else if(it.type==='bonus'){
+        score+=50; showFlash(it.x,by,'⭐+50','var(--gold)');
+      } else {
+        lives--; combo=1; showFlash(it.x,by,'💔 -1','var(--red)');
+        if(lives<=0){endGame(); return}
+      }
+      items.splice(i,1); updateUI(); continue;
+    }
+    // Missed fruit
+    if(it.y>canvas.height+30){
+      if(it.type==='good'){combo=1; updateUI();}
+      items.splice(i,1);
+    }
+  }
+}
+
+const var_green='var(--green)';
+function showFlash(x,y,text,color){
+  const el=document.createElement('div');
+  el.className='catch-flash';el.style.left=x+'px';el.style.top=y+'px';el.style.color=color;el.textContent=text;
+  document.getElementById('canvasWrap').appendChild(el);
+  setTimeout(()=>el.remove(),700);
+}
+
+function drawItems(){
+  items.forEach(it=>{
+    ctx.font=it.size+'px serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(it.emoji,it.x,it.y);
+  });
+}
+
+function updateUI(){
+  document.getElementById('scoreVal').textContent=score;
+  document.getElementById('comboVal').textContent='x'+combo;
+  const lc=document.getElementById('livesContainer');
+  lc.innerHTML='';
+  for(let i=0;i<3;i++){const h=document.createElement('span');h.textContent=i<lives?'❤️':'🖤';h.style.fontSize='1.2em';lc.appendChild(h)}
+  basketEl.style.left=basketX+'px';
+}
+
+// Input
+function handlePointerMove(e){
+  e.preventDefault();
+  const rect=wrap.getBoundingClientRect();
+  const cx=(e.touches?e.touches[0].clientX:e.clientX)-rect.left;
+  basketX=Math.max(0,Math.min(canvas.width-basketW,cx-basketW/2));
+  basketEl.style.left=basketX+'px';
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  const cw=document.getElementById('canvasWrap');
+  cw.addEventListener('mousemove',handlePointerMove);
+  cw.addEventListener('touchmove',handlePointerMove,{passive:false});
+  cw.addEventListener('touchstart',handlePointerMove,{passive:false});
+  // Keyboard
+  document.addEventListener('keydown',e=>{
+    if(!gameActive)return;
+    if(e.key==='ArrowLeft')basketX=Math.max(0,basketX-25);
+    if(e.key==='ArrowRight')basketX=Math.min(canvas.width-basketW,basketX+25);
+    basketEl.style.left=basketX+'px';
+  });
+});
+
+function endGame(){
+  gameActive=false; cancelAnimationFrame(animId);
+  let emoji,title,sub;
+  if(score>=500){emoji='👑';title='Fruit Master!';sub='You are bearing abundant fruit!'}
+  else if(score>=250){emoji='🌟';title='Fruitful Harvest!';sub='Your garden is growing beautifully!'}
+  else if(score>=100){emoji='🌱';title='Growing Well!';sub='Keep cultivating the fruit of the Spirit!'}
+  else{emoji='🍃';title='Keep Growing!';sub='Every seed you plant matters. Try again!'}
+  document.getElementById('endEmoji').textContent=emoji;
+  document.getElementById('endTitle').textContent=title;
+  document.getElementById('endSub').textContent=sub;
+  document.getElementById('sbScore').textContent=score;
+  document.getElementById('sbFruits').textContent=fruitsCaught;
+  document.getElementById('sbCombo').textContent=maxCombo;
+  // Show learned verses
+  const ls=document.getElementById('learnedSection');
+  if(learnedFruits.size>0){
+    let h='<h3>🌿 Verses You Learned</h3>';
+    learnedFruits.forEach(v=>{const[name,verse]=v.split('|');h+=`<div class="learned-item"><span>${FRUITS.find(f=>f.name===name)?.emoji||'🍇'}</span><span><strong>${name}:</strong> ${verse}</span></div>`});
+    ls.innerHTML=h;
+  } else ls.innerHTML='';
+  showScreen('endScreen');
+}
+</script>
+</body>
+</html>

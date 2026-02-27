@@ -804,32 +804,31 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 (function() {
   var KEY = 'nbtt_scrollY_allstudies';
-  function saveScroll() { sessionStorage.setItem(KEY, window.scrollY || document.documentElement.scrollTop); }
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  var _st;
+  window.addEventListener('scroll', function() {
+    clearTimeout(_st);
+    _st = setTimeout(function() { sessionStorage.setItem(KEY, String(window.scrollY || document.documentElement.scrollTop)); }, 80);
+  }, { passive: true });
+  function saveNow() { sessionStorage.setItem(KEY, String(window.scrollY || document.documentElement.scrollTop)); }
+  window.addEventListener('beforeunload', saveNow);
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (link && !link.getAttribute('href').startsWith('#')) saveNow();
+  });
   function restoreScroll() {
     var saved = sessionStorage.getItem(KEY);
     if (saved !== null) {
-      var html = document.documentElement; var orig = html.style.scrollBehavior;
+      var y = parseInt(saved, 10), html = document.documentElement, orig = html.style.scrollBehavior;
       html.style.scrollBehavior = 'auto';
-      window.scrollTo(0, parseInt(saved, 10));
-      requestAnimationFrame(function() {
-        window.scrollTo(0, parseInt(saved, 10));
-        setTimeout(function() { html.style.scrollBehavior = orig || ''; }, 120);
-      });
+      window.scrollTo(0, y);
+      requestAnimationFrame(function() { window.scrollTo(0, y); setTimeout(function() { window.scrollTo(0, y); html.style.scrollBehavior = orig || ''; }, 150); });
     }
   }
-  window.addEventListener('beforeunload', saveScroll);
-  document.addEventListener('click', function(e) {
-    var link = e.target.closest('a[href]');
-    if (link && !link.getAttribute('href').startsWith('#')) saveScroll();
-  });
-  var wasBackNav = false;
-  if (window.performance) {
-    var entries = performance.getEntriesByType && performance.getEntriesByType('navigation');
-    if (entries && entries.length) { wasBackNav = entries[0].type === 'back_forward'; }
-    else if (performance.navigation) { wasBackNav = performance.navigation.type === 2; }
-  }
-  if (wasBackNav) { restoreScroll(); window.addEventListener('load', restoreScroll); }
-  window.addEventListener('pageshow', function(e) { if (e.persisted) restoreScroll(); });
+  var wasBack = false;
+  try { var entries = performance.getEntriesByType('navigation'); if (entries && entries.length) wasBack = entries[0].type === 'back_forward'; else if (performance.navigation) wasBack = performance.navigation.type === 2; } catch(e){}
+  if (wasBack) { restoreScroll(); window.addEventListener('load', restoreScroll); }
+  window.addEventListener('pageshow', function(e) { if (e.persisted) { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; restoreScroll(); } });
 })();
 </script>
 </body>

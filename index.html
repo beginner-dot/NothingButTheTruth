@@ -7,7 +7,7 @@
     <!-- ===== PRIMARY SEO META ===== -->
     <title>NothingButTheTruth — Bible Studies, Devotions, Videos & Interactive Games</title>
     <meta name="description" content="Explore the unfiltered Word of God at NothingButTheTruth. Free Bible studies, daily devotions, scripture-based videos, interactive games, and the Ten Commandments series — truth documented and delivered for the modern seeker.">
-    <meta name="keywords" content="Bible study, daily devotions, scripture, Gospel, Ten Commandments, Christian faith, Bible games, Bible videos, NothingButTheTruth, Word of God, prayer, Holy Bible, baptism, armor of God, angels">
+    <meta name="keywords" content="Bible study, daily devotions, scripture, Gospel, Ten Commandments, Christian faith, Bible games, Bible videos, NothingButTheTruth, Word of God, prayer, Holy Bible, baptism, armor of God, angels, Bible Connections, Prophecy Fulfilled, Verse Hunt, Bible Timeline, Scripture Sprint, free Bible games online, Bible quiz, Christian games">
     <meta name="author" content="NothingButTheTruth">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
     <link rel="canonical" href="https://nothingbutthetruth.web.app/">
@@ -28,7 +28,7 @@
     <!-- ===== FONTS — preconnect for speed ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans&family=Pacifico&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans&family=Pacifico&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- ===== STYLESHEETS ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -274,7 +274,7 @@
 
         <nav class="stats-hud hero-stagger" aria-label="Content overview">
             <a href="all-games.html" class="hud-card" title="Play interactive Bible games — Bingo, Taboo, Relay Race and more">
-                <span class="hud-val" data-target="5" aria-label="5 games available">00</span>
+                <span class="hud-val" data-target="15" aria-label="15 games available">00</span>
                 <span class="hud-lab">Games</span>
             </a>
             <a href="all-studies.html" class="hud-card" title="Read 12+ in-depth Bible studies">
@@ -353,18 +353,36 @@
             });
         });
 
-        // Touch — ONLY the touched emoji grows + glows
+        // Touch — ONLY the touched emoji reacts with a RANDOM animation
+        var touchReactions = ['emoji-spin', 'emoji-bounce', 'emoji-jello', 'emoji-pulse', 'emoji-flip', 'emoji-rocket', 'emoji-touched'];
         emojis.forEach(em => {
             em.addEventListener('touchstart', function(e) {
-                // grow + glow this emoji
-                this.classList.add('emoji-touched');
+                var reaction = touchReactions[Math.floor(Math.random() * touchReactions.length)];
+                this.setAttribute('data-reaction', reaction);
+                this.classList.add(reaction);
             }, { passive: true });
 
             em.addEventListener('touchend', function() {
-                setTimeout(() => {
-                    this.classList.remove('emoji-touched');
-                }, 600);
+                var self = this;
+                setTimeout(function() {
+                    var reaction = self.getAttribute('data-reaction');
+                    if (reaction) { self.classList.remove(reaction); self.removeAttribute('data-reaction'); }
+                }, 800);
             }, { passive: true });
+        });
+
+        // Click — same random reactions for desktop
+        emojis.forEach(em => {
+            em.addEventListener('click', function(e) {
+                var reaction = touchReactions[Math.floor(Math.random() * touchReactions.length)];
+                this.setAttribute('data-reaction', reaction);
+                this.classList.add(reaction);
+                var self = this;
+                setTimeout(function() {
+                    self.classList.remove(reaction);
+                    self.removeAttribute('data-reaction');
+                }, 800);
+            });
         });
     }
 
@@ -414,8 +432,10 @@
         let titleWidth = range.getBoundingClientRect().width;
         const containerWidth = container.getBoundingClientRect().width;
         let ratio = (containerWidth * 0.95) / titleWidth;
-        if (ratio < 1) {
-            title.style.transform = `scale(${ratio})`;
+        // Scale up or down to fill the container width
+        if (ratio !== 1 && titleWidth > 0) {
+            const clampedRatio = Math.min(ratio, 2.5);
+            title.style.transform = `scale(${clampedRatio})`;
             title.style.transformOrigin = 'center center';
         }
     }
@@ -465,6 +485,46 @@
 
         const title = document.getElementById('main-title');
         const container = title ? (title.closest('.glass-card') || title.parentElement) : null;
+
+        // On back-navigation: skip all hero animations, show everything instantly
+        if (window.__nbttWasBack) {
+            // Show title instantly without balloon pop
+            if (title) {
+                const text = title.getAttribute('data-text') || '';
+                title.textContent = text;
+                title.style.opacity = '1';
+                // Fit immediately
+                performFit();
+            }
+            // Reveal all stagger items and HUD cards instantly
+            document.querySelectorAll('.hero-stagger').forEach(function(el) {
+                el.style.transition = 'none';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+            document.querySelectorAll('.hud-card').forEach(function(el) {
+                el.style.transition = 'none';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+            // Reveal all scroll-fade sections
+            document.querySelectorAll('.scroll-fade').forEach(function(el) {
+                el.style.transition = 'none';
+                el.classList.add('visible');
+            });
+            // Trigger counter animation immediately
+            animateCounters();
+            // Setup resize observers
+            if (title && container && window.ResizeObserver) {
+                const ro = new ResizeObserver(fitTitle);
+                ro.observe(container);
+                ro.observe(title);
+            }
+            window.addEventListener('resize', performFit);
+            window.addEventListener('orientationchange', performFit);
+            initReactiveEmojis();
+            return; // Skip all animation sequences
+        }
 
         // Step 1: Start balloon-pop title IMMEDIATELY (no delay)
         balloonPopTitle();
@@ -572,7 +632,19 @@
 
    <!-- Modern Slides (Cards) -->
 <section class="modern-slides scroll-fade">
-  <div class="flip-hint">Tip: Click any card to flip and view the back.</div>
+  <div class="flip-hint" id="flipHint">
+    <div class="flip-hint-glow"></div>
+    <div class="flip-hint-content">
+      <span class="flip-hint-icon">
+        <i class="fas fa-hand-pointer"></i>
+        <span class="flip-hint-ripple"></span>
+      </span>
+      <span class="flip-hint-text">Tap a card to reveal what's on the other side</span>
+      <span class="flip-hint-arrow">
+        <svg width="28" height="16" viewBox="0 0 28 16" fill="none"><path d="M2 8h20m0 0l-6-6m6 6l-6 6" stroke="rgba(255,215,0,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+    </div>
+  </div>
   <div class="flip-card-container">
     <!-- Bible Card -->
     <div class="flip-card">
@@ -866,6 +938,28 @@
         <span class="nx-bubble"></span>
         <span class="nx-bubble"></span>
         <span class="nx-bubble"></span>
+        <!-- New dark glowing purple & blue bubbles -->
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <!-- Tiny glowing purple/blue/pink micro-bubbles -->
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
+        <span class="nx-bubble"></span>
       </div>
       <div class="nx-section-inner">
 
@@ -949,6 +1043,28 @@
     <section class="nx-section nx-devos-section scroll-fade" id="devotions">
       <!-- Floating Blocks -->
       <div class="nx-blocks-container">
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <!-- New dark glowing purple & blue blocks -->
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
+        <!-- Tiny glowing purple/blue/pink micro-blocks -->
+        <span class="nx-block"></span>
+        <span class="nx-block"></span>
         <span class="nx-block"></span>
         <span class="nx-block"></span>
         <span class="nx-block"></span>
@@ -1232,7 +1348,7 @@
       <span class="explore-text">🎮 Explore All Games</span>
       <span class="explore-arrow">→</span>
     </button></a>
-    <div class="games-count">+5 more games available</div>
+    <div class="games-count">+15 more games available</div>
   </div>
 
   <!-- Hidden Games Grid -->
@@ -1267,15 +1383,14 @@
       <a href="games/who-said-it/who-said/who_said.html"><button class="play-btn">▶ Play Now</button></a>
     </div>
 
-    <div class="game-card coming-soon">
+    <div class="game-card">
       <div class="difficulty-badge">⭐⭐⭐</div>
       <h3>📜 Scripture Sprint</h3>
       <p class="game-description">Race to match verse references with their content. Combo system awards bonus points!</p>
       <div class="game-meta">
         <span class="playtime">⏱️ 5-8 min</span>
-        <span class="badge-new">Coming Soon</span>
       </div>
-      <button class="play-btn disabled" disabled>🔒 Coming Soon</button>
+      <a href="games/scripture-sprint/index.html"><button class="play-btn">▶ Play Now</button></a>
     </div>
 
     <div class="game-card coming-soon">
@@ -1289,15 +1404,95 @@
       <button class="play-btn disabled" disabled>🔒 Coming Soon</button>
     </div>
 
-    <div class="game-card coming-soon">
+    <div class="game-card">
       <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
       <h3>⏳ Bible Timeline Master</h3>
       <p class="game-description">Order biblical events chronologically. Master Old Testament, New Testament, or mix!</p>
       <div class="game-meta">
         <span class="playtime">⏱️ 8-15 min</span>
-        <span class="badge-new">Coming Soon</span>
       </div>
-      <button class="play-btn disabled" disabled>🔒 Coming Soon</button>
+      <a href="games/bible-timeline/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
+      <h3>🔗 Bible Connections</h3>
+      <p class="game-description">Find 4 hidden groups among 16 biblical words. Strategic deduction meets deep Scripture knowledge!</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 8-15 min</span>
+      </div>
+      <a href="games/bible-connections/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
+      <h3>📜 Prophecy Fulfilled</h3>
+      <p class="game-description">Match Old Testament prophecies with their New Testament fulfillments. Discover divine connections!</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 10-15 min</span>
+      </div>
+      <a href="games/prophecy-match/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐</div>
+      <h3>🃏 Bible Memory Match</h3>
+      <p class="game-description">Flip cards and find matching biblical pairs — prophets to books, miracles to people. Train your visual memory!</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 5-10 min</span>
+      </div>
+      <a href="games/bible-memory-match/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐⭐</div>
+      <h3>🧠 Bible Sequence Recall</h3>
+      <p class="game-description">Watch biblical symbols light up in a pattern, then repeat the sequence from memory. How many rounds can you survive?</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 5-15 min</span>
+      </div>
+      <a href="games/bible-sequence/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
+      <h3>🎺 Walls of Jericho</h3>
+      <p class="game-description">March around the city, sound the trumpets with perfect timing, and bring the mighty walls crashing down! A rhythm action game based on Joshua 6.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 5-8 min</span>
+      </div>
+      <a href="games/walls-of-jericho/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+  </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐</div>
+      <h3>🍇 Fruit of the Spirit Catcher</h3>
+      <p class="game-description">Catch the fruits of the Spirit falling from heaven while dodging the works of the flesh! An arcade reaction game based on Galatians 5:22-23.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 3-8 min</span>
+      </div>
+      <a href="games/fruit-catcher/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐</div>
+      <h3>🔍 Bible Word Search</h3>
+      <p class="game-description">Find hidden words of Scripture in a puzzle grid! Choose from themes like The Gospels, Apostles, Fruits of the Spirit, Armor of God, and more.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 5-10 min</span>
+      </div>
+      <a href="games/bible-word-search/index.html"><button class="play-btn">▶ Play Now</button></a>
+    </div>
+
+    <div class="game-card game-card-featured">
+      <div class="difficulty-badge">⭐⭐⭐⭐</div>
+      <h3>🚢 Ark Builder</h3>
+      <p class="game-description">Load Noah's Ark with animals and supplies before the flood waters rise! A stacking and timing game based on Genesis 6-9.</p>
+      <div class="game-meta">
+        <span class="playtime">⏱️ 5-10 min</span>
+      </div>
+      <a href="games/ark-builder/index.html"><button class="play-btn">▶ Play Now</button></a>
     </div>
   </div>
 
@@ -1376,13 +1571,13 @@
 
 <section id="question-of-the-week" class="question-week-section">
   <div class="question-container">
-    <h2>� Question of the Week</h2>
-    <p id="question-text">How many commandments did God give to Moses on Mount Sinai?</p>
+    <h2>📖 Question of the Week</h2>
+    <p id="question-text">Which of the Ten Commandments is the ONLY one that begins with the word "Remember"?</p>
 <div class="options">
-  <button class="option-btn" data-correct="false">Five</button>
-  <button class="option-btn" data-correct="true">Ten</button>
-  <button class="option-btn" data-correct="false">Twenty</button>
-  <button class="option-btn" data-correct="false">Twelve</button>
+  <button class="option-btn" data-correct="false">Honor your father and mother</button>
+  <button class="option-btn" data-correct="true">Keep the Sabbath day holy</button>
+  <button class="option-btn" data-correct="false">You shall not bear false witness</button>
+  <button class="option-btn" data-correct="false">You shall have no other gods</button>
 </div>
 
     <button id="submit-btn" class="submit-btn" disabled>Submit Answer</button>
@@ -1412,12 +1607,41 @@
   </div>
 
   <!-- Game results -->
-  <div id="game-results" class="game-results hidden">
-    <h3>Score: <span id="score"></span> / 5</h3>
-    <p>Thank you for playing!</p>
-  </div>
+  <div id="game-results" class="game-results hidden"></div>
 </section>
 
+<!-- Score Modal Overlay -->
+<div id="score-modal-overlay" class="score-modal-overlay hidden">
+  <div class="score-modal">
+    <button class="score-modal-close" id="score-modal-close">&times;</button>
+    <div class="score-modal-header">
+      <span class="score-emoji" id="score-emoji">🏆</span>
+      <h2 class="score-modal-title" id="score-modal-title">Amazing!</h2>
+    </div>
+    <div class="score-ring-container">
+      <svg class="score-ring" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#6a11cb" />
+            <stop offset="100%" stop-color="#2575fc" />
+          </linearGradient>
+        </defs>
+        <circle class="score-ring-bg" cx="60" cy="60" r="52" />
+        <circle class="score-ring-fill" id="score-ring-fill" cx="60" cy="60" r="52" />
+      </svg>
+      <div class="score-ring-text">
+        <span class="score-number" id="score-number">0</span>
+        <span class="score-total">/ 5</span>
+      </div>
+    </div>
+    <p class="score-message" id="score-message">Keep studying!</p>
+    <div class="score-modal-actions">
+      <a href="all-games.html" class="score-btn score-btn-games">🎮 Explore Our Games</a>
+      <button class="score-btn score-btn-retry" id="score-btn-retry">🔄 Try Again</button>
+    </div>
+    <div class="score-confetti" id="score-confetti"></div>
+  </div>
+</div>
 
 
 
@@ -1425,55 +1649,11 @@
 
 
 
-<script>
 
-document.addEventListener("DOMContentLoaded", () => {
-  const options = Array.from(document.querySelectorAll(".option-btn"));
-  const submitBtn = document.getElementById("submit-btn");
-  const correctPopup = document.getElementById("correct-popup");
-  const exploreMoreBtn = document.getElementById("explore-more-btn");
 
-  let selectedOption = null;
 
-  // When option clicked, mark selected & enable submit
-  options.forEach(btn => {
-    btn.addEventListener("click", () => {
-      options.forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
-      selectedOption = btn;
-      submitBtn.disabled = false;
-    });
-  });
 
-  submitBtn.addEventListener("click", () => {
-    if (!selectedOption) {
-      alert("Please select an option!"); // debug
-      return;
-    }
 
-    // Disable buttons & submit
-    options.forEach(b => b.disabled = true);
-    submitBtn.disabled = true;
-
-    // Set popup message based on correctness
-    if (selectedOption.dataset.correct === "true") {
-      correctPopup.querySelector("p").textContent = "✅ Correct! 📖 Did You Know? The Ten Commandments were written by God's finger on two stone tablets and represent the foundation of God's moral law for humanity. These commandments are found in Exodus 20:1-17 and Deuteronomy 5:4-21.";
-    } else {
-      correctPopup.querySelector("p").textContent = "❌ Incorrect! 📖 Did You Know? The correct answer is Ten. The Ten Commandments were written by God's finger on two stone tablets and represent the foundation of God's moral law for humanity. These commandments are found in Exodus 20:1-17 and Deuteronomy 5:4-21.";
-    }
-
-    // Show popup
-    correctPopup.classList.remove("hidden");
-    correctPopup.classList.add("show");
-
-    // Show explore more button after 700ms
-    setTimeout(() => {
-      exploreMoreBtn.classList.remove("hidden");
-      exploreMoreBtn.classList.add("show");
-    }, 700);
-  });
-});
-</script>
 
 
 
@@ -1646,7 +1826,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
 
     <!-- COMMANDMENTS PREVIEW ON HOMEPAGE -->
-    <section id="commandments-home" class="scroll-fade">
+    <section id="video-highlights" class="scroll-fade">
       <h2><i class="fas fa-gavel" style="color:#ffd803"></i> Ten Commandments Series</h2>
       <div class="videos-grid">
         <div class="video-card">
@@ -2006,6 +2186,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <script>
+  let flipHintDismissed = false;
   function flipCard(card) {
     const isFlipped = card.classList.contains("flipped");
 
@@ -2013,6 +2194,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!isFlipped) {
       card.classList.add("flipped");
+    }
+
+    // Intelligently dismiss the hint after first interaction
+    if (!flipHintDismissed) {
+      flipHintDismissed = true;
+      const hint = document.getElementById('flipHint');
+      if (hint) {
+        hint.classList.add('dismissed');
+        setTimeout(() => { hint.style.display = 'none'; }, 500);
+      }
     }
   }
 
@@ -2478,15 +2669,45 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameSubmitBtn = section.querySelector("#game-submit-btn");
   const timerEl = section.querySelector("#time-left");
   const gameResults = section.querySelector("#game-results");
-  const scoreEl = section.querySelector("#score");
 
-  // Mini-game questions
+  // Score modal elements
+  const scoreModal = document.getElementById("score-modal-overlay");
+  const scoreEmoji = document.getElementById("score-emoji");
+  const scoreTitle = document.getElementById("score-modal-title");
+  const scoreNumber = document.getElementById("score-number");
+  const scoreRingFill = document.getElementById("score-ring-fill");
+  const scoreMessage = document.getElementById("score-message");
+  const scoreRetry = document.getElementById("score-btn-retry");
+  const scoreClose = document.getElementById("score-modal-close");
+  const scoreConfetti = document.getElementById("score-confetti");
+
+  // Harder mini-game questions requiring deeper Bible knowledge
   const miniGameQuestions = [
-    { q: "Who built the ark?", options: ["Noah", "Moses", "Abraham", "David"], answer: 0 },
-    { q: "How many days did Jesus fast?", options: ["10", "40", "7", "3"], answer: 1 },
-    { q: "What is the last book of the Bible?", options: ["Revelation", "Genesis", "Psalms", "Exodus"], answer: 0 },
-    { q: "Who was thrown into the lions' den?", options: ["Daniel", "Elijah", "Peter", "Paul"], answer: 0 },
-    { q: "Jesus turned water into what?", options: ["Milk", "Wine", "Oil", "Juice"], answer: 1 },
+    {
+      q: "In Exodus 32, what did the Israelites build while Moses was receiving the commandments on Mount Sinai?",
+      options: ["A golden calf", "A stone altar", "A wooden ark", "A bronze serpent"],
+      answer: 0
+    },
+    {
+      q: "According to James 2:10, what happens if someone keeps the whole law but stumbles at just ONE point?",
+      options: ["They are forgiven automatically", "They are guilty of breaking all of it", "Only that sin is counted", "They must offer a sacrifice"],
+      answer: 1
+    },
+    {
+      q: "In Daniel 3, Shadrach, Meshach, and Abednego refused to bow to Nebuchadnezzar's statue. Which commandment were they upholding?",
+      options: ["You shall not take God's name in vain", "You shall not make or worship idols", "Remember the Sabbath day", "Honor your father and mother"],
+      answer: 1
+    },
+    {
+      q: "According to Romans 13:9, Paul says ALL commandments are summed up in which single rule?",
+      options: ["Fear God above all else", "Keep the Sabbath holy", "Love your neighbor as yourself", "Obey the Lord always"],
+      answer: 2
+    },
+    {
+      q: "In Exodus 34, what miraculous thing happened to Moses' face after he received the commandments the second time?",
+      options: ["It was scarred from the journey", "It shone with radiant light", "He wore a permanent veil", "Nothing visible changed"],
+      answer: 1
+    }
   ];
 
   // Scroll reveal animation trigger
@@ -2508,27 +2729,23 @@ document.addEventListener("DOMContentLoaded", () => {
       options.forEach((b) => b.classList.remove("selected"));
       btn.classList.add("selected");
       selectedOption = btn;
-      submitBtn.disabled = false; // Enable submit only after selection
+      submitBtn.disabled = false;
     })
   );
 
   // Submit button logic for weekly question
   submitBtn.addEventListener("click", () => {
-    if (!selectedOption) return; // No option selected, do nothing
-
-    // Disable all option buttons and the submit button after voting
+    if (!selectedOption) return;
     options.forEach((b) => (b.disabled = true));
     submitBtn.disabled = true;
 
-    // Show popup based on correctness
     if (selectedOption.dataset.correct === "true") {
-      correctPopup.querySelector("p").textContent = "✅ Correct! 📖 Did You Know? The Ten Commandments were written by God's finger on two stone tablets and represent the foundation of God's moral law for humanity. These commandments are found in Exodus 20:1-17 and Deuteronomy 5:4-21.";
+      correctPopup.querySelector("p").textContent = "✅ Correct! 📖 Did You Know? The Fourth Commandment — \"Remember the Sabbath day, to keep it holy\" (Exodus 20:8) — is the only commandment that begins with \"Remember,\" as if God knew humanity would be tempted to forget it. The Sabbath was established at Creation (Genesis 2:2-3) long before it was written in stone.";
     } else {
-      correctPopup.querySelector("p").textContent = "❌ Incorrect! 📖 Did You Know? The correct answer is Ten. The Ten Commandments were written by God's finger on two stone tablets and represent the foundation of God's moral law for humanity. These commandments are found in Exodus 20:1-17 and Deuteronomy 5:4-21.";
+      correctPopup.querySelector("p").textContent = "❌ Not quite! 📖 The answer is \"Keep the Sabbath day holy.\" Exodus 20:8 says \"Remember the Sabbath day, to keep it holy\" — it's the only commandment beginning with \"Remember,\" as if God knew we'd be tempted to forget. The Sabbath was established at Creation itself (Genesis 2:2-3).";
     }
     correctPopup.classList.add("show");
 
-    // Show 'Explore More' button after popup animation (700ms delay)
     setTimeout(() => {
       exploreMoreBtn.classList.add("show");
     }, 700);
@@ -2536,15 +2753,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Explore More button starts mini-game
   exploreMoreBtn.addEventListener("click", () => {
-    // Hide weekly question UI parts
     correctPopup.classList.remove("show");
     exploreMoreBtn.classList.remove("show");
     section.querySelector(".question-container").classList.add("hidden");
-
-    // Show mini-game UI
     miniGame.classList.remove("hidden");
-
-    // Start mini-game
     startMiniGame();
   });
 
@@ -2552,17 +2764,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentQIndex = 0;
   let score = 0;
   let timerId = null;
-  let timeLeft = 20;
+  let timeLeft = 15; // Reduced from 20s for more challenge
   let selectedGameOption = null;
 
-  // Load mini-game question and options
   function loadQuestion(index) {
     const q = miniGameQuestions[index];
     gameQuestionText.textContent = q.q;
-    gameOptions.innerHTML = ""; // Clear previous options
+    gameOptions.innerHTML = "";
     selectedGameOption = null;
     gameSubmitBtn.disabled = true;
-    timeLeft = 20;
+    timeLeft = 15;
     timerEl.textContent = timeLeft;
 
     q.options.forEach((opt, i) => {
@@ -2574,34 +2785,32 @@ document.addEventListener("DOMContentLoaded", () => {
         Array.from(gameOptions.children).forEach((b) => b.classList.remove("selected"));
         btn.classList.add("selected");
         selectedGameOption = btn;
-        gameSubmitBtn.disabled = false; // Enable submit after option selected
+        gameSubmitBtn.disabled = false;
       });
       gameOptions.appendChild(btn);
     });
 
-    // Start countdown timer for question
     clearInterval(timerId);
     timerId = setInterval(() => {
       timeLeft--;
       timerEl.textContent = timeLeft;
+      if (timeLeft <= 5) timerEl.parentElement.classList.add("timer-warning");
       if (timeLeft <= 0) {
         clearInterval(timerId);
         gameSubmitBtn.disabled = true;
+        timerEl.parentElement.classList.remove("timer-warning");
         moveToNextQuestion();
       }
     }, 1000);
   }
 
-  // Move to next question or end game
   function moveToNextQuestion() {
-    // Check answer if option selected
     if (selectedGameOption) {
       const correctIndex = miniGameQuestions[currentQIndex].answer;
       if (parseInt(selectedGameOption.dataset.index, 10) === correctIndex) {
         score++;
       }
     }
-
     currentQIndex++;
     if (currentQIndex < miniGameQuestions.length) {
       loadQuestion(currentQIndex);
@@ -2610,13 +2819,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Mini-game submit button
   gameSubmitBtn.addEventListener("click", () => {
     clearInterval(timerId);
+    timerEl.parentElement.classList.remove("timer-warning");
     moveToNextQuestion();
   });
 
-  // Start mini-game fresh
   function startMiniGame() {
     currentQIndex = 0;
     score = 0;
@@ -2625,12 +2833,92 @@ document.addEventListener("DOMContentLoaded", () => {
     loadQuestion(currentQIndex);
   }
 
-  // End game and show score
+  // Beautiful score popup
   function endGame() {
+    clearInterval(timerId);
     miniGame.classList.add("hidden");
-    gameResults.classList.remove("hidden");
-    scoreEl.textContent = score;
+
+    const total = miniGameQuestions.length;
+    const pct = score / total;
+
+    // Performance tiers
+    let emoji, title, message;
+    if (pct === 1) {
+      emoji = "👑"; title = "Perfect Score!"; message = "You're a true Bible scholar! Every answer was spot on.";
+    } else if (pct >= 0.8) {
+      emoji = "🌟"; title = "Outstanding!"; message = "Impressive knowledge! You really know your Scripture.";
+    } else if (pct >= 0.6) {
+      emoji = "💪"; title = "Great Effort!"; message = "Solid performance! Keep studying to master the Word.";
+    } else if (pct >= 0.4) {
+      emoji = "📖"; title = "Keep Growing!"; message = "Good start! Dive deeper into Scripture — you'll get there.";
+    } else {
+      emoji = "🙏"; title = "Never Give Up!"; message = "Every journey starts somewhere. Keep reading God's Word daily!";
+    }
+
+    scoreEmoji.textContent = emoji;
+    scoreTitle.textContent = title;
+    scoreNumber.textContent = score;
+    scoreMessage.textContent = message;
+
+    // Animate the ring
+    const circumference = 2 * Math.PI * 52; // ~326.73
+    const offset = circumference - (pct * circumference);
+    scoreRingFill.style.strokeDashoffset = circumference; // reset
+    scoreModal.classList.remove("hidden");
+
+    // Trigger reflow then animate
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scoreModal.classList.add("active");
+        scoreRingFill.style.strokeDashoffset = offset;
+      });
+    });
+
+    // Confetti for 80%+
+    if (pct >= 0.8) {
+      launchConfetti();
+    }
   }
+
+  function launchConfetti() {
+    scoreConfetti.innerHTML = "";
+    const colors = ["#6a11cb", "#2575fc", "#ffd700", "#ff6b35", "#00ff9d", "#ff4081"];
+    for (let i = 0; i < 40; i++) {
+      const particle = document.createElement("span");
+      particle.className = "confetti-particle";
+      particle.style.setProperty("--x", (Math.random() * 200 - 100) + "px");
+      particle.style.setProperty("--y", (Math.random() * -250 - 50) + "px");
+      particle.style.setProperty("--r", (Math.random() * 720 - 360) + "deg");
+      particle.style.setProperty("--d", (Math.random() * 0.6 + 0.4) + "s");
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      scoreConfetti.appendChild(particle);
+    }
+  }
+
+  function closeScoreModal() {
+    scoreModal.classList.remove("active");
+    setTimeout(() => {
+      scoreModal.classList.add("hidden");
+      scoreRingFill.style.strokeDashoffset = 326.73;
+      scoreConfetti.innerHTML = "";
+    }, 400);
+  }
+
+  // Close modal
+  scoreClose.addEventListener("click", closeScoreModal);
+  scoreModal.addEventListener("click", (e) => {
+    if (e.target === scoreModal) closeScoreModal();
+  });
+
+  // Retry button
+  scoreRetry.addEventListener("click", () => {
+    closeScoreModal();
+    setTimeout(() => {
+      section.querySelector(".question-container").classList.add("hidden");
+      miniGame.classList.remove("hidden");
+      startMiniGame();
+    }, 450);
+  });
 });
 
 </script>
@@ -2676,6 +2964,12 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const elements = document.querySelectorAll(".scroll-fade");
+
+    // On back-nav, everything is already visible — skip observer
+    if (window.__nbttWasBack) {
+      elements.forEach(function(el) { el.classList.add('visible'); });
+      return;
+    }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
@@ -3218,58 +3512,120 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script src="script.js"></script>
 
-<!-- Scroll-position restore: saves where you were, so the back button returns you there -->
+<!-- Scroll-position restore: bulletproof back-button scroll memory -->
 <script>
 (function() {
   var KEY = 'nbtt_scrollY';
+  var BACK_KEY = 'nbtt_wasBack';
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
-  function saveScroll() {
-    sessionStorage.setItem(KEY, window.scrollY || document.documentElement.scrollTop);
+  // Continuously save scroll position (debounced)
+  var _st;
+  window.addEventListener('scroll', function() {
+    clearTimeout(_st);
+    _st = setTimeout(function() {
+      sessionStorage.setItem(KEY, String(window.scrollY || document.documentElement.scrollTop));
+    }, 80);
+  }, { passive: true });
+
+  function saveNow() { sessionStorage.setItem(KEY, String(window.scrollY || document.documentElement.scrollTop)); }
+  window.addEventListener('beforeunload', saveNow);
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href]');
+    if (link && !link.getAttribute('href').startsWith('#')) saveNow();
+  });
+
+  // Detect back/forward navigation
+  var wasBack = false;
+  try {
+    var entries = performance.getEntriesByType('navigation');
+    if (entries && entries.length) wasBack = entries[0].type === 'back_forward';
+    else if (performance.navigation) wasBack = performance.navigation.type === 2;
+  } catch(e){}
+
+  // Also flag it for DOMContentLoaded handler to read
+  if (wasBack) sessionStorage.setItem(BACK_KEY, '1');
+
+  // On back-nav: immediately reveal ALL hidden elements to prevent layout shift
+  function revealAll() {
+    // Make all scroll-fade elements visible instantly (no animation)
+    document.querySelectorAll('.scroll-fade:not(.visible)').forEach(function(el) {
+      el.style.transition = 'none';
+      el.classList.add('visible');
+    });
+    // Make all hero-stagger elements visible instantly
+    document.querySelectorAll('.hero-stagger').forEach(function(el) {
+      el.style.transition = 'none';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
+    // Make all hud-cards visible
+    document.querySelectorAll('.hud-card').forEach(function(el) {
+      el.style.transition = 'none';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
+  }
+
+  function forceScroll(y) {
+    window.scrollTo({ top: y, left: 0, behavior: 'instant' });
   }
 
   function restoreScroll() {
     var saved = sessionStorage.getItem(KEY);
-    if (saved !== null) {
-      var html = document.documentElement;
-      var orig = html.style.scrollBehavior;
-      html.style.scrollBehavior = 'auto';
-      window.scrollTo(0, parseInt(saved, 10));
+    if (saved === null) return;
+    var y = parseInt(saved, 10);
+    if (isNaN(y) || y <= 0) return;
+
+    // Kill smooth scrolling on both html and body
+    var html = document.documentElement;
+    html.classList.remove('smooth-scroll');
+    html.style.scrollBehavior = 'auto';
+    document.body.style.scrollBehavior = 'auto';
+
+    // Reveal all hidden elements to lock layout
+    revealAll();
+
+    // Aggressive multi-frame restore
+    forceScroll(y);
+    requestAnimationFrame(function() {
+      forceScroll(y);
       requestAnimationFrame(function() {
-        window.scrollTo(0, parseInt(saved, 10));
-        setTimeout(function() { html.style.scrollBehavior = orig || ''; }, 120);
+        forceScroll(y);
+        // Keep retrying over the next 2 seconds to fight layout shifts
+        var retries = [100, 250, 500, 1000, 1500, 2000];
+        retries.forEach(function(delay) {
+          setTimeout(function() { forceScroll(y); }, delay);
+        });
+        // Re-enable smooth scroll after all retries done
+        setTimeout(function() {
+          html.classList.add('smooth-scroll');
+          html.style.scrollBehavior = '';
+          document.body.style.scrollBehavior = '';
+        }, 2200);
       });
-    }
+    });
   }
 
-  // Save scroll position before leaving
-  window.addEventListener('beforeunload', saveScroll);
-
-  // Also save on every link click (safety net for mobile browsers that skip beforeunload)
-  document.addEventListener('click', function(e) {
-    var link = e.target.closest('a[href]');
-    if (link && !link.getAttribute('href').startsWith('#')) saveScroll();
-  });
-
-  // Detect back/forward navigation on full page load
-  var wasBackNav = false;
-  if (window.performance) {
-    var entries = performance.getEntriesByType && performance.getEntriesByType('navigation');
-    if (entries && entries.length) {
-      wasBackNav = entries[0].type === 'back_forward';
-    } else if (performance.navigation) {
-      wasBackNav = performance.navigation.type === 2;
-    }
-  }
-  if (wasBackNav) {
+  if (wasBack) {
+    revealAll();
     restoreScroll();
     window.addEventListener('load', restoreScroll);
+  } else {
+    // Not a back nav — enable smooth scrolling
+    document.documentElement.classList.add('smooth-scroll');
   }
 
-  // Handle bfcache (back-forward cache) — browser restores page from memory,
-  // inline scripts don't re-run, but pageshow fires with persisted=true
+  // bfcache — page restored from memory
   window.addEventListener('pageshow', function(e) {
-    if (e.persisted) restoreScroll();
+    if (e.persisted) {
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      restoreScroll();
+    }
   });
+
+  // Expose wasBack flag globally for DOMContentLoaded handler
+  window.__nbttWasBack = wasBack;
 })();
 </script>
 
