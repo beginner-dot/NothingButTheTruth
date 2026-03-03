@@ -1,0 +1,9 @@
+{
+  "git.autofetch": true,
+  "files.exclude": {
+    "PROGRESS-DASHBOARD.html": false
+  },
+  "search.exclude": {
+    "PROGRESS-DASHBOARD.html": false
+  }
+}
