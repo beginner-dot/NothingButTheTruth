@@ -28,11 +28,11 @@
     <!-- ===== FONTS — preconnect for speed ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Open+Sans&family=Pacifico&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=DM+Serif+Display&family=Luckiest+Guy&family=Open+Sans&family=Pacifico&family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- ===== STYLESHEETS ===== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="indexstyles.css">
+    <link rel="stylesheet" href="Indexstyles.css">
     <link rel="stylesheet" href="style.css">
 
     <!-- ===== STRUCTURED DATA — Organization + WebSite ===== -->
@@ -79,25 +79,217 @@
 
     <header role="banner">
         <nav class="navbar scroll-fade" aria-label="Primary navigation">
-           <div class="WebsiteName"></div>
-            <div class="hamburger" tabindex="0" aria-label="Open menu" role="button" aria-expanded="false">
+         <div class="navbar-left-controls">
+        <!-- Auth button: sign-in trigger OR signed-in profile pill -->
+        <button class="nav-auth-btn" id="navAuthBtn" aria-label="Sign in or view profile">
+          <i class="fas fa-user-circle" aria-hidden="true"></i>
+          <span class="nav-auth-label">Sign In</span>
+        </button>
+        <div class="WebsiteName"></div>
+         </div>
+
+            <div class="hamburger" tabindex="0" aria-label="Open menu" role="button" aria-expanded="false" aria-controls="main-sidebar">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            <div class="sidebar" tabindex="-1" role="dialog" aria-label="Navigation menu">
+            <div class="sidebar" id="main-sidebar" tabindex="-1" role="dialog" aria-label="Navigation menu" aria-hidden="true">
                 <div class="navbar-sidebar-header">
+
+              <!-- Signed-out sidebar profile area -->
+              <div class="sidebar-profile" id="sidebarProfile">
+                <div class="sidebar-profile-signed-out" id="sidebarSignedOut">
+                  <div class="sidebar-profile-icon"><i class="fas fa-user-shield"></i></div>
+                  <p class="sidebar-caption">What would you like to dive into?</p>
+                  <p class="sidebar-privacy-note"><i class="fas fa-lock"></i> Your privacy is sacred to us. Browse freely — no account needed. If you sign up, you can stay <strong>completely anonymous</strong> or choose to share your name.</p>
+                  <button class="sidebar-signin-btn" id="sidebarSignInBtn"><i class="fas fa-sign-in-alt"></i> Sign In / Sign Up</button>
+                </div>
+
+                <!-- Signed-in sidebar profile area (hidden by default) -->
+                <div class="sidebar-profile-signed-in" id="sidebarSignedIn">
+                  <div class="sidebar-avatar" id="sidebarAvatar">?</div>
+                  <p class="sidebar-user-name" id="sidebarUserName">Welcome</p>
+                  <p class="sidebar-user-email" id="sidebarUserEmail"></p>
+                  <div class="sidebar-user-options">
+                    <a href="#" id="sidebarMyVerses" class="sidebar-opt"><i class="fas fa-bookmark"></i> My Saved Verses</a>
+                    <a href="#" id="sidebarMyProgress" class="sidebar-opt"><i class="fas fa-chart-line"></i> My Progress</a>
+                    <a href="#" id="sidebarMyScores" class="sidebar-opt"><i class="fas fa-trophy"></i> Game Scores</a>
+                    <a href="#" id="sidebarEditProfile" class="sidebar-opt"><i class="fas fa-user-edit"></i> Edit Profile</a>
+                  </div>
+                  <button class="sidebar-signout-btn" id="sidebarSignOutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+                </div>
+              </div>
+
+              <hr class="sidebar-divider">
+
                 <ul class="nav-links" role="list">
-                    <li><a href="#home"><i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
+                    <li><a href="#hero-viewport"><i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
                     <li><a href="#studies"><i class="fas fa-book-open" aria-hidden="true"></i> Studies</a></li>
-                    <li><a href="#messages"><i class="fas fa-envelope" aria-hidden="true"></i> Messages</a></li>
-                    <li><a href="#settings"><i class="fas fa-cog" aria-hidden="true"></i> Settings</a></li>
+                    <li><a href="#devotions"><i class="fas fa-envelope" aria-hidden="true"></i> Devotions</a></li>
+                    <li><a href="#games"><i class="fas fa-cog" aria-hidden="true"></i> Games</a></li>
                     <li><a href="all-videos.html"><i class="fas fa-video" aria-hidden="true"></i> Videos</a></li>
                 </ul>
                 </div>
             </div>
         </nav>
     </header>
+
+    <!-- ═══════════════════════════════════════════════════
+         AUTH MODAL — Sign In / Sign Up / Forgot Password
+         ═══════════════════════════════════════════════════ -->
+    <div class="auth-overlay" id="authOverlay" aria-hidden="true">
+      <div class="auth-modal" role="dialog" aria-label="Sign in or create an account">
+
+        <div class="auth-modal-top">
+          <!-- Back / Close button -->
+          <button class="auth-close" id="authClose" aria-label="Go back"><i class="fas fa-arrow-left"></i> Back</button>
+        </div>
+
+        <!-- Trust banner -->
+        <div class="auth-trust-banner">
+          <i class="fas fa-shield-alt"></i>
+          <span>Your identity is yours. Stay anonymous or share your name — it's always your choice.</span>
+        </div>
+
+        <!-- Tab bar -->
+        <div class="auth-tab-bar" role="tablist">
+          <button class="auth-tab active" data-tab="signin" role="tab" aria-selected="true">Sign In</button>
+          <button class="auth-tab" data-tab="signup" role="tab" aria-selected="false">Sign Up</button>
+        </div>
+
+        <!-- SIGN IN PANEL -->
+        <div class="auth-panel active" id="authPanelSignin">
+          <form class="auth-form" id="signinForm" autocomplete="on" novalidate>
+            <div class="auth-field">
+              <label for="signinEmail"><i class="fas fa-envelope"></i> Email</label>
+              <input type="email" id="signinEmail" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+            <div class="auth-field">
+              <label for="signinPassword"><i class="fas fa-lock"></i> Password</label>
+              <input type="password" id="signinPassword" autocomplete="current-password" placeholder="Your password" required>
+              <button type="button" class="auth-pw-toggle" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <p class="auth-error" id="signinError" role="alert"></p>
+            <button type="submit" class="auth-submit-btn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+            <a href="#" class="auth-forgot" id="authForgotLink">Forgot your password?</a>
+          </form>
+          <div class="auth-divider"><span>or</span></div>
+          <button class="auth-google-btn" id="googleSignInBtn"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" width="20" height="20"> Continue with Google</button>
+          <button class="auth-anon-btn" id="anonSignInBtn"><i class="fas fa-user-secret"></i> Continue Anonymously</button>
+          <p class="auth-anon-note">Browse with full features — no email, no name, no trace. You can link a real account any time.</p>
+        </div>
+
+        <!-- SIGN UP PANEL -->
+        <div class="auth-panel" id="authPanelSignup">
+          <form class="auth-form" id="signupForm" autocomplete="on" novalidate>
+            <div class="auth-field">
+              <label for="signupName"><i class="fas fa-user"></i> Display Name <span class="auth-optional">(optional — stay anonymous)</span></label>
+              <input type="text" id="signupName" autocomplete="name" placeholder="Anonymous Believer">
+            </div>
+            <div class="auth-field">
+              <label for="signupEmail"><i class="fas fa-envelope"></i> Email</label>
+              <input type="email" id="signupEmail" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+            <div class="auth-field">
+              <label for="signupPassword"><i class="fas fa-lock"></i> Password</label>
+              <input type="password" id="signupPassword" autocomplete="new-password" placeholder="Min 8 characters" required minlength="8">
+              <button type="button" class="auth-pw-toggle" aria-label="Show password"><i class="fas fa-eye"></i></button>
+            </div>
+            <div class="auth-field">
+              <label for="signupConfirm"><i class="fas fa-lock"></i> Confirm Password</label>
+              <input type="password" id="signupConfirm" autocomplete="new-password" placeholder="Re-enter password" required>
+            </div>
+            <div class="auth-pw-strength" id="pwStrength">
+              <div class="auth-pw-bar"><div class="auth-pw-fill" id="pwFill"></div></div>
+              <span class="auth-pw-label" id="pwLabel"></span>
+            </div>
+            <p class="auth-error" id="signupError" role="alert"></p>
+            <button type="submit" class="auth-submit-btn"><i class="fas fa-user-plus"></i> Create Account</button>
+          </form>
+          <div class="auth-divider"><span>or</span></div>
+          <button class="auth-google-btn" id="googleSignUpBtn"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" width="20" height="20"> Sign up with Google</button>
+          <p class="auth-privacy-promise"><i class="fas fa-heart"></i> We never share your data. Your walk with God is personal.</p>
+        </div>
+
+        <!-- FORGOT PASSWORD PANEL -->
+        <div class="auth-panel" id="authPanelForgot">
+          <p class="auth-forgot-title"><i class="fas fa-key"></i> Reset Your Password</p>
+          <p class="auth-forgot-desc">Enter your email and we'll send a reset link.</p>
+          <form class="auth-form" id="forgotForm" novalidate>
+            <div class="auth-field">
+              <label for="forgotEmail"><i class="fas fa-envelope"></i> Email</label>
+              <input type="email" id="forgotEmail" autocomplete="email" placeholder="you@example.com" required>
+            </div>
+            <p class="auth-error" id="forgotError" role="alert"></p>
+            <p class="auth-success" id="forgotSuccess" role="status"></p>
+            <button type="submit" class="auth-submit-btn"><i class="fas fa-paper-plane"></i> Send Reset Link</button>
+          </form>
+          <a href="#" class="auth-back-link" id="authBackToSignin"><i class="fas fa-arrow-left"></i> Back to Sign In</a>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.querySelector(".hamburger");
+        const sidebar = document.querySelector(".sidebar");
+        if (!hamburger || !sidebar) return;
+
+        const closeSidebar = () => {
+          hamburger.classList.remove("active");
+          sidebar.classList.remove("active");
+          hamburger.setAttribute("aria-expanded", "false");
+          sidebar.setAttribute("aria-hidden", "true");
+        };
+
+        const openSidebar = () => {
+          hamburger.classList.add("active");
+          sidebar.classList.add("active");
+          hamburger.setAttribute("aria-expanded", "true");
+          sidebar.setAttribute("aria-hidden", "false");
+        };
+
+        const toggleSidebar = (e) => {
+          e.stopPropagation();
+          const isOpen = sidebar.classList.contains("active");
+          if (isOpen) {
+            closeSidebar();
+          } else {
+            openSidebar();
+          }
+        };
+
+            hamburger.addEventListener("click", toggleSidebar);
+
+        hamburger.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            const isOpen = sidebar.classList.contains("active");
+            if (isOpen) {
+              closeSidebar();
+            } else {
+              openSidebar();
+            }
+          }
+        });
+
+        sidebar.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+
+        sidebar.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", closeSidebar);
+        });
+
+        document.addEventListener("click", closeSidebar);
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            closeSidebar();
+          }
+        });
+      });
+    </script>
 
 
 
@@ -286,7 +478,7 @@
                 <span class="hud-lab">Devotions</span>
             </a>
             <a href="all-videos.html" class="hud-card" title="Watch scripture-based video series including the Ten Commandments">
-                <span class="hud-val" data-target="5" aria-label="5 videos available">00</span>
+                <span class="hud-val" data-target="11" aria-label="11 videos available">00</span>
                 <span class="hud-lab">Videos</span>
             </a>
         </nav>
@@ -1961,35 +2153,6 @@ homeVideos.forEach(v=>{
     </footer>
 
     <script>
-        // Hamburger menu
-        document.addEventListener("DOMContentLoaded", function () {
-            const hamburger = document.querySelector(".hamburger");
-            const sidebar = document.querySelector(".sidebar");
-
-            hamburger.addEventListener("click", function (e) {
-                e.stopPropagation();
-                hamburger.classList.toggle("active");
-                sidebar.classList.toggle("active");
-            });
-
-            sidebar.addEventListener("click", function (e) {
-                e.stopPropagation();
-            });
-
-            document.addEventListener("click", function () {
-                hamburger.classList.remove("active");
-                sidebar.classList.remove("active");
-            });
-
-            document.addEventListener("keydown", function (e) {
-                if (e.key === "Escape") {
-                    hamburger.classList.remove("active");
-                    sidebar.classList.remove("active");
-                }
-            });
-        });
-
-
         // Slideshow functionality
         let slideIndex = 1;
         let slideTimer = null;
@@ -2028,6 +2191,7 @@ homeVideos.forEach(v=>{
         function animateStudiesBoxes() {
             if (hasAnimatedStudies) return;
             const flexWrap = document.querySelector('.flex-wrap');
+          if (!flexWrap) return;
             const rect = flexWrap.getBoundingClientRect();
             if (rect.top < window.innerHeight && rect.bottom > 0) {
                 hasAnimatedStudies = true;
@@ -2046,6 +2210,8 @@ homeVideos.forEach(v=>{
             }, 100);
         }, { passive: true });
         animateStudiesBoxes();
+
+        });
 
 
 </script>
@@ -3511,6 +3677,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script src="script.js"></script>
+<script type="module" src="Indexstyles.js"></script>
 
 <!-- Scroll-position restore: bulletproof back-button scroll memory -->
 <script>
