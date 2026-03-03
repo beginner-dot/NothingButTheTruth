@@ -9,7 +9,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword,
          signInWithEmailAndPassword, signInWithPopup, signInAnonymously,
-         GoogleAuthProvider, sendPasswordResetEmail, sendEmailVerification,
+         GoogleAuthProvider, FacebookAuthProvider, GithubAuthProvider, sendPasswordResetEmail, sendEmailVerification,
          updateProfile, signOut, linkWithCredential, EmailAuthProvider
        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp
@@ -32,6 +32,8 @@ const app  = initializeApp(firebaseConfig, "nbtt-auth");
 const auth = getAuth(app);
 const db   = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 // ----------------------------------------------------------
 //  DOM References
@@ -84,11 +86,20 @@ ready(() => {
   // Google & Anonymous
   const googleSignInBtn  = $("#googleSignInBtn");
   const googleSignUpBtn  = $("#googleSignUpBtn");
+  const facebookSignInBtn = $("#facebookSignInBtn");
+  const facebookSignUpBtn = $("#facebookSignUpBtn");
+  const githubSignInBtn = $("#githubSignInBtn");
+  const githubSignUpBtn = $("#githubSignUpBtn");
+  const instagramSignInBtn = $("#instagramSignInBtn");
+  const instagramSignUpBtn = $("#instagramSignUpBtn");
+  const tiktokSignInBtn = $("#tiktokSignInBtn");
+  const tiktokSignUpBtn = $("#tiktokSignUpBtn");
   const anonSignInBtn    = $("#anonSignInBtn");
 
   // Sidebar profile
   const sidebarSignedOut = $("#sidebarSignedOut");
   const sidebarSignedIn  = $("#sidebarSignedIn");
+  const sidebarProfile = $("#sidebarProfile");
   const sidebarAvatar    = $("#sidebarAvatar");
   const sidebarUserName  = $("#sidebarUserName");
   const sidebarUserEmail = $("#sidebarUserEmail");
@@ -131,6 +142,39 @@ ready(() => {
 
   function showError(el, msg) {
     if (el) el.textContent = msg;
+  }
+
+  function showProviderSetupHelp(targetErrorEl, providerName) {
+    showError(
+      targetErrorEl,
+      `${providerName} sign-in needs one extra setup step in Firebase. Use Google/Facebook/GitHub/email for now.`
+    );
+  }
+
+  function ensureSidebarPrivacyWrap() {
+    if (!sidebarProfile) return;
+
+    let wrap = document.getElementById("sidebarPrivacyWrap");
+    let note = sidebarProfile.querySelector(".sidebar-privacy-note");
+
+    if (!wrap && note) {
+      wrap = document.createElement("div");
+      wrap.id = "sidebarPrivacyWrap";
+      wrap.className = "sidebar-privacy-wrap";
+      note.parentNode.insertBefore(wrap, note);
+      wrap.appendChild(note);
+    }
+
+    if (!wrap) {
+      wrap = document.createElement("div");
+      wrap.id = "sidebarPrivacyWrap";
+      wrap.className = "sidebar-privacy-wrap";
+      wrap.innerHTML = '<p class="sidebar-privacy-note"><i class="fas fa-lock"></i> Your privacy is sacred to us. Browse freely — no account needed. If you sign up, you can stay <strong>completely anonymous</strong> or choose to share your name.</p>';
+    }
+
+    if (wrap.parentElement !== sidebarProfile) {
+      sidebarProfile.appendChild(wrap);
+    }
   }
 
   function setLoading(btn, loading) {
@@ -267,6 +311,7 @@ ready(() => {
   // ---- Auth State Listener ----
   onAuthStateChanged(auth, async (user) => {
     updateUI(user);
+    ensureSidebarPrivacyWrap();
     if (user) {
       await createUserProfile(user);
     }
@@ -295,6 +340,8 @@ ready(() => {
     $(".sidebar")?.classList.remove("active");
     openAuthModal();
   });
+
+  ensureSidebarPrivacyWrap();
 
   closeBtn?.addEventListener("click", closeAuthModal);
   overlay?.addEventListener("click", (e) => {
@@ -382,21 +429,25 @@ ready(() => {
   });
 
   // ---- Event: Google Sign-In ----
-  async function handleGoogleSignIn() {
+  async function handleProviderSignIn(provider, errorTarget) {
     clearErrors();
     try {
-      if (auth.currentUser?.isAnonymous) {
-        // Link anon account with Google
-        await signInWithPopup(auth, googleProvider);
-      } else {
-        await signInWithPopup(auth, googleProvider);
-      }
+      await signInWithPopup(auth, provider);
     } catch (err) {
-      showError(signinError, friendlyError(err.code));
+      showError(errorTarget || signinError, friendlyError(err.code));
     }
   }
-  googleSignInBtn?.addEventListener("click", handleGoogleSignIn);
-  googleSignUpBtn?.addEventListener("click", handleGoogleSignIn);
+
+  googleSignInBtn?.addEventListener("click", () => handleProviderSignIn(googleProvider, signinError));
+  googleSignUpBtn?.addEventListener("click", () => handleProviderSignIn(googleProvider, signupError));
+  facebookSignInBtn?.addEventListener("click", () => handleProviderSignIn(facebookProvider, signinError));
+  facebookSignUpBtn?.addEventListener("click", () => handleProviderSignIn(facebookProvider, signupError));
+  githubSignInBtn?.addEventListener("click", () => handleProviderSignIn(githubProvider, signinError));
+  githubSignUpBtn?.addEventListener("click", () => handleProviderSignIn(githubProvider, signupError));
+  instagramSignInBtn?.addEventListener("click", () => showProviderSetupHelp(signinError, "Instagram"));
+  instagramSignUpBtn?.addEventListener("click", () => showProviderSetupHelp(signupError, "Instagram"));
+  tiktokSignInBtn?.addEventListener("click", () => showProviderSetupHelp(signinError, "TikTok"));
+  tiktokSignUpBtn?.addEventListener("click", () => showProviderSetupHelp(signupError, "TikTok"));
 
   // ---- Event: Anonymous Sign-In ----
   anonSignInBtn?.addEventListener("click", async () => {
@@ -420,6 +471,85 @@ ready(() => {
       console.error("Sign out error:", err);
     }
   });
+
+  // ---- Share Link Enhancer ----
+  function toAbsoluteUrl(href) {
+    try {
+      return new URL(href, window.location.origin).toString();
+    } catch {
+      return null;
+    }
+  }
+
+  async function shareContent(url, title) {
+    const shareData = {
+      title: title || document.title,
+      text: title || "Check this out",
+      url,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (_) {}
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      alert("Link copied to clipboard.");
+    } catch (_) {
+      prompt("Copy this link:", url);
+    }
+  }
+
+  function getCardShareUrl(card) {
+    if (!card) return null;
+    if (card.dataset.shareUrl) return toAbsoluteUrl(card.dataset.shareUrl);
+    const directHref = card.getAttribute("href");
+    if (directHref) return toAbsoluteUrl(directHref);
+    const nestedLink = card.querySelector("a[href]");
+    if (nestedLink) return toAbsoluteUrl(nestedLink.getAttribute("href"));
+    return null;
+  }
+
+  function getCardShareTitle(card) {
+    const heading = card.querySelector("h3, h2");
+    if (heading?.textContent) return heading.textContent.trim();
+    return "Shared from NothingButTheTruth";
+  }
+
+  function attachShareButtons() {
+    const selectors = [
+      ".nx-card",
+      ".nx-devo-card",
+      ".game-card",
+      ".video-card",
+      ".myth-short-card",
+    ];
+
+    document.querySelectorAll(selectors.join(",")).forEach((card) => {
+      if (card.querySelector(".content-share-btn")) return;
+      const shareUrl = getCardShareUrl(card);
+      if (!shareUrl) return;
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "content-share-btn";
+      btn.setAttribute("aria-label", "Share this");
+      btn.innerHTML = '<i class="fas fa-share-alt"></i>';
+
+      btn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        await shareContent(shareUrl, getCardShareTitle(card));
+      });
+
+      card.appendChild(btn);
+    });
+  }
+
+  attachShareButtons();
 
   // ---- Mark loaded ----
   document.documentElement.dataset.indexstylesJs = "loaded";

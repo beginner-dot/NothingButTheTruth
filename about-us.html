@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | NothingButTheTRUTH</title>
+  <meta name="description" content="About NothingButTheTRUTH — mission, values, commitment to prayer and Scripture, and how we serve all ages with biblical resources." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --blue: #1d4ed8;
+      --green: #0f766e;
+      --soft: #eff6ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    .page {
+      width: min(1120px, 94vw);
+      margin: 0 auto;
+      padding: 24px 0 52px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .brand {
+      font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #dbeafe;
+      background: linear-gradient(120deg, #ffffff 0%, #f8faff 100%);
+      box-shadow: 0 8px 20px rgba(30, 64, 175, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1), rgba(219, 39, 119, 0.1));
+      background-size: 220% 100%;
+      animation: brandGlowShift 8s linear infinite;
+      z-index: 0;
+    }
+
+    .brand-text {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #1d4ed8, #7c3aed, #db2777);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: brandHueFloat 7s ease-in-out infinite;
+    }
+
+    .brand-emoji {
+      position: relative;
+      z-index: 1;
+      font-size: 1.05em;
+      filter: drop-shadow(0 2px 6px rgba(59, 130, 246, 0.28));
+      animation: brandEmojiBob 2.6s ease-in-out infinite;
+    }
+
+    @keyframes brandGlowShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 220% 50%; }
+    }
+
+    @keyframes brandHueFloat {
+      0%, 100% { filter: saturate(100%); }
+      50% { filter: saturate(145%); }
+    }
+
+    @keyframes brandEmojiBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-2px) rotate(-6deg); }
+    }
+
+    .home-link {
+      text-decoration: none;
+      color: var(--blue);
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 600;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #ffffff 0%, #f8fbff 58%, #eef5ff 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      line-height: 1.08;
+      letter-spacing: -0.4px;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 74ch;
+      line-height: 1.72;
+      font-size: 1.02rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 14px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 18px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.66;
+      font-size: 0.96rem;
+    }
+
+    .stack { display: grid; gap: 12px; }
+
+    .offer-list,
+    .value-list {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.65;
+      display: grid;
+      gap: 6px;
+      font-size: 0.95rem;
+    }
+
+    .quote {
+      margin-top: 10px;
+      background: #f8fafc;
+      border-left: 4px solid var(--blue);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #1e293b;
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .badge {
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-weight: 600;
+      font-size: 0.82rem;
+    }
+
+    .note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #99f6e4;
+      background: #ecfeff;
+      color: #115e59;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    .footer {
+      margin-top: 16px;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.86rem;
+    }
+
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(24px) scale(0.985);
+      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(.2,.8,.2,1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-section.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .stack .reveal-section:nth-child(1) { transition-delay: 0.04s; }
+    .stack .reveal-section:nth-child(2) { transition-delay: 0.1s; }
+    .stack .reveal-section:nth-child(3) { transition-delay: 0.16s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .brand::before,
+      .brand-text,
+      .brand-emoji {
+        animation: none !important;
+      }
+
+      .reveal-section {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .hero { padding: 22px; }
+      .reveal-section {
+        transform: translateY(20px) scale(0.99);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="top">
+      <div class="brand"><span class="brand-text">NothingButTheTRUTH</span> <span class="brand-emoji">✨</span></div>
+      <a class="home-link" href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+
+    <section class="hero reveal-section">
+      <h1>About Us</h1>
+      <p>
+        NothingButTheTRUTH is a Bible-centered platform built to help both young and old people grow in faith with clarity.
+        We focus on practical teaching, honest truth, and daily spiritual encouragement through studies, devotions, videos, and interactive resources.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Scripture First</span>
+        <span class="badge">Prayer Driven</span>
+        <span class="badge">Clear for All Ages</span>
+      </div>
+    </section>
+
+    <section class="layout">
+      <div class="stack">
+        <article class="panel reveal-section">
+          <h2 class="section-title"><i class="fas fa-bullseye"></i> Our Mission</h2>
+          <p class="section-text">
+            To present the unfiltered Word of God in ways people can understand, trust, and apply every day.
+            We aim to lead people toward spiritual growth, biblical conviction, and practical obedience.
+          </p>
+        </article>
+
+        <article class="panel reveal-section">
+          <h2 class="section-title"><i class="fas fa-layer-group"></i> What We Offer</h2>
+          <ul class="offer-list">
+            <li>In-depth Bible studies grounded in Prayer and Scripture</li>
+            <li>Daily devotions with practical life application</li>
+            <li>Video teachings and short-form biblical content</li>
+            <li>Interactive Bible games for learning and retention</li>
+          </ul>
+        </article>
+
+        <article class="panel reveal-section">
+          <h2 class="section-title"><i class="fas fa-user-shield"></i> Privacy & Safety</h2>
+          <p class="section-text">
+            You can use the platform without signing up, stay anonymous, or share your identity if you choose.
+            We designed the experience so your journey with God can stay private and safe.
+          </p>
+          <div class="note">
+            We believe trust is part of ministry. Privacy is not optional — it is part of how we serve people with integrity.
+          </div>
+        </article>
+      </div>
+
+      <div class="stack">
+        <article class="panel reveal-section">
+          <h2 class="section-title"><i class="fas fa-heart"></i> Our Values</h2>
+          <ul class="value-list">
+            <li>Faithfulness to Scripture</li>
+            <li>Prayer before performance</li>
+            <li>Truth with compassion</li>
+            <li>Consistency in daily growth</li>
+          </ul>
+        </article>
+
+        <article class="panel reveal-section">
+          <h2 class="section-title"><i class="fas fa-book-bible"></i> Biblical Foundation</h2>
+          <p class="section-text">Our work is guided by this conviction:</p>
+          <div class="quote">
+            “All Scripture is given by inspiration of God, and is profitable for doctrine, for reproof,
+            for correction, for instruction in righteousness.”<br />
+            <strong>2 Timothy 3:16</strong>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <p class="footer">© 2025 NothingButTheTRUTH. Truth documented and delivered for the modern seeker.</p>
+  </main>
+  <script>
+    (function() {
+      const blocks = document.querySelectorAll('.reveal-section');
+      if (!blocks.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        blocks.forEach((el) => el.classList.add('visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '0px 0px -8% 0px',
+        threshold: 0.12,
+      });
+
+      blocks.forEach((el) => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
