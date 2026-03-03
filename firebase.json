@@ -22,6 +22,7 @@
     }
   ],
   "hosting": {
+    "site": "nothingbutthetruth",
     "public": ".",
     "ignore": [
       "firebase.json",
