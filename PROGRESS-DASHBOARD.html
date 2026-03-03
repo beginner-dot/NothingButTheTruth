@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Progress Dashboard — NothingButTheTRUTH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+  :root {
+    --bg: #060812;
+    --bg2: #0d1121;
+    --bg3: #131828;
+    --bg4: #1a2035;
+    --purple: #a855f7;
+    --purple-dim: #7c3aed;
+    --purple-glow: rgba(168,85,247,0.25);
+    --gold: #ffd803;
+    --gold-dim: #c9a800;
+    --gold-glow: rgba(255,216,3,0.2);
+    --green: #22c55e;
+    --red: #ef4444;
+    --orange: #f97316;
+    --blue: #3b82f6;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: rgba(168,85,247,0.2);
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 100px;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--purple-dim); border-radius: 3px; }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, #0d1121 0%, #1a0a2e 50%, #0d1121 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .header-left h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.9rem;
+    background: linear-gradient(135deg, var(--purple), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+
+  .header-left .subtitle {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .site-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--purple);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color .2s;
+  }
+  .site-link:hover { color: var(--gold); }
+
+  .last-updated {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .last-updated i { color: var(--gold); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 24px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.45rem;
+    color: var(--text);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title i { color: var(--purple); font-size: 1.1rem; }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 44px 0;
+  }
+
+  /* ── PROGRESS RING ── */
+  .ring-section {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: center;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 36px;
+    box-shadow: var(--shadow);
+  }
+
+  .ring-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+  }
+
+  .ring-wrapper svg {
+    transform: rotate(-90deg);
+    width: 180px;
+    height: 180px;
+  }
+
+  .ring-track {
+    fill: none;
+    stroke: var(--bg4);
+    stroke-width: 14;
+  }
+
+  .ring-fill {
+    fill: none;
+    stroke: url(#ringGrad);
+    stroke-width: 14;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.6s cubic-bezier(.4,0,.2,1);
+  }
+
+  .ring-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ring-pct {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.1rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .ring-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+
+  .ring-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @media (min-width: 600px) {
+    .ring-stats { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 14px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  .stat-num.green { color: var(--green); }
+  .stat-num.gold  { color: var(--gold); }
+  .stat-num.red   { color: var(--red); }
+  .stat-num.purple { color: var(--purple); }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+  }
+
+  /* ── WINS ── */
+  .wins-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .win-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg2);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    transition: border-color .2s, transform .2s;
+  }
+  .win-item:hover { border-color: var(--green); transform: translateY(-1px); }
+
+  .win-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(34,197,94,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--green);
+    font-size: 0.8rem;
+  }
+
+  .win-text {
+    font-size: 0.83rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 36px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--green), var(--purple), var(--bg4));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -32px;
+    top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.55rem;
+  }
+
+  .timeline-dot.done {
+    border-color: var(--green);
+    background: rgba(34,197,94,0.15);
+    color: var(--green);
+  }
+
+  .timeline-dot.current {
+    border-color: var(--gold);
+    background: rgba(255,216,3,0.12);
+    box-shadow: 0 0 10px var(--gold), 0 0 20px rgba(255,216,3,0.4);
+    animation: pulse-gold 2s ease-in-out infinite;
+    color: var(--gold);
+  }
+
+  .timeline-dot.future {
+    border-color: var(--border);
+    color: var(--text-muted);
+  }
+
+  @keyframes pulse-gold {
+    0%, 100% { box-shadow: 0 0 6px var(--gold), 0 0 14px rgba(255,216,3,0.35); }
+    50%       { box-shadow: 0 0 14px var(--gold), 0 0 28px rgba(255,216,3,0.55); }
+  }
+
+  .timeline-content {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+  }
+
+  .timeline-content.current {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px rgba(255,216,3,0.15), var(--shadow);
+  }
+
+  .timeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .timeline-phase {
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .timeline-phase.done    { color: var(--green); }
+  .timeline-phase.current { color: var(--gold); }
+  .timeline-phase.future  { color: var(--text-muted); }
+
+  .timeline-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .badge-done    { background: rgba(34,197,94,0.15);  color: var(--green); }
+  .badge-current { background: rgba(255,216,3,0.15);  color: var(--gold);  }
+  .badge-future  { background: rgba(148,163,184,0.1); color: var(--text-muted); }
+
+  .timeline-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ── CHECKLIST ── */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .filter-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text-muted);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .filter-btn:hover { border-color: var(--purple); color: var(--text); }
+  .filter-btn.active {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: #fff;
+    box-shadow: 0 0 12px var(--purple-glow);
+  }
+  .filter-btn.active.all    { background: var(--purple-dim); }
+  .filter-btn.active.crit   { background: var(--red); border-color: var(--red); box-shadow: 0 0 10px rgba(239,68,68,.3); }
+  .filter-btn.active.high   { background: var(--orange); border-color: var(--orange); box-shadow: 0 0 10px rgba(249,115,22,.3); }
+  .filter-btn.active.med    { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 10px rgba(59,130,246,.3); }
+  .filter-btn.active.low    { background: #475569; border-color: #475569; }
+
+  .checklist-group-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin: 20px 0 10px;
+    padding-left: 4px;
+    border-left: 3px solid var(--purple);
+    padding-left: 8px;
+  }
+  .checklist-group-title.crit  { border-color: var(--red);    color: var(--red); }
+  .checklist-group-title.high  { border-color: var(--orange); color: var(--orange); }
+  .checklist-group-title.med   { border-color: var(--blue);   color: var(--blue); }
+  .checklist-group-title.low   { border-color: #64748b;       color: #64748b; }
+
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all .2s;
+    user-select: none;
+  }
+  .checklist-item:hover { border-color: var(--purple); background: var(--bg3); }
+  .checklist-item.checked {
+    opacity: 0.55;
+    background: var(--bg);
+    border-color: rgba(34,197,94,0.2);
+  }
+  .checklist-item.checked .ci-text { text-decoration: line-through; }
+
+  .ci-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all .2s;
+    color: transparent;
+    font-size: 0.65rem;
+  }
+  .checklist-item:hover .ci-checkbox { border-color: var(--purple); }
+  .checklist-item.checked .ci-checkbox {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
+  }
+
+  .ci-body { flex: 1; min-width: 0; }
+
+  .ci-text {
+    font-size: 0.83rem;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .ci-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .badge {
+    font-size: 0.66rem;
+    font-weight: 600;
+    padding: 2px 9px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge-critical { background: rgba(239,68,68,.15);  color: var(--red); }
+  .badge-high     { background: rgba(249,115,22,.15); color: var(--orange); }
+  .badge-medium   { background: rgba(59,130,246,.15); color: var(--blue); }
+  .badge-low      { background: rgba(100,116,139,.15); color: #94a3b8; }
+  .badge-effort   { background: rgba(168,85,247,.1); color: var(--purple); }
+
+  /* ── ISSUES ── */
+  .issues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .issue-card {
+    background: var(--bg2);
+    border: 1px solid rgba(239,68,68,0.25);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    transition: border-color .2s, transform .2s;
+  }
+  .issue-card:hover { border-color: var(--red); transform: translateY(-2px); }
+
+  .issue-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: rgba(239,68,68,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--red);
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .issue-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .issue-desc {
+    font-size: 0.77rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── TOOL LINKS ── */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+
+  .tool-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all .2s;
+  }
+  .tool-link:hover {
+    border-color: var(--purple);
+    background: var(--bg3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--purple-glow);
+  }
+
+  .tool-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    background: rgba(168,85,247,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple);
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
+
+  .tool-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .tool-url {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .tool-arrow {
+    margin-left: auto;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+  .tool-link:hover .tool-arrow { color: var(--purple); }
+
+  /* ── SUGGESTIONS ── */
+  .suggestions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+  }
+
+  .suggestion-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    transition: border-color .2s, transform .2s;
+    border-top: 3px solid var(--purple);
+  }
+  .suggestion-card:hover {
+    border-color: var(--purple);
+    border-top-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--purple-glow);
+  }
+
+  .suggestion-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--purple);
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .suggestion-title {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .suggestion-desc {
+    font-size: 0.77rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  /* ── SITE STATS ── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 14px;
+  }
+
+  .stats-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 20px 14px;
+    text-align: center;
+    transition: border-color .2s, transform .2s;
+  }
+  .stats-box:hover { border-color: var(--purple); transform: translateY(-2px); }
+
+  .stats-box-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--purple);
+    line-height: 1;
+  }
+
+  .stats-box-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  /* ── SEO TOOLKIT ── */
+  .toolkit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 14px;
+  }
+
+  .toolkit-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    transition: border-color .2s;
+  }
+  .toolkit-card:hover { border-color: var(--gold); }
+
+  .toolkit-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .toolkit-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: rgba(255,216,3,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 0.95rem;
+  }
+
+  .toolkit-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  .toolkit-cmd {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    transition: border-color .2s;
+    user-select: all;
+  }
+  .toolkit-cmd:hover { border-color: var(--green); }
+
+  .copy-hint {
+    font-size: 0.63rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+    transition: color .2s;
+  }
+  .toolkit-cmd:hover .copy-hint { color: var(--green); }
+
+  .toolkit-desc {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .dashboard-footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .footer-left {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .footer-left span { color: var(--purple); font-weight: 600; }
+
+  .footer-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: 1px solid;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-reset {
+    border-color: var(--red);
+    color: var(--red);
+    background: rgba(239,68,68,0.05);
+  }
+  .btn-reset:hover {
+    background: rgba(239,68,68,0.15);
+    box-shadow: 0 0 12px rgba(239,68,68,0.25);
+  }
+
+  .btn-print {
+    border-color: var(--purple);
+    color: var(--purple);
+    background: rgba(168,85,247,0.05);
+  }
+  .btn-print:hover {
+    background: rgba(168,85,247,0.15);
+    box-shadow: 0 0 12px var(--purple-glow);
+  }
+
+  /* ── FIXED PRINT BUTTON ── */
+  .fab-print {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 200;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--purple-dim));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px var(--purple-glow);
+    border: none;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .fab-print:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(168,85,247,0.5);
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; color: #000; }
+    .site-header, .fab-print, .filter-bar { position: static; }
+    .fab-print { display: none; }
+    .btn-print { display: none; }
+    .checklist-item, .win-item, .issue-card, .tool-link, .suggestion-card, .stats-box, .toolkit-card, .timeline-content {
+      border-color: #ccc !important;
+    }
+    .section-title, .timeline-phase.done, .ring-pct { color: #000 !important; -webkit-text-fill-color: #000 !important; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .ring-section { grid-template-columns: 1fr; }
+    .ring-wrapper { margin: 0 auto; }
+    .site-header { padding: 20px 18px; }
+    .container { padding: 24px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+═══════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-left">
+    <h1><i class="fa-solid fa-cross" style="font-size:1.4rem;margin-right:10px;color:var(--gold);"></i>NothingButTheTRUTH — SEO Dashboard</h1>
+    <p class="subtitle">Bible Studies · Devotions · Games · Videos</p>
+  </div>
+  <div class="header-right">
+    <a href="https://nothingbutthetruth.web.app" target="_blank" rel="noopener" class="site-link">
+      <i class="fa-solid fa-globe"></i> nothingbutthetruth.web.app
+      <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.7rem;"></i>
+    </a>
+    <span class="last-updated"><i class="fa-regular fa-calendar-check"></i> Last updated: March 3, 2026</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════
+       PROGRESS RING
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-circle-notch"></i> Overall SEO Progress</h2>
+  <div class="ring-section">
+    <div class="ring-wrapper">
+      <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="#ffd803"/>
+          </linearGradient>
+        </defs>
+        <circle class="ring-track" cx="90" cy="90" r="76"/>
+        <circle class="ring-fill" id="ringFill" cx="90" cy="90" r="76"
+          stroke-dasharray="477.52"
+          stroke-dashoffset="477.52"/>
+      </svg>
+      <div class="ring-center">
+        <div class="ring-pct" id="ringPct">0%</div>
+        <div class="ring-label">Complete</div>
+      </div>
+    </div>
+
+    <div class="ring-stats">
+      <div class="stat-card">
+        <div class="stat-num green" id="statCompleted">0</div>
+        <div class="stat-label">Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num gold" id="statTodo">21</div>
+        <div class="stat-label">To Do</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num red" id="statCritical">3</div>
+        <div class="stat-label">Critical Left</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num purple">67</div>
+        <div class="stat-label">Total Pages</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════
+       WINS SECTION
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-trophy"></i> Completed Wins (14)</h2>
+  <div class="wins-grid">
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">SEO meta tags on all 67 pages (title, description, canonical, OG, Twitter Card)</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">JSON-LD structured data on all 67 pages</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">Keywords &amp; author meta tags on all 67 pages</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">Optimized title lengths (35–60 chars, 0 issues)</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">Optimized description lengths (110–160 chars, 0 issues)</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">Smart XML sitemap with tiered priorities (67 URLs)</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">robots.txt with Sitemap directive</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">Breadcrumb navigation on 54 content pages</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">BreadcrumbList JSON-LD on 54 pages</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">"Continue Exploring" related content sections on 51 pages</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">Mini site-wide footer on 51 pages</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">Hub cross-links (Studies ↔ Devotions ↔ Games ↔ Videos) on 4 hubs</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">Repaired 2 malformed HTML files</div>
+    </div>
+
+    <div class="win-item">
+      <div class="win-icon"><i class="fa-solid fa-check"></i></div>
+      <div class="win-text">SEO automation toolkit (3 scripts: seo-hardening.js, seo-verify.js, seo-internal-links.js)</div>
+    </div>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════
+       ROADMAP TIMELINE
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-map-location-dot"></i> Roadmap Timeline</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <span class="timeline-phase done">Phase 1 — Technical SEO Foundation</span>
+          <span class="timeline-badge badge-done">DONE</span>
+        </div>
+        <p class="timeline-desc">Sitemap, robots.txt, canonical URLs, meta tags, JSON-LD on all 67 pages.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <span class="timeline-phase done">Phase 2 — Metadata Quality Rewrite</span>
+          <span class="timeline-badge badge-done">DONE</span>
+        </div>
+        <p class="timeline-desc">Optimized all title and description lengths, added OG + Twitter Card tags, structured data quality pass.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <span class="timeline-phase done">Phase 3 — Internal Link Authority Pass</span>
+          <span class="timeline-badge badge-done">DONE</span>
+        </div>
+        <p class="timeline-desc">Breadcrumbs on 54 pages, "Continue Exploring" sections on 51 pages, hub cross-links on 4 hubs.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot current"><i class="fa-solid fa-bolt"></i></div>
+      <div class="timeline-content current">
+        <div class="timeline-header">
+          <span class="timeline-phase current">Phase 4 — Critical Fixes &amp; Quick Wins</span>
+          <span class="timeline-badge badge-current">CURRENT · Mar 8, 2026</span>
+        </div>
+        <p class="timeline-desc">Fix broken share links, Privacy Policy, PNG share image, Search Console, favicon, 404 page, Analytics, hotlinked images.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot future"><i class="fa-regular fa-clock"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <span class="timeline-phase future">Phase 5 — Performance &amp; Security</span>
+          <span class="timeline-badge badge-future">Mar 15, 2026</span>
+        </div>
+        <p class="timeline-desc">Cache headers, security headers, reduce font families, clean up Firebase SDK duplicates, defer render-blocking scripts.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot future"><i class="fa-regular fa-clock"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <span class="timeline-phase future">Phase 6 — Content Depth &amp; Discoverability</span>
+          <span class="timeline-badge badge-future">Apr 5, 2026</span>
+        </div>
+        <p class="timeline-desc">Email newsletter, FAQ schema, accessibility landmarks, image optimization, PWA support.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot future"><i class="fa-regular fa-clock"></i></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <span class="timeline-phase future">Phase 7 — Promotion &amp; Audience Building</span>
+          <span class="timeline-badge badge-future">Apr 30, 2026 · Ongoing</span>
+        </div>
+        <p class="timeline-desc">Social media presence, backlink building, content calendar (1–2 new pages/month), Bing Webmaster Tools.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════
+       ACTION CHECKLIST
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Action Checklist</h2>
+
+  <div class="filter-bar">
+    <button class="filter-btn active all" onclick="filterChecklist('all')">
+      <i class="fa-solid fa-layer-group" style="margin-right:4px;"></i> All
+    </button>
+    <button class="filter-btn crit" onclick="filterChecklist('critical')">
+      <i class="fa-solid fa-circle-exclamation" style="margin-right:4px;"></i> Critical
+    </button>
+    <button class="filter-btn high" onclick="filterChecklist('high')">
+      <i class="fa-solid fa-fire" style="margin-right:4px;"></i> High
+    </button>
+    <button class="filter-btn med" onclick="filterChecklist('medium')">
+      <i class="fa-solid fa-bars-staggered" style="margin-right:4px;"></i> Medium
+    </button>
+    <button class="filter-btn low" onclick="filterChecklist('low')">
+      <i class="fa-regular fa-clock" style="margin-right:4px;"></i> Later
+    </button>
+  </div>
+
+  <div id="checklistContainer">
+
+    <div class="checklist-group-title crit" data-priority="critical">🔴 Critical</div>
+
+    <div class="checklist-item" data-id="c1" data-priority="critical" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Fix 59 broken share links (.com → .web.app) — 9 files affected</div>
+        <div class="ci-badges">
+          <span class="badge badge-critical">Critical</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 5 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="c2" data-priority="critical" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Create Privacy Policy page (site collects user accounts)</div>
+        <div class="ci-badges">
+          <span class="badge badge-critical">Critical</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 30 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="c3" data-priority="critical" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Replace SVG share image with PNG/JPG 1200×630 (social platforms can't render SVG)</div>
+        <div class="ci-badges">
+          <span class="badge badge-critical">Critical</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 15 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-group-title high" data-priority="high">🟠 High Priority</div>
+
+    <div class="checklist-item" data-id="h1" data-priority="high" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Register Google Search Console &amp; submit sitemap (search.google.com/search-console)</div>
+        <div class="ci-badges">
+          <span class="badge badge-high">High</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 10 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="h2" data-priority="high" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Add favicon and app icons (use realfavicongenerator.net)</div>
+        <div class="ci-badges">
+          <span class="badge badge-high">High</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 15 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="h3" data-priority="high" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Create custom 404 page + update firebase.json</div>
+        <div class="ci-badges">
+          <span class="badge badge-high">High</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 20 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="h4" data-priority="high" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Activate Google Analytics (measurement ID G-LXVCQNJ6VJ exists but gtag.js not loaded)</div>
+        <div class="ci-badges">
+          <span class="badge badge-high">High</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 10 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="h5" data-priority="high" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Replace 6 Pinterest-hotlinked images with local copies</div>
+        <div class="ci-badges">
+          <span class="badge badge-high">High</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 30 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="h6" data-priority="high" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Add security headers in firebase.json (X-Frame-Options, X-Content-Type-Options, Referrer-Policy)</div>
+        <div class="ci-badges">
+          <span class="badge badge-high">High</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 10 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-group-title med" data-priority="medium">🔵 Medium Priority</div>
+
+    <div class="checklist-item" data-id="m1" data-priority="medium" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Configure caching headers for static assets in firebase.json</div>
+        <div class="ci-badges">
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 10 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="m2" data-priority="medium" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Reduce Google Fonts from 8 families to 3</div>
+        <div class="ci-badges">
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 30 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="m3" data-priority="medium" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Clean up 3 duplicate Firebase initializations (v9.22.2, v10.12.0, v10.12.2)</div>
+        <div class="ci-badges">
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 45 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="m4" data-priority="medium" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Defer render-blocking scripts (Chart.js, Firebase compat)</div>
+        <div class="ci-badges">
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 10 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="m5" data-priority="medium" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Add email newsletter signup (Mailchimp / ConvertKit)</div>
+        <div class="ci-badges">
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 1–2 hrs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="m6" data-priority="medium" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Add FAQ sections with FAQPage schema to studies</div>
+        <div class="ci-badges">
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 2–3 hrs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="m7" data-priority="medium" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Add accessibility landmarks to study/devotion pages</div>
+        <div class="ci-badges">
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 1 hr</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="m8" data-priority="medium" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Add loading="lazy" and width/height to all images</div>
+        <div class="ci-badges">
+          <span class="badge badge-medium">Medium</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 15 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-group-title low" data-priority="low">⚪ Low / Later</div>
+
+    <div class="checklist-item" data-id="l1" data-priority="low" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Add PWA support (manifest + service worker)</div>
+        <div class="ci-badges">
+          <span class="badge badge-low">Low</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 3–4 hrs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="l2" data-priority="low" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Create social media presence</div>
+        <div class="ci-badges">
+          <span class="badge badge-low">Low</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> Ongoing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="l3" data-priority="low" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Build backlinks (forums, guest posts, church directories)</div>
+        <div class="ci-badges">
+          <span class="badge badge-low">Low</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> Ongoing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="l4" data-priority="low" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Establish content calendar (1–2 new pages/month)</div>
+        <div class="ci-badges">
+          <span class="badge badge-low">Low</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> Ongoing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-item" data-id="l5" data-priority="low" onclick="toggleItem(this)">
+      <div class="ci-checkbox"><i class="fa-solid fa-check"></i></div>
+      <div class="ci-body">
+        <div class="ci-text">Submit to Bing Webmaster Tools</div>
+        <div class="ci-badges">
+          <span class="badge badge-low">Low</span>
+          <span class="badge badge-effort"><i class="fa-regular fa-clock"></i> 10 min</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /checklistContainer -->
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════
+       DISCOVERED ISSUES
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> Discovered Issues</h2>
+  <div class="issues-grid">
+
+    <div class="issue-card">
+      <div class="issue-icon"><i class="fa-solid fa-link-slash"></i></div>
+      <div class="issue-title">59 Broken Share Links</div>
+      <div class="issue-desc">Share buttons across 9 files still point to <code style="color:var(--red);">.com</code> instead of <code style="color:var(--green);">.web.app</code>. These 404 when shared on social media.</div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-icon"><i class="fa-solid fa-image"></i></div>
+      <div class="issue-title">SVG Share Image</div>
+      <div class="issue-desc">The OG share image is SVG format. Facebook, Twitter/X, LinkedIn, and WhatsApp cannot render SVG previews. Needs a 1200×630 PNG or JPG.</div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-icon"><i class="fa-brands fa-firebase"></i></div>
+      <div class="issue-title">Triple Firebase SDK (~600 KB wasted)</div>
+      <div class="issue-desc">Three different Firebase SDK versions loaded simultaneously (v9.22.2, v10.12.0, v10.12.2), adding ~600 KB of redundant JavaScript.</div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-icon"><i class="fa-brands fa-pinterest"></i></div>
+      <div class="issue-title">6 Hotlinked Pinterest Images</div>
+      <div class="issue-desc">6 images are served directly from Pinterest's CDN. These can break at any time. All should be downloaded and hosted locally.</div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-icon"><i class="fa-brands fa-google"></i></div>
+      <div class="issue-title">8 Google Font Families (~500 KB)</div>
+      <div class="issue-desc">Importing 8 different font families adds ~500 KB of render-blocking CSS. Reducing to 3 core families would significantly improve LCP.</div>
+    </div>
+
+    <div class="issue-card">
+      <div class="issue-icon"><i class="fa-solid fa-chart-line"></i></div>
+      <div class="issue-title">Analytics Configured But Silent</div>
+      <div class="issue-desc">Measurement ID <code style="color:var(--purple);">G-LXVCQNJ6VJ</code> exists in the config, but <code>gtag.js</code> is never loaded. Zero data is being collected.</div>
+    </div>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════
+       EXTERNAL TOOL LINKS
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> External SEO Tools</h2>
+  <div class="tools-grid">
+
+    <a href="https://search.google.com/search-console" target="_blank" rel="noopener" class="tool-link">
+      <div class="tool-icon"><i class="fa-brands fa-google"></i></div>
+      <div>
+        <div class="tool-name">Google Search Console</div>
+        <div class="tool-url">search.google.com/search-console</div>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square tool-arrow"></i>
+    </a>
+
+    <a href="https://analytics.google.com" target="_blank" rel="noopener" class="tool-link">
+      <div class="tool-icon"><i class="fa-solid fa-chart-bar"></i></div>
+      <div>
+        <div class="tool-name">Google Analytics</div>
+        <div class="tool-url">analytics.google.com</div>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square tool-arrow"></i>
+    </a>
+
+    <a href="https://pagespeed.web.dev" target="_blank" rel="noopener" class="tool-link">
+      <div class="tool-icon"><i class="fa-solid fa-gauge-high"></i></div>
+      <div>
+        <div class="tool-name">PageSpeed Insights</div>
+        <div class="tool-url">pagespeed.web.dev</div>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square tool-arrow"></i>
+    </a>
+
+    <a href="https://search.google.com/test/rich-results" target="_blank" rel="noopener" class="tool-link">
+      <div class="tool-icon"><i class="fa-solid fa-code"></i></div>
+      <div>
+        <div class="tool-name">Rich Results Test</div>
+        <div class="tool-url">search.google.com/test/rich-results</div>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square tool-arrow"></i>
+    </a>
+
+    <a href="https://realfavicongenerator.net" target="_blank" rel="noopener" class="tool-link">
+      <div class="tool-icon"><i class="fa-regular fa-image"></i></div>
+      <div>
+        <div class="tool-name">Favicon Generator</div>
+        <div class="tool-url">realfavicongenerator.net</div>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square tool-arrow"></i>
+    </a>
+
+    <a href="https://validator.schema.org" target="_blank" rel="noopener" class="tool-link">
+      <div class="tool-icon"><i class="fa-solid fa-check-double"></i></div>
+      <div>
+        <div class="tool-name">Schema Validator</div>
+        <div class="tool-url">validator.schema.org</div>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square tool-arrow"></i>
+    </a>
+
+    <a href="https://metatags.io" target="_blank" rel="noopener" class="tool-link">
+      <div class="tool-icon"><i class="fa-solid fa-tags"></i></div>
+      <div>
+        <div class="tool-name">Meta Tag Checker</div>
+        <div class="tool-url">metatags.io</div>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square tool-arrow"></i>
+    </a>
+
+    <a href="https://bing.com/webmasters" target="_blank" rel="noopener" class="tool-link">
+      <div class="tool-icon"><i class="fa-brands fa-microsoft"></i></div>
+      <div>
+        <div class="tool-name">Bing Webmaster Tools</div>
+        <div class="tool-url">bing.com/webmasters</div>
+      </div>
+      <i class="fa-solid fa-arrow-up-right-from-square tool-arrow"></i>
+    </a>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════
+       COPILOT SUGGESTIONS
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Copilot Suggestions</h2>
+  <div class="suggestions-grid">
+
+    <div class="suggestion-card">
+      <div class="suggestion-num">01</div>
+      <div class="suggestion-title">Create a "Start Here" Page</div>
+      <div class="suggestion-desc">New visitors don't know where to begin. A guided entry page that routes users to Studies, Devotions, Games, or Videos based on their interest would reduce bounce rates and improve engagement.</div>
+    </div>
+
+    <div class="suggestion-card">
+      <div class="suggestion-num">02</div>
+      <div class="suggestion-title">Add "Reading Time" Estimates</div>
+      <div class="suggestion-desc">Display estimated reading time (e.g., "5 min read") on studies and devotions. This sets expectations, builds trust, and can improve click-through rates from search results.</div>
+    </div>
+
+    <div class="suggestion-card">
+      <div class="suggestion-num">03</div>
+      <div class="suggestion-title">Create Topical Landing Pages</div>
+      <div class="suggestion-desc">Build topic cluster pages (e.g., "Prophecy", "Salvation", "Prayer") that link out to all related content. These hub pages signal topical authority to Google and attract long-tail searches.</div>
+    </div>
+
+    <div class="suggestion-card">
+      <div class="suggestion-num">04</div>
+      <div class="suggestion-title">Add "Share Your Testimony" Feature</div>
+      <div class="suggestion-desc">User-generated testimonies create fresh content, build community, and can dramatically increase return visits. Consider a simple form powered by Firebase Firestore.</div>
+    </div>
+
+    <div class="suggestion-card">
+      <div class="suggestion-num">05</div>
+      <div class="suggestion-title">Launch Weekly Devotional Email</div>
+      <div class="suggestion-desc">A weekly devotional email newsletter keeps your audience engaged, drives repeat traffic, and builds a direct relationship that isn't dependent on Google's algorithm.</div>
+    </div>
+
+    <div class="suggestion-card">
+      <div class="suggestion-num">06</div>
+      <div class="suggestion-title">Target "People Also Ask" Questions</div>
+      <div class="suggestion-desc">Research PAA questions related to your topics (e.g., "What does the Bible say about angels?") and write structured Q&amp;A sections to capture Google featured snippets and PAA boxes.</div>
+    </div>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════
+       SITE STATS SNAPSHOT
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> Site Stats Snapshot</h2>
+  <div class="stats-grid">
+
+    <div class="stats-box">
+      <div class="stats-box-num">67</div>
+      <div class="stats-box-label">Total Pages</div>
+    </div>
+
+    <div class="stats-box">
+      <div class="stats-box-num">23</div>
+      <div class="stats-box-label">Bible Studies</div>
+    </div>
+
+    <div class="stats-box">
+      <div class="stats-box-num">16</div>
+      <div class="stats-box-label">Devotions</div>
+    </div>
+
+    <div class="stats-box">
+      <div class="stats-box-num">15</div>
+      <div class="stats-box-label">Games</div>
+    </div>
+
+    <div class="stats-box">
+      <div class="stats-box-num">54</div>
+      <div class="stats-box-label">Breadcrumb Pages</div>
+    </div>
+
+    <div class="stats-box">
+      <div class="stats-box-num">51</div>
+      <div class="stats-box-label">Related Sections</div>
+    </div>
+
+    <div class="stats-box">
+      <div class="stats-box-num" style="color:var(--green);">0</div>
+      <div class="stats-box-label">SEO Issues</div>
+    </div>
+
+    <div class="stats-box">
+      <div class="stats-box-num">4</div>
+      <div class="stats-box-label">Hub Cross-Links</div>
+    </div>
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ═══════════════════════════════════════════
+       SEO TOOLKIT
+  ═══════════════════════════════════════════ -->
+  <h2 class="section-title"><i class="fa-solid fa-terminal"></i> SEO Automation Toolkit</h2>
+  <div class="toolkit-grid">
+
+    <div class="toolkit-card">
+      <div class="toolkit-card-header">
+        <div class="toolkit-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="toolkit-name">seo-hardening.js</div>
+      </div>
+      <div class="toolkit-cmd" onclick="copyCmd(this)" title="Click to copy">
+        <span>node tools/seo-hardening.js</span>
+        <span class="copy-hint"><i class="fa-regular fa-copy"></i> Copy</span>
+      </div>
+      <div class="toolkit-desc">Adds / updates all SEO meta tags, JSON-LD structured data, OG tags, and Twitter Cards across every page in the site.</div>
+    </div>
+
+    <div class="toolkit-card">
+      <div class="toolkit-card-header">
+        <div class="toolkit-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <div class="toolkit-name">seo-verify.js</div>
+      </div>
+      <div class="toolkit-cmd" onclick="copyCmd(this)" title="Click to copy">
+        <span>node tools/seo-verify.js</span>
+        <span class="copy-hint"><i class="fa-regular fa-copy"></i> Copy</span>
+      </div>
+      <div class="toolkit-desc">Audits all pages and reports title lengths, description lengths, missing tags, and any other SEO issues found.</div>
+    </div>
+
+    <div class="toolkit-card">
+      <div class="toolkit-card-header">
+        <div class="toolkit-icon"><i class="fa-solid fa-diagram-project"></i></div>
+        <div class="toolkit-name">seo-internal-links.js</div>
+      </div>
+      <div class="toolkit-cmd" onclick="copyCmd(this)" title="Click to copy">
+        <span>node tools/seo-internal-links.js</span>
+        <span class="copy-hint"><i class="fa-regular fa-copy"></i> Copy</span>
+      </div>
+      <div class="toolkit-desc">Injects breadcrumbs, "Continue Exploring" sections, and hub cross-links across all content pages and hub pages.</div>
+    </div>
+
+  </div>
+
+</div><!-- /container -->
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="dashboard-footer">
+  <div class="footer-left">
+    NothingButTheTRUTH SEO Dashboard &nbsp;·&nbsp;
+    <span>nothingbutthetruth.web.app</span> &nbsp;·&nbsp;
+    Last updated: March 3, 2026
+  </div>
+  <div class="footer-buttons">
+    <button class="btn btn-reset" onclick="resetProgress()">
+      <i class="fa-solid fa-rotate-left"></i> Reset Progress
+    </button>
+    <button class="btn btn-print" onclick="window.print()">
+      <i class="fa-solid fa-print"></i> Print
+    </button>
+  </div>
+</footer>
+
+<!-- Fixed print FAB -->
+<button class="fab-print" onclick="window.print()" title="Print dashboard">
+  <i class="fa-solid fa-print"></i>
+</button>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script>
+  const STORAGE_KEY = 'nbtt-dashboard-progress';
+  const TOTAL_ITEMS = 21;
+
+  // ── Load saved state ──
+  function loadProgress() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function saveProgress(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  // ── Toggle item ──
+  function toggleItem(el) {
+    const id = el.dataset.id;
+    const state = loadProgress();
+    if (el.classList.contains('checked')) {
+      el.classList.remove('checked');
+      delete state[id];
+    } else {
+      el.classList.add('checked');
+      state[id] = true;
+    }
+    saveProgress(state);
+    updateRing();
+  }
+
+  // ── Update ring & stats ──
+  function updateRing() {
+    const state = loadProgress();
+    const completed = Object.keys(state).length;
+    const todo = TOTAL_ITEMS - completed;
+    const pct = Math.round((completed / TOTAL_ITEMS) * 100);
+
+    // Count critical remaining
+    const critItems = document.querySelectorAll('.checklist-item[data-priority="critical"]:not(.checked)');
+    const critLeft = critItems.length;
+
+    // SVG ring
+    const circumference = 2 * Math.PI * 76; // ≈ 477.52
+    const offset = circumference - (pct / 100) * circumference;
+    const ring = document.getElementById('ringFill');
+    if (ring) ring.style.strokeDashoffset = offset;
+
+    // Text
+    const pctEl = document.getElementById('ringPct');
+    if (pctEl) pctEl.textContent = pct + '%';
+
+    const compEl = document.getElementById('statCompleted');
+    if (compEl) compEl.textContent = completed;
+
+    const todoEl = document.getElementById('statTodo');
+    if (todoEl) todoEl.textContent = todo;
+
+    const critEl = document.getElementById('statCritical');
+    if (critEl) critEl.textContent = critLeft;
+  }
+
+  // ── Restore checkboxes from localStorage ──
+  function restoreCheckboxes() {
+    const state = loadProgress();
+    document.querySelectorAll('.checklist-item').forEach(function(el) {
+      if (state[el.dataset.id]) {
+        el.classList.add('checked');
+      }
+    });
+    updateRing();
+  }
+
+  // ── Filter checklist ──
+  function filterChecklist(priority) {
+    // Update button states
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    const activeBtn = document.querySelector('.filter-btn.' + (priority === 'all' ? 'all' : priority === 'critical' ? 'crit' : priority === 'high' ? 'high' : priority === 'medium' ? 'med' : 'low'));
+    if (activeBtn) activeBtn.classList.add('active');
+
+    // Show/hide items and group titles
+    document.querySelectorAll('.checklist-item').forEach(function(item) {
+      if (priority === 'all' || item.dataset.priority === priority) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+
+    document.querySelectorAll('.checklist-group-title').forEach(function(title) {
+      if (priority === 'all' || title.dataset.priority === priority) {
+        title.style.display = '';
+      } else {
+        title.style.display = 'none';
+      }
+    });
+  }
+
+  // ── Reset progress ──
+  function resetProgress() {
+    if (confirm('Reset all checklist progress? This cannot be undone.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      document.querySelectorAll('.checklist-item.checked').forEach(function(el) {
+        el.classList.remove('checked');
+      });
+      updateRing();
+    }
+  }
+
+  // ── Copy command ──
+  function copyCmd(el) {
+    const text = el.querySelector('span:first-child').textContent.trim();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        const hint = el.querySelector('.copy-hint');
+        if (hint) {
+          hint.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+          hint.style.color = 'var(--green)';
+          setTimeout(function() {
+            hint.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+            hint.style.color = '';
+          }, 2000);
+        }
+      });
+    }
+  }
+
+  // ── Init ──
+  document.addEventListener('DOMContentLoaded', function() {
+    restoreCheckboxes();
+  });
+</script>
+</body>
+</html>
