@@ -4422,6 +4422,92 @@ body {
 body {
   transition: background 0.4s ease, color 0.4s ease;
 }
+
+/* === Myth-Busters Shorts Section === */
+.mythbusters-shorts {
+  padding: 56px 20px 24px;
+  background: linear-gradient(145deg, rgba(18, 14, 36, 0.95), rgba(29, 20, 58, 0.88));
+  position: relative;
+}
+
+.mythbusters-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mythbusters-shorts h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+
+.mythbusters-shorts h2 i {
+  color: #ffd803;
+  margin-right: 8px;
+}
+
+.mythbusters-subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.82);
+  font-style: italic;
+  font-size: 1rem;
+  margin-bottom: 26px;
+}
+
+.mythbusters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  justify-items: center;
+}
+
+.myth-short-card {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 16px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+}
+
+.myth-short-player {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.myth-short-player mux-player {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.mythbusters-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 22px auto 0;
+  padding: 10px 22px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  border: 1px solid rgba(255, 215, 3, 0.55);
+  background: linear-gradient(135deg, rgba(106, 17, 203, 0.45), rgba(37, 117, 252, 0.3));
+  transition: all 0.25s ease;
+}
+
+.mythbusters-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(106, 17, 203, 0.3);
+  border-color: rgba(255, 215, 3, 0.85);
+}
+
 /* === Video Section Styles === */
 .video-section {
   padding: 60px 20px;
@@ -4893,6 +4979,23 @@ body {
 
 /* Responsive adjustments for video section */
 @media (max-width: 768px) {
+  .mythbusters-shorts {
+    padding: 44px 14px 18px;
+  }
+
+  .mythbusters-shorts h2 {
+    font-size: 1.75rem;
+  }
+
+  .mythbusters-subtitle {
+    font-size: 0.92rem;
+    margin-bottom: 18px;
+  }
+
+  .mythbusters-grid {
+    gap: 14px;
+  }
+
   .video-section {
     padding: 40px 15px;
   }
