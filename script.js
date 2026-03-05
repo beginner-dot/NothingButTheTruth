@@ -98,7 +98,7 @@ ${JSON.stringify({
             container.insertAdjacentHTML('beforeend',
                 `
                 <div class="full-series-wrap">
-                    <a href="full-series.html" class="full-series-btn">View the Full Series</a>
+                    <a href="all-videos.html" class="full-series-btn">View the Full Series</a>
                 </div>
                 `
             );

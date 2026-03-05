@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+<title>Who Said It? — Bible Quote Quiz | NothingButTheTRUTH</title>
+            <meta name="description" content="Match famous Bible quotes to their speakers! Test your knowledge of Scripture by identifying who said these memorable verses. Free Bible quiz game.">
+            <meta name="keywords" content="Bible study, Christian devotion, Scripture, NothingButTheTRUTH, Bible game, interactive Scripture quiz, said, bible, quote, quiz, NothingButTheTRUTH">
+            <meta name="author" content="NothingButTheTRUTH">
+            <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+            <link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/Who-said-it/who-said/index.html">
+            <meta property="og:title" content="Who Said It? — Bible Quote Quiz | NothingButTheTRUTH">
+            <meta property="og:description" content="Match famous Bible quotes to their speakers! Test your knowledge of Scripture by identifying who said these memorable verses. Free Bible quiz game.">
+            <meta property="og:type" content="website">
+            <meta property="og:url" content="https://NothingButTheTRUTH.web.app/games/Who-said-it/who-said/index.html">
+            <meta property="og:site_name" content="NothingButTheTRUTH">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:title" content="Who Said It? — Bible Quote Quiz | NothingButTheTRUTH">
+            <meta name="twitter:description" content="Match famous Bible quotes to their speakers! Test your knowledge of Scripture by identifying who said these memorable verses. Free Bible quiz game.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Who Said It?","description":"Match famous Bible quotes to their speakers in this fun Scripture quiz game.","url":"https://NothingButTheTRUTH.web.app/games/Who-said-it/who-said/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTRUTH","url":"https://NothingButTheTRUTH.web.app"}}
+</script>
+<style>
+  /* ====== CSS — DARK THEME (site-wide match) ====== */
+  :root {
+    --bg: #0a0a14;
+    --bg2: #0d1025;
+    --bg3: #111530;
+    --card: rgba(255,255,255,.06);
+    --purple: #a855f7;
+    --purple-dim: rgba(168,85,247,.15);
+    --green: #22c55e;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --gold: #fbbf24;
+    --text: #fff;
+    --sub: rgba(255,255,255,.6);
+    --border: rgba(168,85,247,.12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--sub);
+    margin: 0;
+    padding: 0 1rem 2rem 1rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  body::before {
+    content:'';position:fixed;inset:0;
+    background:radial-gradient(ellipse at 50% 80%,rgba(168,85,247,.06),transparent 50%),radial-gradient(ellipse at 30% 20%,rgba(59,130,246,.06),transparent 50%);
+    pointer-events:none;
+  }
+
+  /* Game Title */
+  h1#game-title {
+    font-size: 2.6rem;
+    font-weight: 900;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    user-select: none;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Instructions and Rules container */
+  #rules-instructions {
+    max-width: 700px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin-top: 0.75rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    color: var(--sub);
+    user-select: none;
+    line-height: 1.5;
+  }
+  #rules-instructions h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: var(--purple);
+    text-align: center;
+  }
+  #rules-instructions ul {
+    padding-left: 1.25rem;
+    margin-top: 0.75rem;
+  }
+  #rules-instructions ul li {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  /* Session info */
+  #session-info {
+    margin: 1rem 0 1.5rem 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--purple);
+    user-select: text;
+  }
+
+  /* Controls container */
+  #controls {
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Buttons base */
+  .btn-main {
+    border: none;
+    padding: 12px 26px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+    transition: all 0.3s ease;
+    color: white;
+    min-width: 140px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  .btn-main:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+  button:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  /* Button colors — dark theme */
+  .btn-create {
+    background: linear-gradient(135deg, var(--blue), #2563eb);
+  }
+  .btn-create:hover:not(:disabled) {
+    box-shadow: 0 4px 20px rgba(59,130,246,.4);
+  }
+  .btn-join {
+    background: linear-gradient(135deg, var(--purple), #7c3aed);
+  }
+  .btn-join:hover:not(:disabled) {
+    box-shadow: 0 4px 20px rgba(168,85,247,.4);
+  }
+  .btn-start {
+    background: linear-gradient(135deg, var(--green), #16a34a);
+  }
+  .btn-start:hover:not(:disabled) {
+    box-shadow: 0 4px 20px rgba(34,197,94,.4);
+  }
+  .btn-next {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+  }
+  .btn-next:hover:not(:disabled) {
+    box-shadow: 0 4px 20px rgba(6,182,212,.4);
+  }
+
+  /* Scoreboard & Timer */
+  #scoreboard, #timer {
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 10px 26px;
+    margin: 0.25rem;
+    min-width: 180px;
+    text-align: center;
+    user-select: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  #scoreboard {
+    background: rgba(59,130,246,.12);
+    border: 1px solid rgba(59,130,246,.2);
+    color: #93c5fd;
+  }
+  #timer {
+    background: rgba(168,85,247,.12);
+    border: 1px solid rgba(168,85,247,.2);
+    color: var(--purple);
+    text-shadow: 0 0 16px rgba(168,85,247,.3);
+  }
+
+  /* Quote box */
+  #quoteBox {
+    font-size: 1.35rem;
+    font-style: italic;
+    margin: 1.5rem 0 1.3rem 0;
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+    min-height: 80px;
+    padding: 18px 28px;
+    background: linear-gradient(135deg, rgba(168,85,247,.12), rgba(59,130,246,.12));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    color: var(--text);
+    user-select: text;
+    transition: background 0.4s ease;
+  }
+
+  /* Answers container */
+  #answer-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    max-width: 720px;
+  }
+  #answer-buttons button {
+    background: linear-gradient(135deg, var(--purple), #7c3aed);
+    border: none;
+    padding: 14px 22px;
+    font-size: 1.05rem;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    min-width: 140px;
+    box-shadow: 0 5px 20px rgba(168,85,247,.3);
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  #answer-buttons button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(168,85,247,.5);
+  }
+
+  /* Message */
+  #message {
+    height: 40px;
+    font-weight: 700;
+    text-align: center;
+    margin: 1rem 0 0.8rem 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    user-select: none;
+  }
+  #message.show {
+    opacity: 1;
+  }
+
+  /* Next question button */
+  #next-question {
+    display: none;
+    margin-top: 1rem;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(6,182,212,.4);
+    user-select: none;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  #next-question:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(6,182,212,.5);
+  }
+  #next-question:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  /* End screen */
+  #endScreen {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--green);
+    display: none;
+    user-select: none;
+  }
+
+  /* Instructions below end screen */
+  #instructions {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--sub);
+    max-width: 700px;
+    text-align: center;
+    user-select: none;
+    line-height: 1.4;
+  }
+
+  /* Confetti canvas */
+  #confetti-canvas {
+    position: fixed;
+    pointer-events: none;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 760px) {
+    #answer-buttons button, .btn-main {
+      min-width: 100%;
+    }
+    #controls {
+      flex-direction: column;
+      gap: 12px;
+    }
+    #scoreboard, #timer {
+      min-width: auto;
+      width: 100%;
+      margin: 0.25rem 0;
+    }
+  }
+
+  #restart-popup {
+    margin-top: 1rem;
+    text-align: center;
+    animation: fadeIn 0.8s ease forwards;
+  }
+
+  #restart-btn {
+    background: linear-gradient(135deg, var(--blue), #2563eb);
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 12px 30px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(59,130,246,.4);
+    transition: all 0.3s ease;
+    user-select: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+
+  #restart-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(59,130,246,.5);
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+</style>
+              <meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+              <meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+            <meta property="og:locale" content="en_US">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://NothingButTheTRUTH.web.app/"},
+  {"@type":"ListItem","position":2,"name":"Games","item":"https://NothingButTheTRUTH.web.app/all-games.html"},
+  {"@type":"ListItem","position":3,"name":"Who Said It?","item":"https://NothingButTheTRUTH.web.app/games/Who-said-it/who-said/index.html"}
+]}
+</script>
+</head>
+<body>
+<!-- NBTT-INTERNAL-LINKS-INJECTED -->
+
+<!-- ===== SEO BREADCRUMB NAV ===== -->
+<nav class="nbtt-breadcrumb" aria-label="Breadcrumb" style="
+  padding:12px 20px;margin:0;font-size:0.85rem;font-family:'Poppins',sans-serif;
+  background:rgba(10,10,26,0.85);border-bottom:1px solid rgba(168,85,247,0.15);
+  color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+">
+  <a href="../../../index.html" style="color:#a855f7;text-decoration:none;font-weight:600;">Home</a>
+  <span style="color:rgba(255,255,255,0.3);">›</span>
+  <a href="../../../all-games.html" style="color:#a855f7;text-decoration:none;font-weight:600;">Games</a>
+  <span style="color:rgba(255,255,255,0.3);">›</span>
+  <span style="color:rgba(255,255,255,0.7);">Who Said It?</span>
+</nav>
+
+<h1 id="game-title">Who-Said</h1>
+
+<section id="rules-instructions" aria-label="Game Rules and Instructions">
+  <h2>How to Play</h2>
+  <ul>
+    <li>Click Start Game to start a new session or <strong>Join Game</strong> to enter an existing session ID.</li>
+    <li>After creating or joining, click <strong>Start Game</strong> to begin.</li>
+    <li>Read the Bible quote shown and select who said it from the multiple-choice answers.</li>
+    <li>You have 30 seconds to answer each question.</li>
+    <li>Correct answers earn points and build streaks. Every 3 correct answers triggers a confetti celebration!</li>
+    <li>If time runs out or you answer incorrectly, the correct answer is highlighted.</li>
+    <li>Click <strong>Next Question</strong> to move forward. The game ends after 10 questions.</li>
+    <li>Try to score as high as possible. Good luck and have fun!</li>
+  </ul>
+</section>
+
+<div id="session-info" style="display:none;">
+  Your Session ID: <span id="session-id"></span>
+</div>
+
+<div id="controls">
+  <button id="create-game" class="btn-main btn-create">Create Game</button>
+  <button id="join-game" class="btn-main btn-join">Join Game</button>
+  <button id="start-game" class="btn-main btn-start" style="display:none;">Start Game</button>
+</div>
+
+<div id="scoreboard">Score: 0 | Question: 0 / 0</div>
+<div id="timer">Time Left: 60s</div>
+
+<div id="quoteBox" aria-live="polite" aria-atomic="true"></div>
+
+<div id="answer-buttons" role="group" aria-label="Answer options"></div>
+
+<div id="message" role="alert" aria-live="assertive"></div>
+
+<button id="next-question" class="btn-next" disabled>Next Question</button>
+
+  <button id="exit-game" class="btn-main" style="display:none; background:linear-gradient(135deg,#ef4444,#dc2626); margin-top: 1rem;" onclick="window.location.href='../../../all-games.html'">↩ Back to Games</button>
+<div id="endScreen" role="region" aria-live="polite" aria-atomic="true"></div>
+
+<div id="instructions">
+  <p><em>Note:</em> This quiz tests your knowledge of Bible quotes and who said them. Stay sharp and enjoy!</p>
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+// Firebase config + init
+const firebaseConfig = {
+  apiKey: "AIzaSyAFb6AHyBQZwMOrUtgf_-6WJgbmYA4hS8o",
+  authDomain: "NothingButTheTRUTH-1cd23.firebaseapp.com",
+  databaseURL: "https://NothingButTheTRUTH-1cd23-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "NothingButTheTRUTH-1cd23",
+  storageBucket: "NothingButTheTRUTH-1cd23.appspot.com",
+  messagingSenderId: "253692400115",
+  appId: "1:253692400115:web:7eb36acdf69382d28d0286",
+  measurementId: "G-LXVCQNJ6VJ"
+};
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+const quizData = [
+  {quote: "The LORD is my shepherd; I shall not want.", answer: "David", options:["David", "Moses", "Jesus", "Paul"]},
+  {quote: "I can do all things through Christ who strengthens me.", answer: "Paul", options:["Paul", "Peter", "John", "James"]},
+  {quote: "In the beginning God created the heavens and the earth.", answer: "Moses", options:["Moses", "God", "Adam", "Noah"]},
+  {quote: "Jesus wept.", answer: "Jesus", options:["Jesus", "Mary", "John", "Peter"]},
+  {quote: "Let there be light.", answer: "God", options:["God", "Moses", "Jesus", "Elijah"]},
+  {quote: "Your faith has healed you.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "Am I my brother’s keeper?", answer: "Cain", options:["Cain", "Abel", "Seth", "Adam"]},
+  {quote: "Blessed are the meek, for they shall inherit the earth.", answer: "Jesus", options:["Jesus", "Moses", "David", "Solomon"]},
+  {quote: "For I know the plans I have for you, declares the LORD.", answer: "Jeremiah", options:["Jeremiah", "Isaiah", "Ezekiel", "Daniel"]},
+  {quote: "Our Father in heaven, hallowed be your name.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "The wages of sin is death.", answer: "Paul", options:["Paul", "Peter", "James", "John"]},
+  {quote: "If God is for us, who can be against us?", answer: "Paul", options:["Paul", "Peter", "John", "David"]},
+  {quote: "Noah found favor in the eyes of the LORD.", answer: "Narrator", options:["Narrator", "Noah", "God", "Moses"]},
+  {quote: "God is our refuge and strength, a very present help in trouble.", answer: "David", options:["David", "Solomon", "Moses", "Elijah"]},
+  {quote: "Be strong and courageous. Do not be afraid; do not be discouraged.", answer: "Joshua", options:["Joshua", "Moses", "David", "Samson"]},
+  {quote: "Love your neighbor as yourself.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "Go and make disciples of all nations.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "The Spirit is willing, but the flesh is weak.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "Cast all your anxiety on him because he cares for you.", answer: "Peter", options:["Peter", "Paul", "John", "James"]},
+  {quote: "The LORD will fight for you; you need only to be still.", answer: "Moses", options:["Moses", "Joshua", "David", "Elijah"]},
+  {quote: "Let my people go!", answer: "Moses", options:["Moses", "Pharaoh", "Aaron", "God"]},
+  {quote: "It is finished.", answer: "Jesus", options:["Paul", "Jesus", "Peter", "John"]},
+  {quote: "Choose you this day whom ye will serve.", answer: "Joshua", options:["Moses", "Joshua", "Samuel", "David"]},
+  {quote: "I am the way, the truth, and the life.", answer: "Jesus", options:["Jesus", "John", "Paul", "Peter"]},
+  {quote: "Speak, Lord; for thy servant heareth.", answer: "Samuel", options:["Eli", "David", "Samuel", "Solomon"]},
+  {quote: "What is truth?", answer: "Pilate", options:["Jesus", "Pilate", "Paul", "Herod"]},
+  {quote: "Thou shalt not tempt the Lord thy God.", answer: "Jesus", options:["Jesus", "Moses", "Satan", "Elijah"]},
+  {quote: "Repent, for the kingdom of heaven is at hand.", answer: "John the Baptist", options:["Jesus", "Peter", "John the Baptist", "Paul"]},
+  {quote: "God so loved the world, that he gave his only begotten Son.", answer: "Jesus", options:["Jesus", "John", "Paul", "Peter"]},
+  {quote: "For God did not send his Son into the world to condemn the world.", answer: "John", options:["Jesus", "John", "Paul", "Peter"]},
+  {quote: "The LORD is my light and my salvation; whom shall I fear?", answer: "David", options:["David", "Moses", "Paul", "Jesus"]},
+  {quote: "Come unto me, all ye that labour and are heavy laden.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "I am the resurrection and the life.", answer: "Jesus", options:["Jesus", "Paul", "John", "Peter"]},
+  {quote: "The kingdom of God is within you.", answer: "Jesus", options:["Jesus", "Paul", "John", "Peter"]},
+  {quote: "He that hath ears to hear, let him hear.", answer: "Jesus", options:["Jesus", "Paul", "John", "Peter"]},
+  {quote: "Trust in the LORD with all thine heart.", answer: "Solomon", options:["Solomon", "David", "Moses", "Jesus"]},
+  {quote: "Be still, and know that I am God.", answer: "David", options:["David", "Moses", "Paul", "Jesus"]},
+  {quote: "Faith without works is dead.", answer: "James", options:["James", "Paul", "Peter", "John"]},
+  {quote: "For where two or three are gathered together in my name, there am I in the midst of them.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "Blessed are the pure in heart, for they shall see God.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "Whoever believes in me, as Scripture has said, rivers of living water will flow from within them.", answer: "Jesus", options:["Jesus", "Paul", "John", "Peter"]},
+  {quote: "But the fruit of the Spirit is love, joy, peace, longsuffering...", answer: "Paul", options:["Paul", "Peter", "John", "James"]},
+  {quote: "I am the Alpha and the Omega.", answer: "Jesus", options:["Jesus", "John", "Paul", "Peter"]},
+  {quote: "Therefore, if anyone is in Christ, the new creation has come.", answer: "Paul", options:["Paul", "Peter", "John", "James"]},
+  {quote: "For all have sinned and fall short of the glory of God.", answer: "Paul", options:["Paul", "Peter", "John", "James"]},
+  {quote: "Blessed are those who hunger and thirst for righteousness.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "The thief comes only to steal and kill and destroy.", answer: "Jesus", options:["Jesus", "Paul", "John", "Peter"]},
+  {quote: "Ask and it will be given to you; seek and you will find.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+  {quote: "The heavens declare the glory of God.", answer: "David", options:["David", "Moses", "Paul", "Jesus"]},
+  {quote: "But seek first his kingdom and his righteousness.", answer: "Jesus", options:["Jesus", "Paul", "Peter", "John"]},
+];
+
+
+// Constants & Globals
+const totalQuestions = 10;
+const questionDuration = 30; // seconds
+
+let userId = null;
+let sessionId = null;
+let isHost = false;
+
+let currentQuestionIndex = 0;
+let gameStarted = false;
+let questionStartTime = 0;
+
+let playerScore = 0;
+let playerAnswered = false;
+let streak = 0;
+
+let confettiParticles = [];
+let confettiRunning = false;
+let timerInterval = null;
+
+// DOM Elements
+const createGameBtn = document.getElementById("create-game");
+const joinGameBtn = document.getElementById("join-game");
+const startGameBtn = document.getElementById("start-game");
+const nextQuestionBtn = document.getElementById("next-question");
+const exitGameBtn = document.getElementById("exit-game");
+const sessionIdSpan = document.getElementById("session-id");
+const sessionInfo = document.getElementById("session-info");
+const quoteBox = document.getElementById("quoteBox");
+const answerButtons = document.getElementById("answer-buttons");
+const timerDisplay = document.getElementById("timer");
+const scoreboard = document.getElementById("scoreboard");
+const message = document.getElementById("message");
+const endScreen = document.getElementById("endScreen");
+const instructions = document.getElementById("instructions");
+const confettiCanvas = document.getElementById("confetti-canvas");
+const ctx = confettiCanvas.getContext("2d");
+
+// Responsive canvas size
+function resizeCanvas() {
+  confettiCanvas.width = window.innerWidth;
+  confettiCanvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// Confetti code (your original style)
+const colors = ['#a855f7', '#3b82f6', '#22c55e', '#06b6d4', '#fbbf24', '#ec4899'];
+class ConfettiParticle {
+  constructor() {
+    this.x = Math.random() * confettiCanvas.width;
+    this.y = Math.random() * -confettiCanvas.height;
+    this.size = (Math.random() * 7) + 3;
+    this.speedY = (Math.random() * 3) + 2;
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+    this.tilt = Math.random() * 10;
+    this.tiltSpeed = Math.random() * 0.1 + 0.05;
+  }
+  update() {
+    this.y += this.speedY;
+    this.tilt += this.tiltSpeed;
+    if(this.y > confettiCanvas.height) {
+      this.y = -this.size;
+      this.x = Math.random() * confettiCanvas.width;
+    }
+  }
+  draw(ctx) {
+    ctx.beginPath();
+    ctx.lineWidth = this.size / 2;
+    ctx.strokeStyle = this.color;
+    ctx.moveTo(this.x + this.tilt, this.y);
+    ctx.lineTo(this.x + this.tilt + this.size, this.y);
+    ctx.stroke();
+  }
+}
+
+function createConfetti(count=100) {
+  confettiParticles = [];
+  for(let i=0; i<count; i++) {
+    confettiParticles.push(new ConfettiParticle());
+  }
+}
+
+function runConfetti() {
+  if(!confettiRunning) return;
+  ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  confettiParticles.forEach(p => {
+    p.update();
+    p.draw(ctx);
+  });
+  requestAnimationFrame(runConfetti);
+}
+
+function triggerConfetti() {
+  confettiRunning = true;
+  createConfetti(200);
+  runConfetti();
+  setTimeout(() => { confettiRunning = false; ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height); }, 5000);
+}
+
+// Utility shuffle
+function shuffle(array) {
+  for(let i = array.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// Simple user and session ID generators
+function generateUserId() {
+  return 'u' + Math.random().toString(36).substr(2, 9);
+}
+function generateSessionId() {
+  return Math.random().toString(36).substr(2, 6).toUpperCase();
+}
+
+// Show message with fade effect
+let messageTimeout;
+function showMessage(text, color="#a855f7") {
+  clearTimeout(messageTimeout);
+  message.style.color = color;
+  message.textContent = text;
+  message.classList.add("show");
+  messageTimeout = setTimeout(() => {
+    message.classList.remove("show");
+  }, 3500);
+}
+
+// Disable all answer buttons
+function disableAnswers() {
+  Array.from(answerButtons.children).forEach(btn => btn.disabled = true);
+}
+
+// Update player scoreboard & info
+function updatePlayers(players) {
+  const playerList = Object.entries(players || []);
+  const playerCount = playerList.length;
+  const yourPlayer = players ? players[userId] : null;
+  playerScore = yourPlayer ? yourPlayer.score : 0;
+  playerAnswered = yourPlayer ? yourPlayer.answered : false;
+
+  scoreboard.textContent = `Players: ${playerCount} | Your Score: ${playerScore} | Question: ${currentQuestionIndex + 1} / ${totalQuestions}`;
+}
+
+// Update the question and UI based on Firebase data
+function updateQuestionUI(data) {
+  if(!gameStarted) {
+    quoteBox.textContent = "Waiting for host to start the game...";
+    answerButtons.innerHTML = "";
+    timerDisplay.textContent = "";
+    message.textContent = "";
+    exitGameBtn.style.display = "none";
+    return;
+  }
+
+  const questions = data.questions || [];
+  if(currentQuestionIndex >= questions.length) {
+    endScreen.style.display = "block";
+    endScreen.textContent = `Game Over! Final score: ${playerScore} / ${totalQuestions}`;
+    quoteBox.textContent = "";
+    answerButtons.innerHTML = "";
+    timerDisplay.textContent = "";
+    exitGameBtn.style.display = "inline-block";
+    // Gamification
+    if(typeof NBTT!=='undefined'){
+      const acc=totalQuestions>0?Math.round((playerScore/totalQuestions)*100):0;
+      const result={score:playerScore,accuracy:acc,streak:streak||0};
+      const{isNewBest}=NBTT.saveScore('who-said-it',result);
+      result._beatPB=isNewBest;
+      NBTT.showPersonalBest('who-said-it',endScreen,result);
+      NBTT.checkAchievements('who-said-it',result);
+      NBTT.checkDailyChallenge('who-said-it',result);
+    }
+    return;
+  }
+  endScreen.style.display = "none";
+  exitGameBtn.style.display = "none";
+
+  const currentQ = questions[currentQuestionIndex];
+  quoteBox.textContent = currentQ.quote;
+
+  const now = Date.now();
+  const elapsed = Math.floor((now - questionStartTime) / 1000);
+  const timeLeft = questionDuration - elapsed;
+
+  if(timeLeft <= 0) {
+    timerDisplay.textContent = "Time Left: 0s";
+    disableAnswers();
+    if(!playerAnswered) showMessage("⏰ Time's up! Wait for next question.", "#ff6f00");
+    return;
+  }
+
+  timerDisplay.textContent = `Time Left: ${timeLeft}s`;
+
+  // Show answer buttons
+  answerButtons.innerHTML = "";
+  // Shuffle options so correct answer isn't always in the same position
+  const shuffledOptions = [...currentQ.options];
+  for (let i = shuffledOptions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+  }
+  shuffledOptions.forEach(option => {
+    const btn = document.createElement("button");
+    btn.textContent = option;
+    btn.disabled = playerAnswered || timeLeft <= 0;
+    btn.onclick = () => submitAnswer(option, currentQ.answer);
+    answerButtons.appendChild(btn);
+  });
+}
+
+// Update control buttons based on game state and user role
+function updateControls(data) {
+  if(!isHost) {
+    startGameBtn.style.display = "none";
+    nextQuestionBtn.style.display = "none";
+    return;
+  }
+
+  startGameBtn.style.display = data.gameStarted ? "none" : "inline-block";
+
+  const players = data.players || {};
+  const allAnswered = Object.values(players).every(p => p.answered);
+
+  if(data.gameStarted && allAnswered) {
+    nextQuestionBtn.style.display = "inline-block";
+    nextQuestionBtn.disabled = false;
+  } else {
+    nextQuestionBtn.style.display = "none";
+  }
+}
+
+// Listen to Firebase game data updates and sync UI & state
+function listenToGameUpdates() {
+  const gameRef = database.ref(`games/${sessionId}`);
+
+  gameRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    if(!data) {
+      alert("Game session ended or does not exist.");
+      resetGame();
+      return;
+    }
+    currentQuestionIndex = data.currentQuestionIndex;
+    gameStarted = data.gameStarted;
+    questionStartTime = data.questionStartTime;
+
+    updatePlayers(data.players);
+    updateQuestionUI(data);
+    updateControls(data);
+  });
+}
+
+// Create new game session (host)
+async function createGameSession() {
+  userId = generateUserId();
+  sessionId = generateSessionId();
+  isHost = true;
+
+  // Shuffle and slice questions for this session
+  const gameQuestions = [...quizData];
+  shuffle(gameQuestions);
+  const questionsForGame = gameQuestions.slice(0, totalQuestions);
+
+  // Initialize game data in Firebase
+  await database.ref(`games/${sessionId}`).set({
+    hostId: userId,
+    currentQuestionIndex: 0,
+    questionStartTime: 0,
+    gameStarted: false,
+    players: {
+      [userId]: {
+        name: "HostPlayer",
+        score: 0,
+        answered: false
+      }
+    },
+    questions: questionsForGame
+  });
+
+  updateUIForSession();
+  listenToGameUpdates();
+}
+
+// Join existing game session
+async function joinGameSession(joinId) {
+  userId = generateUserId();
+  sessionId = joinId.toUpperCase();
+  isHost = false;
+
+  const gameRef = database.ref(`games/${sessionId}`);
+  const snapshot = await gameRef.once('value');
+  if(!snapshot.exists()) {
+    alert("Session ID not found!");
+    resetGame();
+    return;
+  }
+
+  // Add player to game
+  await gameRef.child(`players/${userId}`).set({
+    name: "GuestPlayer",
+    score: 0,
+    answered: false
+  });
+
+  updateUIForSession();
+  listenToGameUpdates();
+}
+
+// Submit player's answer
+async function submitAnswer(selected, correctAnswer) {
+  if(playerAnswered) return;
+
+  const isCorrect = (selected === correctAnswer);
+  playerAnswered = true;
+
+  const playerRef = database.ref(`games/${sessionId}/players/${userId}`);
+
+  // Update player's score and answered state atomically
+  await playerRef.transaction(player => {
+    if(player) {
+      player.answered = true;
+      if(isCorrect) {
+        player.score = (player.score || 0) + 1;
+      }
+    }
+    return player;
+  });
+
+  // Show immediate feedback
+  Array.from(answerButtons.children).forEach(btn => {
+    btn.disabled = true;
+    if(btn.textContent === correctAnswer) {
+      btn.style.backgroundColor = "#00c853";
+    } else if(btn.textContent === selected) {
+      btn.style.backgroundColor = isCorrect ? "#00c853" : "#d50000";
+    }
+  });
+
+  showMessage(isCorrect ? "Correct! 🎉" : `Wrong! Correct: ${correctAnswer}`, isCorrect ? "#00c853" : "#d50000");
+
+  // Manage streak and confetti for local user (host can track global streak if you want)
+  if(isCorrect) {
+    streak++;
+    if(streak > 0 && streak % 3 === 0) {
+      triggerConfetti();
+    }
+  } else {
+    streak = 0;
+  }
+}
+
+// Host starts the game - sets flags and question start time
+async function startGame() {
+  if(!isHost) return;
+
+  const now = Date.now();
+  await database.ref(`games/${sessionId}`).update({
+    gameStarted: true,
+    currentQuestionIndex: 0,
+    questionStartTime: now,
+  });
+}
+
+// Host moves to next question - reset answers and update index/time
+async function nextQuestion() {
+  if(!isHost) return;
+
+  const now = Date.now();
+  const playersRef = database.ref(`games/${sessionId}/players`);
+
+  // Reset answered flags
+  const playersSnapshot = await playersRef.once('value');
+  playersSnapshot.forEach(playerSnap => {
+    playerSnap.ref.update({ answered: false });
+  });
+
+  // Increase question index and update timer start
+  const newIndex = currentQuestionIndex + 1;
+  await database.ref(`games/${sessionId}`).update({
+    currentQuestionIndex: newIndex,
+    questionStartTime: now,
+  });
+
+  nextQuestionBtn.style.display = "none";
+}
+
+// Reset the game/UI on session end or error
+function resetGame() {
+  userId = null;
+  sessionId = null;
+  isHost = false;
+  gameStarted = false;
+  currentQuestionIndex = 0;
+  playerScore = 0;
+  playerAnswered = false;
+  streak = 0;
+
+  sessionInfo.style.display = "none";
+  sessionIdSpan.textContent = "";
+  quoteBox.textContent = "";
+  answerButtons.innerHTML = "";
+  timerDisplay.textContent = "";
+  scoreboard.textContent = "";
+  message.textContent = "";
+  endScreen.style.display = "none";
+  exitGameBtn.style.display = "none";
+  instructions.style.display = "block";
+
+  createGameBtn.disabled = false;
+  joinGameBtn.disabled = false;
+  startGameBtn.style.display = "none";
+  nextQuestionBtn.style.display = "none";
+}
+
+// UI update when session is created or joined
+function updateUIForSession() {
+  sessionIdSpan.textContent = sessionId;
+  sessionInfo.style.display = "block";
+  startGameBtn.style.display = isHost ? "inline-block" : "none";
+  createGameBtn.disabled = true;
+  joinGameBtn.disabled = true;
+  instructions.style.display = "none";
+  nextQuestionBtn.style.display = "none";
+  message.textContent = "";
+  endScreen.style.display = "none";
+  streak = 0;
+}
+
+// Event listeners
+createGameBtn.addEventListener('click', createGameSession);
+
+joinGameBtn.addEventListener('click', async () => {
+  const enteredId = prompt("Enter Session ID to join:");
+  if(enteredId) {
+    await joinGameSession(enteredId);
+  }
+});
+
+startGameBtn.addEventListener('click', startGame);
+
+nextQuestionBtn.addEventListener('click', nextQuestion);
+
+</script>
+
+
+<!-- ===== SEO RELATED CONTENT — INTERNAL LINKING ===== -->
+<section class="nbtt-related-section" style="
+  max-width:800px;margin:3rem auto 0;padding:2rem 1.5rem;
+  background:rgba(10,10,26,0.9);border:1px solid rgba(168,85,247,0.15);
+  border-radius:16px;font-family:'Poppins',sans-serif;
+">
+  <h2 style="
+    color:#fff;font-size:1.4rem;text-align:center;margin:0 0 0.3rem;
+    font-weight:700;letter-spacing:-0.02em;
+  ">
+    <i class="fas fa-compass" style="color:#a855f7;margin-right:8px;"></i>Continue Exploring
+  </h2>
+  <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;margin:0 0 1.5rem;">
+    Dive deeper into God's Word with related content
+  </p>
+  <div style="display:grid;gap:10px;">
+    
+      <a href="../../verse-hunt-live/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Verse Hunt</strong>
+      </a>
+      <a href="../../relay-race/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Bible Relay Race</strong>
+      </a>
+      <a href="../../bible-bingo/BibleBingoScriptureSprint/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Bible Bingo</strong>
+      </a>
+      <a href="../../../Studies/facts_or_fiction.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(37,117,252,0.08);
+        border:1px solid rgba(37,117,252,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#60a5fa;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#bfdbfe;">Is the Bible Facts or Fiction?</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Studies</span>
+      </a>
+      <a href="../../../Studies/history_of_christian_faith.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(37,117,252,0.08);
+        border:1px solid rgba(37,117,252,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#60a5fa;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#bfdbfe;">History of the Christian Faith</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Studies</span>
+      </a>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+    <a href="../../../all-games.html" style="
+      display:inline-flex;align-items:center;gap:6px;padding:10px 22px;
+      background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);
+      border-radius:50px;color:#c084fc;text-decoration:none;font-weight:600;font-size:0.85rem;
+      transition:all 0.3s ease;
+    ">
+      <i class="fas fa-gamepad"></i> All Games
+    </a>
+    <a href="../../../index.html" style="
+      display:inline-flex;align-items:center;gap:6px;padding:10px 22px;
+      background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+      border-radius:50px;color:#ccc;text-decoration:none;font-weight:600;font-size:0.85rem;
+      transition:all 0.3s ease;
+    ">
+      <i class="fas fa-home"></i> Home
+    </a>
+  </div>
+</section>
+
+<!-- ===== SEO SITE-WIDE MINI FOOTER ===== -->
+<footer class="nbtt-mini-footer" style="
+  max-width:800px;margin:1.5rem auto 2rem;padding:1.2rem 1.5rem;
+  background:rgba(10,10,26,0.7);border-top:1px solid rgba(168,85,247,0.1);
+  border-radius:12px;font-family:'Poppins',sans-serif;text-align:center;
+">
+  <nav aria-label="Site navigation" style="
+    display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:0.8rem;
+  ">
+    <a href="../../../index.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-home"></i> Home</a>
+    <a href="../../../all-studies.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-book-open"></i> Studies</a>
+    <a href="../../../vod.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-dove"></i> Devotions</a>
+    <a href="../../../all-games.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-gamepad"></i> Games</a>
+    <a href="../../../all-videos.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-video"></i> Videos</a>
+    <a href="../../../about-us.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-info-circle"></i> About</a>
+  </nav>
+  <p style="color:rgba(255,255,255,0.35);font-size:0.7rem;margin:0;">
+    &copy; 2026 NothingButTheTRUTH. All rights reserved.
+  </p>
+</footer>
+<script src="../../nbtt-gamification.js"></script>
+<script>
+(function(){
+  if(window.location.search.includes('play=1')){
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    requestAnimationFrame(()=>window.scrollTo(0,0));
+    window.addEventListener('load',()=>window.scrollTo(0,0),{once:true});
+  }
+})();
+</script>
+</body>
+</html>

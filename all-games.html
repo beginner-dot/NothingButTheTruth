@@ -1,539 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Bible Games — Play Free Scripture Games | NothingButTheTruth</title>
-    <meta name="description" content="Play 12+ free interactive Bible games including Verse Hunt, Bible Connections, Prophecy Fulfilled, Memory Match, Sequence Recall, Walls of Jericho, and more. Test your Scripture knowledge and have fun!">
-    <meta name="keywords" content="Bible games, free Bible games online, Scripture games, Bible quiz, Bible trivia, Christian games, Bible Connections, Prophecy game, Bible Timeline, Verse Hunt, NothingButTheTruth">
-    <meta name="author" content="NothingButTheTruth">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <link rel="canonical" href="https://nothingbutthetruth.web.app/all-games.html">
-    <meta property="og:title" content="All Bible Games — NothingButTheTruth">
-    <meta property="og:description" content="Play 12+ free interactive Bible games. Test your Scripture knowledge with Verse Hunt, Bible Connections, Prophecy Fulfilled, and more!">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nothingbutthetruth.web.app/all-games.html">
-    <meta property="og:site_name" content="NothingButTheTruth">
-    <meta property="og:locale" content="en_US">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="All Bible Games — NothingButTheTruth">
-    <meta name="twitter:description" content="Play 12+ free interactive Bible games. Test your Scripture knowledge and have fun!">
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"CollectionPage","name":"All Bible Games","description":"Play 9+ free interactive Bible games including Verse Hunt, Bible Connections, Prophecy Fulfilled, Timeline Master and more.","url":"https://nothingbutthetruth.web.app/all-games.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTruth","url":"https://nothingbutthetruth.web.app"}}
-    </script>
-    <link rel="stylesheet" href="Indexstyles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .all-games-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header-section {
-            text-align: center;
-            color: white;
-            margin-bottom: 3rem;
-        }
-
-        .header-section h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            font-weight: 800;
-        }
-
-        .header-section p {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            margin: 0.5rem 0 0 0;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin-bottom: 2rem;
-            padding: 12px 28px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid white;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .back-btn:hover {
-            background: white;
-            color: #667eea;
-            transform: translateX(-5px);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .game-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            animation: slideUp 0.5s ease forwards;
-            opacity: 0;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .game-card:nth-child(1) { animation-delay: 0.1s; }
-        .game-card:nth-child(2) { animation-delay: 0.2s; }
-        .game-card:nth-child(3) { animation-delay: 0.3s; }
-        .game-card:nth-child(4) { animation-delay: 0.4s; }
-        .game-card:nth-child(5) { animation-delay: 0.5s; }
-        .game-card:nth-child(6) { animation-delay: 0.6s; }
-        .game-card:nth-child(7) { animation-delay: 0.7s; }
-        .game-card:nth-child(8) { animation-delay: 0.8s; }
-        .game-card:nth-child(9) { animation-delay: 0.9s; }
-        .game-card:nth-child(10) { animation-delay: 1.0s; }
-        .game-card:nth-child(11) { animation-delay: 1.1s; }
-        .game-card:nth-child(12) { animation-delay: 1.2s; }
-        .game-card:nth-child(13) { animation-delay: 1.3s; }
-        .game-card:nth-child(14) { animation-delay: 1.4s; }
-        .game-card:nth-child(15) { animation-delay: 1.5s; }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
-        }
-
-        .game-card-content {
-            padding: 2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            width: fit-content;
-        }
-
-        .game-card h3 {
-            font-size: 1.8rem;
-            color: #333;
-            margin: 0 0 0.8rem 0;
-        }
-
-        .game-card p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .game-meta {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
-            font-size: 0.95rem;
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        .play-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            width: 100%;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .play-btn:active {
-            transform: scale(0.98);
-        }
-
-        .coming-soon {
-            opacity: 0.6;
-        }
-
-        .coming-soon .play-btn {
-            background: #ccc;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .coming-soon .play-btn:hover {
-            transform: scale(1);
-            box-shadow: none;
-        }
-
-        .badge-new {
-            display: inline-block;
-            background: #ff6b6b;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-left: 0.5rem;
-        }
-
-        .section-title {
-            color: white;
-            font-size: 2rem;
-            margin: 3rem 0 2rem 0;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .coming-soon-games {
-            opacity: 0.8;
-        }
-
-        @media (max-width: 768px) {
-            .header-section h1 {
-                font-size: 2.5rem;
-            }
-
-            .games-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .game-card-content {
-                padding: 1.5rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Bible Games — Play Free Scripture Games | NothingButTheTRUTH</title>
+  <meta name="description" content="Play 20 free interactive Bible games — word search, trivia, memory match, timeline, prophecy challenges, and more. Test and grow your Scripture knowledge.">
+  <meta name="keywords" content="Bible games, scripture games, Christian quiz, NothingButTheTRUTH">
+  <meta name="author" content="NothingButTheTRUTH">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://NothingButTheTRUTH.web.app/all-games.html">
+  <meta property="og:title" content="All Bible Games — Play Free Scripture Games | NothingButTheTRUTH">
+  <meta property="og:description" content="Play 20 free interactive Bible games — word search, trivia, memory match, timeline, prophecy challenges, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://NothingButTheTRUTH.web.app/all-games.html">
+  <meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="All Bible Games — Play Free Scripture Games | NothingButTheTRUTH">
+  <meta name="twitter:description" content="Play 20 free interactive Bible games and grow your Scripture knowledge.">
+  <meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{--bg:#0a0a14;--card:rgba(255,255,255,.06);--bd:rgba(168,85,247,.24);--txt:#fff;--sub:rgba(255,255,255,.66);--purple:#a855f7;--blue:#2575fc;--gold:#f59e0b}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Poppins',sans-serif;background:radial-gradient(circle at 10% 10%,#1a1643,#0a0a14 40%);color:var(--txt);padding:24px}
+    .wrap{max-width:1180px;margin:0 auto}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:1px solid var(--bd);text-decoration:none;font-weight:700}
+    .btn-home{background:rgba(255,255,255,.08);color:#ddd}
+    .btn-stats{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;border:none}
+    .hero{border:1px solid var(--bd);background:linear-gradient(135deg,rgba(168,85,247,.14),rgba(37,117,252,.12));border-radius:18px;padding:24px;margin-bottom:20px}
+    .hero h1{font-size:2rem;margin-bottom:6px}
+    .hero p{color:#e7e2ff}
+    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:16px}
+    .stat{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px}
+    .stat .v{font-size:1.4rem;font-weight:800}
+    .stat .l{font-size:.76rem;color:var(--sub);text-transform:uppercase;letter-spacing:.05em}
+    .section{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-radius:16px;padding:16px;margin-bottom:14px}
+    .section h2{font-size:1.1rem;margin-bottom:4px}
+    .section p{font-size:.86rem;color:var(--sub);margin-bottom:12px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+    .card{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px}
+    .meta{font-size:.8rem;color:var(--sub)}
+    .play{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:10px;text-decoration:none;background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;font-weight:700}
+  </style>
 </head>
 <body>
-    <div class="all-games-container">
-        <!-- Back Button -->
-        <a href="index.html" class="back-btn">← Back to Home</a>
-
-        <!-- Header -->
-        <div class="header-section">
-            <h1>🎮 All Bible Games</h1>
-            <p>Choose from our complete collection of scripture-based games!</p>
-        </div>
-
-        <!-- Available Games -->
-        <h2 class="section-title">Available Games</h2>
-        <div class="games-grid">
-            <!-- Verse Hunt -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐</div>
-                    <h3>🔍 Verse Hunt</h3>
-                    <p>Find verses under time pressure. Race against the clock to answer scripture questions correctly. Test your biblical knowledge with varying difficulty levels!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 5-10 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/verse-hunt-live/versehunt.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Who Said It -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐</div>
-                    <h3>💭 Who Said It?</h3>
-                    <p>Match famous biblical quotes to their speakers. Test your knowledge of scripture by identifying who said these memorable verses and statements!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 8-15 min</span>
-                        <span>👥 Multiplayer</span>
-                    </div>
-                </div>
-                <a href="games/who-said-it/who-said/who_said.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Bible Relay Race -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
-                    <h3>👥 Bible Relay Race</h3>
-                    <p>Scripture in motion! Answer questions in rapid succession to win the race. Teams compete to answer the most questions correctly!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 10-20 min</span>
-                        <span>👥 Team Game</span>
-                    </div>
-                </div>
-                <a href="games/relay-race/relayrace.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Bible Bingo -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐</div>
-                    <h3>🎭 Bible Bingo</h3>
-                    <p>Team up and test your scripture knowledge. Match verses to complete your bingo card and earn lines for points!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 8-15 min</span>
-                        <span>👥 Team Game</span>
-                    </div>
-                </div>
-                <a href="games/bible-bingo/BibleBingoScriptureSprint/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Bible Taboo / GridLock -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐</div>
-                    <h3>🤔 Bible GridLock</h3>
-                    <p>Navigate through biblical facts and verses. Answer correctly to unlock the grid path and complete the challenge!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 6-12 min</span>
-                        <span>👥 Multiplayer</span>
-                    </div>
-                </div>
-                <a href="games/bible-taboo/bible_taboo.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Scripture Sprint -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐</div>
-                    <h3>📜 Scripture Sprint</h3>
-                    <p>Race to match verse references with their content. Build combos for bonus points and beat the clock with three difficulty levels!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 5-8 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/scripture-sprint/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Bible Timeline Master -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
-                    <h3>⏳ Bible Timeline Master</h3>
-                    <p>Drag biblical events into the correct chronological order. Master Old Testament, New Testament, or tackle the full Bible timeline!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 8-15 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/bible-timeline/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Bible Connections -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
-                    <h3>🔗 Bible Connections</h3>
-                    <p>Find 4 hidden groups among 16 biblical words. A strategic deduction game that tests your deep knowledge of Scripture!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 8-15 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/bible-connections/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Prophecy Fulfilled -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
-                    <h3>📜 Prophecy Fulfilled</h3>
-                    <p>Match Old Testament prophecies with their New Testament fulfillments. Discover how Scripture connects across centuries with streak bonuses!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 10-15 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/prophecy-match/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Bible Memory Match -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐</div>
-                    <h3>🃏 Bible Memory Match <span class="badge-new">NEW</span></h3>
-                    <p>Flip cards and find matching biblical pairs — prophets to books, miracles to people. Train your visual memory with 3 difficulty levels!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 5-10 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/bible-memory-match/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Bible Sequence Recall -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐</div>
-                    <h3>🧠 Bible Sequence Recall <span class="badge-new">NEW</span></h3>
-                    <p>Watch biblical symbols light up in a pattern, then repeat from memory. A Simon Says-style challenge that gets harder every round!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 5-15 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/bible-sequence/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Walls of Jericho -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐⭐</div>
-                    <h3>🎺 Walls of Jericho <span class="badge-new">NEW</span></h3>
-                    <p>March around the city, sound trumpets with perfect timing, and bring the walls crashing down! A rhythm action game based on Joshua 6.</p>
-                    <div class="game-meta">
-                        <span>⏱️ 5-8 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/walls-of-jericho/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Fruit of the Spirit Catcher -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐</div>
-                    <h3>🍇 Fruit of the Spirit Catcher <span class="badge-new">NEW</span></h3>
-                    <p>Catch the fruits of the Spirit falling from heaven while dodging the works of the flesh! An arcade reaction game based on Galatians 5:22-23.</p>
-                    <div class="game-meta">
-                        <span>⏱️ 3-8 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/fruit-catcher/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Bible Word Search -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐</div>
-                    <h3>🔍 Bible Word Search <span class="badge-new">NEW</span></h3>
-                    <p>Find hidden words of Scripture in a puzzle grid! Choose from themes like The Gospels, Apostles, Fruits of the Spirit, Armor of God, and more.</p>
-                    <div class="game-meta">
-                        <span>⏱️ 5-10 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/bible-word-search/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-
-            <!-- Ark Builder -->
-            <div class="game-card">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐</div>
-                    <h3>🚢 Ark Builder <span class="badge-new">NEW</span></h3>
-                    <p>Load Noah's Ark with animals and supplies before the flood waters rise! A stacking and timing game based on Genesis 6-9.</p>
-                    <div class="game-meta">
-                        <span>⏱️ 5-10 min</span>
-                        <span>🎯 Single Player</span>
-                    </div>
-                </div>
-                <a href="games/ark-builder/index.html" style="padding: 0 2rem 2rem 2rem; text-decoration: none;"><button class="play-btn">▶ Play Now</button></a>
-            </div>
-        </div>
-
-        <!-- Coming Soon Games -->
-        <h2 class="section-title">Coming Soon</h2>
-        <div class="games-grid coming-soon-games">
-            <!-- Translation Challenge -->
-            <div class="game-card coming-soon">
-                <div class="game-card-content">
-                    <div class="difficulty-badge">⭐⭐⭐⭐</div>
-                    <h3>🌍 Translation Challenge</h3>
-                    <p>Identify Bible translations. Learn the nuances between KJV, NIV, ESV, and more with this educational game!</p>
-                    <div class="game-meta">
-                        <span>⏱️ 10-12 min</span>
-                        <span class="badge-new">Coming Soon</span>
-                    </div>
-                </div>
-                <button class="play-btn" disabled>🔒 Coming Soon</button>
-            </div>
-        </div>
+  <div class="wrap">
+    <div class="top">
+      <a href="index.html" class="btn btn-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+      <a href="games/leaderboard.html" class="btn btn-stats"><i class="fas fa-trophy"></i> My Stats & Achievements</a>
     </div>
 
-    <script>
-        // Add smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
+    <section class="hero">
+      <h1>🎮 All Bible Games</h1>
+      <p>Choose from the full game library. Homepage shows your top 3 best games; everything else is listed here.</p>
+      <div class="stats">
+        <div class="stat"><div class="v">20</div><div class="l">Total Games</div></div>
+        <div class="stat"><div class="v">3</div><div class="l">Homepage Featured</div></div>
+        <div class="stat"><div class="v">4</div><div class="l">Categories</div></div>
+      </div>
+    </section>
 
-<!-- Scroll-position restore -->
-<script>
-(function() {
-  var KEY = 'nbtt_scrollY_allgames';
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  var _st;
-  window.addEventListener('scroll', function() {
-    clearTimeout(_st);
-    _st = setTimeout(function() { sessionStorage.setItem(KEY, String(window.scrollY || document.documentElement.scrollTop)); }, 80);
-  }, { passive: true });
-  function saveNow() { sessionStorage.setItem(KEY, String(window.scrollY || document.documentElement.scrollTop)); }
-  window.addEventListener('beforeunload', saveNow);
-  document.addEventListener('click', function(e) {
-    var link = e.target.closest('a[href]');
-    if (link && !link.getAttribute('href').startsWith('#')) saveNow();
-  });
-  function restoreScroll() {
-    var saved = sessionStorage.getItem(KEY);
-    if (saved !== null) {
-      var y = parseInt(saved, 10), html = document.documentElement, orig = html.style.scrollBehavior;
-      html.style.scrollBehavior = 'auto';
-      window.scrollTo(0, y);
-      requestAnimationFrame(function() { window.scrollTo(0, y); setTimeout(function() { window.scrollTo(0, y); html.style.scrollBehavior = orig || ''; }, 150); });
-    }
-  }
-  var wasBack = false;
-  try { var entries = performance.getEntriesByType('navigation'); if (entries && entries.length) wasBack = entries[0].type === 'back_forward'; else if (performance.navigation) wasBack = performance.navigation.type === 2; } catch(e){}
-  if (wasBack) { restoreScroll(); window.addEventListener('load', restoreScroll); }
-  window.addEventListener('pageshow', function(e) { if (e.persisted) { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; restoreScroll(); } });
-})();
-</script>
+    <section class="section">
+      <h2>🔥 Featured & Competitive</h2>
+      <p>Fast-paced games with score pressure and leaderboard focus.</p>
+      <div class="grid">
+        <article class="card"><h3>🔥 MythBuster: Truth Shield</h3><p class="meta">Myth vs truth SDA doctrine defense • 8-14 min</p><a class="play" href="games/mythbuster-truth-shield/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>✨ Second Advent Quest</h3><p class="meta">Mission-based end-time readiness quiz • 8-14 min</p><a class="play" href="games/second-advent-quest/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>📜 Revelation Letters Challenge</h3><p class="meta">7 churches readiness challenge • 8-14 min</p><a class="play" href="games/revelation-letters-challenge/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>🔍 Verse Hunt</h3><p class="meta">Timed Scripture quiz • 5-10 min</p><a class="play" href="games/verse-hunt-live/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>💭 Who Said It?</h3><p class="meta">Quote-to-speaker challenge • 8-15 min</p><a class="play" href="games/who-said-it/who-said/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>👥 Bible Relay Race</h3><p class="meta">Rapid-fire team quiz • 10-20 min</p><a class="play" href="games/relay-race/index.html?play=1">▶ Play Now</a></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🧠 Quiz & Knowledge</h2>
+      <p>Sharpen Bible understanding through questions, clues, and references.</p>
+      <div class="grid">
+        <article class="card"><h3>🧸 Kingdom Kids Adventure</h3><p class="meta">Family-friendly character choice quest • 8-14 min</p><a class="play" href="games/kingdom-kids-adventure/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>⛪ Sanctuary Symbol Match</h3><p class="meta">Sanctuary meaning and symbol puzzle • 7-13 min</p><a class="play" href="games/sanctuary-symbol-match/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>🎭 Bible Bingo</h3><p class="meta">Scripture bingo • 8-15 min</p><a class="play" href="games/bible-bingo/BibleBingoScriptureSprint/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>🤔 Bible GridLock</h3><p class="meta">Clue-solving challenge • 6-12 min</p><a class="play" href="games/bible-taboo/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>📜 Scripture Sprint</h3><p class="meta">Reference match race • 5-8 min</p><a class="play" href="games/scripture-sprint/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>📜 Prophecy Fulfilled</h3><p class="meta">OT to NT matching • 10-15 min</p><a class="play" href="games/prophecy-match/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>🔍 Bible Word Search</h3><p class="meta">Theme-based word search • 5-10 min</p><a class="play" href="games/bible-word-search/index.html?play=1">▶ Play Now</a></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🧩 Puzzle & Memory</h2>
+      <p>Strategic puzzle games for pattern recognition and retention.</p>
+      <div class="grid">
+        <article class="card"><h3>🔗 Bible Connections</h3><p class="meta">Find hidden word groups • 8-15 min</p><a class="play" href="games/bible-connections/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>🃏 Bible Memory Match</h3><p class="meta">Card pair memory trainer • 5-10 min</p><a class="play" href="games/bible-memory-match/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>🧠 Bible Sequence Recall</h3><p class="meta">Sequence memory game • 5-15 min</p><a class="play" href="games/bible-sequence/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>⏳ Bible Timeline Master</h3><p class="meta">Chronological ordering • 8-15 min</p><a class="play" href="games/bible-timeline/index.html?play=1">▶ Play Now</a></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>🎯 Action & Arcade</h2>
+      <p>Interactive movement games with reflex, timing, and momentum.</p>
+      <div class="grid">
+        <article class="card"><h3>🎺 Walls of Jericho</h3><p class="meta">Rhythm-action mission • 5-8 min</p><a class="play" href="games/walls-of-jericho/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>🍇 Fruit of the Spirit Catcher</h3><p class="meta">Arcade catcher game • 3-8 min</p><a class="play" href="games/fruit-catcher/index.html?play=1">▶ Play Now</a></article>
+        <article class="card"><h3>🚢 Ark Builder</h3><p class="meta">Stacking and timing • 5-10 min</p><a class="play" href="games/ark-builder/index.html?play=1">▶ Play Now</a></article>
+      </div>
+    </section>
+  </div>
 </body>
 </html>

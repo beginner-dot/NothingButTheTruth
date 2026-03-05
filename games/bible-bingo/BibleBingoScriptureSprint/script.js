@@ -63,9 +63,14 @@ const prompts = [
   { text: "🌍 Great Commission", verse: "Matthew 28:19" }
 ];
 
-// Shuffle helper
+// Shuffle helper (Fisher-Yates)
 function shuffle(array) {
-  return array.sort(() => Math.random() - 0.5);
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
 // Initialize board
@@ -86,6 +91,7 @@ function createBoard() {
       cell.classList.toggle("completed");
       showVersePopup(item.verse);
       checkWin();
+      checkBoardComplete();
       saveScores();
     });
     board.push(cell);
@@ -227,6 +233,54 @@ function startGame() {
   document.querySelector(".bingo-container").classList.remove("hidden");
   loadScores();
   createBoard();
+}
+
+// Check if the entire board is completed → show end screen
+function checkBoardComplete() {
+  const allCells = document.querySelectorAll(".bingo-cell");
+  const allCompleted = Array.from(allCells).every(c => c.classList.contains("completed"));
+  if (!allCompleted) return;
+
+  // Small delay so the last cell animation plays
+  setTimeout(() => {
+    const endScreen = document.getElementById("endScreen");
+    document.getElementById("endLines").textContent = lineScore;
+    document.getElementById("endTeamA").textContent = teamAScore;
+    document.getElementById("endTeamB").textContent = teamBScore;
+
+    // Dynamic end message
+    let msg = "";
+    if (lineScore >= 10) msg = "👑 Bingo Legend! Scripture master unlocked!";
+    else if (lineScore >= 5) msg = "💥 Bingo Pro in the making!";
+    else if (lineScore >= 2) msg = "🔥 Great effort — you're warming up!";
+    else if (lineScore >= 1) msg = "🙌 Nice start — keep going!";
+    else msg = "📖 Board filled! Try to complete more lines next time.";
+    document.getElementById("endMessage").textContent = msg;
+
+    // Show winner info in subtitle
+    let subtitle = "You filled the entire board!";
+    if (teamAScore > teamBScore) subtitle += " 🔴 Team A wins!";
+    else if (teamBScore > teamAScore) subtitle += " 🔵 Team B wins!";
+    else if (teamAScore > 0) subtitle += " It's a tie!";
+    document.getElementById("endSubtitle").textContent = subtitle;
+
+    endScreen.classList.remove("hidden");
+  }, 600);
+  // Gamification
+  if(typeof NBTT!=='undefined'){
+    var result={score:lineScore,teamAScore:teamAScore,teamBScore:teamBScore};
+    var saveResult=NBTT.saveScore('bible-bingo',result);
+    result._beatPB=saveResult.isNewBest;
+    NBTT.showPersonalBest('bible-bingo',endScreen,result);
+    NBTT.checkAchievements('bible-bingo',result);
+    NBTT.checkDailyChallenge('bible-bingo',result);
+  }
+}
+
+// Play Again from end screen
+function playAgain() {
+  document.getElementById("endScreen").classList.add("hidden");
+  resetBingo();
 }
 
 // Add event listener for start button

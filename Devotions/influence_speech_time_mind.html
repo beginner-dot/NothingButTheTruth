@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Influence, Speech, Time, Mind — 4-Part Interactive Devotion | NothingButTheTRUTH</title>
+  <meta name="description" content="A 4-part interactive devotional journey on Influence, Speech, Time, and Mind rooted in Scripture and public-domain SDA sources.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://NothingButTheTRUTH.web.app/Devotions/influence_speech_time_mind.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Influence, Speech, Time, Mind — 4-Part Interactive Devotion">
+  <meta property="og:description" content="A modern, practical devotional formation journey based on Scripture and SDA public-domain sources.">
+  <meta property="og:url" content="https://NothingButTheTRUTH.web.app/Devotions/influence_speech_time_mind.html">
+  <meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Influence, Speech, Time, Mind — 4-Part Interactive Devotion">
+  <meta name="twitter:description" content="A modern, practical devotional formation journey based on Scripture and SDA public-domain sources.">
+  <meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root{--bg:#070b18;--panel:rgba(255,255,255,.05);--panel2:#121933;--bd:rgba(168,85,247,.24);--txt:#f3f4ff;--sub:#c7ceef;--purple:#a855f7;--blue:#3b82f6;--green:#22c55e;--gold:#f59e0b}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:radial-gradient(circle at 20% 0%,rgba(168,85,247,.25),transparent 45%),radial-gradient(circle at 80% 100%,rgba(59,130,246,.22),transparent 55%),var(--bg);color:var(--txt);min-height:100vh;padding:24px}
+    .wrap{max-width:1050px;margin:0 auto}
+    .back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:#ddd;background:rgba(255,255,255,.06);border:1px solid var(--bd);padding:10px 16px;border-radius:999px;font-weight:700}
+    .hero{margin-top:14px;border:1px solid var(--bd);background:linear-gradient(135deg,rgba(168,85,247,.16),rgba(59,130,246,.12));border-radius:18px;padding:24px}
+    .hero h1{font-size:clamp(1.5rem,4vw,2.35rem);margin-bottom:8px}
+    .hero p{color:#ebe9ff;line-height:1.8;max-width:900px}
+    .chips{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px}
+    .chip{font-size:.8rem;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08)}
+
+    .progress-shell{margin-top:14px;background:var(--panel);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px}
+    .progress-meta{display:flex;justify-content:space-between;gap:8px;color:var(--sub);font-size:.82rem;margin-bottom:8px}
+    .bar{height:9px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}
+    .bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--gold));transition:.3s}
+
+    .diagram{margin-top:18px;background:var(--panel);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px}
+    .diagram h2{font-size:1rem;margin-bottom:10px}
+    .flow{display:grid;grid-template-columns:repeat(7,minmax(90px,1fr));gap:8px;align-items:center}
+    .node{padding:10px 8px;border-radius:10px;text-align:center;background:#121b38;border:1px solid rgba(255,255,255,.1);font-size:.78rem;font-weight:700}
+    .arrow{text-align:center;color:#c4b5fd}
+
+    .tabs{margin-top:18px;background:var(--panel);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px}
+    .tab-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+    .tab-btn{border:1px solid rgba(255,255,255,.16);background:#141d3b;color:#eef2ff;padding:10px;border-radius:10px;cursor:pointer;font-weight:700}
+    .tab-btn.active{border-color:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,.25) inset}
+    .tab-panel{display:none;background:var(--panel2);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px}
+    .tab-panel.active{display:block}
+    .tab-panel h3{font-size:1.15rem;margin-bottom:8px}
+    .tab-panel p{line-height:1.8;color:#e9edff;margin-bottom:10px}
+    .verse{padding:10px;border-left:3px solid #c084fc;background:rgba(168,85,247,.14);border-radius:8px;margin-bottom:10px;font-style:italic}
+    .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+    .action{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px}
+    .action h4{font-size:.88rem;margin-bottom:5px;color:#d8b4fe}
+    .action p{font-size:.86rem;color:var(--sub);line-height:1.65}
+
+    .interactive{margin-top:14px;display:grid;gap:8px}
+    .check{display:flex;align-items:flex-start;gap:9px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:10px;border-radius:10px}
+    .check input{margin-top:3px}
+    .check label{font-size:.9rem;color:#edf0ff;line-height:1.6}
+
+    .journal{margin-top:16px;background:var(--panel);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px}
+    .journal h2{font-size:1rem;margin-bottom:8px}
+    textarea{width:100%;min-height:130px;resize:vertical;background:#121933;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;color:#f4f6ff;font-family:inherit;line-height:1.6}
+    .journal .small{margin-top:7px;color:var(--sub);font-size:.82rem}
+
+    .sources{margin-top:16px;background:var(--panel);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px}
+    .sources h2{font-size:1rem;margin-bottom:8px}
+    .sources ul{margin-left:18px;line-height:1.9;color:#ecf0ff}
+    .sources li{font-size:.92rem}
+
+    .cta{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;border-radius:10px;padding:11px 14px;font-weight:700}
+    .btn-main{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff}
+    .btn-alt{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff}
+
+    @media(max-width:860px){.flow{grid-template-columns:1fr;}.arrow{transform:rotate(90deg)}.tab-btns{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="../vod.html" class="back"><i class="fas fa-arrow-left"></i> Back to Devotions</a>
+
+    <section class="hero">
+      <h1>Influence, Speech, Time, Mind — A 4-Part Formation Journey</h1>
+      <p>
+        This is not a guilt session. It is a growth pathway. In SDA theology, sanctification is not self-salvation; it is Christ-centered transformation through the Holy Spirit, grounded in Scripture, lived in obedience, and aimed at mission readiness for Christ’s return. These four parts are arranged in order because they build each other.
+      </p>
+      <div class="chips">
+        <span class="chip">Influence</span>
+        <span class="chip">Speech</span>
+        <span class="chip">Time</span>
+        <span class="chip">Mind</span>
+        <span class="chip">Interactive</span>
+        <span class="chip">SDA Theology</span>
+      </div>
+
+      <div class="progress-shell">
+        <div class="progress-meta"><span>Journey Progress</span><span id="progressText">0 / 8 commitments</span></div>
+        <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+      </div>
+    </section>
+
+    <section class="diagram">
+      <h2>📈 Formation Diagram — How the four parts link</h2>
+      <div class="flow">
+        <div class="node">Influence</div>
+        <div class="arrow">➜</div>
+        <div class="node">Speech</div>
+        <div class="arrow">➜</div>
+        <div class="node">Time</div>
+        <div class="arrow">➜</div>
+        <div class="node">Mind</div>
+      </div>
+      <div class="flow" style="margin-top:8px;grid-template-columns:1fr 60px 1fr 60px 1fr;">
+        <div class="node">Character</div>
+        <div class="arrow">➜</div>
+        <div class="node">Witness</div>
+        <div class="arrow">➜</div>
+        <div class="node">Readiness for the Second Advent</div>
+      </div>
+    </section>
+
+    <section class="tabs">
+      <div class="tab-btns">
+        <button class="tab-btn active" data-tab="influence">1) Influence</button>
+        <button class="tab-btn" data-tab="speech">2) Speech</button>
+        <button class="tab-btn" data-tab="time">3) Time</button>
+        <button class="tab-btn" data-tab="mind">4) Mind</button>
+      </div>
+
+      <article class="tab-panel active" id="influence">
+        <h3>Influence — Who shapes your soul?</h3>
+        <p>
+          Influence is discipleship by atmosphere. The people, media, and habits around you are quietly preaching a sermon every day. SDA teaching is clear: the remnant life is not isolation, but intentional separation from corrupting influences and active engagement in mission.
+        </p>
+        <div class="verse">“Be not conformed to this world: but be ye transformed by the renewing of your mind.” — Romans 12:2 (KJV)</div>
+        <div class="actions">
+          <div class="action"><h4>Realistic advice</h4><p>Audit your top 5 influences this week: people, playlists, feeds, and conversations. Keep what feeds Christlikeness; reduce what normalizes compromise.</p></div>
+          <div class="action"><h4>Today’s step</h4><p>Replace one draining influence with one mission-shaping influence: Scripture audio, prayer walk, or one strong faith mentor call.</p></div>
+          <div class="action"><h4>Prayer prompt</h4><p>“Lord, make me both protected from evil and useful to people. Keep my heart pure and my witness active.”</p></div>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="speech">
+        <h3>Speech — Your tongue is a theology in public</h3>
+        <p>
+          Words reveal worship. In the great controversy worldview, speech can either carry the spirit of accusation or the spirit of Christ. Our message is not only what we preach on Sabbath; it is how we speak on Tuesday when pressure rises.
+        </p>
+        <div class="verse">“Let no corrupt communication proceed out of your mouth, but that which is good to the use of edifying...” — Ephesians 4:29 (KJV)</div>
+        <div class="actions">
+          <div class="action"><h4>Realistic advice</h4><p>Use the 3-second rule before hard replies: “Is it true? Is it kind? Is it necessary?” This simple pause protects relationships and witness.</p></div>
+          <div class="action"><h4>Today’s step</h4><p>Send one healing message today: apology, encouragement, or gratitude. Let your speech become practical ministry.</p></div>
+          <div class="action"><h4>Prayer prompt</h4><p>“Set a watch, O Lord, before my mouth. Let my words sound like grace and truth together.”</p></div>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="time">
+        <h3>Time — Stewardship is spiritual warfare</h3>
+        <p>
+          Time is one of the clearest tests of loyalty. SDA theology calls believers to wise stewardship, Sabbath-centered rhythm, and mission-first priorities. If your calendar has no room for God, your heart is already crowded.
+        </p>
+        <div class="verse">“Redeeming the time, because the days are evil.” — Ephesians 5:16 (KJV)</div>
+        <div class="actions">
+          <div class="action"><h4>Realistic advice</h4><p>Use “first 20, last 20”: first 20 minutes for Scripture/prayer, last 20 for reflection and planning. Consistency beats intensity.</p></div>
+          <div class="action"><h4>Today’s step</h4><p>Block one non-negotiable devotional window in your phone calendar for 7 days. Treat it like a sacred appointment.</p></div>
+          <div class="action"><h4>Prayer prompt</h4><p>“Jesus, be Lord over my schedule. Teach me urgency without anxiety, rest without laziness, and mission without burnout.”</p></div>
+        </div>
+      </article>
+
+      <article class="tab-panel" id="mind">
+        <h3>Mind — The battlefield where victory starts</h3>
+        <p>
+          The final crisis is not first about politics; it is about worship, loyalty, and thought life surrendered to Christ. The Spirit renews the mind through truth. A guarded mind produces a steady heart, and a steady heart stands faithful.
+        </p>
+        <div class="verse">“Thou wilt keep him in perfect peace, whose mind is stayed on thee...” — Isaiah 26:3 (KJV)</div>
+        <div class="actions">
+          <div class="action"><h4>Realistic advice</h4><p>When intrusive fear comes, answer with Scripture out loud. Replace mental spirals with verbal truth.</p></div>
+          <div class="action"><h4>Today’s step</h4><p>Memorize one verse this week and repeat it at stress points. The mind changes through repeated truth.</p></div>
+          <div class="action"><h4>Prayer prompt</h4><p>“Holy Spirit, sanctify my imagination, my memory, and my attention. Let my mind become a dwelling place for Your truth.”</p></div>
+        </div>
+      </article>
+
+      <div class="interactive">
+        <div class="check"><input type="checkbox" data-track="influence"><label>I will audit and refine my top influences this week.</label></div>
+        <div class="check"><input type="checkbox" data-track="speech"><label>I will practice grace-filled speech, especially under pressure.</label></div>
+        <div class="check"><input type="checkbox" data-track="time"><label>I will protect daily devotion time and honor God with my schedule.</label></div>
+        <div class="check"><input type="checkbox" data-track="mind"><label>I will fight discouragement with memorized Scripture and prayer.</label></div>
+        <div class="check"><input type="checkbox" data-track="mission"><label>I will turn personal growth into witness and service.</label></div>
+        <div class="check"><input type="checkbox" data-track="sabbath"><label>I will guard Sabbath as weekly spiritual reset and delight in God.</label></div>
+        <div class="check"><input type="checkbox" data-track="advent"><label>I will live watchfully, preparing myself and others for Christ’s return.</label></div>
+        <div class="check"><input type="checkbox" data-track="grace"><label>I will remember: obedience is fruit of grace, not a way to earn salvation.</label></div>
+      </div>
+    </section>
+
+    <section class="journal">
+      <h2>📝 Personal Reflection (auto-saved)</h2>
+      <textarea id="journalBox" placeholder="Write honestly: Which of the four areas is strongest in your life right now, and which needs repentance and rebuilding?"></textarea>
+      <p class="small">Tip: Write one action for today, one for this week, and one for this month.</p>
+    </section>
+
+    <section class="sources">
+      <h2>📚 Public-Domain Sources Used</h2>
+      <ul>
+        <li><strong>The Holy Bible (KJV)</strong> — public domain in the U.S.</li>
+        <li><strong>Steps to Christ</strong> (Ellen G. White, 1892) — public domain.</li>
+        <li><strong>Thoughts From the Mount of Blessing</strong> (Ellen G. White, 1896) — public domain.</li>
+        <li><strong>Christ’s Object Lessons</strong> (Ellen G. White, 1900) — public domain.</li>
+        <li><strong>The Ministry of Healing</strong> (Ellen G. White, 1905) — public domain.</li>
+        <li><strong>The Great Controversy</strong> (Ellen G. White, 1911 edition) — public domain.</li>
+      </ul>
+      <p style="margin-top:8px;color:var(--sub);line-height:1.7;font-size:.9rem;">This devotion follows SDA core principles: salvation by grace through faith, law-and-gospel harmony, Sabbath-centered discipleship, sanctification by the Spirit, and end-time readiness through Christ-centered mission.</p>
+    </section>
+
+    <div class="cta">
+      <a href="../vod.html" class="btn btn-main"><i class="fas fa-book-open"></i> Explore More Devotions</a>
+      <a href="../index.html#devotions" class="btn btn-alt"><i class="fas fa-home"></i> Back to Homepage</a>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+      tabButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.tab;
+          tabButtons.forEach((x) => x.classList.remove('active'));
+          tabPanels.forEach((p) => p.classList.remove('active'));
+          btn.classList.add('active');
+          const panel = document.getElementById(target);
+          if(panel) panel.classList.add('active');
+        });
+      });
+
+      const checks = document.querySelectorAll('input[data-track]');
+      const progressText = document.getElementById('progressText');
+      const barFill = document.getElementById('barFill');
+
+      function saveChecks(){
+        const payload = {};
+        checks.forEach((cb) => {
+          payload[cb.dataset.track] = cb.checked;
+        });
+        localStorage.setItem('devotion4_parts_checks', JSON.stringify(payload));
+      }
+
+      function loadChecks(){
+        const raw = localStorage.getItem('devotion4_parts_checks');
+        if(!raw) return;
+        try {
+          const parsed = JSON.parse(raw);
+          checks.forEach((cb) => {
+            cb.checked = !!parsed[cb.dataset.track];
+          });
+        } catch (_) {}
+      }
+
+      function updateProgress(){
+        const completed = Array.from(checks).filter((cb) => cb.checked).length;
+        const total = checks.length;
+        progressText.textContent = `${completed} / ${total} commitments`;
+        barFill.style.width = `${(completed / total) * 100}%`;
+      }
+
+      loadChecks();
+      updateProgress();
+      checks.forEach((cb) => {
+        cb.addEventListener('change', () => {
+          saveChecks();
+          updateProgress();
+        });
+      });
+
+      const journalBox = document.getElementById('journalBox');
+      const journalKey = 'devotion4_parts_journal';
+      journalBox.value = localStorage.getItem(journalKey) || '';
+      journalBox.addEventListener('input', () => {
+        localStorage.setItem(journalKey, journalBox.value);
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Dashboard — NothingButTheTRUTH</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#060812;--bg2:#0d1025;--bg3:#111530;
+            --border:rgba(168,85,247,.12);--border2:rgba(168,85,247,.3);
+            --txt:#bbb;--txt2:#fff;--dim:rgba(255,255,255,.4);
+            --green:#22c55e;--green-bg:rgba(34,197,94,.08);--green-bd:rgba(34,197,94,.3);
+            --yellow:#eab308;--yellow-bg:rgba(234,179,8,.08);--yellow-bd:rgba(234,179,8,.3);
+            --red:#ef4444;--red-bg:rgba(239,68,68,.08);--red-bd:rgba(239,68,68,.3);
+            --blue:#3b82f6;--purple:#a855f7;--cyan:#06b6d4;--orange:#f97316;
+            --r:14px;
+        }
+        body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;line-height:1.6}
+
+        /* NAV */
+        .topbar{position:sticky;top:0;z-index:100;background:rgba(6,8,18,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.5rem;gap:0;overflow-x:auto}
+        .topbar .logo{font-weight:800;color:var(--txt2);font-size:1.05rem;margin-right:auto;padding:14px 0;white-space:nowrap}
+        .topbar .logo span{color:var(--purple)}
+        .tab-btn{background:none;border:none;color:var(--dim);padding:14px 16px;font:600 .82rem/1 'Poppins',sans-serif;cursor:pointer;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap}
+        .tab-btn:hover{color:var(--txt)}
+        .tab-btn.active{color:var(--purple);border-bottom-color:var(--purple)}
+        .home-link{color:var(--dim);text-decoration:none;font-size:.82rem;font-weight:600;padding:14px 16px;transition:.2s;white-space:nowrap}
+        .home-link:hover{color:var(--purple)}
+
+        /* LAYOUT */
+        .container{max-width:1100px;margin:0 auto;padding:1.5rem}
+        .panel{display:none}.panel.active{display:block}
+
+        /* HERO STATUS */
+        .hero-status{text-align:center;padding:2rem 1rem;margin-bottom:2rem;border-radius:var(--r);border:1px solid var(--green-bd);background:var(--green-bg)}
+        .hero-status h2{font-size:2.5rem;font-weight:800;color:var(--green);margin-bottom:.25rem}
+        .hero-status p{color:var(--dim);font-size:.95rem}
+        .hero-status .subtitle{color:var(--txt);font-size:1rem;margin-top:.5rem}
+
+        /* STAT ROW */
+        .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-bottom:2rem}
+        .stat{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;text-align:center}
+        .stat .n{font-size:2rem;font-weight:800;line-height:1}
+        .stat .l{font-size:.72rem;color:var(--dim);text-transform:uppercase;letter-spacing:.04em;margin-top:4px}
+
+        /* SECTION HEADINGS */
+        .section-head{font-size:1.3rem;font-weight:700;color:var(--txt2);margin:2rem 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+
+        /* CARDS */
+        .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem}
+        .card h3{color:var(--txt2);font-size:1rem;margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+        .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+
+        /* DONE / NOT DONE BLOCKS */
+        .done-block{border-left:4px solid var(--green);background:var(--green-bg)}
+        .notdone-block{border-left:4px solid var(--orange);background:var(--yellow-bg)}
+
+        /* CHECKLIST */
+        .checklist{list-style:none;display:flex;flex-direction:column;gap:6px}
+        .checklist li{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;line-height:1.5}
+        .check{flex-shrink:0;width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin-top:1px}
+        .check-yes{background:var(--green-bg);border:1px solid var(--green-bd);color:var(--green)}
+        .check-no{background:var(--yellow-bg);border:1px solid var(--yellow-bd);color:var(--yellow)}
+
+        /* TABLE */
+        .tbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)}
+        table{width:100%;border-collapse:collapse;font-size:.85rem}
+        thead th{background:rgba(168,85,247,.07);color:var(--txt2);font-weight:600;text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);white-space:nowrap}
+        tbody td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle}
+        tbody tr:hover{background:rgba(168,85,247,.04)}
+        .pill{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:50px;white-space:nowrap}
+        .p-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
+        .p-yellow{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-bd)}
+        .p-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
+
+        /* TIMELINE */
+        .tl-row{display:grid;grid-template-columns:120px 1fr 80px;gap:0;margin-bottom:2px;border-radius:10px;overflow:hidden}
+        .tl-date{padding:14px 12px;background:var(--bg2);border:1px solid var(--border);border-right:none;border-radius:10px 0 0 10px;font-size:.82rem;font-weight:600;display:flex;flex-direction:column;justify-content:center}
+        .tl-date .d{color:var(--txt2)}.tl-date .y{font-size:.7rem;color:var(--dim);font-weight:400}
+        .tl-body{padding:14px 16px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+        .tl-body h4{color:var(--txt2);font-size:.92rem;margin-bottom:4px}
+        .tl-body p{color:var(--dim);font-size:.8rem;line-height:1.5}
+        .tl-body .time{color:var(--purple);font-weight:600;font-size:.78rem;margin-top:6px}
+        .tl-status{padding:14px 10px;background:var(--bg2);border:1px solid var(--border);border-left:none;border-radius:0 10px 10px 0;display:flex;align-items:center;justify-content:center}
+        .tl-done{background:var(--green-bg);border-color:var(--green-bd);color:var(--green);font-weight:700;font-size:.82rem}
+        .tl-pending{background:var(--yellow-bg);border-color:var(--yellow-bd);color:var(--yellow);font-weight:700;font-size:.82rem}
+
+        /* WORK LOG */
+        .wl-session{margin-bottom:1.5rem}
+        .wl-session h3{color:var(--txt2);font-size:1rem;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+        .wl-item{display:grid;grid-template-columns:1fr 80px;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem}
+        .wl-item:last-child{border:none}
+        .wl-item .desc{color:var(--txt)}
+        .wl-item .t{color:var(--purple);font-weight:600;text-align:right;white-space:nowrap}
+
+        /* SEO METER */
+        .seo-meter{width:100%;height:32px;background:rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin:1rem 0}
+        .seo-fill{height:100%;border-radius:20px;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;font-size:.82rem;font-weight:700;color:white;background:linear-gradient(90deg,var(--green),#16a34a)}
+
+        /* RESPONSIVE */
+        @media(max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}}
+        @media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.tl-row{grid-template-columns:90px 1fr 60px}.topbar{flex-wrap:wrap}}
+        @media print{.topbar{position:static}.panel{display:block!important;page-break-before:always}.tab-btn{display:none}}
+    </style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="topbar">
+    <div class="logo"><span>⚡</span> Dashboard</div>
+    <button class="tab-btn active" onclick="showTab('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="showTab('content',this)">Content</button>
+    <button class="tab-btn" onclick="showTab('timeline',this)">Timeline</button>
+    <button class="tab-btn" onclick="showTab('worklog',this)">Work Log</button>
+    <button class="tab-btn" onclick="showTab('seo',this)">SEO</button>
+    <a href="index.html" class="home-link">← Back to Site</a>
+</nav>
+
+<!-- ================================================================ -->
+<!-- TAB 1: OVERVIEW — The big picture in 30 seconds                  -->
+<!-- ================================================================ -->
+<div class="container">
+<section class="panel active" id="tab-overview">
+
+    <!-- STATUS BANNER -->
+    <div class="hero-status">
+        <h2>99% Complete</h2>
+        <p>All planned features are built and working. Only content creation remains.</p>
+        <div class="subtitle">8.5 hours of work done across 2 days (March 4–5, 2026) &nbsp;·&nbsp; ~1 hour of work left</div>
+    </div>
+
+    <!-- KEY NUMBERS -->
+    <div class="stats">
+        <div class="stat"><div class="n" style="color:var(--purple)">70</div><div class="l">Total Pages</div></div>
+        <div class="stat"><div class="n" style="color:var(--green)">20</div><div class="l">Games</div></div>
+        <div class="stat"><div class="n" style="color:var(--blue)">23</div><div class="l">Studies</div></div>
+        <div class="stat"><div class="n" style="color:var(--cyan)">18</div><div class="l">Devotions</div></div>
+        <div class="stat"><div class="n" style="color:var(--yellow)">10</div><div class="l">Videos</div></div>
+        <div class="stat"><div class="n" style="color:var(--green)">97</div><div class="l">SEO Score</div></div>
+    </div>
+
+    <div class="card" style="border-left:4px solid var(--purple)">
+        <h3 style="color:var(--purple)">🧠 Go-To Partner Snapshot</h3>
+        <div class="grid-3">
+            <div>
+                <p style="color:var(--txt2);font-weight:700;font-size:.82rem;margin-bottom:.35rem">Right Now</p>
+                <ul class="checklist">
+                    <li><span class="check check-yes">✓</span> Christianity route replaced with latest build</li>
+                    <li><span class="check check-yes">✓</span> Devotions and Games hubs redesigned</li>
+                    <li><span class="check check-yes">✓</span> Homepage now focused: 7 devotions, 3 featured games (including Second Advent Quest)</li>
+                    <li><span class="check check-yes">✓</span> Four latest games shipped: Sanctuary Symbol Match, Revelation Letters Challenge, Mythbuster Truth Shield, Kingdom Kids Adventure</li>
+                    <li><span class="check check-yes">✓</span> New interactive 4-part devotional journey added (Influence, Speech, Time, Mind)</li>
+                </ul>
+            </div>
+            <div>
+                <p style="color:var(--txt2);font-weight:700;font-size:.82rem;margin-bottom:.35rem">Immediate Next</p>
+                <ul class="checklist">
+                    <li><span class="check check-yes">✓</span> Latest fixes deployed to live hosting</li>
+                    <li><span class="check check-yes">✓</span> 12-week Poll + Worship topic calendar now active</li>
+                    <li><span class="check check-no">→</span> Publish Track C Kids Video #1 (script-ready, CapCut production pending)</li>
+                    <li><span class="check check-no">→</span> Publish “Bible in Real Life Stories” content pack</li>
+                </ul>
+            </div>
+            <div>
+                <p style="color:var(--txt2);font-weight:700;font-size:.82rem;margin-bottom:.35rem">Partner Actions</p>
+                <ul class="checklist">
+                    <li><span class="check check-yes">✓</span> Use this dashboard as your single status source</li>
+                    <li><span class="check check-yes">✓</span> Track blockers in Work Log before each deploy</li>
+                    <li><span class="check check-yes">✓</span> Prioritize content publishing over feature work</li>
+                    <li><span class="check check-yes">✓</span> Review "Suggested Next Upgrades" every week</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:.9rem;padding:.95rem;border:1px solid var(--border);border-radius:10px;background:var(--bg3)">
+            <p style="font-size:.82rem;color:var(--txt2);font-weight:700;margin-bottom:.35rem">Mini Dashboard (Live Ops)</p>
+            <div class="grid-3" style="margin-bottom:.7rem">
+                <div class="stat" style="padding:.9rem"><div class="n" style="font-size:1.2rem;color:var(--green)">Dark</div><div class="l">Default Theme</div></div>
+                <div class="stat" style="padding:.9rem"><div class="n" style="font-size:1.2rem;color:var(--blue)">Persisted</div><div class="l">Light Override</div></div>
+                <div class="stat" style="padding:.9rem"><div class="n" style="font-size:1.2rem;color:var(--purple)">1/12</div><div class="l">Kids Script Pipeline</div></div>
+            </div>
+            <ul class="checklist">
+                <li><span class="check check-yes">✓</span> Theme behavior now defaults to dark across devices and respects user light-mode switch.</li>
+                <li><span class="check check-yes">✓</span> Theme persistence is storage-safe (graceful fallback when local storage is unavailable).</li>
+                <li><span class="check check-yes">✓</span> 20-game library and launch routing verified with play-entry query support.</li>
+                <li><span class="check check-no">→</span> Next publish target: MythBusters/Kids Track C Episode 1 short-form video.</li>
+            </ul>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem">
+            <button class="tab-btn" style="border:1px solid var(--border2);border-radius:10px;padding:10px 12px" onclick="showTab('content', document.querySelectorAll('.tab-btn')[1])">Open Content Overview</button>
+            <button class="tab-btn" style="border:1px solid var(--border2);border-radius:10px;padding:10px 12px" onclick="showTab('timeline', document.querySelectorAll('.tab-btn')[2])">Open Timeline</button>
+            <button class="tab-btn" style="border:1px solid var(--border2);border-radius:10px;padding:10px 12px" onclick="showTab('worklog', document.querySelectorAll('.tab-btn')[3])">Open Work Log</button>
+            <button class="tab-btn" style="border:1px solid var(--border2);border-radius:10px;padding:10px 12px" onclick="showTab('seo', document.querySelectorAll('.tab-btn')[4])">Open SEO Health</button>
+        </div>
+        <div style="margin-top:.9rem;padding:.8rem;border:1px solid var(--border);border-radius:10px;background:var(--bg3)">
+            <p style="font-size:.82rem;color:var(--txt2);font-weight:700;margin-bottom:.35rem">Suggested Next Upgrades</p>
+            <ul class="checklist">
+                <li><span class="check check-yes">✓</span> Weekly analyzer score keeper panel added (votes, completion, launch health)</li>
+                <li><span class="check check-no">+</span> Add monthly gameplay health report with top drop-off pages</li>
+                <li><span class="check check-no">+</span> Add one-click "publish checklist" before each deploy</li>
+            </ul>
+        </div>
+        <div style="margin-top:.9rem;padding:.8rem;border:1px solid var(--border);border-radius:10px;background:var(--bg3)">
+            <p style="font-size:.82rem;color:var(--txt2);font-weight:700;margin-bottom:.35rem">Weekly Poll & Worship Challenge Upgrade Blueprint</p>
+            <ul class="checklist">
+                <li><span class="check check-yes">✓</span> <strong>Question quality standard:</strong> one clear idea per poll, 3 choices max, neutral wording, no leading language.</li>
+                <li><span class="check check-yes">✓</span> <strong>Weekly content cadence:</strong> 12-week rotating topic bank (Prayer, Scripture, Fellowship, Mission, Character, Sabbath).</li>
+                <li><span class="check check-yes">✓</span> <strong>Visible timing logic:</strong> both sections display synchronized weekly reset countdowns.</li>
+                <li><span class="check check-yes">✓</span> <strong>Engagement upgrade:</strong> active week marker + weekly reset metadata shown for Poll and Worship focus.</li>
+                <li><span class="check check-no">→</span> <strong>Spiritual growth loop:</strong> each completed worship week unlocks one guided reflection and one next-step challenge.</li>
+                <li><span class="check check-no">→</span> <strong>Trust + accessibility:</strong> keep one-vote-per-week rules transparent and optimize for mobile thumb reach.</li>
+            </ul>
+        </div>
+        <div style="margin-top:.9rem;padding:.95rem;border:1px solid var(--border);border-radius:10px;background:var(--bg3)">
+            <p style="font-size:.82rem;color:var(--txt2);font-weight:700;margin-bottom:.35rem">Project Analyzer & Score Keeper</p>
+            <div class="grid-3" style="margin-bottom:.7rem">
+                <div class="stat" style="padding:.9rem"><div class="n" style="font-size:1.3rem;color:var(--green)">95%</div><div class="l">Launch Reliability</div></div>
+                <div class="stat" style="padding:.9rem"><div class="n" style="font-size:1.3rem;color:var(--blue)">12</div><div class="l">Week Rotation Ready</div></div>
+                <div class="stat" style="padding:.9rem"><div class="n" style="font-size:1.3rem;color:var(--purple)">20</div><div class="l">Live Games in Library</div></div>
+            </div>
+            <ul class="checklist">
+                <li><span class="check check-yes">✓</span> Poll now hard-resets by week ID and prevents duplicate votes per week.</li>
+                <li><span class="check check-yes">✓</span> Worship challenge now rotates by a 12-week themed content bank.</li>
+                <li><span class="check check-yes">✓</span> Countdown visibility is active for both poll and worship weekly boundaries.</li>
+                <li><span class="check check-yes">✓</span> New flagship game deployed: Second Advent Quest with lesson-driven gameplay.</li>
+                <li><span class="check check-yes">✓</span> Two additional interactive releases deployed and linked in hubs.</li>
+            </ul>
+        </div>
+        <div style="margin-top:.9rem;padding:.95rem;border:1px solid var(--border);border-radius:10px;background:var(--bg3)">
+            <p style="font-size:.82rem;color:var(--txt2);font-weight:700;margin-bottom:.35rem">Game Ideas Backlog (Next Releases)</p>
+            <ul class="checklist">
+                <li><span class="check check-no">+</span> <strong>Revelation Timeline Rush:</strong> sequence end-time prophecy events against a countdown.</li>
+                <li><span class="check check-no">+</span> <strong>Sanctuary Explorer:</strong> interactive map puzzle of courtyard, holy place, and most holy place symbols.</li>
+                <li><span class="check check-no">+</span> <strong>Three Angels Broadcast:</strong> mission-routing strategy game to deliver Revelation 14 messages globally.</li>
+                <li><span class="check check-no">+</span> <strong>Sabbath Defender:</strong> scenario-based decision game focused on conviction under pressure.</li>
+                <li><span class="check check-no">+</span> <strong>Parable Builder:</strong> reconstruct Jesus' parables in correct symbolic order.</li>
+                <li><span class="check check-no">+</span> <strong>Acts Mission Sprint:</strong> route planning and verse challenges through the early church journey map.</li>
+                <li><span class="check check-no">+</span> <strong>Daniel Vision Decoder:</strong> decode symbols from Daniel 2, 7, and 8 using clue chaining.</li>
+                <li><span class="check check-no">+</span> <strong>Armor of God Arena:</strong> wave-defense quiz where each correct answer equips one armor piece.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- WHAT'S DONE vs WHAT'S LEFT -->
+    <div class="grid-2">
+
+        <!-- DONE -->
+        <div class="card done-block">
+            <h3 style="color:var(--green)">✅ What's Done</h3>
+            <ul class="checklist">
+                <li><span class="check check-yes">✓</span> 20 interactive Bible games — all working, all bugs fixed</li>
+                <li><span class="check check-yes">✓</span> Gamification: high scores, 25 achievements, daily challenges</li>
+                <li><span class="check check-yes">✓</span> Leaderboard page (games/leaderboard.html)</li>
+                <li><span class="check check-yes">✓</span> 23 Bible studies — complete</li>
+                <li><span class="check check-yes">✓</span> 18 devotions — complete, all SEO issues fixed</li>
+                <li><span class="check check-yes">✓</span> 10 videos: 9 Ten Commandments episodes + intro</li>
+                <li><span class="check check-yes">✓</span> MythBusters page — redesigned with dark theme</li>
+                <li><span class="check check-yes">✓</span> Homepage, navigation, all hub pages working</li>
+                <li><span class="check check-yes">✓</span> SEO: meta tags, OG images, sitemap, schema.org</li>
+                <li><span class="check check-yes">✓</span> All critical and medium bugs resolved (51 total fixes)</li>
+                <li><span class="check check-yes">✓</span> Dark/light mode toggle — persistent, works site-wide</li>
+                <li><span class="check check-yes">✓</span> Search bar — Ctrl+K overlay, searches all content</li>
+                <li><span class="check check-yes">✓</span> Bookmark system — save studies/devotions, sidebar panel</li>
+                <li><span class="check check-yes">✓</span> Reading progress tracker — scroll-based, stats panel</li>
+                <li><span class="check check-yes">✓</span> Expanded game content in 6 games (+70 new items)</li>
+                <li><span class="check check-yes">✓</span> Performance: deferred scripts, removed duplicate loads</li>
+            </ul>
+        </div>
+
+        <!-- NOT DONE -->
+        <div class="card notdone-block">
+            <h3 style="color:var(--orange)">⏳ What's Left (Non-video focus)</h3>
+            <ul class="checklist">
+                <li><span class="check check-no">—</span> <strong>"Bible in Real Life Stories"</strong> — Hidden from search. Needs story content written (~1 hour of writing).</li>
+            </ul>
+            <p style="color:var(--dim);font-size:.82rem;margin-top:1rem">None of these are blockers. The site is fully functional and ready for users.</p>
+        </div>
+    </div>
+
+</section>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB 2: CONTENT — What's on the site                              -->
+<!-- ================================================================ -->
+<div class="container">
+<section class="panel" id="tab-content">
+
+    <!-- ===== GAMES ===== -->
+    <h2 class="section-head">🎮 Games (20)</h2>
+    <p style="color:var(--dim);font-size:.85rem;margin-bottom:1rem">All 20 games have high-score tracking, achievements, and daily challenges via the shared gamification engine (<code>nbtt-gamification.js</code>). A central leaderboard page shows all stats.</p>
+
+    <div class="tbl-wrap">
+        <table>
+            <thead><tr><th>#</th><th>Game</th><th>Type</th><th>Content</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Ark Builder</td><td>Stacking / Timing</td><td>12+6 items</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>2</td><td>Bible Bingo</td><td>5×5 Bingo (multiplayer)</td><td>52 prompts</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>3</td><td>Bible Connections</td><td>NYT-style Groups</td><td>18 puzzles</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>4</td><td>Bible Memory Match</td><td>Card Flip</td><td>20 pairs</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>5</td><td>Bible Sequence</td><td>Simon Says</td><td>12 symbols</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>6</td><td>Bible Taboo</td><td>Forbidden Word (multiplayer)</td><td>50 cards</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>7</td><td>Bible Timeline</td><td>Drag Ordering</td><td>42 events</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>8</td><td>Bible Word Search</td><td>Word Search Grid</td><td>100 words / 10 themes</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>9</td><td>Fruit Catcher</td><td>Arcade / Canvas</td><td>14 items</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>10</td><td>Prophecy Match</td><td>OT→NT Matching</td><td>36 pairs</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>11</td><td>Relay Race</td><td>Team Quiz (MCQ)</td><td>70 questions</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>12</td><td>Scripture Sprint</td><td>Verse→Reference Quiz</td><td>55 verses</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>13</td><td>Verse Hunt Live</td><td>Timed Quiz</td><td>66 questions</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>14</td><td>Walls of Jericho</td><td>Rhythm Action</td><td>7 laps</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>15</td><td>Who Said It?</td><td>Quote Quiz (multiplayer)</td><td>50 quotes</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>16</td><td>Second Advent Quest</td><td>Mission Quiz / Eschatology</td><td>14 source-based questions</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>17</td><td>Sanctuary Symbol Match</td><td>Symbol Match / Theology</td><td>12 symbol-meaning rounds</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>18</td><td>Revelation Letters Challenge</td><td>7-Churches Quiz</td><td>12 letter-based rounds</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>19</td><td>MythBuster: Truth Shield</td><td>Doctrine Defense Quiz</td><td>12 myth-truth rounds</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>20</td><td>Kingdom Kids Adventure</td><td>Kids Character Quest</td><td>12 story-choice rounds</td><td><span class="pill p-green">✓ Done</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ===== STUDIES ===== -->
+    <h2 class="section-head">📖 Studies (23)</h2>
+    <div class="tbl-wrap">
+        <table>
+            <thead><tr><th>#</th><th>Title</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Are Angels Real?</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>2</td><td>Armor of God (Expanded)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>3</td><td>Armor of God (Compact)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>4</td><td>A Tale of Cities</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>5</td><td>Christ The Savior</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>6</td><td>Exodus to Sinai: Law of Love</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>7</td><td>Is the Bible Facts or Fiction?</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>8</td><td>God's Purpose in Communication</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>9</td><td>History of Christian Faith</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>10</td><td>Jesus Is Real</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>11</td><td>Meaning &amp; History of Baptism</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>12</td><td>Preparing to Meet God — Pt 1</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>13</td><td>Preparing to Meet God — Pt 2</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>14</td><td>Preparing to Meet God — Pt 3</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>15</td><td>Satan the Accuser, Christ the Defender</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>16</td><td>The Childhood of Jesus Christ</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>17</td><td>Jesus Christ "The Lamb Of God"</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>18</td><td>The Lord's Supper</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>19</td><td>The Nature of Sin &amp; God's Law</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>20</td><td>God "The Word" Made Flesh</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>21</td><td>Where Is Jesus Right Now?</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>22</td><td>Is the Bible God's Word? (Expanded)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>23</td><td>Why the Bible is God's Word</td><td><span class="pill p-green">✓ Done</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ===== DEVOTIONS ===== -->
+    <h2 class="section-head">🕊️ Devotions (18)</h2>
+    <div class="tbl-wrap">
+        <table>
+            <thead><tr><th>#</th><th>Title</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Anchor of Hope</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>2</td><td>A Tale of Cities</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>3</td><td>Called to Shine</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>4</td><td>Danger of Not Keeping Commandments</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>5</td><td>Do It for God</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>6</td><td>Faith Under Fire</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>7</td><td>The Final Invitation</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>8</td><td>Hannah's Devotion</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>9</td><td>10 Cmds Connect Us with God</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>10</td><td>Importance of Commandments</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>11</td><td>Love That Saves</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>12</td><td>Take Up The Cross</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>13</td><td>The Mustard Seed</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>14</td><td>The Power of the Cross</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>15</td><td>Unshackled by Grace</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>16</td><td>Walking in the Light</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>17</td><td>Influence, Speech, Time, Mind (Interactive)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ===== VIDEOS ===== -->
+    <h2 class="section-head">🎬 Videos (10)</h2>
+    <p style="color:var(--dim);font-size:.85rem;margin-bottom:1rem">All videos are hosted on Mux and served through a custom player. The Ten Commandments series is the main video content. MythBusters also has a "Video Shorts" section for future content.</p>
+
+    <div class="tbl-wrap">
+        <table>
+            <thead><tr><th>#</th><th>Video</th><th>Where</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td>1</td><td>Story of the Ten Commandments (Intro)</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>2</td><td>1st Commandment — No Other Gods</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>3</td><td>2nd Commandment — No Graven Images</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>4</td><td>3rd Commandment — Respect the Sabbath</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>5</td><td>4th Commandment — Honor Your Parents</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>6</td><td>5th Commandment — Do Not Murder</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>7</td><td>6th Commandment — No Adultery</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>8</td><td>7th Commandment — Do Not Steal</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>9</td><td>8th Commandment — Do Not Lie</td><td>all-videos.html</td><td><span class="pill p-green">✓ Live</span></td></tr>
+                <tr><td>10</td><td>10th Commandment — Coming Soon</td><td>all-videos.html</td><td><span class="pill p-yellow">⏳ Pending</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p style="color:var(--dim);font-size:.8rem;margin-top:.5rem">Note: The 9th Commandment video is not listed on the site. Episode 10 (10th Commandment) shows "Coming Soon."</p>
+
+    <!-- ===== TOP-LEVEL PAGES ===== -->
+    <h2 class="section-head">🏠 Top-Level Pages (11)</h2>
+    <div class="tbl-wrap">
+        <table>
+            <thead><tr><th>Page</th><th>Purpose</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td>index.html</td><td>Homepage — main hub linking to everything</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>all-games.html</td><td>Games directory (20 games)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>all-studies.html</td><td>Studies library (23 studies)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>vod.html</td><td>Devotions directory (17 devotions)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>all-videos.html</td><td>Video library (Mux player)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>mythbusters.html</td><td>Myth debunking + video shorts</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>the-ten-commandments.html</td><td>10 Commandments hub (videos + studies + devotions)</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>about-us.html</td><td>Mission &amp; beliefs</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>account-options.html</td><td>Login / account options</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>new-model.html</td><td>New Model page</td><td><span class="pill p-green">✓ Done</span></td></tr>
+                <tr><td>games/leaderboard.html</td><td>Stats, achievements, daily challenges</td><td><span class="pill p-green">✓ Done</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB 3: TIMELINE — What happened and when                         -->
+<!-- ================================================================ -->
+<div class="container">
+<section class="panel" id="tab-timeline">
+
+    <p style="color:var(--dim);font-size:.9rem;margin-bottom:1.5rem">Every phase below has a real date. <span style="color:var(--green);font-weight:600">Green = completed.</span> <span style="color:var(--yellow);font-weight:600">Yellow = not yet done.</span> Time estimates reflect actual AI-assisted development sessions including review and testing.</p>
+
+    <!-- PHASE 3 -->
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">Mar 4, 2026</div><div class="y">Day 1</div></div>
+        <div class="tl-body">
+            <h4>Phase 3 — Bug Fixes</h4>
+            <p>Fixed 5 broken exit button URLs, deleted broken file (who_said_it,html), fixed 4 devotion title/H1 mismatches, removed bloat files from verse-hunt-live.</p>
+            <div class="time">⏱ ~30 minutes · 5 tasks</div>
+        </div>
+        <div class="tl-status tl-done">✅ Done</div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">Mar 4, 2026</div><div class="y">Day 1</div></div>
+        <div class="tl-body">
+            <h4>Phase 4 — Theme &amp; UX</h4>
+            <p>Converted 3 games to dark theme, added Bible Bingo end screen, renamed 4 entry files to index.html (+ updated 90 cross-references), fixed vod.html broken links, linked MythBusters into site navigation.</p>
+            <div class="time">⏱ ~1.5 hours · 7 tasks</div>
+        </div>
+        <div class="tl-status tl-done">✅ Done</div>
+    </div>
+
+    <!-- PHASE 5a -->
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">Mar 4, 2026</div><div class="y">Day 1</div></div>
+        <div class="tl-body">
+            <h4>Phase 5a — Game Quality Audit</h4>
+            <p>Deep-tested all 15 games. Fixed 4 critical bugs (Relay Race unplayable, Word Search impossible words, Taboo revealed forbidden words, Relay reset bug). Fixed 4 medium bugs (biased shuffling, broken accuracy, static options, duplicate end screens). Expanded content in 4 games.</p>
+            <div class="time">⏱ ~2 hours · 13 tasks</div>
+        </div>
+        <div class="tl-status tl-done">✅ Done</div>
+    </div>
+
+    <!-- PHASE 5b -->
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">Mar 5, 2026</div><div class="y">Day 2</div></div>
+        <div class="tl-body">
+            <h4>Phase 5b — MythBusters Redesign + SEO</h4>
+            <p>Completely redesigned MythBusters with dark theme. Added homepage MythBusters section. Fixed H1 tags (3→1), rewrote meta descriptions for 6 pages, cleaned title artifacts on 5 pages. SEO score: 72 → 90.</p>
+            <div class="time">⏱ ~1 hour · 10 tasks</div>
+        </div>
+        <div class="tl-status tl-done">✅ Done</div>
+    </div>
+
+    <!-- PHASE 5c -->
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">Mar 5, 2026</div><div class="y">Day 2</div></div>
+        <div class="tl-body">
+            <h4>Phase 5c — Gamification + SEO Polish</h4>
+            <p>Built gamification engine (nbtt-gamification.js): personal bests, 25 achievements, 14 daily challenges. Integrated into all 15 games. Converted OG image to JPG, renamed New Model.html, removed emoji from meta tags. SEO score: 90 → 97.</p>
+            <div class="time">⏱ ~1.5 hours · 6 tasks</div>
+        </div>
+        <div class="tl-status tl-done">✅ Done</div>
+    </div>
+
+    <!-- PHASE 6 -->
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">Mar 5, 2026</div><div class="y">Day 2</div></div>
+        <div class="tl-body">
+            <h4>Phase 6 — Leaderboard Page</h4>
+            <p>Created games/leaderboard.html with 6 stat cards, personal bests grid, 25 achievements with progress bars, daily challenge card, reset button. Linked from 4 locations + sitemap.</p>
+            <div class="time">⏱ ~35 minutes · 4 tasks</div>
+        </div>
+        <div class="tl-status tl-done">✅ Done</div>
+    </div>
+
+    <!-- REMAINING -->
+    <div style="margin-top:2rem;padding-top:1rem;border-top:2px solid var(--yellow-bd)">
+        <h3 style="color:var(--yellow);margin-bottom:1rem">⏳ Not Yet Done</h3>
+    </div>
+
+    <!-- PHASE 7 -->
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">Mar 5, 2026</div><div class="y">Day 2</div></div>
+        <div class="tl-body">
+            <h4>Phase 7 — New Features + Game Content</h4>
+            <p>Built 4 new user features: dark/light mode toggle (persistent), search bar (Ctrl+K, 60+ pages indexed), bookmark system (FAB on studies/devotions + sidebar panel), reading progress tracker (scroll-based + stats panel). Expanded content in 6 games (+70 items). Performance: removed 3 duplicate Chart.js loads, deferred Firebase/Mux scripts. Hidden Bible in Real Life Stories from search.</p>
+            <div class="time">⏱ ~1.5 hours · 7 tasks</div>
+        </div>
+        <div class="tl-status tl-done">✅ Done</div>
+    </div>
+
+    <div style="margin-top:2rem;padding-top:1rem;border-top:2px solid var(--yellow-bd)">
+        <h3 style="color:var(--yellow);margin-bottom:1rem">⏳ Not Yet Done</h3>
+    </div>
+
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">TBD</div><div class="y">Future</div></div>
+        <div class="tl-body">
+            <h4>10th Commandment Video</h4>
+            <p>Episode 10 placeholder exists on all-videos.html. Needs video to be produced and Mux playback ID added.</p>
+        </div>
+        <div class="tl-status tl-pending">⏳</div>
+    </div>
+
+    <div class="tl-row">
+        <div class="tl-date"><div class="d">TBD</div><div class="y">Future</div></div>
+        <div class="tl-body">
+            <h4>Bible in Real Life Stories</h4>
+            <p>Landing page exists (hidden from search). Needs story content written.</p>
+        </div>
+        <div class="tl-status tl-pending">⏳</div>
+    </div>
+
+    <!-- TOTALS -->
+    <div class="stats" style="margin-top:2rem">
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">58</div><div class="l">Problems Fixed</div></div>
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">~8.5 hrs</div><div class="l">Total Time Spent</div></div>
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">2</div><div class="l">Days of Work</div></div>
+        <div class="stat" style="border-color:var(--yellow-bd)"><div class="n" style="color:var(--yellow)">2</div><div class="l">Items Remaining</div></div>
+        <div class="stat" style="border-color:var(--purple)"><div class="n" style="color:var(--purple)">~1 hr</div><div class="l">Work Left</div></div>
+    </div>
+
+    <!-- TIME PER DAY -->
+    <div class="card" style="margin-top:1rem;border-left:4px solid var(--purple)">
+        <h3>Time Spent Per Day</h3>
+        <div style="display:grid;grid-template-columns:120px 1fr 80px;gap:8px;font-size:.88rem">
+            <div style="color:var(--txt2);font-weight:600">March 4</div><div>Phase 3 (Bug Fixes) + Phase 4 (Theme &amp; UX) + Phase 5a (Game Audit)</div><div style="color:var(--purple);font-weight:600;text-align:right">~4 hrs</div>
+            <div style="color:var(--txt2);font-weight:600">March 5</div><div>Phase 5b (MythBusters + SEO) + Phase 5c (Gamification) + Phase 6 (Leaderboard) + Phase 7 (Features + Content)</div><div style="color:var(--purple);font-weight:600;text-align:right">~4.5 hrs</div>
+        </div>
+    </div>
+
+</section>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB 4: WORK LOG — Detailed record of every fix                   -->
+<!-- ================================================================ -->
+<div class="container">
+<section class="panel" id="tab-worklog">
+
+    <p style="color:var(--dim);font-size:.9rem;margin-bottom:1.5rem">Every problem found and fixed, with time estimates for AI-assisted development (includes writing code, reviewing, and testing).</p>
+
+    <!-- PHASE 3 -->
+    <div class="wl-session">
+        <h3>📋 Phase 3 — Bug Fixes &nbsp;·&nbsp; March 4, 2026</h3>
+        <div class="wl-item"><div class="desc">Fixed 5 game exit buttons pointing to "/" instead of all-games.html</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc">Deleted broken file: who_said_it,html (comma instead of period)</div><div class="t">2 min</div></div>
+        <div class="wl-item"><div class="desc">Fixed 3 devotion title/H1 mismatches (anchor_of_hope, Do_it_for_God, the_power_of_the_cross)</div><div class="t">10 min</div></div>
+        <div class="wl-item"><div class="desc">Fixed Take_up_The_Cross — promoted H2 to H1, updated title</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc">Removed verse-hunt-live bloat (node_modules, server.js, package.json)</div><div class="t">8 min</div></div>
+        <div style="text-align:right;font-size:.82rem;font-weight:600;color:var(--green);padding-top:8px;border-top:1px solid var(--border)">Phase 3 total: ~30 min</div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="wl-session">
+        <h3>📋 Phase 4 — Theme &amp; UX &nbsp;·&nbsp; March 4, 2026</h3>
+        <div class="wl-item"><div class="desc">Converted Bible Taboo, Relay Race, and Who Said It to dark theme (CSS overhaul)</div><div class="t">30 min</div></div>
+        <div class="wl-item"><div class="desc">Added Bible Bingo end screen with team scores, confetti, play-again button</div><div class="t">15 min</div></div>
+        <div class="wl-item"><div class="desc">Renamed 4 entry files to index.html + updated 90 cross-references</div><div class="t">15 min</div></div>
+        <div class="wl-item"><div class="desc">Fixed vod.html: 4 broken devotion links + added 3 missing cards</div><div class="t">10 min</div></div>
+        <div class="wl-item"><div class="desc">Linked mythbusters.html into homepage navigation and sidebar</div><div class="t">10 min</div></div>
+        <div style="text-align:right;font-size:.82rem;font-weight:600;color:var(--green);padding-top:8px;border-top:1px solid var(--border)">Phase 4 total: ~1.5 hrs</div>
+    </div>
+
+    <!-- PHASE 5a -->
+    <div class="wl-session">
+        <h3>📋 Phase 5a — Game Quality Audit &nbsp;·&nbsp; March 4, 2026</h3>
+        <div class="wl-item"><div class="desc"><strong style="color:var(--red)">P0:</strong> Rewrote Relay Race from text-input to multiple-choice (50 questions)</div><div class="t">30 min</div></div>
+        <div class="wl-item"><div class="desc"><strong style="color:var(--red)">P0:</strong> Fixed Word Search — words that fail to place are now removed from find-list</div><div class="t">10 min</div></div>
+        <div class="wl-item"><div class="desc"><strong style="color:var(--red)">P0:</strong> Fixed Taboo — forbidden words now hidden from guessers</div><div class="t">10 min</div></div>
+        <div class="wl-item"><div class="desc"><strong style="color:var(--red)">P0:</strong> Fixed Relay Race questionsAnswered not resetting on replay</div><div class="t">3 min</div></div>
+        <div class="wl-item"><div class="desc"><strong style="color:var(--orange)">P1:</strong> Replaced biased shuffle with Fisher-Yates in Bible Bingo &amp; Prophecy Match</div><div class="t">10 min</div></div>
+        <div class="wl-item"><div class="desc"><strong style="color:var(--orange)">P1:</strong> Fixed Verse Hunt accuracy calculation (added correctCount)</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc"><strong style="color:var(--orange)">P1:</strong> Fixed Who Said It — answer options now shuffled</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc"><strong style="color:var(--orange)">P1:</strong> Fixed Relay Race duplicate end screens on replay</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc">Expanded Bible Taboo content: 10 → 50 cards (5 forbidden words each)</div><div class="t">12 min</div></div>
+        <div class="wl-item"><div class="desc">Expanded Relay Race content: 10 → 50 multiple-choice questions</div><div class="t">12 min</div></div>
+        <div class="wl-item"><div class="desc">Expanded Prophecy Match content: 10 → 25 OT/NT pairs</div><div class="t">10 min</div></div>
+        <div class="wl-item"><div class="desc">Expanded Bible Connections content: 4 → 12 puzzles</div><div class="t">8 min</div></div>
+        <div style="text-align:right;font-size:.82rem;font-weight:600;color:var(--green);padding-top:8px;border-top:1px solid var(--border)">Phase 5a total: ~2 hrs</div>
+    </div>
+
+    <!-- PHASE 5b -->
+    <div class="wl-session">
+        <h3>📋 Phase 5b — MythBusters + SEO &nbsp;·&nbsp; March 5, 2026</h3>
+        <div class="wl-item"><div class="desc">Redesigned MythBusters page (dark theme, red/orange accents, pill tabs, video shorts section)</div><div class="t">20 min</div></div>
+        <div class="wl-item"><div class="desc">Added MythBusters section to homepage + sidebar nav link</div><div class="t">12 min</div></div>
+        <div class="wl-item"><div class="desc">Fixed homepage H1 tags (3 → 1) — demoted 2 extras to H2</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc">Rewrote meta descriptions for 6 pages (homepage, games, 10 cmds, vod, about, studies)</div><div class="t">10 min</div></div>
+        <div class="wl-item"><div class="desc">Cleaned 5 title artifacts (removed "|..." garbage) + fixed double-encoded &amp;amp;</div><div class="t">8 min</div></div>
+        <div class="wl-item"><div class="desc">Verified 42+ links — confirmed 0 broken (3 reported were false alarm)</div><div class="t">5 min</div></div>
+        <div style="text-align:right;font-size:.82rem;font-weight:600;color:var(--green);padding-top:8px;border-top:1px solid var(--border)">Phase 5b total: ~1 hr</div>
+    </div>
+
+    <!-- PHASE 5c -->
+    <div class="wl-session">
+        <h3>📋 Phase 5c — Gamification + SEO Polish &nbsp;·&nbsp; March 5, 2026</h3>
+        <div class="wl-item"><div class="desc">Created nbtt-gamification.js (548 lines): personal bests, 25 achievements, 14 daily challenges</div><div class="t">30 min</div></div>
+        <div class="wl-item"><div class="desc">Integrated gamification into all 15 games (import script + saveScore calls)</div><div class="t">30 min</div></div>
+        <div class="wl-item"><div class="desc">Generated 1200×630 JPG og:image + replaced SVG refs across 40+ files</div><div class="t">10 min</div></div>
+        <div class="wl-item"><div class="desc">Renamed New Model.html → new-model.html (updated canonical, OG, schema, sitemap)</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc">Removed emoji from all-videos.html meta descriptions</div><div class="t">3 min</div></div>
+        <div style="text-align:right;font-size:.82rem;font-weight:600;color:var(--green);padding-top:8px;border-top:1px solid var(--border)">Phase 5c total: ~1.5 hrs</div>
+    </div>
+
+    <!-- PHASE 6 -->
+    <div class="wl-session">
+        <h3>📋 Phase 6 — Leaderboard Page &nbsp;·&nbsp; March 5, 2026</h3>
+        <div class="wl-item"><div class="desc">Created games/leaderboard.html (~340 lines): stats, PBs grid, achievements, daily challenge, reset</div><div class="t">20 min</div></div>
+        <div class="wl-item"><div class="desc">Linked from all-games.html (header button + footer pill)</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc">Linked from homepage sidebar ("Game Scores") + homepage games section</div><div class="t">5 min</div></div>
+        <div class="wl-item"><div class="desc">Added leaderboard to sitemap.xml</div><div class="t">2 min</div></div>
+        <div style="text-align:right;font-size:.82rem;font-weight:600;color:var(--green);padding-top:8px;border-top:1px solid var(--border)">Phase 6 total: ~35 min</div>
+    </div>
+
+    <!-- PHASE 7 -->
+    <div class="wl-session">
+        <h3>📋 Phase 7 — New Features + Game Content &nbsp;·&nbsp; March 5, 2026</h3>
+        <div class="wl-item"><div class="desc">Hidden Bible in Real Life Stories (noindex,nofollow + removed from sitemap)</div><div class="t">3 min</div></div>
+        <div class="wl-item"><div class="desc">Performance: removed 3 duplicate Chart.js loads, deferred Firebase &amp; Mux scripts</div><div class="t">8 min</div></div>
+        <div class="wl-item"><div class="desc">Expanded 6 games: +6 puzzles, +20 questions, +15 verses, +4 themes, +11 pairs, +6 verse-hunts</div><div class="t">20 min</div></div>
+        <div class="wl-item"><div class="desc">Built dark/light mode toggle (CSS overrides, localStorage, toggle button in navbar)</div><div class="t">20 min</div></div>
+        <div class="wl-item"><div class="desc">Built search bar (Ctrl+K overlay, 60+ pages indexed, type-ahead, color-coded results)</div><div class="t">15 min</div></div>
+        <div class="wl-item"><div class="desc">Built bookmark system (FAB on content pages, sidebar panel, localStorage persistence)</div><div class="t">12 min</div></div>
+        <div class="wl-item"><div class="desc">Built reading progress tracker (scroll-based bar, stats panel with completion %)</div><div class="t">12 min</div></div>
+        <div style="text-align:right;font-size:.82rem;font-weight:600;color:var(--green);padding-top:8px;border-top:1px solid var(--border)">Phase 7 total: ~1.5 hrs</div>
+    </div>
+
+    <!-- GRAND TOTAL -->
+    <div class="stats" style="margin-top:1.5rem">
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">58</div><div class="l">Total Fixes</div></div>
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">~8.5 hrs</div><div class="l">Total Time</div></div>
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">7</div><div class="l">Phases Done</div></div>
+    </div>
+
+</section>
+</div>
+
+<!-- ================================================================ -->
+<!-- TAB 5: SEO — Search engine health                                -->
+<!-- ================================================================ -->
+<div class="container">
+<section class="panel" id="tab-seo">
+
+    <!-- SCORE -->
+    <div class="stats" style="margin-bottom:1.5rem">
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green);font-size:2.5rem">97</div><div class="l">SEO Score / 100</div></div>
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">71/71</div><div class="l">Pages with Meta</div></div>
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">0</div><div class="l">Broken Links</div></div>
+        <div class="stat" style="border-color:var(--green-bd)"><div class="n" style="color:var(--green)">1</div><div class="l">H1 Tags on Home</div></div>
+    </div>
+
+    <!-- WHAT IS SEO -->
+    <div class="card" style="border-left:4px solid var(--purple);margin-bottom:1.5rem">
+        <h3>What is SEO?</h3>
+        <p style="font-size:.9rem">SEO (Search Engine Optimization) is how you help Google find and understand your website. Think of Google as a librarian — SEO is your book's label on the shelf. Without it, nobody finds your content. A score of <strong style="color:var(--green)">97/100</strong> means your site is in excellent shape.</p>
+    </div>
+
+    <!-- SCORE BAR -->
+    <div class="card">
+        <h3>Score Breakdown</h3>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:.5rem">
+            <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px"><span>Meta Tags</span><span style="color:var(--green);font-weight:600">20/20</span></div>
+                <div class="seo-meter"><div class="seo-fill" style="width:100%">100%</div></div>
+            </div>
+            <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px"><span>Link Health</span><span style="color:var(--green);font-weight:600">20/20</span></div>
+                <div class="seo-meter"><div class="seo-fill" style="width:100%">100%</div></div>
+            </div>
+            <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px"><span>Social Sharing (OG/Twitter)</span><span style="color:var(--green);font-weight:600">20/20</span></div>
+                <div class="seo-meter"><div class="seo-fill" style="width:100%">100%</div></div>
+            </div>
+            <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px"><span>Page Structure (H1, schema.org)</span><span style="color:var(--green);font-weight:600">18/20</span></div>
+                <div class="seo-meter"><div class="seo-fill" style="width:90%">90%</div></div>
+            </div>
+            <div>
+                <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px"><span>URL Structure</span><span style="color:var(--green);font-weight:600">17/20</span></div>
+                <div class="seo-meter"><div class="seo-fill" style="width:85%">85%</div></div>
+            </div>
+        </div>
+        <p style="font-size:.8rem;color:var(--dim);margin-top:1rem">The missing 3 points are from uppercase folder names (Studies/, Devotions/) and one apostrophe in a filename (hannah's_devotion.html). These work fine but aren't best practice. Renaming them would break existing links, so they're left as-is.</p>
+    </div>
+
+    <!-- WHAT WE FIXED -->
+    <div class="grid-2" style="margin-top:1rem">
+        <div class="card done-block">
+            <h3 style="color:var(--green)">✅ SEO Issues Fixed</h3>
+            <ul class="checklist">
+                <li><span class="check check-yes">✓</span> <s>3 H1 tags on homepage</s> → Fixed to 1</li>
+                <li><span class="check check-yes">✓</span> <s>5 titles with "|..." artifacts</s> → Rewritten</li>
+                <li><span class="check check-yes">✓</span> <s>6 poor meta descriptions</s> → Rewritten</li>
+                <li><span class="check check-yes">✓</span> <s>OG image was SVG format</s> → Converted to JPG</li>
+                <li><span class="check check-yes">✓</span> <s>Space in filename (New Model.html)</s> → Renamed</li>
+                <li><span class="check check-yes">✓</span> <s>Emoji in all-videos.html meta</s> → Removed</li>
+                <li><span class="check check-yes">✓</span> <s>Double-encoded &amp;amp; in about-us.html</s> → Fixed</li>
+            </ul>
+        </div>
+        <div class="card" style="border-left:4px solid var(--green)">
+            <h3 style="color:var(--green)">✅ What's Working</h3>
+            <ul class="checklist">
+                <li><span class="check check-yes">✓</span> All 71 pages have meta descriptions</li>
+                <li><span class="check check-yes">✓</span> All pages have OG tags for social sharing</li>
+                <li><span class="check check-yes">✓</span> Schema.org JSON-LD on all public pages</li>
+                <li><span class="check check-yes">✓</span> sitemap.xml and robots.txt configured</li>
+                <li><span class="check check-yes">✓</span> Mobile viewport on every page</li>
+                <li><span class="check check-yes">✓</span> Zero broken internal links</li>
+                <li><span class="check check-yes">✓</span> 1200×630 JPG social preview image</li>
+            </ul>
+        </div>
+    </div>
+
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer style="text-align:center;padding:1.5rem;color:var(--dim);font-size:.75rem;border-top:1px solid var(--border)">
+    NothingButTheTRUTH — Project Dashboard · Last updated: March 5, 2026 · 8.5 hrs done, ~1 hr left
+</footer>
+
+<!-- TAB SWITCHING -->
+<script>
+function showTab(name, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    if (btn) btn.classList.add('active');
+}
+</script>
+</body>
+</html>

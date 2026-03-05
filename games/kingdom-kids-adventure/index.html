@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kingdom Kids Adventure | NothingButTheTRUTH</title>
+<meta name="description" content="A joyful Bible adventure for kids: story choices, memory verse boosts, and character-building wins.">
+<link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/kingdom-kids-adventure/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#06111f;--card:#132746;--txt:#eff6ff;--sub:#c5d3ea;--purple:#8b5cf6;--blue:#2563eb;--green:#22c55e;--gold:#f59e0b;--red:#ef4444}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;color:var(--txt);min-height:100vh;padding:20px;background:radial-gradient(circle at 15% 0%,rgba(139,92,246,.2),transparent 45%),radial-gradient(circle at 85% 100%,rgba(37,99,235,.2),transparent 55%),var(--bg)}
+.wrap{max-width:980px;margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.back{color:#e5ecff;text-decoration:none;border:1px solid rgba(255,255,255,.18);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.06)}.brand{font-weight:800;background:linear-gradient(135deg,var(--purple),#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px}#start h1{margin:0 0 6px}#start p{color:var(--sub);line-height:1.7}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.badge{font-size:.78rem;padding:6px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08)}
+.modes{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.modes button{border:1px solid rgba(255,255,255,.15);background:var(--card);color:#eef5ff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.modes button.on{border-color:var(--gold);box-shadow:0 0 0 2px rgba(245,158,11,.25) inset}
+.play{background:linear-gradient(135deg,var(--purple),var(--blue));border:none;color:#fff;padding:12px 16px;border-radius:10px;cursor:pointer;font-weight:800}
+#game,#end{display:none}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}.stat{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center}.k{font-size:.7rem;color:var(--sub);text-transform:uppercase}.v{font-size:1.1rem;font-weight:800}
+.timer{height:8px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;margin-bottom:10px}.fill{height:100%;width:100%;background:linear-gradient(90deg,var(--green),var(--gold))}
+.story{font-size:1.06rem;line-height:1.65;margin-bottom:10px}.opts{display:grid;gap:8px}.opts button{text-align:left;padding:11px;border:1px solid rgba(255,255,255,.14);background:var(--card);color:#eff5ff;border-radius:10px;cursor:pointer}.opts button:hover{transform:translateX(3px)}.opts button.ok{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.6)}.opts button.bad{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.65)}
+.feed{min-height:1.4em;margin:8px 0;font-weight:700}.lesson{display:none;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(37,99,235,.13));border:1px solid rgba(139,92,246,.45);padding:12px;border-radius:10px}.lesson.show{display:block}.next{margin-top:8px;border:none;padding:10px 13px;border-radius:9px;background:#2563eb;color:white;font-weight:700;cursor:pointer}
+#end h2{margin:0 0 6px}.scores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.s{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:9px;text-align:center}.recap{background:var(--card);border:1px solid rgba(255,255,255,.1);padding:10px;border-radius:10px}.recap ul{margin:8px 0 0 18px;line-height:1.7}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.actions button,.actions a{padding:10px 14px;border-radius:9px;text-decoration:none;border:none;cursor:pointer;font-weight:700}.actions .r{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff}.actions .h{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff}
+@media(max-width:760px){.hud,.scores{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="back" href="../../all-games.html">← All Games</a><div class="brand">KINGDOM KIDS ADVENTURE</div></div>
+
+  <section id="start" class="panel">
+    <h1>🧸 Kingdom Kids Adventure</h1>
+    <p>A joyful story-quiz game where kids choose wise actions, learn Bible truth, and build strong character in Jesus.</p>
+    <div class="badges"><span class="badge">Family Friendly</span><span class="badge">Bible-Centered</span><span class="badge">Character Building</span></div>
+    <div class="modes" id="modes"><button class="on" data-m="pathfinder">Pathfinder (20s)</button><button data-m="junior">Junior Mission (16s)</button><button data-m="champion">Champion (13s)</button></div>
+    <button class="play" id="startBtn">Start Adventure</button>
+  </section>
+
+  <section id="game" class="panel">
+    <div class="hud">
+      <div class="stat"><div class="k">Stars</div><div class="v" id="score">0</div></div>
+      <div class="stat"><div class="k">Streak</div><div class="v" id="streak">0</div></div>
+      <div class="stat"><div class="k">Hearts</div><div class="v" id="lives">3</div></div>
+      <div class="stat"><div class="k">Scene</div><div class="v" id="qNum">1/10</div></div>
+      <div class="stat"><div class="k">Mode</div><div class="v" id="modeOut">PATHFINDER</div></div>
+    </div>
+    <div class="timer"><div class="fill" id="fill"></div></div>
+    <div class="story" id="q"></div>
+    <div class="opts" id="opts"></div>
+    <div class="feed" id="feed"></div>
+    <div class="lesson" id="lesson"><div id="lessonTxt"></div><button class="next" id="nextBtn">Continue</button></div>
+  </section>
+
+  <section id="end" class="panel">
+    <h2 id="title">Adventure Finished</h2><p id="sub"></p>
+    <div class="scores"><div class="s"><div class="k">Stars</div><div class="v" id="fScore">0</div></div><div class="s"><div class="k">Accuracy</div><div class="v" id="fAcc">0%</div></div><div class="s"><div class="k">Best Streak</div><div class="v" id="fStreak">0</div></div><div class="s"><div class="k">Best Stars</div><div class="v" id="fBest">0</div></div></div>
+    <div class="recap"><strong>Adventure Lessons</strong><ul id="recap"></ul></div>
+    <div class="actions"><button class="r" id="again">Play Again</button><a class="h" href="../../all-games.html">Game Hub</a><a class="h" href="../../all-videos.html">Kids Videos</a></div>
+  </section>
+</div>
+<script>
+(function(){if(window.location.search.includes('play=1')){if('scrollRestoration' in history) history.scrollRestoration='manual';window.scrollTo(0,0);document.addEventListener('DOMContentLoaded',()=>{window.scrollTo(0,0);requestAnimationFrame(()=>window.scrollTo(0,0));setTimeout(()=>window.scrollTo(0,0),60);});}})();
+const modeSec={pathfinder:20,junior:16,champion:13};let mode='pathfinder';
+const modes=document.getElementById('modes');modes.querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;modes.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
+const bank=[
+{q:'At school, someone is being laughed at. What should you do?',o:['Join in to fit in','Stand with kindness and help them'],a:1,l:'Jesus teaches compassion. Real courage protects others.'},
+{q:'You made a mistake at home. What is the best response?',o:['Hide it and blame someone else','Tell the truth and ask forgiveness'],a:1,l:'Honesty and repentance grow trust and Christlike character.'},
+{q:'You feel angry with a friend. What helps first?',o:['Say hurtful words quickly','Pause, pray, then speak kindly'],a:1,l:'Self-control is strength. Prayer helps words become healing.'},
+{q:'You have free time before bed. Best choice?',o:['Only endless scrolling','Short Bible reading and prayer first'],a:1,l:'Small daily habits build a strong spiritual life.'},
+{q:'A classmate asks why you are kind. You can say:',o:['I just want attention','Jesus loves us, and I want to reflect Him'],a:1,l:'Witness can be simple, warm, and natural.'},
+{q:'During Sabbath, what mindset is healthiest?',o:['Treat it as boring restriction','Enjoy worship, family, rest, and gratitude'],a:1,l:'Sabbath is a gift that refreshes heart and mind.'},
+{q:'You promised to help someone but forgot. What now?',o:['Ignore it','Apologize and complete your promise'],a:1,l:'Faithfulness in little things reflects God’s character.'},
+{q:'A scary thought comes at night. What can you do?',o:['Panic alone','Pray and repeat a Bible promise'],a:1,l:'God’s Word brings peace and courage.'},
+{q:'You can include one new habit this week. Pick:',o:['More complaining','One act of service every day'],a:1,l:'Service turns faith into action and joy.'},
+{q:'When tempted to copy wrong behavior, choose:',o:['Follow crowd pressure','Choose truth even if alone'],a:1,l:'Faithfulness often begins with one brave decision.'},
+{q:'Your friend is sad. Best response?',o:['Ignore and move on','Listen, encourage, and pray with them'],a:1,l:'Kind presence is powerful ministry.'},
+{q:'What makes a strong young disciple?',o:['Popularity first','Prayer, Bible, obedience, and love'],a:1,l:'Spiritual strength grows from daily connection with Jesus.'}
+];
+const start=document.getElementById('start'),game=document.getElementById('game'),end=document.getElementById('end');
+const q=document.getElementById('q'),opts=document.getElementById('opts'),feed=document.getElementById('feed'),lesson=document.getElementById('lesson'),lessonTxt=document.getElementById('lessonTxt');
+const scoreEl=document.getElementById('score'),streakEl=document.getElementById('streak'),livesEl=document.getElementById('lives'),qNum=document.getElementById('qNum'),modeOut=document.getElementById('modeOut'),fill=document.getElementById('fill');
+let list=[],i=0,score=0,streak=0,bst=0,lives=3,corr=0,ans=false,timer=null,left=0,notes=[];
+function sh(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;}
+function hud(){scoreEl.textContent=score;streakEl.textContent=streak;livesEl.textContent=lives;qNum.textContent=`${Math.min(i+1,list.length)}/${list.length}`;modeOut.textContent=mode.toUpperCase();}
+function stop(){if(timer){clearInterval(timer);timer=null;}}
+function startTimer(){stop();left=modeSec[mode];fill.style.width='100%';timer=setInterval(()=>{left-=0.1;fill.style.width=`${Math.max(0,left/modeSec[mode]*100)}%`;if(left<=0&&!ans)pick(-1);},100)}
+function lock(){opts.querySelectorAll('button').forEach(b=>b.disabled=true)}
+function show(){ans=false;feed.textContent='';lesson.classList.remove('show');const x=list[i];q.textContent=x.q;opts.innerHTML='';x.o.forEach((o,idx)=>{const b=document.createElement('button');b.textContent=`${idx+1}. ${o}`;b.onclick=()=>pick(idx);opts.appendChild(b);});hud();startTimer();}
+function pick(sel){if(ans)return;ans=true;stop();const x=list[i];lock();const bs=[...opts.querySelectorAll('button')];bs.forEach((b,idx)=>{if(idx===x.a)b.classList.add('ok');if(sel===idx&&idx!==x.a)b.classList.add('bad');});if(sel===x.a){corr++;streak++;bst=Math.max(bst,streak);score+=Math.max(90,Math.floor(90+left*8+streak*12));feed.textContent='⭐ Great choice!';feed.style.color='#86efac';}else{lives--;streak=0;score=Math.max(0,score-35);feed.textContent=sel===-1?'⏱️ Time up!':'💛 Try again!';feed.style.color='#fca5a5';}
+notes.push(x.l);lessonTxt.textContent=x.l;lesson.classList.add('show');hud();}
+function done(){stop();game.style.display='none';end.style.display='block';const asked=Math.max(1,i+1),acc=Math.round(corr/asked*100);document.getElementById('title').textContent=acc>=85?'🏆 Kingdom Helper!':'✨ Keep Growing!';document.getElementById('sub').textContent=`Mode: ${mode.toUpperCase()} • ${asked}/${list.length} scenes complete`;
+document.getElementById('fScore').textContent=score;document.getElementById('fAcc').textContent=`${acc}%`;document.getElementById('fStreak').textContent=bst;const hi=Math.max(Number(localStorage.getItem('kka_hi')||0),score);localStorage.setItem('kka_hi',hi);document.getElementById('fBest').textContent=hi;document.getElementById('recap').innerHTML=[...new Set(notes)].slice(-4).map(x=>`<li>${x}</li>`).join('');}
+function begin(){list=sh(bank).slice(0,mode==='pathfinder'?10:mode==='junior'?11:12);i=0;score=0;streak=0;bst=0;lives=3;corr=0;notes=[];start.style.display='none';end.style.display='none';game.style.display='block';show();}
+document.getElementById('startBtn').onclick=begin;document.getElementById('again').onclick=()=>{start.style.display='block';game.style.display='none';end.style.display='none';window.scrollTo(0,0)};document.getElementById('nextBtn').onclick=()=>{if(!ans)return;if(lives<=0){done();return;}i++;if(i>=list.length){done();return;}show();};
+document.addEventListener('keydown',e=>{if(game.style.display!=='block'||ans)return;const k=Number(e.key)-1;if(k>=0&&k<2){const b=opts.querySelectorAll('button')[k];if(b)pick(k);}});
+</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+[
+  { "title": "Bible Gateway KJV", "url": "BIBLE_PUBLIC_DOMAIN_PLACEHOLDER", "type": "Bible", "publicDomain": true },
+  { "title": "Ellen G White Writings", "url": "EGW_PUBLIC_DOMAIN_PLACEHOLDER", "type": "EGW", "publicDomain": true },
+  { "title": "Historical Public Domain Archive", "url": "HISTORY_PUBLIC_DOMAIN_PLACEHOLDER", "type": "History", "publicDomain": true },
+  { "title": "Audio Lesson Feed", "url": "AUDIO_PUBLIC_DOMAIN_PLACEHOLDER", "type": "Audio", "publicDomain": true }
+]

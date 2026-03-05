@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Armor of God: Gear Up for Spiritual Battle -... |...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e9e6f7 0%, #e3f0fa 100%);
+      color: #222;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+    .main-content {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 2.5vw 6vw 3vw 6vw;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px 0 rgba(60,60,120,0.10);
+      min-height: 80vh;
+      position: relative;
+    }
+    .header-section {
+      text-align: center;
+      margin-bottom: 2.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: none;
+      background: linear-gradient(120deg, #2575fc 0%, #6a11cb 100%);
+      border-radius: 0 0 32px 32px;
+      color: #fff;
+      box-shadow: 0 8px 32px 0 rgba(37,117,252,0.15), 0 2px 12px 0 rgba(106,17,203,0.10);
+      position: relative;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+      overflow: hidden;
+    }
+    .header-section::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      left: -80px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, #ffd803 0%, #2575fc 70%, transparent 100%);
+      opacity: 0.18;
+      z-index: 0;
+    }
+    .header-section::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      right: -80px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, #6a11cb 0%, #fff 80%, transparent 100%);
+      opacity: 0.13;
+      z-index: 0;
+    }
+    .header-section h1 {
+      margin: 0;
+      font-size: 2.7rem;
+      letter-spacing: 1.5px;
+      font-weight: 800;
+      text-shadow: 0 4px 24px rgba(37,117,252,0.18), 0 1px 0 #fff;
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      padding: 0.4em 1.2em;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 2px 16px 0 rgba(37,117,252,0.08);
+    }
+    .header-section .header-subtitle {
+      display: block;
+      margin-top: 1.2em;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #eaf4fd;
+      letter-spacing: 0.5px;
+      z-index: 1;
+      position: relative;
+      text-shadow: 0 2px 8px rgba(37,117,252,0.13);
+    }
+    h2 {
+      color: #2575fc;
+      margin-top: 2rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    h3 {
+      color: #6a11cb;
+      margin-top: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .quote {
+      margin: 1.2em 0;
+      padding: 1em 1.5em;
+      background: linear-gradient(90deg, #f3f0fa 0%, #eaf4fd 100%);
+      border-left: 5px solid #6a11cb;
+      border-radius: 8px;
+      color: #333;
+      font-style: italic;
+      font-size: 1.08em;
+      box-shadow: 0 8px 32px 0 rgba(106,17,203,0.25), 0 24px 80px 0 rgba(37,117,252,0.25);
+      position: relative;
+    }
+    .quote-cite {
+      display: block;
+      margin-top: 0.5em;
+      color: #6a11cb;
+      font-size: 0.95em;
+      font-style: normal;
+    }
+    ul {
+      color: #222;
+      font-size: 1.05em;
+      line-height: 1.7;
+      margin-bottom: 1.2em;
+    }
+    .manuscript-section {
+      box-shadow: 0 8px 32px 0 rgb(0, 0, 86);
+      border-radius: 16px;
+      background: #fafaff;
+      padding: 2em 1.5em;
+      margin: 2em 0;
+    }
+    .bible-verse {
+      background: #eaf4fd;
+      border-left: 4px solid #2575fc;
+      border-radius: 7px;
+      padding: 0.7em 1.2em;
+      margin: 1em 0;
+      font-style: italic;
+      color: #222;
+      font-size: 1.08em;
+      box-shadow: 0 2px 8px 0 rgba(37,117,252,0.07);
+    }
+
+    /* Diagram Styles */
+    .diagram-container {
+      display: flex;
+      justify-content: center;
+      margin: 2em 0;
+      padding: 1.5em;
+      background: #f9f8fd;
+      border-radius: 12px;
+      border: 1px solid #e8e4f3;
+    }
+    svg.diagram-svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+    .table-container {
+      overflow-x: auto;
+      margin: 1.5em 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #f9f8fd;
+      border-radius: 8px;
+    }
+    th, td {
+      padding: 0.8em 1.2em;
+      text-align: left;
+      border-bottom: 1px solid #e8e4f3;
+    }
+    th {
+      background: linear-gradient(120deg, #2575fc 0%, #6a11cb 100%);
+      color: #fff;
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover {
+      background: #f3f0fa;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        font-size: 0.98em;
+      }
+      .main-content {
+        padding: 7vw 3vw 5vw 3vw;
+        margin: 8vw 1vw;
+      }
+      .header-section h1 {
+        font-size: 1.4rem;
+      }
+      .diagram-container {
+        padding: 1em;
+      }
+      svg.diagram-svg {
+        max-width: 100%;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="study-style.css">
+              <meta name="description" content="The Apostle Paul commands us in Ephesians 6:10-18 to &amp;amp;amp;quot;put on the whole armor of God&amp;amp;amp;quot; to stand against the devil">
+              <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+              <link rel="canonical" href="https://NothingButTheTRUTH.web.app/Studies/armor-expanded.html">
+              <meta property="og:type" content="article">
+              <meta property="og:title" content="Armor of God: Gear Up for Spiritual Battle -... |...">
+              <meta property="og:description" content="The Apostle Paul commands us in Ephesians 6:10-18 to &amp;amp;amp;quot;put on the whole armor of God&amp;amp;amp;quot; to stand against the devil">
+              <meta property="og:url" content="https://NothingButTheTRUTH.web.app/Studies/armor-expanded.html">
+              <meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+              <meta name="twitter:card" content="summary_large_image">
+              <meta name="twitter:title" content="Armor of God: Gear Up for Spiritual Battle -... |...">
+              <meta name="twitter:description" content="The Apostle Paul commands us in Ephesians 6:10-18 to &amp;amp;amp;quot;put on the whole armor of God&amp;amp;amp;quot; to stand against the devil">
+              <meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Armor of God: Complete Study on Spiritual Warfare","description":"Complete study on the Armor of God from Ephesians 6 with detailed explanations and diagrams.","url":"https://NothingButTheTRUTH.web.app/Studies/armor-expanded.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTRUTH","url":"https://NothingButTheTRUTH.web.app"}}
+  </script>
+            <meta name="keywords" content="Bible study, Christian devotion, Scripture, NothingButTheTRUTH, in-depth Bible study, Christian theology, armor, gear, spiritual, battle">
+            <meta name="author" content="NothingButTheTRUTH">
+            <meta property="og:site_name" content="NothingButTheTRUTH">
+            <meta property="og:locale" content="en_US">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://NothingButTheTRUTH.web.app/"},
+  {"@type":"ListItem","position":2,"name":"Studies","item":"https://NothingButTheTRUTH.web.app/all-studies.html"},
+  {"@type":"ListItem","position":3,"name":"The Armor of God","item":"https://NothingButTheTRUTH.web.app/Studies/armor-expanded.html"}
+]}
+</script>
+</head>
+<body>
+<!-- NBTT-INTERNAL-LINKS-INJECTED -->
+
+<!-- ===== SEO BREADCRUMB NAV ===== -->
+<nav class="nbtt-breadcrumb" aria-label="Breadcrumb" style="
+  padding:12px 20px;margin:0;font-size:0.85rem;font-family:'Poppins',sans-serif;
+  background:rgba(10,10,26,0.85);border-bottom:1px solid rgba(168,85,247,0.15);
+  color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+">
+  <a href="../index.html" style="color:#a855f7;text-decoration:none;font-weight:600;">Home</a>
+  <span style="color:rgba(255,255,255,0.3);">›</span>
+  <a href="../all-studies.html" style="color:#a855f7;text-decoration:none;font-weight:600;">Studies</a>
+  <span style="color:rgba(255,255,255,0.3);">›</span>
+  <span style="color:rgba(255,255,255,0.7);">The Armor of God</span>
+</nav>
+  <!-- SVG Gradient Border -->
+  <svg class="gradient-border" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="border-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#6a11cb"/>
+        <stop offset="100%" stop-color="#2575fc"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="98" height="98" fill="none" stroke="url(#border-gradient)" stroke-width="2"/>
+  </svg>
+  <div class="main-content">
+    <section class="header-section">
+      <h1>Armor of God: Gear Up for Spiritual Battle</h1>
+      <span class="header-subtitle">Ephesians 6 Unpacked — Practical, Powerful, and Needed</span>
+    </section>
+
+    <section class="manuscript-section">
+      <h2>Stand Firm in the Full Armor of God</h2>
+      <p>The Apostle Paul commands us in <strong>Ephesians 6:10-18</strong> to "put on the whole armor of God" to stand against the devil's schemes. This armor isn't just metaphorical — it's spiritual gear designed to protect and empower you in everyday battles.</p>
+
+      <p>In our modern world, we often face battles that are invisible to the eye yet profoundly real in their impact on our daily lives. The message of Ephesians 6 is one of hope and empowerment: <strong>You are not defenseless.</strong> Christ has already provided everything you need to stand firm, to resist temptation, and to overcome the darkness that seeks to pull you away from God's truth.</p>
+
+      <h2>Understanding Spiritual Warfare</h2>
+      <p>Before we examine our armor, Paul reminds us of the nature of the battle:</p>
+      <div class="bible-verse">"For our struggle is not against flesh and blood, but against the rulers, against the authorities, against the powers of this dark world and against the spiritual forces of evil in the heavenly realms." (Ephesians 6:12)</div>
+
+      <p>This isn't the language of madness or superstition. The Bible describes a spiritual reality behind the physical world. The discouragement that makes you want to abandon your faith, the impulse to compromise your integrity, the fear that paralyzes you—these are real spiritual attacks.</p>
+
+      <div class="diagram-container">
+        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" class="diagram-svg" style="max-width: 100%; width: 100%; height: auto;">
+          <defs>
+            <marker id="arrowred" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L0,6 L9,3 z" fill="#ff6b6b"/>
+            </marker>
+          </defs>
+          <!-- Shield -->
+          <ellipse cx="200" cy="150" rx="120" ry="130" fill="#FFD803" stroke="#6a11cb" stroke-width="3"/>
+          <text x="200" y="155" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">YOU</text>
+          
+          <!-- Enemy attacks -->
+          <circle cx="50" cy="80" r="20" fill="#ff6b6b" opacity="0.8"/>
+          <text x="50" y="85" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Doubt</text>
+          <line x1="70" y1="100" x2="140" y2="120" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowred)"/>
+          
+          <circle cx="350" cy="80" r="20" fill="#ff6b6b" opacity="0.8"/>
+          <text x="350" y="85" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Fear</text>
+          <line x1="330" y1="100" x2="260" y2="120" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowred)"/>
+          
+          <circle cx="350" cy="220" r="20" fill="#ff6b6b" opacity="0.8"/>
+          <text x="350" y="225" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Lust</text>
+          <line x1="330" y1="200" x2="260" y2="180" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowred)"/>
+          
+          <circle cx="50" cy="220" r="20" fill="#ff6b6b" opacity="0.8"/>
+          <text x="50" y="225" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Shame</text>
+          <line x1="70" y1="200" x2="140" y2="180" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowred)"/>
+          
+          <circle cx="200" cy="40" r="20" fill="#ff6b6b" opacity="0.8"/>
+          <text x="200" y="45" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Lies</text>
+          <line x1="200" y1="60" x2="200" y2="105" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowred)"/>
+          
+          <circle cx="200" cy="260" r="20" fill="#ff6b6b" opacity="0.8"/>
+          <text x="200" y="265" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">Pride</text>
+          <line x1="200" y1="240" x2="200" y2="195" stroke="#ff6b6b" stroke-width="2" marker-end="url(#arrowred)"/>
+        </svg>
+      </div>
+
+      <h2>The Six Pieces of Armor Explained</h2>
+      <p>Each piece of armor serves a specific protective purpose. Let's examine them one by one, understanding not just what they are, but what they represent and how they function in your spiritual life.</p>
+
+      <h3>Belt of Truth</h3>
+      <div class="bible-verse">"Stand therefore, having your loins girt about with truth..." (Ephesians 6:14)</div>
+      <p>In Roman military fashion, the belt served a critical function—it held everything else together. A soldier's armor was useless if not properly fastened. Similarly, truth is the foundation that holds your entire spiritual life together.</p>
+      <p><strong>What this means:</strong> Truth protects you from the enemy's primary weapon: deception. When you know God's truth—about His character, His promises, your identity in Christ—lies cannot take root. Jesus said, "You will know the truth, and the truth will set you free" (John 8:32).</p>
+
+      <h3>Breastplate of Righteousness</h3>
+      <div class="bible-verse">"...and having on the breastplate of righteousness..." (Ephesians 6:14)</div>
+      <p>The breastplate protected vital organs—the heart, lungs, and core of the body. It was the most essential piece. Righteousness guards your heart from corruption and protects you from the guilt and shame that evil desires to inflict.</p>
+      <p><strong>What this means:</strong> Righteousness means living a life aligned with God's standards, not through perfection, but through accepting Christ's righteousness. When you live with integrity and pursue godliness, the accusations and condemnation of the enemy cannot penetrate your heart.</p>
+
+      <h3>Shoes of the Gospel of Peace</h3>
+      <div class="bible-verse">"And your feet shod with the preparation of the gospel of peace." (Ephesians 6:15)</div>
+      <p>Roman soldiers' shoes were specially designed for traction and stability in battle. Similarly, the gospel of peace equips you to stand firm and advance fearlessly.</p>
+      <p><strong>What this means:</strong> The gospel of peace assures you that through Christ, you have peace with God and peace in your circumstances, no matter the turmoil around you. This peace equips you to move forward with confidence in your faith.</p>
+
+      <h3>Shield of Faith</h3>
+      <div class="bible-verse">"Above all, taking the shield of faith, with which you can extinguish all the flaming arrows of the evil one." (Ephesians 6:16)</div>
+      <p>The shield is described as capable of extinguishing "flaming arrows"—sudden attacks of doubt, temptation, anxiety, and fear. These attacks are designed to ignite destructive emotions within you.</p>
+      <p><strong>What this means:</strong> Faith in God's character and faithfulness deflects these arrows. When you trust that God is good, that He's working for your benefit, and that He's in control, the fiery darts of the enemy lose their power.</p>
+
+      <h3>Helmet of Salvation</h3>
+      <div class="bible-verse">"Take the helmet of salvation..." (Ephesians 6:17)</div>
+      <p>The helmet protects the head—the center of thought and identity. The helmet of salvation protects your mind by anchoring your identity in your salvation through Christ.</p>
+      <p><strong>What this means:</strong> It's the confidence that you are secure in Christ, that your sins are forgiven, and that your future is assured. When attacks come against your worth or security, the helmet reminds you: "I am a child of God. I am redeemed. I am safe."</p>
+
+      <h3>Sword of the Spirit (God's Word)</h3>
+      <div class="bible-verse">"...and the sword of the Spirit, which is the word of God." (Ephesians 6:17)</div>
+      <p>While all other pieces are defensive, the sword is your offensive tool. God's Word is "living and active. Sharper than any double-edged sword..." (Hebrews 4:12).</p>
+      <p><strong>What this means:</strong> When Jesus faced temptation, He wielded Scripture: "It is written..." This is your power as well. Knowing and quoting God's Word combats lies and advances God's kingdom.</p>
+
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Armor Piece</th>
+            <th>What It Protects</th>
+            <th>Enemy Attack It Defends Against</th>
+          </tr>
+          <tr>
+            <td><strong>Belt of Truth</strong></td>
+            <td>Your foundation</td>
+            <td>Deception and lies</td>
+          </tr>
+          <tr>
+            <td><strong>Breastplate of Righteousness</strong></td>
+            <td>Your heart and conscience</td>
+            <td>Guilt and condemnation</td>
+          </tr>
+          <tr>
+            <td><strong>Shoes of Gospel Peace</strong></td>
+            <td>Your footing and readiness</td>
+            <td>Anxiety and instability</td>
+          </tr>
+          <tr>
+            <td><strong>Shield of Faith</strong></td>
+            <td>Against sudden attacks</td>
+            <td>Doubt and temptation</td>
+          </tr>
+          <tr>
+            <td><strong>Helmet of Salvation</strong></td>
+            <td>Your mind and identity</td>
+            <td>Fear and worthlessness</td>
+          </tr>
+          <tr>
+            <td><strong>Sword of the Spirit</strong></td>
+            <td>Your offensive power</td>
+            <td>Advances God's kingdom</td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>Putting On Your Armor Daily</h2>
+      <p>Understanding the armor intellectually is only the first step. The critical action is <strong>to put it on daily.</strong> This is an intentional practice that transforms how you face life's battles.</p>
+
+      <div class="quote">
+        "Therefore put on the full armor of God, so that when the day of evil comes, you may be able to stand your ground, and after you have done everything, to stand."
+        <span class="quote-cite">— Ephesians 6:13</span>
+      </div>
+
+      <h3>Daily Application Steps</h3>
+      <ul>
+        <li><strong>Belt of Truth:</strong> Begin your day by meditating on one biblical truth. Write it down or speak it aloud.</li>
+        <li><strong>Breastplate of Righteousness:</strong> Ask God to help you live with integrity today. Confess any known sin and accept His forgiveness.</li>
+        <li><strong>Shoes of Gospel Peace:</strong> Remind yourself of your peace in Christ today. Look for one opportunity to share your faith.</li>
+        <li><strong>Shield of Faith:</strong> When temptation or doubt strikes, pause and declare: "I trust God in this situation."</li>
+        <li><strong>Helmet of Salvation:</strong> Affirm your security in Christ. You are His, and nothing can separate you from His love.</li>
+        <li><strong>Sword of the Spirit:</strong> Memorize and study God's Word. Use Scripture to combat lies when they arise.</li>
+        <li><strong>Prayer:</strong> "Pray in the Spirit on all occasions with all kinds of prayers and petitions" (Ephesians 6:18).</li>
+      </ul>
+
+      <h3>Challenge</h3>
+      <ul>
+        <li>Identify which piece of armor you feel weakest in today. Is it truth? Righteousness? Faith? Confidence in your salvation?</li>
+        <li>Spend intentional time this week focusing on that one piece. Read Scripture about it. Pray for God to strengthen you there.</li>
+        <li>Memorize Ephesians 6:10-11 as your battle cry: "Finally, be strong in the Lord and in his mighty power. Put on the full armor of God so that you can take your stand against the devil's schemes."</li>
+        <li>Share this study with someone who is struggling with doubt, fear, or spiritual attack. Your testimony of God's protection could be transformative.</li>
+      </ul>
+
+      <div class="quote">
+        "The armor of God is not imaginary—it's real, available, and essential for every believer. Christ has freely given it to you. Now put it on."
+        <span class="quote-cite">— Reflection</span>
+      </div>
+    </section>
+  </div>
+
+<!-- ===== SEO RELATED CONTENT — INTERNAL LINKING ===== -->
+<section class="nbtt-related-section" style="
+  max-width:800px;margin:3rem auto 0;padding:2rem 1.5rem;
+  background:rgba(10,10,26,0.9);border:1px solid rgba(168,85,247,0.15);
+  border-radius:16px;font-family:'Poppins',sans-serif;
+">
+  <h2 style="
+    color:#fff;font-size:1.4rem;text-align:center;margin:0 0 0.3rem;
+    font-weight:700;letter-spacing:-0.02em;
+  ">
+    <i class="fas fa-compass" style="color:#a855f7;margin-right:8px;"></i>Continue Exploring
+  </h2>
+  <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;margin:0 0 1.5rem;">
+    Dive deeper into God's Word with related content
+  </p>
+  <div style="display:grid;gap:10px;">
+    
+      <a href="armor.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#e0d0ff;">Armor of God Devotional</strong>
+      </a>
+      <a href="history_of_christian_faith.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#e0d0ff;">History of the Christian Faith</strong>
+      </a>
+      <a href="facts_or_fiction.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#e0d0ff;">Is the Bible Facts or Fiction?</strong>
+      </a>
+      <a href="../Devotions/anchor_of_hope.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(37,117,252,0.08);
+        border:1px solid rgba(37,117,252,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#60a5fa;margin-right:6px;"><i class="fas fa-dove"></i></span>
+        <strong style="color:#bfdbfe;">Anchor of Hope</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Devotions</span>
+      </a>
+      <a href="../Devotions/called_to_shine.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(37,117,252,0.08);
+        border:1px solid rgba(37,117,252,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#60a5fa;margin-right:6px;"><i class="fas fa-dove"></i></span>
+        <strong style="color:#bfdbfe;">Called to Shine</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Devotions</span>
+      </a>
+      <a href="../games/verse-hunt-live/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(255,215,3,0.06);
+        border:1px solid rgba(255,215,3,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#ffd803;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#fef3c7;">Verse Hunt</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Game</span>
+      </a>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+    <a href="../all-studies.html" style="
+      display:inline-flex;align-items:center;gap:6px;padding:10px 22px;
+      background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);
+      border-radius:50px;color:#c084fc;text-decoration:none;font-weight:600;font-size:0.85rem;
+      transition:all 0.3s ease;
+    ">
+      <i class="fas fa-book-open"></i> All Studies
+    </a>
+    <a href="../index.html" style="
+      display:inline-flex;align-items:center;gap:6px;padding:10px 22px;
+      background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+      border-radius:50px;color:#ccc;text-decoration:none;font-weight:600;font-size:0.85rem;
+      transition:all 0.3s ease;
+    ">
+      <i class="fas fa-home"></i> Home
+    </a>
+  </div>
+</section>
+
+<!-- ===== SEO SITE-WIDE MINI FOOTER ===== -->
+<footer class="nbtt-mini-footer" style="
+  max-width:800px;margin:1.5rem auto 2rem;padding:1.2rem 1.5rem;
+  background:rgba(10,10,26,0.7);border-top:1px solid rgba(168,85,247,0.1);
+  border-radius:12px;font-family:'Poppins',sans-serif;text-align:center;
+">
+  <nav aria-label="Site navigation" style="
+    display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:0.8rem;
+  ">
+    <a href="../index.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-home"></i> Home</a>
+    <a href="../all-studies.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-book-open"></i> Studies</a>
+    <a href="../vod.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-dove"></i> Devotions</a>
+    <a href="../all-games.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-gamepad"></i> Games</a>
+    <a href="../all-videos.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-video"></i> Videos</a>
+    <a href="../about-us.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-info-circle"></i> About</a>
+  </nav>
+  <p style="color:rgba(255,255,255,0.35);font-size:0.7rem;margin:0;">
+    &copy; 2026 NothingButTheTRUTH. All rights reserved.
+  </p>
+</footer>
+</body>
+</html>

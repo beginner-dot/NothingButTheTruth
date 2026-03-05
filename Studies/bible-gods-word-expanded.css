@@ -1,0 +1,1309 @@
+/* ═══════════════════════════════════════════════════════════
+   BIBLE IS GOD'S WORD EXPANDED STUDY — EXTENDED STYLESHEET
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --brand-a: #2c3e50;
+  --brand-b: #34495e;
+  --brand-c: #f39c12;
+  --ink: #2c3e50;
+  --ink-soft: #555;
+  --ok: #27ae60;
+  --warn: #e74c3c;
+  --info: #3498db;
+  --card-bg: #f8f6ff;
+  --soft-bg: #fafafa;
+  --line: #e0e0e0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VISUAL DIAGRAMS & CHARTS
+   ═══════════════════════════════════════════════════════════ */
+
+/* Prophecy Timeline */
+.prophecy-timeline {
+  background: linear-gradient(135deg, #f0e6ff 0%, #e6f5ff 100%);
+  border: 2px solid var(--brand-a);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.prophecy-timeline h4 {
+  text-align: center;
+  margin-top: 0;
+  color: var(--brand-a);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-line {
+  height: 4px;
+  background: linear-gradient(to right, var(--brand-a), var(--brand-c));
+  margin: 1.5rem 0;
+  border-radius: 2px;
+}
+
+.timeline-events {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.timeline-event {
+  position: relative;
+  padding-top: 2.5rem;
+  text-align: center;
+}
+
+.timeline-event::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background: var(--brand-c);
+  border: 3px solid var(--brand-a);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(44, 62, 80, 0.15);
+}
+
+.timeline-event h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--brand-a);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.timeline-event p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.timeline-event strong {
+  color: var(--brand-a);
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.85rem;
+}
+
+/* Bar Chart */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  height: 350px;
+  padding: 2rem 1rem;
+  background: linear-gradient(180deg, #f5f0ff 0%, #f0f8ff 100%);
+  border: 2px solid var(--brand-a);
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 80px;
+}
+
+.bar {
+  width: 100%;
+  max-width: 70px;
+  background: linear-gradient(to top, var(--brand-a), var(--brand-c));
+  border-radius: 6px 6px 0 0;
+  border: 2px solid var(--brand-a);
+  border-bottom: none;
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 30px;
+}
+
+.bar:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+  transform: translateY(-4px);
+}
+
+.bar-label {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.bar-value {
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  color: var(--brand-a);
+  white-space: nowrap;
+  font-size: 0.95rem;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+}
+
+/* Evidence Comparison Cards */
+.evidence-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.evidence-card-compact {
+  background: white;
+  border: 2px solid var(--brand-a);
+  border-radius: 12px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.evidence-card-compact:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(44, 62, 80, 0.15);
+  border-color: var(--brand-c);
+}
+
+.evidence-card-compact .number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-c));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.evidence-card-compact .label {
+  font-weight: 700;
+  color: var(--brand-a);
+  font-size: 0.85rem;
+  line-height: 1.3;
+  margin-bottom: 0.8rem;
+}
+
+.evidence-card-compact .description {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+/* Evidence Grid */
+.evidence-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.evidence-item {
+  background: linear-gradient(135deg, #f8f9fa 0%, #f0f3ff 100%);
+  border-left: 5px solid var(--brand-a);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.evidence-item:hover {
+  box-shadow: 0 6px 16px rgba(44, 62, 80, 0.12);
+  transform: translateY(-2px);
+}
+
+.evidence-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.evidence-item p {
+  margin: 0.8rem 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.evidence-item strong {
+  color: var(--brand-a);
+}
+
+/* Comparison Grid */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.comparison-item {
+  background: linear-gradient(135deg, #f0f8ff 0%, #f5f0ff 100%);
+  border: 2px solid var(--brand-a);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.comparison-item h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.comparison-item p {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+/* Science Grid */
+.science-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.science-item {
+  background: linear-gradient(135deg, #f0f9f7 0%, #fff9f0 100%);
+  border-left: 4px solid var(--ok);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
+}
+
+.science-item:hover {
+  box-shadow: 0 6px 16px rgba(39, 174, 96, 0.15);
+  transform: translateY(-2px);
+}
+
+.science-item h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1rem;
+}
+
+.science-item p {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Testimony Timeline */
+.testimony-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.testimony-item {
+  background: white;
+  border: 2px solid var(--brand-a);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.testimony-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.testimony-item h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.testimony-item p {
+  margin: 0.8rem 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.testimony-item strong {
+  color: var(--brand-a);
+}
+
+/* Modern Evidence Cards */
+.modern-evidence {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.evidence-card {
+  background: linear-gradient(135deg, #fff5f0 0%, #f0f5ff 100%);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--brand-c);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.evidence-card:hover {
+  box-shadow: 0 6px 16px rgba(44, 62, 80, 0.12);
+  transform: translateY(-2px);
+}
+
+.evidence-card h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.evidence-card p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.evidence-item {
+  background: linear-gradient(135deg, #f8f9fa 0%, #f0f3ff 100%);
+  border-left: 5px solid var(--brand-a);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.evidence-item h4 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.evidence-item p {
+  margin: 0.8rem 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.evidence-item strong {
+  color: var(--brand-a);
+}
+
+/* Comparison Grid */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.comparison-item {
+  background: linear-gradient(135deg, #f0f8ff 0%, #f5f0ff 100%);
+  border: 2px solid var(--brand-a);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.comparison-item h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.comparison-item p {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+/* Science Grid */
+.science-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.science-item {
+  background: linear-gradient(135deg, #f0f9f7 0%, #fff9f0 100%);
+  border-left: 4px solid var(--ok);
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.science-item h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1rem;
+}
+
+.science-item p {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Testimony Timeline */
+.testimony-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.testimony-item {
+  background: white;
+  border: 2px solid var(--brand-a);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+}
+
+.testimony-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.testimony-item h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.testimony-item p {
+  margin: 0.8rem 0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.testimony-item strong {
+  color: var(--brand-a);
+}
+
+/* Modern Evidence Cards */
+.modern-evidence {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.evidence-card {
+  background: linear-gradient(135deg, #fff5f0 0%, #f0f5ff 100%);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--brand-c);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.evidence-card h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.evidence-card p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Q&A Blocks */
+.qa-block {
+  background: #fafafa;
+  border-left: 4px solid var(--info);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+}
+
+.qa-block p {
+  margin: 0.8rem 0;
+  line-height: 1.6;
+}
+
+.qa-block p:first-child {
+  margin-top: 0;
+  font-weight: 600;
+  color: var(--brand-a);
+}
+
+.qa-block p strong {
+  color: var(--brand-a);
+}
+
+.qa-block ul {
+  margin: 1rem 0;
+  padding-left: 1.8rem;
+}
+
+.qa-block li {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Action Steps */
+.action-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.step-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  background: white;
+  border: 2px solid var(--line);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  border-radius: 8px;
+  height: 80px;
+}
+
+.step-content h4 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.step-content p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Quote Block */
+.quote-block {
+  border-left: 5px solid var(--brand-c);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  background: #fffbf0;
+  border-radius: 6px;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+.quote-block p {
+  margin: 0.5rem 0;
+}
+
+.quote-block footer {
+  margin-top: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--brand-a);
+  font-size: 0.9rem;
+}
+
+/* Topic Card */
+.topic-card {
+  background: linear-gradient(135deg, #f0e6ff 0%, #e6f5ff 100%);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--brand-a);
+  margin: 1.5rem 0;
+}
+
+.topic-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.topic-card p {
+  margin: 0.5rem 0;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.icon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--brand-a);
+  font-weight: 600;
+}
+
+/* Prayer Box */
+.prayer-box {
+  background: linear-gradient(135deg, #f0e6ff 0%, #ffe6f0 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  border-left: 5px solid var(--brand-a);
+  margin: 1.5rem 0;
+}
+
+.prayer-box p {
+  margin: 1rem 0;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+/* Key Point callout */
+.key-point {
+  background: #fffbf0;
+  border-left: 4px solid var(--brand-c);
+  padding: 1rem 1.5rem;
+  margin: 1.2rem 0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.key-point i {
+  color: var(--brand-c);
+  margin-right: 0.5rem;
+}
+
+.key-point p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* OK Note */
+.ok-note {
+  background: #f0f9f7;
+  border-left: 4px solid var(--ok);
+  padding: 1rem 1.5rem;
+  margin: 1.2rem 0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.ok-note i {
+  color: var(--ok);
+  margin-right: 0.5rem;
+}
+
+.ok-note p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Warning Note */
+.warning-note {
+  background: #fef5f5;
+  border-left: 4px solid var(--warn);
+  padding: 1rem 1.5rem;
+  margin: 1.2rem 0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.warning-note i {
+  color: var(--warn);
+  margin-right: 0.5rem;
+}
+
+.warning-note p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Study Table */
+.study-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.study-table thead {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: white;
+}
+
+.study-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.study-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.study-table tbody tr:nth-child(even) {
+  background: var(--soft-bg);
+}
+
+.study-table tbody tr:hover {
+  background: #f5f5ff;
+}
+
+/* Visual Box */
+.visual-box {
+  background: linear-gradient(135deg, #f5f0ff 0%, #f0f8ff 100%);
+  border: 2px solid var(--brand-a);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+
+.visual-box h4 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+/* Study Section */
+.study-section {
+  margin: 3rem 0;
+  padding: 2rem 1.5rem;
+  background: white;
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 3px solid var(--brand-a);
+  padding-bottom: 1rem;
+}
+
+.section-icon {
+  font-size: 1.8rem;
+  color: var(--brand-c);
+}
+
+/* Study Nav */
+.study-nav {
+  margin: 2rem 0;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.nav-list li a {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.nav-list li a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+}
+
+/* Study Footer */
+.study-footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-top: 2px solid var(--brand-a);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.study-footer i {
+  font-size: 2rem;
+  color: var(--brand-c);
+  margin-bottom: 0.5rem;
+}
+
+/* Action Path Visual */
+.action-path-visual {
+  background: linear-gradient(135deg, #f5f0ff 0%, #f0f8ff 100%);
+  border: 2px solid var(--brand-a);
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  margin: 2rem 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-path-svg {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+}
+
+/* Action Steps */
+.action-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.step-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  background: white;
+  border: 2px solid var(--line);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.step-item:hover {
+  box-shadow: 0 6px 16px rgba(44, 62, 80, 0.1);
+  border-color: var(--brand-c);
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  border-radius: 8px;
+  height: 80px;
+}
+
+.step-content h4 {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.step-content p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Q&A Blocks */
+.qa-block {
+  background: #fafafa;
+  border-left: 4px solid var(--info);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+}
+
+.qa-block p {
+  margin: 0.8rem 0;
+  line-height: 1.6;
+}
+
+.qa-block p:first-child {
+  margin-top: 0;
+  font-weight: 600;
+  color: var(--brand-a);
+}
+
+.qa-block p strong {
+  color: var(--brand-a);
+}
+
+.qa-block ul {
+  margin: 1rem 0;
+  padding-left: 1.8rem;
+}
+
+.qa-block li {
+  margin: 0.6rem 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Scenario Boxes */
+.scenario-box {
+  background: white;
+  border-left: 5px solid var(--brand-a);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.scenario-box h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.scenario-box p {
+  margin: 0.8rem 0;
+  line-height: 1.7;
+}
+
+/* Prayer Box */
+.prayer-box {
+  background: linear-gradient(135deg, #f0e6ff 0%, #ffe6f0 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  border-left: 5px solid var(--brand-a);
+  margin: 1.5rem 0;
+}
+
+.prayer-box p {
+  margin: 1rem 0;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+/* Key Point callout */
+.key-point {
+  background: #fffbf0;
+  border-left: 4px solid var(--brand-c);
+  padding: 1rem 1.5rem;
+  margin: 1.2rem 0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.key-point i {
+  color: var(--brand-c);
+  margin-right: 0.5rem;
+}
+
+.key-point p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* OK Note */
+.ok-note {
+  background: #f0f9f7;
+  border-left: 4px solid var(--ok);
+  padding: 1rem 1.5rem;
+  margin: 1.2rem 0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.ok-note i {
+  color: var(--ok);
+  margin-right: 0.5rem;
+}
+
+.ok-note p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Warning Note */
+.warning-note {
+  background: #fef5f5;
+  border-left: 4px solid var(--warn);
+  padding: 1rem 1.5rem;
+  margin: 1.2rem 0;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.warning-note i {
+  color: var(--warn);
+  margin-right: 0.5rem;
+}
+
+.warning-note p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Topic Card */
+.topic-card {
+  background: linear-gradient(135deg, #f0e6ff 0%, #e6f5ff 100%);
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 4px solid var(--brand-a);
+  margin: 1.5rem 0;
+}
+
+.topic-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+.topic-card p {
+  margin: 0.5rem 0;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.icon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--brand-a);
+  font-weight: 600;
+}
+
+/* Quote Block */
+.quote-block {
+  border-left: 5px solid var(--brand-c);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  background: #fffbf0;
+  border-radius: 6px;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+.quote-block p {
+  margin: 0.5rem 0;
+}
+
+.quote-block footer {
+  margin-top: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--brand-a);
+  font-size: 0.9rem;
+}
+
+/* Study Table */
+.study-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.study-table thead {
+  background: linear-gradient(135deg, var(--brand-a) 0%, var(--brand-b) 100%);
+  color: white;
+}
+
+.study-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.study-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.study-table tbody tr:nth-child(even) {
+  background: var(--soft-bg);
+}
+
+.study-table tbody tr:hover {
+  background: #f5f5ff;
+}
+
+/* Visual Box */
+.visual-box {
+  background: linear-gradient(135deg, #f5f0ff 0%, #f0f8ff 100%);
+  border: 2px solid var(--brand-a);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+
+.visual-box h4 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--brand-a);
+  font-size: 1.05rem;
+}
+
+/* Study Section */
+.study-section {
+  margin: 3rem 0;
+  padding: 2rem 1.5rem;
+  background: white;
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 3px solid var(--brand-a);
+  padding-bottom: 1rem;
+}
+
+.section-icon {
+  font-size: 1.8rem;
+  color: var(--brand-c);
+}
+
+/* Study Nav */
+.study-nav {
+  margin: 2rem 0;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.nav-list li a {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, var(--brand-a), var(--brand-b));
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.nav-list li a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+}
+
+/* Study Footer */
+.study-footer {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-top: 2px solid var(--brand-a);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.study-footer i {
+  font-size: 2rem;
+  color: var(--brand-c);
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+  .science-grid,
+  .comparison-grid,
+  .testimony-timeline,
+  .modern-evidence,
+  .evidence-row,
+  .evidence-comparison {
+    grid-template-columns: 1fr;
+  }
+
+  .bar-chart {
+    height: 280px;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .timeline-events {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .step-item {
+    grid-template-columns: 1fr;
+  }
+
+  .step-number {
+    height: auto;
+    padding: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .nav-list {
+    flex-direction: column;
+  }
+
+  .nav-list li a {
+    display: block;
+    text-align: center;
+  }
+
+  .study-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .prayer-box,
+  .visual-box,
+  .qa-block {
+    padding: 1.5rem 1rem;
+  }
+
+  .action-path-svg {
+    max-width: 95vw;
+  }
+}

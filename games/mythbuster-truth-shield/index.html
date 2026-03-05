@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MythBuster: Truth Shield | NothingButTheTRUTH</title>
+<meta name="description" content="Fast-paced SDA theology challenge: classify spiritual claims, debunk myths, and defend truth with Scripture.">
+<link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/mythbuster-truth-shield/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070912;--card:#141b37;--txt:#f1f5ff;--sub:#c3cbe6;--red:#ef4444;--green:#22c55e;--purple:#a855f7;--blue:#2563eb;--gold:#f59e0b}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;color:var(--txt);min-height:100vh;padding:20px;background:radial-gradient(circle at 20% 0%,rgba(168,85,247,.2),transparent 45%),radial-gradient(circle at 80% 100%,rgba(37,99,235,.2),transparent 55%),var(--bg)}
+.wrap{max-width:980px;margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.back{color:#e2e8ff;text-decoration:none;border:1px solid rgba(255,255,255,.18);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.06)}.brand{font-weight:800;background:linear-gradient(135deg,var(--purple),#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px}#start h1{margin:0 0 6px}#start p{color:var(--sub);line-height:1.7}
+.modes{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.modes button{border:1px solid rgba(255,255,255,.15);background:var(--card);color:#edf2ff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.modes button.on{border-color:var(--gold);box-shadow:0 0 0 2px rgba(245,158,11,.25) inset}
+.play{background:linear-gradient(135deg,var(--purple),var(--blue));border:none;color:#fff;padding:12px 16px;border-radius:10px;cursor:pointer;font-weight:800}
+#game,#end{display:none}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}.stat{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:8px;text-align:center}.k{font-size:.7rem;color:var(--sub);text-transform:uppercase}.v{font-size:1.1rem;font-weight:800}
+.timer{height:8px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;margin-bottom:10px}.fill{height:100%;width:100%;background:linear-gradient(90deg,var(--green),var(--gold))}
+.q{font-size:1.08rem;line-height:1.6;margin-bottom:10px}.claims{display:grid;gap:8px}.claims button{text-align:left;padding:11px;border:1px solid rgba(255,255,255,.14);background:var(--card);border-radius:10px;color:#edf2ff;cursor:pointer}.claims button:hover{transform:translateX(3px)}.claims button.ok{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.6)}.claims button.bad{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.65)}
+.feed{min-height:1.4em;margin:8px 0;font-weight:700}.explain{display:none;background:linear-gradient(135deg,rgba(168,85,247,.18),rgba(37,99,235,.13));border:1px solid rgba(168,85,247,.45);padding:12px;border-radius:10px}.explain.show{display:block}.next{margin-top:8px;border:none;padding:10px 13px;border-radius:9px;background:#2563eb;color:white;font-weight:700;cursor:pointer}
+#end h2{margin:0 0 6px}.scores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.s{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:9px;text-align:center}.recap{background:var(--card);border:1px solid rgba(255,255,255,.1);padding:10px;border-radius:10px}.recap ul{margin:8px 0 0 18px;line-height:1.7}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.actions button,.actions a{padding:10px 14px;border-radius:9px;text-decoration:none;border:none;cursor:pointer;font-weight:700}.actions .r{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff}.actions .h{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff}
+@media(max-width:760px){.hud,.scores{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="back" href="../../all-games.html">← All Games</a><div class="brand">MYTHBUSTER: TRUTH SHIELD</div></div>
+
+  <section id="start" class="panel">
+    <h1>🔥 MythBuster: Truth Shield</h1>
+    <p>Classify spiritual claims, expose subtle error, and defend biblical truth with SDA doctrine clarity.</p>
+    <div class="modes" id="modes"><button class="on" data-m="disciple">Disciple (18s)</button><button data-m="watchman">Watchman (14s)</button><button data-m="reformer">Reformer (11s)</button></div>
+    <button class="play" id="startBtn">Start Shield Run</button>
+  </section>
+
+  <section id="game" class="panel">
+    <div class="hud">
+      <div class="stat"><div class="k">Score</div><div class="v" id="score">0</div></div>
+      <div class="stat"><div class="k">Streak</div><div class="v" id="streak">0</div></div>
+      <div class="stat"><div class="k">Lives</div><div class="v" id="lives">3</div></div>
+      <div class="stat"><div class="k">Round</div><div class="v" id="qNum">1/10</div></div>
+      <div class="stat"><div class="k">Mode</div><div class="v" id="modeOut">DISCIPLE</div></div>
+    </div>
+    <div class="timer"><div class="fill" id="fill"></div></div>
+    <div class="q" id="q"></div>
+    <div class="claims" id="opts"></div>
+    <div class="feed" id="feed"></div>
+    <div class="explain" id="explain"><div id="explainTxt"></div><button class="next" id="nextBtn">Continue</button></div>
+  </section>
+
+  <section id="end" class="panel">
+    <h2 id="title">Complete</h2><p id="sub"></p>
+    <div class="scores"><div class="s"><div class="k">Score</div><div class="v" id="fScore">0</div></div><div class="s"><div class="k">Accuracy</div><div class="v" id="fAcc">0%</div></div><div class="s"><div class="k">Best Streak</div><div class="v" id="fStreak">0</div></div><div class="s"><div class="k">High Score</div><div class="v" id="fBest">0</div></div></div>
+    <div class="recap"><strong>Truth Lessons Captured</strong><ul id="recap"></ul></div>
+    <div class="actions"><button class="r" id="again">Play Again</button><a class="h" href="../../all-games.html">Game Hub</a><a class="h" href="../../mythbusters.html">Open MythBusters</a></div>
+  </section>
+</div>
+<script>
+(function(){if(window.location.search.includes('play=1')){if('scrollRestoration' in history) history.scrollRestoration='manual';window.scrollTo(0,0);document.addEventListener('DOMContentLoaded',()=>{window.scrollTo(0,0);requestAnimationFrame(()=>window.scrollTo(0,0));setTimeout(()=>window.scrollTo(0,0),60);});}})();
+const modeSec={disciple:18,watchman:14,reformer:11};let mode='disciple';
+const modes=document.getElementById('modes');modes.querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;modes.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
+const bank=[
+{q:'Claim: “The dead are conscious and guiding us now.”',o:['Truth','Myth'],a:1,l:'Biblically, death is a sleep until resurrection; this protects believers from spiritual deception.'},
+{q:'Claim: “Salvation is a free gift through grace by faith.”',o:['Truth','Myth'],a:0,l:'SDA doctrine affirms justification by grace through faith; obedience is fruit, not payment.'},
+{q:'Claim: “Eternal torment proves God’s justice.”',o:['Truth','Myth'],a:1,l:'The final punishment is destruction (second death), revealing both justice and mercy.'},
+{q:'Claim: “Sabbath is still a covenant sign of loyalty to the Creator.”',o:['Truth','Myth'],a:0,l:'Sabbath remains a creation and redemption sign, central in end-time worship themes.'},
+{q:'Claim: “Once saved, always saved no matter later choices.”',o:['Truth','Myth'],a:1,l:'Scripture calls for endurance and abiding faith; perseverance matters.'},
+{q:'Claim: “The great controversy is a conflict over God’s character and law.”',o:['Truth','Myth'],a:0,l:'This framework helps believers interpret doctrine, mission, and final events.'},
+{q:'Claim: “Human tradition should override plain Scripture when convenient.”',o:['Truth','Myth'],a:1,l:'Sola Scriptura protects doctrine from drift and keeps Christ central.'},
+{q:'Claim: “Sanctification is Spirit-led growth, not self-powered perfection.”',o:['Truth','Myth'],a:0,l:'Transformation is real but dependent on Christ’s power, not human boasting.'},
+{q:'Claim: “Sunday law pressure has no prophetic relevance for SDA theology.”',o:['Truth','Myth'],a:1,l:'SDA eschatology sees worship-legislation pressure as prophetically significant.'},
+{q:'Claim: “Three angels’ messages are still mission-critical.”',o:['Truth','Myth'],a:0,l:'They frame final gospel proclamation: worship, warning, and faithful endurance.'},
+{q:'Claim: “Truth can be separated from love and still be Christian witness.”',o:['Truth','Myth'],a:1,l:'Biblical witness requires both truth and Christlike love.'},
+{q:'Claim: “Christ’s intercession in heaven is central to assurance and readiness.”',o:['Truth','Myth'],a:0,l:'Sanctuary-centered faith grounds assurance and mission urgency.'}
+];
+const start=document.getElementById('start'),game=document.getElementById('game'),end=document.getElementById('end');
+const q=document.getElementById('q'),opts=document.getElementById('opts'),feed=document.getElementById('feed'),explain=document.getElementById('explain'),explainTxt=document.getElementById('explainTxt');
+const scoreEl=document.getElementById('score'),streakEl=document.getElementById('streak'),livesEl=document.getElementById('lives'),qNum=document.getElementById('qNum'),modeOut=document.getElementById('modeOut'),fill=document.getElementById('fill');
+let list=[],i=0,score=0,streak=0,bst=0,lives=3,corr=0,ans=false,timer=null,left=0,notes=[];
+function sh(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;}
+function hud(){scoreEl.textContent=score;streakEl.textContent=streak;livesEl.textContent=lives;qNum.textContent=`${Math.min(i+1,list.length)}/${list.length}`;modeOut.textContent=mode.toUpperCase();}
+function stop(){if(timer){clearInterval(timer);timer=null;}}
+function startTimer(){stop();left=modeSec[mode];fill.style.width='100%';timer=setInterval(()=>{left-=0.1;fill.style.width=`${Math.max(0,left/modeSec[mode]*100)}%`;if(left<=0&&!ans)pick(-1);},100)}
+function lock(){opts.querySelectorAll('button').forEach(b=>b.disabled=true)}
+function show(){ans=false;feed.textContent='';explain.classList.remove('show');const x=list[i];q.textContent=x.q;opts.innerHTML='';x.o.forEach((o,idx)=>{const b=document.createElement('button');b.textContent=`${idx+1}. ${o}`;b.onclick=()=>pick(idx);opts.appendChild(b);});hud();startTimer();}
+function pick(sel){if(ans)return;ans=true;stop();const x=list[i];lock();const bs=[...opts.querySelectorAll('button')];bs.forEach((b,idx)=>{if(idx===x.a)b.classList.add('ok');if(sel===idx&&idx!==x.a)b.classList.add('bad');});
+if(sel===x.a){corr++;streak++;bst=Math.max(bst,streak);score+=Math.max(95,Math.floor(95+left*9+streak*14));feed.textContent='✅ Correct — shield strengthened';feed.style.color='#86efac';}
+else{lives--;streak=0;score=Math.max(0,score-40);feed.textContent=sel===-1?'⏱️ Time expired':'❌ Myth detected — shield damaged';feed.style.color='#fca5a5';}
+notes.push(x.l);explainTxt.textContent=x.l;explain.classList.add('show');hud();}
+function done(){stop();game.style.display='none';end.style.display='block';const asked=Math.max(1,i+1),acc=Math.round(corr/asked*100);document.getElementById('title').textContent=acc>=85?'🛡️ Truth Defender':'✨ Keep Training';document.getElementById('sub').textContent=`Mode: ${mode.toUpperCase()} • ${asked}/${list.length} rounds complete`;
+document.getElementById('fScore').textContent=score;document.getElementById('fAcc').textContent=`${acc}%`;document.getElementById('fStreak').textContent=bst;const hi=Math.max(Number(localStorage.getItem('mbts_hi')||0),score);localStorage.setItem('mbts_hi',hi);document.getElementById('fBest').textContent=hi;document.getElementById('recap').innerHTML=[...new Set(notes)].slice(-4).map(x=>`<li>${x}</li>`).join('');}
+function begin(){list=sh(bank).slice(0,mode==='disciple'?10:mode==='watchman'?11:12);i=0;score=0;streak=0;bst=0;lives=3;corr=0;notes=[];start.style.display='none';end.style.display='none';game.style.display='block';show();}
+document.getElementById('startBtn').onclick=begin;document.getElementById('again').onclick=()=>{start.style.display='block';game.style.display='none';end.style.display='none';window.scrollTo(0,0)};document.getElementById('nextBtn').onclick=()=>{if(!ans)return;if(lives<=0){done();return;}i++;if(i>=list.length){done();return;}show();};
+document.addEventListener('keydown',e=>{if(game.style.display!=='block'||ans)return;const k=Number(e.key)-1;if(k>=0&&k<2){const b=opts.querySelectorAll('button')[k];if(b)pick(k);}});
+</script>
+</body>
+</html>

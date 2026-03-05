@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Bible Relay Race — Team Scripture Game | NothingButTheTRUTH</title>
+              <meta name="description" content="Scripture in motion! Answer Bible questions in rapid succession to win the race. A fast-paced team game for Bible study groups. Free to play online.">
+              <meta name="keywords" content="Bible study, Christian devotion, Scripture, NothingButTheTRUTH, Bible game, interactive Scripture quiz, bible, relay, race, team, scripture, game">
+              <meta name="author" content="NothingButTheTRUTH">
+              <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+              <link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/relay-race/index.html">
+              <meta property="og:title" content="Bible Relay Race — Team Scripture Game | NothingButTheTRUTH">
+              <meta property="og:description" content="Scripture in motion! Answer Bible questions in rapid succession to win the race. A fast-paced team game for Bible study groups. Free to play online.">
+              <meta property="og:type" content="website">
+              <meta property="og:url" content="https://NothingButTheTRUTH.web.app/games/relay-race/index.html">
+              <meta property="og:site_name" content="NothingButTheTRUTH">
+              <meta name="twitter:card" content="summary_large_image">
+              <meta name="twitter:title" content="Bible Relay Race — Team Scripture Game | NothingButTheTRUTH">
+              <meta name="twitter:description" content="Scripture in motion! Answer Bible questions in rapid succession to win the race. A fast-paced team game for Bible study groups. Free to play online.">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Bible Relay Race","description":"A fast-paced team Bible game — answer Scripture questions in rapid succession to win!","url":"https://NothingButTheTRUTH.web.app/games/relay-race/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTRUTH","url":"https://NothingButTheTRUTH.web.app"}}
+  </script>
+  <style>
+    /* ====== CSS — DARK THEME (site-wide match) ====== */
+    :root {
+      --bg: #0a0a14;
+      --bg2: #0d1025;
+      --bg3: #111530;
+      --card: rgba(255,255,255,.06);
+      --purple: #a855f7;
+      --purple-dim: rgba(168,85,247,.15);
+      --green: #22c55e;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --gold: #fbbf24;
+      --text: #fff;
+      --sub: rgba(255,255,255,.6);
+      --border: rgba(168,85,247,.12);
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: var(--sub);
+      min-height: 100vh;
+    }
+    body::before {
+      content:'';position:fixed;inset:0;
+      background:radial-gradient(ellipse at 50% 80%,rgba(168,85,247,.06),transparent 50%),radial-gradient(ellipse at 30% 20%,rgba(59,130,246,.06),transparent 50%);
+      pointer-events:none;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--purple), #7c3aed);
+      color: white;
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .instructions,
+    .scoreboard,
+    .question-area,
+    .controls {
+      margin: 1rem auto;
+      max-width: 700px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .instructions h2 { color: var(--purple); }
+    .instructions ol { text-align: left; color: var(--sub); }
+
+    .team-highlight {
+      font-weight: bold;
+      color: var(--red);
+    }
+
+    #timer {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      color: var(--purple);
+      font-weight: 700;
+      text-shadow: 0 0 20px rgba(168,85,247,.3);
+    }
+
+    .question {
+      font-size: 1.25rem;
+      margin: 1rem 0;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    input[type="text"] {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      width: 75%;
+      max-width: 400px;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+    input[type="text"]::placeholder { color: rgba(255,255,255,.3); }
+    input[type="text"]:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 12px rgba(168,85,247,.2); }
+
+    button {
+      margin: 0.5rem;
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--green), #16a34a);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(34,197,94,.4);
+    }
+
+    #hintButton {
+      background: linear-gradient(135deg, var(--gold), #d97706);
+    }
+    #hintButton:hover {
+      box-shadow: 0 4px 20px rgba(251,191,36,.4);
+    }
+
+    #hintButton.used {
+      background: linear-gradient(135deg, var(--red), #dc2626);
+    }
+
+    .message {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      color: var(--green);
+    }
+
+    .end-screen {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 2rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      color: var(--text);
+    }
+    .choice-btn {
+      padding: 0.8rem 1rem;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg3);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      text-align: center;
+    }
+    .choice-btn:hover:not(:disabled) {
+      background: var(--purple-dim);
+      border-color: var(--purple);
+      transform: translateY(-2px);
+    }
+    .choice-btn:disabled { cursor: default; }
+  </style>
+              <meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+              <meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+            <meta property="og:locale" content="en_US">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://NothingButTheTRUTH.web.app/"},
+  {"@type":"ListItem","position":2,"name":"Games","item":"https://NothingButTheTRUTH.web.app/all-games.html"},
+  {"@type":"ListItem","position":3,"name":"Bible Relay Race","item":"https://NothingButTheTRUTH.web.app/games/relay-race/index.html"}
+]}
+</script>
+</head>
+
+<body>
+<!-- NBTT-INTERNAL-LINKS-INJECTED -->
+
+<!-- ===== SEO BREADCRUMB NAV ===== -->
+<nav class="nbtt-breadcrumb" aria-label="Breadcrumb" style="
+  padding:12px 20px;margin:0;font-size:0.85rem;font-family:'Poppins',sans-serif;
+  background:rgba(10,10,26,0.85);border-bottom:1px solid rgba(168,85,247,0.15);
+  color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+">
+  <a href="../../index.html" style="color:#a855f7;text-decoration:none;font-weight:600;">Home</a>
+  <span style="color:rgba(255,255,255,0.3);">›</span>
+  <a href="../../all-games.html" style="color:#a855f7;text-decoration:none;font-weight:600;">Games</a>
+  <span style="color:rgba(255,255,255,0.3);">›</span>
+  <span style="color:rgba(255,255,255,0.7);">Bible Relay Race</span>
+</nav>
+  <header>Bible Relay Race Game</header>
+
+  <div class="instructions">
+    <h2>How to Play</h2>
+    <ol style="text-align: left;">
+      <li>Team Red starts the game.</li>
+      <li>Click the <strong>Start Game</strong> button to begin.</li>
+      <li>Each team takes turns answering questions.</li>
+      <li>Questions are timed. You get 30 seconds per question.</li>
+      <li>If you need help, use the <strong>Hint</strong> button. But using it reduces your score by half for that question.</li>
+      <li>Click <strong>Submit</strong> to check your answer.</li>
+      <li>If time runs out and no answer was submitted, click <strong>Next Question</strong> to continue.</li>
+      <li>Different types of questions will appear — typing, true/false, matching, etc.</li>
+    </ol>
+  </div>
+
+  <div class="scoreboard">
+    <p><span class="team-highlight">Team Red</span> Score: <span id="teamRedScore">0</span></p>
+    <p><span class="team-highlight" style="color: blue;">Team Blue</span> Score: <span id="teamBlueScore">0</span></p>
+    <p>Current Turn: <span id="currentTeam">Red</span></p>
+  </div>
+
+  <div class="controls">
+    <button onclick="startGame()">Start Game</button>
+    <button id="nextBtn" onclick="showNextQuestion()" style="display:none;">Next Question</button>
+    <button id="exitBtn" onclick="window.location.href='../../all-games.html'" style="display:none;">↩ Back to Games</button>
+  </div>
+
+  <div class="question-area" style="display:none;">
+    <div id="timer">Time: 30s</div>
+    <div id="question" class="question">Press 'Next Question' to begin.</div>
+    <div id="choicesArea" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem auto;max-width:500px;"></div>
+    <button id="hintButton" onclick="useHint()">💡 Hint</button>
+    <div id="message" class="message"></div>
+  </div>
+
+  <script>
+    const questions = [
+      { q: "Who led the Israelites out of Egypt?", a: "Moses", wrong: ["Abraham", "Joshua", "David"], hint: "Starts with M" },
+      { q: "What was the first plague God sent on Egypt?", a: "Water turned to blood", wrong: ["Frogs", "Darkness", "Locusts"], hint: "It happened in the Nile" },
+      { q: "Who built the ark before the great flood?", a: "Noah", wrong: ["Moses", "Abraham", "Enoch"], hint: "God told him to gather animals" },
+      { q: "What giant did David defeat?", a: "Goliath", wrong: ["Og", "Anak", "Samson"], hint: "A Philistine warrior" },
+      { q: "Who was sold into slavery by his brothers?", a: "Joseph", wrong: ["Benjamin", "Reuben", "Judah"], hint: "He interpreted dreams in Egypt" },
+      { q: "What is the first book of the Bible?", a: "Genesis", wrong: ["Exodus", "Psalms", "Matthew"], hint: "It means beginning" },
+      { q: "Who was swallowed by a great fish?", a: "Jonah", wrong: ["Elijah", "Daniel", "Peter"], hint: "He was running from God" },
+      { q: "In what city was Jesus born?", a: "Bethlehem", wrong: ["Nazareth", "Jerusalem", "Capernaum"], hint: "Starts with B" },
+      { q: "Who betrayed Jesus for thirty pieces of silver?", a: "Judas Iscariot", wrong: ["Peter", "Thomas", "Bartholomew"], hint: "He kissed Jesus to identify Him" },
+      { q: "How many days did God take to create the world?", a: "6 days", wrong: ["7 days", "3 days", "1 day"], hint: "He rested on day seven" },
+      { q: "What was Jesus' first miracle?", a: "Turning water into wine", wrong: ["Healing the blind", "Walking on water", "Feeding 5,000"], hint: "It happened at a wedding" },
+      { q: "What river was Jesus baptized in?", a: "The Jordan River", wrong: ["The Nile", "The Euphrates", "The Red Sea"], hint: "It is not the Nile" },
+      { q: "Who denied Jesus three times?", a: "Peter", wrong: ["Judas", "Thomas", "John"], hint: "Jesus called him the Rock" },
+      { q: "How many apostles did Jesus choose?", a: "12", wrong: ["7", "10", "14"], hint: "Think of the tribes of Israel" },
+      { q: "What did Jesus feed 5,000 people with?", a: "5 loaves and 2 fish", wrong: ["7 loaves and 3 fish", "Bread and wine", "Manna from heaven"], hint: "A boy offered his lunch" },
+      { q: "Who wrote most of the New Testament letters?", a: "Paul", wrong: ["Peter", "John", "James"], hint: "He was formerly called Saul" },
+      { q: "True or False: Paul wrote the book of Psalms.", a: "False", wrong: ["True"], hint: "David wrote most of them" },
+      { q: "Where was Jesus crucified?", a: "Golgotha (Calvary)", wrong: ["Mount Sinai", "Garden of Gethsemane", "Bethany"], hint: "Place of the Skull" },
+      { q: "Who was the first king of Israel?", a: "Saul", wrong: ["David", "Solomon", "Samuel"], hint: "Tribe of Benjamin" },
+      { q: "Who was known as the wisest king?", a: "Solomon", wrong: ["David", "Hezekiah", "Josiah"], hint: "He built the first Temple" },
+      { q: "Who was thrown into a den of lions?", a: "Daniel", wrong: ["David", "Elijah", "Jeremiah"], hint: "He prayed three times a day" },
+      { q: "Who was taken up to heaven in a chariot of fire?", a: "Elijah", wrong: ["Enoch", "Moses", "Elisha"], hint: "His successor got his mantle" },
+      { q: "How many books are in the Bible?", a: "66", wrong: ["72", "39", "52"], hint: "39 Old + 27 New" },
+      { q: "What is the longest book of the Bible?", a: "Psalms", wrong: ["Isaiah", "Genesis", "Jeremiah"], hint: "It has 150 chapters" },
+      { q: "Where did Moses receive the Ten Commandments?", a: "Mount Sinai", wrong: ["Mount Zion", "Mount Carmel", "Mount Olivet"], hint: "In the wilderness" },
+      { q: "What sea did Moses part?", a: "The Red Sea", wrong: ["The Dead Sea", "The Mediterranean", "Sea of Galilee"], hint: "They walked through on dry ground" },
+      { q: "In the parable, what did the Good Samaritan do?", a: "Helped a wounded stranger", wrong: ["Gave money to the temple", "Healed the sick", "Fed the hungry"], hint: "Everyone else passed by" },
+      { q: "What does the parable of the lost sheep teach?", a: "God seeks every lost soul", wrong: ["Shepherds are important", "Sheep are valuable", "Count your blessings"], hint: "Left 99 to find 1" },
+      { q: "What did the prodigal son do with his inheritance?", a: "Wasted it on wild living", wrong: ["Invested it wisely", "Gave it to the poor", "Built a house"], hint: "He ended up feeding pigs" },
+      { q: "Who committed the first murder in the Bible?", a: "Cain", wrong: ["Lamech", "Esau", "Pharaoh"], hint: "He killed his brother" },
+      { q: "What sign did God give Noah after the flood?", a: "A rainbow", wrong: ["A dove", "A star", "Thunder"], hint: "Appears in the sky after rain" },
+      { q: "How many people did Jesus raise from the dead?", a: "3", wrong: ["1", "2", "7"], hint: "Lazarus, Jairus daughter, widows son" },
+      { q: "What did Jesus walk on?", a: "Water", wrong: ["Fire", "Clouds", "Hot coals"], hint: "The disciples were in a boat" },
+      { q: "What happened when Jesus died on the cross?", a: "The temple curtain tore in two", wrong: ["The sky turned red", "The stars fell", "The earth froze"], hint: "It split from top to bottom" },
+      { q: "How long was Lazarus dead before Jesus raised him?", a: "4 days", wrong: ["3 days", "1 day", "7 days"], hint: "Martha said he already stinks" },
+      { q: "What is considered the most famous Bible verse?", a: "John 3:16", wrong: ["Psalm 23:1", "Romans 8:28", "Genesis 1:1"], hint: "For God so loved the world" },
+      { q: "Complete: The Lord is my shepherd, I shall not ______", a: "Want", wrong: ["Fear", "Fail", "Fall"], hint: "Psalm 23" },
+      { q: "What is the greatest commandment according to Jesus?", a: "Love the Lord your God with all your heart", wrong: ["Do not steal", "Honor your parents", "Do not lie"], hint: "About loving God completely" },
+      { q: "What did Jesus say is the second greatest commandment?", a: "Love your neighbor as yourself", wrong: ["Do not commit adultery", "Keep the Sabbath", "Do not covet"], hint: "About loving people" },
+      { q: "What were Adam and Eve's first two sons?", a: "Cain and Abel", wrong: ["Seth and Enoch", "Jacob and Esau", "Isaac and Ishmael"], hint: "One farmer, one shepherd" },
+      { q: "How old was Abraham when Isaac was born?", a: "100 years old", wrong: ["75 years old", "90 years old", "120 years old"], hint: "Sarah was 90" },
+      { q: "Who interpreted Pharaoh's dreams about famine?", a: "Joseph", wrong: ["Daniel", "Moses", "Aaron"], hint: "Coat of many colors" },
+      { q: "In the sower parable, what does the seed represent?", a: "The Word of God", wrong: ["Money", "Faith", "The Holy Spirit"], hint: "Falls on different types of ground" },
+      { q: "How many talents did the master give the faithful servant?", a: "5 talents", wrong: ["10 talents", "2 talents", "1 talent"], hint: "He doubled them to 10" },
+      { q: "Of the 10 lepers healed, how many thanked Jesus?", a: "1 out of 10", wrong: ["3 out of 10", "5 out of 10", "All 10"], hint: "He was a Samaritan" },
+      { q: "What was the forbidden tree called?", a: "Tree of Knowledge of Good and Evil", wrong: ["Tree of Life", "Tree of Wisdom", "The Great Tree"], hint: "God said not to eat from it" },
+      { q: "What is the Golden Rule?", a: "Do unto others as you would have them do unto you", wrong: ["Love the Lord your God", "Honor your father and mother", "Keep the Sabbath holy"], hint: "Treat people how you want to be treated" },
+      { q: "What was Saul's name changed to after conversion?", a: "Paul", wrong: ["Peter", "Barnabas", "Silas"], hint: "Road to Damascus" },
+      { q: "Love your ______ as yourself. Fill in the blank.", a: "Neighbor", wrong: ["Family", "Friends", "Country"], hint: "The person next door" },
+      { q: "What is the shortest book of the Bible?", a: "3 John", wrong: ["Jude", "Philemon", "Obadiah"], hint: "Shortest by word count in NT" },
+      { q: "Who was thrown into a den of lions?", a: "Daniel", wrong: ["David", "Samson", "Elijah"], hint: "Interpreted dreams for the king" },
+      { q: "What was the first miracle Jesus performed?", a: "Turning water into wine", wrong: ["Healing a blind man", "Walking on water", "Feeding 5000"], hint: "At a wedding in Cana" },
+      { q: "Who betrayed Jesus for 30 pieces of silver?", a: "Judas Iscariot", wrong: ["Peter", "Thomas", "Bartholomew"], hint: "Betrayed with a kiss" },
+      { q: "How many days did God take to create the world?", a: "6 days", wrong: ["7 days", "5 days", "3 days"], hint: "He rested on the 7th" },
+      { q: "Who was swallowed by a great fish?", a: "Jonah", wrong: ["Elijah", "Isaiah", "Amos"], hint: "Refused to go to Nineveh" },
+      { q: "What mountain did Moses receive the Ten Commandments on?", a: "Mount Sinai", wrong: ["Mount Carmel", "Mount Zion", "Mount Hermon"], hint: "Also called Horeb" },
+      { q: "Who was the first king of Israel?", a: "Saul", wrong: ["David", "Solomon", "Samuel"], hint: "From the tribe of Benjamin" },
+      { q: "What river was Jesus baptized in?", a: "Jordan River", wrong: ["Nile River", "Euphrates", "Red Sea"], hint: "John baptized there" },
+      { q: "Who wrote most of the Psalms?", a: "David", wrong: ["Solomon", "Moses", "Asaph"], hint: "The shepherd king" },
+      { q: "What city walls fell after the Israelites marched around them?", a: "Jericho", wrong: ["Ai", "Babylon", "Jerusalem"], hint: "Marched 7 days with trumpets" },
+      { q: "Who interpreted Pharaoh's dreams about 7 fat and 7 thin cows?", a: "Joseph", wrong: ["Moses", "Daniel", "Aaron"], hint: "Had a coat of many colors" },
+      { q: "What is the last book of the Old Testament?", a: "Malachi", wrong: ["Zechariah", "Obadiah", "Micah"], hint: "Starts with M" },
+      { q: "Who killed Goliath?", a: "David", wrong: ["Saul", "Jonathan", "Samson"], hint: "Used a sling and a stone" },
+      { q: "In what town was Jesus born?", a: "Bethlehem", wrong: ["Nazareth", "Jerusalem", "Capernaum"], hint: "City of David" },
+      { q: "Who was the mother of John the Baptist?", a: "Elizabeth", wrong: ["Mary", "Anna", "Martha"], hint: "Cousin of Mary" },
+      { q: "What did God use to speak to Moses in the desert?", a: "A burning bush", wrong: ["A pillar of fire", "An angel", "Thunder"], hint: "It burned but was not consumed" },
+      { q: "How many tribes of Israel were there?", a: "12", wrong: ["10", "7", "14"], hint: "Named after Jacob's sons" },
+      { q: "What is the greatest commandment according to Jesus?", a: "Love the Lord your God with all your heart", wrong: ["Do not steal", "Honor your parents", "Keep the Sabbath"], hint: "Love God with everything" },
+      { q: "Who denied Jesus three times?", a: "Peter", wrong: ["Thomas", "Judas", "James"], hint: "Also called Simon" }
+    ];
+
+    let currentQuestion = 0;
+    let timer;
+    let timeLeft = 30;
+    let currentTeam = 'Red';
+    let redScore = 0;
+    let blueScore = 0;
+    let hintUsed = false;
+    let totalQuestionsToPlay = 10;
+    let questionsAnswered = 0;
+    let answerSubmitted = false;
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function startGame() {
+      shuffle(questions);
+      currentQuestion = 0;
+      questionsAnswered = 0;
+      answerSubmitted = false;
+      currentTeam = 'Red';
+      redScore = 0;
+      blueScore = 0;
+      document.getElementById("teamRedScore").textContent = redScore;
+      document.getElementById("teamBlueScore").textContent = blueScore;
+      document.getElementById("currentTeam").textContent = currentTeam;
+      document.querySelector(".question-area").style.display = "block";
+      document.getElementById("nextBtn").style.display = "inline-block";
+      document.querySelectorAll('.end-screen').forEach(function(el) { el.remove(); });
+      document.getElementById("exitBtn").style.display = "none";
+      showNextQuestion();
+    }
+
+    function renderChoices(q) {
+      var choicesDiv = document.getElementById("choicesArea");
+      choicesDiv.innerHTML = "";
+      var options = shuffle([q.a].concat(q.wrong));
+      options.forEach(function(opt) {
+        var btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.className = "choice-btn";
+        btn.onclick = function() { selectAnswer(opt, q.a); };
+        choicesDiv.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(selected, correct) {
+      if (answerSubmitted) return;
+      answerSubmitted = true;
+      clearInterval(timer);
+
+      var choiceBtns = document.querySelectorAll('.choice-btn');
+      choiceBtns.forEach(function(btn) {
+        btn.disabled = true;
+        if (btn.textContent === correct) {
+          btn.style.background = "linear-gradient(135deg, var(--green), #16a34a)";
+          btn.style.color = "#fff";
+        } else if (btn.textContent === selected && selected !== correct) {
+          btn.style.background = "linear-gradient(135deg, var(--red), #dc2626)";
+          btn.style.color = "#fff";
+        } else {
+          btn.style.opacity = "0.4";
+        }
+      });
+
+      var message = "";
+      if (selected === correct) {
+        if (currentTeam === 'Red') {
+          redScore += hintUsed ? 0.5 : 1;
+          document.getElementById("teamRedScore").textContent = redScore;
+        } else {
+          blueScore += hintUsed ? 0.5 : 1;
+          document.getElementById("teamBlueScore").textContent = blueScore;
+        }
+        message = hintUsed ? "Correct! (Half point - hint used)" : "Correct! Full point awarded!";
+      } else {
+        message = "Wrong! The answer was: " + correct;
+      }
+
+      document.getElementById("message").textContent = message;
+      document.getElementById("message").style.color = selected === correct ? "var(--green)" : "var(--red)";
+
+      currentTeam = currentTeam === 'Red' ? 'Blue' : 'Red';
+      document.getElementById("currentTeam").textContent = currentTeam;
+      questionsAnswered++;
+      currentQuestion = (currentQuestion + 1) % questions.length;
+
+      if (questionsAnswered >= totalQuestionsToPlay) {
+        setTimeout(function() { endGame(); }, 1500);
+      }
+    }
+
+    function showNextQuestion() {
+      if (questionsAnswered >= totalQuestionsToPlay) { endGame(); return; }
+
+      document.getElementById("message").textContent = "";
+      document.getElementById("message").style.color = "var(--green)";
+      document.getElementById("hintButton").classList.remove("used");
+      document.getElementById("hintButton").disabled = false;
+      hintUsed = false;
+      answerSubmitted = false;
+
+      var q = questions[currentQuestion];
+      document.getElementById("question").textContent = q.q;
+      renderChoices(q);
+
+      clearInterval(timer);
+      timeLeft = 30;
+      document.getElementById("timer").textContent = "Time: " + timeLeft + "s";
+      timer = setInterval(function() {
+        timeLeft--;
+        document.getElementById("timer").textContent = "Time: " + timeLeft + "s";
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          answerSubmitted = true;
+          document.querySelectorAll('.choice-btn').forEach(function(btn) {
+            btn.disabled = true;
+            if (btn.textContent === q.a) {
+              btn.style.background = "linear-gradient(135deg, var(--green), #16a34a)";
+              btn.style.color = "#fff";
+            } else {
+              btn.style.opacity = "0.4";
+            }
+          });
+          document.getElementById("message").textContent = "Time is up! The answer was: " + q.a;
+          document.getElementById("message").style.color = "var(--gold)";
+          currentTeam = currentTeam === 'Red' ? 'Blue' : 'Red';
+          document.getElementById("currentTeam").textContent = currentTeam;
+          questionsAnswered++;
+          currentQuestion = (currentQuestion + 1) % questions.length;
+          if (questionsAnswered >= totalQuestionsToPlay) {
+            setTimeout(function() { endGame(); }, 1500);
+          }
+        }
+      }, 1000);
+    }
+
+    function endGame() {
+      clearInterval(timer);
+      document.querySelector(".question-area").style.display = "none";
+      document.getElementById("nextBtn").style.display = "none";
+      document.querySelectorAll('.end-screen').forEach(function(el) { el.remove(); });
+
+      var winner = redScore > blueScore ? "Team Red" : blueScore > redScore ? "Team Blue" : "Tie!";
+      var total = redScore + blueScore;
+      var maxPoints = totalQuestionsToPlay;
+      var pct = Math.round((total / maxPoints) * 100);
+      var grade = pct >= 90 ? "Amazing!" : pct >= 70 ? "Great job!" : pct >= 50 ? "Good effort!" : "Keep studying!";
+
+      var html = '<div class="end-screen">' +
+        '<h2>Game Over!</h2>' +
+        '<p style="font-size:1.8em;margin:0.3em 0;">' + winner + ' wins!</p>' +
+        '<p style="font-size:1.3em;">Red: ' + redScore + ' | Blue: ' + blueScore + '</p>' +
+        '<p style="color:var(--sub);font-size:0.95em;">Combined accuracy: ' + pct + '% - ' + grade + '</p>' +
+        '<button onclick="startGame()" style="margin-top:1rem;">Play Again</button>' +
+        '</div>';
+      document.body.insertAdjacentHTML('beforeend', html);
+      document.getElementById("exitBtn").style.display = "inline-block";
+      // Gamification
+      if(typeof NBTT!=='undefined'){
+        var totalScore=redScore+blueScore;
+        var result={score:totalScore,accuracy:pct,redScore:redScore,blueScore:blueScore};
+        var saveResult=NBTT.saveScore('relay-race',result);
+        result._beatPB=saveResult.isNewBest;
+        var endEl=document.querySelector('.end-screen');
+        if(endEl) NBTT.showPersonalBest('relay-race',endEl,result);
+        NBTT.checkAchievements('relay-race',result);
+        NBTT.checkDailyChallenge('relay-race',result);
+      }
+    }
+
+    function useHint() {
+      document.getElementById("message").textContent = "Hint: " + questions[currentQuestion].hint;
+      document.getElementById("hintButton").classList.add("used");
+      document.getElementById("hintButton").disabled = true;
+      hintUsed = true;
+    }
+  </script>
+
+
+<!-- ===== SEO RELATED CONTENT — INTERNAL LINKING ===== -->
+<section class="nbtt-related-section" style="
+  max-width:800px;margin:3rem auto 0;padding:2rem 1.5rem;
+  background:rgba(10,10,26,0.9);border:1px solid rgba(168,85,247,0.15);
+  border-radius:16px;font-family:'Poppins',sans-serif;
+">
+  <h2 style="
+    color:#fff;font-size:1.4rem;text-align:center;margin:0 0 0.3rem;
+    font-weight:700;letter-spacing:-0.02em;
+  ">
+    <i class="fas fa-compass" style="color:#a855f7;margin-right:8px;"></i>Continue Exploring
+  </h2>
+  <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;margin:0 0 1.5rem;">
+    Dive deeper into God's Word with related content
+  </p>
+  <div style="display:grid;gap:10px;">
+    
+      <a href="../verse-hunt-live/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Verse Hunt</strong>
+      </a>
+      <a href="../bible-bingo/BibleBingoScriptureSprint/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Bible Bingo</strong>
+      </a>
+      <a href="../scripture-sprint/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Scripture Sprint</strong>
+      </a>
+      <a href="../../Studies/facts_or_fiction.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(37,117,252,0.08);
+        border:1px solid rgba(37,117,252,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#60a5fa;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#bfdbfe;">Is the Bible Facts or Fiction?</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Studies</span>
+      </a>
+      <a href="../../Studies/history_of_christian_faith.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(37,117,252,0.08);
+        border:1px solid rgba(37,117,252,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#60a5fa;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#bfdbfe;">History of the Christian Faith</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Studies</span>
+      </a>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+    <a href="../../all-games.html" style="
+      display:inline-flex;align-items:center;gap:6px;padding:10px 22px;
+      background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);
+      border-radius:50px;color:#c084fc;text-decoration:none;font-weight:600;font-size:0.85rem;
+      transition:all 0.3s ease;
+    ">
+      <i class="fas fa-gamepad"></i> All Games
+    </a>
+    <a href="../../index.html" style="
+      display:inline-flex;align-items:center;gap:6px;padding:10px 22px;
+      background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+      border-radius:50px;color:#ccc;text-decoration:none;font-weight:600;font-size:0.85rem;
+      transition:all 0.3s ease;
+    ">
+      <i class="fas fa-home"></i> Home
+    </a>
+  </div>
+</section>
+
+<!-- ===== SEO SITE-WIDE MINI FOOTER ===== -->
+<footer class="nbtt-mini-footer" style="
+  max-width:800px;margin:1.5rem auto 2rem;padding:1.2rem 1.5rem;
+  background:rgba(10,10,26,0.7);border-top:1px solid rgba(168,85,247,0.1);
+  border-radius:12px;font-family:'Poppins',sans-serif;text-align:center;
+">
+  <nav aria-label="Site navigation" style="
+    display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:0.8rem;
+  ">
+    <a href="../../index.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-home"></i> Home</a>
+    <a href="../../all-studies.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-book-open"></i> Studies</a>
+    <a href="../../vod.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-dove"></i> Devotions</a>
+    <a href="../../all-games.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-gamepad"></i> Games</a>
+    <a href="../../all-videos.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-video"></i> Videos</a>
+    <a href="../../about-us.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-info-circle"></i> About</a>
+  </nav>
+  <p style="color:rgba(255,255,255,0.35);font-size:0.7rem;margin:0;">
+    &copy; 2026 NothingButTheTRUTH. All rights reserved.
+  </p>
+</footer>
+<script src="../nbtt-gamification.js"></script>
+<script>
+(function(){
+  if(window.location.search.includes('play=1')){
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    requestAnimationFrame(()=>window.scrollTo(0,0));
+    window.addEventListener('load',()=>window.scrollTo(0,0),{once:true});
+  }
+})();
+</script>
+</body>
+
+</html>

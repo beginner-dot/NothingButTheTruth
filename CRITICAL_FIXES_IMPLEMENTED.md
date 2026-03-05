@@ -134,7 +134,7 @@ Replaced vague descriptions with specific biblical stories:
 ```
 
 ### 4c. Relay Race Exit Button
-**File:** `games/relay-race/relayrace.html` (Line 118)
+**File:** `games/relay-race/index.html` (Line 118)
 
 ```html
 <button id="exitBtn" onclick="window.location.href='/'" style="display:none;">↩ Back to Games</button>
@@ -149,7 +149,7 @@ Replaced vague descriptions with specific biblical stories:
 ---
 
 ## 5. 🏆 RELAY RACE - PROPER GAME END SCREEN
-**File:** `games/relay-race/relayrace.html`
+**File:** `games/relay-race/index.html`
 
 ### What Was Fixed:
 - **Missing Feature:** Game had no formal end condition after 10 questions
@@ -338,9 +338,9 @@ After critical fixes, consider these enhancements:
 1. ✅ `Indexstyles.css` - Notification banner styling
 2. ✅ `games/bible-bingo/BibleBingoScriptureSprint/index.html` - Firebase config, exit button
 3. ✅ `games/bible-bingo/BibleBingoScriptureSprint/script.js` - Remove duplicates
-4. ✅ `games/Bible-taboo/bible_taboo.html` - Exit button, game end logic
-5. ✅ `games/relay-race/relayrace.html` - Exit button, game end screen
-6. ✅ `games/Who-said-it/who-said/who_said.html` - Previously fixed
+4. ✅ `games/Bible-taboo/index.html` - Exit button, game end logic
+5. ✅ `games/relay-race/index.html` - Exit button, game end screen
+6. ✅ `games/Who-said-it/who-said/index.html` - Previously fixed
 
 ---
 

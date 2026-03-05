@@ -2,313 +2,654 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bible MythBusters - Debunk Spiritual Myths</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible MythBusters — Debunk Spiritual Myths | NothingButTheTRUTH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <style>
+  /* ────────────── DESIGN TOKENS ────────────── */
   :root {
-    --tech-blue: #1E90FF;
-    --neo-teal: #00BFA6;
-    --charcoal-gray: #2D2D2D;
-    --cloud-gray: #F5F5F5;
-    --electric-green: #00FF9D;
-    --truth-green: #28a745;
-    --danger-red: #dc3545;
-    --soft-bg: #f9fafd;
-    --tab-bg-active: #00bfa6;
-    --tab-bg-inactive: #e0f7f5;
+    --mb-bg:       #0a0a1a;
+    --mb-surface:  #12122a;
+    --mb-card:     #1a1a3a;
+    --mb-border:   rgba(255,100,50,0.15);
+    --mb-flame:    #ff6b35;
+    --mb-ember:    #ff9f43;
+    --mb-lava:     #e74c3c;
+    --mb-gold:     #ffd700;
+    --mb-text:     #e8e6f0;
+    --mb-muted:    rgba(255,255,255,0.45);
+    --mb-truth:    #2ecc71;
+    --mb-lie:      #e74c3c;
+    --mb-radius:   1rem;
+    --mb-glow:     0 0 30px rgba(255,107,53,0.15);
   }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Poppins', sans-serif;
-    background: var(--soft-bg);
-    color: var(--charcoal-gray);
-    margin: 2rem auto;
-    max-width: 900px;
-    padding: 0 1rem;
+    background: var(--mb-bg);
+    color: var(--mb-text);
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  h1 {
-    text-align: center;
-    color: var(--tech-blue);
-    margin-bottom: 2rem;
-    text-shadow: 0 0 8px var(--electric-green);
+  /* ── Breadcrumb ── */
+  .mb-breadcrumb {
+    padding: 12px 20px;
+    font-size: 0.85rem;
+    background: rgba(10,10,26,0.95);
+    border-bottom: 1px solid var(--mb-border);
+    color: var(--mb-muted);
+    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
   }
-
-  .myth-container {
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-    padding: 2rem;
-  }
-
-  .myth-title {
-    font-size: 2rem;
-    margin-bottom: 0.3rem;
-    color: var(--tech-blue);
-  }
-
-  .myth-lie {
-    font-weight: 700;
-    color: var(--danger-red);
-    margin-bottom: 1rem;
-  }
-
-  .myth-truth {
+  .mb-breadcrumb a {
+    color: var(--mb-flame);
+    text-decoration: none;
     font-weight: 600;
-    color: var(--truth-green);
+    transition: color 0.2s;
+  }
+  .mb-breadcrumb a:hover { color: var(--mb-ember); }
+  .mb-breadcrumb .sep { color: rgba(255,255,255,0.2); }
+
+  /* ── Hero Header ── */
+  .mb-hero {
+    text-align: center;
+    padding: 3rem 1.5rem 2rem;
+    position: relative;
+  }
+  .mb-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,107,53,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .mb-hero-icon {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    animation: flamePulse 2s ease-in-out infinite;
+  }
+  @keyframes flamePulse {
+    0%,100% { filter: drop-shadow(0 0 8px rgba(255,107,53,0.4)); transform: scale(1); }
+    50%     { filter: drop-shadow(0 0 20px rgba(255,107,53,0.7)); transform: scale(1.08); }
+  }
+  .mb-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--mb-flame), var(--mb-ember), var(--mb-gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+  .mb-hero-sub {
+    color: var(--mb-muted);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ── Section Tabs (Video Shorts / Text Myths) ── */
+  .mb-mode-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .mb-mode-btn {
+    padding: 0.7rem 1.8rem;
+    background: var(--mb-card);
+    border: 2px solid var(--mb-border);
+    border-radius: 50px;
+    color: var(--mb-muted);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .mb-mode-btn:hover {
+    border-color: var(--mb-flame);
+    color: var(--mb-text);
+  }
+  .mb-mode-btn.active {
+    background: linear-gradient(135deg, var(--mb-flame), var(--mb-lava));
+    border-color: transparent;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(255,107,53,0.3);
+  }
+
+  /* ── Container ── */
+  .mb-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+  }
+
+  /* ── Video Shorts Panel ── */
+  .mb-panel { display: none; }
+  .mb-panel.active { display: block; }
+
+  .mb-video-coming {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--mb-surface);
+    border: 2px dashed var(--mb-border);
+    border-radius: var(--mb-radius);
+  }
+  .mb-video-coming i {
+    font-size: 3rem;
+    color: var(--mb-flame);
+    margin-bottom: 1rem;
+    display: block;
+    opacity: 0.6;
+  }
+  .mb-video-coming h3 {
+    font-size: 1.4rem;
+    color: var(--mb-ember);
+    margin-bottom: 0.5rem;
+  }
+  .mb-video-coming p {
+    color: var(--mb-muted);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Myth Carousel ── */
+  .mb-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 1.5rem;
   }
+  .mb-progress-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--mb-card);
+    border-radius: 2px;
+    margin: 0 1rem;
+    overflow: hidden;
+  }
+  .mb-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--mb-flame), var(--mb-ember));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .mb-progress-label {
+    font-size: 0.8rem;
+    color: var(--mb-muted);
+    white-space: nowrap;
+  }
 
-  /* Tabs */
-  .tabs {
-    display: flex;
-    gap: 0.5rem;
+  .mb-myth-card {
+    background: var(--mb-surface);
+    border: 1px solid var(--mb-border);
+    border-radius: var(--mb-radius);
+    padding: 2rem;
+    box-shadow: var(--mb-glow);
+    position: relative;
+    overflow: hidden;
+  }
+  .mb-myth-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--mb-flame), var(--mb-ember), var(--mb-gold));
+  }
+
+  .mb-myth-number {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--mb-flame), var(--mb-lava));
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 50px;
+    letter-spacing: 0.05em;
     margin-bottom: 1rem;
   }
 
-  .tab-btn {
+  .mb-myth-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .mb-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 0.6rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .mb-label-lie {
+    background: rgba(231,76,60,0.1);
+    border-left: 3px solid var(--mb-lie);
+  }
+  .mb-label-lie .mb-label-icon { color: var(--mb-lie); }
+  .mb-label-truth {
+    background: rgba(46,204,113,0.1);
+    border-left: 3px solid var(--mb-truth);
+  }
+  .mb-label-truth .mb-label-icon { color: var(--mb-truth); }
+  .mb-label-icon { font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+  .mb-label-tag {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .mb-label-lie .mb-label-tag { color: var(--mb-lie); }
+  .mb-label-truth .mb-label-tag { color: var(--mb-truth); }
+
+  /* ── Source Tabs ── */
+  .mb-source-tabs {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    overflow-x: auto;
+  }
+  .mb-source-tab {
     flex: 1;
-    padding: 0.6rem 0;
-    background: var(--tab-bg-inactive);
-    border: none;
+    min-width: 0;
+    padding: 0.6rem 0.5rem;
+    background: var(--mb-card);
+    border: 1px solid transparent;
+    border-bottom: none;
     border-radius: 0.6rem 0.6rem 0 0;
-    cursor: pointer;
+    color: var(--mb-muted);
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    color: var(--charcoal-gray);
-    transition: background 0.3s, color 0.3s;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .mb-source-tab:hover { color: var(--mb-text); border-color: var(--mb-border); }
+  .mb-source-tab[aria-selected="true"] {
+    background: var(--mb-card);
+    border-color: var(--mb-flame);
+    border-bottom-color: var(--mb-card);
+    color: var(--mb-flame);
   }
 
-  .tab-btn[aria-selected="true"] {
-    background: var(--tab-bg-active);
-    color: white;
-    cursor: default;
-    box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
-  }
-
-  .tab-panel {
-    border: 2px solid var(--tab-bg-active);
+  .mb-source-panel {
+    border: 1px solid var(--mb-flame);
     border-top: none;
-    border-radius: 0 0 1rem 1rem;
-    padding: 1rem 1.5rem;
-    min-height: 120px;
-    background: white;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 0 0 0.8rem 0.8rem;
+    padding: 1.2rem 1.5rem;
+    min-height: 100px;
+    background: var(--mb-card);
     white-space: pre-wrap;
     font-style: italic;
-    color: #444;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    font-size: 0.92rem;
   }
+  .mb-source-panel[hidden] { display: none; }
 
-  .tab-panel[hidden] {
-    display: none;
-  }
-
-  /* Navigation */
-  .nav-buttons {
-    margin-top: 1.5rem;
+  /* ── Navigation ── */
+  .mb-nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    gap: 0.5rem;
   }
-
-  .nav-buttons button {
-    background: var(--neo-teal);
+  .mb-nav-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, var(--mb-flame), var(--mb-lava));
     border: none;
-    padding: 0.6rem 1.3rem;
-    border-radius: 0.7rem;
-    color: white;
+    border-radius: 50px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
     font-weight: 700;
+    font-size: 0.9rem;
     cursor: pointer;
-    box-shadow: 0 3px 6px rgba(0,191,166,0.5);
-    transition: background 0.3s ease;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255,107,53,0.25);
+  }
+  .mb-nav-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255,107,53,0.4);
+  }
+  .mb-nav-btn:disabled {
+    background: var(--mb-card);
+    color: var(--mb-muted);
+    box-shadow: none;
+    cursor: not-allowed;
   }
 
-  .nav-buttons button:disabled {
-    background: #a6d8d0;
-    cursor: not-allowed;
-    box-shadow: none;
+  /* ── Back to Home Link ── */
+  .mb-back-link {
+    display: block;
+    text-align: center;
+    margin-top: 2.5rem;
+    padding: 1rem;
+  }
+  .mb-back-link a {
+    color: var(--mb-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .mb-back-link a:hover { color: var(--mb-flame); }
+  .mb-back-link a i { margin-right: 0.4rem; }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    .mb-myth-card { padding: 1.5rem 1rem; }
+    .mb-myth-title { font-size: 1.3rem; }
+    .mb-source-tab { font-size: 0.7rem; padding: 0.5rem 0.3rem; }
+    .mb-nav-btn { padding: 0.6rem 1rem; font-size: 0.8rem; }
+    .mb-mode-btn { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
   }
 </style>
+
+<!-- ── SEO Meta ── -->
+<meta name="description" content="Bible MythBusters — Debunk common spiritual myths using Scripture, Spirit of Prophecy, The Great Controversy, and Steps to Christ. Interactive myth-by-myth truth reveals and video shorts.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://NothingButTheTRUTH.web.app/mythbusters.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bible MythBusters — Debunk Spiritual Myths | NothingButTheTRUTH">
+<meta property="og:description" content="Debunk common spiritual myths with the Bible, Spirit of Prophecy, The Great Controversy, and Steps to Christ. Interactive myth-by-myth truth reveals and video shorts.">
+<meta property="og:url" content="https://NothingButTheTRUTH.web.app/mythbusters.html">
+<meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bible MythBusters — Debunk Spiritual Myths | NothingButTheTRUTH">
+<meta name="twitter:description" content="Debunk common spiritual myths with the Bible, Spirit of Prophecy, The Great Controversy, and Steps to Christ.">
+<meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Bible MythBusters — Debunk Spiritual Myths","description":"Debunk common spiritual myths using Scripture, Spirit of Prophecy, The Great Controversy, and Steps to Christ. Interactive myth-by-myth truth reveals.","url":"https://NothingButTheTRUTH.web.app/mythbusters.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTRUTH","url":"https://NothingButTheTRUTH.web.app"}}
+</script>
+<meta name="keywords" content="Bible mythbusters, debunk spiritual myths, Bible truth, Spirit of Prophecy, Great Controversy, Steps to Christ, NothingButTheTRUTH">
+<meta name="author" content="NothingButTheTRUTH">
+<meta property="og:site_name" content="NothingButTheTRUTH">
+<meta property="og:locale" content="en_US">
 </head>
 <body>
 
-<h1>Bible MythBusters</h1>
+<!-- ═══════ BREADCRUMB ═══════ -->
+<nav class="mb-breadcrumb" aria-label="Breadcrumb">
+  <a href="index.html">Home</a>
+  <span class="sep">›</span>
+  <span style="color:rgba(255,255,255,0.7);">Bible MythBusters</span>
+</nav>
 
-<div class="myth-container" role="main" aria-live="polite">
-  <h2 id="mythTitle" class="myth-title"></h2>
-  <p id="mythLie" class="myth-lie"></p>
-  <p id="mythTruth" class="myth-truth"></p>
+<!-- ═══════ HERO ═══════ -->
+<header class="mb-hero">
+  <div class="mb-hero-icon">🔥</div>
+  <h1>Bible MythBusters</h1>
+  <p class="mb-hero-sub">Separating spiritual lies from biblical truth — one myth at a time.</p>
+</header>
 
-  <div class="tabs" role="tablist" aria-label="Sources Tabs">
-    <button class="tab-btn" role="tab" aria-selected="true" tabindex="0" aria-controls="source-bible" id="tab-bible">Bible</button>
-    <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="source-sop" id="tab-sop">Spirit of Prophecy</button>
-    <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="source-gc" id="tab-gc">Great Controversy</button>
-    <button class="tab-btn" role="tab" aria-selected="false" tabindex="-1" aria-controls="source-sc" id="tab-sc">Steps to Christ</button>
-  </div>
-
-  <section id="source-bible" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-bible"></section>
-  <section id="source-sop" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-sop" hidden></section>
-  <section id="source-gc" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-gc" hidden></section>
-  <section id="source-sc" class="tab-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-sc" hidden></section>
-
-  <div class="nav-buttons">
-    <button id="prevBtn" aria-label="Previous Myth" disabled>← Previous</button>
-    <button id="nextBtn" aria-label="Next Myth">Next →</button>
-  </div>
+<!-- ═══════ MODE TABS: Myth Busting / Video Shorts ═══════ -->
+<div class="mb-mode-tabs">
+  <button class="mb-mode-btn active" data-panel="myths" aria-pressed="true">
+    <i class="fas fa-book-open"></i>&nbsp; Myth Busting
+  </button>
+  <button class="mb-mode-btn" data-panel="videos" aria-pressed="false">
+    <i class="fas fa-play-circle"></i>&nbsp; Video Shorts
+  </button>
 </div>
 
+<div class="mb-container">
+
+  <!-- ═══════ PANEL 1: MYTH BUSTING (Carousel) ═══════ -->
+  <div class="mb-panel active" id="panel-myths">
+
+    <!-- Progress Bar -->
+    <div class="mb-progress">
+      <span class="mb-progress-label" id="progressLabel">Myth 1 of 7</span>
+      <div class="mb-progress-bar">
+        <div class="mb-progress-fill" id="progressFill" style="width:14.28%"></div>
+      </div>
+    </div>
+
+    <!-- Myth Card -->
+    <article class="mb-myth-card" role="main" aria-live="polite">
+      <span class="mb-myth-number" id="mythNumber">MYTH 1</span>
+      <h2 class="mb-myth-title" id="mythTitle"></h2>
+
+      <div class="mb-label mb-label-lie">
+        <span class="mb-label-icon"><i class="fas fa-times-circle"></i></span>
+        <div>
+          <span class="mb-label-tag">The Lie</span>
+          <span id="mythLie"></span>
+        </div>
+      </div>
+
+      <div class="mb-label mb-label-truth">
+        <span class="mb-label-icon"><i class="fas fa-check-circle"></i></span>
+        <div>
+          <span class="mb-label-tag">The Truth</span>
+          <span id="mythTruth"></span>
+        </div>
+      </div>
+
+      <!-- Source Tabs -->
+      <div class="mb-source-tabs" role="tablist" aria-label="Source Tabs">
+        <button class="mb-source-tab" role="tab" aria-selected="true" tabindex="0" aria-controls="src-bible" id="tab-bible">
+          <i class="fas fa-bible"></i> Bible
+        </button>
+        <button class="mb-source-tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="src-sop" id="tab-sop">
+          Spirit of Prophecy
+        </button>
+        <button class="mb-source-tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="src-gc" id="tab-gc">
+          Great Controversy
+        </button>
+        <button class="mb-source-tab" role="tab" aria-selected="false" tabindex="-1" aria-controls="src-sc" id="tab-sc">
+          Steps to Christ
+        </button>
+      </div>
+
+      <section id="src-bible" class="mb-source-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-bible"></section>
+      <section id="src-sop"   class="mb-source-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-sop" hidden></section>
+      <section id="src-gc"    class="mb-source-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-gc" hidden></section>
+      <section id="src-sc"    class="mb-source-panel" role="tabpanel" tabindex="0" aria-labelledby="tab-sc" hidden></section>
+
+      <!-- Carousel Nav -->
+      <div class="mb-nav">
+        <button class="mb-nav-btn" id="prevBtn" aria-label="Previous Myth" disabled>
+          <i class="fas fa-chevron-left"></i> Previous
+        </button>
+        <button class="mb-nav-btn" id="nextBtn" aria-label="Next Myth">
+          Next <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </article>
+  </div>
+
+  <!-- ═══════ PANEL 2: VIDEO SHORTS ═══════ -->
+  <div class="mb-panel" id="panel-videos">
+    <div class="mb-video-coming">
+      <i class="fas fa-film"></i>
+      <h3>Video Shorts Coming Soon</h3>
+      <p>Short, punchy video clips debunking spiritual myths — stay tuned for Bible MythBusters in video form!</p>
+    </div>
+  </div>
+
+  <!-- Back to Home -->
+  <div class="mb-back-link">
+    <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+  </div>
+
+</div>
+
+<!-- ═══════ JAVASCRIPT ═══════ -->
 <script>
+  /* ── Myths Data ── */
   const myths = [
     {
       id: "dead-conscious",
       title: "The Dead Are Conscious After Death",
       lie: "Your loved ones are watching over you from heaven right now.",
       truth: "The dead are unconscious, waiting the resurrection when Christ returns.",
-      bible: `Ecclesiastes 9:5 - “For the living know that they shall die: but the dead know not any thing.”\nJohn 11:11-14 - Jesus called Lazarus' death sleep, showing unconsciousness.`,
-      sop: `“To the believer, death is but a small matter... The dead are resting in the grave until the resurrection.” — Steps to Christ, Ch. 8`,
-      gc: `“The doctrine of man's consciousness in death... has prepared the way for modern spiritualism and false teaching.” — Great Controversy, p. 558`,
-      sc: `“None are placed in heaven at death; the saints sleep in the dust of the earth, waiting for the resurrection.” — Selected Messages, Vol. 1, p. 232`
+      bible: `Ecclesiastes 9:5 — "For the living know that they shall die: but the dead know not any thing."\n\nJohn 11:11-14 — Jesus called Lazarus' death sleep, showing unconsciousness.`,
+      sop: `"To the believer, death is but a small matter… The dead are resting in the grave until the resurrection." — Steps to Christ, Ch. 8`,
+      gc: `"The doctrine of man's consciousness in death… has prepared the way for modern spiritualism and false teaching." — Great Controversy, p. 558`,
+      sc: `"None are placed in heaven at death; the saints sleep in the dust of the earth, waiting for the resurrection." — Selected Messages, Vol. 1, p. 232`
     },
     {
       id: "salvation-by-works",
       title: "Salvation Is Earned By Works",
       lie: "You must earn your way to heaven through your good deeds and behavior.",
-      truth: "Salvation is a gift of grace from God, received by faith alone, not by works; works are the evidence of faith, not the cause of salvation.",
-      bible: `Ephesians 2:8-9 - "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God:\nNot of works, lest any man should boast."\nTitus 3:5 - "Not by works of righteousness which we have done, but according to his mercy he saved us."\nJames 2:17 - "Faith, if it hath not works, is dead." (works show faith but don’t earn salvation)`,
-      sop: `“The sinner is justified by faith alone; yet the faith that justifies is never alone.” — Steps to Christ, Ch. 6\n“Good works are the fruits of a living faith; they do not earn salvation but are its evidence.” — Selected Messages, Vol. 1, p. 364`,
-      gc: `“By faith alone are we justified; and faith is never alone but works through love.” — Great Controversy, p. 488`,
-      sc: `“True faith will manifest itself by good works.” — Ellen G. White, Testimonies for the Church, Vol. 4, p. 210`
+      truth: "Salvation is a gift of grace from God, received by faith alone; works are the evidence of faith, not the cause.",
+      bible: `Ephesians 2:8-9 — "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast."\n\nTitus 3:5 — "Not by works of righteousness which we have done, but according to his mercy he saved us."\n\nJames 2:17 — "Faith, if it hath not works, is dead." (works show faith but don't earn salvation)`,
+      sop: `"The sinner is justified by faith alone; yet the faith that justifies is never alone." — Steps to Christ, Ch. 6\n\n"Good works are the fruits of a living faith; they do not earn salvation but are its evidence." — Selected Messages, Vol. 1, p. 364`,
+      gc: `"By faith alone are we justified; and faith is never alone but works through love." — Great Controversy, p. 488`,
+      sc: `"True faith will manifest itself by good works." — Ellen G. White, Testimonies for the Church, Vol. 4, p. 210`
     },
     {
       id: "eternal-hellfire",
       title: "Eternal Hellfire Torments The Wicked Forever",
       lie: "The wicked burn forever in hellfire after death.",
-      truth: "The wicked are destroyed—eternal punishment means eternal destruction, not eternal suffering.",
-      bible: `Matthew 10:28 - “Fear him which is able to destroy both soul and body in hell.”\nMalachi 4:1 - “The wicked shall be ashes under the soles of your feet.”`,
-      sop: `“The final destruction of the wicked is an act of divine justice, not eternal torment.” — Steps to Christ, Ch. 8`,
-      gc: `“The lake of fire represents the second death, the complete extinction of sin and sinners.” — Great Controversy, p. 665`,
-      sc: `“The wicked shall be consumed and shall go into everlasting punishment, which is destruction.” — Selected Messages, Vol. 2, p. 119`
+      truth: "The wicked are destroyed — eternal punishment means eternal destruction, not eternal suffering.",
+      bible: `Matthew 10:28 — "Fear him which is able to destroy both soul and body in hell."\n\nMalachi 4:1 — "The wicked shall be ashes under the soles of your feet."`,
+      sop: `"The final destruction of the wicked is an act of divine justice, not eternal torment." — Steps to Christ, Ch. 8`,
+      gc: `"The lake of fire represents the second death, the complete extinction of sin and sinners." — Great Controversy, p. 665`,
+      sc: `"The wicked shall be consumed and shall go into everlasting punishment, which is destruction." — Selected Messages, Vol. 2, p. 119`
     },
     {
       id: "works-salvation-only",
       title: "Good Works Alone Save You",
       lie: "If you do enough good works, you will be saved.",
-      truth: "Good works are important but cannot save without faith in Christ’s righteousness.",
-      bible: `Titus 3:5 - "Not by works of righteousness which we have done, but according to his mercy he saved us."\nGalatians 2:16 - "Knowing that a man is not justified by the works of the law, but by the faith of Jesus Christ."`,
-      sop: `“Good works are the fruit, not the root, of salvation.” — Steps to Christ, Ch. 7`,
-      gc: `“Salvation is by grace, through faith, not by works alone.” — Great Controversy, p. 489`,
-      sc: `“No man can save himself by works; it is the grace of Christ that saves.” — Testimonies, Vol. 6, p. 200`
+      truth: "Good works are important but cannot save without faith in Christ's righteousness.",
+      bible: `Titus 3:5 — "Not by works of righteousness which we have done, but according to his mercy he saved us."\n\nGalatians 2:16 — "Knowing that a man is not justified by the works of the law, but by the faith of Jesus Christ."`,
+      sop: `"Good works are the fruit, not the root, of salvation." — Steps to Christ, Ch. 7`,
+      gc: `"Salvation is by grace, through faith, not by works alone." — Great Controversy, p. 489`,
+      sc: `"No man can save himself by works; it is the grace of Christ that saves." — Testimonies, Vol. 6, p. 200`
     },
     {
       id: "sabbath-irrelevant",
       title: "The Sabbath Is No Longer Important",
       lie: "The Sabbath was only for the Old Testament and is no longer binding.",
-      truth: "The Sabbath is a perpetual sign of God’s covenant and remains a holy day of rest and worship.",
-      bible: `Exodus 20:8-11 - The Fourth Commandment about the Sabbath\nHebrews 4:9 - There remains a Sabbath rest for the people of God.`,
-      sop: `“The Sabbath is the Lord’s day, a day for rest, worship, and spiritual renewal.” — Steps to Christ, Ch. 7`,
-      gc: `“The observance of the Sabbath is a vital test of loyalty to God.” — Great Controversy, p. 437`,
-      sc: `“The Sabbath commandment is still binding upon Christians.” — Selected Messages, Vol. 1, p. 242`
+      truth: "The Sabbath is a perpetual sign of God's covenant and remains a holy day of rest and worship.",
+      bible: `Exodus 20:8-11 — The Fourth Commandment about the Sabbath.\n\nHebrews 4:9 — There remains a Sabbath rest for the people of God.`,
+      sop: `"The Sabbath is the Lord's day, a day for rest, worship, and spiritual renewal." — Steps to Christ, Ch. 7`,
+      gc: `"The observance of the Sabbath is a vital test of loyalty to God." — Great Controversy, p. 437`,
+      sc: `"The Sabbath commandment is still binding upon Christians." — Selected Messages, Vol. 1, p. 242`
     },
     {
       id: "once-saved-always-saved",
       title: "Once Saved, Always Saved",
       lie: "Once you accept Christ, you cannot lose your salvation no matter what.",
       truth: "Salvation requires continual faith and obedience; it can be forfeited by turning away from God.",
-      bible: `Hebrews 10:26-27 - Warning against willful sin after receiving knowledge of truth.\nRevelation 3:5 - Overcomers will be clothed in white garments.`,
-      sop: `“He who endures to the end will be saved; faith must be maintained.” — Steps to Christ, Ch. 9`,
-      gc: `“Salvation is conditional on faithfulness, not a guaranteed ticket.” — Great Controversy, p. 330`,
-      sc: `“It is possible to fall from grace by apostasy.” — Testimonies, Vol. 5, p. 206`
+      bible: `Hebrews 10:26-27 — Warning against willful sin after receiving knowledge of truth.\n\nRevelation 3:5 — Overcomers will be clothed in white garments.`,
+      sop: `"He who endures to the end will be saved; faith must be maintained." — Steps to Christ, Ch. 9`,
+      gc: `"Salvation is conditional on faithfulness, not a guaranteed ticket." — Great Controversy, p. 330`,
+      sc: `"It is possible to fall from grace by apostasy." — Testimonies, Vol. 5, p. 206`
     },
     {
-      id: "hell-fire-immortal-soul",
+      id: "immortal-soul",
       title: "The Soul Is Immortal and Goes to Hell",
       lie: "The soul never dies and immediately goes to heaven or hell after death.",
       truth: "The soul is not inherently immortal; it dies and awaits resurrection. Hell is the grave, not a fiery torment.",
-      bible: `Genesis 2:7 - The soul is the living body.\nEzekiel 18:4 - The soul that sins shall die.\nPsalm 146:4 - When a person dies, their thoughts perish.`,
-      sop: `“The soul that sins will die; there is no conscious existence in death.” — Steps to Christ, Ch. 8`,
-      gc: `“The immortality of the soul is a doctrine from paganism, not the Bible.” — Great Controversy, p. 527`,
-      sc: `“Death is a sleep until the resurrection.” — Selected Messages, Vol. 1, p. 232`
+      bible: `Genesis 2:7 — The soul is the living body.\n\nEzekiel 18:4 — The soul that sins shall die.\n\nPsalm 146:4 — When a person dies, their thoughts perish.`,
+      sop: `"The soul that sins will die; there is no conscious existence in death." — Steps to Christ, Ch. 8`,
+      gc: `"The immortality of the soul is a doctrine from paganism, not the Bible." — Great Controversy, p. 527`,
+      sc: `"Death is a sleep until the resurrection." — Selected Messages, Vol. 1, p. 232`
     }
   ];
 
+  /* ── DOM References ── */
   let currentIndex = 0;
-  const mythTitle = document.getElementById("mythTitle");
-  const mythLie = document.getElementById("mythLie");
-  const mythTruth = document.getElementById("mythTruth");
-  const sourceBible = document.getElementById("source-bible");
-  const sourceSOP = document.getElementById("source-sop");
-  const sourceGC = document.getElementById("source-gc");
-  const sourceSC = document.getElementById("source-sc");
+  const mythTitle   = document.getElementById("mythTitle");
+  const mythLie     = document.getElementById("mythLie");
+  const mythTruth   = document.getElementById("mythTruth");
+  const mythNumber  = document.getElementById("mythNumber");
+  const progressLabel = document.getElementById("progressLabel");
+  const progressFill  = document.getElementById("progressFill");
+  const srcBible = document.getElementById("src-bible");
+  const srcSOP   = document.getElementById("src-sop");
+  const srcGC    = document.getElementById("src-gc");
+  const srcSC    = document.getElementById("src-sc");
+  const tabs     = document.querySelectorAll(".mb-source-tab");
+  const prevBtn  = document.getElementById("prevBtn");
+  const nextBtn  = document.getElementById("nextBtn");
 
-  const tabs = document.querySelectorAll(".tab-btn");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
-
+  /* ── Update Myth Display ── */
   function updateMyth(index) {
     const myth = myths[index];
-    mythTitle.textContent = myth.title;
-    mythLie.textContent = myth.lie;
-    mythTruth.textContent = myth.truth;
-    sourceBible.textContent = myth.bible;
-    sourceSOP.textContent = myth.sop;
-    sourceGC.textContent = myth.gc;
-    sourceSC.textContent = myth.sc;
+    mythTitle.textContent  = myth.title;
+    mythLie.textContent    = myth.lie;
+    mythTruth.textContent  = myth.truth;
+    mythNumber.textContent = `MYTH ${index + 1}`;
+    srcBible.textContent   = myth.bible;
+    srcSOP.textContent     = myth.sop;
+    srcGC.textContent      = myth.gc;
+    srcSC.textContent      = myth.sc;
 
-    // Reset tabs
-    tabs.forEach(tab => {
-      tab.setAttribute("aria-selected", "false");
-      tab.setAttribute("tabindex", "-1");
-    });
-    tabs[0].setAttribute("aria-selected", "true");
-    tabs[0].setAttribute("tabindex", "0");
+    // Progress
+    progressLabel.textContent = `Myth ${index + 1} of ${myths.length}`;
+    progressFill.style.width  = `${((index + 1) / myths.length) * 100}%`;
 
-    // Show only Bible source by default
-    sourceBible.hidden = false;
-    sourceSOP.hidden = true;
-    sourceGC.hidden = true;
-    sourceSC.hidden = true;
+    // Reset source tabs
+    tabs.forEach(t => { t.setAttribute("aria-selected","false"); t.setAttribute("tabindex","-1"); });
+    tabs[0].setAttribute("aria-selected","true");
+    tabs[0].setAttribute("tabindex","0");
+    srcBible.hidden = false;
+    srcSOP.hidden = true;
+    srcGC.hidden = true;
+    srcSC.hidden = true;
 
-    // Enable/disable navigation buttons
+    // Nav buttons
     prevBtn.disabled = index === 0;
     nextBtn.disabled = index === myths.length - 1;
   }
 
-  // Tab switching logic
+  /* ── Source Tab Switching ── */
   tabs.forEach(tab => {
     tab.addEventListener("click", () => {
       if (tab.getAttribute("aria-selected") === "true") return;
-
-      // Set all tabs to false
-      tabs.forEach(t => {
-        t.setAttribute("aria-selected", "false");
-        t.setAttribute("tabindex", "-1");
-      });
-      tab.setAttribute("aria-selected", "true");
-      tab.setAttribute("tabindex", "0");
-
-      // Show the corresponding panel
-      const targetPanel = document.getElementById(tab.getAttribute("aria-controls"));
-      document.querySelectorAll(".tab-panel").forEach(panel => {
-        panel.hidden = panel !== targetPanel;
-      });
-      targetPanel.focus();
+      tabs.forEach(t => { t.setAttribute("aria-selected","false"); t.setAttribute("tabindex","-1"); });
+      tab.setAttribute("aria-selected","true");
+      tab.setAttribute("tabindex","0");
+      const target = document.getElementById(tab.getAttribute("aria-controls"));
+      document.querySelectorAll(".mb-source-panel").forEach(p => { p.hidden = (p !== target); });
+      target.focus();
     });
   });
 
-  prevBtn.addEventListener("click", () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateMyth(currentIndex);
-    }
+  /* ── Prev / Next ── */
+  prevBtn.addEventListener("click", () => { if (currentIndex > 0) { currentIndex--; updateMyth(currentIndex); } });
+  nextBtn.addEventListener("click", () => { if (currentIndex < myths.length - 1) { currentIndex++; updateMyth(currentIndex); } });
+
+  /* ── Mode Tab Switching (Myth Busting / Video Shorts) ── */
+  document.querySelectorAll(".mb-mode-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".mb-mode-btn").forEach(b => { b.classList.remove("active"); b.setAttribute("aria-pressed","false"); });
+      btn.classList.add("active");
+      btn.setAttribute("aria-pressed","true");
+      document.querySelectorAll(".mb-panel").forEach(p => p.classList.remove("active"));
+      document.getElementById("panel-" + btn.dataset.panel).classList.add("active");
+    });
   });
 
-  nextBtn.addEventListener("click", () => {
-    if (currentIndex < myths.length - 1) {
-      currentIndex++;
-      updateMyth(currentIndex);
-    }
-  });
-
-  // Initialize with first myth
-  updateMyth(currentIndex);
+  /* ── Init ── */
+  updateMyth(0);
 </script>
 
 </body>

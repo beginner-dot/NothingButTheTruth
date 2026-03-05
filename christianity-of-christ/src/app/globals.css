@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+a {
+  @apply text-indigo-700 hover:text-indigo-900;
+}
+
+.prose-block h1,
+.prose-block h2,
+.prose-block h3,
+.prose-block h4 {
+  @apply mt-6 font-serif text-slate-900;
+}
+
+.prose-block p,
+.prose-block li {
+  @apply mt-3 leading-7 text-slate-700;
+}
+
+.prose-block blockquote {
+  @apply mt-4 border-l-4 border-indigo-300 bg-indigo-50 p-4 italic text-slate-700;
+}
+
+html[data-contrast="high"] body {
+  @apply bg-black text-white;
+}
+
+html[data-contrast="high"] a {
+  @apply text-yellow-300;
+}

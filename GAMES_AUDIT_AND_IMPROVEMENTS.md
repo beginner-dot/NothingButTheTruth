@@ -13,7 +13,7 @@ This report documents detailed findings from investigating all 5 active games in
 
 ---
 
-## 🔍 **1. VERSE HUNT CHALLENGE** `versehunt.html`
+## 🔍 **1. VERSE HUNT CHALLENGE** `index.html`
 **Status:** ✅ Recently Enhanced  
 **Type:** Single-Player Timed Quiz  
 **Technology:** Vanilla JS, Canvas (Confetti), Web Audio API
@@ -221,7 +221,7 @@ const firebaseConfig = {
 
 ---
 
-## 🎯 **3. BIBLE TABOO** `Bible-taboo/bible_taboo.html`
+## 🎯 **3. BIBLE TABOO** `Bible-taboo/index.html`
 **Status:** ⚠️ Moderate Issues  
 **Type:** Multiplayer Team Word Guessing  
 **Technology:** Firebase Realtime Database
@@ -299,7 +299,7 @@ const firebaseConfig = {
 
 ---
 
-## 👥 **4. BIBLE RELAY RACE** `relay-race/relayrace.html`
+## 👥 **4. BIBLE RELAY RACE** `relay-race/index.html`
 **Status:** ⚠️ Design Limitations  
 **Type:** Turn-Based Team Quiz  
 **Technology:** Vanilla JS (No Backend)
@@ -408,7 +408,7 @@ const firebaseConfig = {
 
 ---
 
-## 💭 **5. WHO SAID IT** `Who-said-it/who-said/who_said.html`
+## 💭 **5. WHO SAID IT** `Who-said-it/who-said/index.html`
 **Status:** ✅ Recently Fixed (Partially)
 **Type:** Multiplayer Quote Attribution Quiz  
 **Technology:** Firebase Realtime Database

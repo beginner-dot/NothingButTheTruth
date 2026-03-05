@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bible Cross-References - Nothing But The Truth |......</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: radial-gradient(ellipse at center, #0a0a23 0%, #000 100%);
+            font-family: 'Georgia', serif; 
+            overflow: hidden;
+            color: white;
+        }
+        canvas { display: block; }
+        #info {
+            position: absolute; top: 20px; left: 20px; 
+            background: rgba(0,0,0,0.8); padding: 20px; border-radius: 15px;
+            backdrop-filter: blur(10px); font-size: 16px;
+        }
+        #tooltip {
+            position: absolute; background: rgba(255,255,255,0.95); 
+            color: #1a1a2e; padding: 15px 25px; border-radius: 10px;
+            font-size: 18px; pointer-events: none; display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        #legend {
+            position: absolute; bottom: 20px; right: 20px;
+            background: rgba(0,0,0,0.7); padding: 15px; border-radius: 10px;
+            font-size: 14px; text-align: center;
+        }
+    </style>
+              <meta name="description" content="Bible Cross-References - Nothing But The Truth |...... — Bible-centered content from NothingButTheTRUTH including studies, devotions, videos, and...">
+              <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+              <link rel="canonical" href="https://NothingButTheTRUTH.web.app/new-model.html">
+              <meta property="og:type" content="website">
+              <meta property="og:title" content="Bible Cross-References - Nothing But The Truth |......">
+              <meta property="og:description" content="Bible Cross-References - Nothing But The Truth |...... — Bible-centered content from NothingButTheTRUTH including studies, devotions, videos, and...">
+              <meta property="og:url" content="https://NothingButTheTRUTH.web.app/new-model.html">
+              <meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+              <meta name="twitter:card" content="summary_large_image">
+              <meta name="twitter:title" content="Bible Cross-References - Nothing But The Truth |......">
+              <meta name="twitter:description" content="Bible Cross-References - Nothing But The Truth |...... — Bible-centered content from NothingButTheTRUTH including studies, devotions, videos, and...">
+              <meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Bible Cross-References - Nothing But The Truth","description":"Bible Cross-References - Nothing But The Truth — Bible-centered content from NothingButTheTRUTH including studies, devotions, videos, and interactive faith resources.","url":"https://NothingButTheTRUTH.web.app/new-model.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTRUTH","url":"https://NothingButTheTRUTH.web.app"}}
+  </script>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta name="keywords" content="Bible study, Christian devotion, Scripture, NothingButTheTRUTH, bible, cross, references, nothing, truth">
+            <meta name="author" content="NothingButTheTRUTH">
+            <meta property="og:site_name" content="NothingButTheTRUTH">
+            <meta property="og:locale" content="en_US">
+</head>
+<body>
+    <canvas id="bible-arcs"></canvas>
+    
+    <div id="info">
+        <div>📖 Bible Cross-References</div>
+        <div>63,779 connections • Mouse over timeline</div>
+    </div>
+    
+    <div id="tooltip"></div>
+    <div id="legend">
+        <div>Genesis → Revelation</div>
+        <div style="height:4px; background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24); margin-top:5px;"></div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('bible-arcs');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height * 0.7;
+        const timelineHeight = 60;
+
+        // Bible structure: books → chapters → verse counts (simplified)
+        const bibleBooks = [
+            {name: "Genesis", chapters: 50}, {name: "Exodus", chapters: 40}, 
+            {name: "Matthew", chapters: 28}, {name: "John", chapters: 21},
+            {name: "Revelation", chapters: 22}
+        ];
+
+        // Generate cross-references (simplified network)
+        const crossReferences = [];
+        for(let i = 0; i < 5000; i++) {
+            const book1 = Math.floor(Math.random() * bibleBooks.length);
+            const book2 = Math.floor(Math.random() * bibleBooks.length);
+            if(book1 !== book2) {
+                crossReferences.push({
+                    start: Math.random(),
+                    end: Math.random(),
+                    thickness: Math.random() * 2 + 0.5,
+                    colorDistance: Math.abs(book1 - book2) / bibleBooks.length
+                });
+            }
+        }
+
+        let hoveredChapter = -1;
+        let time = 0;
+        let mouseX = 0;
+
+        // Mouse interaction
+        canvas.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            hoveredChapter = Math.floor((mouseX / canvas.width) * 1189); // Total chapters
+        });
+
+        function drawTimeline() {
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+            gradient.addColorStop(0, '#ff6b6b'); gradient.addColorStop(0.25, '#4ecdc4');
+            gradient.addColorStop(0.5, '#45b7d1'); gradient.addColorStop(0.75, '#f9ca24');
+            gradient.addColorStop(1, '#ff9ff3');
+            
+            ctx.fillStyle = 'rgba(10, 10, 35, 0.3)';
+            ctx.fillRect(0, centerY - timelineHeight/2, canvas.width, timelineHeight);
+            
+            // Timeline chapters
+            ctx.fillStyle = gradient;
+            ctx.shadowColor = '#ffffff';
+            ctx.shadowBlur = 20;
+            for(let i = 0; i < 100; i++) {
+                const x = (i / 99) * canvas.width;
+                const height = 8 + Math.sin(time * 0.1 + i * 0.2) * 3;
+                ctx.fillRect(x - 2, centerY - height/2, 4, height);
+            }
+            ctx.shadowBlur = 0;
+
+            // Book labels
+            ctx.fillStyle = 'rgba(255,255,255,0.8)';
+            ctx.font = 'bold 16px Georgia';
+            ctx.textAlign = 'center';
+            bibleBooks.forEach((book, i) => {
+                const totalChapters = bibleBooks.slice(0,i+1).reduce((sum, b) => sum + b.chapters, 0);
+                const x = (totalChapters / 1189) * canvas.width;
+                ctx.fillText(book.name, x, centerY + 35);
+            });
+        }
+
+        function drawArcs() {
+            crossReferences.forEach(ref => {
+                const startX = ref.start * canvas.width;
+                const endX = ref.end * canvas.width;
+                const midY = centerY - 100 - Math.sin(time * 0.05 + ref.start * 10) * 20;
+                const thickness = ref.thickness * (hoveredChapter === -1 ? 0.3 : 1);
+                
+                // Rainbow color by distance
+                const hue = (ref.colorDistance * 360 + time * 2) % 360;
+                const color = `hsla(${hue}, 70%, 60%, ${thickness * 0.3})`;
+                
+                // Glow effect
+                ctx.shadowColor = color.replace('0.3)', '0.8)');
+                ctx.shadowBlur = 15;
+                
+                ctx.strokeStyle = color;
+                ctx.lineWidth = thickness;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.moveTo(startX, centerY);
+                ctx.quadraticCurveTo((startX + endX)/2, midY, endX, centerY);
+                ctx.stroke();
+            });
+            ctx.shadowBlur = 0;
+        }
+
+        function drawHoveredConnections() {
+            if(hoveredChapter !== -1) {
+                ctx.shadowColor = '#ffd700';
+                ctx.shadowBlur = 30;
+                
+                crossReferences.forEach(ref => {
+                    const startChapter = Math.floor(ref.start * 1189);
+                    const endChapter = Math.floor(ref.end * 1189);
+                    
+                    if(startChapter === hoveredChapter || endChapter === hoveredChapter) {
+                        const startX = ref.start * canvas.width;
+                        const endX = ref.end * canvas.width;
+                        const midY = centerY - 150;
+                        
+                        const gradient = ctx.createLinearGradient(startX, centerY, endX, centerY);
+                        gradient.addColorStop(0, '#ffd700');
+                        gradient.addColorStop(0.5, '#ffed4a');
+                        gradient.addColorStop(1, '#ffd700');
+                        
+                        ctx.strokeStyle = gradient;
+                        ctx.lineWidth = 4;
+                        ctx.lineCap = 'round';
+                        ctx.beginPath();
+                        ctx.moveTo(startX, centerY);
+                        ctx.quadraticCurveTo((startX + endX)/2, midY, endX, centerY);
+                        ctx.stroke();
+                    }
+                });
+            }
+        }
+
+        function drawTooltip() {
+            if(hoveredChapter !== -1) {
+                const tooltip = document.getElementById('tooltip');
+                const bookIndex = Math.floor(hoveredChapter / 50) % bibleBooks.length;
+                tooltip.innerHTML = `
+                    <strong>${bibleBooks[bookIndex].name}</strong><br>
+                    Chapter ${hoveredChapter % bibleBooks[bookIndex].chapters + 1}<br>
+                    <small>Hover to see connections</small>
+                `;
+                tooltip.style.left = mouseX + 15 + 'px';
+                tooltip.style.top = (centerY - 60) + 'px';
+                tooltip.style.display = 'block';
+            } else {
+                document.getElementById('tooltip').style.display = 'none';
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            ctx.fillStyle = 'rgba(10, 10, 35, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            drawTimeline();
+            drawArcs();
+            drawHoveredConnections();
+            drawTooltip();
+            
+            time += 1;
+        }
+
+        // Resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        animate();
+        console.log('✅ Bible Cross-References loaded!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Advent Quest — Watch, Learn, Prepare | NothingButTheTRUTH</title>
+<meta name="description" content="A premium Bible learning game on the Second Advent. Answer prophecy and mission challenges, unlock lesson cards, and strengthen your preparation mindset.">
+<meta name="keywords" content="Bible game, Second Advent, prophecy, Christian quiz, NothingButTheTRUTH">
+<meta name="author" content="NothingButTheTRUTH">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/second-advent-quest/index.html">
+<meta property="og:title" content="Second Advent Quest — Watch, Learn, Prepare | NothingButTheTRUTH">
+<meta property="og:description" content="A high-quality interactive game focused on the hope, mission, and preparation of the Second Advent.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://NothingButTheTRUTH.web.app/games/second-advent-quest/index.html">
+<meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Second Advent Quest — Watch, Learn, Prepare | NothingButTheTRUTH">
+<meta name="twitter:description" content="A high-quality interactive game focused on the hope, mission, and preparation of the Second Advent.">
+<meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Second Advent Quest","description":"An interactive Bible game centered on Second Advent lessons using site study sources.","url":"https://NothingButTheTRUTH.web.app/games/second-advent-quest/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTRUTH","url":"https://NothingButTheTRUTH.web.app"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root {
+  --bg:#060812;
+  --bg2:#10142d;
+  --card:rgba(255,255,255,0.06);
+  --card2:rgba(255,255,255,0.1);
+  --text:#f5f7ff;
+  --sub:rgba(255,255,255,0.72);
+  --purple:#a855f7;
+  --blue:#3b82f6;
+  --gold:#f59e0b;
+  --green:#22c55e;
+  --red:#ef4444;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  color:var(--text);
+  background: radial-gradient(ellipse at 20% 10%, rgba(168,85,247,.16), transparent 45%), radial-gradient(ellipse at 80% 90%, rgba(59,130,246,.16), transparent 50%), var(--bg);
+  min-height:100vh;
+  padding:20px;
+  overflow-x:hidden;
+}
+.container{max-width:980px;margin:0 auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.back-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  text-decoration:none;color:var(--sub);font-weight:600;font-size:.92rem;
+  border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:10px 16px;
+  background:rgba(255,255,255,.04)
+}
+.brand{font-weight:800;letter-spacing:.03em;background:linear-gradient(135deg,var(--purple),#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.screen{display:none}
+.screen.active{display:block}
+.hero{
+  border:1px solid rgba(168,85,247,.35);
+  background:linear-gradient(135deg, rgba(168,85,247,.14), rgba(59,130,246,.12));
+  border-radius:20px;padding:34px 24px;margin-bottom:16px;text-align:center
+}
+.hero h1{font-size:clamp(1.9rem,4.6vw,3rem);margin-bottom:8px}
+.hero p{color:#ebe9ff;max-width:760px;margin:0 auto;line-height:1.65}
+.mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:18px 0}
+.mode-btn{
+  text-align:left;border:1px solid rgba(255,255,255,.14);background:var(--card);color:var(--text);
+  border-radius:14px;padding:14px;cursor:pointer;transition:.25s
+}
+.mode-btn:hover{transform:translateY(-2px);border-color:rgba(168,85,247,.65)}
+.mode-btn.active{border-color:var(--gold);box-shadow:0 0 0 2px rgba(245,158,11,.25) inset;background:rgba(245,158,11,.1)}
+.mode-btn .title{font-weight:700}
+.mode-btn .meta{font-size:.82rem;color:var(--sub);margin-top:4px}
+.play-btn{
+  border:none;border-radius:14px;padding:14px 26px;font-size:1.02rem;
+  background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff;font-weight:800;cursor:pointer
+}
+.info-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:16px}
+.info-card{background:var(--card);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px;text-align:left}
+.info-card h3{font-size:.9rem;margin-bottom:4px}
+.info-card p{font-size:.82rem;color:var(--sub)}
+.game-shell{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);border-radius:18px;padding:16px}
+.hud{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.stat{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:11px;padding:10px;text-align:center}
+.stat .label{font-size:.72rem;color:var(--sub);text-transform:uppercase;letter-spacing:.04em}
+.stat .value{font-size:1.15rem;font-weight:800;margin-top:2px}
+.timer-wrap{height:9px;background:rgba(255,255,255,.09);border-radius:999px;overflow:hidden;margin-bottom:14px}
+.timer-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--green),var(--gold));transition:width .2s linear}
+.question-card{background:var(--bg2);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px;margin-bottom:12px}
+.question-tag{display:inline-block;font-size:.72rem;font-weight:700;background:rgba(168,85,247,.2);border:1px solid rgba(168,85,247,.35);padding:5px 10px;border-radius:999px;margin-bottom:10px}
+#questionText{font-size:1.15rem;line-height:1.6}
+.options{display:grid;gap:10px}
+.option-btn{
+  text-align:left;border:1px solid rgba(255,255,255,.14);background:var(--card);color:var(--text);
+  border-radius:12px;padding:13px 14px;font-size:.95rem;cursor:pointer;transition:.2s
+}
+.option-btn:hover{border-color:rgba(59,130,246,.65);transform:translateX(3px)}
+.option-btn.correct{background:rgba(34,197,94,.18);border-color:rgba(34,197,94,.75)}
+.option-btn.wrong{background:rgba(239,68,68,.16);border-color:rgba(239,68,68,.7)}
+.option-btn:disabled{cursor:not-allowed;opacity:.86}
+.feedback{margin-top:10px;min-height:1.5em;font-weight:700}
+.feedback.good{color:#86efac}
+.feedback.bad{color:#fca5a5}
+.lesson-card{display:none;margin-top:12px;background:linear-gradient(135deg,rgba(168,85,247,.16),rgba(59,130,246,.12));border:1px solid rgba(168,85,247,.35);border-radius:12px;padding:14px}
+.lesson-card.show{display:block}
+.lesson-card h4{margin-bottom:6px}
+.lesson-card p{font-size:.9rem;line-height:1.58;color:#ecebff}
+.lesson-src{margin-top:8px;font-size:.78rem;color:#d6d3f5;opacity:.9}
+.lesson-actions{margin-top:10px;display:flex;justify-content:flex-end}
+.next-btn{border:none;border-radius:10px;padding:10px 14px;font-weight:700;background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;cursor:pointer}
+.end{
+  text-align:center;border:1px solid rgba(255,255,255,.12);border-radius:18px;
+  background:linear-gradient(135deg, rgba(168,85,247,.15), rgba(59,130,246,.12));padding:26px
+}
+.end h2{font-size:2rem;margin-bottom:8px}
+.end p{color:#ecebff}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+.score-item{background:var(--card2);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:12px}
+.score-item .k{font-size:.74rem;color:var(--sub);text-transform:uppercase;letter-spacing:.04em}
+.score-item .v{font-size:1.2rem;font-weight:800}
+.recap{margin-top:10px;text-align:left;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px}
+.recap h3{margin-bottom:8px}
+.recap ul{padding-left:18px;line-height:1.7;color:#eef1ff;font-size:.92rem}
+.end-actions{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.end-actions button,.end-actions a{border:none;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.btn-restart{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff}
+.btn-hub{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+kbd{display:inline-block;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.13);font-size:.72rem}
+@media(max-width:760px){
+  .hud{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{padding:24px 16px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <a class="back-btn" href="../../all-games.html"><i class="fas fa-arrow-left"></i> All Games</a>
+    <div class="brand">SECOND ADVENT QUEST</div>
+  </div>
+
+  <section id="startScreen" class="screen active" aria-label="Start screen">
+    <div class="hero">
+      <h1>✨ Second Advent Quest</h1>
+      <p>Play a premium mission-style Bible challenge focused on the <strong>Second Advent</strong>. Answer correctly, unlock lesson cards from your study sources, and finish with a practical preparation recap.</p>
+
+      <div class="mode-grid" id="modeGrid" role="radiogroup" aria-label="Difficulty mode">
+        <button class="mode-btn active" data-mode="watchful" role="radio" aria-checked="true">
+          <div class="title">Watchful</div>
+          <div class="meta">9 questions • 25s/question • Gentle pacing</div>
+        </button>
+        <button class="mode-btn" data-mode="herald" role="radio" aria-checked="false">
+          <div class="title">Herald</div>
+          <div class="meta">11 questions • 20s/question • Balanced challenge</div>
+        </button>
+        <button class="mode-btn" data-mode="faithful" role="radio" aria-checked="false">
+          <div class="title">Faithful</div>
+          <div class="meta">12 questions • 16s/question • High focus mode</div>
+        </button>
+      </div>
+
+      <button id="startBtn" class="play-btn"><i class="fas fa-play"></i> Start Quest</button>
+
+      <div class="info-row">
+        <article class="info-card"><h3>📚 Source-anchored</h3><p>Lessons are based on your studies content: <em>Preparing People to Meet God Pt. 2</em>, <em>History of Christian Faith</em>, and <em>The Lord’s Supper</em>.</p></article>
+        <article class="info-card"><h3>🎮 Perfect flow</h3><p>Timed rounds, streak scoring, keyboard support (<kbd>1</kbd>-<kbd>4</kbd>), and stable start behavior with <code>?play=1</code>.</p></article>
+        <article class="info-card"><h3>🏆 Progress memory</h3><p>Saves high score and best accuracy locally so improvement stays visible between sessions.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="gameScreen" class="screen" aria-label="Game screen">
+    <div class="game-shell">
+      <div class="hud">
+        <div class="stat"><div class="label">Score</div><div id="scoreStat" class="value">0</div></div>
+        <div class="stat"><div class="label">Streak</div><div id="streakStat" class="value">0</div></div>
+        <div class="stat"><div class="label">Lives</div><div id="livesStat" class="value">3</div></div>
+        <div class="stat"><div class="label">Question</div><div id="questionStat" class="value">1/9</div></div>
+        <div class="stat"><div class="label">Time</div><div id="timeStat" class="value">25s</div></div>
+      </div>
+
+      <div class="timer-wrap" aria-hidden="true"><div id="timerFill" class="timer-fill"></div></div>
+
+      <article class="question-card">
+        <div id="questionTag" class="question-tag">Second Advent Focus</div>
+        <h2 id="questionText">Question text</h2>
+        <div id="options" class="options" aria-live="polite"></div>
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+
+        <div id="lessonCard" class="lesson-card" aria-live="polite">
+          <h4>📖 Lesson Insight</h4>
+          <p id="lessonText"></p>
+          <div id="lessonSource" class="lesson-src"></div>
+          <div class="lesson-actions">
+            <button id="nextBtn" class="next-btn">Continue <i class="fas fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="endScreen" class="screen" aria-label="Results screen">
+    <div class="end">
+      <h2 id="endTitle">Quest Complete!</h2>
+      <p id="endSubtitle">You finished the mission.</p>
+
+      <div class="score-grid">
+        <div class="score-item"><div class="k">Final Score</div><div id="finalScore" class="v">0</div></div>
+        <div class="score-item"><div class="k">Accuracy</div><div id="finalAccuracy" class="v">0%</div></div>
+        <div class="score-item"><div class="k">Best Streak</div><div id="finalStreak" class="v">0</div></div>
+        <div class="score-item"><div class="k">High Score</div><div id="bestScore" class="v">0</div></div>
+      </div>
+
+      <div class="recap">
+        <h3>🧭 Second Advent Lesson Recap</h3>
+        <ul id="recapList"></ul>
+      </div>
+
+      <div class="end-actions">
+        <button id="restartBtn" class="btn-restart"><i class="fas fa-rotate-right"></i> Play Again</button>
+        <a class="btn-hub" href="../../all-games.html"><i class="fas fa-gamepad"></i> Game Hub</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function launchTopGuard(){
+  if(window.location.search.includes('play=1')){
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    document.addEventListener('DOMContentLoaded', () => {
+      window.scrollTo(0,0);
+      requestAnimationFrame(() => window.scrollTo(0,0));
+      setTimeout(() => window.scrollTo(0,0), 60);
+    });
+  }
+})();
+
+const modes = {
+  watchful: { questions: 9, seconds: 25, scoreMultiplier: 1 },
+  herald: { questions: 11, seconds: 20, scoreMultiplier: 1.15 },
+  faithful: { questions: 12, seconds: 16, scoreMultiplier: 1.3 }
+};
+
+const questionBank = [
+  {
+    tag: 'Advent Movement',
+    question: 'In your study history page, what movement highlighted prophecy about Jesus\' second coming in the early 1800s?',
+    options: ['The Great Advent Awakening', 'The Council of Nicaea', 'The Protestant State Church', 'The Medieval Monastic Reform'],
+    answer: 0,
+    lesson: 'The Great Advent Awakening called people to seriously study Daniel and Revelation concerning Christ\'s return.',
+    source: 'Source: Studies/history_of_christian_faith.html'
+  },
+  {
+    tag: 'Prophetic Study',
+    question: 'According to your source, William Miller centered his expectation on which prophecy text?',
+    options: ['Daniel 8:14', 'Genesis 1:1', 'Psalm 23', 'Acts 2'],
+    answer: 0,
+    lesson: 'The study explains that Miller used Daniel 8:14 and warned people to prepare for the Lord\'s coming.',
+    source: 'Source: Studies/history_of_christian_faith.html'
+  },
+  {
+    tag: '1844 Insight',
+    question: 'After the Great Disappointment, what did the remaining believers conclude?',
+    options: ['The date was wrong and prophecy failed', 'The date was right but the event was misunderstood', 'Prophecy should not be studied', 'Jesus already returned invisibly in Rome'],
+    answer: 1,
+    lesson: 'Your study states they concluded the date was correct but the event referred to a heavenly sanctuary phase, not Christ returning to earth in 1844.',
+    source: 'Source: Studies/history_of_christian_faith.html'
+  },
+  {
+    tag: 'Mission',
+    question: 'The “Prepare ye the way of the Lord” message in your source says we should prepare the way for which event?',
+    options: ['A political reform', 'The second advent of the Saviour', 'A new temple in Jerusalem', 'A new gospel'],
+    answer: 1,
+    lesson: 'The study clearly says: as John prepared the way for the first coming, believers today prepare for Christ\'s second advent.',
+    source: 'Source: Studies/preparing_people_to_meet_God_pt_2.html'
+  },
+  {
+    tag: 'Reform Focus',
+    question: 'What does your source say publishing institutions should present in clear lines before the world?',
+    options: ['Human traditions', 'Political strategy', 'Necessity of obedience to God\'s commandments', 'Economic prosperity doctrine'],
+    answer: 2,
+    lesson: 'The source emphasizes obedience to all God\'s commandments as part of preparation work for the second advent.',
+    source: 'Source: Studies/preparing_people_to_meet_God_pt_2.html'
+  },
+  {
+    tag: 'Everlasting Gospel',
+    question: 'Which Revelation message is connected in your source with end-time preparation?',
+    options: ['Revelation 2:10 only', 'Revelation 14:6-7', 'Revelation 1:1 only', 'Revelation 22:21 only'],
+    answer: 1,
+    lesson: 'Your page links second-advent preparation to the everlasting gospel and the call to fear God because the hour of His judgment is come.',
+    source: 'Source: Studies/preparing_people_to_meet_God_pt_2.html'
+  },
+  {
+    tag: 'Hope',
+    question: 'In your Lord\'s Supper study, Communion points forward to which future reality?',
+    options: ['A purely symbolic memory with no future meaning', 'The Second Coming of Christ in power and glory', 'A temple rebuilding schedule', 'A national revival only'],
+    answer: 1,
+    lesson: 'The source teaches Communion is observed “until he comes,” keeping believers focused on Christ\'s return.',
+    source: 'Source: Studies/the_lords_supper.html'
+  },
+  {
+    tag: 'Practical Readiness',
+    question: 'What practical posture does your source connect with second-advent hope?',
+    options: ['Spiritual apathy', 'Self-examination and character preparation', 'Ignoring doctrine', 'Waiting without mission'],
+    answer: 1,
+    lesson: 'The study ties end-time hope with self-examination, covenant renewal, and aligning life with God\'s teachings.',
+    source: 'Source: Studies/the_lords_supper.html'
+  },
+  {
+    tag: 'Final Conflict',
+    question: 'In your Christian history study, what central issue is highlighted in the final conflict?',
+    options: ['Geographical borders', 'The law of God, especially Sabbath faithfulness', 'Ancient language debates', 'Agricultural reform'],
+    answer: 1,
+    lesson: 'Your source frames the final conflict around allegiance to God and obedience to His commandments under pressure.',
+    source: 'Source: Studies/history_of_christian_faith.html'
+  },
+  {
+    tag: 'Victory Theme',
+    question: 'How does your history study describe the ending hope for God\'s people?',
+    options: ['Uncertainty with no final victory', 'Ultimate and glorious victory at the Second Advent', 'Only institutional survival', 'Private spirituality without mission'],
+    answer: 1,
+    lesson: 'The conclusion promises glorious victory for God\'s people at the Second Advent.',
+    source: 'Source: Studies/history_of_christian_faith.html'
+  },
+  {
+    tag: 'Message Tone',
+    question: 'John the Baptist\'s model message in your source is best summarized as:',
+    options: ['Repent and prepare the way of the Lord', 'Relax and ignore prophecy', 'Replace Scripture with culture', 'Seek signs without obedience'],
+    answer: 0,
+    lesson: 'The cited Matthew 3 passage and commentary present repentance and preparation as the model for end-time proclamation.',
+    source: 'Source: Studies/preparing_people_to_meet_God_pt_2.html'
+  },
+  {
+    tag: 'Stewardship',
+    question: 'Your source says God\'s workers should focus on:',
+    options: ['What cannot be done', 'What can be done through God\'s strength', 'Human power first', 'No organized mission'],
+    answer: 1,
+    lesson: 'The preparation message calls believers to active cooperation with God, trusting His unlimited resources.',
+    source: 'Source: Studies/preparing_people_to_meet_God_pt_2.html'
+  },
+  {
+    tag: 'Blessed Hope',
+    question: 'In your Lord\'s Supper study, Second Advent hope is described as what kind of guidance?',
+    options: ['A temporary feeling', 'The North Star of duty', 'An optional extra', 'A private mystery with no mission'],
+    answer: 1,
+    lesson: 'The source calls Second Advent hope a steady guide that shapes faithful daily living.',
+    source: 'Source: Studies/the_lords_supper.html'
+  },
+  {
+    tag: 'Purpose',
+    question: 'Miller\'s stated goal in the Advent movement (per your source) was to:',
+    options: ['Start a political movement', 'Warn the world and prepare people for the Lord\'s coming', 'Reject Bible prophecy', 'Form a social club'],
+    answer: 1,
+    lesson: 'Your history source highlights warning, preparation, and mission as the movement\'s purpose.',
+    source: 'Source: Studies/history_of_christian_faith.html'
+  }
+];
+
+const startScreen = document.getElementById('startScreen');
+const gameScreen = document.getElementById('gameScreen');
+const endScreen = document.getElementById('endScreen');
+const modeButtons = Array.from(document.querySelectorAll('.mode-btn'));
+const startBtn = document.getElementById('startBtn');
+const nextBtn = document.getElementById('nextBtn');
+const restartBtn = document.getElementById('restartBtn');
+
+const scoreStat = document.getElementById('scoreStat');
+const streakStat = document.getElementById('streakStat');
+const livesStat = document.getElementById('livesStat');
+const questionStat = document.getElementById('questionStat');
+const timeStat = document.getElementById('timeStat');
+const timerFill = document.getElementById('timerFill');
+const questionTag = document.getElementById('questionTag');
+const questionText = document.getElementById('questionText');
+const optionsWrap = document.getElementById('options');
+const feedbackEl = document.getElementById('feedback');
+const lessonCard = document.getElementById('lessonCard');
+const lessonText = document.getElementById('lessonText');
+const lessonSource = document.getElementById('lessonSource');
+
+const endTitle = document.getElementById('endTitle');
+const endSubtitle = document.getElementById('endSubtitle');
+const finalScore = document.getElementById('finalScore');
+const finalAccuracy = document.getElementById('finalAccuracy');
+const finalStreak = document.getElementById('finalStreak');
+const bestScore = document.getElementById('bestScore');
+const recapList = document.getElementById('recapList');
+
+let selectedMode = 'watchful';
+let questions = [];
+let qIndex = 0;
+let score = 0;
+let streak = 0;
+let bestStreak = 0;
+let lives = 3;
+let correctCount = 0;
+let answered = false;
+let timeLeft = 0;
+let timer = null;
+let lessonRecap = new Set();
+
+function shuffle(arr){
+  const copy = [...arr];
+  for(let i = copy.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function setActiveMode(mode){
+  selectedMode = mode;
+  modeButtons.forEach(btn => {
+    const active = btn.dataset.mode === mode;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-checked', active ? 'true' : 'false');
+  });
+}
+
+modeButtons.forEach(btn => {
+  btn.addEventListener('click', () => setActiveMode(btn.dataset.mode));
+});
+
+function switchScreen(target){
+  [startScreen, gameScreen, endScreen].forEach(s => s.classList.remove('active'));
+  target.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function updateHud(){
+  scoreStat.textContent = score;
+  streakStat.textContent = streak;
+  livesStat.textContent = lives;
+  questionStat.textContent = `${Math.min(qIndex + 1, questions.length)}/${questions.length}`;
+  timeStat.textContent = `${Math.max(0, Math.ceil(timeLeft))}s`;
+}
+
+function clearTimer(){
+  if(timer){
+    clearInterval(timer);
+    timer = null;
+  }
+}
+
+function startTimer(){
+  clearTimer();
+  const max = modes[selectedMode].seconds;
+  timeLeft = max;
+  timerFill.style.width = '100%';
+  timer = setInterval(() => {
+    timeLeft -= 0.1;
+    const pct = Math.max(0, (timeLeft / max) * 100);
+    timerFill.style.width = `${pct}%`;
+    timeStat.textContent = `${Math.max(0, Math.ceil(timeLeft))}s`;
+    if(timeLeft <= 0){
+      clearTimer();
+      if(!answered) handleAnswer(-1);
+    }
+  }, 100);
+}
+
+function lockOptions(){
+  optionsWrap.querySelectorAll('button').forEach(btn => btn.disabled = true);
+}
+
+function revealLesson(question){
+  lessonText.textContent = question.lesson;
+  lessonSource.textContent = question.source;
+  lessonCard.classList.add('show');
+  lessonRecap.add(question.lesson);
+}
+
+function handleAnswer(selectedIndex){
+  if(answered) return;
+  answered = true;
+  clearTimer();
+
+  const q = questions[qIndex];
+  const optionButtons = Array.from(optionsWrap.querySelectorAll('button'));
+
+  lockOptions();
+  optionButtons.forEach((btn, idx) => {
+    if(idx === q.answer) btn.classList.add('correct');
+    if(selectedIndex === idx && idx !== q.answer) btn.classList.add('wrong');
+  });
+
+  if(selectedIndex === q.answer){
+    streak += 1;
+    bestStreak = Math.max(bestStreak, streak);
+    correctCount += 1;
+    const timeBonus = Math.max(0, Math.floor(timeLeft)) * 4;
+    const streakBonus = streak * 15;
+    const base = 100;
+    score += Math.round((base + timeBonus + streakBonus) * modes[selectedMode].scoreMultiplier);
+    feedbackEl.textContent = '✅ Correct! Great readiness insight.';
+    feedbackEl.className = 'feedback good';
+  } else {
+    lives -= 1;
+    streak = 0;
+    score = Math.max(0, score - 40);
+    feedbackEl.textContent = selectedIndex === -1 ? '⏱️ Time expired. Lesson still unlocked below.' : '❌ Not quite. Review the lesson and keep going.';
+    feedbackEl.className = 'feedback bad';
+  }
+
+  updateHud();
+  revealLesson(q);
+
+  if(lives <= 0){
+    nextBtn.textContent = 'See Results';
+  } else if(qIndex >= questions.length - 1){
+    nextBtn.textContent = 'Finish Quest';
+  } else {
+    nextBtn.textContent = 'Continue';
+  }
+}
+
+function renderQuestion(){
+  answered = false;
+  feedbackEl.textContent = '';
+  feedbackEl.className = 'feedback';
+  lessonCard.classList.remove('show');
+
+  const q = questions[qIndex];
+  questionTag.textContent = q.tag;
+  questionText.textContent = q.question;
+  optionsWrap.innerHTML = '';
+
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = `${idx + 1}. ${opt}`;
+    btn.addEventListener('click', () => handleAnswer(idx));
+    optionsWrap.appendChild(btn);
+  });
+
+  updateHud();
+  startTimer();
+}
+
+function buildRecap(){
+  const keyLessons = Array.from(lessonRecap).slice(0, 4);
+  const fallback = [
+    'The Second Advent hope is mission-focused, not passive.',
+    'Preparation includes repentance, obedience, and proclamation.',
+    'Christ\'s return remains the church\'s blessed hope and direction.'
+  ];
+  const items = keyLessons.length ? keyLessons : fallback;
+  recapList.innerHTML = items.map(text => `<li>${text}</li>`).join('');
+}
+
+function getPerformanceTitle(accuracy){
+  if(accuracy >= 90) return '🏆 Herald of Hope!';
+  if(accuracy >= 75) return '✨ Watchful and Strong';
+  if(accuracy >= 60) return '🕊️ Growing in Readiness';
+  return '📘 Keep Learning, Keep Preparing';
+}
+
+function endGame(){
+  clearTimer();
+  switchScreen(endScreen);
+
+  const totalAsked = Math.max(1, qIndex + 1);
+  const accuracy = Math.round((correctCount / totalAsked) * 100);
+  endTitle.textContent = getPerformanceTitle(accuracy);
+  endSubtitle.textContent = `Mode: ${selectedMode.toUpperCase()} • Completed: ${totalAsked}/${questions.length} questions`;
+
+  finalScore.textContent = String(score);
+  finalAccuracy.textContent = `${accuracy}%`;
+  finalStreak.textContent = String(bestStreak);
+
+  const high = Number(localStorage.getItem('saq_high_score') || 0);
+  const bestAcc = Number(localStorage.getItem('saq_best_accuracy') || 0);
+  const newHigh = Math.max(high, score);
+  const newBestAcc = Math.max(bestAcc, accuracy);
+  localStorage.setItem('saq_high_score', String(newHigh));
+  localStorage.setItem('saq_best_accuracy', String(newBestAcc));
+
+  bestScore.textContent = String(newHigh);
+  buildRecap();
+}
+
+function startGame(){
+  const config = modes[selectedMode];
+  questions = shuffle(questionBank).slice(0, config.questions);
+  qIndex = 0;
+  score = 0;
+  streak = 0;
+  bestStreak = 0;
+  lives = 3;
+  correctCount = 0;
+  answered = false;
+  lessonRecap = new Set();
+
+  switchScreen(gameScreen);
+  renderQuestion();
+}
+
+nextBtn.addEventListener('click', () => {
+  if(!answered) return;
+  if(lives <= 0){
+    endGame();
+    return;
+  }
+  qIndex += 1;
+  if(qIndex >= questions.length){
+    endGame();
+    return;
+  }
+  renderQuestion();
+});
+
+startBtn.addEventListener('click', startGame);
+restartBtn.addEventListener('click', () => {
+  switchScreen(startScreen);
+  setTimeout(() => startGame(), 60);
+});
+
+document.addEventListener('keydown', (e) => {
+  if(!gameScreen.classList.contains('active')) return;
+  if(answered) return;
+  const idx = Number(e.key) - 1;
+  if(idx >= 0 && idx <= 3){
+    const btns = optionsWrap.querySelectorAll('button');
+    if(btns[idx]) handleAnswer(idx);
+  }
+});
+</script>
+</body>
+</html>

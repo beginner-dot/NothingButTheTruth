@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Stats &amp; Achievements — Bible Games | NothingButTheTRUTH</title>
+    <meta name="description" content="Track your personal bests, unlock achievements, and complete daily challenges across 15 free Bible games on NothingButTheTRUTH.">
+    <meta name="keywords" content="Bible games, achievements, leaderboard, personal best, high scores, NothingButTheTRUTH">
+    <meta name="author" content="NothingButTheTRUTH">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/leaderboard.html">
+    <meta property="og:title" content="My Stats & Achievements — Bible Games | NothingButTheTRUTH">
+    <meta property="og:description" content="Track your personal bests, unlock achievements, and complete daily challenges across 15 free Bible games.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://NothingButTheTRUTH.web.app/games/leaderboard.html">
+    <meta property="og:site_name" content="NothingButTheTRUTH">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Stats & Achievements — Bible Games | NothingButTheTRUTH">
+    <meta name="twitter:description" content="Track your personal bests, unlock achievements, and complete daily challenges across 15 free Bible games.">
+    <meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebPage","name":"My Stats & Achievements","description":"Track your personal bests across 15 free Bible games.","url":"https://NothingButTheTRUTH.web.app/games/leaderboard.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTRUTH","url":"https://NothingButTheTRUTH.web.app"}}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #060818;
+            --bg2: #0c1030;
+            --bg3: #111540;
+            --border: rgba(168,85,247,.12);
+            --border2: rgba(168,85,247,.3);
+            --txt: #c4c4d4;
+            --txt2: #fff;
+            --dim: rgba(255,255,255,.4);
+            --purple: #a855f7;
+            --green: #22c55e;
+            --gold: #ffd700;
+            --orange: #f97316;
+            --blue: #3b82f6;
+            --cyan: #06b6d4;
+            --red: #ef4444;
+            --r: 14px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--txt);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+            background: linear-gradient(180deg, rgba(168,85,247,.08) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px; left: 50%; transform: translateX(-50%);
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(168,85,247,.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--txt2);
+            position: relative;
+        }
+        .hero h1 span { color: var(--purple); }
+        .hero p {
+            color: var(--dim);
+            font-size: .95rem;
+            margin-top: .5rem;
+            position: relative;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .85rem;
+            margin-bottom: 1rem;
+            position: relative;
+            transition: opacity .2s;
+        }
+        .back-link:hover { opacity: .7; }
+
+        /* ── Container ── */
+        .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+        /* ── Stat Row ── */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: .75rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 1rem;
+            text-align: center;
+            transition: .25s;
+        }
+        .stat-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+        .stat-num { font-size: 1.8rem; font-weight: 700; line-height: 1; }
+        .stat-lbl { font-size: .7rem; color: var(--dim); text-transform: uppercase; letter-spacing: .04em; margin-top: 4px; }
+
+        /* ── Section Headers ── */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--txt2);
+            margin-bottom: 1rem;
+        }
+        .section-title .icon { font-size: 1.4rem; }
+
+        /* ── Tabs ── */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--dim);
+            padding: 12px 20px;
+            font: 600 .85rem/1 'Poppins', sans-serif;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: .2s;
+        }
+        .tab-btn:hover { color: var(--txt); }
+        .tab-btn.active { color: var(--purple); border-bottom-color: var(--purple); }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* ── Daily Challenge Card ── */
+        .daily-card {
+            background: linear-gradient(135deg, rgba(255,107,53,.08), rgba(255,159,67,.04));
+            border: 1px solid rgba(255,107,53,.25);
+            border-radius: var(--r);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .daily-icon { font-size: 2.5rem; flex-shrink: 0; }
+        .daily-info { flex: 1; }
+        .daily-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); }
+        .daily-title { font-size: 1.1rem; font-weight: 700; color: var(--txt2); margin: 2px 0; }
+        .daily-goal { font-size: .85rem; color: var(--dim); }
+        .daily-status {
+            flex-shrink: 0;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: .78rem;
+            font-weight: 700;
+        }
+        .daily-done { background: rgba(34,197,94,.12); color: var(--green); border: 1px solid rgba(34,197,94,.3); }
+        .daily-pending { background: rgba(255,107,53,.1); color: var(--orange); border: 1px solid rgba(255,107,53,.25); }
+        .daily-play {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            background: linear-gradient(135deg, var(--orange), #e65100);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font: 700 .82rem 'Poppins', sans-serif;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .daily-play:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(249,115,22,.3); }
+
+        /* ── Personal Bests Grid ── */
+        .pb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: .75rem;
+            margin-bottom: 2rem;
+        }
+        .pb-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 1rem 1.2rem;
+            transition: .25s;
+            position: relative;
+            overflow: hidden;
+        }
+        .pb-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+        .pb-card.has-score { border-color: rgba(168,85,247,.2); }
+        .pb-card.has-score::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--blue));
+        }
+        .pb-card .game-icon { font-size: 1.6rem; margin-bottom: 6px; }
+        .pb-card .game-name { font-size: .82rem; font-weight: 600; color: var(--txt2); margin-bottom: 8px; }
+        .pb-card .pb-score {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+        }
+        .pb-card .pb-label { font-size: .65rem; color: var(--dim); text-transform: uppercase; letter-spacing: .03em; margin-top: 2px; }
+        .pb-card .pb-date { font-size: .68rem; color: var(--dim); margin-top: 6px; }
+        .pb-card .no-score {
+            font-size: .82rem;
+            color: rgba(255,255,255,.2);
+            font-style: italic;
+        }
+        .pb-card .play-link {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: .75rem;
+            color: var(--purple);
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity .2s;
+        }
+        .pb-card .play-link:hover { opacity: .7; }
+
+        /* ── Achievements Grid ── */
+        .ach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+            gap: .75rem;
+            margin-bottom: 2rem;
+        }
+        .ach-card {
+            padding: 1.1rem;
+            border-radius: var(--r);
+            background: rgba(255,255,255,.02);
+            border: 1px solid rgba(255,255,255,.05);
+            text-align: center;
+            opacity: .35;
+            transition: all .3s;
+        }
+        .ach-card.unlocked {
+            opacity: 1;
+            border-color: rgba(168,85,247,.25);
+            background: rgba(168,85,247,.06);
+        }
+        .ach-card .ach-icon { font-size: 2rem; margin-bottom: 6px; }
+        .ach-card .ach-name { font-size: .82rem; font-weight: 700; color: var(--txt2); margin-bottom: 4px; }
+        .ach-card .ach-desc { font-size: .7rem; color: var(--dim); line-height: 1.4; }
+
+        /* ── Progress Bar ── */
+        .progress-wrap { margin-bottom: 2rem; }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: .82rem;
+            margin-bottom: 6px;
+        }
+        .progress-label strong { color: var(--txt2); }
+        .progress-label span { color: var(--dim); }
+        .progress-track {
+            height: 10px;
+            background: rgba(255,255,255,.05);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, var(--purple), var(--blue));
+            transition: width 1s ease;
+        }
+
+        /* ── Reset Button ── */
+        .reset-area {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+        .reset-btn {
+            background: rgba(239,68,68,.08);
+            border: 1px solid rgba(239,68,68,.2);
+            color: var(--red);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font: 600 .8rem 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .reset-btn:hover { background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.4); }
+
+        /* ── Footer Cross-links ── */
+        .crosslinks { text-align: center; padding: 2rem 1rem; }
+        .crosslinks p { color: var(--dim); font-size: .85rem; margin-bottom: 1rem; }
+        .crosslinks-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .crosslinks-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            background: rgba(168,85,247,.08);
+            border: 1px solid rgba(168,85,247,.2);
+            border-radius: 50px;
+            color: #c084fc;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .85rem;
+            transition: all .3s;
+        }
+        .crosslinks-pill:hover { background: rgba(168,85,247,.15); border-color: rgba(168,85,247,.4); transform: translateY(-1px); }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.6rem; }
+            .stat-row { grid-template-columns: repeat(2, 1fr); }
+            .pb-grid { grid-template-columns: repeat(2, 1fr); }
+            .ach-grid { grid-template-columns: repeat(2, 1fr); }
+            .daily-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<div class="hero">
+    <a href="../all-games.html" class="back-link">← Back to All Games</a>
+    <h1>My <span>Stats</span> &amp; Achievements</h1>
+    <p>Your personal bests, badges, and daily challenges across all 15 games</p>
+</div>
+
+<div class="container">
+
+    <!-- ═══════ STAT CARDS ═══════ -->
+    <div class="stat-row" id="statRow">
+        <div class="stat-card">
+            <div class="stat-num" style="color:var(--purple)" id="statTotalGames">0</div>
+            <div class="stat-lbl">Games Played</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num" style="color:var(--blue)" id="statUniqueGames">0</div>
+            <div class="stat-lbl">Games Tried</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num" style="color:var(--gold)" id="statPBs">0</div>
+            <div class="stat-lbl">Personal Bests</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num" style="color:var(--green)" id="statBadges">0</div>
+            <div class="stat-lbl">Badges Earned</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num" style="color:var(--orange)" id="statDaily">0</div>
+            <div class="stat-lbl">Daily Challenges</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-num" style="color:var(--cyan)" id="statAccuracy">0</div>
+            <div class="stat-lbl">90%+ Accuracy</div>
+        </div>
+    </div>
+
+    <!-- ═══════ DAILY CHALLENGE ═══════ -->
+    <div class="daily-card" id="dailyCard">
+        <div class="daily-icon">📅</div>
+        <div class="daily-info">
+            <div class="daily-label">Today's Challenge</div>
+            <div class="daily-title" id="dailyTitle">Loading...</div>
+            <div class="daily-goal" id="dailyGoal"></div>
+        </div>
+        <div id="dailyAction"></div>
+    </div>
+
+    <!-- ═══════ TABS ═══════ -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="scores">🏆 Personal Bests</button>
+        <button class="tab-btn" data-tab="achievements">🌟 Achievements</button>
+    </div>
+
+    <!-- ═══════ TAB: PERSONAL BESTS ═══════ -->
+    <div class="tab-panel active" id="tab-scores">
+        <div class="pb-grid" id="pbGrid"></div>
+    </div>
+
+    <!-- ═══════ TAB: ACHIEVEMENTS ═══════ -->
+    <div class="tab-panel" id="tab-achievements">
+        <div class="progress-wrap" id="achProgress"></div>
+        <div class="ach-grid" id="achGrid"></div>
+    </div>
+
+    <!-- ═══════ RESET ═══════ -->
+    <div class="reset-area">
+        <button class="reset-btn" id="resetBtn">🗑️ Reset All My Data</button>
+        <p style="font-size:.72rem;color:var(--dim);margin-top:8px;">This will erase all personal bests, achievements, and daily challenge progress.</p>
+    </div>
+</div>
+
+<!-- ═══════ CROSS-LINKS ═══════ -->
+<div class="crosslinks">
+    <p>Explore more from NothingButTheTRUTH</p>
+    <div class="crosslinks-row">
+        <a href="../all-games.html" class="crosslinks-pill">🎮 All Games</a>
+        <a href="../all-studies.html" class="crosslinks-pill">📖 Studies</a>
+        <a href="../vod.html" class="crosslinks-pill">🕊️ Devotions</a>
+        <a href="../all-videos.html" class="crosslinks-pill">🎬 Videos</a>
+    </div>
+</div>
+
+<!-- ═══════ GAMIFICATION ENGINE ═══════ -->
+<script src="nbtt-gamification.js"></script>
+
+<script>
+(function() {
+    'use strict';
+
+    /* ──────────────────────────
+       POPULATE STATS
+       ────────────────────────── */
+    function renderStats() {
+        const stats   = NBTT.getStats();
+        const scores  = NBTT.getScores();
+        const badges  = NBTT.getUnlockedBadges();
+        const pbCount = Object.keys(scores).length;
+
+        document.getElementById('statTotalGames').textContent  = stats.totalGamesPlayed || 0;
+        document.getElementById('statUniqueGames').textContent = stats.uniqueGamesPlayed || 0;
+        document.getElementById('statPBs').textContent         = pbCount;
+        document.getElementById('statBadges').textContent      = badges.length;
+        document.getElementById('statDaily').textContent       = stats.dailyChallengesCompleted || 0;
+        document.getElementById('statAccuracy').textContent    = stats.highAccuracyCount || 0;
+    }
+
+    /* ──────────────────────────
+       DAILY CHALLENGE
+       ────────────────────────── */
+    function renderDaily() {
+        const ch   = NBTT.getDailyChallenge();
+        const done = NBTT.isDailyChallengeCompleted();
+        const game = NBTT.GAMES[ch.game];
+
+        document.getElementById('dailyTitle').textContent = ch.title;
+        document.getElementById('dailyGoal').textContent  = ch.goal;
+
+        const action = document.getElementById('dailyAction');
+        if (done) {
+            action.innerHTML = '<div class="daily-status daily-done">✅ Completed</div>';
+        } else {
+            const url = game ? game.url.replace('games/', '') : '#';
+            action.innerHTML = '<a class="daily-play" href="' + url + '">▶ Play Now</a>';
+        }
+    }
+
+    /* ──────────────────────────
+       PERSONAL BESTS GRID
+       ────────────────────────── */
+    function renderScores() {
+        const scores = NBTT.getScores();
+        const grid   = document.getElementById('pbGrid');
+        grid.innerHTML = '';
+
+        const gameIds = Object.keys(NBTT.GAMES);
+
+        gameIds.forEach(function(id) {
+            const meta = NBTT.GAMES[id];
+            const pb   = scores[id];
+            const card = document.createElement('div');
+            card.className = 'pb-card' + (pb ? ' has-score' : '');
+
+            if (pb) {
+                const dateStr = pb.date ? new Date(pb.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+                card.innerHTML =
+                    '<div class="game-icon">' + meta.icon + '</div>' +
+                    '<div class="game-name">' + meta.name + '</div>' +
+                    '<div class="pb-score">' + (pb.score !== undefined ? pb.score : '—') + '</div>' +
+                    '<div class="pb-label">' + (meta.scoreLabel || 'Score') + '</div>' +
+                    (dateStr ? '<div class="pb-date">Set ' + dateStr + '</div>' : '') +
+                    '<a class="play-link" href="' + meta.url.replace('games/', '') + '">Play again →</a>';
+            } else {
+                card.innerHTML =
+                    '<div class="game-icon">' + meta.icon + '</div>' +
+                    '<div class="game-name">' + meta.name + '</div>' +
+                    '<div class="no-score">Not played yet</div>' +
+                    '<a class="play-link" href="' + meta.url.replace('games/', '') + '">Play →</a>';
+            }
+
+            grid.appendChild(card);
+        });
+    }
+
+    /* ──────────────────────────
+       ACHIEVEMENTS
+       ────────────────────────── */
+    function renderAchievements() {
+        const unlocked = NBTT.getUnlockedBadges();
+        const total    = NBTT.ACHIEVEMENTS.length;
+        const count    = unlocked.length;
+        const pct      = total > 0 ? Math.round((count / total) * 100) : 0;
+
+        // Progress bar
+        const wrap = document.getElementById('achProgress');
+        wrap.innerHTML =
+            '<div class="progress-label">' +
+                '<strong>Achievements Unlocked</strong>' +
+                '<span>' + count + ' / ' + total + ' (' + pct + '%)</span>' +
+            '</div>' +
+            '<div class="progress-track">' +
+                '<div class="progress-fill" style="width:' + pct + '%"></div>' +
+            '</div>';
+
+        // Grid
+        const grid = document.getElementById('achGrid');
+        grid.innerHTML = '';
+
+        NBTT.ACHIEVEMENTS.forEach(function(ach) {
+            const is = unlocked.includes(ach.id);
+            const card = document.createElement('div');
+            card.className = 'ach-card' + (is ? ' unlocked' : '');
+            card.innerHTML =
+                '<div class="ach-icon">' + (is ? ach.icon : '🔒') + '</div>' +
+                '<div class="ach-name">' + ach.name + '</div>' +
+                '<div class="ach-desc">' + ach.desc + '</div>';
+            grid.appendChild(card);
+        });
+    }
+
+    /* ──────────────────────────
+       TABS
+       ────────────────────────── */
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+            document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    /* ──────────────────────────
+       RESET
+       ────────────────────────── */
+    document.getElementById('resetBtn').addEventListener('click', function() {
+        if (!confirm('Are you sure? This will delete all your personal bests, achievements, and daily challenge progress. This cannot be undone.')) return;
+        localStorage.removeItem('nbtt_scores');
+        localStorage.removeItem('nbtt_badges');
+        localStorage.removeItem('nbtt_stats');
+        localStorage.removeItem('nbtt_daily');
+        renderStats();
+        renderDaily();
+        renderScores();
+        renderAchievements();
+    });
+
+    /* ──────────────────────────
+       INIT
+       ────────────────────────── */
+    renderStats();
+    renderDaily();
+    renderScores();
+    renderAchievements();
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanctuary Symbol Match | NothingButTheTRUTH</title>
+<meta name="description" content="Match sanctuary symbols to their meanings and Scripture anchors in a fast, beautiful Bible puzzle game.">
+<link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/sanctuary-symbol-match/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060914;--card:#101833;--purple:#a855f7;--blue:#3b82f6;--green:#22c55e;--red:#ef4444;--txt:#eef2ff;--sub:#c4c9e9}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;background:radial-gradient(circle at 20% 10%,rgba(168,85,247,.2),transparent 40%),radial-gradient(circle at 80% 100%,rgba(59,130,246,.2),transparent 50%),var(--bg);color:var(--txt);min-height:100vh;padding:20px}
+.wrap{max-width:980px;margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px}
+.back{color:#d6dbff;text-decoration:none;border:1px solid rgba(255,255,255,.18);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.05)}
+.brand{font-weight:800;background:linear-gradient(135deg,var(--purple),#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px}
+#start h1{margin:0 0 6px;font-size:2rem}#start p{color:var(--sub);line-height:1.7}
+.mode{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.mode button{border:1px solid rgba(255,255,255,.15);background:#182142;color:#eaf0ff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.mode button.on{border-color:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,.25) inset}
+.play{background:linear-gradient(135deg,var(--purple),var(--blue));color:white;border:none;padding:12px 16px;border-radius:10px;cursor:pointer;font-weight:800}
+#game,#end{display:none}.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}.stat{background:#121b3a;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:9px;text-align:center}.label{font-size:.7rem;color:var(--sub);text-transform:uppercase}.val{font-size:1.1rem;font-weight:800}
+.timer{height:8px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;margin-bottom:10px}.fill{height:100%;background:linear-gradient(90deg,var(--green),#f59e0b);width:100%}
+.q{font-size:1.15rem;line-height:1.6;margin-bottom:12px}.opts{display:grid;gap:8px}.opts button{text-align:left;padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:#182142;color:#ecf1ff;cursor:pointer}
+.opts button:hover{transform:translateX(3px)}.opts button.ok{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.6)}.opts button.bad{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.6)}
+.feed{min-height:1.4em;margin:8px 0;font-weight:700}.lesson{display:none;margin-top:10px;background:linear-gradient(135deg,rgba(168,85,247,.16),rgba(59,130,246,.14));border:1px solid rgba(168,85,247,.4);border-radius:10px;padding:12px}.lesson.show{display:block}
+.next{margin-top:9px;background:#2563eb;border:none;color:#fff;padding:10px 13px;border-radius:9px;cursor:pointer;font-weight:700}
+#end h2{margin:0 0 6px}.scores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.s{background:#121b3a;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px;text-align:center}
+.recap{margin-top:8px;background:#121b3a;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px}.recap ul{margin:8px 0 0 18px;line-height:1.7}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.actions button,.actions a{padding:10px 14px;border-radius:9px;text-decoration:none;border:none;cursor:pointer;font-weight:700}
+.actions .r{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff}.actions .h{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+@media(max-width:760px){.hud,.scores{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="back" href="../../all-games.html">← All Games</a>
+    <div class="brand">SANCTUARY SYMBOL MATCH</div>
+  </div>
+
+  <section id="start" class="card">
+    <h1>⛪ Sanctuary Symbol Match</h1>
+    <p>Match each sanctuary truth to its biblical meaning. Learn the flow from sacrifice to intercession through quick decision rounds.</p>
+    <div class="mode" id="modePick">
+      <button class="on" data-mode="study">Study (20s)</button>
+      <button data-mode="mission">Mission (16s)</button>
+      <button data-mode="expert">Expert (13s)</button>
+    </div>
+    <button class="play" id="startBtn">Start Match</button>
+  </section>
+
+  <section id="game" class="card">
+    <div class="hud">
+      <div class="stat"><div class="label">Score</div><div class="val" id="score">0</div></div>
+      <div class="stat"><div class="label">Streak</div><div class="val" id="streak">0</div></div>
+      <div class="stat"><div class="label">Lives</div><div class="val" id="lives">3</div></div>
+      <div class="stat"><div class="label">Question</div><div class="val" id="qNum">1/10</div></div>
+    </div>
+    <div class="timer"><div class="fill" id="fill"></div></div>
+    <div class="q" id="q"></div>
+    <div class="opts" id="opts"></div>
+    <div class="feed" id="feed"></div>
+    <div class="lesson" id="lesson"><div id="lessonTxt"></div><button class="next" id="nextBtn">Continue</button></div>
+  </section>
+
+  <section id="end" class="card">
+    <h2 id="title">Finished</h2>
+    <p id="sub"></p>
+    <div class="scores">
+      <div class="s"><div class="label">Score</div><div class="val" id="fScore">0</div></div>
+      <div class="s"><div class="label">Accuracy</div><div class="val" id="fAcc">0%</div></div>
+      <div class="s"><div class="label">Best Streak</div><div class="val" id="fStreak">0</div></div>
+      <div class="s"><div class="label">High Score</div><div class="val" id="fBest">0</div></div>
+    </div>
+    <div class="recap"><strong>Lesson Recap</strong><ul id="recap"></ul></div>
+    <div class="actions"><button class="r" id="again">Play Again</button><a class="h" href="../../all-games.html">Game Hub</a></div>
+  </section>
+</div>
+<script>
+(function(){
+  if(window.location.search.includes('play=1')){if('scrollRestoration' in history) history.scrollRestoration='manual';window.scrollTo(0,0);document.addEventListener('DOMContentLoaded',()=>{window.scrollTo(0,0);requestAnimationFrame(()=>window.scrollTo(0,0));setTimeout(()=>window.scrollTo(0,0),60);});}
+})();
+const modePick=document.getElementById('modePick');let mode='study';const modeSec={study:20,mission:16,expert:13};
+modePick.querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;modePick.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
+const bank=[
+{q:'Which sanctuary service pointed to Christ as the Lamb?',o:['Daily sacrifice','Trumpet signaling','Incense only','Bread replacement'],a:0,l:'The sacrificial system taught substitution, pointing to Christ’s atoning death.'},
+{q:'What did the Most Holy Place service especially highlight?',o:['Athletic discipline','Judgment and cleansing focus','Political leadership','Temple taxes'],a:1,l:'The Most Holy Place emphasis includes judgment, accountability, and cleansing themes.'},
+{q:'The altar of incense most closely symbolizes:',o:['Intercessory prayer before God','Military defense','Food supply','Land ownership'],a:0,l:'Incense imagery in Scripture is tied to prayer rising before God.'},
+{q:'The table of showbread pointed to:',o:['Human achievements','God’s sustaining Word and provision','Temple architecture only','Priestly travel plans'],a:1,l:'Bread imagery teaches continual dependence on God’s sustaining provision.'},
+{q:'The lampstand represented:',o:['Human fame','Divine light and witness','Royal taxation','Harvest accounting'],a:1,l:'Light in the sanctuary symbolizes truth, guidance, and witness.'},
+{q:'Sanctuary typology teaches that salvation is:',o:['Only ritual compliance','A full redemptive process in Christ','Unrelated to grace','Purely symbolic myth'],a:1,l:'The pattern reveals a coherent redemptive process centered in Christ’s ministry.'},
+{q:'The priestly ministry prefigured Christ as:',o:['Mediator and intercessor','Earthly king only','Scribe only','Military commander'],a:0,l:'Priestly roles point to Christ’s mediatorial and intercessory work.'},
+{q:'The sanctuary’s central message is best described as:',o:['Cosmic random chance','God dwelling with and saving His people','Human self-perfection','National expansion'],a:1,l:'The sanctuary message reveals God’s desire to dwell with and redeem His people.'},
+{q:'Why does sanctuary study matter today?',o:['It is obsolete and irrelevant','It clarifies Christ’s ministry and our response','Only for archaeology','Only for clergy historians'],a:1,l:'It gives practical clarity for faith, repentance, assurance, and mission.'},
+{q:'A healthy response to sanctuary truth is:',o:['Complacency','Faithful obedience and hopeful trust in Christ','Fear-driven isolation','Ignoring Scripture'],a:1,l:'Sanctuary truth calls for trust in Christ, reverence, and practical obedience.'},
+{q:'Which concept is most linked to the Day of Atonement motif?',o:['Indifference','Heart searching and repentance','Festival entertainment','Merchandise exchange'],a:1,l:'Atonement themes call for repentance, cleansing, and covenant loyalty.'},
+{q:'The sanctuary teaches God is:',o:['Distant and unknowable','Just, merciful, and relational','Unconcerned with sin','Bound by human systems'],a:1,l:'Its symbols combine justice and mercy in God’s redemptive character.'}
+];
+const start=document.getElementById('start'),game=document.getElementById('game'),end=document.getElementById('end');
+const qEl=document.getElementById('q'),opts=document.getElementById('opts'),feed=document.getElementById('feed'),lesson=document.getElementById('lesson'),lessonTxt=document.getElementById('lessonTxt');
+const scoreEl=document.getElementById('score'),streakEl=document.getElementById('streak'),livesEl=document.getElementById('lives'),qNum=document.getElementById('qNum'),fill=document.getElementById('fill');
+let list=[],i=0,score=0,streak=0,bst=0,lives=3,corr=0,ans=false,t=null,left=0,notes=[];
+function sh(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;}
+function hud(){scoreEl.textContent=score;streakEl.textContent=streak;livesEl.textContent=lives;qNum.textContent=`${Math.min(i+1,list.length)}/${list.length}`}
+function stop(){if(t){clearInterval(t);t=null;}}
+function goTimer(){stop();left=modeSec[mode];fill.style.width='100%';t=setInterval(()=>{left-=0.1;fill.style.width=`${Math.max(0,left/modeSec[mode]*100)}%`;if(left<=0&&!ans){pick(-1);}},100)}
+function show(){ans=false;feed.textContent='';lesson.classList.remove('show');const q=list[i];qEl.textContent=q.q;opts.innerHTML='';q.o.forEach((o,idx)=>{const b=document.createElement('button');b.textContent=`${idx+1}. ${o}`;b.onclick=()=>pick(idx);opts.appendChild(b);});hud();goTimer();}
+function lock(){opts.querySelectorAll('button').forEach(b=>b.disabled=true)}
+function pick(sel){if(ans)return;ans=true;stop();const q=list[i];lock();const bs=[...opts.querySelectorAll('button')];bs.forEach((b,idx)=>{if(idx===q.a)b.classList.add('ok');if(sel===idx&&idx!==q.a)b.classList.add('bad');});
+if(sel===q.a){corr++;streak++;bst=Math.max(bst,streak);score+=Math.max(80,Math.floor(80+left*8+streak*12));feed.textContent='✅ Correct';feed.style.color='#86efac';}
+else{lives--;streak=0;score=Math.max(0,score-35);feed.textContent=sel===-1?'⏱️ Time up':'❌ Not correct';feed.style.color='#fca5a5';}
+notes.push(q.l);lessonTxt.textContent=q.l;lesson.classList.add('show');hud();}
+function finish(){stop();game.style.display='none';end.style.display='block';const asked=Math.max(1,i+1),acc=Math.round(corr/asked*100);document.getElementById('title').textContent=acc>=85?'🏆 Sanctuary Scholar':'✨ Keep Building';document.getElementById('sub').textContent=`Mode: ${mode.toUpperCase()} • ${asked}/${list.length} completed`;
+document.getElementById('fScore').textContent=score;document.getElementById('fAcc').textContent=`${acc}%`;document.getElementById('fStreak').textContent=bst;const hi=Math.max(Number(localStorage.getItem('ssm_hi')||0),score);localStorage.setItem('ssm_hi',hi);document.getElementById('fBest').textContent=hi;
+document.getElementById('recap').innerHTML=[...new Set(notes)].slice(-4).map(x=>`<li>${x}</li>`).join('');}
+function startGame(){list=sh(bank).slice(0,mode==='study'?10:mode==='mission'?11:12);i=0;score=0;streak=0;bst=0;lives=3;corr=0;notes=[];start.style.display='none';end.style.display='none';game.style.display='block';show();}
+document.getElementById('startBtn').onclick=startGame;document.getElementById('again').onclick=()=>{start.style.display='block';game.style.display='none';end.style.display='none';window.scrollTo(0,0)};
+document.getElementById('nextBtn').onclick=()=>{if(!ans)return;if(lives<=0){finish();return;}i++;if(i>=list.length){finish();return;}show();};
+document.addEventListener('keydown',e=>{if(game.style.display!=='block'||ans)return;const k=Number(e.key)-1;if(k>=0&&k<4){const b=opts.querySelectorAll('button')[k];if(b)pick(k);}});
+</script>
+</body>
+</html>

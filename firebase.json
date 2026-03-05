@@ -36,12 +36,6 @@
       "**/*.msi",
       "**/*.com",
       "**/*.scr"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   },
   "storage": {

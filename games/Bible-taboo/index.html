@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Bible GridLock — Forbidden Phrase Game | NothingButTheTRUTH</title>
+              <meta name="description" content="Navigate biblical facts and verses in this multiplayer challenge! Answer correctly to unlock the grid path. A fun Bible word game for groups.">
+              <meta name="keywords" content="Bible study, Christian devotion, Scripture, NothingButTheTRUTH, Bible game, interactive Scripture quiz, bible, gridlock, forbidden, phrase, game, NothingButTheTRUTH">
+              <meta name="author" content="NothingButTheTRUTH">
+              <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+              <link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/Bible-taboo/index.html">
+              <meta property="og:title" content="Bible GridLock — Forbidden Phrase Game | NothingButTheTRUTH">
+              <meta property="og:description" content="Navigate biblical facts and verses in this multiplayer challenge! Answer correctly to unlock the grid path. A fun Bible word game for groups.">
+              <meta property="og:type" content="website">
+              <meta property="og:url" content="https://NothingButTheTRUTH.web.app/games/Bible-taboo/index.html">
+              <meta property="og:site_name" content="NothingButTheTRUTH">
+              <meta name="twitter:card" content="summary_large_image">
+              <meta name="twitter:title" content="Bible GridLock — Forbidden Phrase Game | NothingButTheTRUTH">
+              <meta name="twitter:description" content="Navigate biblical facts and verses in this multiplayer challenge! Answer correctly to unlock the grid path. A fun Bible word game for groups.">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Bible GridLock","description":"Navigate biblical facts and verses in this multiplayer forbidden phrase challenge.","url":"https://NothingButTheTRUTH.web.app/games/Bible-taboo/index.html","isPartOf":{"@type":"WebSite","name":"NothingButTheTRUTH","url":"https://NothingButTheTRUTH.web.app"}}
+  </script>
+  <style>
+    /* ====== CSS — DARK THEME (site-wide match) ====== */
+    :root {
+      --bg: #0a0a14;
+      --bg2: #0d1025;
+      --bg3: #111530;
+      --card: rgba(255,255,255,.06);
+      --purple: #a855f7;
+      --purple-dim: rgba(168,85,247,.15);
+      --green: #22c55e;
+      --red: #ef4444;
+      --text: #fff;
+      --sub: rgba(255,255,255,.6);
+      --border: rgba(168,85,247,.12);
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--sub);
+      margin: 0; padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    body::before {
+      content:'';position:fixed;inset:0;
+      background:radial-gradient(ellipse at 50% 80%,rgba(168,85,247,.06),transparent 50%),radial-gradient(ellipse at 30% 20%,rgba(59,130,246,.06),transparent 50%);
+      pointer-events:none;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      position: relative;
+    }
+    h1 {
+      text-align: center;
+      color: var(--text);
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--purple), #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .instructions {
+      margin-bottom: 2rem;
+    }
+    .instructions h2 {
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+    }
+    .instructions ul {
+      list-style-type: disc;
+      padding-left: 1.4rem;
+      color: var(--sub);
+    }
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    button {
+      background: linear-gradient(135deg, var(--purple), #7c3aed);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 1.05rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1 1 150px;
+      min-width: 150px;
+      max-width: 220px;
+      user-select: none;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(168,85,247,.4);
+    }
+    button:disabled {
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.3);
+      cursor: not-allowed;
+    }
+    #sessionIdDisplay {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--purple);
+      text-align: center;
+      margin-bottom: 1rem;
+      word-break: break-word;
+    }
+    #joinError {
+      color: var(--red);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1rem;
+      min-height: 1.2em;
+    }
+    .game-area {
+      display: none;
+      text-align: center;
+      border-radius: 14px;
+      padding: 1.5rem 2rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      margin-top: 1rem;
+    }
+    .timer {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin: 1rem 0;
+      text-shadow: 0 0 20px rgba(168,85,247,.3);
+    }
+    .card {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 1rem 0;
+      color: var(--text);
+    }
+    .forbidden {
+      font-style: italic;
+      color: var(--red);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .score {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+      font-weight: 600;
+      color: var(--sub);
+    }
+    .message {
+      font-size: 1.2rem;
+      color: var(--green);
+      min-height: 1.5em;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .end-message {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-top: 2rem;
+    }
+    .leaderboard {
+      max-height: 200px;
+      overflow-y: auto;
+      background: rgba(168,85,247,.06);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .leaderboard h3 {
+      margin-top: 0;
+      text-align: center;
+      color: var(--purple);
+    }
+    .leaderboard ol {
+      padding-left: 1.4rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: var(--sub);
+    }
+    #joinSessionInput {
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      width: 60%;
+      max-width: 320px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+    }
+    #joinSessionInput::placeholder { color: rgba(255,255,255,.3); }
+    #joinSessionInput:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 12px rgba(168,85,247,.2); }
+    @media (max-width: 600px) {
+      button {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+      .timer {
+        font-size: 2.4rem;
+      }
+      .card {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+              <meta property="og:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+              <meta name="twitter:image" content="https://NothingButTheTRUTH.web.app/seo-default-image.jpg">
+            <meta property="og:locale" content="en_US">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+  {"@type":"ListItem","position":1,"name":"Home","item":"https://NothingButTheTRUTH.web.app/"},
+  {"@type":"ListItem","position":2,"name":"Games","item":"https://NothingButTheTRUTH.web.app/all-games.html"},
+  {"@type":"ListItem","position":3,"name":"Bible GridLock","item":"https://NothingButTheTRUTH.web.app/games/Bible-taboo/index.html"}
+]}
+</script>
+</head>
+<body>
+<!-- NBTT-INTERNAL-LINKS-INJECTED -->
+
+<!-- ===== SEO BREADCRUMB NAV ===== -->
+<nav class="nbtt-breadcrumb" aria-label="Breadcrumb" style="
+  padding:12px 20px;margin:0;font-size:0.85rem;font-family:'Poppins',sans-serif;
+  background:rgba(10,10,26,0.85);border-bottom:1px solid rgba(168,85,247,0.15);
+  color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+">
+  <a href="../../index.html" style="color:#a855f7;text-decoration:none;font-weight:600;">Home</a>
+  <span style="color:rgba(255,255,255,0.3);">›</span>
+  <a href="../../all-games.html" style="color:#a855f7;text-decoration:none;font-weight:600;">Games</a>
+  <span style="color:rgba(255,255,255,0.3);">›</span>
+  <span style="color:rgba(255,255,255,0.7);">Bible GridLock</span>
+</nav>
+  <div class="container">
+    <h1>Bible Gridlock: The Forbidden Phrase - Multiplayer</h1>
+
+    <div class="instructions">
+      <h2>How to Play</h2>
+      <ul>
+        <li>Split into teams of 3–6 people.</li>
+        <li>One player is the <strong>Describer</strong>.</li>
+        <li>The Describer gets a Bible topic &amp; 5 forbidden words.</li>
+        <li>They have <strong>1 minute</strong> to describe the topic WITHOUT saying any forbidden word.</li>
+        <li>Their team must guess the topic correctly to earn points.</li>
+        <li>If a forbidden word is said or time runs out, no points are earned and the game moves on only when "Next Question" is pressed.</li>
+        <li>The game consists of 10 questions per play.</li>
+        <li>Host creates a game, shares the session ID. Players join with the code.</li>
+        <li>Game starts only when host presses "Start Game".</li>
+      </ul>
+    </div>
+
+    <div class="btn-group">
+      <button id="createGameBtn">➕ Create Game</button>
+      <button id="joinGameBtn">🔗 Join Game</button>
+      <button id="startGameBtn" disabled>▶️ Start Game</button>
+    </div>
+
+    <div id="sessionIdDisplay"></div>
+
+    <div style="text-align:center; margin-bottom:1rem;">
+      <input id="joinSessionInput" type="text" placeholder="Enter Session ID to Join" />
+    </div>
+    <div id="joinError"></div>
+
+    <div class="game-area" id="gameArea">
+      <div class="timer" id="timer">60</div>
+      <div class="card" id="topicCard"></div>
+      <div class="forbidden" id="forbiddenWords"></div>
+      <div class="score" id="scoreBoard">Score: 0 | Streak: 0 | Question: 0 / 10</div>
+      <div class="message" id="motivator"></div>
+
+      <div style="margin-top: 1rem;">
+        <button id="gotItBtn" disabled>✅ Got It!</button>
+        <button id="nextBtn" disabled>Next Question</button>
+      </div>
+
+      <div class="end-message" id="endMessage" style="display:none;"></div>
+      <div style="text-align:center; margin-top: 1rem;">
+        <button id="restartBtn" style="display:none;">🔄 Play Again</button>
+        <button id="exitBtn" style="display:none;" onclick="window.location.href='../../all-games.html'">↩ Back to Games</button>
+      </div>
+
+      <div class="leaderboard" id="leaderboard" style="display:none;">
+        <h3>Leaderboard</h3>
+        <ol id="leaderboardList"></ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <script>
+    // Your Firebase config here (replace with your actual config)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFb6AHyBQZwMOrUtgf_-6WJgbmYA4hS8o",
+      authDomain: "NothingButTheTRUTH-1cd23.firebaseapp.com",
+      databaseURL: "https://NothingButTheTRUTH-1cd23-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "NothingButTheTRUTH-1cd23",
+      storageBucket: "NothingButTheTRUTH-1cd23.appspot.com",
+      messagingSenderId: "253692400115",
+      appId: "1:253692400115:web:7eb36acdf69382d28d0286",
+      measurementId: "G-LXVCQNJ6VJ"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // DOM Elements
+    const createGameBtn = document.getElementById('createGameBtn');
+    const joinGameBtn = document.getElementById('joinGameBtn');
+    const startGameBtn = document.getElementById('startGameBtn');
+    const sessionIdDisplay = document.getElementById('sessionIdDisplay');
+    const joinSessionInput = document.getElementById('joinSessionInput');
+    const joinError = document.getElementById('joinError');
+
+    const gameArea = document.getElementById('gameArea');
+    const timerDisplay = document.getElementById('timer');
+    const topicCard = document.getElementById('topicCard');
+    const forbiddenWords = document.getElementById('forbiddenWords');
+    const scoreBoard = document.getElementById('scoreBoard');
+    const motivator = document.getElementById('motivator');
+    const gotItBtn = document.getElementById('gotItBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const endMessage = document.getElementById('endMessage');
+    const restartBtn = document.getElementById('restartBtn');
+    const leaderboardDiv = document.getElementById('leaderboard');
+    const leaderboardList = document.getElementById('leaderboardList');
+
+    // Game variables
+    const cards = [
+      { topic: "David & Goliath", forbidden: ["Giant", "Slingshot", "Stone", "Fight", "Fear"] },
+      { topic: "Noah's Ark", forbidden: ["Flood", "Boat", "Animals", "Rain", "Pairs"] },
+      { topic: "Ten Commandments", forbidden: ["Moses", "Law", "Stone", "Mountain", "Israel"] },
+      { topic: "Jesus' Baptism", forbidden: ["Water", "Jordan", "John", "Dove", "Baptize"] },
+      { topic: "Garden of Eden", forbidden: ["Snake", "Fruit", "Tree", "Eve", "Apple"] },
+      { topic: "Paul in Prison", forbidden: ["Chains", "Jail", "Silas", "Earthquake", "Sing"] },
+      { topic: "Jonah and the Whale", forbidden: ["Fish", "Three days", "Nineveh", "Storm", "Run"] },
+      { topic: "The Prodigal Son", forbidden: ["Father", "Lost", "Return", "Farmer", "Fatted calf"] },
+      { topic: "The Good Samaritan", forbidden: ["Neighbor", "Road", "Robbers", "Priest", "Levite"] },
+      { topic: "The Last Supper", forbidden: ["Bread", "Wine", "Judas", "Disciples", "Betray"] },
+      { topic: "The Burning Bush", forbidden: ["Moses", "Fire", "Desert", "Shoes", "God"] },
+      { topic: "Daniel in the Lions' Den", forbidden: ["Lions", "King", "Pray", "Night", "Angel"] },
+      { topic: "The Tower of Babel", forbidden: ["Build", "Language", "Confuse", "City", "Scatter"] },
+      { topic: "Crossing the Red Sea", forbidden: ["Water", "Moses", "Egypt", "Pharaoh", "Dry"] },
+      { topic: "The Birth of Jesus", forbidden: ["Manger", "Star", "Bethlehem", "Mary", "Shepherds"] },
+      { topic: "Feeding the 5,000", forbidden: ["Bread", "Fish", "Hungry", "Miracle", "Boy"] },
+      { topic: "Walking on Water", forbidden: ["Sea", "Storm", "Peter", "Boat", "Sink"] },
+      { topic: "The Resurrection", forbidden: ["Tomb", "Stone", "Angel", "Three days", "Alive"] },
+      { topic: "Cain and Abel", forbidden: ["Brother", "Murder", "Offering", "Jealous", "Blood"] },
+      { topic: "Abraham and Isaac", forbidden: ["Sacrifice", "Mountain", "Ram", "Knife", "Son"] },
+      { topic: "The Exodus", forbidden: ["Egypt", "Moses", "Pharaoh", "Plagues", "Free"] },
+      { topic: "Samson and Delilah", forbidden: ["Hair", "Strength", "Cut", "Philistines", "Blind"] },
+      { topic: "The Sermon on the Mount", forbidden: ["Jesus", "Blessed", "Mountain", "Teach", "Crowd"] },
+      { topic: "The Armor of God", forbidden: ["Shield", "Sword", "Helmet", "Belt", "Ephesians"] },
+      { topic: "Jacob's Ladder", forbidden: ["Dream", "Angels", "Stairway", "Heaven", "Sleep"] },
+      { topic: "The Golden Calf", forbidden: ["Idol", "Gold", "Aaron", "Worship", "Mountain"] },
+      { topic: "Ruth and Naomi", forbidden: ["Moab", "Loyal", "Boaz", "Harvest", "Mother-in-law"] },
+      { topic: "The Walls of Jericho", forbidden: ["March", "Trumpet", "Seven", "Joshua", "Fall"] },
+      { topic: "Joseph's Coat", forbidden: ["Colors", "Brothers", "Father", "Jealous", "Sold"] },
+      { topic: "Elijah vs Prophets of Baal", forbidden: ["Fire", "Altar", "Rain", "Mountain", "Challenge"] },
+      { topic: "The Beatitudes", forbidden: ["Blessed", "Poor", "Meek", "Mourn", "Peacemakers"] },
+      { topic: "Lazarus Raised", forbidden: ["Dead", "Tomb", "Four days", "Cry", "Sisters"] },
+      { topic: "Peter's Denial", forbidden: ["Rooster", "Three", "Fire", "Know", "Jesus"] },
+      { topic: "The Parable of the Sower", forbidden: ["Seed", "Soil", "Thorns", "Birds", "Grow"] },
+      { topic: "The Road to Emmaus", forbidden: ["Walk", "Stranger", "Bread", "Recognize", "Risen"] },
+      { topic: "Moses Parts the Waters", forbidden: ["Red Sea", "Staff", "Egypt", "Dry", "Pharaoh"] },
+      { topic: "The Transfiguration", forbidden: ["Mountain", "Glow", "Moses", "Elijah", "Cloud"] },
+      { topic: "Zacchaeus", forbidden: ["Tree", "Short", "Tax", "Jesus", "Jericho"] },
+      { topic: "Creation", forbidden: ["Seven", "Light", "Adam", "Rest", "World"] },
+      { topic: "The Temptation of Jesus", forbidden: ["Devil", "Desert", "Forty", "Stones", "Worship"] },
+      { topic: "The Ascension", forbidden: ["Cloud", "Heaven", "Forty days", "Angels", "Watch"] },
+      { topic: "Pentecost", forbidden: ["Fire", "Tongues", "Holy Spirit", "Wind", "Speak"] },
+      { topic: "The Passover", forbidden: ["Lamb", "Blood", "Door", "Egypt", "Angel"] },
+      { topic: "Queen Esther", forbidden: ["King", "Jewish", "Haman", "Banquet", "Save"] },
+      { topic: "Healing the Blind Man", forbidden: ["Eyes", "Mud", "Wash", "See", "Born"] },
+      { topic: "The Fiery Furnace", forbidden: ["Three", "King", "Fire", "Bow", "Fourth man"] },
+      { topic: "John the Baptist", forbidden: ["Baptize", "Jordan", "Locust", "Prepare", "Wilderness"] },
+      { topic: "Gideon's Army", forbidden: ["Three hundred", "Trumpet", "Torch", "Jar", "Midianites"] },
+      { topic: "The Mustard Seed", forbidden: ["Small", "Faith", "Grow", "Tree", "Mountain"] },
+      { topic: "The Lost Coin", forbidden: ["Woman", "Sweep", "Search", "Found", "Rejoice"] }
+    ];
+
+    const totalQuestions = 15;
+    let gameDeck = [];
+    let currentIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let timer;
+    let timeLeft = 60;
+    let gameActive = false;
+
+    let sessionId = null;
+    let isHost = false;
+    let gameStarted = false;
+
+    // Utility: shuffle array
+    function shuffleArray(array) {
+      for(let i = array.length -1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i +1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    // Generate random session ID
+    function generateSessionId() {
+      return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    // Update Firebase session data
+    function updateSessionData(data) {
+      if(!sessionId) return;
+      db.ref('sessions/' + sessionId).update(data);
+    }
+
+    // Reset game variables
+    function resetGameVars() {
+      score = 0;
+      streak = 0;
+      currentIndex = 0;
+      gameActive = false;
+      gameStarted = false;
+      timeLeft = 60;
+      motivator.textContent = '';
+      endMessage.style.display = 'none';
+      restartBtn.style.display = 'none';
+      leaderboardDiv.style.display = 'none';
+      gotItBtn.disabled = true;
+      nextBtn.disabled = true;
+      scoreBoard.textContent = `Score: 0 | Streak: 0 | Question: 0 / ${totalQuestions}`;
+    }
+
+    // Show question card
+    function showQuestion() {
+      if(currentIndex >= gameDeck.length || currentIndex >= totalQuestions) {
+        endGame();
+        return;
+      }
+      const card = gameDeck[currentIndex];
+      topicCard.textContent = card.topic;
+      forbiddenWords.textContent = "Forbidden words: " + card.forbidden.join(", ");
+      scoreBoard.textContent = `Score: ${score} | Streak: ${streak} | Question: ${currentIndex + 1} / ${totalQuestions}`;
+      motivator.textContent = '';
+      timeLeft = 60;
+      timerDisplay.textContent = timeLeft;
+      gotItBtn.disabled = false;
+      nextBtn.disabled = true;
+      startTimer();
+    }
+
+    // Timer functions
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+        if(timeLeft <= 0) {
+          clearInterval(timer);
+          motivator.textContent = "Time's up!";
+          gotItBtn.disabled = true;
+          nextBtn.disabled = false;
+          streak = 0;
+          updateScore();
+          updateSessionData({currentQuestion: currentIndex + 1, score, streak, gameStarted});
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    // Update score display & sync
+    function updateScore() {
+      scoreBoard.textContent = `Score: ${score} | Streak: ${streak} | Question: ${currentIndex + 1} / ${totalQuestions}`;
+    }
+
+    // End game & show leaderboard
+    async function endGame() {
+      gameActive = false;
+      gameStarted = false;
+      stopTimer();
+      gotItBtn.disabled = true;
+      nextBtn.disabled = true;
+      endMessage.style.display = 'block';
+      endMessage.textContent = `Game over! Your final score is ${score}.`;
+      restartBtn.style.display = 'inline-block';
+      document.getElementById('exitBtn').style.display = 'inline-block';
+
+      // Save score in leaderboard
+      if(sessionId && isHost) {
+        const scoresRef = db.ref(`sessions/${sessionId}/leaderboard`);
+        const newScoreRef = scoresRef.push();
+        await newScoreRef.set({score, timestamp: Date.now()});
+        displayLeaderboard();
+      }
+      // Gamification
+      if(typeof NBTT!=='undefined'){
+        const result={score:score,streak:streak};
+        const{isNewBest}=NBTT.saveScore('bible-taboo',result);
+        result._beatPB=isNewBest;
+        NBTT.showPersonalBest('bible-taboo',endMessage.parentElement,result);
+        NBTT.checkAchievements('bible-taboo',result);
+        NBTT.checkDailyChallenge('bible-taboo',result);
+      }
+    }
+
+    // Display leaderboard
+    function displayLeaderboard() {
+      leaderboardDiv.style.display = 'block';
+      leaderboardList.innerHTML = '';
+      db.ref(`sessions/${sessionId}/leaderboard`).orderByChild('score').limitToLast(10).once('value', snapshot => {
+        const scores = [];
+        snapshot.forEach(child => {
+          scores.push(child.val());
+        });
+        scores.sort((a,b) => b.score - a.score);
+        scores.forEach((s,i) => {
+          const li = document.createElement('li');
+          li.textContent = `Score: ${s.score} (${new Date(s.timestamp).toLocaleString()})`;
+          leaderboardList.appendChild(li);
+        });
+      });
+    }
+
+    // Event handlers
+
+    // Create game
+    createGameBtn.addEventListener('click', () => {
+      sessionId = generateSessionId();
+      isHost = true;
+      resetGameVars();
+      gameDeck = [...cards];
+      shuffleArray(gameDeck);
+      sessionIdDisplay.textContent = `Session ID: ${sessionId}`;
+      joinError.textContent = '';
+      gameArea.style.display = 'block';
+      startGameBtn.disabled = false;
+      joinSessionInput.value = '';
+      updateSessionData({host: true, gameStarted: false});
+    });
+
+    // Join game
+    joinGameBtn.addEventListener('click', async () => {
+      const enteredId = joinSessionInput.value.trim().toUpperCase();
+      if(!enteredId) {
+        joinError.textContent = "Please enter a session ID to join.";
+        return;
+      }
+      // Check if session exists
+      const snapshot = await db.ref(`sessions/${enteredId}`).get();
+      if(!snapshot.exists()) {
+        joinError.textContent = "Session ID not found.";
+        return;
+      }
+      sessionId = enteredId;
+      isHost = false;
+      resetGameVars();
+      gameArea.style.display = 'block';
+      sessionIdDisplay.textContent = `Joined Session: ${sessionId}`;
+      joinError.textContent = '';
+      startGameBtn.disabled = true;
+      // Listen to game start and updates
+      listenForGameUpdates();
+    });
+
+    // Start game (host only)
+    startGameBtn.addEventListener('click', () => {
+      if(!isHost || !sessionId) return;
+      gameStarted = true;
+      updateSessionData({gameStarted: true});
+      startGameBtn.disabled = true;
+      gameDeck = [...cards];
+      shuffleArray(gameDeck);
+      currentIndex = 0;
+      score = 0;
+      streak = 0;
+      gameActive = true;
+      showQuestion();
+      updateSessionData({currentQuestion: currentIndex, score, streak, gameStarted});
+    });
+
+    // Got it button (team guessed right)
+    gotItBtn.addEventListener('click', () => {
+      if(!gameActive) return;
+      score += 10 + streak * 2;
+      streak++;
+      updateScore();
+      motivator.textContent = "Great job! Keep going!";
+      gotItBtn.disabled = true;
+      nextBtn.disabled = false;
+      stopTimer();
+      updateSessionData({score, streak});
+    });
+
+    // Next question button
+    nextBtn.addEventListener('click', () => {
+      if(!gameActive) return;
+      currentIndex++;
+      if(currentIndex >= totalQuestions) {
+        endGame();
+      } else {
+        showQuestion();
+        updateSessionData({currentQuestion: currentIndex, score, streak});
+      }
+      nextBtn.disabled = true;
+      gotItBtn.disabled = false;
+      motivator.textContent = '';
+    });
+
+    // Restart game button
+    restartBtn.addEventListener('click', () => {
+      if(!sessionId) return;
+      resetGameVars();
+      if(isHost) {
+        startGameBtn.disabled = false;
+        endMessage.style.display = 'none';
+        leaderboardDiv.style.display = 'none';
+      }
+    });
+
+    // Listen for game updates (for joining players)
+    function listenForGameUpdates() {
+      if(!sessionId) return;
+      const sessionRef = db.ref(`sessions/${sessionId}`);
+
+      sessionRef.on('value', snapshot => {
+        const data = snapshot.val();
+        if(!data) return;
+
+        if(data.gameStarted && !gameActive) {
+          gameStarted = true;
+          gameActive = true;
+          currentIndex = data.currentQuestion || 0;
+          score = data.score || 0;
+          streak = data.streak || 0;
+          showQuestionJoin(data);
+        }
+
+        // Update score & question display for joiners
+        if(gameActive) {
+          score = data.score || score;
+          streak = data.streak || streak;
+          currentIndex = data.currentQuestion || currentIndex;
+          scoreBoard.textContent = `Score: ${score} | Streak: ${streak} | Question: ${currentIndex + 1} / ${totalQuestions}`;
+        }
+      });
+    }
+
+    // Show question to joiners (guessers) — hide forbidden words so only the describer sees them
+    function showQuestionJoin(data) {
+      const card = cards[currentIndex] || cards[0];
+      topicCard.textContent = card.topic;
+      forbiddenWords.textContent = "You are the guesser — forbidden words are hidden!";
+      forbiddenWords.style.background = 'rgba(168,85,247,0.1)';
+      forbiddenWords.style.color = 'rgba(255,255,255,0.4)';
+      forbiddenWords.style.fontStyle = 'italic';
+      scoreBoard.textContent = `Score: ${score} | Streak: ${streak} | Question: ${currentIndex + 1} / ${totalQuestions}`;
+      motivator.textContent = 'Waiting for host...';
+      timerDisplay.textContent = '';
+      gotItBtn.disabled = true;
+      nextBtn.disabled = true;
+    }
+  </script>
+
+<!-- ===== SEO RELATED CONTENT — INTERNAL LINKING ===== -->
+<section class="nbtt-related-section" style="
+  max-width:800px;margin:3rem auto 0;padding:2rem 1.5rem;
+  background:rgba(10,10,26,0.9);border:1px solid rgba(168,85,247,0.15);
+  border-radius:16px;font-family:'Poppins',sans-serif;
+">
+  <h2 style="
+    color:#fff;font-size:1.4rem;text-align:center;margin:0 0 0.3rem;
+    font-weight:700;letter-spacing:-0.02em;
+  ">
+    <i class="fas fa-compass" style="color:#a855f7;margin-right:8px;"></i>Continue Exploring
+  </h2>
+  <p style="text-align:center;color:rgba(255,255,255,0.5);font-size:0.85rem;margin:0 0 1.5rem;">
+    Dive deeper into God's Word with related content
+  </p>
+  <div style="display:grid;gap:10px;">
+    
+      <a href="../bible-connections/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Bible Connections</strong>
+      </a>
+      <a href="../bible-word-search/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Bible Word Search</strong>
+      </a>
+      <a href="../verse-hunt-live/index.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(168,85,247,0.08);
+        border:1px solid rgba(168,85,247,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#a855f7;margin-right:6px;"><i class="fas fa-gamepad"></i></span>
+        <strong style="color:#e0d0ff;">Verse Hunt</strong>
+      </a>
+      <a href="../../Studies/facts_or_fiction.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(37,117,252,0.08);
+        border:1px solid rgba(37,117,252,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#60a5fa;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#bfdbfe;">Is the Bible Facts or Fiction?</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Studies</span>
+      </a>
+      <a href="../../Studies/history_of_christian_faith.html" class="nbtt-related-card" style="
+        display:block;padding:14px 18px;background:rgba(37,117,252,0.08);
+        border:1px solid rgba(37,117,252,0.2);border-radius:10px;
+        text-decoration:none;color:#ddd;transition:all 0.3s ease;
+      ">
+        <span style="color:#60a5fa;margin-right:6px;"><i class="fas fa-book-open"></i></span>
+        <strong style="color:#bfdbfe;">History of the Christian Faith</strong>
+        <span style="font-size:0.75rem;color:rgba(255,255,255,0.4);margin-left:8px;">Studies</span>
+      </a>
+  </div>
+  <div style="display:flex;gap:12px;justify-content:center;margin-top:1.5rem;flex-wrap:wrap;">
+    <a href="../../all-games.html" style="
+      display:inline-flex;align-items:center;gap:6px;padding:10px 22px;
+      background:rgba(168,85,247,0.15);border:1px solid rgba(168,85,247,0.3);
+      border-radius:50px;color:#c084fc;text-decoration:none;font-weight:600;font-size:0.85rem;
+      transition:all 0.3s ease;
+    ">
+      <i class="fas fa-gamepad"></i> All Games
+    </a>
+    <a href="../../index.html" style="
+      display:inline-flex;align-items:center;gap:6px;padding:10px 22px;
+      background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);
+      border-radius:50px;color:#ccc;text-decoration:none;font-weight:600;font-size:0.85rem;
+      transition:all 0.3s ease;
+    ">
+      <i class="fas fa-home"></i> Home
+    </a>
+  </div>
+</section>
+
+<!-- ===== SEO SITE-WIDE MINI FOOTER ===== -->
+<footer class="nbtt-mini-footer" style="
+  max-width:800px;margin:1.5rem auto 2rem;padding:1.2rem 1.5rem;
+  background:rgba(10,10,26,0.7);border-top:1px solid rgba(168,85,247,0.1);
+  border-radius:12px;font-family:'Poppins',sans-serif;text-align:center;
+">
+  <nav aria-label="Site navigation" style="
+    display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:0.8rem;
+  ">
+    <a href="../../index.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-home"></i> Home</a>
+    <a href="../../all-studies.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-book-open"></i> Studies</a>
+    <a href="../../vod.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-dove"></i> Devotions</a>
+    <a href="../../all-games.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-gamepad"></i> Games</a>
+    <a href="../../all-videos.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-video"></i> Videos</a>
+    <a href="../../about-us.html" style="color:#a855f7;text-decoration:none;font-size:0.8rem;font-weight:600;"><i class="fas fa-info-circle"></i> About</a>
+  </nav>
+  <p style="color:rgba(255,255,255,0.35);font-size:0.7rem;margin:0;">
+    &copy; 2026 NothingButTheTRUTH. All rights reserved.
+  </p>
+</footer>
+<script src="../nbtt-gamification.js"></script>
+<script>
+(function(){
+  if(window.location.search.includes('play=1')){
+    if('scrollRestoration' in history) history.scrollRestoration='manual';
+    window.scrollTo(0,0);
+    requestAnimationFrame(()=>window.scrollTo(0,0));
+    window.addEventListener('load',()=>window.scrollTo(0,0),{once:true});
+  }
+})();
+</script>
+</body>
+</html>

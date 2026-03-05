@@ -1,0 +1,58 @@
+.panel {
+  margin-bottom: 14px;
+  background: #f9fcff;
+  border: 1px solid #d5e5f7;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.title {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: #1f4b99;
+  font-weight: 700;
+}
+
+.list {
+  display: grid;
+  gap: 8px;
+}
+
+.item {
+  border: 1px solid #d8e6f6;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 8px;
+}
+
+.moduleBtn {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: #1f4b99;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.citations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.citeBtn {
+  border: 1px solid #c4d9f2;
+  background: #f5f9ff;
+  color: #243b53;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.citeBtn:hover,
+.moduleBtn:hover {
+  color: #0f2f6f;
+}

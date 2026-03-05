@@ -103,6 +103,14 @@ ready(() => {
   const sidebarAvatar    = $("#sidebarAvatar");
   const sidebarUserName  = $("#sidebarUserName");
   const sidebarUserEmail = $("#sidebarUserEmail");
+  const sidebarUserMode  = $("#sidebarUserMode");
+  const sidebarBackdrop  = $("#sidebarBackdrop");
+
+  const noSignInBtn      = $("#noSignInBtn");
+  const activatePublicBtn = $("#activatePublicBtn");
+  const activateAnonBtn  = $("#activateAnonBtn");
+
+  let pendingAccessMode = null;
 
   // ---- Helpers ----
   function openAuthModal() {
@@ -169,7 +177,7 @@ ready(() => {
       wrap = document.createElement("div");
       wrap.id = "sidebarPrivacyWrap";
       wrap.className = "sidebar-privacy-wrap";
-      wrap.innerHTML = '<p class="sidebar-privacy-note"><i class="fas fa-lock"></i> Your privacy is sacred to us. Browse freely — no account needed. If you sign up, you can stay <strong>completely anonymous</strong> or choose to share your name.</p>';
+      wrap.innerHTML = '<p class="sidebar-privacy-note"><i class="fas fa-lock"></i> Everything here is <strong>free</strong>. No sign in = <strong>limited</strong>. Public sign in = <strong>unlimited + public profile</strong>. Anonymous sign in = <strong>unlimited + private profile</strong>. <a href="account-options.html" class="sidebar-privacy-link">If you don’t understand then click here</a>.</p>';
     }
 
     if (wrap.parentElement !== sidebarProfile) {
@@ -187,6 +195,35 @@ ready(() => {
       btn.disabled = false;
       if (btn.dataset.origHtml) btn.innerHTML = btn.dataset.origHtml;
     }
+  }
+
+  function setSidebarOpenState(isOpen) {
+    const hamburger = $(".hamburger");
+    const sidebar = $(".sidebar");
+    if (!hamburger || !sidebar) return;
+
+    hamburger.classList.toggle("active", isOpen);
+    sidebar.classList.toggle("active", isOpen);
+    hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    sidebar.setAttribute("aria-hidden", isOpen ? "false" : "true");
+
+    if (sidebarBackdrop) {
+      sidebarBackdrop.classList.toggle("active", isOpen);
+      sidebarBackdrop.setAttribute("aria-hidden", isOpen ? "false" : "true");
+    }
+
+    document.body.classList.toggle("sidebar-open", isOpen);
+  }
+
+  function normalizeMode(mode, user) {
+    if (mode === "public-unlimited" || mode === "anonymous-unlimited") return mode;
+    if (user?.isAnonymous) return "anonymous-unlimited";
+    return "public-unlimited";
+  }
+
+  function modeLabel(mode) {
+    if (mode === "anonymous-unlimited") return "Anonymous Account · Private · Unlimited";
+    return "Public Account · Public Profile · Unlimited";
   }
 
   function friendlyError(code) {
@@ -245,10 +282,36 @@ ready(() => {
   async function createUserProfile(user) {
     const ref = doc(db, "users", user.uid);
     const snap = await getDoc(ref).catch(() => null);
+    const defaultMode = normalizeMode(pendingAccessMode, user);
+    const visibility = defaultMode === "public-unlimited" ? "public" : "private";
+
     if (snap && snap.exists()) {
       // Returning user — update lastLogin
-      await updateDoc(ref, { lastLogin: serverTimestamp() }).catch(() => {});
-      return;
+      const existing = snap.data() || {};
+      const updates = {
+        lastLogin: serverTimestamp(),
+      };
+
+      if (!existing.accountMode) updates.accountMode = defaultMode;
+      if (!existing.profileVisibility) updates.profileVisibility = visibility;
+      if (typeof existing.unlimitedAccess !== "boolean") updates.unlimitedAccess = true;
+      if (typeof existing.isPublicProfile !== "boolean") updates.isPublicProfile = visibility === "public";
+
+      if (pendingAccessMode && existing.accountMode !== pendingAccessMode) {
+        updates.accountMode = pendingAccessMode;
+        updates.profileVisibility = pendingAccessMode === "public-unlimited" ? "public" : "private";
+        updates.unlimitedAccess = true;
+        updates.isPublicProfile = pendingAccessMode === "public-unlimited";
+      }
+
+      await updateDoc(ref, updates).catch(() => {});
+      pendingAccessMode = null;
+
+      return {
+        ...existing,
+        accountMode: updates.accountMode || existing.accountMode || defaultMode,
+        profileVisibility: updates.profileVisibility || existing.profileVisibility || visibility,
+      };
     }
 
     // Migrate localStorage data into the new profile
@@ -268,6 +331,10 @@ ready(() => {
       displayName: user.displayName || "Anonymous Believer",
       email: user.email || null,
       isAnonymous: user.isAnonymous || false,
+      accountMode: defaultMode,
+      profileVisibility: visibility,
+      isPublicProfile: visibility === "public",
+      unlimitedAccess: true,
       createdAt: serverTimestamp(),
       lastLogin: serverTimestamp(),
       savedVerses,
@@ -275,15 +342,24 @@ ready(() => {
       gameScores: {},
       pollVotes: {},
     }).catch((e) => console.warn("Profile create failed:", e));
+
+    pendingAccessMode = null;
+
+    return {
+      accountMode: defaultMode,
+      profileVisibility: visibility,
+    };
   }
 
   // ---- UI State Manager ----
-  function updateUI(user) {
+  function updateUI(user, profileData = null) {
     if (user) {
       // Signed in
-      const name = user.isAnonymous ? "Anonymous Believer" : (user.displayName || "Believer");
+      const mode = normalizeMode(profileData?.accountMode, user);
+      const isAnonMode = mode === "anonymous-unlimited";
+      const name = isAnonMode ? "Anonymous Believer" : (user.displayName || "Believer");
       const initial = name.charAt(0).toUpperCase();
-      const email = user.email || (user.isAnonymous ? "Anonymous mode" : "");
+      const email = isAnonMode ? "Private anonymous account" : (user.email || "Public account");
 
       // Navbar button
       if (navAuthBtn) {
@@ -296,6 +372,7 @@ ready(() => {
       if (sidebarAvatar) sidebarAvatar.textContent = initial;
       if (sidebarUserName) sidebarUserName.textContent = name;
       if (sidebarUserEmail) sidebarUserEmail.textContent = email;
+      if (sidebarUserMode) sidebarUserMode.textContent = modeLabel(mode);
 
       closeAuthModal();
     } else {
@@ -305,15 +382,19 @@ ready(() => {
       }
       if (sidebarSignedOut) sidebarSignedOut.style.display = "block";
       if (sidebarSignedIn)  sidebarSignedIn.style.display = "none";
+      if (sidebarUserMode) sidebarUserMode.textContent = "";
     }
   }
 
   // ---- Auth State Listener ----
   onAuthStateChanged(auth, async (user) => {
-    updateUI(user);
     ensureSidebarPrivacyWrap();
     if (user) {
-      await createUserProfile(user);
+      const profileData = await createUserProfile(user);
+      updateUI(user, profileData);
+    } else {
+      pendingAccessMode = null;
+      updateUI(null);
     }
   });
 
@@ -321,14 +402,7 @@ ready(() => {
   navAuthBtn?.addEventListener("click", () => {
     if (auth.currentUser) {
       // Already signed in — open sidebar instead
-      const hamburger = $(".hamburger");
-      const sidebar   = $(".sidebar");
-      if (hamburger && sidebar) {
-        hamburger.classList.add("active");
-        sidebar.classList.add("active");
-        hamburger.setAttribute("aria-expanded", "true");
-        sidebar.setAttribute("aria-hidden", "false");
-      }
+      setSidebarOpenState(true);
     } else {
       openAuthModal();
     }
@@ -336,8 +410,7 @@ ready(() => {
 
   sidebarSignInBtn?.addEventListener("click", () => {
     // Close sidebar first
-    $(".hamburger")?.classList.remove("active");
-    $(".sidebar")?.classList.remove("active");
+    setSidebarOpenState(false);
     openAuthModal();
   });
 
@@ -355,6 +428,22 @@ ready(() => {
   tabs.forEach(tab => {
     tab.addEventListener("click", () => switchTab(tab.dataset.tab));
   });
+  noSignInBtn?.addEventListener("click", () => {
+    closeAuthModal();
+  });
+  activatePublicBtn?.addEventListener("click", () => {
+    switchTab("signup");
+  });
+  activateAnonBtn?.addEventListener("click", async () => {
+    clearErrors();
+    pendingAccessMode = "anonymous-unlimited";
+    try {
+      await signInAnonymously(auth);
+    } catch (err) {
+      pendingAccessMode = null;
+      showError(signinError, friendlyError(err.code));
+    }
+  });
   forgotLink?.addEventListener("click", (e) => { e.preventDefault(); switchTab("forgot"); });
   backToSignin?.addEventListener("click", (e) => { e.preventDefault(); switchTab("signin"); });
 
@@ -371,8 +460,10 @@ ready(() => {
     const btn = signinForm.querySelector(".auth-submit-btn");
     setLoading(btn, true);
     try {
+      pendingAccessMode = "public-unlimited";
       await signInWithEmailAndPassword(auth, email, pw);
     } catch (err) {
+      pendingAccessMode = null;
       showError(signinError, friendlyError(err.code));
     }
     setLoading(btn, false);
@@ -394,6 +485,7 @@ ready(() => {
     const btn = signupForm.querySelector(".auth-submit-btn");
     setLoading(btn, true);
     try {
+      pendingAccessMode = "public-unlimited";
       // If currently anonymous, link instead of creating new
       if (auth.currentUser?.isAnonymous) {
         const cred = EmailAuthProvider.credential(email, pw);
@@ -404,8 +496,9 @@ ready(() => {
         await updateProfile(result.user, { displayName: name });
         await sendEmailVerification(result.user).catch(() => {});
       }
-      updateUI(auth.currentUser);
+      updateUI(auth.currentUser, { accountMode: "public-unlimited" });
     } catch (err) {
+      pendingAccessMode = null;
       showError(signupError, friendlyError(err.code));
     }
     setLoading(btn, false);
@@ -429,11 +522,13 @@ ready(() => {
   });
 
   // ---- Event: Google Sign-In ----
-  async function handleProviderSignIn(provider, errorTarget) {
+  async function handleProviderSignIn(provider, errorTarget, mode = "public-unlimited") {
     clearErrors();
+    pendingAccessMode = mode;
     try {
       await signInWithPopup(auth, provider);
     } catch (err) {
+      pendingAccessMode = null;
       showError(errorTarget || signinError, friendlyError(err.code));
     }
   }
@@ -453,8 +548,10 @@ ready(() => {
   anonSignInBtn?.addEventListener("click", async () => {
     clearErrors();
     try {
+      pendingAccessMode = "anonymous-unlimited";
       await signInAnonymously(auth);
     } catch (err) {
+      pendingAccessMode = null;
       showError(signinError, friendlyError(err.code));
     }
   });
@@ -465,8 +562,7 @@ ready(() => {
       await signOut(auth);
       updateUI(null);
       // Close sidebar
-      $(".hamburger")?.classList.remove("active");
-      $(".sidebar")?.classList.remove("active");
+      setSidebarOpenState(false);
     } catch (err) {
       console.error("Sign out error:", err);
     }
@@ -506,6 +602,15 @@ ready(() => {
   function getCardShareUrl(card) {
     if (!card) return null;
     if (card.dataset.shareUrl) return toAbsoluteUrl(card.dataset.shareUrl);
+
+    if (card.classList.contains("video-card")) {
+      const wrapper = card.querySelector(".video-wrapper[id]");
+      const id = wrapper?.id;
+      const base = toAbsoluteUrl("all-videos.html");
+      if (!base) return null;
+      return id ? `${base}#${id}` : base;
+    }
+
     const directHref = card.getAttribute("href");
     if (directHref) return toAbsoluteUrl(directHref);
     const nestedLink = card.querySelector("a[href]");
@@ -521,8 +626,6 @@ ready(() => {
 
   function attachShareButtons() {
     const selectors = [
-      ".nx-card",
-      ".nx-devo-card",
       ".game-card",
       ".video-card",
       ".myth-short-card",

@@ -1,0 +1,14 @@
+{
+  "userId": "demo-user",
+  "moduleProgress": {
+    "module-0": {
+      "completedLessons": ["module-0-lesson-1"],
+      "habits": { "prayer": "kept", "scripture": "prayed", "service": "kept", "solitude": "struggled" },
+      "reflections": [
+        { "id": "r-1", "lessonId": "module-0-lesson-1", "text": "Christ is my model.", "mood": "encouraged", "createdAt": "2026-03-05T00:00:00.000Z" }
+      ]
+    }
+  },
+  "badges": ["starter"],
+  "lastActive": "2026-03-05T00:00:00.000Z"
+}

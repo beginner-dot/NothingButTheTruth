@@ -401,6 +401,106 @@ h1 {
   }
 }
 
+}
+
+/* ====== END SCREEN ====== */
+.end-screen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  animation: fadeIn 0.5s ease;
+}
+.end-screen.hidden {
+  display: none;
+}
+.end-screen-content {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  max-width: 440px;
+  width: 90vw;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(106,17,203,0.5);
+  color: white;
+}
+.end-screen-content h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+.end-subtitle {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  margin-bottom: 1.5rem;
+}
+.end-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.end-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 12px 20px;
+  min-width: 100px;
+}
+.end-stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+}
+.end-stat-label {
+  font-size: 0.8rem;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+.end-msg {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  min-height: 1.5em;
+}
+.end-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.end-btn {
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+}
+.end-btn-primary {
+  background: white;
+  color: #6a11cb;
+}
+.end-btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(255,255,255,0.4);
+}
+.end-btn-secondary {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.end-btn-secondary:hover {
+  background: rgba(255,255,255,0.3);
+}
+
 /* Landscape orientation styles */
 @media (max-width: 900px) and (orientation: landscape) {
   body {

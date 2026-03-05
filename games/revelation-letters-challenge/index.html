@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Revelation Letters Challenge | NothingButTheTRUTH</title>
+<meta name="description" content="Master the 7 churches of Revelation with a fast strategic quiz game: message, warning, and promise mapping.">
+<link rel="canonical" href="https://NothingButTheTRUTH.web.app/games/revelation-letters-challenge/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070912;--card:#12182c;--purple:#8b5cf6;--blue:#2563eb;--green:#22c55e;--red:#ef4444;--txt:#f1f5ff;--sub:#c5cbe2}
+*{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;background:radial-gradient(circle at 15% 0%,rgba(139,92,246,.2),transparent 45%),radial-gradient(circle at 85% 100%,rgba(37,99,235,.2),transparent 55%),var(--bg);color:var(--txt);min-height:100vh;padding:20px}
+.wrap{max-width:980px;margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.back{color:#dbe2ff;text-decoration:none;border:1px solid rgba(255,255,255,.18);padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.05)}.brand{font-weight:800;background:linear-gradient(135deg,var(--purple),#93c5fd);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px}#start h1{margin:0 0 6px;font-size:2rem}#start p{color:var(--sub);line-height:1.7}
+.modes{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.modes button{border:1px solid rgba(255,255,255,.15);background:#1a2240;color:#ecf1ff;padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:700}.modes button.on{border-color:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,.25) inset}
+.play{background:linear-gradient(135deg,var(--purple),var(--blue));border:none;color:#fff;padding:12px 15px;border-radius:10px;cursor:pointer;font-weight:800}
+#game,#end{display:none}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:10px}.stat{background:#141d37;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:9px;text-align:center}.k{font-size:.7rem;color:var(--sub);text-transform:uppercase}.v{font-size:1.1rem;font-weight:800}
+.timer{height:8px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;margin-bottom:10px}.fill{height:100%;width:100%;background:linear-gradient(90deg,var(--green),#f59e0b)}
+.chip{display:inline-block;font-size:.72rem;background:rgba(139,92,246,.2);border:1px solid rgba(139,92,246,.4);padding:4px 9px;border-radius:999px;margin-bottom:8px}.q{font-size:1.1rem;line-height:1.55;margin-bottom:10px}
+.opts{display:grid;gap:8px}.opts button{padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,.14);background:#1a2240;color:#edf2ff;text-align:left;cursor:pointer}.opts button:hover{transform:translateX(3px)}.opts button.ok{background:rgba(34,197,94,.2);border-color:rgba(34,197,94,.6)}.opts button.bad{background:rgba(239,68,68,.2);border-color:rgba(239,68,68,.6)}
+.feed{min-height:1.4em;margin:8px 0;font-weight:700}.insight{display:none;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(37,99,235,.13));border:1px solid rgba(139,92,246,.45);padding:12px;border-radius:10px}.insight.show{display:block}
+.next{margin-top:8px;background:#2563eb;color:white;border:none;padding:10px 13px;border-radius:9px;font-weight:700;cursor:pointer}
+#end h2{margin:0 0 6px}.scores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}.s{background:#141d37;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px;text-align:center}
+.recap{background:#141d37;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px}.recap ul{margin:8px 0 0 18px;line-height:1.7}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.actions button,.actions a{padding:10px 14px;border-radius:9px;text-decoration:none;border:none;cursor:pointer;font-weight:700}.actions .r{background:linear-gradient(135deg,var(--purple),var(--blue));color:#fff}.actions .h{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+@media(max-width:760px){.hud,.scores{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="back" href="../../all-games.html">← All Games</a><div class="brand">REVELATION LETTERS CHALLENGE</div></div>
+
+  <section id="start" class="panel">
+    <h1>📜 Revelation Letters Challenge</h1>
+    <p>Test your mastery of the seven churches in Revelation: commendations, warnings, and promises for overcomers.</p>
+    <div class="modes" id="modes">
+      <button class="on" data-m="survey">Survey (19s)</button>
+      <button data-m="watch">Watchful (15s)</button>
+      <button data-m="urgent">Urgent (12s)</button>
+    </div>
+    <button id="startBtn" class="play">Start Challenge</button>
+  </section>
+
+  <section id="game" class="panel">
+    <div class="hud">
+      <div class="stat"><div class="k">Score</div><div class="v" id="score">0</div></div>
+      <div class="stat"><div class="k">Streak</div><div class="v" id="streak">0</div></div>
+      <div class="stat"><div class="k">Lives</div><div class="v" id="lives">3</div></div>
+      <div class="stat"><div class="k">Question</div><div class="v" id="qNum">1/10</div></div>
+      <div class="stat"><div class="k">Mode</div><div class="v" id="modeOut">SURVEY</div></div>
+    </div>
+    <div class="timer"><div class="fill" id="fill"></div></div>
+    <div class="chip" id="chip">Seven Churches</div>
+    <div class="q" id="q"></div>
+    <div class="opts" id="opts"></div>
+    <div class="feed" id="feed"></div>
+    <div class="insight" id="insight"><div id="insightTxt"></div><button id="nextBtn" class="next">Continue</button></div>
+  </section>
+
+  <section id="end" class="panel">
+    <h2 id="title">Completed</h2>
+    <p id="sub"></p>
+    <div class="scores">
+      <div class="s"><div class="k">Score</div><div class="v" id="fScore">0</div></div>
+      <div class="s"><div class="k">Accuracy</div><div class="v" id="fAcc">0%</div></div>
+      <div class="s"><div class="k">Best Streak</div><div class="v" id="fStreak">0</div></div>
+      <div class="s"><div class="k">High Score</div><div class="v" id="fBest">0</div></div>
+    </div>
+    <div class="recap"><strong>Letters Recap</strong><ul id="recap"></ul></div>
+    <div class="actions"><button id="again" class="r">Play Again</button><a class="h" href="../../all-games.html">Game Hub</a></div>
+  </section>
+</div>
+<script>
+(function(){if(window.location.search.includes('play=1')){if('scrollRestoration' in history) history.scrollRestoration='manual';window.scrollTo(0,0);document.addEventListener('DOMContentLoaded',()=>{window.scrollTo(0,0);requestAnimationFrame(()=>window.scrollTo(0,0));setTimeout(()=>window.scrollTo(0,0),60);});}})();
+const modeSec={survey:19,watch:15,urgent:12};let mode='survey';const modes=document.getElementById('modes');modes.querySelectorAll('button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;modes.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');});
+const bank=[
+{t:'Ephesus',q:'Which church was praised for testing false apostles but warned about losing first love?',o:['Smyrna','Ephesus','Pergamum','Laodicea'],a:1,l:'Ephesus was doctrinally alert but needed renewed love and devotion.'},
+{t:'Smyrna',q:'Which church received encouragement in suffering and persecution?',o:['Smyrna','Sardis','Thyatira','Philadelphia'],a:0,l:'Smyrna is urged to remain faithful under trial, even unto death.'},
+{t:'Pergamum',q:'Which church was warned about compromising with false teaching?',o:['Pergamum','Ephesus','Laodicea','Sardis'],a:0,l:'Pergamum faced pressure to blend truth with corrupt doctrines.'},
+{t:'Thyatira',q:'Which church was commended for works but warned against tolerated corruption?',o:['Thyatira','Smyrna','Philadelphia','Ephesus'],a:0,l:'Thyatira shows growth in works yet danger in tolerated spiritual compromise.'},
+{t:'Sardis',q:'Which church had a reputation of life but was spiritually dead?',o:['Laodicea','Sardis','Pergamum','Smyrna'],a:1,l:'Sardis needed watchfulness and repentance to revive true spiritual life.'},
+{t:'Philadelphia',q:'Which church is described as having an open door and faithful endurance?',o:['Philadelphia','Thyatira','Ephesus','Laodicea'],a:0,l:'Philadelphia is a model of faithful endurance and mission opportunity.'},
+{t:'Laodicea',q:'Which church was rebuked for being lukewarm and self-satisfied?',o:['Sardis','Pergamum','Laodicea','Ephesus'],a:2,l:'Laodicea is called to zealous repentance and true spiritual riches.'},
+{t:'Promise',q:'To overcomers, Revelation repeatedly promises:',o:['Political dominion only','Spiritual reward and eternal fellowship with Christ','Earthly wealth guarantees','No future judgment'],a:1,l:'The letters end with hope: overcoming through Christ leads to eternal reward.'},
+{t:'Pattern',q:'The repeated command “He who has an ear, let him hear...” emphasizes:',o:['Ignoring counsel','Personal and church-wide response to the Spirit','A hidden elite code','Historical trivia only'],a:1,l:'Each letter calls every generation to hear and obey the Spirit’s message.'},
+{t:'Mission',q:'A practical way to apply the seven letters today is:',o:['Treat them as irrelevant history','Use them for self-examination, repentance, and faithfulness','Use them only for argument','Ignore warnings and keep routine religion'],a:1,l:'The letters are living counsel for readiness, purity, and mission.'},
+{t:'Hope',q:'Which overall tone balances the warnings in Revelation 2–3?',o:['Despair','Hopeful call to overcome in Christ','Neutrality','Political revolution'],a:1,l:'Warnings are paired with hope and promises that anchor believers in Christ.'},
+{t:'Readiness',q:'The seven letters best prepare believers for:',o:['End-time faithfulness and discernment','Financial speculation','Cultural isolation only','No practical change'],a:0,l:'Revelation letters sharpen discernment and perseverance for final faithfulness.'}
+];
+const start=document.getElementById('start'),game=document.getElementById('game'),end=document.getElementById('end');
+const q=document.getElementById('q'),opts=document.getElementById('opts'),feed=document.getElementById('feed'),insight=document.getElementById('insight'),insightTxt=document.getElementById('insightTxt');
+const scoreEl=document.getElementById('score'),streakEl=document.getElementById('streak'),livesEl=document.getElementById('lives'),qNum=document.getElementById('qNum'),modeOut=document.getElementById('modeOut'),fill=document.getElementById('fill'),chip=document.getElementById('chip');
+let list=[],i=0,score=0,streak=0,bst=0,lives=3,corr=0,ans=false,timer=null,left=0,notes=[];
+function sh(a){const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;}
+function hud(){scoreEl.textContent=score;streakEl.textContent=streak;livesEl.textContent=lives;qNum.textContent=`${Math.min(i+1,list.length)}/${list.length}`;modeOut.textContent=mode.toUpperCase();}
+function stop(){if(timer){clearInterval(timer);timer=null;}}
+function startTimer(){stop();left=modeSec[mode];fill.style.width='100%';timer=setInterval(()=>{left-=0.1;fill.style.width=`${Math.max(0,left/modeSec[mode]*100)}%`;if(left<=0&&!ans)pick(-1);},100)}
+function lock(){opts.querySelectorAll('button').forEach(b=>b.disabled=true)}
+function show(){ans=false;feed.textContent='';insight.classList.remove('show');const x=list[i];q.textContent=x.q;chip.textContent=x.t;opts.innerHTML='';x.o.forEach((o,idx)=>{const b=document.createElement('button');b.textContent=`${idx+1}. ${o}`;b.onclick=()=>pick(idx);opts.appendChild(b);});hud();startTimer();}
+function pick(sel){if(ans)return;ans=true;stop();const x=list[i];lock();const bs=[...opts.querySelectorAll('button')];bs.forEach((b,idx)=>{if(idx===x.a)b.classList.add('ok');if(sel===idx&&idx!==x.a)b.classList.add('bad');});if(sel===x.a){corr++;streak++;bst=Math.max(bst,streak);score+=Math.max(90,Math.floor(90+left*9+streak*14));feed.textContent='✅ Correct';feed.style.color='#86efac';}else{lives--;streak=0;score=Math.max(0,score-40);feed.textContent=sel===-1?'⏱️ Time expired':'❌ Not correct';feed.style.color='#fca5a5';}
+notes.push(x.l);insightTxt.textContent=x.l;insight.classList.add('show');hud();}
+function done(){stop();game.style.display='none';end.style.display='block';const asked=Math.max(1,i+1),acc=Math.round(corr/asked*100);document.getElementById('title').textContent=acc>=85?'🏆 Letter Watchman':'✨ Keep Studying';document.getElementById('sub').textContent=`Mode: ${mode.toUpperCase()} • ${asked}/${list.length} completed`;
+document.getElementById('fScore').textContent=score;document.getElementById('fAcc').textContent=`${acc}%`;document.getElementById('fStreak').textContent=bst;const hi=Math.max(Number(localStorage.getItem('rlc_hi')||0),score);localStorage.setItem('rlc_hi',hi);document.getElementById('fBest').textContent=hi;document.getElementById('recap').innerHTML=[...new Set(notes)].slice(-4).map(x=>`<li>${x}</li>`).join('');}
+function begin(){list=sh(bank).slice(0,mode==='survey'?10:mode==='watch'?11:12);i=0;score=0;streak=0;bst=0;lives=3;corr=0;notes=[];start.style.display='none';end.style.display='none';game.style.display='block';show();}
+document.getElementById('startBtn').onclick=begin;document.getElementById('again').onclick=()=>{start.style.display='block';game.style.display='none';end.style.display='none';window.scrollTo(0,0)};document.getElementById('nextBtn').onclick=()=>{if(!ans)return;if(lives<=0){done();return;}i++;if(i>=list.length){done();return;}show();};
+document.addEventListener('keydown',e=>{if(game.style.display!=='block'||ans)return;const k=Number(e.key)-1;if(k>=0&&k<4){const b=opts.querySelectorAll('button')[k];if(b)pick(k);}});
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nothingbutthetruth.web.app/sitemap.xml

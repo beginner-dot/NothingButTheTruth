@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model UserProgress {
+  userId    String   @id
+  data      String
+  updatedAt DateTime @updatedAt
+}
+
+model HabitEntry {
+  id        String   @id @default(cuid())
+  userId    String
+  habitId   String
+  status    String
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model ReflectionEntry {
+  id           String   @id @default(cuid())
+  userId       String
+  reflectionId String
+  lessonId     String
+  text         String
+  mood         String
+  createdAt    DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model ForumPost {
+  id          String   @id @default(cuid())
+  category    String
+  title       String
+  body        String
+  authorName  String
+  approved    Boolean  @default(false)
+  flagged     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Testimony {
+  id          String   @id @default(cuid())
+  title       String
+  body        String
+  authorName  String
+  shareOptIn  Boolean  @default(false)
+  approved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}

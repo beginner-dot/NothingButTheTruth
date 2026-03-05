@@ -1,0 +1,8 @@
+{
+  "id": "module-0-quiz-1",
+  "lessonId": "module-0-lesson-1",
+  "questions": [
+    { "id": "q1", "type": "multiple-choice", "question": "What defines salvation?", "options": ["works", "grace through faith"], "correctIndex": 1, "explanation": "Ephesians 2:8-10" },
+    { "id": "q2", "type": "true-false", "question": "Obedience earns salvation", "options": ["True", "False"], "correctIndex": 1, "explanation": "Grace first." }
+  ]
+}

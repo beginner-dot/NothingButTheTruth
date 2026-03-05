@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "study:build": "npm --prefix christianity-of-christ run build",
+    "study:sync": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Get-ChildItem systematic-reconstruction -Force | Remove-Item -Recurse -Force; Copy-Item -Path christianity-of-christ\\out\\* -Destination systematic-reconstruction -Recurse -Force\"",
+    "study:deploy": "npm run study:build && npm run study:sync && npx firebase-tools@13.35.1 deploy --only hosting"
   },
   "repository": {
     "type": "git",
