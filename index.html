@@ -526,7 +526,7 @@
 
     <div class="hero-container" id="hero-card">
         <div class="glass-card">
-            <h1 class="hero-title" id="main-title" data-text="NothingButTheTRUTH" style="opacity:0;">NothingButTheTRUTH</h1>
+            <h1 class="hero-title" id="main-title" data-text="NothingButTheTRUTH">NothingButTheTRUTH</h1>
             
             <p class="hero-subtitle hero-stagger">
               <span aria-hidden="true">📖</span> Understand Scripture clearly, strengthen your daily walk, and grow with <strong>Bible truth made practical</strong> through studies, devotions, videos, and interactive faith tools.
@@ -654,6 +654,8 @@
     function balloonPopTitle() {
         const title = document.getElementById('main-title');
         if (!title) return;
+        // Cancel CSS fallback animation since JS is handling it
+        title.style.animation = 'none';
         const text = title.getAttribute('data-text') || '';
         title.innerHTML = '';
         title.style.opacity = '1';
@@ -745,8 +747,11 @@
         const popDuration = titleText.length * 55 + 500;
 
         // Stagger items & HUD cards are hidden by CSS rules (no FOUC)
+        // Cancel CSS fallback animations since JS is handling reveal
         const staggerItems = document.querySelectorAll('.hero-stagger');
         const hudCards = document.querySelectorAll('.hud-card');
+        staggerItems.forEach(el => { el.style.animation = 'none'; });
+        hudCards.forEach(el => { el.style.animation = 'none'; });
 
         // Step 3: After title pops in, fade in subtitle
         setTimeout(() => {
@@ -792,10 +797,10 @@
     function updateHudCounts() {
         const games = document.querySelectorAll('#games .play-btn:not(.disabled)').length;
         /* Homepage shows 7 preview items; HUD reflects total content available */
-        const studies = 20;
-        const devotions = 17;
+        const studies = 23;
+        const devotions = 18;
         const vals = document.querySelectorAll('.stats-hud .hud-card .hud-val');
-        if (vals[0]) vals[0].setAttribute('data-target', String(games || 5));
+        if (vals[0]) vals[0].setAttribute('data-target', String(games || 20));
         if (vals[1]) vals[1].setAttribute('data-target', String(studies));
         if (vals[2]) vals[2].setAttribute('data-target', String(devotions));
     }
@@ -1622,7 +1627,7 @@
       font-size:0.9rem;box-shadow:0 4px 16px rgba(245,158,11,0.35);
       transition:all 0.3s ease;font-family:'Poppins',sans-serif;
     "><i class="fas fa-trophy"></i> My Stats &amp; Achievements</a>
-    <div class="games-count">+17 more games available in All Games</div>
+    <div class="games-count">+17 more games available — <a href="all-games.html" style="color:#c084fc;">See All Games</a></div>
   </div>
 
   <!-- Hidden Games Grid -->
