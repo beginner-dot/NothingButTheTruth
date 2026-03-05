@@ -3375,6 +3375,171 @@ body {
           background: rgba(255,255,255,0.3);
         }
 
+        /* ─── COURSES SECTION ─── */
+        .nx-courses-section {
+          background:
+            radial-gradient(circle at 18% 18%, rgba(0,255,255,0.10) 0%, transparent 45%),
+            radial-gradient(circle at 82% 24%, rgba(111,0,255,0.14) 0%, transparent 46%),
+            linear-gradient(150deg, #060a1b 0%, #0a1533 35%, #111a44 68%, #101736 100%);
+        }
+        .nx-badge-courses {
+          background: rgba(83, 255, 241, 0.12);
+          border-color: rgba(83, 255, 241, 0.35);
+          color: #b5ffff;
+        }
+        .nx-line-courses {
+          background: linear-gradient(90deg, rgba(83,255,241,0.45), rgba(122,92,255,0.45));
+        }
+        .nx-course-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1rem;
+          max-width: 980px;
+          margin: 0 auto;
+        }
+        .nx-course-card {
+          position: relative;
+          display: block;
+          text-decoration: none;
+          color: #ebf2ff;
+          padding: 1.1rem 1.1rem 1rem;
+          border-radius: 14px;
+          border: 1px solid rgba(123, 162, 255, 0.26);
+          background: linear-gradient(160deg, rgba(15,22,54,0.95), rgba(11,18,46,0.95));
+          box-shadow: 0 14px 32px rgba(4, 9, 29, 0.45);
+          overflow: hidden;
+          transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+        }
+        .nx-course-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(130deg, rgba(0,255,255,0.11), transparent 42%, rgba(116,74,255,0.13));
+          pointer-events: none;
+          opacity: .78;
+        }
+        .nx-course-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(106, 246, 255, 0.55);
+          box-shadow: 0 20px 38px rgba(8, 14, 42, 0.56);
+        }
+        .nx-course-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: .6rem;
+          margin-bottom: .65rem;
+          position: relative;
+          z-index: 1;
+        }
+        .nx-course-pill {
+          font-size: .66rem;
+          letter-spacing: .12em;
+          text-transform: uppercase;
+          font-weight: 800;
+          border-radius: 999px;
+          padding: 6px 10px;
+          color: #ccfffb;
+          border: 1px solid rgba(83,255,241,0.38);
+          background: rgba(3,26,36,.55);
+        }
+        .nx-course-pill-alt {
+          color: #d8ccff;
+          border-color: rgba(151,120,255,.42);
+          background: rgba(25,18,49,.58);
+        }
+        .nx-course-icon {
+          width: 34px;
+          height: 34px;
+          border-radius: 10px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          color: #8af2ff;
+          border: 1px solid rgba(129,233,255,.45);
+          background: rgba(10,22,53,.72);
+        }
+        .nx-course-card h3 {
+          margin: 0 0 .42rem;
+          font-size: 1.08rem;
+          font-weight: 800;
+          line-height: 1.35;
+          color: #f7fbff;
+          position: relative;
+          z-index: 1;
+        }
+        .nx-course-card p {
+          margin: 0;
+          color: rgba(224,236,255,.88);
+          line-height: 1.56;
+          font-size: .93rem;
+          position: relative;
+          z-index: 1;
+        }
+        .nx-course-cta {
+          margin-top: .8rem;
+          display: inline-flex;
+          align-items: center;
+          gap: .42rem;
+          color: #8cf6ff;
+          font-weight: 700;
+          font-size: .85rem;
+          position: relative;
+          z-index: 1;
+        }
+        .nx-course-coming .nx-course-cta {
+          color: #d4c4ff;
+        }
+
+        [data-theme="light"] .nx-courses-section {
+          background:
+            radial-gradient(circle at 18% 18%, rgba(0,119,255,0.10) 0%, transparent 45%),
+            radial-gradient(circle at 82% 24%, rgba(138,92,246,0.11) 0%, transparent 46%),
+            linear-gradient(150deg, #eaf2ff 0%, #dae8ff 45%, #e8eeff 100%);
+        }
+        [data-theme="light"] .nx-course-card {
+          color: #12213f;
+          background: linear-gradient(165deg, rgba(255,255,255,0.94), rgba(237,245,255,0.95));
+          border-color: rgba(114,145,226,0.35);
+          box-shadow: 0 10px 24px rgba(78, 97, 138, 0.17);
+        }
+        [data-theme="light"] .nx-course-card h3 {
+          color: #13254a;
+        }
+        [data-theme="light"] .nx-course-card p {
+          color: #2f436e;
+        }
+        [data-theme="light"] .nx-course-card::before {
+          background: linear-gradient(135deg, rgba(66,132,255,0.08), transparent 45%, rgba(114,87,250,0.08));
+          opacity: .95;
+        }
+        [data-theme="light"] .nx-course-pill {
+          color: #064c69;
+          border-color: rgba(75,148,214,.45);
+          background: rgba(219,243,255,.9);
+        }
+        [data-theme="light"] .nx-course-pill-alt {
+          color: #4f2e9c;
+          border-color: rgba(133,100,225,.42);
+          background: rgba(236,227,255,.9);
+        }
+        [data-theme="light"] .nx-course-icon {
+          color: #0f4c73;
+          border-color: rgba(89,149,224,.45);
+          background: rgba(226,240,255,.95);
+        }
+        [data-theme="light"] .nx-course-cta {
+          color: #0f5e8b;
+        }
+        [data-theme="light"] .nx-course-coming .nx-course-cta {
+          color: #5f33be;
+        }
+        @media (max-width: 900px) {
+          .nx-course-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
         /* ─── STUDIES SECTION ─── */
         .nx-studies-section {
           background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 30%, #312e81 60%, #3730a3 100%);

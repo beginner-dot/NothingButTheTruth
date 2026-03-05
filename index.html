@@ -68,6 +68,18 @@
       ]
     }
     </script>
+    <script>
+    (function () {
+      try {
+        var key = "nbtt_theme";
+        var saved = localStorage.getItem(key);
+        var theme = (saved === "light" || saved === "dark") ? saved : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+    </script>
 
   <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
@@ -147,7 +159,7 @@
                     <li><a href="#devotions"><i class="fas fa-envelope" aria-hidden="true"></i> Devotions</a></li>
                     <li><a href="#mythbusters"><i class="fas fa-fire" aria-hidden="true"></i> MythBusters</a></li>
                     <li><a href="#games"><i class="fas fa-gamepad" aria-hidden="true"></i> Games</a></li>
-                    <li><a href="systematic-reconstruction/"><i class="fas fa-terminal" aria-hidden="true"></i> Christianity of Christ</a></li>
+                    <li><a href="#courses"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Courses</a></li>
                     <li><a href="all-videos.html"><i class="fas fa-video" aria-hidden="true"></i> Videos</a></li>
                   <li><a href="about-us.html"><i class="fas fa-circle-info" aria-hidden="true"></i> About</a></li>
                 </ul>
@@ -523,7 +535,7 @@
             <nav class="button-group hero-stagger" aria-label="Quick access">
                 <a href="all-videos.html" class="blade-btn btn-main" title="Watch Bible-based video messages and the Ten Commandments series"><span aria-hidden="true">🎥</span> Watch Videos</a>
                 <a href="all-studies.html" class="blade-btn" title="Browse free in-depth Bible studies on faith, baptism, angels, and more"><span aria-hidden="true">📚</span> Explore Studies</a>
-              <a href="systematic-reconstruction/" class="blade-btn" title="Open the complete interactive system audit: The Christianity of Christ"><span aria-hidden="true">🖥️</span> Christianity of Christ</a>
+              <a href="spiritual-growth-courses.html" class="blade-btn" title="Start short spiritual growth courses designed for practical discipleship"><span aria-hidden="true">🧠</span> Spiritual Growth Courses</a>
             </nav>
         </div>
 
@@ -1323,6 +1335,43 @@
           </a>
         </div>
 
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════
+         COURSES SECTION — Short Spiritual Growth Courses
+    ═══════════════════════════════════════════ -->
+    <section class="nx-section nx-courses-section scroll-fade" id="courses">
+      <div class="nx-section-inner">
+        <div class="nx-section-header">
+          <span class="nx-section-badge nx-badge-courses"><i class="fas fa-brain"></i> Learn & Grow</span>
+          <h2 class="nx-section-title">Short, Spiritual Growth Courses</h2>
+          <p class="nx-section-sub">Built for your real walk with God: concise, Bible-first lessons to help you understand truth, apply it, and grow steadily.</p>
+          <div class="nx-header-line nx-line-courses"></div>
+        </div>
+
+        <div class="nx-course-grid">
+          <a href="spiritual-growth-courses.html" class="nx-course-card nx-course-feature">
+            <div class="nx-course-top">
+              <span class="nx-course-pill">Free • No Certificates</span>
+              <span class="nx-course-icon"><i class="fas fa-seedling"></i></span>
+            </div>
+            <h3>Start Your Spiritual Growth Track</h3>
+            <p>Every course is free and focused on transformation, not credentials. These lessons are here to help you grow closer to God one step at a time.</p>
+            <span class="nx-course-cta">Open Courses <i class="fas fa-arrow-right"></i></span>
+          </a>
+
+          <a href="ten-commandments-course.html" class="nx-course-card nx-course-coming" aria-label="Ten Commandments Course coming soon">
+            <div class="nx-course-top">
+              <span class="nx-course-pill nx-course-pill-alt">Coming Soon</span>
+              <span class="nx-course-icon"><i class="fas fa-tablets"></i></span>
+            </div>
+            <h3>Course: The Ten Commandments</h3>
+            <p>A dedicated short course on the commandments, obedience, and Christ-centered character formation is on the way.</p>
+            <span class="nx-course-cta">View Placeholder <i class="fas fa-hourglass-half"></i></span>
+          </a>
+        </div>
       </div>
     </section>
 

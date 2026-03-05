@@ -29,6 +29,12 @@
     }
   }
 
+  function getDefaultTheme() {
+    const path = (window.location.pathname || "").toLowerCase();
+    const isHome = path === "/" || path.endsWith("/index.html") || path === "";
+    return isHome ? "light" : "dark";
+  }
+
   function applyTheme(theme) {
     document.documentElement.classList.add("theme-transitioning");
     document.documentElement.setAttribute("data-theme", theme);
@@ -48,7 +54,7 @@
 
   function initThemeToggle() {
     const saved = getStoredTheme();
-    const theme = saved || "dark";
+    const theme = saved || getDefaultTheme();
     applyTheme(theme);
 
     const btn = document.getElementById("themeToggleBtn");
