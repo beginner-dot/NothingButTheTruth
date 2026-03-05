@@ -158,6 +158,11 @@
     @media (max-width: 900px) {
       .layout { grid-template-columns: 1fr; }
     }
+    @keyframes royalShimmer {
+      0%   { background-position: 0% center; }
+      50%  { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
   </style>
 </head>
 <body>
@@ -181,6 +186,13 @@
       <article class="card">
         <h2>Course Library</h2>
         <p>You are here to grow with God, not to chase paperwork. Every course on this page is free and built to help you understand Scripture, strengthen conviction, and live what you believe.</p>
+
+        <div class="course" style="border-color: rgba(160,100,255,0.50); background: linear-gradient(135deg, rgba(75,0,130,0.30), rgba(25,25,112,0.35), rgba(40,20,80,0.30)); box-shadow: 0 0 14px rgba(128,0,255,0.18), 0 0 28px rgba(65,105,225,0.10);">
+          <span class="meta" style="border-color: rgba(255,215,0,0.50); background: linear-gradient(135deg, rgba(106,13,173,0.45), rgba(40,20,100,0.60)); color: #ffd866;"><i class="fas fa-crown" style="color:#ffd700; filter:drop-shadow(0 0 4px rgba(255,215,0,0.5));"></i> Featured Course</span>
+          <h3 style="background: linear-gradient(135deg, #e0c3ff, #ffd866, #a78bfa, #60a5fa); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: royalShimmer 4s ease infinite;">The Christianity of Christ</h3>
+          <p>A systematic reconstruction of biblical Christianity — terminal-style theological audit using KJV, Ellen White, and pioneer logs. Rediscover the faith once delivered to the saints.</p>
+          <a class="link" href="systematic-reconstruction/index.html" style="background: linear-gradient(90deg, #c084fc, #60a5fa, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Enter the Course <i class="fas fa-arrow-right" style="-webkit-text-fill-color: #ffd866;"></i></a>
+        </div>
 
         <div class="course">
           <span class="meta"><i class="fas fa-hourglass-half"></i> Coming Soon</span>

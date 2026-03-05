@@ -3509,6 +3509,199 @@ body {
           color: #d4c4ff;
         }
 
+        /* ── Christianity of Christ — Royal Glow Featured Card ── */
+        .nx-course-coc {
+          grid-column: 1 / -1;
+          border: 1.5px solid rgba(160, 100, 255, 0.45);
+          background:
+            linear-gradient(135deg,
+              rgba(75, 0, 130, 0.45) 0%,
+              rgba(25, 25, 112, 0.50) 40%,
+              rgba(72, 0, 168, 0.40) 70%,
+              rgba(40, 20, 80, 0.55) 100%);
+          box-shadow:
+            0 0 18px rgba(128, 0, 255, 0.25),
+            0 0 40px rgba(65, 105, 225, 0.15),
+            0 14px 32px rgba(4, 9, 29, 0.50);
+          transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+        }
+        .nx-course-coc::before {
+          background:
+            linear-gradient(130deg,
+              rgba(106, 13, 173, 0.18) 0%,
+              rgba(65, 105, 225, 0.14) 30%,
+              transparent 50%,
+              rgba(255, 215, 0, 0.10) 75%,
+              rgba(128, 0, 255, 0.12) 100%);
+          opacity: 1;
+        }
+        .nx-course-coc:hover {
+          transform: translateY(-5px);
+          border-color: rgba(200, 160, 255, 0.65);
+          box-shadow:
+            0 0 24px rgba(128, 0, 255, 0.35),
+            0 0 52px rgba(65, 105, 225, 0.25),
+            0 0 14px rgba(255, 215, 0, 0.18),
+            0 22px 44px rgba(8, 14, 42, 0.55);
+        }
+        /* Background glow ring */
+        .nx-coc-glow-ring {
+          position: absolute;
+          inset: -2px;
+          border-radius: 16px;
+          background:
+            linear-gradient(135deg,
+              rgba(106, 13, 173, 0.50),
+              rgba(65, 105, 225, 0.45),
+              rgba(255, 215, 0, 0.35),
+              rgba(106, 13, 173, 0.50));
+          background-size: 300% 300%;
+          animation: royalGlowShift 6s ease infinite;
+          filter: blur(6px);
+          z-index: 0;
+          opacity: 0.55;
+          pointer-events: none;
+        }
+        .nx-course-coc:hover .nx-coc-glow-ring {
+          opacity: 0.80;
+          filter: blur(8px);
+        }
+        @keyframes royalGlowShift {
+          0%   { background-position: 0% 50%; }
+          50%  { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        /* Royal pill */
+        .nx-course-pill-royal {
+          color: #ffd866;
+          border-color: rgba(255, 215, 0, 0.50);
+          background:
+            linear-gradient(135deg,
+              rgba(106, 13, 173, 0.45),
+              rgba(40, 20, 100, 0.60));
+          text-shadow: 0 0 8px rgba(255, 215, 0, 0.35);
+        }
+        .nx-course-pill-royal i {
+          color: #ffd700;
+          filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.50));
+        }
+        /* Royal icon */
+        .nx-icon-royal {
+          color: #c9a0ff;
+          border-color: rgba(160, 100, 255, 0.55);
+          background:
+            linear-gradient(135deg,
+              rgba(65, 105, 225, 0.35),
+              rgba(106, 13, 173, 0.40));
+          box-shadow: 0 0 10px rgba(128, 0, 255, 0.25);
+        }
+        /* Title glow — royal gold gradient */
+        .nx-course-coc h3 {
+          background: linear-gradient(135deg, #e0c3ff, #ffd866, #a78bfa, #60a5fa);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: royalTextShimmer 4s ease infinite;
+          font-size: 1.18rem;
+        }
+        @keyframes royalTextShimmer {
+          0%   { background-position: 0% center; }
+          50%  { background-position: 100% center; }
+          100% { background-position: 0% center; }
+        }
+        .nx-course-coc p {
+          color: rgba(220, 210, 255, 0.92);
+        }
+        /* Royal CTA */
+        .nx-cta-royal {
+          background: linear-gradient(90deg, #c084fc, #60a5fa, #fbbf24);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          font-weight: 800;
+          filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.30));
+        }
+        .nx-cta-royal i {
+          -webkit-text-fill-color: #ffd866;
+          filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.40));
+        }
+
+        /* ── Light Theme — Christianity of Christ ── */
+        [data-theme="light"] .nx-course-coc {
+          border-color: rgba(106, 13, 173, 0.30);
+          background:
+            linear-gradient(135deg,
+              rgba(245, 235, 255, 0.96) 0%,
+              rgba(235, 240, 255, 0.96) 40%,
+              rgba(255, 248, 230, 0.94) 80%,
+              rgba(242, 232, 255, 0.96) 100%);
+          box-shadow:
+            0 0 12px rgba(106, 13, 173, 0.12),
+            0 0 24px rgba(65, 105, 225, 0.08),
+            0 10px 24px rgba(78, 97, 138, 0.15);
+        }
+        [data-theme="light"] .nx-course-coc::before {
+          background:
+            linear-gradient(130deg,
+              rgba(106, 13, 173, 0.06),
+              rgba(65, 105, 225, 0.05),
+              transparent 50%,
+              rgba(255, 193, 7, 0.06));
+          opacity: 1;
+        }
+        [data-theme="light"] .nx-course-coc:hover {
+          border-color: rgba(106, 13, 173, 0.45);
+          box-shadow:
+            0 0 18px rgba(106, 13, 173, 0.18),
+            0 0 30px rgba(65, 105, 225, 0.12),
+            0 0 10px rgba(255, 193, 7, 0.10),
+            0 16px 32px rgba(78, 97, 138, 0.18);
+        }
+        [data-theme="light"] .nx-coc-glow-ring {
+          opacity: 0.25;
+        }
+        [data-theme="light"] .nx-course-coc:hover .nx-coc-glow-ring {
+          opacity: 0.40;
+        }
+        [data-theme="light"] .nx-course-pill-royal {
+          color: #6A0DAD;
+          border-color: rgba(106, 13, 173, 0.40);
+          background: linear-gradient(135deg, rgba(242, 230, 255, 0.95), rgba(255, 248, 230, 0.92));
+          text-shadow: none;
+        }
+        [data-theme="light"] .nx-course-pill-royal i {
+          color: #b8860b;
+          filter: none;
+        }
+        [data-theme="light"] .nx-icon-royal {
+          color: #5b21b6;
+          border-color: rgba(91, 33, 182, 0.40);
+          background: linear-gradient(135deg, rgba(235, 240, 255, 0.95), rgba(242, 230, 255, 0.95));
+          box-shadow: 0 0 6px rgba(91, 33, 182, 0.10);
+        }
+        [data-theme="light"] .nx-course-coc h3 {
+          background: linear-gradient(135deg, #6A0DAD, #002366, #b8860b, #4169E1);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        [data-theme="light"] .nx-course-coc p {
+          color: #3b2e5a;
+        }
+        [data-theme="light"] .nx-cta-royal {
+          background: linear-gradient(90deg, #6A0DAD, #4169E1, #b8860b);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          filter: none;
+        }
+        [data-theme="light"] .nx-cta-royal i {
+          -webkit-text-fill-color: #996515;
+          filter: none;
+        }
+
         [data-theme="light"] .nx-courses-section {
           background:
             radial-gradient(circle at 18% 18%, rgba(0,119,255,0.10) 0%, transparent 45%),
