@@ -1886,13 +1886,18 @@ body {
         .hero-stagger {
             opacity: 0;
             transform: translateY(25px);
-            animation: heroFallbackReveal 0.6s ease-out 3s forwards;
         }
 
-        /* Hero title — hidden initially for balloon animation, CSS fallback reveals it */
-        .hero-title {
-            opacity: 0;
+        /* When JS takes over animation, it adds .js-hero-ready to body.
+           If JS never fires (slow CDN), the fallback animation kicks in after 3.5s */
+        body:not(.js-hero-ready) .hero-stagger {
+            animation: heroFallbackReveal 0.6s ease-out 3.5s forwards;
+        }
+        body:not(.js-hero-ready) .hero-title {
             animation: heroFallbackReveal 0.6s ease-out 3s forwards;
+        }
+        body:not(.js-hero-ready) .hud-card {
+            animation: heroFallbackReveal 0.6s ease-out 4s forwards;
         }
 
         /* CSS fallback: if JS DOMContentLoaded is delayed by slow CDN scripts,
@@ -2184,7 +2189,6 @@ body {
             transform-origin: center center;
             opacity: 0;
             transform: translateY(20px);
-            animation: heroFallbackReveal 0.6s ease-out 3.5s forwards;
             color: inherit;
             text-decoration: none;
             cursor: pointer;

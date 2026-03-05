@@ -526,7 +526,7 @@
 
     <div class="hero-container" id="hero-card">
         <div class="glass-card">
-            <h1 class="hero-title" id="main-title" data-text="NothingButTheTRUTH">NothingButTheTRUTH</h1>
+            <h1 class="hero-title" id="main-title" data-text="NothingButTheTRUTH" style="opacity:0;">NothingButTheTRUTH</h1>
             
             <p class="hero-subtitle hero-stagger">
               <span aria-hidden="true">📖</span> Understand Scripture clearly, strengthen your daily walk, and grow with <strong>Bible truth made practical</strong> through studies, devotions, videos, and interactive faith tools.
@@ -613,6 +613,72 @@
                     em.style.filter = `drop-shadow(0 0 ${10 + (1 - dist/100) * 18}px rgba(168, 85, 247, ${0.4 + (1 - dist/100) * 0.5}))`;
                     em.style.zIndex = '5';
                 } else {
+                    em.style.transform = '';
+                    em.style.filter = '';
+                    em.style.zIndex = '';
+                }
+            });
+        });
+
+        // Touch — ONLY the touched emoji reacts with a RANDOM animation
+        var touchReactions = ['emoji-spin', 'emoji-bounce', 'emoji-jello', 'emoji-pulse', 'emoji-flip', 'emoji-rocket', 'emoji-touched'];
+        emojis.forEach(em => {
+            em.addEventListener('touchstart', function(e) {
+                var reaction = touchReactions[Math.floor(Math.random() * touchReactions.length)];
+                this.setAttribute('data-reaction', reaction);
+                this.classList.add(reaction);
+            }, { passive: true });
+
+            em.addEventListener('touchend', function() {
+                var self = this;
+                setTimeout(function() {
+                    var reaction = self.getAttribute('data-reaction');
+                    if (reaction) { self.classList.remove(reaction); self.removeAttribute('data-reaction'); }
+                }, 800);
+            }, { passive: true });
+        });
+
+        // Click — same random reactions for desktop
+        emojis.forEach(em => {
+            em.addEventListener('click', function(e) {
+                var reaction = touchReactions[Math.floor(Math.random() * touchReactions.length)];
+                this.setAttribute('data-reaction', reaction);
+                this.classList.add(reaction);
+                var self = this;
+                setTimeout(function() {
+                    self.classList.remove(reaction);
+                    self.removeAttribute('data-reaction');
+                }, 800);
+            });
+        });
+    }
+
+    // ============================
+    // SCROLL-TRIGGERED HUD COUNTERS
+    // ============================
+    let hudCounted = false;
+    function animateCounters() {
+        if (hudCounted) return;
+        const vals = document.querySelectorAll('.stats-hud .hud-val[data-target]');
+        if (!vals.length) return;
+
+        const firstVal = vals[0];
+        const rect = firstVal.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            hudCounted = true;
+            vals.forEach(el => {
+                const target = parseInt(el.getAttribute('data-target'), 10);
+                let current = 0;
+                const duration = 1200; // ms
+                const steps = 30;
+                const stepTime = duration / steps;
+                const increment = target / steps;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
                     el.textContent = String(Math.round(current)).padStart(2, '0');
                 }, stepTime);
             });
@@ -654,8 +720,6 @@
     function balloonPopTitle() {
         const title = document.getElementById('main-title');
         if (!title) return;
-        // Cancel CSS fallback animation since JS is handling it
-        title.style.animation = 'none';
         const text = title.getAttribute('data-text') || '';
         title.innerHTML = '';
         title.style.opacity = '1';
@@ -679,6 +743,9 @@
     // MASTER LOAD SEQUENCE — everything in order, no glitch
     // ============================
     document.addEventListener('DOMContentLoaded', () => {
+        // JS has loaded — cancel CSS fallback animations
+        document.body.classList.add('js-hero-ready');
+
         // Step 0: Immediately show navbar (prevent scroll-fade invisible flash)
         const navbar = document.querySelector('.navbar.scroll-fade');
         if (navbar) navbar.classList.add('visible');
@@ -691,6 +758,7 @@
 
         // On back-navigation: skip all hero animations, show everything instantly
         if (window.__nbttWasBack) {
+            document.body.classList.add('js-hero-ready');
             // Show title instantly without balloon pop
             if (title) {
                 const text = title.getAttribute('data-text') || '';
@@ -747,11 +815,8 @@
         const popDuration = titleText.length * 55 + 500;
 
         // Stagger items & HUD cards are hidden by CSS rules (no FOUC)
-        // Cancel CSS fallback animations since JS is handling reveal
         const staggerItems = document.querySelectorAll('.hero-stagger');
         const hudCards = document.querySelectorAll('.hud-card');
-        staggerItems.forEach(el => { el.style.animation = 'none'; });
-        hudCards.forEach(el => { el.style.animation = 'none'; });
 
         // Step 3: After title pops in, fade in subtitle
         setTimeout(() => {
