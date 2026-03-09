@@ -70,14 +70,7 @@
     </script>
     <script>
     (function () {
-      try {
-        var key = "nbtt_theme";
-        var saved = localStorage.getItem(key);
-        var theme = (saved === "light" || saved === "dark") ? saved : "light";
-        document.documentElement.setAttribute("data-theme", theme);
-      } catch (e) {
-        document.documentElement.setAttribute("data-theme", "light");
-      }
+      document.documentElement.setAttribute("data-theme", "dark");
     })();
     </script>
 
@@ -99,10 +92,7 @@
           <i class="fas fa-user-circle" aria-hidden="true"></i>
           <span class="nav-auth-label">Sign In</span>
         </button>
-        <!-- Theme toggle -->
-        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle light or dark mode">
-          <i class="fas fa-sun"></i><span class="theme-label">Light</span>
-        </button>
+        <!-- Theme toggle removed — dark mode only for now -->
         <!-- Search trigger -->
         <button class="search-trigger" aria-label="Search the site">
           <i class="fas fa-search"></i> Search <kbd>Ctrl+K</kbd>
@@ -161,6 +151,7 @@
                     <li><a href="#games"><i class="fas fa-gamepad" aria-hidden="true"></i> Games</a></li>
                     <li><a href="#courses"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Courses</a></li>
                     <li><a href="all-videos.html"><i class="fas fa-video" aria-hidden="true"></i> Videos</a></li>
+                    <li><a href="notifications.html"><i class="fas fa-bell" aria-hidden="true"></i> Updates</a></li>
                   <li><a href="about-us.html"><i class="fas fa-circle-info" aria-hidden="true"></i> About</a></li>
                 </ul>
                 </div>
@@ -549,16 +540,26 @@
                 <span class="hud-lab">Studies</span>
             </a>
             <a href="vod.html" class="hud-card" title="Read daily devotions — Anchor of Hope, Faith Under Fire, and more">
-              <span class="hud-val" data-target="18" aria-label="18 devotions available">00</span>
+              <span class="hud-val" data-target="19" aria-label="19 devotions available">00</span>
                 <span class="hud-lab">Devotions</span>
             </a>
             <a href="all-videos.html" class="hud-card" title="Watch scripture-based video series including the Ten Commandments">
-                <span class="hud-val" data-target="11" aria-label="11 videos available">00</span>
+              <span class="hud-val" data-target="11" aria-label="11 videos available">00</span>
                 <span class="hud-lab">Videos</span>
             </a>
         </nav>
     </div>
 </section>
+
+<!-- ═══ Notification Banner ═══ -->
+<div class="nbtt-notification-bar" id="nbttNotifBar">
+  <div class="nbtt-notif-icon"><i class="fas fa-bell" style="color:#ffd700"></i></div>
+  <div class="nbtt-notif-body">
+    <p><strong>NothingButTheTRUTH is live &amp; growing.</strong> Some features are still being built — videos, courses, and more are in active production. This site is permanent and here to stay.</p>
+  </div>
+  <a href="notifications.html" class="nbtt-notif-link"><i class="fas fa-arrow-right"></i> View All Updates</a>
+  <button class="nbtt-notif-dismiss" onclick="this.closest('.nbtt-notification-bar').style.display='none'" aria-label="Dismiss notification">&times;</button>
+</div>
 
 
 <script>
@@ -863,7 +864,7 @@
         const games = document.querySelectorAll('#games .play-btn:not(.disabled)').length;
         /* Homepage shows 7 preview items; HUD reflects total content available */
         const studies = 23;
-        const devotions = 18;
+        const devotions = 19;
         const vals = document.querySelectorAll('.stats-hud .hud-card .hud-val');
         if (vals[0]) vals[0].setAttribute('data-target', String(games || 20));
         if (vals[1]) vals[1].setAttribute('data-target', String(studies));
@@ -1363,6 +1364,11 @@
           <a href="Devotions/influence_speech_time_mind.html" class="nx-devo-card">
             <div class="nx-devo-emoji">🧭</div>
             <h3>Influence • Speech • Time • Mind</h3>
+          </a>
+
+          <a href="Devotions/church_born_in_fire.html" class="nx-devo-card">
+            <div class="nx-devo-emoji">🔥</div>
+            <h3>Church Born in Fire</h3>
           </a>
 
           <a href="Devotions/anchor_of_hope.html" class="nx-devo-card">
@@ -2199,40 +2205,28 @@
       <span class="bubble b-s8"></span>
     </div>
     
-    <div class="videos-grid">
-      <!-- Video Card 1 -->
-      <div class="video-card">
-        <div class="video-wrapper" id="intro-video"></div>
-        <div class="fullscreen-box">
-          <button onclick="openFullscreen(this)">⛶ Fullscreen</button>
-        </div>
-        <h3>📽️ Video Section Intro</h3>
-        <p>Introduction to the video section.</p>
+    <!-- Videos & MythBuster Shorts — Coming Soon Placeholder -->
+    <div class="video-coming-soon-placeholder">
+      <div class="vcs-icon">🎬</div>
+      <h3 class="vcs-title">Videos &amp; MythBuster Shorts — Coming Soon</h3>
+      <p class="vcs-text">We are actively producing Bible-based video content and MythBuster short-form episodes. This section will feature powerful teachings, myth debunking clips, and more — all rooted in Scripture.</p>
+      <div class="vcs-badges">
+        <span class="vcs-badge"><i class="fas fa-video"></i> Video Series</span>
+        <span class="vcs-badge"><i class="fas fa-fire"></i> MythBuster Shorts</span>
+        <span class="vcs-badge"><i class="fas fa-tools"></i> In Production</span>
       </div>
-
+      <p class="vcs-sub">Stay tuned — glory to God.</p>
     </div>
 
     <!-- COMMANDMENTS PREVIEW ON HOMEPAGE -->
     <section id="video-highlights" class="scroll-fade">
-      <h2><i class="fas fa-gavel" style="color:#ffd803"></i> Ten Commandments Series</h2>
+      <h2><i class="fas fa-landmark" style="color:#ffd803"></i> Historical Videos</h2>
       <div class="videos-grid">
-        <div class="video-card">
-          <div class="video-wrapper" id="home-ep1"></div>
+        <div class="video-card video-card-compact">
+          <div class="video-wrapper" id="home-history-1"></div>
           <div class="fullscreen-box"><button onclick="openFullscreen(this)">⛶ Fullscreen</button></div>
-          <h3>🎬 VID 1</h3>
-          <p>An overview of how the commandments came to be.</p>
-        </div>
-        <div class="video-card">
-          <div class="video-wrapper" id="home-ep2"></div>
-          <div class="fullscreen-box"><button onclick="openFullscreen(this)">⛶ Fullscreen</button></div>
-          <h3>📽️ VID 2</h3>
-          <p>Exclusive worship of the one true God.</p>
-        </div>
-        <div class="video-card">
-          <div class="video-wrapper" id="home-ep3"></div>
-          <div class="fullscreen-box"><button onclick="openFullscreen(this)">⛶ Fullscreen</button></div>
-          <h3>📽️ VID 3</h3>
-          <p>The prohibition against idols.</p>
+          <h3>📽️ History and Formation of the Christian Church</h3>
+          <p>The story of the early church's birth, growth, trials, and witness through Scripture and history.</p>
         </div>
       </div>
       <div class="all-videos-hero-link">
@@ -2249,6 +2243,40 @@
       <div class="shape shape-1"></div>
       <div class="shape shape-2"></div>
       <div class="shape shape-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENT VIDEOS HUB (STAGED - NOT LIVE) -->
+<section id="recent-videos-hub" class="recent-videos-hub scroll-fade" aria-label="Recent Videos Hub">
+  <div class="recent-videos-inner">
+    <div class="recent-videos-head">
+      <span class="recent-videos-badge"><i class="fas fa-clock"></i> Staged Section</span>
+      <h2><i class="fas fa-photo-film"></i> Recent Videos Hub</h2>
+      <p>Latest video additions for internal preview before public launch.</p>
+    </div>
+
+    <div class="recent-videos-grid">
+      <article class="recent-video-card">
+        <span class="recent-video-tag">Historical</span>
+        <h3>History and Formation of the Christian Church</h3>
+        <p>A historical walkthrough of the church's formation, growth, trials, and witness.</p>
+        <a href="all-videos.html" class="recent-video-btn">Watch in Video Library</a>
+      </article>
+
+      <article class="recent-video-card">
+        <span class="recent-video-tag">Commandments</span>
+        <h3>10th Commandment</h3>
+        <p>Final episode in the commandments sequence with practical faith focus.</p>
+        <a href="all-videos.html" class="recent-video-btn">Watch in Video Library</a>
+      </article>
+
+      <article class="recent-video-card">
+        <span class="recent-video-tag">Commandments</span>
+        <h3>9th Commandment - Do not covet</h3>
+        <p>A message on contentment, gratitude, and trusting God's provision.</p>
+        <a href="all-videos.html" class="recent-video-btn">Watch in Video Library</a>
+      </article>
     </div>
   </div>
 </section>
@@ -2272,23 +2300,31 @@ function openFullscreen(button) {
 <script defer src="https://unpkg.com/@mux/mux-player"></script>
 <script defer src="mux-player.js"></script>
 <script>
-// instantiate the four preview videos with matching styles
-const homeVideos = [
-  {id:'intro-video', play:'IvEpefz6ZAHjpG71jCPutOjQiBs701j5BZD6DPtnPlcY', color:'#ffd803', playEmoji:'🎥', pauseEmoji:'⏸️', title:'Site Introduction', desc:'Welcome intro to NothingButTheTRUTH.'},
-  {id:'home-ep1', play:'IvEpefz6ZAHjpG71jCPutOjQiBs701j5BZD6DPtnPlcY', color:'#ff0055', playEmoji:'✨', pauseEmoji:'⏸️', title:'THE STORY OF THE TEN COMMANDMENTS - DISCOVER HOW THE TEN COMMANDMENTS CAME TO BE', desc:'An overview of the importance and relevance of the Ten Commandments in the Christian life.'},
-  {id:'home-ep2', play:'At02BeC1XsfvnzLdph1i7WcMbgljkszxUGYd2tH5018Ow', color:'#0077cc', playEmoji:'▶️', pauseEmoji:'⏹️', title:'1st Commandment - No other Gods', desc:'Explains the meaning of placing God first and avoiding idols.'},
-  {id:'home-ep3', play:'cCbeBi2BZhcEEe8MNnYvlI4Cwn02w00wk29x31bHj02XE8', color:'#00cc77', playEmoji:'🎬', pauseEmoji:'⏸️', title:'2nd Commandment - No Graven Images', desc:'The prohibition against idols.'}
-];
-homeVideos.forEach(v=>{
-  const container = document.getElementById(v.id);
-  if (container) {
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof createMuxExperience !== 'function') return;
+
+  const homeVideos = [
+    {id:'home-history-1', play:'vyyX1iWsXBo647NDltev45sx5JKMA8Wb8lqIktQ02Yb8', color:'#8b5cf6', playEmoji:'🏛️', pauseEmoji:'⏸️', title:'History and Formation of the Christian Church', desc:'A historical teaching on how the Christian church formed, expanded, and endured through biblical history.'}
+  ];
+
+  homeVideos.forEach(v => {
+    const container = document.getElementById(v.id);
+    if (!container) return;
+
     createMuxExperience(v.play, v.color, v.playEmoji, v.pauseEmoji, container);
-    const ld = {"@context":"http://schema.org","@type":"VideoObject",name:v.title,description:v.desc,contentUrl:`https://stream.mux.com/${v.play}.m3u8`,embedUrl:`https://mux.com/embed/${v.play}`};
+    const ld = {
+      "@context":"http://schema.org",
+      "@type":"VideoObject",
+      name:v.title,
+      description:v.desc,
+      contentUrl:`https://stream.mux.com/${v.play}.m3u8`,
+      embedUrl:`https://mux.com/embed/${v.play}`
+    };
     const scr = document.createElement('script');
     scr.type='application/ld+json';
     scr.textContent = JSON.stringify(ld);
     document.body.appendChild(scr);
-  }
+  });
 });
 </script>
 

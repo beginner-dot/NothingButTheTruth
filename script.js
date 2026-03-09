@@ -19,8 +19,11 @@ function renderStories(filter) {
     container.innerHTML = '';
     const normalized = filter.trim().toLowerCase();
     const list = storiesData.filter(s =>
-        !normalized || s.title.toLowerCase().includes(normalized) ||
-        (s.category && s.category.toLowerCase().includes(normalized))
+        s.availability !== 'unavailable-on-web' && (
+            !normalized ||
+            s.title.toLowerCase().includes(normalized) ||
+            (s.category && s.category.toLowerCase().includes(normalized))
+        )
     );
 
     list.forEach((story, index) => {
@@ -69,7 +72,7 @@ ${JSON.stringify({
 
         // build action buttons for quiz and study
         let actionButtons = '';
-        if (story.quizId && story.quizId !== 'quiz11') {
+        if (story.quizId) {
             actionButtons = `
                 <div class="action-buttons">
                     <button class="quiz-btn" onclick="openQuiz('${story.quizId}', '${story.title.replace(/'/g, "\\'")}')">🎯 Take the Quiz</button>
@@ -138,7 +141,7 @@ function closeQuiz(modal) {
 // load quiz content based on ID
 function loadQuiz(quizId, container) {
     const quizzes = {
-        'q1': {
+        'q0': {
             title: 'The Ten Commandments Story',
             questions: [
                 {q: 'On which mountain did God give the Ten Commandments to Moses?', options: ['Mount Sinai', 'Mount Carmel', 'Mount Zion'], correct: 0, verse: 'Exodus 19:20'},
@@ -146,7 +149,7 @@ function loadQuiz(quizId, container) {
                 {q: 'What material were the tablets made of?', options: ['Wood', 'Stone', 'Clay'], correct: 1, verse: 'Exodus 24:12'}
             ]
         },
-        'q2': {
+        'q1': {
             title: '1st Commandment Quiz',
             questions: [
                 {q: 'What does the first commandment forbid?', options: ['Having other gods', 'Working on Sabbath', 'Taking God\'s name in vain'],correct: 0, verse: 'Exodus 20:3'},
@@ -154,7 +157,7 @@ function loadQuiz(quizId, container) {
                 {q: 'When we worship false gods, what do we lose?', options: ['Our home', 'Our relationship with God', 'Our possessions'], correct: 1, verse: '1 John 5:21'}
             ]
         },
-        'q3': {
+        'q2': {
             title: '2nd Commandment Quiz',
             questions: [
                 {q: 'What does the second commandment forbid?', options: ['Graven images', 'Talking', 'Eating'], correct: 0, verse: 'Exodus 20:4'},
@@ -162,7 +165,7 @@ function loadQuiz(quizId, container) {
                 {q: 'What form of worship does God require?', options: ['In spirit and truth', 'Only in temples', 'Before idols'], correct: 0, verse: 'John 4:24'}
             ]
         },
-        'q4': {
+        'q3': {
             title: '3rd Commandment Quiz',
             questions: [
                 {q: 'The Sabbath is a sign of what between God and His people?', options: ['Wealth', 'A covenant', 'Friendship'], correct: 1, verse: 'Exodus 31:13'},
@@ -170,7 +173,7 @@ function loadQuiz(quizId, container) {
                 {q: 'Rest on the Sabbath teaches us to trust in whom?', options: ['Ourselves', 'Money', 'God'], correct: 2, verse: 'Hebrews 4:9-10'}
             ]
         },
-        'q5': {
+        'q4': {
             title: '4th Commandment Quiz',
             questions: [
                 {q: 'Which commandment says to honor your parents?', options: ['Third', 'Fourth', 'Fifth'], correct: 1, verse: 'Exodus 20:12'},
@@ -178,7 +181,7 @@ function loadQuiz(quizId, container) {
                 {q: 'How should we treat those who raised us?', options: ['With disrespect', 'With honor and care', 'Ignore them'], correct: 1, verse: '1 Timothy 5:4'}
             ]
         },
-        'q6': {
+        'q5': {
             title: '5th Commandment Quiz',
             questions: [
                 {q: 'The 5th commandment says: \"Thou shalt not__________\"?', options: ['Steal', 'Murder', 'Lie'], correct: 1, verse: 'Exodus 20:13'},
@@ -186,7 +189,7 @@ function loadQuiz(quizId, container) {
                 {q: 'Jesus said to love whom?', options: ['Enemies', 'Friends only', 'Rich people'], correct: 0, verse: 'Matthew 5:44'}
             ]
         },
-        'q7': {
+        'q6': {
             title: '6th Commandment Quiz',
             questions: [
                 {q: 'What does the 6th commandment forbid?', options: ['Adultery', 'Stealing', 'Lying'], correct: 0, verse: 'Exodus 20:14'},
@@ -194,7 +197,7 @@ function loadQuiz(quizId, container) {
                 {q: 'Faithful love protects what?', options: ['Money', 'The family', 'The home'], correct: 1, verse: '1 Corinthians 13:8'}
             ]
         },
-        'q8': {
+        'q7': {
             title: '7th Commandment Quiz',
             questions: [
                 {q: 'What does the 7th commandment forbid?', options: ['Stealing', 'Murder', 'Lying'], correct: 0, verse: 'Exodus 20:15'},
@@ -202,7 +205,7 @@ function loadQuiz(quizId, container) {
                 {q: 'What should we do with what others own?', options: ['Respect it', 'Ignore it', 'Take it'], correct: 0, verse: 'Romans 13:9'}
             ]
         },
-        'q9': {
+        'q8': {
             title: '8th Commandment Quiz',
             questions: [
                 {q: 'Bearing false witness means__________?', options: ['Being quiet', 'Telling lies', 'Speaking truth'], correct: 1, verse: 'Exodus 20:16'},
@@ -210,12 +213,20 @@ function loadQuiz(quizId, container) {
                 {q: 'A truthful tongue is a _______ of life?', options: ['Enemy', 'Tree', 'Stone'], correct: 1, verse: 'Proverbs 15:4'}
             ]
         },
-        'q10': {
+        'q9': {
             title: '9th Commandment Quiz',
             questions: [
                 {q: 'What does "covet" mean?', options: ['To bless', 'To desire wrongfully what others have', 'To ignore'], correct: 1, verse: 'Exodus 20:17'},
                 {q: 'Contentment comes from knowing what?', options: ['We have everything', 'God provides', 'Money is good'], correct: 1, verse: 'Philippians 4:11-12'},
                 {q: 'Envy leads to what?' , options: ['Joy', 'Sin', 'Peace'], correct: 1, verse: 'James 3:16'}
+            ]
+        },
+        'q10': {
+            title: '10th Commandment Quiz',
+            questions: [
+                {q: 'What should guide our desires according to Jesus?', options: ['Self first', 'God\'s will first', 'Others\' approval'], correct: 1, verse: 'Matthew 6:33'},
+                {q: 'What helps believers resist envy and discontent?', options: ['Gratitude', 'Comparison', 'Isolation'], correct: 0, verse: '1 Thessalonians 5:18'},
+                {q: 'The final commandment points us toward what kind of heart?', options: ['Proud', 'Content and obedient', 'Doubtful'], correct: 1, verse: 'Psalm 51:10'}
             ]
         }
     };
@@ -271,7 +282,7 @@ function closeStudy(modal) {
 
 function loadStudy(storyId, container) {
     const studies = {
-        1: {
+        0: {
             title: 'Understanding God\'s Perfect Law',
             content: `
 <style>
@@ -305,7 +316,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        2: {
+        1: {
             title: 'No Other Gods - Putting God First',
             content: `
 <style>
@@ -342,7 +353,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        3: {
+        2: {
             title: 'No Graven Images - Pure Worship',
             content: `
 <style>
@@ -379,7 +390,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        4: {
+        3: {
             title: 'The Sabbath - God\'s Gift of Rest',
             content: `
 <style>
@@ -419,7 +430,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        5: {
+        4: {
             title: 'Honor Father and Mother - Foundation of Family',
             content: `
 <style>
@@ -460,7 +471,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        6: {
+        5: {
             title: 'The Sanctity of Life - Do Not Murder',
             content: `
 <style>
@@ -505,7 +516,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        7: {
+        6: {
             title: 'Faithfulness in Marriage - No Adultery',
             content: `
 <style>
@@ -550,7 +561,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        8: {
+        7: {
             title: 'Honesty and Respect - Do Not Steal',
             content: `
 <style>
@@ -595,7 +606,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        9: {
+        8: {
             title: 'The Power of Truth - Do Not Lie',
             content: `
 <style>
@@ -646,7 +657,7 @@ function loadStudy(storyId, container) {
 </div>
             `
         },
-        10: {
+        9: {
             title: 'Contentment Over Envy - Do Not Covet',
             content: `
 <style>
@@ -694,6 +705,26 @@ function loadStudy(storyId, container) {
 <div class="study-verse">"For we brought nothing into the world, and we can take nothing out of it\" - 1 Timothy 6:7</div>
 
 <p>When you stop coveting and start appreciating, when you stop comparing and start celebrating others' happiness, life becomes so much sweeter. You are free! 💝</p>
+</div>
+            `
+        },
+        10: {
+            title: '10th Commandment - Final Commitment',
+            content: `
+<style>
+.study-text { font-size: 1.1rem; line-height: 1.8; color: #222; }
+.study-verse { background: #f3f0fa; padding: 1rem; margin: 1rem 0; border-left: 4px solid #6a11cb; font-style: italic; border-radius: 6px; }
+.study-heading { color: #2575fc; font-size: 1.3rem; font-weight: bold; margin-top: 1.5rem; margin-bottom: 0.8rem; }
+</style>
+<div class="study-text">
+<p>This final commandment calls believers to surrender both actions and heart-desires to God. It is a call to inner holiness, not only outward behavior.</p>
+
+<div class="study-verse">"Create in me a clean heart, O God" - Psalm 51:10</div>
+
+<p><strong class="study-heading">Living the Final Commandment</strong></p>
+<p>Keep choosing gratitude over envy, worship over distraction, and obedience over compromise. Let Christ shape your desires so your life reflects God's character.</p>
+
+<div class="study-verse">"Let this mind be in you, which was also in Christ Jesus" - Philippians 2:5</div>
 </div>
             `
         }

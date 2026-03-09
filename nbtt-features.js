@@ -53,17 +53,9 @@
   }
 
   function initThemeToggle() {
-    const saved = getStoredTheme();
-    const theme = saved || getDefaultTheme();
-    applyTheme(theme);
-
-    const btn = document.getElementById("themeToggleBtn");
-    if (btn) {
-      btn.addEventListener("click", function () {
-        const current = document.documentElement.getAttribute("data-theme") || "dark";
-        applyTheme(current === "dark" ? "light" : "dark");
-      });
-    }
+    // Light mode disabled — force dark mode only
+    applyTheme("dark");
+    // Toggle button removed from HTML; no listener needed
   }
 
   /* ──────────────────────────────────────────────────────────
@@ -90,6 +82,7 @@
     { title: "A Tale of Cities (Devotion)", url: "Devotions/a_tale_of_cities.html", type: "Devotion", keywords: "cities devotion babylon jerusalem" },
     { title: "Anchor of Hope", url: "Devotions/anchor_of_hope.html", type: "Devotion", keywords: "anchor hope hebrews steadfast" },
     { title: "Called to Shine", url: "Devotions/called_to_shine.html", type: "Devotion", keywords: "called shine light world matthew" },
+    { title: "Church Born in Fire", url: "Devotions/church_born_in_fire.html", type: "Devotion", keywords: "church born fire acts history formation" },
     { title: "Danger of Not Keeping the Commandments", url: "Devotions/danger_of_not_keeping_the_commandments.html", type: "Devotion", keywords: "commandments danger disobedience" },
     { title: "Do It for God", url: "Devotions/Do_it_for_God.html", type: "Devotion", keywords: "do it god service colossians" },
     { title: "Faith Under Fire", url: "Devotions/faith_under_fire.html", type: "Devotion", keywords: "faith fire trial testing" },

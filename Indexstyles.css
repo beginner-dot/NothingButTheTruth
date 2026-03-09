@@ -1897,7 +1897,8 @@ body {
             animation: heroFallbackReveal 0.6s ease-out 3s forwards;
         }
         body:not(.js-hero-ready) .hud-card {
-            animation: heroFallbackReveal 0.6s ease-out 4s forwards;
+            opacity: 1;
+            transform: none;
         }
 
         /* CSS fallback: if JS DOMContentLoaded is delayed by slow CDN scripts,
@@ -2173,8 +2174,8 @@ body {
             display: flex;
             justify-content: center;
             gap: 50px;
-            margin-top: 70px;
-            margin-bottom: 80px; /* ensure subsequent sections start below HUD */
+            margin-top: 20px;
+            margin-bottom: 30px;
             position: relative;
             z-index: 2000; /* stay on top of flip cards */
         }
@@ -2187,8 +2188,8 @@ body {
             text-align: center;
             transition: 0.3s;
             transform-origin: center center;
-            opacity: 0;
-            transform: translateY(20px);
+            opacity: 1;
+            transform: none;
             color: inherit;
             text-decoration: none;
             cursor: pointer;
@@ -2239,8 +2240,8 @@ body {
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 10px;
-                margin-top: 24px;
-                margin-bottom: 30px;
+                margin-top: 16px;
+                margin-bottom: 20px;
                 justify-content: center;
             }
             .hud-card { width: 45%; padding: 10px 8px; }
@@ -3364,9 +3365,9 @@ body {
         }
         .nx-section-badge i { font-size: 0.65rem; }
         .nx-badge-warm {
-          color: rgba(255,255,255,0.85);
-          background: rgba(255,255,255,0.12);
-          border-color: rgba(255,255,255,0.18);
+          color: rgba(255,215,0,0.95);
+          background: rgba(126,34,206,0.2);
+          border-color: rgba(168,85,247,0.35);
         }
         .nx-section-title {
           font-family: 'DM Serif Display', serif;
@@ -3895,7 +3896,7 @@ body {
 
         /* ─── DEVOTIONS SECTION ─── */
         .nx-devos-section {
-          background: linear-gradient(160deg, #1c1917 0%, #44403c 30%, #78716c 60%, #57534e 100%);
+          background: linear-gradient(160deg, #0d0221 0%, #1a0533 30%, #120a3a 60%, #0e0628 100%);
         }
 
         /* ── Floating Blocks (Devotions) ── */
@@ -3919,16 +3920,16 @@ body {
           95%  { opacity: 0.25; }
           100% { transform: translateY(-900px) rotate(360deg) scale(1.1); opacity: 0; }
         }
-        .nx-block:nth-child(1)  { width: 45px; height: 45px; left: 6%;  border-radius: 6px;  background: rgba(251,191,36,0.3);  box-shadow: 0 0 16px rgba(251,191,36,0.15); animation-duration: 13s; animation-delay: 0s; }
-        .nx-block:nth-child(2)  { width: 35px; height: 35px; left: 18%; border-radius: 50%;  background: rgba(245,158,11,0.35); box-shadow: 0 0 14px rgba(245,158,11,0.18); animation-duration: 10s; animation-delay: 2s; }
-        .nx-block:nth-child(3)  { width: 55px; height: 55px; left: 32%; border-radius: 8px;  background: rgba(217,119,6,0.28);  box-shadow: 0 0 22px rgba(217,119,6,0.15); animation-duration: 15s; animation-delay: 1s; }
-        .nx-block:nth-child(4)  { width: 25px; height: 25px; left: 45%; border-radius: 50%;  background: rgba(251,191,36,0.4);  box-shadow: 0 0 10px rgba(251,191,36,0.2);  animation-duration: 11s; animation-delay: 4s; }
-        .nx-block:nth-child(5)  { width: 40px; height: 40px; left: 58%; border-radius: 4px;  background: rgba(253,224,71,0.25); box-shadow: 0 0 18px rgba(253,224,71,0.12); animation-duration: 16s; animation-delay: 0.5s; }
-        .nx-block:nth-child(6)  { width: 50px; height: 50px; left: 70%; border-radius: 50%;  background: rgba(245,158,11,0.32); box-shadow: 0 0 20px rgba(245,158,11,0.18); animation-duration: 12s; animation-delay: 3s; }
-        .nx-block:nth-child(7)  { width: 60px; height: 60px; left: 82%; border-radius: 10px; background: rgba(217,119,6,0.25);  box-shadow: 0 0 24px rgba(217,119,6,0.14); animation-duration: 14s; animation-delay: 0.5s; }
-        .nx-block:nth-child(8)  { width: 20px; height: 20px; left: 50%; border-radius: 50%;  background: rgba(251,191,36,0.45); box-shadow: 0 0 8px rgba(251,191,36,0.22);  animation-duration: 9s;  animation-delay: 5s; }
-        .nx-block:nth-child(9)  { width: 65px; height: 65px; left: 12%; border-radius: 8px;  background: rgba(253,224,71,0.2);  box-shadow: 0 0 26px rgba(253,224,71,0.1);  animation-duration: 18s; animation-delay: 6s; }
-        .nx-block:nth-child(10) { width: 38px; height: 38px; left: 93%; border-radius: 50%;  background: rgba(245,158,11,0.35); box-shadow: 0 0 16px rgba(245,158,11,0.18); animation-duration: 11s; animation-delay: 1.5s; }
+        .nx-block:nth-child(1)  { width: 45px; height: 45px; left: 6%;  border-radius: 6px;  background: rgba(168,85,247,0.35);  box-shadow: 0 0 20px rgba(168,85,247,0.4);  animation-duration: 13s; animation-delay: 0s; }
+        .nx-block:nth-child(2)  { width: 35px; height: 35px; left: 18%; border-radius: 50%;  background: rgba(255,215,0,0.3);   box-shadow: 0 0 16px rgba(255,215,0,0.35);  animation-duration: 10s; animation-delay: 2s; }
+        .nx-block:nth-child(3)  { width: 55px; height: 55px; left: 32%; border-radius: 8px;  background: rgba(30,64,175,0.35);  box-shadow: 0 0 22px rgba(59,130,246,0.35); animation-duration: 15s; animation-delay: 1s; }
+        .nx-block:nth-child(4)  { width: 25px; height: 25px; left: 45%; border-radius: 50%;  background: rgba(168,85,247,0.4);  box-shadow: 0 0 14px rgba(192,132,252,0.4); animation-duration: 11s; animation-delay: 4s; }
+        .nx-block:nth-child(5)  { width: 40px; height: 40px; left: 58%; border-radius: 4px;  background: rgba(255,215,0,0.25);  box-shadow: 0 0 18px rgba(255,215,0,0.3);   animation-duration: 16s; animation-delay: 0.5s; }
+        .nx-block:nth-child(6)  { width: 50px; height: 50px; left: 70%; border-radius: 50%;  background: rgba(29,78,216,0.35);  box-shadow: 0 0 20px rgba(96,165,250,0.4);  animation-duration: 12s; animation-delay: 3s; }
+        .nx-block:nth-child(7)  { width: 60px; height: 60px; left: 82%; border-radius: 10px; background: rgba(126,34,206,0.3);  box-shadow: 0 0 24px rgba(168,85,247,0.35); animation-duration: 14s; animation-delay: 0.5s; }
+        .nx-block:nth-child(8)  { width: 20px; height: 20px; left: 50%; border-radius: 50%;  background: rgba(255,215,0,0.4);   box-shadow: 0 0 12px rgba(255,215,0,0.45);  animation-duration: 9s;  animation-delay: 5s; }
+        .nx-block:nth-child(9)  { width: 65px; height: 65px; left: 12%; border-radius: 8px;  background: rgba(30,58,138,0.3);   box-shadow: 0 0 26px rgba(59,130,246,0.3);  animation-duration: 18s; animation-delay: 6s; }
+        .nx-block:nth-child(10) { width: 38px; height: 38px; left: 93%; border-radius: 50%;  background: rgba(168,85,247,0.35); box-shadow: 0 0 16px rgba(192,132,252,0.4); animation-duration: 11s; animation-delay: 1.5s; }
 
         /* New dark glowing purple & blue blocks */
         .nx-block:nth-child(11) { width: 44px; height: 44px; left: 8%;  border-radius: 8px;  background: rgba(88,28,135,0.4);   box-shadow: 0 0 20px rgba(126,34,206,0.45); animation-duration: 12s; animation-delay: 2.5s; }
@@ -4055,12 +4056,12 @@ body {
           box-shadow: none;
         }
         .nx-cta-devos:hover {
-          box-shadow: 0 8px 28px rgba(180, 83, 9, 0.25);
+          box-shadow: 0 8px 28px rgba(126, 34, 206, 0.3);
         }
 
         /* ─── MYTHBUSTERS SECTION ─── */
         .nx-mythbusters-section {
-          background: linear-gradient(160deg, #1a0a0a 0%, #2d1117 30%, #3b1520 60%, #451a2a 100%);
+          background: linear-gradient(160deg, #070219 0%, #12042e 30%, #0a0c3d 60%, #180840 100%);
         }
 
         /* Floating embers */
@@ -4085,28 +4086,28 @@ body {
           90%  { opacity: 0.2; }
           100% { transform: translateY(-800px) scale(0.8); opacity: 0; }
         }
-        .nx-ember:nth-child(1)  { width: 6px;  height: 6px;  left: 8%;  background: rgba(255,107,53,0.8);  box-shadow: 0 0 8px rgba(255,107,53,0.5);  animation-duration: 6s;  animation-delay: 0s; }
-        .nx-ember:nth-child(2)  { width: 4px;  height: 4px;  left: 18%; background: rgba(255,159,67,0.7);  box-shadow: 0 0 6px rgba(255,159,67,0.4);  animation-duration: 8s;  animation-delay: 1s; }
-        .nx-ember:nth-child(3)  { width: 8px;  height: 8px;  left: 30%; background: rgba(231,76,60,0.6);   box-shadow: 0 0 10px rgba(231,76,60,0.4);  animation-duration: 7s;  animation-delay: 0.5s; }
-        .nx-ember:nth-child(4)  { width: 5px;  height: 5px;  left: 45%; background: rgba(255,215,0,0.5);   box-shadow: 0 0 8px rgba(255,215,0,0.3);   animation-duration: 9s;  animation-delay: 2s; }
-        .nx-ember:nth-child(5)  { width: 7px;  height: 7px;  left: 55%; background: rgba(255,107,53,0.7);  box-shadow: 0 0 9px rgba(255,107,53,0.4);  animation-duration: 5s;  animation-delay: 3s; }
-        .nx-ember:nth-child(6)  { width: 4px;  height: 4px;  left: 65%; background: rgba(255,159,67,0.8);  box-shadow: 0 0 7px rgba(255,159,67,0.5);  animation-duration: 10s; animation-delay: 1.5s; }
-        .nx-ember:nth-child(7)  { width: 6px;  height: 6px;  left: 78%; background: rgba(231,76,60,0.7);   box-shadow: 0 0 8px rgba(231,76,60,0.4);   animation-duration: 6s;  animation-delay: 4s; }
-        .nx-ember:nth-child(8)  { width: 5px;  height: 5px;  left: 88%; background: rgba(255,107,53,0.6);  box-shadow: 0 0 7px rgba(255,107,53,0.35); animation-duration: 8s;  animation-delay: 0.3s; }
-        .nx-ember:nth-child(9)  { width: 3px;  height: 3px;  left: 38%; background: rgba(255,215,0,0.7);   box-shadow: 0 0 6px rgba(255,215,0,0.4);   animation-duration: 7s;  animation-delay: 5s; }
-        .nx-ember:nth-child(10) { width: 7px;  height: 7px;  left: 92%; background: rgba(255,159,67,0.6);  box-shadow: 0 0 9px rgba(255,159,67,0.35); animation-duration: 11s; animation-delay: 2.5s; }
+        .nx-ember:nth-child(1)  { width: 6px;  height: 6px;  left: 8%;  background: rgba(168,85,247,0.8);  box-shadow: 0 0 10px rgba(168,85,247,0.5);  animation-duration: 6s;  animation-delay: 0s; }
+        .nx-ember:nth-child(2)  { width: 4px;  height: 4px;  left: 18%; background: rgba(255,215,0,0.7);   box-shadow: 0 0 8px rgba(255,215,0,0.4);    animation-duration: 8s;  animation-delay: 1s; }
+        .nx-ember:nth-child(3)  { width: 8px;  height: 8px;  left: 30%; background: rgba(59,130,246,0.6);  box-shadow: 0 0 12px rgba(59,130,246,0.4);  animation-duration: 7s;  animation-delay: 0.5s; }
+        .nx-ember:nth-child(4)  { width: 5px;  height: 5px;  left: 45%; background: rgba(255,215,0,0.5);   box-shadow: 0 0 8px rgba(255,215,0,0.3);    animation-duration: 9s;  animation-delay: 2s; }
+        .nx-ember:nth-child(5)  { width: 7px;  height: 7px;  left: 55%; background: rgba(126,34,206,0.7);  box-shadow: 0 0 10px rgba(168,85,247,0.5);  animation-duration: 5s;  animation-delay: 3s; }
+        .nx-ember:nth-child(6)  { width: 4px;  height: 4px;  left: 65%; background: rgba(255,215,0,0.8);   box-shadow: 0 0 8px rgba(255,215,0,0.5);    animation-duration: 10s; animation-delay: 1.5s; }
+        .nx-ember:nth-child(7)  { width: 6px;  height: 6px;  left: 78%; background: rgba(30,64,175,0.7);   box-shadow: 0 0 10px rgba(59,130,246,0.4);  animation-duration: 6s;  animation-delay: 4s; }
+        .nx-ember:nth-child(8)  { width: 5px;  height: 5px;  left: 88%; background: rgba(168,85,247,0.6);  box-shadow: 0 0 8px rgba(192,132,252,0.35); animation-duration: 8s;  animation-delay: 0.3s; }
+        .nx-ember:nth-child(9)  { width: 3px;  height: 3px;  left: 38%; background: rgba(255,215,0,0.7);   box-shadow: 0 0 6px rgba(255,215,0,0.4);    animation-duration: 7s;  animation-delay: 5s; }
+        .nx-ember:nth-child(10) { width: 7px;  height: 7px;  left: 92%; background: rgba(126,34,206,0.6);  box-shadow: 0 0 10px rgba(168,85,247,0.35); animation-duration: 11s; animation-delay: 2.5s; }
 
         .nx-badge-flame {
-          color: rgba(255,255,255,0.85);
-          background: rgba(255,107,53,0.15);
-          border-color: rgba(255,107,53,0.3);
+          color: rgba(255,215,0,0.95);
+          background: rgba(126,34,206,0.2);
+          border-color: rgba(168,85,247,0.35);
         }
 
         /* MythBusters feature card */
         .nx-mb-feature {
           display: block;
-          background: rgba(255,107,53,0.05);
-          border: 1px solid rgba(255,107,53,0.15);
+          background: rgba(126,34,206,0.08);
+          border: 1px solid rgba(168,85,247,0.2);
           border-radius: 16px;
           padding: 2rem;
           text-decoration: none;
@@ -4120,12 +4121,12 @@ body {
           position: absolute;
           top: 0; left: 0; right: 0;
           height: 3px;
-          background: linear-gradient(90deg, #ff6b35, #ff9f43, #ffd700);
+          background: linear-gradient(90deg, #7c3aed, #ffd700, #1e40af);
         }
         .nx-mb-feature:hover {
           transform: translateY(-4px);
-          border-color: rgba(255,107,53,0.35);
-          box-shadow: 0 12px 40px rgba(255,107,53,0.15);
+          border-color: rgba(168,85,247,0.45);
+          box-shadow: 0 12px 40px rgba(126,34,206,0.25);
         }
         .nx-mb-feature-inner {
           display: flex;
@@ -6560,6 +6561,96 @@ body {
   font-style: italic;
 }
 
+/* Staged sections are kept in code but not exposed */
+.staged-hidden {
+  display: none !important;
+}
+
+/* Recent Videos Hub (homepage staged module) */
+.recent-videos-hub {
+  padding: 50px 20px;
+  background: linear-gradient(135deg, rgba(10, 20, 50, 0.9), rgba(20, 6, 40, 0.92));
+}
+
+.recent-videos-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.recent-videos-head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.recent-videos-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  background: rgba(168, 85, 247, 0.12);
+  color: #d8b4fe;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.recent-videos-head h2 {
+  margin: 14px 0 8px;
+  color: #fff;
+  font-size: 2rem;
+  font-family: 'DM Serif Display', serif;
+}
+
+.recent-videos-head p {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.recent-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.recent-video-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.recent-video-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(255, 215, 3, 0.1);
+  border: 1px solid rgba(255, 215, 3, 0.28);
+  color: #ffd803;
+}
+
+.recent-video-card h3 {
+  margin: 12px 0 8px;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.recent-video-card p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.recent-video-btn {
+  display: inline-block;
+  margin-top: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #c084fc;
+}
+
 .videos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -6578,6 +6669,15 @@ body {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
   max-width: 500px;
   margin: 0 auto;
+}
+
+/* Compact variant for single featured homepage video */
+.video-card.video-card-compact {
+  max-width: 380px;
+}
+
+.video-card.video-card-compact .video-wrapper {
+  padding-bottom: 62%;
 }
 
 .video-card:hover {
@@ -7027,6 +7127,10 @@ body {
   .videos-grid {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+
+  .video-card.video-card-compact {
+    max-width: 100%;
   }
 
   .video-subtitle {
@@ -7951,6 +8055,158 @@ body.dark-mode .video-card:hover {
   .sidebar {
     width: 400px;
     right: -420px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   VIDEO COMING SOON PLACEHOLDER
+   ═══════════════════════════════════════════════════════════ */
+.video-coming-soon-placeholder {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(126,34,206,0.06);
+  border: 1px dashed rgba(168,85,247,0.35);
+  border-radius: 16px;
+  margin-bottom: 2.5rem;
+}
+.vcs-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 16px rgba(168,85,247,0.4));
+}
+.vcs-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: #ffd700;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 18px rgba(255,215,0,0.25);
+}
+.vcs-text {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.92rem;
+  max-width: 640px;
+  margin: 0 auto 1.25rem;
+  line-height: 1.7;
+}
+.vcs-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+.vcs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  background: rgba(126,34,206,0.15);
+  border: 1px solid rgba(168,85,247,0.3);
+  border-radius: 50px;
+}
+.vcs-badge i { font-size: 0.7rem; color: #ffd700; }
+.vcs-sub {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   NOTIFICATION BANNER (Homepage)
+   ═══════════════════════════════════════════════════════════ */
+.nbtt-notification-bar {
+  position: relative;
+  background: linear-gradient(135deg, #0d0221 0%, #1a0533 50%, #0a0c3d 100%);
+  border: 1px solid rgba(168,85,247,0.25);
+  border-radius: 12px;
+  margin: 0 auto 0;
+  max-width: 1100px;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 100;
+  box-shadow: 0 4px 24px rgba(126,34,206,0.15);
+  animation: notifSlideIn 0.6s ease-out;
+}
+@keyframes notifSlideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.nbtt-notif-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,215,0,0.12);
+  border: 1px solid rgba(255,215,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+.nbtt-notif-body {
+  flex: 1;
+  min-width: 0;
+}
+.nbtt-notif-body p {
+  color: rgba(255,255,255,0.82);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin: 0;
+}
+.nbtt-notif-body p strong {
+  color: #ffd700;
+}
+.nbtt-notif-link {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffd700;
+  background: rgba(255,215,0,0.08);
+  border: 1px solid rgba(255,215,0,0.25);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.nbtt-notif-link:hover {
+  background: rgba(255,215,0,0.18);
+  border-color: rgba(255,215,0,0.5);
+  transform: translateY(-1px);
+}
+.nbtt-notif-dismiss {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.35);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.nbtt-notif-dismiss:hover { color: rgba(255,255,255,0.7); }
+
+@media (max-width: 640px) {
+  .nbtt-notification-bar {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 10px;
+    margin: 0 8px;
+    border-radius: 10px;
+  }
+  .nbtt-notif-link {
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
   }
 }
 

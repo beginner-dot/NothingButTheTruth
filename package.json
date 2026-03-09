@@ -22,10 +22,14 @@
   "description": "",
   "dependencies": {
     "chart.js": "^4.5.0",
-    "firebase": "^12.0.0"
+    "firebase": "^12.0.0",
+    "framer-motion": "^12.35.2"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.27",
     "create-hintrc": "^4.0.15",
-    "hint": "^7.1.13"
+    "hint": "^7.1.13",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.1"
   }
 }
